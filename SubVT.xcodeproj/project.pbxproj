@@ -36,6 +36,10 @@
 		A0E0F6822848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6702848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf */; };
 		A0E0F6872848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
 		A0E0F6882848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
+		A0E0F68B2848D2B40029DDBF /* SubVTData in Frameworks */ = {isa = PBXBuildFile; productRef = A0E0F68A2848D2B40029DDBF /* SubVTData */; };
+		A0E0F68D2848E8B60029DDBF /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F68C2848E8B60029DDBF /* data-env.json */; };
+		A0E0F68E2848E8B60029DDBF /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F68C2848E8B60029DDBF /* data-env.json */; };
+		A0E0F68F2848E8B60029DDBF /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F68C2848E8B60029DDBF /* data-env.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +84,7 @@
 		A0E0F6702848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-ExtraLight.ttf"; sourceTree = "<group>"; };
 		A0E0F6832848CD9B0029DDBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		A0E0F6862848CF120029DDBF /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		A0E0F68C2848E8B60029DDBF /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E0F68B2848D2B40029DDBF /* SubVTData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				A0E0F6672848CD0A0029DDBF /* Fonts */,
+				A0E0F68C2848E8B60029DDBF /* data-env.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -225,6 +232,9 @@
 			dependencies = (
 			);
 			name = SubVT;
+			packageProductDependencies = (
+				A0E0F68A2848D2B40029DDBF /* SubVTData */,
+			);
 			productName = SubVT;
 			productReference = A0BF90912848C1EB0053389A /* SubVT.app */;
 			productType = "com.apple.product-type.application";
@@ -297,6 +307,9 @@
 				Base,
 			);
 			mainGroup = A0BF90882848C1EB0053389A;
+			packageReferences = (
+				A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */,
+			);
 			productRefGroup = A0BF90922848C1EB0053389A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -318,6 +331,7 @@
 				A0BF909C2848C1EC0053389A /* Preview Assets.xcassets in Resources */,
 				A0E0F6812848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf in Resources */,
 				A0E0F6792848CD1C0029DDBF /* LexendDeca-Medium.ttf in Resources */,
+				A0E0F68D2848E8B60029DDBF /* data-env.json in Resources */,
 				A0E0F6772848CD1C0029DDBF /* LexendDeca-Bold.ttf in Resources */,
 				A0BF90992848C1EC0053389A /* Assets.xcassets in Resources */,
 				A0E0F67F2848CD1C0029DDBF /* LexendDeca-Thin.ttf in Resources */,
@@ -331,6 +345,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0E0F68E2848E8B60029DDBF /* data-env.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +356,7 @@
 				A0E0F6742848CD1C0029DDBF /* LexendDeca-Light.ttf in Resources */,
 				A0E0F67A2848CD1C0029DDBF /* LexendDeca-Medium.ttf in Resources */,
 				A0E0F67E2848CD1C0029DDBF /* LexendDeca-ExtraBold.ttf in Resources */,
+				A0E0F68F2848E8B60029DDBF /* data-env.json in Resources */,
 				A0E0F6762848CD1C0029DDBF /* LexendDeca-Regular.ttf in Resources */,
 				A0E0F6802848CD1C0029DDBF /* LexendDeca-Thin.ttf in Resources */,
 				A0E0F6782848CD1C0029DDBF /* LexendDeca-Bold.ttf in Resources */,
@@ -539,10 +555,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -572,10 +588,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2,6";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -695,6 +711,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/helikon-labs/subvt-data-swift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 0.2.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A0E0F68A2848D2B40029DDBF /* SubVTData */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */;
+			productName = SubVTData;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		A0BF909F2848C1EC0053389A /* SubVT.xcdatamodeld */ = {
