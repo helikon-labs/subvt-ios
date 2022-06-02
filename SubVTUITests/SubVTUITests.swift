@@ -2,7 +2,7 @@
 //  SubVTUITests.swift
 //  SubVTUITests
 //
-//  Created by Kutsal Kaan Bilgin on 12.01.2022.
+//  Created by Kutsal Kaan Bilgin on 2.06.2022.
 //
 
 import XCTest
@@ -27,7 +27,6 @@ class SubVTUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
 

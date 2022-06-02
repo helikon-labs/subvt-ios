@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>UIAppFonts</key>
+	<array>
+		<string>LexendDeca-Black.ttf</string>
+		<string>LexendDeca-Bold.ttf</string>
+		<string>LexendDeca-ExtraBold.ttf</string>
+		<string>LexendDeca-ExtraLight.ttf</string>
+		<string>LexendDeca-Light.ttf</string>
+		<string>LexendDeca-Medium.ttf</string>
+		<string>LexendDeca-Regular.ttf</string>
+		<string>LexendDeca-SemiBold.ttf</string>
+		<string>LexendDeca-Thin.ttf</string>
+	</array>
+</dict>
+</plist>

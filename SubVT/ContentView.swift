@@ -2,7 +2,7 @@
 //  ContentView.swift
 //  SubVT
 //
-//  Created by Kutsal Kaan Bilgin on 12.01.2022.
+//  Created by Kutsal Kaan Bilgin on 2.06.2022.
 //
 
 import SwiftUI
