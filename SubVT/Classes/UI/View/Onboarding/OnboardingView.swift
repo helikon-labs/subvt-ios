@@ -16,7 +16,6 @@ struct OnboardingView: View {
             OnboardingPage4View()
         }
         .tabViewStyle(.page)
-        .indexViewStyle(.page(backgroundDisplayMode: .always))
         .ignoresSafeArea()
         .onAppear(perform: {
             UIScrollView.appearance().bounces = false

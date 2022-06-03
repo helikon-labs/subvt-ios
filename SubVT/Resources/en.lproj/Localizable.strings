@@ -1,0 +1,10 @@
+/* 
+  Localizable.strings
+  SubVT
+
+  Created by Kutsal Kaan Bilgin on 3.06.2022.
+  
+*/
+"onboarding.title"="Welcome to SubVT";
+"onboarding.subtitle"="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+"onboarding.get_started"="Get started";

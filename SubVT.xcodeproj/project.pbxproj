@@ -21,6 +21,12 @@
 		A0128A5C284A1A1D000C2307 /* OnboardingPage3View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A5A284A1A1D000C2307 /* OnboardingPage3View.swift */; };
 		A0128A5E284A1A28000C2307 /* OnboardingPage4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A5D284A1A28000C2307 /* OnboardingPage4View.swift */; };
 		A0128A5F284A1A28000C2307 /* OnboardingPage4View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A5D284A1A28000C2307 /* OnboardingPage4View.swift */; };
+		A0128A62284A3BCC000C2307 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A61284A3BCC000C2307 /* UIConfig.swift */; };
+		A0128A63284A3BCC000C2307 /* UIConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A61284A3BCC000C2307 /* UIConfig.swift */; };
+		A0128A67284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
+		A0128A68284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
+		A0128A6D284A4EAE000C2307 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A6C284A4EAE000C2307 /* Color.swift */; };
+		A0128A6E284A4EAE000C2307 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A6C284A4EAE000C2307 /* Color.swift */; };
 		A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90942848C1EB0053389A /* SubVTApp.swift */; };
 		A0BF90972848C1EB0053389A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90962848C1EB0053389A /* ContentView.swift */; };
 		A0BF90992848C1EC0053389A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0BF90982848C1EC0053389A /* Assets.xcassets */; };
@@ -81,6 +87,9 @@
 		A0128A57284A1A12000C2307 /* OnboardingPage2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage2View.swift; sourceTree = "<group>"; };
 		A0128A5A284A1A1D000C2307 /* OnboardingPage3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage3View.swift; sourceTree = "<group>"; };
 		A0128A5D284A1A28000C2307 /* OnboardingPage4View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage4View.swift; sourceTree = "<group>"; };
+		A0128A61284A3BCC000C2307 /* UIConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConfig.swift; sourceTree = "<group>"; };
+		A0128A69284A47AD000C2307 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A0128A6C284A4EAE000C2307 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		A0BF90912848C1EB0053389A /* SubVT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubVT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0BF90942848C1EB0053389A /* SubVTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTApp.swift; sourceTree = "<group>"; };
 		A0BF90962848C1EB0053389A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -198,6 +207,22 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		A0128A60284A3BB8000C2307 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A0128A61284A3BCC000C2307 /* UIConfig.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		A0128A6B284A4E9D000C2307 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A0128A6C284A4EAE000C2307 /* Color.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		A0BF90882848C1EB0053389A = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +285,7 @@
 				A0128A44284A0A14000C2307 /* Config */,
 				A0E0F6672848CD0A0029DDBF /* Fonts */,
 				A0BF909F2848C1EC0053389A /* SubVT.xcdatamodeld */,
+				A0128A6A284A47AD000C2307 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -294,6 +320,8 @@
 		A0E0F6852848CEDD0029DDBF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				A0128A6B284A4E9D000C2307 /* Extension */,
+				A0128A60284A3BB8000C2307 /* Config */,
 				A0128A4A284A1189000C2307 /* Util */,
 				A0128A49284A0B50000C2307 /* View */,
 			);
@@ -413,6 +441,7 @@
 				A0128A46284A0A32000C2307 /* data-env-example.json in Resources */,
 				A0E0F6752848CD1C0029DDBF /* LexendDeca-Regular.ttf in Resources */,
 				A0E0F67D2848CD1C0029DDBF /* LexendDeca-ExtraBold.ttf in Resources */,
+				A0128A67284A47AD000C2307 /* Localizable.strings in Resources */,
 				A0BF909C2848C1EC0053389A /* Preview Assets.xcassets in Resources */,
 				A0E0F6812848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf in Resources */,
 				A0E0F6792848CD1C0029DDBF /* LexendDeca-Medium.ttf in Resources */,
@@ -440,6 +469,7 @@
 			files = (
 				A0E0F6742848CD1C0029DDBF /* LexendDeca-Light.ttf in Resources */,
 				A0E0F67A2848CD1C0029DDBF /* LexendDeca-Medium.ttf in Resources */,
+				A0128A68284A47AD000C2307 /* Localizable.strings in Resources */,
 				A0E0F67E2848CD1C0029DDBF /* LexendDeca-ExtraBold.ttf in Resources */,
 				A0E0F68F2848E8B60029DDBF /* data-env.json in Resources */,
 				A0E0F6762848CD1C0029DDBF /* LexendDeca-Regular.ttf in Resources */,
@@ -462,11 +492,13 @@
 				A0128A4D284A1297000C2307 /* Settings.swift in Sources */,
 				A0128A5B284A1A1D000C2307 /* OnboardingPage3View.swift in Sources */,
 				A0BF909E2848C1EC0053389A /* Persistence.swift in Sources */,
+				A0128A6D284A4EAE000C2307 /* Color.swift in Sources */,
 				A0128A5E284A1A28000C2307 /* OnboardingPage4View.swift in Sources */,
 				A0BF90972848C1EB0053389A /* ContentView.swift in Sources */,
 				A0128A51284A150C000C2307 /* OnboardingView.swift in Sources */,
 				A0128A58284A1A12000C2307 /* OnboardingPage2View.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
+				A0128A62284A3BCC000C2307 /* UIConfig.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 			);
@@ -486,6 +518,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
+				A0128A63284A3BCC000C2307 /* UIConfig.swift in Sources */,
+				A0128A6E284A4EAE000C2307 /* Color.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0128A5C284A1A1D000C2307 /* OnboardingPage3View.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPage1View.swift in Sources */,
@@ -511,6 +545,17 @@
 			targetProxy = A0BF90B12848C1EC0053389A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A0128A6A284A47AD000C2307 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A0128A69284A47AD000C2307 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		A0BF90B82848C1EC0053389A /* Debug */ = {

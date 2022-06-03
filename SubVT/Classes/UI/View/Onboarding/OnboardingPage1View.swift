@@ -8,34 +8,59 @@
 import SwiftUI
 
 struct OnboardingPage1View: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment (\.colorScheme) var colorScheme: ColorScheme
+    
     var body: some View {
         ZStack {
             VStack {
                 Spacer()
                 HStack {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        Image(colorScheme == .light ? "3DLogoLargeLight" : "3DLogoLargeDark")
-                            .padding(0)
-                    } else {
-                        Image(colorScheme == .light ? "3DLogoLight" : "3DLogoDark")
-                            .padding(0)
-                    }
+                    UIConfig.Image.getOnboarding3DVolume(colorScheme: colorScheme)
                     Spacer()
                 }
             }
             VStack {
-                Text("Welcome to SubVT")
-                    .font(LexendDeca.semiBold.withSize(24))
                 Spacer()
-                    .frame(height: 18)
-                Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit")
-                    .padding(.top, 0)
-                    .frame(width: 260)
-                    .font(LexendDeca.light.withSize(14))
+                    .frame(height: UIConfig.Dimension.onboardingTitleMarginTop)
+                Text(LocalizedStringKey("onboarding.title"))
+                    .font(UIConfig.Font.onboardingTitle)
                 Spacer()
+                    .frame(height: UIConfig.Dimension.onboardingSubtitleMarginTop)
+                Text(LocalizedStringKey("onboarding.subtitle"))
+                    .frame(width: UIConfig.Dimension.onboardingSubtitleWidth)
+                    .font(UIConfig.Font.onboardingSubtitle)
+                    .multilineTextAlignment(.center)
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    Spacer()
+                        .frame(height: UIConfig.Dimension.onboardingGetStartedButtonMarginTop)
+                } else {
+                    Spacer()
+                }
+                Button(
+                    action: {
+                        print("Rounded Button")
+                    },
+                    label: {
+                        Text(LocalizedStringKey("onboarding.get_started"))
+                            .frame(
+                                width: UIConfig.Dimension.onboardingGetStartedButtonWidth,
+                                height: UIConfig.Dimension.onboardingGetStartedButtonHeight
+                            )
+                            .foregroundColor(UIConfig.Color.actionButtonText)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10)
+                                    .background(UIConfig.Color.actionButtonBg.cornerRadius(10))
+                            )
+                            .font(UIConfig.Font.actionButton)
+                    }
+                )
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    Spacer()
+                } else {
+                    Spacer()
+                        .frame(height: UIConfig.Dimension.onboardingGetStartedButtonMarginBottom)
+                }
             }
-            .padding(.top, 143)
             
         }
         .ignoresSafeArea()
