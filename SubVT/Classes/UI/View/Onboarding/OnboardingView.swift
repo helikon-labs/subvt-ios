@@ -16,10 +16,10 @@ struct OnboardingView: View {
             OnboardingPage4View()
         }
         .tabViewStyle(.page)
-        .ignoresSafeArea()
         .onAppear(perform: {
             UIScrollView.appearance().bounces = false
          })
+        .ignoresSafeArea()
     }
 }
 
