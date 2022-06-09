@@ -18,9 +18,9 @@ struct ContentView: View {
 
     var body: some View {
         if Settings.hasOnboarded {
-            OnboardingView()
+            IntroductionView()
         } else {
-            OnboardingView()
+            IntroductionView()
         }
     }
 }

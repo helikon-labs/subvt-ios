@@ -11,8 +11,8 @@
 		A0128A4D284A1297000C2307 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A4C284A1297000C2307 /* Settings.swift */; };
 		A0128A4E284A1297000C2307 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A4C284A1297000C2307 /* Settings.swift */; };
 		A0128A4F284A1297000C2307 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A4C284A1297000C2307 /* Settings.swift */; };
-		A0128A51284A150C000C2307 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A50284A150C000C2307 /* OnboardingView.swift */; };
-		A0128A52284A150C000C2307 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A50284A150C000C2307 /* OnboardingView.swift */; };
+		A0128A51284A150C000C2307 /* OnboardingParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A50284A150C000C2307 /* OnboardingParentView.swift */; };
+		A0128A52284A150C000C2307 /* OnboardingParentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A50284A150C000C2307 /* OnboardingParentView.swift */; };
 		A0128A55284A19C5000C2307 /* OnboardingPage1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A54284A19C5000C2307 /* OnboardingPage1View.swift */; };
 		A0128A56284A19C5000C2307 /* OnboardingPage1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A54284A19C5000C2307 /* OnboardingPage1View.swift */; };
 		A0128A58284A1A12000C2307 /* OnboardingPage2View.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A57284A1A12000C2307 /* OnboardingPage2View.swift */; };
@@ -27,6 +27,7 @@
 		A0128A68284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
 		A0128A6D284A4EAE000C2307 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A6C284A4EAE000C2307 /* Color.swift */; };
 		A0128A6E284A4EAE000C2307 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A6C284A4EAE000C2307 /* Color.swift */; };
+		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
 		A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC56284B8E0000914237 /* UI+Font.swift */; };
@@ -92,7 +93,7 @@
 /* Begin PBXFileReference section */
 		A0128A45284A0A32000C2307 /* data-env-example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env-example.json"; sourceTree = "<group>"; };
 		A0128A4C284A1297000C2307 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
-		A0128A50284A150C000C2307 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A0128A50284A150C000C2307 /* OnboardingParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingParentView.swift; sourceTree = "<group>"; };
 		A0128A54284A19C5000C2307 /* OnboardingPage1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage1View.swift; sourceTree = "<group>"; };
 		A0128A57284A1A12000C2307 /* OnboardingPage2View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage2View.swift; sourceTree = "<group>"; };
 		A0128A5A284A1A1D000C2307 /* OnboardingPage3View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage3View.swift; sourceTree = "<group>"; };
@@ -100,6 +101,7 @@
 		A0128A61284A3BCC000C2307 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		A0128A69284A47AD000C2307 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0128A6C284A4EAE000C2307 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		A0A1DC53284B8DD200914237 /* UI+Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension.swift"; sourceTree = "<group>"; };
 		A0A1DC56284B8E0000914237 /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
 		A0A1DC5A284B8E2B00914237 /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
@@ -214,11 +216,12 @@
 		A0128A53284A1855000C2307 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				A0128A50284A150C000C2307 /* OnboardingView.swift */,
+				A03B954028524E0500836A94 /* IntroductionView.swift */,
 				A0128A54284A19C5000C2307 /* OnboardingPage1View.swift */,
 				A0128A57284A1A12000C2307 /* OnboardingPage2View.swift */,
 				A0128A5A284A1A1D000C2307 /* OnboardingPage3View.swift */,
 				A0128A5D284A1A28000C2307 /* OnboardingPage4View.swift */,
+				A0128A50284A150C000C2307 /* OnboardingParentView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -518,7 +521,8 @@
 				A0128A5E284A1A28000C2307 /* OnboardingPage4View.swift in Sources */,
 				A0A1DC5E284B8E5300914237 /* UI+Color.swift in Sources */,
 				A0BF90972848C1EB0053389A /* ContentView.swift in Sources */,
-				A0128A51284A150C000C2307 /* OnboardingView.swift in Sources */,
+				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
+				A0128A51284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A0128A58284A1A12000C2307 /* OnboardingPage2View.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
@@ -552,7 +556,7 @@
 				A0128A5C284A1A1D000C2307 /* OnboardingPage3View.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPage1View.swift in Sources */,
 				A0A1DC58284B8E0000914237 /* UI+Font.swift in Sources */,
-				A0128A52284A150C000C2307 /* OnboardingView.swift in Sources */,
+				A0128A52284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A0128A4F284A1297000C2307 /* Settings.swift in Sources */,
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
 				A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */,

@@ -6,5 +6,5 @@
   
 */
 "onboarding.title"="Welcome to SubVT";
-"onboarding.subtitle"="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+"onboarding.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";
 "onboarding.get_started"="Get started";
