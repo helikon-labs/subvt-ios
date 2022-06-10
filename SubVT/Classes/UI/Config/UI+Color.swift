@@ -9,9 +9,13 @@ import SwiftUI
 
 extension UI {
     enum Color {
-        static let actionButtonBg = SwiftUI.Color(0x3B6EFF)
-        static let actionButtonText = SwiftUI.Color.white
-        // background morph view
+        enum Common {
+            static let actionButton = SwiftUI.Color(0x3B6EFF)
+            static let actionButtonPressed = SwiftUI.Color(0x1D54EF)
+            static let actionButtonShadow = SwiftUI.Color(0x3B6EFF, alpha: 0.75)
+            static let actionButtonText = SwiftUI.Color.white
+        }
+        
         enum BgMorph {
             static func getLeftViewOpacity(colorScheme: ColorScheme) ->  Double {
                 (colorScheme == .dark) ? 1.0 : 0.55

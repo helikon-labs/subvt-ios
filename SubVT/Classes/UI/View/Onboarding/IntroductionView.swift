@@ -9,22 +9,24 @@ import SwiftUI
 
 struct IntroductionView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @State var initialized = false
+    @State var hasAppeared = false
     
     var body: some View {
         ZStack {
+            // background color morph
             BgMorphView()
                 .offset(
                     x: 0,
-                    y: initialized ? 0 : -100
+                    y: hasAppeared ? 0 : -100
                 )
+            // 3D volume
             VStack {
                 Spacer()
                 HStack {
                     UI.Image.Onboarding.get3DVolume(colorScheme: colorScheme)
                         .offset(
-                            x: initialized ? 0 : -50,
-                            y: initialized ? 0 : 100
+                            x: hasAppeared ? 0 : -50,
+                            y: hasAppeared ? 0 : 100
                         )
                     Spacer()
                 }
@@ -33,6 +35,7 @@ struct IntroductionView: View {
             VStack {
                 Spacer()
                     .frame(height: UI.Dimension.Onboarding.titleMarginTop)
+                // text
                 Group {
                     Text(LocalizedStringKey("onboarding.title"))
                         .font(UI.Font.Onboarding.title)
@@ -45,10 +48,10 @@ struct IntroductionView: View {
                 }
                 .offset(
                     x: 0,
-                    y: initialized ? 0 : -30
+                    y: hasAppeared ? 0 : -30
                 )
                 .opacity(
-                    initialized ? 1 : 0
+                    hasAppeared ? 1 : 0
                 )
                 .animation(
                     Animation
@@ -60,45 +63,16 @@ struct IntroductionView: View {
                 } else {
                     Spacer()
                 }
-                ZStack {
-                    RoundedRectangle(cornerRadius: 10)
-                        .fill(UI.Color.actionButtonBg)
-                        .frame(
-                            width: UI.Dimension.Onboarding.getStartedButtonWidth * 12 / 13,
-                            height: UI.Dimension.Onboarding.getStartedButtonHeight
-                        )
-                        .offset(x: 0, y: 10)
-                        .opacity(0.5)
-                        .blur(radius: 10)
-                    Button(
-                        action: {
-                            print("Rounded Button")
-                        },
-                        label: {
-                            Text(LocalizedStringKey("onboarding.get_started"))
-                                .frame(
-                                    width: UI.Dimension.Onboarding.getStartedButtonWidth,
-                                    height: UI.Dimension.Onboarding.getStartedButtonHeight
-                                )
-                                .foregroundColor(UI.Color.actionButtonText)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .background(UI.Color.actionButtonBg.cornerRadius(10))
-                                )
-                                .font(UI.Font.actionButton)
-                        }
-                    )
+                Button(LocalizedStringKey("onboarding.get_started")) {
+                    print("button pressed")
                 }
+                .buttonStyle(ActionButtonStyle())
                 .opacity(
-                    initialized ? 1 : 0
+                    hasAppeared ? 1 : 0
                 )
                 .offset(
                     x: 0,
-                    y: initialized ? 0 : 70
-                )
-                .animation(
-                    Animation
-                        .easeOut(duration: 0.5)
+                    y: hasAppeared ? 0 : 70
                 )
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     Spacer()
@@ -113,7 +87,7 @@ struct IntroductionView: View {
         }
         .ignoresSafeArea()
         .onAppear() {
-            initialized = true
+            hasAppeared = true
         }
     }
 }

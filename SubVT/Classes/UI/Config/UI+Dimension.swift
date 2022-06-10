@@ -10,6 +10,19 @@ import SwiftUI
 
 extension UI {
     enum Dimension {
+        enum Common {
+            static var actionButtonWidth: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .pad {
+                        return 272
+                    } else {
+                        return 266
+                    }
+                }
+            }
+            static let actionButtonHeight: CGFloat = 64
+        }
+        
         enum BgMorph {
             static let leftViewBlurRadius: CGFloat = 54
             static let middleViewBlurRadius: CGFloat = 84
@@ -236,16 +249,6 @@ extension UI {
                     }
                 }
             }
-            static var getStartedButtonWidth: CGFloat {
-                get {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return 272
-                    } else {
-                        return 266
-                    }
-                }
-            }
-            static let getStartedButtonHeight: CGFloat = 64
             static var getStartedButtonMarginTop: CGFloat {
                 get {
                     if UIDevice.current.userInterfaceIdiom == .pad {
