@@ -9,19 +9,51 @@ import SwiftUI
 
 extension UI {
     enum Image {
-        enum Onboarding {
-            static func get3DVolume(colorScheme: ColorScheme) -> SwiftUI.Image {
+        enum Introduction {
+            static func iconVolume(_ colorScheme: ColorScheme) -> SwiftUI.Image {
                 if colorScheme == .dark {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return SwiftUI.Image("3DLogoLargeDark")
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return SwiftUI.Image("IconVolumeDarkPhone")
                     } else {
-                        return SwiftUI.Image("3DLogoDark")
+                        return SwiftUI.Image("IconVolumeDarkPad")
                     }
                 } else {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return SwiftUI.Image("3DLogoLargeLight")
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return SwiftUI.Image("IconVolumeLightPhone")
                     } else {
-                        return SwiftUI.Image("3DLogoLight")
+                        return SwiftUI.Image("IconVolumeLightPad")
+                    }
+                }
+            }
+        }
+        
+        enum Onboarding {
+            static func step(
+                step: OnboardingStep,
+                _ colorScheme: ColorScheme
+            ) -> SwiftUI.Image {
+                var name = ""
+                switch step {
+                case .step1:
+                    name = "Step1"
+                case .step2:
+                    name = "Step2"
+                case .step3:
+                    name = "Step3"
+                case .step4:
+                    name = "Step4"
+                }
+                if colorScheme == .dark {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return SwiftUI.Image("Onboarding\(name)DarkPhone")
+                    } else {
+                        return SwiftUI.Image("Onboarding\(name)DarkPad")
+                    }
+                } else {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return SwiftUI.Image("Onboarding\(name)LightPhone")
+                    } else {
+                        return SwiftUI.Image("Onboarding\(name)DarkPad")
                     }
                 }
             }

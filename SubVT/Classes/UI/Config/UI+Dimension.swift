@@ -13,14 +13,15 @@ extension UI {
         enum Common {
             static var actionButtonWidth: CGFloat {
                 get {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return 272
-                    } else {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
                         return 266
+                    } else {
+                        return 272
                     }
                 }
             }
             static let actionButtonHeight: CGFloat = 64
+            static let lineSpacing: CGFloat = 4
         }
         
         enum BgMorph {
@@ -221,52 +222,96 @@ extension UI {
             
             static let rightViewRotation = -13.16
         }
-        enum Onboarding {
+        
+        enum Introduction {
             static var titleMarginTop: CGFloat {
                 get {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return 163
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 103
                     } else {
-                        return 143
+                        return 183
                     }
                 }
             }
             static var subtitleMarginTop: CGFloat {
                 get {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return 24
-                    } else {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
                         return 18
+                    } else {
+                        return 24
                     }
                 }
             }
             static var subtitleWidth: CGFloat {
                 get {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return 420
-                    } else {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
                         return 260
+                    } else {
+                        return 420
                     }
                 }
             }
             static var getStartedButtonMarginTop: CGFloat {
                 get {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return 40
-                    } else {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
                         return .infinity
+                    } else {
+                        return 40
                     }
                 }
             }
-            static var getStartedButtonMarginBottom: CGFloat {
+            static let getStartedButtonMarginBottom: CGFloat = 16
+        }
+        
+        enum Onboarding {
+            static var pageNumberMarginTop: CGFloat {
                 get {
-                    if UIDevice.current.userInterfaceIdiom == .pad {
-                        return .infinity
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 46
                     } else {
-                        return 40
+                        return 110
                     }
                 }
             }
+            static let titleMarginTop: CGFloat = 42
+            static var descriptionMarginTop: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 18
+                    } else {
+                        return 24
+                    }
+                }
+            }
+            static var textHorizontalPadding: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 54
+                    } else {
+                        return 100
+                    }
+                }
+            }
+            static var navigationSectionMarginTop: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 52
+                    } else {
+                        return 93
+                    }
+                }
+            }
+            static var navigationSectionMarginBottom: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 50
+                    } else {
+                        return 55
+                    }
+                }
+            }
+            static let pageCircleSize: CGFloat = 6
+            static let pageCircleSpacing: CGFloat = 15
         }
     }
 }

@@ -51,11 +51,8 @@ struct BgMorphView: View {
             )
             ZStack(alignment: .leading) {
                 Ellipse()
-                    .fill(UI.Color.BgMorph.getLeftViewColor(colorScheme: colorScheme))
+                    .fill(Color("BgMorphLeftView"))
                     .blur(radius: UI.Dimension.BgMorph.leftViewBlurRadius)
-                    .opacity(
-                        UI.Color.BgMorph.getLeftViewOpacity(colorScheme: colorScheme)
-                    )
                     .frame(
                         width: leftViewSize.0,
                         height: leftViewSize.1
@@ -76,8 +73,7 @@ struct BgMorphView: View {
                     )
                 if colorScheme == .dark {
                     Ellipse()
-                        .fill(UI.Color.BgMorph.getMiddleViewColor())
-                        .opacity(0.16)
+                        .fill(Color("BgMorphMiddleView"))
                         .blur(radius: UI.Dimension.BgMorph.middleViewBlurRadius)
                         .frame(
                             width: middleViewSize.0,
@@ -94,11 +90,8 @@ struct BgMorphView: View {
                         )
                 }
                 Ellipse()
-                    .fill(UI.Color.BgMorph.getRightViewColor(colorScheme: colorScheme))
+                    .fill(Color("BgMorphRightView"))
                     .blur(radius: UI.Dimension.BgMorph.rightViewBlurRadius)
-                    .opacity(
-                        UI.Color.BgMorph.getRightViewOpacity(colorScheme: colorScheme)
-                    )
                     .frame(
                         width: rightViewSize.0,
                         height: rightViewSize.1

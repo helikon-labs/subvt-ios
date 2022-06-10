@@ -13,15 +13,27 @@ struct AppView: View {
     private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
+        animation: .default
+    )
     private var items: FetchedResults<Item>
+    @EnvironmentObject var appData: AppData
 
     var body: some View {
-        if Settings.hasOnboarded {
-            IntroductionView()
-        } else {
-            IntroductionView()
+        ZStack {
+            switch appData.currentView {
+            case .introduction:
+                IntroductionView()
+                    .environmentObject(appData)
+                    .transition(.opacity)
+            case .onboarding:
+                OnboardingParentView()
+                    .environmentObject(appData)
+                    .transition(.opacity)
+            case .networkSelection:
+                fatalError()
+            }
         }
+        .background(Color("Background"))
     }
 }
 

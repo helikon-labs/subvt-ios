@@ -14,10 +14,10 @@ struct ActionButtonStyle: ButtonStyle {
                 width: UI.Dimension.Common.actionButtonWidth,
                 height: UI.Dimension.Common.actionButtonHeight
             )
-            .foregroundColor(UI.Color.Common.actionButtonText)
+            .foregroundColor(Color("ActionButtonText"))
             .background(configuration.isPressed
-                        ? UI.Color.Common.actionButtonPressed
-                        : UI.Color.Common.actionButton
+                        ? Color("ActionButtonPressed")
+                        : Color("ActionButton")
             )
             .cornerRadius(10)
             .font(UI.Font.actionButton)
@@ -26,11 +26,10 @@ struct ActionButtonStyle: ButtonStyle {
                 y: configuration.isPressed ? 5 : 0
             )
             .shadow(
-                color: UI.Color.Common.actionButtonShadow,
-                radius: 10,
+                color: Color("ActionButtonShadow"),
+                radius: 5,
                 x: 0,
                 y: 10
             )
-            .animation(.easeOut(duration: 0.2))
     }
 }

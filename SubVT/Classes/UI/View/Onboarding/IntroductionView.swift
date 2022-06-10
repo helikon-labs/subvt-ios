@@ -8,86 +8,158 @@
 import SwiftUI
 
 struct IntroductionView: View {
+    private enum DisplayState {
+        case notAppeared
+        case appeared
+        case dissolved
+        
+        var bgMorphViewYOffset: CGFloat {
+            get {
+                switch self {
+                case .notAppeared:
+                    return -100
+                case .appeared:
+                    return 0
+                case .dissolved:
+                    return -100
+                }
+            }
+        }
+        
+        var textYOffset: CGFloat {
+            get {
+                switch self {
+                case .notAppeared:
+                    return -50
+                case .appeared:
+                    return 0
+                case .dissolved:
+                    return 50
+                }
+            }
+        }
+        
+        var opacity: Double {
+            get {
+                switch self {
+                case .notAppeared:
+                    return 0
+                case .appeared:
+                    return 1
+                case .dissolved:
+                    return 0
+                }
+            }
+        }
+        
+        var iconVolumeOffset: (CGFloat, CGFloat) {
+            get {
+                switch self {
+                case .notAppeared:
+                    return (-350, 350)
+                case .appeared:
+                    return (0, 0)
+                case .dissolved:
+                    return (-350, 350)
+                }
+            }
+        }
+        
+        var buttonYOffset: CGFloat {
+            get {
+                switch self {
+                case .notAppeared:
+                    return 70
+                case .appeared:
+                    return 0
+                case .dissolved:
+                    return 70
+                }
+            }
+        }
+    }
+    
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @State var hasAppeared = false
+    @EnvironmentObject var appData: AppData
+    @State private var displayState = DisplayState.notAppeared
+    
     
     var body: some View {
         ZStack {
-            // background color morph
+            Color("IntroductionBg").ignoresSafeArea()
             BgMorphView()
                 .offset(
                     x: 0,
-                    y: hasAppeared ? 0 : -100
+                    y: self.displayState.bgMorphViewYOffset
                 )
+                .opacity(self.displayState.opacity)
             // 3D volume
             VStack {
                 Spacer()
                 HStack {
-                    UI.Image.Onboarding.get3DVolume(colorScheme: colorScheme)
+                    UI.Image.Introduction.iconVolume(colorScheme)
                         .offset(
-                            x: hasAppeared ? 0 : -50,
-                            y: hasAppeared ? 0 : 100
+                            x: self.displayState.iconVolumeOffset.0,
+                            y: self.displayState.iconVolumeOffset.1
                         )
                     Spacer()
                 }
-                .animation(Animation.easeOut(duration: 1.0).delay(0))
+                .animation(Animation.easeOut(duration: 0.75).delay(0))
             }
+            .ignoresSafeArea()
             VStack {
                 Spacer()
-                    .frame(height: UI.Dimension.Onboarding.titleMarginTop)
+                    .frame(height: UI.Dimension.Introduction.titleMarginTop)
                 // text
                 Group {
-                    Text(LocalizedStringKey("onboarding.title"))
-                        .font(UI.Font.Onboarding.title)
+                    Text(LocalizedStringKey("introduction.title"))
+                        .font(UI.Font.Introduction.title)
+                        .foregroundColor(Color("Text"))
                     Spacer()
-                        .frame(height: UI.Dimension.Onboarding.subtitleMarginTop)
-                    Text(LocalizedStringKey("onboarding.subtitle"))
-                        .frame(width: UI.Dimension.Onboarding.subtitleWidth)
-                        .font(UI.Font.Onboarding.subtitle)
+                        .frame(height: UI.Dimension.Introduction.subtitleMarginTop)
+                    Text(LocalizedStringKey("introduction.subtitle"))
+                        .frame(width: UI.Dimension.Introduction.subtitleWidth)
+                        .font(UI.Font.Introduction.subtitle)
+                        .foregroundColor(Color("Text"))
+                        .lineSpacing(UI.Dimension.Common.lineSpacing)
                         .multilineTextAlignment(.center)
                 }
-                .offset(
-                    x: 0,
-                    y: hasAppeared ? 0 : -30
+                .offset(x: 0,y: self.displayState.textYOffset
                 )
-                .opacity(
-                    hasAppeared ? 1 : 0
-                )
-                .animation(
-                    Animation
-                        .easeOut(duration: 0.5)
-                )
+                .opacity(self.displayState.opacity)
+                .animation(Animation.easeOut(duration: 0.5))
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     Spacer()
-                        .frame(height: UI.Dimension.Onboarding.getStartedButtonMarginTop)
+                        .frame(height: UI.Dimension.Introduction.getStartedButtonMarginTop)
                 } else {
                     Spacer()
                 }
-                Button(LocalizedStringKey("onboarding.get_started")) {
-                    print("button pressed")
+                Button(LocalizedStringKey("introduction.get_started")) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                        self.displayState = .dissolved
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                            withAnimation {
+                                self.appData.currentView = .onboarding
+                            }
+                        }
+                    }
                 }
                 .buttonStyle(ActionButtonStyle())
-                .opacity(
-                    hasAppeared ? 1 : 0
-                )
-                .offset(
-                    x: 0,
-                    y: hasAppeared ? 0 : 70
-                )
+                .opacity(self.displayState.opacity)
+                .offset(x: 0, y: self.displayState.buttonYOffset)
+                .animation(Animation.easeOut(duration: 0.35))
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     Spacer()
                 } else {
                     Spacer()
-                        .frame(
-                            height: UI.Dimension.Onboarding.getStartedButtonMarginBottom
-                        )
+                        .frame(height: UI.Dimension.Introduction.getStartedButtonMarginBottom)
                 }
             }
             
         }
-        .ignoresSafeArea()
+        // .ignoresSafeArea()
         .onAppear() {
-            hasAppeared = true
+            self.displayState = .appeared
         }
     }
 }
