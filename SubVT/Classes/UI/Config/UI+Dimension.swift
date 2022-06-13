@@ -22,6 +22,16 @@ extension UI {
             }
             static let actionButtonHeight: CGFloat = 64
             static let lineSpacing: CGFloat = 4
+            static var actionButtonMarginTop: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return .infinity
+                    } else {
+                        return 40
+                    }
+                }
+            }
+            static let actionButtonMarginBottom: CGFloat = 16
         }
         
         enum BgMorph {
@@ -251,16 +261,6 @@ extension UI {
                     }
                 }
             }
-            static var getStartedButtonMarginTop: CGFloat {
-                get {
-                    if UIDevice.current.userInterfaceIdiom == .phone {
-                        return .infinity
-                    } else {
-                        return 40
-                    }
-                }
-            }
-            static let getStartedButtonMarginBottom: CGFloat = 16
         }
         
         enum Onboarding {
@@ -273,7 +273,7 @@ extension UI {
                     }
                 }
             }
-            static let titleMarginTop: CGFloat = 42
+            static let titleMarginTop: CGFloat = 52
             static var descriptionMarginTop: CGFloat {
                 get {
                     if UIDevice.current.userInterfaceIdiom == .phone {
@@ -312,6 +312,67 @@ extension UI {
             }
             static let pageCircleSize: CGFloat = 6
             static let pageCircleSpacing: CGFloat = 15
+        }
+        
+        enum NetworkSelection {
+            static var titleMarginTop: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 115
+                    } else {
+                        return 195
+                    }
+                }
+            }
+            static var subtitleMarginTop: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 18
+                    } else {
+                        return 24
+                    }
+                }
+            }
+            static var networkGridMarginTop: CGFloat = 40
+            static var networkButtonSize: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 128
+                    } else {
+                        return 156
+                    }
+                }
+            }
+            static var networkButtonCornerRadius: CGFloat = 12
+            static var networkButtonPadding: CGFloat = 16
+            static var networkButtonSpacing: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 8
+                    } else {
+                        return 16
+                    }
+                }
+            }
+            static var networkIconSize: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 40
+                    } else {
+                        return 50
+                    }
+                }
+            }
+            static var networkSelectionIndicatorSize: CGFloat = 7
+            static var networkButtonShadowOffset: CGFloat {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return 11
+                    } else {
+                        return 17
+                    }
+                }
+            }
         }
     }
 }

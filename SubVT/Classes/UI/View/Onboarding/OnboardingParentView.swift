@@ -10,12 +10,13 @@ import SwiftUI
 struct OnboardingParentView: View {
     
     @Environment (\.colorScheme) var colorScheme: ColorScheme
+    @EnvironmentObject var appData: AppData
     @State private var step = OnboardingStep.step1
     private let pageCount: Int = OnboardingStep.allCases.count
     
     var body: some View {
         ZStack {
-            Color("Background").ignoresSafeArea()
+            Color("Bg").ignoresSafeArea()
             VStack(alignment: .leading) {
                 Spacer()
                     .frame(height: UI.Dimension.Onboarding.pageNumberMarginTop)
@@ -54,6 +55,11 @@ struct OnboardingParentView: View {
                     Text(LocalizedStringKey("onboarding.skip"))
                         .font(UI.Font.Onboarding.skipButton)
                         .foregroundColor(Color("Text"))
+                        .onTapGesture {
+                            withAnimation {
+                                self.appData.currentView = .networkSelection
+                            }
+                        }
                     Spacer()
                     HStack(spacing: UI.Dimension.Onboarding.pageCircleSpacing) {
                         ForEach(OnboardingStep.allCases, id: \.rawValue) { step in
@@ -73,24 +79,6 @@ struct OnboardingParentView: View {
                                     y: UI.Dimension.Onboarding.pageCircleSize / 2
                                 )
                         }
-                        /*
-                        ForEach(0 ..< self.pageCount, id:\.self) { i in
-                            Circle()
-                                .fill((i == self.step.index)
-                                      ? Color("ActionButton")
-                                      : Color("OnboardingPageCircleBg")
-                                )
-                                .frame(
-                                    width: UI.Dimension.Onboarding.pageCircleSize,
-                                    height: UI.Dimension.Onboarding.pageCircleSize
-                                )
-                                .shadow(
-                                    color: (i == self.step.index) ? Color("ActionButton") : Color.clear,
-                                    radius: 3,
-                                    x: 0,
-                                    y: UI.Dimension.Onboarding.pageCircleSize / 2
-                                )
-                        } */
                     }
                     .animation(Animation.easeOut(duration: 0.25))
                     Spacer()
@@ -99,7 +87,11 @@ struct OnboardingParentView: View {
                         .foregroundColor(Color("Text"))
                         .onTapGesture {
                             withAnimation {
-                                self.step = self.step.nextStep
+                                if self.step == .step4 {
+                                    self.appData.currentView = .networkSelection
+                                } else {
+                                    self.step = self.step.nextStep
+                                }
                             }
                         }
                 }
@@ -112,7 +104,6 @@ struct OnboardingParentView: View {
                 Spacer()
                     .frame(height: 40)
             }
-            // .onAppear(perform: { UIScrollView.appearance().bounces = false })
         }
     }
 }

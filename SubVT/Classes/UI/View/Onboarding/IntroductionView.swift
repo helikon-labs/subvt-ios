@@ -8,80 +8,74 @@
 import SwiftUI
 
 struct IntroductionView: View {
-    private enum DisplayState {
-        case notAppeared
-        case appeared
-        case dissolved
-        
-        var bgMorphViewYOffset: CGFloat {
-            get {
-                switch self {
-                case .notAppeared:
-                    return -100
-                case .appeared:
-                    return 0
-                case .dissolved:
-                    return -100
-                }
-            }
-        }
-        
-        var textYOffset: CGFloat {
-            get {
-                switch self {
-                case .notAppeared:
-                    return -50
-                case .appeared:
-                    return 0
-                case .dissolved:
-                    return 50
-                }
-            }
-        }
-        
-        var opacity: Double {
-            get {
-                switch self {
-                case .notAppeared:
-                    return 0
-                case .appeared:
-                    return 1
-                case .dissolved:
-                    return 0
-                }
-            }
-        }
-        
-        var iconVolumeOffset: (CGFloat, CGFloat) {
-            get {
-                switch self {
-                case .notAppeared:
-                    return (-350, 350)
-                case .appeared:
-                    return (0, 0)
-                case .dissolved:
-                    return (-350, 350)
-                }
-            }
-        }
-        
-        var buttonYOffset: CGFloat {
-            get {
-                switch self {
-                case .notAppeared:
-                    return 70
-                case .appeared:
-                    return 0
-                case .dissolved:
-                    return 70
-                }
+    @Environment (\.colorScheme) var colorScheme: ColorScheme
+    @EnvironmentObject var appData: AppData
+    @State private var displayState: BasicViewDisplayState = .notAppeared
+    
+    var bgMorphViewYOffset: CGFloat {
+        get {
+            switch self.displayState {
+            case .notAppeared:
+                return -100
+            case .appeared:
+                return 0
+            case .dissolved:
+                return -100
             }
         }
     }
     
-    @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @EnvironmentObject var appData: AppData
-    @State private var displayState = DisplayState.notAppeared
+    var textYOffset: CGFloat {
+        get {
+            switch self.displayState {
+            case .notAppeared:
+                return -50
+            case .appeared:
+                return 0
+            case .dissolved:
+                return 50
+            }
+        }
+    }
+    
+    var opacity: Double {
+        get {
+            switch self.displayState {
+            case .notAppeared:
+                return 0
+            case .appeared:
+                return 1
+            case .dissolved:
+                return 0
+            }
+        }
+    }
+    
+    var iconVolumeOffset: (CGFloat, CGFloat) {
+        get {
+            switch self.displayState {
+            case .notAppeared:
+                return (-350, 350)
+            case .appeared:
+                return (0, 0)
+            case .dissolved:
+                return (-350, 350)
+            }
+        }
+    }
+    
+    var buttonYOffset: CGFloat {
+        get {
+            switch self.displayState {
+            case .notAppeared:
+                return 70
+            case .appeared:
+                return 0
+            case .dissolved:
+                return 70
+            }
+        }
+    }
     
     
     var body: some View {
@@ -90,17 +84,17 @@ struct IntroductionView: View {
             BgMorphView()
                 .offset(
                     x: 0,
-                    y: self.displayState.bgMorphViewYOffset
+                    y: self.bgMorphViewYOffset
                 )
-                .opacity(self.displayState.opacity)
+                .opacity(self.opacity)
             // 3D volume
             VStack {
                 Spacer()
                 HStack {
                     UI.Image.Introduction.iconVolume(colorScheme)
                         .offset(
-                            x: self.displayState.iconVolumeOffset.0,
-                            y: self.displayState.iconVolumeOffset.1
+                            x: self.iconVolumeOffset.0,
+                            y: self.iconVolumeOffset.1
                         )
                     Spacer()
                 }
@@ -124,13 +118,13 @@ struct IntroductionView: View {
                         .lineSpacing(UI.Dimension.Common.lineSpacing)
                         .multilineTextAlignment(.center)
                 }
-                .offset(x: 0,y: self.displayState.textYOffset
+                .offset(x: 0,y: self.textYOffset
                 )
-                .opacity(self.displayState.opacity)
+                .opacity(self.opacity)
                 .animation(Animation.easeOut(duration: 0.5))
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     Spacer()
-                        .frame(height: UI.Dimension.Introduction.getStartedButtonMarginTop)
+                        .frame(height: UI.Dimension.Common.actionButtonMarginTop)
                 } else {
                     Spacer()
                 }
@@ -145,14 +139,14 @@ struct IntroductionView: View {
                     }
                 }
                 .buttonStyle(ActionButtonStyle())
-                .opacity(self.displayState.opacity)
-                .offset(x: 0, y: self.displayState.buttonYOffset)
+                .opacity(self.opacity)
+                .offset(x: 0, y: self.buttonYOffset)
                 .animation(Animation.easeOut(duration: 0.35))
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     Spacer()
                 } else {
                     Spacer()
-                        .frame(height: UI.Dimension.Introduction.getStartedButtonMarginBottom)
+                        .frame(height: UI.Dimension.Common.actionButtonMarginBottom)
                 }
             }
             

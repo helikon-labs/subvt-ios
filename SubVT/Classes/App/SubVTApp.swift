@@ -18,6 +18,7 @@ class AppData : ObservableObject {
     @Published var currentView: CurrentView = Settings.hasOnboarded
         ? .networkSelection
         : .introduction
+    @Published var network: Network!
 }
 
 @main

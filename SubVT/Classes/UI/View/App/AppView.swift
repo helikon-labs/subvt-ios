@@ -16,6 +16,7 @@ struct AppView: View {
         animation: .default
     )
     private var items: FetchedResults<Item>
+    
     @EnvironmentObject var appData: AppData
 
     var body: some View {
@@ -30,10 +31,12 @@ struct AppView: View {
                     .environmentObject(appData)
                     .transition(.opacity)
             case .networkSelection:
-                fatalError()
+                NetworkSelectionView()
+                    .environmentObject(appData)
+                    .transition(.opacity)
             }
         }
-        .background(Color("Background"))
+        .background(Color("Bg"))
     }
 }
 

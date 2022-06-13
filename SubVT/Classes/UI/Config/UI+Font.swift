@@ -73,5 +73,29 @@ extension UI {
                 }
             }
         }
+        
+        enum NetworkSelection {
+            static var title: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.semiBold.withSize(24)
+                } else {
+                    return LexendDeca.semiBold.withSize(36)
+                }
+            }
+            static var subtitle: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.light.withSize(14)
+                } else {
+                    return LexendDeca.light.withSize(16)
+                }
+            }
+            static var network: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.medium.withSize(14)
+                } else {
+                    return LexendDeca.medium.withSize(18)
+                }
+            }
+        }
     }
 }

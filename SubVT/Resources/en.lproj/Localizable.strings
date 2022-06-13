@@ -5,6 +5,8 @@
   Created by Kutsal Kaan Bilgin on 3.06.2022.
   
 */
+"common.go"="Go!";
+
 "introduction.title"="Welcome to SubVT";
 "introduction.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";
 "introduction.get_started"="Get started";
@@ -19,3 +21,6 @@
 "onboarding.step_3.description"="SubVT provides you with detailed past era and validator activity reports. Gain insight and understanding about the network and staking dynamics to improve the performance of your validators.";
 "onboarding.step_4.title"="Beyond the Blocks";
 "onboarding.step_4.description"="Add the SubVT Telemetry as an extra target for your validators to get even more data and notifications about peer count, upload and download bandwidth, block height, client version and more.";
+
+"network_selection.selected_network"="Selected Network";
+"network_selection.select_network"="Select an available network";

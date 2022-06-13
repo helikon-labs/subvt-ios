@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SubVTData
 
 extension UI {
     enum Image {
@@ -55,6 +56,18 @@ extension UI {
                     } else {
                         return SwiftUI.Image("Onboarding\(name)DarkPad")
                     }
+                }
+            }
+        }
+        
+        enum NetworkSelection {
+            static func networkIcon(
+                network: Network
+            ) -> SwiftUI.Image {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return SwiftUI.Image("\(network.chain.capitalized)IconPhone")
+                } else {
+                    return SwiftUI.Image("\(network.chain.capitalized)IconPad")
                 }
             }
         }

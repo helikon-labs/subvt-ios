@@ -44,6 +44,12 @@
 		A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90AA2848C1EC0053389A /* SubVTTests.swift */; };
 		A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90B42848C1EC0053389A /* SubVTUITests.swift */; };
 		A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90B62848C1EC0053389A /* SubVTUITestsLaunchTests.swift */; };
+		A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */; };
+		A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */; };
+		A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
+		A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
+		A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
+		A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
 		A0E0F6712848CD1C0029DDBF /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */; };
 		A0E0F6722848CD1C0029DDBF /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */; };
 		A0E0F6732848CD1C0029DDBF /* LexendDeca-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6692848CD1C0029DDBF /* LexendDeca-Light.ttf */; };
@@ -115,6 +121,9 @@
 		A0BF90B42848C1EC0053389A /* SubVTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTUITests.swift; sourceTree = "<group>"; };
 		A0BF90B62848C1EC0053389A /* SubVTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A0BF90C32848C2140053389A /* SubVT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SubVT.entitlements; sourceTree = "<group>"; };
+		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
+		A0C9A781285749940071C7AC /* BasicDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDisplayState.swift; sourceTree = "<group>"; };
+		A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionViewModel.swift; sourceTree = "<group>"; };
 		A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-SemiBold.ttf"; sourceTree = "<group>"; };
 		A0E0F6692848CD1C0029DDBF /* LexendDeca-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-Light.ttf"; sourceTree = "<group>"; };
 		A0E0F66A2848CD1C0029DDBF /* LexendDeca-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-Regular.ttf"; sourceTree = "<group>"; };
@@ -187,6 +196,7 @@
 			children = (
 				A04C429428533554007C970B /* App */,
 				A04C428B285321ED007C970B /* Common */,
+				A0C9A77D28573D930071C7AC /* Network Selection */,
 				A04C428A285321D3007C970B /* Network Status */,
 				A0128A53284A1855000C2307 /* Onboarding */,
 			);
@@ -250,6 +260,7 @@
 			isa = PBXGroup;
 			children = (
 				A04C428D285334E2007C970B /* ActionButton.swift */,
+				A0C9A781285749940071C7AC /* BasicDisplayState.swift */,
 				A0A1DC60284B990B00914237 /* BgMorphView.swift */,
 			);
 			path = Common;
@@ -318,6 +329,30 @@
 			path = SubVTUITests;
 			sourceTree = "<group>";
 		};
+		A0C9A77D28573D930071C7AC /* Network Selection */ = {
+			isa = PBXGroup;
+			children = (
+				A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */,
+			);
+			path = "Network Selection";
+			sourceTree = "<group>";
+		};
+		A0C9A78428575EC80071C7AC /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				A0C9A78528575F320071C7AC /* Network Selection */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
+		A0C9A78528575F320071C7AC /* Network Selection */ = {
+			isa = PBXGroup;
+			children = (
+				A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */,
+			);
+			path = "Network Selection";
+			sourceTree = "<group>";
+		};
 		A0E0F6662848CD000029DDBF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,10 +395,11 @@
 		A0E0F6852848CEDD0029DDBF /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				A0128A6B284A4E9D000C2307 /* Extension */,
 				A0128A60284A3BB8000C2307 /* Config */,
+				A0128A6B284A4E9D000C2307 /* Extension */,
 				A0128A4A284A1189000C2307 /* Util */,
 				A0128A49284A0B50000C2307 /* View */,
+				A0C9A78428575EC80071C7AC /* View Model */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -530,12 +566,15 @@
 			files = (
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A0A1DC5B284B8E2B00914237 /* UI+Image.swift in Sources */,
+				A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A0128A4D284A1297000C2307 /* Settings.swift in Sources */,
 				A0BF909E2848C1EC0053389A /* Persistence.swift in Sources */,
 				A0128A6D284A4EAE000C2307 /* Color.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
 				A04C429628533564007C970B /* AppView.swift in Sources */,
+				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
+				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0128A51284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
@@ -561,12 +600,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
+				A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A0128A6E284A4EAE000C2307 /* Color.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */,
+				A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
 				A04C428F285334E2007C970B /* ActionButton.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
