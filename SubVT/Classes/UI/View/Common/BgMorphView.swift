@@ -12,6 +12,17 @@ struct BgMorphView: View {
         case start
         case mid
         case end
+        
+        var next: Step {
+            switch self {
+            case .start:
+                return .mid
+            case .mid:
+                return .end
+            case .end:
+                return .start
+            }
+        }
     }
     
     @Environment (\.colorScheme) var colorScheme: ColorScheme
@@ -63,8 +74,9 @@ struct BgMorphView: View {
                         )
                     )
                     .rotationEffect(.degrees(
-                        UI.Dimension.BgMorph.getLeftViewRotation(
-                            step: step
+                        UI.Dimension.BgMorph.leftViewRotation(
+                            colorScheme: self.colorScheme,
+                            step: self.step
                         )
                     ))
                     .position(
@@ -110,18 +122,14 @@ struct BgMorphView: View {
             .frame(maxWidth: geometry.size.width)
             .ignoresSafeArea()
             .onReceive(timer) { time in
-                switch self.step {
-                case .start:
-                    self.step = .mid
-                case .mid:
-                    self.step = .end
-                case .end:
-                    self.step = .start
+                withAnimation(.easeInOut(duration: 3.5)) {
+                    self.step = self.step.next
                 }
             }
-            .animation(Animation.easeInOut(duration: 3.5))
             .onAppear() {
-                self.step = .mid
+                withAnimation(.easeInOut(duration: 3.5)) {
+                    self.step = self.step.next
+                }
             }
         }
     }

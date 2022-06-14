@@ -28,6 +28,8 @@
 		A04C429728533564007C970B /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C429528533564007C970B /* AppView.swift */; };
 		A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C42982853BA18007C970B /* OnboardingStep.swift */; };
 		A04C429A2853BA18007C970B /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C42982853BA18007C970B /* OnboardingStep.swift */; };
+		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
+		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC56284B8E0000914237 /* UI+Font.swift */; };
@@ -105,6 +107,7 @@
 		A04C428D285334E2007C970B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		A04C429528533564007C970B /* AppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		A04C42982853BA18007C970B /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
+		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
 		A0A1DC53284B8DD200914237 /* UI+Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension.swift"; sourceTree = "<group>"; };
 		A0A1DC56284B8E0000914237 /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
 		A0A1DC5A284B8E2B00914237 /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
@@ -332,6 +335,7 @@
 		A0C9A77D28573D930071C7AC /* Network Selection */ = {
 			isa = PBXGroup;
 			children = (
+				A0646D99285856FE00B687ED /* NetworkButtonView.swift */,
 				A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */,
 			);
 			path = "Network Selection";
@@ -577,6 +581,7 @@
 				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0128A51284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
+				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
@@ -602,6 +607,7 @@
 			files = (
 				A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
+				A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,

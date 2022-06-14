@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import SubVTData
 
 struct NetworkSelectionView: View {
     @EnvironmentObject var appData: AppData
     @StateObject private var viewModel = NetworkSelectionViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
+    @State private var selectedNetwork: Network? = nil
     
     private let gridItemLayout = [
         GridItem(.fixed(UI.Dimension.NetworkSelection.networkButtonSize)),
@@ -46,7 +48,11 @@ struct NetworkSelectionView: View {
                     switch viewModel.fetchState {
                     case .loading:
                         ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: Color("Text")))
+                            .progressViewStyle(
+                                CircularProgressViewStyle(
+                                    tint: Color("Text")
+                                )
+                            )
                             .scaleEffect(1.25)
                     case .success(let networks):
                         LazyVGrid(
@@ -54,52 +60,19 @@ struct NetworkSelectionView: View {
                             spacing: UI.Dimension.NetworkSelection.networkButtonSpacing
                         ) {
                             ForEach(networks.indices, id: \.self) { i in
-                                ZStack(alignment: .leading) {
-                                    RoundedRectangle(
-                                        cornerRadius: UI.Dimension.NetworkSelection.networkButtonCornerRadius,
-                                        style: .circular
-                                    )
-                                    .fill(Color("NetworkButtonBg"))
-                                    .frame(
-                                        width: UI.Dimension.NetworkSelection.networkButtonSize,
-                                        height: UI.Dimension.NetworkSelection.networkButtonSize
-                                    )
-                                    .shadow(
-                                        color: Color("NetworkButtonShadow"),
-                                        radius: 8,
-                                        x: UI.Dimension.NetworkSelection.networkButtonShadowOffset,
-                                        y: UI.Dimension.NetworkSelection.networkButtonShadowOffset
-                                    )
-                                    VStack(alignment: .leading) {
-                                        HStack(alignment: .top) {
-                                            UI.Image.NetworkSelection.networkIcon(network: networks[i])
-                                                .frame(
-                                                    width: UI.Dimension.NetworkSelection.networkIconSize,
-                                                    height: UI.Dimension.NetworkSelection.networkIconSize
-                                                )
-                                            Spacer()
-                                            Circle()
-                                                .fill(Color.green)
-                                                .frame(
-                                                    width: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize,
-                                                    height: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize
-                                                )
-                                                .shadow(
-                                                    color: Color.green,
-                                                    radius: 3,
-                                                    x: 0,
-                                                    y: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize / 2
-                                                )
-                                        }
-                                        Spacer()
-                                        Text(networks[i].display)
-                                            .font(UI.Font.NetworkSelection.network)
-                                            .foregroundColor(Color("Text"))
+                                Button(
+                                    action: {
+                                        self.selectedNetwork = networks[i]
+                                    },
+                                    label: {
+                                        NetworkButtonView(
+                                            isSelected: self.selectedNetwork?.id == networks[i].id,
+                                            network: networks[i]
+                                        )
                                     }
-                                    .padding(UI.Dimension.NetworkSelection.networkButtonPadding)
-                                }
+                                )
+                                .buttonStyle(NetworkButtonStyle())
                                 .zIndex(100 - Double(i))
-                                .padding(0)
                             }
                         }
                     default:
@@ -117,10 +90,9 @@ struct NetworkSelectionView: View {
                     Button(LocalizedStringKey("common.go")) {
                         // action
                     }
-                    .disabled(appData.network == nil)
-                    .buttonStyle((appData.network == nil)
-                                 ? ActionButtonDisabledStyle()
-                                 : ActionButtonDisabledStyle()
+                    .disabled(selectedNetwork == nil)
+                    .buttonStyle(ActionButtonStyle(
+                        isEnabled: selectedNetwork != nil)
                     )
                 }
                 .frame(maxWidth: .infinity)
@@ -141,5 +113,6 @@ struct NetworkSelectionView: View {
 struct NetworkSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkSelectionView()
+            .environmentObject(AppData())
     }
 }

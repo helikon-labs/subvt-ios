@@ -111,5 +111,7 @@ struct OnboardingParentView: View {
 struct OnboardingParentView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingParentView()
+            .environmentObject(AppData())
+            .preferredColorScheme(.dark)
     }
 }

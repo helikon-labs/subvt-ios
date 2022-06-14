@@ -28,7 +28,6 @@ class NetworkSelectionViewModel: ObservableObject {
                 if let error = response.error {
                     self.fetchState = .error(error: error)
                 } else {
-                    print("networks : \(response.value!)")
                     self.fetchState = .success(networks: response.value!)
                 }
             }

@@ -39,6 +39,17 @@ extension UI {
             static let middleViewBlurRadius: CGFloat = 84
             static let rightViewBlurRadius: CGFloat = 90
             
+            static func yOffset(displayState: BasicViewDisplayState) -> CGFloat {
+                switch displayState {
+                case .notAppeared:
+                    return -500
+                case .appeared:
+                    return -150
+                case .dissolved:
+                    return -500
+                }
+            }
+            
             static func getLeftViewTransform(colorScheme: ColorScheme) -> CGAffineTransform {
                 if colorScheme == .dark {
                     return CGAffineTransform.identity
@@ -68,7 +79,7 @@ extension UI {
                         )
                     case .mid:
                         return (
-                            geometry.size.width * 0.72,
+                            geometry.size.width * 2.72,
                             geometry.size.height * 0.55
                         )
                     case .end:
@@ -109,34 +120,79 @@ extension UI {
                         )
                     }
                 } else {
-                    switch step {
-                    case .start:
-                        return (
-                            geometry.size.height * 0.10,
-                            -geometry.size.height * 0.39
-                        )
-                    case .mid:
-                        return (
-                            geometry.size.width * 0.13,
-                            -geometry.size.height * 0.45
-                        )
-                    case .end:
-                        return (
-                            geometry.size.width * 0.1,
-                            -geometry.size.height * 0.37
-                        )
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        switch step {
+                        case .start:
+                            return (
+                                geometry.size.height * 0.10,
+                                -geometry.size.height * 0.39
+                            )
+                        case .mid:
+                            return (
+                                geometry.size.width * 0.13,
+                                -geometry.size.height * 0.45
+                            )
+                        case .end:
+                            return (
+                                geometry.size.width * 0.1,
+                                -geometry.size.height * 0.37
+                            )
+                        }
+                    } else {
+                        switch step {
+                        case .start:
+                            return (
+                                geometry.size.height * 0.19,
+                                -geometry.size.height * 0.39
+                            )
+                        case .mid:
+                            return (
+                                geometry.size.width * 0.23,
+                                -geometry.size.height * 0.45
+                            )
+                        case .end:
+                            return (
+                                geometry.size.width * 0.1,
+                                -geometry.size.height * 0.37
+                            )
+                        }
                     }
                 }
             }
             
-            static func getLeftViewRotation(step: BgMorphView.Step) -> Double {
-                switch step {
-                case .start:
-                    return 15
-                case .mid:
-                    return -5
-                case .end:
-                    return -5
+            static func leftViewRotation(
+                colorScheme: ColorScheme,
+                step: BgMorphView.Step
+            ) -> Double {
+                if colorScheme == .dark {
+                    switch step {
+                    case .start:
+                        return 15
+                    case .mid:
+                        return -5
+                    case .end:
+                        return -5
+                    }
+                } else {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        switch step {
+                        case .start:
+                            return 15
+                        case .mid:
+                            return 15
+                        case .end:
+                            return 15
+                        }
+                    } else {
+                        switch step {
+                        case .start:
+                            return 25
+                        case .mid:
+                            return 30
+                        case .end:
+                            return 25
+                        }
+                    }
                 }
             }
             
@@ -230,16 +286,64 @@ extension UI {
                 }
             }
             
-            static let rightViewRotation = -13.16
+            static var rightViewRotation: Double {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return -13.16
+                    } else {
+                        return 10
+                    }
+                }
+            }
         }
         
         enum Introduction {
+            static func opacity(displayState: BasicViewDisplayState) -> CGFloat {
+                switch displayState {
+                case .notAppeared:
+                    return 0
+                case .appeared:
+                    return 1
+                case .dissolved:
+                    return 0
+                }
+            }
+            static func iconVolumeOffset(displayState: BasicViewDisplayState) -> (CGFloat, CGFloat) {
+                switch displayState {
+                case .notAppeared:
+                    return (-420, 420)
+                case .appeared:
+                    return (-20, 20)
+                case .dissolved:
+                    return (-420, 420)
+                }
+            }
+            static func textYOffset(displayState: BasicViewDisplayState) -> CGFloat {
+                switch displayState {
+                case .notAppeared:
+                    return -50
+                case .appeared:
+                    return 0
+                case .dissolved:
+                    return 50
+                }
+            }
+            static func buttonYOffset(displayState: BasicViewDisplayState) -> CGFloat {
+                switch displayState {
+                case .notAppeared:
+                    return 70
+                case .appeared:
+                    return 0
+                case .dissolved:
+                    return 70
+                }
+            }
             static var titleMarginTop: CGFloat {
                 get {
                     if UIDevice.current.userInterfaceIdiom == .phone {
-                        return 103
+                        return 115
                     } else {
-                        return 183
+                        return 213
                     }
                 }
             }
@@ -367,9 +471,9 @@ extension UI {
             static var networkButtonShadowOffset: CGFloat {
                 get {
                     if UIDevice.current.userInterfaceIdiom == .phone {
-                        return 11
+                        return 14
                     } else {
-                        return 17
+                        return 18
                     }
                 }
             }

@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/GigaBitcoin/secp256k1.swift.git",
       "state" : {
-        "revision" : "c2740e267c4bdb8e803f611d20f71c14fa72664f",
-        "version" : "0.6.0"
+        "revision" : "c61f15293e1c4617299b8b91efdd06f583de1148",
+        "version" : "0.4.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/helikon-labs/subvt-data-swift.git",
       "state" : {
-        "revision" : "eae75b6c1a9a62279e432eac51a047421de62aff",
-        "version" : "0.2.5"
+        "revision" : "74cee1f5c6d2bb2af74a91207da80d2467ca2eca",
+        "version" : "0.2.8"
       }
     },
     {
