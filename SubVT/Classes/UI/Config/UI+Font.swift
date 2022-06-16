@@ -12,6 +12,11 @@ extension UI {
         // general purpose
         static let actionButton = LexendDeca.semiBold.withSize(18)
         
+        enum Snackbar {
+            static var message = LexendDeca.light.withSize(16)
+            static var action = LexendDeca.regular.withSize(16)
+        }
+        
         enum Introduction {
             static var title: SwiftUI.Font {
                 if UIDevice.current.userInterfaceIdiom == .phone {

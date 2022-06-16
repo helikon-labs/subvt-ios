@@ -37,6 +37,7 @@ struct AppView: View {
                     .transition(.opacity)
             }
         }
+        .animation(.easeInOut(duration: 0.25))
     }
 }
 

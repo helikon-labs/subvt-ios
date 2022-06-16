@@ -11,8 +11,8 @@ import SubVTData
 struct NetworkButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? 0.98 : 1.0)
-            .animation(.none)
+            .scaleEffect(configuration.isPressed ? 0.97 : 1.0)
+            .animation(.linear(duration: 0.1), value: configuration.isPressed)
     }
 }
 
@@ -23,7 +23,7 @@ struct NetworkButtonView: View {
     var body: some View {
         ZStack(alignment: .leading) {
             RoundedRectangle(
-                cornerRadius: UI.Dimension.NetworkSelection.networkButtonCornerRadius,
+                cornerRadius: UI.Dimension.Common.cornerRadius,
                 style: .circular
             )
             .fill(Color("NetworkButtonBg"))
@@ -47,20 +47,23 @@ struct NetworkButtonView: View {
                             height: UI.Dimension.NetworkSelection.networkIconSize
                         )
                     Spacer()
-                    if isSelected {
-                        Circle()
-                            .fill(Color("NetworkButtonSelectionIndicator"))
-                            .frame(
-                                width: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize,
-                                height: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize
-                            )
-                            .shadow(
-                                color: Color("NetworkButtonSelectionIndicator"),
-                                radius: 3,
-                                x: 0,
-                                y: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize / 2
-                            )
+                    ZStack {
+                        if isSelected {
+                            Circle()
+                                .fill(Color("NetworkButtonSelectionIndicator"))
+                                .frame(
+                                    width: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize,
+                                    height: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize
+                                )
+                                .shadow(
+                                    color: Color("NetworkButtonSelectionIndicator"),
+                                    radius: 3,
+                                    x: 0,
+                                    y: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize / 2
+                                )
+                        }
                     }
+                    .animation(.linear(duration: 0.1), value: self.isSelected)
                 }
                 Spacer()
                 Text(network.display)
@@ -88,11 +91,16 @@ struct NetworkButtonView_Previews: PreviewProvider {
                 ss58Prefix: 1,
                 tokenTicker: "KSM",
                 tokenDecimalCount: 12,
-                networkStatusServiceURL: nil,
-                reportServiceURL: nil,
-                validatorDetailsServiceURL: nil,
-                activeValidatorListServiceURL: nil,
-                inactiveValidatorListServiceURL: nil
+                networkStatusServiceHost: nil,
+                networkStatusServicePort: nil,
+                reportServiceHost: nil,
+                reportServicePort: nil,
+                validatorDetailsServiceHost: nil,
+                validatorDetailsServicePort: nil,
+                activeValidatorListServiceHost: nil,
+                activeValidatorListServicePort: nil,
+                inactiveValidatorListServiceHost: nil,
+                inactiveValidatorListServicePort: nil
             )
         )
     }

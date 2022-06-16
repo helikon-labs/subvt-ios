@@ -6,6 +6,11 @@
   
 */
 "common.go"="Go!";
+"common.retry"="Retry";
+
+"error.connection"="Connection error";
+"error.unexpected"="Unexpected error";
+"error.server"="Server error";
 
 "introduction.title"="Welcome to SubVT";
 "introduction.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";

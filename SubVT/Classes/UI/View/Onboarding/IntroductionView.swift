@@ -21,11 +21,7 @@ struct IntroductionView: View {
                         displayState: self.displayState
                     )
                 )
-                .opacity(
-                    UI.Dimension.Introduction.opacity(
-                        displayState: self.displayState
-                    )
-                )
+                .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
                 .animation(
                     .easeOut(duration: 0.75),
                     value: self.displayState
@@ -78,11 +74,7 @@ struct IntroductionView: View {
                         displayState: self.displayState
                     )
                 )
-                .opacity(
-                    UI.Dimension.Introduction.opacity(
-                        displayState: self.displayState
-                    )
-                )
+                .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
                 .animation(
                     .easeOut(duration: 0.75),
                     value: self.displayState
@@ -103,15 +95,11 @@ struct IntroductionView: View {
                         }
                     }
                 }
-                .buttonStyle(ActionButtonStyle(isEnabled: true))
-                .opacity(
-                    UI.Dimension.Introduction.opacity(
-                        displayState: self.displayState
-                    )
-                )
+                .buttonStyle(ActionButtonStyle(isEnabled: .constant(true)))
+                .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
                 .offset(
                     x: 0,
-                    y: UI.Dimension.Introduction.buttonYOffset(
+                    y: UI.Dimension.Common.actionButtonYOffset(
                         displayState: self.displayState
                     )
                 )

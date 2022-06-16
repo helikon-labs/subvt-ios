@@ -88,7 +88,9 @@ struct OnboardingParentView: View {
                         .onTapGesture {
                             withAnimation {
                                 if self.step == .step4 {
-                                    self.appData.currentView = .networkSelection
+                                    withAnimation {
+                                        self.appData.currentView = .networkSelection
+                                    }
                                 } else {
                                     self.step = self.step.nextStep
                                 }

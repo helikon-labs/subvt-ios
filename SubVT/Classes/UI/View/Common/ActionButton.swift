@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActionButtonStyle: ButtonStyle {
-    let isEnabled: Bool
+    @Binding var isEnabled: Bool
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
@@ -16,28 +16,41 @@ struct ActionButtonStyle: ButtonStyle {
                 width: UI.Dimension.Common.actionButtonWidth,
                 height: UI.Dimension.Common.actionButtonHeight
             )
-            .foregroundColor(isEnabled ? Color("ActionButtonText") : Color("ActionButtonDisabledText"))
-            .background(isEnabled
-                ? (configuration.isPressed ? Color("ActionButtonPressed") : Color("ActionButton"))
-                : Color("ActionButtonDisabled")
+            .foregroundColor(
+                self.isEnabled
+                    ? Color("ActionButtonText")
+                    : Color("ActionButtonDisabledText")
+            )
+            .background(
+                self.isEnabled
+                    ? (
+                        configuration.isPressed
+                            ? Color("ActionButtonPressed")
+                            : Color("ActionButton")
+                    )
+                    : Color("ActionButtonDisabled")
             )
             .cornerRadius(10)
             .font(UI.Font.actionButton)
             .offset(
                 x: 0,
-                y: configuration.isPressed ? 5 : 0
-            )
-            .animation(
-                .easeOut(duration: 0.15),
-                value: configuration.isPressed
+                y: configuration.isPressed ? 3 : 0
             )
             .shadow(
-                color: isEnabled
+                color: self.isEnabled
                     ? Color("ActionButtonShadow")
                     : Color.clear,
                 radius: 5,
                 x: 0,
                 y: 10
+            )
+            .animation(
+                .easeOut(duration: 0.5),
+                value: self.isEnabled
+            )
+            .animation(
+                .linear(duration: 0.10),
+                value: configuration.isPressed
             )
     }
 }
