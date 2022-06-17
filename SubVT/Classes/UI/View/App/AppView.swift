@@ -9,6 +9,7 @@ import SwiftUI
 import CoreData
 
 struct AppView: View {
+    @EnvironmentObject var appState: AppState
     @Environment(\.managedObjectContext)
     private var viewContext
     @FetchRequest(
@@ -17,31 +18,33 @@ struct AppView: View {
     )
     private var items: FetchedResults<Item>
     
-    @EnvironmentObject var appData: AppData
-
+    
     var body: some View {
         ZStack {
             Color("Bg").ignoresSafeArea()
-            switch appData.currentView {
+            switch self.appState.stage {
             case .introduction:
                 IntroductionView()
-                    .environmentObject(appData)
+                    .environmentObject(self.appState)
             case .onboarding:
                 OnboardingParentView()
-                    .environmentObject(appData)
+                    .environmentObject(self.appState)
             case .networkSelection:
                 NetworkSelectionView()
-                    .environmentObject(appData)
+                    .environmentObject(self.appState)
+            case .home:
+                HomeView()
+                    .environmentObject(self.appState)
             }
         }
-        .animation(nil, value: appData.currentView)
+        .animation(nil, value: self.appState.stage)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         AppView()
-            .environmentObject(AppData())
+            .environmentObject(AppState())
             .environment(
                 \.managedObjectContext,
                  PersistenceController.preview.container.viewContext

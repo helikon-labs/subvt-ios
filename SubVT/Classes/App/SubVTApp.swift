@@ -8,28 +8,15 @@
 import SubVTData
 import SwiftUI
 
-enum CurrentView: Int {
-    case introduction
-    case onboarding
-    case networkSelection
-}
-
-class AppData : ObservableObject {
-    @Published var currentView: CurrentView = Settings.hasOnboarded
-        ? .networkSelection
-        : .introduction
-    @Published var network: Network!
-}
-
 @main
 struct SubVTApp: App {
     let persistenceController = PersistenceController.shared
-    private var appData = AppData()
+    private var appState = AppState()
     
     var body: some Scene {
         WindowGroup {
             AppView()
-                .environmentObject(appData)
+                .environmentObject(appState)
                 .environment(
                     \.managedObjectContext,
                      persistenceController.container.viewContext

@@ -32,10 +32,6 @@ struct ActionButtonStyle: ButtonStyle {
             )
             .cornerRadius(10)
             .font(UI.Font.actionButton)
-            .offset(
-                x: 0,
-                y: configuration.isPressed ? 3 : 0
-            )
             .shadow(
                 color: self.isEnabled
                     ? Color("ActionButtonShadow")
@@ -44,8 +40,13 @@ struct ActionButtonStyle: ButtonStyle {
                 x: 0,
                 y: 10
             )
+            .scaleEffect(configuration.isPressed ? 0.99 : 1)
+            .offset(
+                x: 0,
+                y: configuration.isPressed ? 3 : 0
+            )
             .animation(
-                .easeOut(duration: 0.5),
+                .easeOut(duration: 0.4),
                 value: self.isEnabled
             )
             .animation(

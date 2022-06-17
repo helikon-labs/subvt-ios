@@ -8,9 +8,9 @@
 "common.go"="Go!";
 "common.retry"="Retry";
 
-"error.connection"="Connection error";
-"error.unexpected"="Unexpected error";
-"error.server"="Server error";
+"common.error.connection"="Connection error";
+"common.error.unexpected"="Unexpected error";
+"common.error.server"="Server error";
 
 "introduction.title"="Welcome to SubVT";
 "introduction.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";
@@ -29,3 +29,4 @@
 
 "network_selection.selected_network"="Selected Network";
 "network_selection.select_network"="Select an available network";
+"network_selection.error.network_list"="Error while getting the network list. Please check your connection.";

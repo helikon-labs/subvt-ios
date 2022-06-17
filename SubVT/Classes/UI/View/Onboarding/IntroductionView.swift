@@ -9,7 +9,7 @@ import SwiftUI
 
 struct IntroductionView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @EnvironmentObject var appData: AppData
+    @EnvironmentObject var appState: AppState
     @State private var displayState: BasicViewDisplayState = .notAppeared
     
     var body: some View {
@@ -90,7 +90,7 @@ struct IntroductionView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                         self.displayState = .dissolved
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            self.appData.currentView = .onboarding
+                            self.appState.stage = .onboarding
                         }
                     }
                 }
@@ -124,7 +124,7 @@ struct IntroductionView: View {
 struct IntroductionView_Previews: PreviewProvider {
     static var previews: some View {
         IntroductionView()
-            .environmentObject(AppData())
+            .environmentObject(AppState())
             .preferredColorScheme(.dark)
     }
 }

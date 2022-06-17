@@ -13,8 +13,15 @@ extension UI {
         static let actionButton = LexendDeca.semiBold.withSize(18)
         
         enum Snackbar {
-            static var message = LexendDeca.light.withSize(16)
-            static var action = LexendDeca.regular.withSize(16)
+            static var message: SwiftUI.Font {
+                get {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return LexendDeca.light.withSize(15)
+                    } else {
+                        return LexendDeca.light.withSize(15)
+                    }
+                }
+            }
         }
         
         enum Introduction {

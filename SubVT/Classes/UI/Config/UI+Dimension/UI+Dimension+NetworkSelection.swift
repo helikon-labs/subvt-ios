@@ -39,7 +39,7 @@ extension UI.Dimension {
             }
         }
         
-        static var networkGridMarginTop: CGFloat = 40
+        static let networkGridMarginTop: CGFloat = 40
         static var networkButtonSize: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {
@@ -49,7 +49,7 @@ extension UI.Dimension {
                 }
             }
         }
-        static var networkButtonPadding: CGFloat = 16
+        static let networkButtonPadding: CGFloat = 16
         static var networkButtonSpacing: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {
@@ -68,7 +68,7 @@ extension UI.Dimension {
                 }
             }
         }
-        static var networkSelectionIndicatorSize: CGFloat = 7
+        static let networkSelectionIndicatorSize: CGFloat = 7
         static var networkButtonShadowOffset: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {
@@ -87,6 +87,32 @@ extension UI.Dimension {
                 return 0
             case .dissolved:
                 return 15
+            }
+        }
+        
+        static func snackbarYOffset(fetchState: NetworkSelectionViewModel.FetchState) -> CGFloat {
+            switch fetchState {
+            case .idle:
+                fallthrough
+            case .loading:
+                fallthrough
+            case .success:
+                return 92
+            case .error:
+                return -96
+            }
+        }
+        
+        static func snackbarOpacity(fetchState: NetworkSelectionViewModel.FetchState) -> Double {
+            switch fetchState {
+            case .idle:
+                fallthrough
+            case .loading:
+                fallthrough
+            case .success:
+                return 0
+            case .error:
+                return 1
             }
         }
     }

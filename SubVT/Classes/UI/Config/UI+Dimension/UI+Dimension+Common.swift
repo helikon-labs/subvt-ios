@@ -9,8 +9,8 @@ import SwiftUI
 
 extension UI.Dimension {
     enum Common {
-        static var cornerRadius: CGFloat = 12
-        static var horizontalPadding: CGFloat = 16
+        static let cornerRadius: CGFloat = 12
+        static let horizontalPadding: CGFloat = 16
         static var actionButtonWidth: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {

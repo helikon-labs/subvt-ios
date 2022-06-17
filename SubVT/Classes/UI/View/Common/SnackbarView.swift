@@ -7,92 +7,84 @@
 
 import SwiftUI
 
+struct SnackbarButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.99 : 1)
+            .offset(y: configuration.isPressed ? 2 : 0)
+            .animation(.linear(duration: 0.1), value: configuration.isPressed)
+    }
+}
+
 struct SnackbarView: View {
-    enum DisplayState: Equatable {
-        case hidden
+    enum SnackbarType: Equatable {
         case info
         case error(canRetry: Bool)
     }
     let message: LocalizedStringKey
-    let state: DisplayState
+    let type: SnackbarType
     let action: () -> ()
     
-    var bottomOffset: CGFloat {
-        get {
-            switch self.state {
-            case .hidden:
-                return 400
-            case .error(_):
-                fallthrough
-            case .info:
-                return -100
-            }
-        }
-    }
-    
     var body: some View {
-        VStack {
-            Spacer()
-            Button(
-                action: action,
-                label: {
-                    HStack {
-                        Spacer()
-                            .frame(width: UI.Dimension.Common.horizontalPadding)
-                        ZStack(alignment: .leading) {
-                            RoundedRectangle(
-                                cornerRadius: UI.Dimension.Common.cornerRadius,
-                                style: .circular
-                            )
-                            .fill(Color("SnackbarBg"))
-                            .frame(
-                                maxWidth: .infinity,
-                                minHeight: UI.Dimension.Snackbar.height,
-                                maxHeight: UI.Dimension.Snackbar.height
-                            )
+        Button(
+            action: action,
+            label: {
+                HStack {
+                    Spacer()
+                        .frame(width: UI.Dimension.Common.horizontalPadding)
+                    ZStack(alignment: .leading) {
+                        VStack {
                             HStack {
                                 Spacer()
                                     .frame(width: UI.Dimension.Common.horizontalPadding)
                                 Image("SnackbarExclamationIcon")
                                 Spacer()
-                                    .frame(width: 10)
+                                    .frame(width: UI.Dimension.Snackbar.messageMarginLeft)
                                 Text(message)
-                                    .lineLimit(1)
                                     .font(UI.Font.Snackbar.message)
                                     .foregroundColor(Color("Text"))
-                                switch self.state {
+                                    .lineSpacing(UI.Dimension.Snackbar.lineSpacing)
+                                switch self.type {
+                                case .info:
+                                    Spacer()
+                                        .frame(width: UI.Dimension.Common.horizontalPadding)
                                 case .error(let canRetry):
                                     if canRetry {
                                         Spacer()
                                         Text(LocalizedStringKey("common.retry"))
                                             .lineLimit(1)
-                                            .font(UI.Font.Snackbar.action)
+                                            .font(UI.Font.Snackbar.message)
                                             .foregroundColor(Color("SnackbarAction"))
                                         Spacer()
                                             .frame(width: UI.Dimension.Common.horizontalPadding)
                                     }
-                                default:
-                                    Spacer()
-                                        .frame(width: UI.Dimension.Common.horizontalPadding)
                                 }
                             }
                         }
-                        Spacer()
-                            .frame(width: UI.Dimension.Common.horizontalPadding)
+                        .padding(EdgeInsets(
+                            top: UI.Dimension.Snackbar.verticalPadding,
+                            leading: 0,
+                            bottom: UI.Dimension.Snackbar.verticalPadding,
+                            trailing: 0
+                        ))
                     }
-                    .frame(maxWidth: .infinity)
+                    .background(Color("SnackbarBg"))
+                    .cornerRadius(UI.Dimension.Common.cornerRadius)
+                    Spacer()
+                        .frame(width: UI.Dimension.Common.horizontalPadding)
                 }
-            )
-            .offset(y: self.bottomOffset)
-        }
+                .frame(maxWidth: .infinity)
+            }
+        )
+        .buttonStyle(SnackbarButtonStyle())
     }
 }
 
 struct SnackbarView_Previews: PreviewProvider {
     static var previews: some View {
         SnackbarView(
-            message: LocalizedStringKey("error.connection"),
-            state: .error(canRetry: true)
+            message: LocalizedStringKey("network_selection.error.network_list"),
+            type: .error(canRetry: true)
         ) {
             
         }

@@ -9,6 +9,8 @@ import SwiftUI
 
 extension UI.Dimension {
     enum Snackbar {
-        static let height: CGFloat = 52
+        static let verticalPadding: CGFloat = 14
+        static let lineSpacing: CGFloat = 2
+        static let messageMarginLeft: CGFloat = 12
     }
 }

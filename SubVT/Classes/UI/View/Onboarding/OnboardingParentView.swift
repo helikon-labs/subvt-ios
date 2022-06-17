@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct OnboardingParentView: View {
-    
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @EnvironmentObject var appData: AppData
+    @EnvironmentObject var appState: AppState
     @State private var step: OnboardingStep = .step1
     @State private var displayState: BasicViewDisplayState = .notAppeared
     private let pageCount: Int = OnboardingStep.allCases.count
@@ -59,7 +58,7 @@ struct OnboardingParentView: View {
                         .onTapGesture {
                             self.displayState = .dissolved
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                self.appData.currentView = .networkSelection
+                                self.appState.stage = .networkSelection
                             }
                         }
                     Spacer()
@@ -94,7 +93,7 @@ struct OnboardingParentView: View {
                             if self.step == .step4 {
                                 self.displayState = .dissolved
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                    self.appData.currentView = .networkSelection
+                                    self.appState.stage = .networkSelection
                                 }
                             } else {
                                 withAnimation {
@@ -116,6 +115,7 @@ struct OnboardingParentView: View {
         .opacity(self.displayState == .appeared ? 1 : 0)
         .animation(.easeOut(duration: 0.5))
         .onAppear {
+            Settings.hasOnboarded = true
             self.displayState = .appeared
         }
     }
@@ -124,7 +124,7 @@ struct OnboardingParentView: View {
 struct OnboardingParentView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingParentView()
-            .environmentObject(AppData())
+            .environmentObject(AppState())
             .preferredColorScheme(.dark)
     }
 }

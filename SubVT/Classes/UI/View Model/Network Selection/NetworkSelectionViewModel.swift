@@ -24,6 +24,10 @@ class NetworkSelectionViewModel: ObservableObject {
     private var networks: [Network]! = nil
     
     func getNetworks() {
+        if let networks = Settings.getNetworks() {
+            self.fetchState = .success(networks: networks)
+            return
+        }
         self.fetchState = .loading
         self.fetchTimer = Timer.scheduledTimer(
             withTimeInterval: 1.5,
@@ -43,6 +47,7 @@ class NetworkSelectionViewModel: ObservableObject {
                     self.fetchState = .error(error: error)
                     self.fetchTimer?.invalidate()
                 } else {
+                    Settings.setNetworkList(response.value!)
                     if self.fetchTimer?.isValid ?? false {
                         self.networks = response.value!
                     } else {
@@ -51,5 +56,11 @@ class NetworkSelectionViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func selectNetwork(appState: AppState, network: Network) {
+        Settings.setSelectedNetwork(network)
+        appState.network = network
+        appState.stage = .home
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 import SubVTData
 
 struct NetworkSelectionView: View {
-    @EnvironmentObject var appData: AppData
+    @EnvironmentObject var appState: AppState
     @StateObject private var viewModel = NetworkSelectionViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networksDisplayState: BasicViewDisplayState = .notAppeared
@@ -20,21 +20,6 @@ struct NetworkSelectionView: View {
         GridItem(.fixed(UI.Dimension.NetworkSelection.networkButtonSize)),
         GridItem(.fixed(UI.Dimension.NetworkSelection.networkButtonSize))
     ]
-    
-    private func snackbarDisplayState(
-        fetchState: NetworkSelectionViewModel.FetchState
-    ) -> SnackbarView.DisplayState {
-        switch fetchState {
-        case .idle:
-            fallthrough
-        case .loading:
-            fallthrough
-        case .success(_):
-            return .hidden
-        case .error(_):
-            return .error(canRetry: true)
-        }
-    }
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -63,7 +48,7 @@ struct NetworkSelectionView: View {
                 ))
                 .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
                 .animation(
-                    .easeOut(duration: 0.75),
+                    .easeOut(duration: 0.5),
                     value: self.displayState
                 )
                 Spacer()
@@ -125,7 +110,13 @@ struct NetworkSelectionView: View {
                 }
                 VStack(alignment: .leading) {
                     Button(LocalizedStringKey("common.go")) {
-                        // action
+                        guard let network = selectedNetwork else {
+                            return
+                        }
+                        self.viewModel.selectNetwork(
+                            appState: self.appState,
+                            network: network
+                        )
                     }
                     .disabled(selectedNetwork == nil)
                     .buttonStyle(ActionButtonStyle(isEnabled: $actionButtonIsEnabled))
@@ -137,7 +128,7 @@ struct NetworkSelectionView: View {
                         )
                     )
                     .animation(
-                        .easeOut(duration: 0.75),
+                        .easeOut(duration: 0.5),
                         value: self.displayState
                     )
                 }
@@ -149,19 +140,31 @@ struct NetworkSelectionView: View {
                         .frame(height: UI.Dimension.Common.actionButtonMarginBottom)
                 }
             }
-            SnackbarView(
-                message: LocalizedStringKey("error.connection"),
-                state: self.snackbarDisplayState(
-                    fetchState: self.viewModel.fetchState
+            ZStack {
+                SnackbarView(
+                    message: LocalizedStringKey("network_selection.error.network_list"),
+                    type: .error(canRetry: true)
+                ) {
+                    self.viewModel.getNetworks()
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .offset(
+                    y: UI.Dimension.NetworkSelection.snackbarYOffset(
+                        fetchState: self.viewModel.fetchState
+                    )
                 )
-            ) {
-                print("ok")
+                .opacity(UI.Dimension.NetworkSelection.snackbarOpacity(
+                    fetchState: self.viewModel.fetchState
+                ))
+                .animation(
+                    .spring(),
+                    value: self.viewModel.fetchState
+                )
             }
-            .animation(.easeOut(duration: 0.5))
         }
         .onAppear {
             self.displayState = .appeared
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self.viewModel.getNetworks()
             }
         }
@@ -171,7 +174,7 @@ struct NetworkSelectionView: View {
 struct NetworkSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkSelectionView()
-            .environmentObject(AppData())
+            .environmentObject(AppState())
             // .preferredColorScheme(.dark)
     }
 }

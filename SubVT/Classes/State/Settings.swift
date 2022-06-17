@@ -22,20 +22,33 @@ final class Settings {
         }
     }
     
-    static func setNetwork(_ network: Network) throws {
-        let data = try jsonEncoder.encode(network)
-        userDefaults.set(data, forKey: Key.network.rawValue)
+    static func setNetworkList(_ networks: [Network]) {
+        let data = try! jsonEncoder.encode(networks)
+        userDefaults.set(data, forKey: Key.networks.rawValue)
     }
     
-    static func getNetwork() throws -> Network? {
-        if let data = userDefaults.data(forKey: Key.network.rawValue) {
-            return try jsonDecoder.decode(Network.self, from: data)
+    static func getNetworks() -> [Network]? {
+        if let data = userDefaults.data(forKey: Key.networks.rawValue) {
+            return try! jsonDecoder.decode([Network].self, from: data)
+        }
+        return nil
+    }
+    
+    static func setSelectedNetwork(_ network: Network) {
+        let data = try! jsonEncoder.encode(network)
+        userDefaults.set(data, forKey: Key.selectedNetwork.rawValue)
+    }
+    
+    static func getSelectedNetwork() -> Network? {
+        if let data = userDefaults.data(forKey: Key.selectedNetwork.rawValue) {
+            return try! jsonDecoder.decode(Network.self, from: data)
         }
         return nil
     }
     
     private enum Key: String {
         case hasOnboarded = "io.subvt.has_onboarded"
-        case network = "io.subvt.network"
+        case networks = "io.subvt.networks"
+        case selectedNetwork = "io.subvt.selected_network"
     }
 }
