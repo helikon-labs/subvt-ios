@@ -172,6 +172,6 @@ struct NetworkSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkSelectionView()
             .environmentObject(AppData())
-            .preferredColorScheme(.dark)
+            // .preferredColorScheme(.dark)
     }
 }

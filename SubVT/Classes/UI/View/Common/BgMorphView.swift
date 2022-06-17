@@ -119,15 +119,17 @@ struct BgMorphView: View {
                         y: rightViewSize.1 / 2 + rightViewOffset.1
                     )
             }
-            .frame(maxWidth: geometry.size.width)
+            .animation(
+                .easeInOut(duration: 3.5),
+                value: self.step
+            )
+            .frame(maxWidth: .infinity)
             .ignoresSafeArea()
-            .onReceive(timer) { time in
-                withAnimation(.easeInOut(duration: 3.5)) {
-                    self.step = self.step.next
-                }
+            .onReceive(timer) { _ in
+                self.step = self.step.next
             }
             .onAppear() {
-                withAnimation(.easeInOut(duration: 3.5)) {
+                DispatchQueue.main.async() {
                     self.step = self.step.next
                 }
             }

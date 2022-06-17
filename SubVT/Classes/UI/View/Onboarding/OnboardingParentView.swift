@@ -11,7 +11,8 @@ struct OnboardingParentView: View {
     
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @EnvironmentObject var appData: AppData
-    @State private var step = OnboardingStep.step1
+    @State private var step: OnboardingStep = .step1
+    @State private var displayState: BasicViewDisplayState = .notAppeared
     private let pageCount: Int = OnboardingStep.allCases.count
     
     var body: some View {
@@ -56,7 +57,8 @@ struct OnboardingParentView: View {
                         .font(UI.Font.Onboarding.skipButton)
                         .foregroundColor(Color("Text"))
                         .onTapGesture {
-                            withAnimation {
+                            self.displayState = .dissolved
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                                 self.appData.currentView = .networkSelection
                             }
                         }
@@ -80,18 +82,22 @@ struct OnboardingParentView: View {
                                 )
                         }
                     }
-                    .animation(Animation.easeOut(duration: 0.25))
+                    .animation(
+                        .easeOut(duration: 0.25),
+                        value: self.step
+                    )
                     Spacer()
                     Text(LocalizedStringKey("onboarding.next"))
                         .font(UI.Font.Onboarding.nextButton)
                         .foregroundColor(Color("Text"))
                         .onTapGesture {
-                            withAnimation {
-                                if self.step == .step4 {
-                                    withAnimation {
-                                        self.appData.currentView = .networkSelection
-                                    }
-                                } else {
+                            if self.step == .step4 {
+                                self.displayState = .dissolved
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                                    self.appData.currentView = .networkSelection
+                                }
+                            } else {
+                                withAnimation {
                                     self.step = self.step.nextStep
                                 }
                             }
@@ -106,6 +112,11 @@ struct OnboardingParentView: View {
                 Spacer()
                     .frame(height: 40)
             }
+        }
+        .opacity(self.displayState == .appeared ? 1 : 0)
+        .animation(.easeOut(duration: 0.5))
+        .onAppear {
+            self.displayState = .appeared
         }
     }
 }

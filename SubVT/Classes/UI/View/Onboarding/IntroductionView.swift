@@ -26,6 +26,7 @@ struct IntroductionView: View {
                     .easeOut(duration: 0.75),
                     value: self.displayState
                 )
+                
             // 3D volume
             VStack {
                 Spacer()
@@ -89,9 +90,7 @@ struct IntroductionView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                         self.displayState = .dissolved
                         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                            withAnimation {
-                                self.appData.currentView = .onboarding
-                            }
+                            self.appData.currentView = .onboarding
                         }
                     }
                 }

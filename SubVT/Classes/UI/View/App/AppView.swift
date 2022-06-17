@@ -26,18 +26,15 @@ struct AppView: View {
             case .introduction:
                 IntroductionView()
                     .environmentObject(appData)
-                    .transition(.opacity)
             case .onboarding:
                 OnboardingParentView()
                     .environmentObject(appData)
-                    .transition(.opacity)
             case .networkSelection:
                 NetworkSelectionView()
                     .environmentObject(appData)
-                    .transition(.opacity)
             }
         }
-        .animation(.easeInOut(duration: 0.25))
+        .animation(nil, value: appData.currentView)
     }
 }
 
