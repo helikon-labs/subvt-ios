@@ -51,7 +51,7 @@ extension UI.Dimension {
             case .appeared:
                 return 0
             case .dissolved:
-                return 70
+                return 180
             }
         }
     }

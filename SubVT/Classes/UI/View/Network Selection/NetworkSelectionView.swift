@@ -89,6 +89,9 @@ struct NetworkSelectionView: View {
                         .offset(y: UI.Dimension.NetworkSelection.networkButtonYOffset(
                             displayState: self.networksDisplayState
                         ))
+                        .opacity(UI.Dimension.Common.displayStateOpacity(
+                            self.networksDisplayState
+                        ))
                         .animation(
                             .easeOut(duration: 0.4),
                             value: self.networksDisplayState
@@ -113,10 +116,14 @@ struct NetworkSelectionView: View {
                         guard let network = selectedNetwork else {
                             return
                         }
-                        self.viewModel.selectNetwork(
-                            appState: self.appState,
-                            network: network
-                        )
+                        self.displayState = .dissolved
+                        self.networksDisplayState = .dissolved
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                            self.viewModel.selectNetwork(
+                                appState: self.appState,
+                                network: network
+                            )
+                        }
                     }
                     .disabled(selectedNetwork == nil)
                     .buttonStyle(ActionButtonStyle(isEnabled: $actionButtonIsEnabled))

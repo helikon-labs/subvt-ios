@@ -35,7 +35,7 @@ extension UI.Dimension {
             case .appeared:
                 return 0
             case .dissolved:
-                return 50
+                return 30
             }
         }
         
@@ -82,11 +82,11 @@ extension UI.Dimension {
         static func networkButtonYOffset(displayState: BasicViewDisplayState) -> CGFloat {
             switch displayState {
             case .notAppeared:
-                return 15
+                return 20
             case .appeared:
                 return 0
             case .dissolved:
-                return 15
+                return 30
             }
         }
         

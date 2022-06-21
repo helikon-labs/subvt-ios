@@ -109,5 +109,15 @@ extension UI {
                 }
             }
         }
+        
+        enum NetworkStatus {
+            static var title: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.semiBold.withSize(24)
+                } else {
+                    return LexendDeca.semiBold.withSize(36)
+                }
+            }
+        }
     }
 }
