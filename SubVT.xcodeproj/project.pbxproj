@@ -44,9 +44,6 @@
 		A07BA827285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */; };
 		A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */; };
 		A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098E593285DDE3D00AAA68A /* PreviewData.swift */; };
-		A098E596285DF01100AAA68A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098E595285DF01100AAA68A /* NetworkStatus.swift */; };
-		A098E597285DF01100AAA68A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098E595285DF01100AAA68A /* NetworkStatus.swift */; };
-		A098E598285DF01100AAA68A /* NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098E595285DF01100AAA68A /* NetworkStatus.swift */; };
 		A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC56284B8E0000914237 /* UI+Font.swift */; };
@@ -139,7 +136,6 @@
 		A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Onboarding.swift"; sourceTree = "<group>"; };
 		A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkSelection.swift"; sourceTree = "<group>"; };
 		A098E593285DDE3D00AAA68A /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
-		A098E595285DF01100AAA68A /* NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatus.swift; sourceTree = "<group>"; };
 		A0A1DC53284B8DD200914237 /* UI+Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension.swift"; sourceTree = "<group>"; };
 		A0A1DC56284B8E0000914237 /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
 		A0A1DC5A284B8E2B00914237 /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
@@ -236,7 +232,6 @@
 				A04C428B285321ED007C970B /* Common */,
 				A0DCABB5285CA35700E458F4 /* Home */,
 				A0C9A77D28573D930071C7AC /* Network Selection */,
-				A04C428A285321D3007C970B /* Network Status */,
 				A0128A53284A1855000C2307 /* Onboarding */,
 			);
 			path = View;
@@ -254,7 +249,6 @@
 			isa = PBXGroup;
 			children = (
 				A0DCABBC285CA54C00E458F4 /* AppState.swift */,
-				A098E595285DF01100AAA68A /* NetworkStatus.swift */,
 				A0128A4C284A1297000C2307 /* Settings.swift */,
 				A0DCABC0285CA5C900E458F4 /* Stage.swift */,
 			);
@@ -289,13 +283,6 @@
 				A0128A6C284A4EAE000C2307 /* Color.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		A04C428A285321D3007C970B /* Network Status */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "Network Status";
 			sourceTree = "<group>";
 		};
 		A04C428B285321ED007C970B /* Common */ = {
@@ -643,7 +630,6 @@
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A0A1DC5B284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A0DCABC1285CA5C900E458F4 /* Stage.swift in Sources */,
-				A098E596285DF01100AAA68A /* NetworkStatus.swift in Sources */,
 				A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A07BA827285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
 				A0128A4D284A1297000C2307 /* Settings.swift in Sources */,
@@ -680,7 +666,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0128A4E284A1297000C2307 /* Settings.swift in Sources */,
-				A098E597285DF01100AAA68A /* NetworkStatus.swift in Sources */,
 				A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -712,7 +697,6 @@
 				A0128A52284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A0DCABBE285CA54C00E458F4 /* AppState.swift in Sources */,
 				A0128A4F284A1297000C2307 /* Settings.swift in Sources */,
-				A098E598285DF01100AAA68A /* NetworkStatus.swift in Sources */,
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
 				A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A07BA825285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
@@ -1054,8 +1038,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/helikon-labs/subvt-data-swift.git";
 			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.2.5;
+				branch = main;
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

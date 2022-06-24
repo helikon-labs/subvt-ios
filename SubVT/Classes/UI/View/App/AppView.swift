@@ -10,10 +10,13 @@ import CoreData
 
 struct AppView: View {
     @EnvironmentObject var appState: AppState
-    @Environment(\.managedObjectContext)
-    private var viewContext
+    @Environment(\.scenePhase) var scenePhase
+    @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
+        sortDescriptors: [NSSortDescriptor(
+            keyPath: \Item.timestamp,
+            ascending: true
+        )],
         animation: .default
     )
     private var items: FetchedResults<Item>
@@ -38,6 +41,9 @@ struct AppView: View {
             }
         }
         .animation(nil, value: self.appState.stage)
+        .onChange(of: scenePhase) { newPhase in
+            self.appState.onScenePhaseChange(newPhase)
+        }
     }
 }
 
