@@ -60,7 +60,6 @@ class NetworkSelectionViewModel: ObservableObject {
     
     func selectNetwork(appState: AppState, network: Network) {
         Settings.setSelectedNetwork(network)
-        appState.setNetwork(network, subscribe: true)
         appState.stage = .home
     }
 }

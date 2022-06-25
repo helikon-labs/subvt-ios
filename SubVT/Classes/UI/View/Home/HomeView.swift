@@ -9,7 +9,9 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
+    @Environment(\.scenePhase) var scenePhase
     @EnvironmentObject var appState: AppState
+    @StateObject private var viewModel = NetworkStatusViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     
     var body: some View {
@@ -64,6 +66,10 @@ struct HomeView: View {
         }
         .onAppear() {
             self.displayState = .appeared
+            self.viewModel.subscribeToNetworkStatus()
+        }
+        .onChange(of: scenePhase) { newPhase in
+            self.viewModel.onScenePhaseChange(newPhase)
         }
     }
 }

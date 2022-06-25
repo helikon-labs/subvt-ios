@@ -10,32 +10,21 @@ import SubVTData
 import SwiftUI
 
 class NetworkStatusViewModel: ObservableObject {
-    @Published private(set) var network: Network!
+    @Published private(set) var network: Network
     @Published private(set) var networkStatus = NetworkStatus()
     @Published private(set) var networkStatusServiceStatus: RPCSubscriptionServiceStatus = .idle
     
     private var networkStatusServiceStatusSubscription: AnyCancellable? = nil
     private var networkStatusServiceSubscription: AnyCancellable? = nil
-    private var networkStatusService: SubVTData.NetworkStatusService? = nil
+    private let networkStatusService: SubVTData.NetworkStatusService
     
-    func onScenePhaseChange(_ scenePhase: ScenePhase) {
-        switch scenePhase {
-        case .background:
-            break
-        case .inactive:
-            self.networkStatusService?.unsubscribe()
-        case .active:
-            subscribeToNetworkStatus()
-        @unknown default:
-            fatalError("Unknown scene phase: \(scenePhase)")
-        }
-    }
+    private var subscriptionIsInProgress = false
     
-    private func initNetworkStatusService() {
-        guard let network = self.network,
-              self.networkStatusService == nil else {
-            return
+    init() {
+        guard let network = Settings.getSelectedNetwork() else {
+            fatalError("Network not selected before network status screen.")
         }
+        self.network = network
         if let host = network.networkStatusServiceHost,
            let port = network.networkStatusServicePort {
             self.networkStatusService = NetworkStatusService(
@@ -47,41 +36,67 @@ class NetworkStatusViewModel: ObservableObject {
         }
     }
     
-    private func subscribeToNetworkStatus() {
-        initNetworkStatusService()
-        guard let networkStatusService = self.networkStatusService else {
-            return
+    func onScenePhaseChange(_ scenePhase: ScenePhase) {
+        switch scenePhase {
+        case .background:
+            break
+        case .inactive:
+            self.networkStatusService.unsubscribe()
+            subscriptionIsInProgress = false
+        case .active:
+            if !subscriptionIsInProgress {
+                self.subscribeToNetworkStatus()
+            }
+        @unknown default:
+            fatalError("Unknown scene phase: \(scenePhase)")
         }
-        self.networkStatusServiceStatusSubscription = networkStatusService.$status
+    }
+    
+    func subscribeToNetworkStatus() {
+        self.subscriptionIsInProgress = true
+        if self.networkStatusServiceStatusSubscription == nil {
+            self.networkStatusServiceStatusSubscription = self.networkStatusService.$status
+                .sink {
+                    [weak self]
+                    (status) in
+                    self?.networkStatusServiceStatus = status
+                }
+        }
+        self.networkStatusServiceSubscription?.cancel()
+        self.networkStatusServiceSubscription = self.networkStatusService
+            .subscribe()
             .sink {
                 [weak self]
-                (status) in
-                self?.networkStatusServiceStatus = status
-            }
-        networkStatusServiceSubscription = networkStatusService
-            .subscribe()
-            .sink { (completion) in
+                (completion) in
+                guard let self = self else { return }
                 switch completion {
                 case .finished:
                     print("network status finished.")
+                    self.subscriptionIsInProgress = false
                 case .failure(let rpcError):
                     print("network status finished with error: \(rpcError)")
+                    self.subscriptionIsInProgress = false
                 }
             } receiveValue: {
                 [weak self]
                 (event) in
+                guard let self = self else { return }
                 switch event {
+                case .subscribed(_):
+                    self.subscriptionIsInProgress = false
+                    print("network status subscribed")
                 case .update(let statusUpdate):
                     if let status = statusUpdate.status {
                         print("received network status \(status.bestBlockNumber)")
-                        self?.networkStatus = status
+                        self.networkStatus = status
                     } else if let diff = statusUpdate.diff {
                         print("received network status update \(diff.bestBlockNumber ?? 0)")
-                        self?.networkStatus.apply(diff: diff)
+                        self.networkStatus.apply(diff: diff)
                     }
                 case .unsubscribed:
+                    self.subscriptionIsInProgress = false
                     print("network status unsubscribed")
-                default:
+                case .reconnectSuggested:
                     break
                 }
             }

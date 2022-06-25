@@ -10,7 +10,6 @@ import CoreData
 
 struct AppView: View {
     @EnvironmentObject var appState: AppState
-    @Environment(\.scenePhase) var scenePhase
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(
@@ -41,9 +40,6 @@ struct AppView: View {
             }
         }
         .animation(nil, value: self.appState.stage)
-        .onChange(of: scenePhase) { newPhase in
-            self.appState.onScenePhaseChange(newPhase)
-        }
     }
 }
 

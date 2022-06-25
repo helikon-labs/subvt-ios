@@ -30,9 +30,7 @@ enum PreviewData {
     
     static var appState: AppState {
         get {
-            let appState = AppState()
-            appState.setNetwork(kusama)
-            return appState
+            return AppState()
         }
     }
 }
