@@ -63,6 +63,10 @@
 		A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90AA2848C1EC0053389A /* SubVTTests.swift */; };
 		A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90B42848C1EC0053389A /* SubVTUITests.swift */; };
 		A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90B62848C1EC0053389A /* SubVTUITestsLaunchTests.swift */; };
+		A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */; };
+		A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */; };
+		A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
+		A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
 		A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */; };
 		A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */; };
 		A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
@@ -156,6 +160,8 @@
 		A0BF90B42848C1EC0053389A /* SubVTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTUITests.swift; sourceTree = "<group>"; };
 		A0BF90B62848C1EC0053389A /* SubVTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A0BF90C32848C2140053389A /* SubVT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SubVT.entitlements; sourceTree = "<group>"; };
+		A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+TabBar.swift"; sourceTree = "<group>"; };
+		A0C062A4286721E9001FE459 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
 		A0C9A781285749940071C7AC /* BasicDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDisplayState.swift; sourceTree = "<group>"; };
 		A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionViewModel.swift; sourceTree = "<group>"; };
@@ -318,6 +324,7 @@
 				A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */,
 				A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */,
 				A07BA81D285B948D00575683 /* UI+Dimension+Snackbar.swift */,
+				A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */,
 			);
 			path = "UI+Dimension";
 			sourceTree = "<group>";
@@ -423,6 +430,7 @@
 			isa = PBXGroup;
 			children = (
 				A0DCABB6285CA36A00E458F4 /* HomeView.swift */,
+				A0C062A4286721E9001FE459 /* TabBarView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -649,6 +657,7 @@
 				A0BF909E2848C1EC0053389A /* Persistence.swift in Sources */,
 				A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */,
 				A0128A6D284A4EAE000C2307 /* Color.swift in Sources */,
+				A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
 				A04C429628533564007C970B /* AppView.swift in Sources */,
 				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
@@ -669,6 +678,7 @@
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
+				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */,
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A04C428E285334E2007C970B /* ActionButton.swift in Sources */,
@@ -689,6 +699,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
 				A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */,
@@ -706,6 +717,7 @@
 				A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
+				A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A04C428F285334E2007C970B /* ActionButton.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPageView.swift in Sources */,

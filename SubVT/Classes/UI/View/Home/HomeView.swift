@@ -28,8 +28,8 @@ struct HomeView: View {
                     .easeOut(duration: 0.75),
                     value: self.displayState
                 )
-            Color("NetworkSelectionOverlayBg")
-                .ignoresSafeArea()
+            //Color("NetworkSelectionOverlayBg")
+            //    .ignoresSafeArea()
             ZStack(alignment: .topLeading) {
                 HStack(alignment: .center) {
                     Text(LocalizedStringKey("network_status.title"))
@@ -49,12 +49,15 @@ struct HomeView: View {
             VStack {
                 Spacer()
                 HStack(alignment: .center) {
+                    VStack {
+                        
+                    }
                     Text("asd")
                 }
-                .frame(height:66)
+                .frame(height: UI.Dimension.TabBar.height)
                 .frame(maxWidth: .infinity)
                 .background(Color("TabBarBg"))
-                .cornerRadius(20)
+                .cornerRadius(UI.Dimension.TabBar.cornerRadius)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(EdgeInsets(

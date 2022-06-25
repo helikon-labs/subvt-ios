@@ -92,9 +92,7 @@ struct BgMorphView: View {
                             height: middleViewSize.1
                         )
                         .transformEffect(
-                            UI.Dimension.BgMorph.getMiddleViewTransform(
-                                colorScheme: colorScheme
-                            )
+                            UI.Dimension.BgMorph.middleViewTransform
                         )
                         .position(
                             x: middleViewSize.0 / 2 + middleViewOffset.0,

@@ -10,6 +10,18 @@ import SwiftUI
 struct ActionButtonStyle: ButtonStyle {
     @Binding var isEnabled: Bool
     
+    private func getBackgroundColor(configuration: Configuration) -> Color {
+        if self.isEnabled {
+            if configuration.isPressed {
+                return Color("ActionButtonPressed")
+            } else {
+                return Color("ActionButton")
+            }
+        } else {
+            return Color("ActionButtonDisabled")
+        }
+    }
+    
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(
@@ -21,17 +33,9 @@ struct ActionButtonStyle: ButtonStyle {
                     ? Color("ActionButtonText")
                     : Color("ActionButtonDisabledText")
             )
-            .background(
-                self.isEnabled
-                    ? (
-                        configuration.isPressed
-                            ? Color("ActionButtonPressed")
-                            : Color("ActionButton")
-                    )
-                    : Color("ActionButtonDisabled")
-            )
+            .background(self.getBackgroundColor(configuration: configuration))
             .cornerRadius(10)
-            .font(UI.Font.actionButton)
+            .font(UI.Font.Common.actionButton)
             .shadow(
                 color: self.isEnabled
                     ? Color("ActionButtonShadow")

@@ -9,19 +9,12 @@ import SwiftUI
 
 extension UI {
     enum Font {
-        // general purpose
-        static let actionButton = LexendDeca.semiBold.withSize(18)
+        enum Common {
+            static let actionButton = LexendDeca.semiBold.withSize(18)
+        }
         
         enum Snackbar {
-            static var message: SwiftUI.Font {
-                get {
-                    if UIDevice.current.userInterfaceIdiom == .phone {
-                        return LexendDeca.light.withSize(15)
-                    } else {
-                        return LexendDeca.light.withSize(15)
-                    }
-                }
-            }
+            static let message = LexendDeca.light.withSize(15)
         }
         
         enum Introduction {
@@ -42,13 +35,7 @@ extension UI {
         }
         
         enum Onboarding {
-            static var currentPage: SwiftUI.Font {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return LexendDeca.semiBold.withSize(14)
-                } else {
-                    return LexendDeca.semiBold.withSize(14)
-                }
-            }
+            static let currentPage = LexendDeca.semiBold.withSize(14)
             static var pageCount: SwiftUI.Font {
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     return LexendDeca.light.withSize(14)
@@ -70,20 +57,8 @@ extension UI {
                     return LexendDeca.light.withSize(16)
                 }
             }
-            static var skipButton: SwiftUI.Font {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return LexendDeca.light.withSize(18)
-                } else {
-                    return LexendDeca.light.withSize(18)
-                }
-            }
-            static var nextButton: SwiftUI.Font {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return LexendDeca.semiBold.withSize(18)
-                } else {
-                    return LexendDeca.semiBold.withSize(18)
-                }
-            }
+            static let skipButton = LexendDeca.light.withSize(18)
+            static let nextButton = LexendDeca.semiBold.withSize(18)
         }
         
         enum NetworkSelection {

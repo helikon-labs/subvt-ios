@@ -9,7 +9,7 @@ import Foundation
 import SubVTData
 
 final class Settings {
-    private static let userDefaults = UserDefaults(suiteName: "group.io.helikon.subvt")!
+    private static let userDefaults = UserDefaults.standard
     private static let jsonEncoder = JSONEncoder()
     private static let jsonDecoder = JSONDecoder()
     

@@ -142,21 +142,12 @@ extension UI.Dimension {
                 switch step {
                 case .start:
                     return 15
-                case .mid:
-                    return -5
-                case .end:
+                case .mid, .end:
                     return -5
                 }
             } else {
                 if UIDevice.current.userInterfaceIdiom == .phone {
-                    switch step {
-                    case .start:
-                        return 15
-                    case .mid:
-                        return 15
-                    case .end:
-                        return 15
-                    }
+                    return 15
                 } else {
                     switch step {
                     case .start:
@@ -170,16 +161,14 @@ extension UI.Dimension {
             }
         }
         
-        static func getMiddleViewTransform(colorScheme: ColorScheme) -> CGAffineTransform {
-            return CGAffineTransform.init(
-                a: 1,
-                b: 0.72,
-                c: -0.03,
-                d: 0.86,
-                tx: 0,
-                ty: 0
-            )
-        }
+        static let middleViewTransform = CGAffineTransform.init(
+            a: 1,
+            b: 0.72,
+            c: -0.03,
+            d: 0.86,
+            tx: 0,
+            ty: 0
+        )
         
         static func getMiddleViewSize(
             geometry: GeometryProxy
@@ -195,12 +184,7 @@ extension UI.Dimension {
             step: BgMorphView.Step
         ) -> (CGFloat, CGFloat) {
             switch step {
-            case .start:
-                return (
-                    geometry.size.width * 0.36,
-                    -geometry.size.height * 0.18
-                )
-            case .mid:
+            case .start, .mid:
                 return (
                     geometry.size.width * 0.36,
                     -geometry.size.height * 0.18
