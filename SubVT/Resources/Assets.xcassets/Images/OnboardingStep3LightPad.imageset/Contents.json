@@ -1,14 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "OnboardingStep3LightPad@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "OnboardingStep3LightPad@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "OnboardingStep3LightPad@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

@@ -33,7 +33,7 @@ extension UI {
                 step: OnboardingStep,
                 _ colorScheme: ColorScheme
             ) -> SwiftUI.Image {
-                var name = ""
+                var name: String
                 switch step {
                 case .step1:
                     name = "Step1"
@@ -54,7 +54,7 @@ extension UI {
                     if UIDevice.current.userInterfaceIdiom == .phone {
                         return SwiftUI.Image("Onboarding\(name)LightPhone")
                     } else {
-                        return SwiftUI.Image("Onboarding\(name)DarkPad")
+                        return SwiftUI.Image("Onboarding\(name)LightPad")
                     }
                 }
             }

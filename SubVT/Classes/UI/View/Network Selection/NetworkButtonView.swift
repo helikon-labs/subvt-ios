@@ -39,6 +39,7 @@ struct NetworkButtonView: View {
                 x: UI.Dimension.NetworkSelection.networkButtonShadowOffset,
                 y: UI.Dimension.NetworkSelection.networkButtonShadowOffset
             )
+            .animation(.linear(duration: 0.1), value: self.isSelected)
             VStack(alignment: .leading) {
                 HStack(alignment: .top) {
                     UI.Image.NetworkSelection.networkIcon(network: network)

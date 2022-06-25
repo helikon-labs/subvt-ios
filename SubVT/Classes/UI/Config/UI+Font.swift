@@ -85,6 +85,10 @@ extension UI {
             }
         }
         
+        enum TabBar {
+            static let text = LexendDeca.light.withSize(10)
+        }
+        
         enum NetworkStatus {
             static var title: SwiftUI.Font {
                 if UIDevice.current.userInterfaceIdiom == .phone {

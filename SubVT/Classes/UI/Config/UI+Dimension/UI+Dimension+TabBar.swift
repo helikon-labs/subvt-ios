@@ -19,5 +19,23 @@ extension UI.Dimension {
             }
         }
         static let cornerRadius: CGFloat = 16
+        static var itemWidth: CGFloat {
+            get {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return 75
+                } else {
+                    return 84
+                }
+            }
+        }
+        static var itemSpacing: CGFloat {
+            get {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return 10
+                } else {
+                    return 24
+                }
+            }
+        }
     }
 }

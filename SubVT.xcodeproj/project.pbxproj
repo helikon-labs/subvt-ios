@@ -21,6 +21,8 @@
 		A0128A68284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
 		A0128A6D284A4EAE000C2307 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A6C284A4EAE000C2307 /* Color.swift */; };
 		A0128A6E284A4EAE000C2307 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A6C284A4EAE000C2307 /* Color.swift */; };
+		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
+		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
 		A04C428E285334E2007C970B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C428D285334E2007C970B /* ActionButton.swift */; };
 		A04C428F285334E2007C970B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C428D285334E2007C970B /* ActionButton.swift */; };
@@ -130,6 +132,7 @@
 		A0128A61284A3BCC000C2307 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		A0128A69284A47AD000C2307 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0128A6C284A4EAE000C2307 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		A04C428D285334E2007C970B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		A04C429528533564007C970B /* AppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
@@ -431,6 +434,7 @@
 			children = (
 				A0DCABB6285CA36A00E458F4 /* HomeView.swift */,
 				A0C062A4286721E9001FE459 /* TabBarView.swift */,
+				A02839C32867A456009CA8BA /* Tab.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -662,6 +666,7 @@
 				A04C429628533564007C970B /* AppView.swift in Sources */,
 				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
+				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
@@ -726,6 +731,7 @@
 				A0DCABBE285CA54C00E458F4 /* AppState.swift in Sources */,
 				A0128A4F284A1297000C2307 /* Settings.swift in Sources */,
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
+				A02839C52867A456009CA8BA /* Tab.swift in Sources */,
 				A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A07BA825285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04C429A2853BA18007C970B /* OnboardingStep.swift in Sources */,
