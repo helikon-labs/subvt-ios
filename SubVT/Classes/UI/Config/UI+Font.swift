@@ -36,13 +36,7 @@ extension UI {
         
         enum Onboarding {
             static let currentPage = LexendDeca.semiBold.withSize(14)
-            static var pageCount: SwiftUI.Font {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return LexendDeca.light.withSize(14)
-                } else {
-                    return LexendDeca.light.withSize(14)
-                }
-            }
+            static let pageCount = LexendDeca.light.withSize(14)
             static var title: SwiftUI.Font {
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     return LexendDeca.semiBold.withSize(22)

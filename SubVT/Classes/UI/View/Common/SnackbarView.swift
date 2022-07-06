@@ -86,7 +86,7 @@ struct SnackbarView_Previews: PreviewProvider {
             message: LocalizedStringKey("network_selection.error.network_list"),
             type: .error(canRetry: true)
         ) {
-            
+            // no-op
         }
         //.preferredColorScheme(.dark)
     }
