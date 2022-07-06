@@ -5,6 +5,7 @@
 //  Created by Kutsal Kaan Bilgin on 18.06.2022.
 //
 
+import Foundation
 import SubVTData
 
 enum PreviewData {
@@ -28,9 +29,14 @@ enum PreviewData {
         inactiveValidatorListServicePort: nil
     )
     
-    static var appState: AppState {
-        get {
-            return AppState()
-        }
-    }
+    static let userDefaults: UserDefaults = {
+        let defaults = UserDefaults.init(
+            suiteName: "io.helikon.subvt.user_defaults.preview"
+        )!
+        defaults.set(
+            try! JSONEncoder().encode(kusama),
+            forKey: AppStorageKey.selectedNetwork
+        )
+        return defaults
+    }()
 }

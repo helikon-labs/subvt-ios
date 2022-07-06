@@ -5,12 +5,13 @@
 //  Created by Kutsal Kaan Bilgin on 17.06.2022.
 //
 
+import SubVTData
 import SwiftUI
 
 struct HomeView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @Environment(\.scenePhase) var scenePhase
-    @EnvironmentObject var appState: AppState
+    @AppStorage(AppStorageKey.selectedNetwork) private var network: Network = PreviewData.kusama
     @StateObject private var viewModel = NetworkStatusViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     
@@ -48,16 +49,7 @@ struct HomeView: View {
             ))
             VStack {
                 Spacer()
-                HStack(alignment: .center) {
-                    VStack {
-                        
-                    }
-                    Text("asd")
-                }
-                .frame(height: UI.Dimension.TabBar.height)
-                .frame(maxWidth: .infinity)
-                .background(Color("TabBarBg"))
-                .cornerRadius(UI.Dimension.TabBar.cornerRadius)
+                TabBarView()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(EdgeInsets(
@@ -69,7 +61,7 @@ struct HomeView: View {
         }
         .onAppear() {
             self.displayState = .appeared
-            self.viewModel.subscribeToNetworkStatus()
+            self.viewModel.subscribeToNetworkStatus(network: self.network)
         }
         .onChange(of: scenePhase) { newPhase in
             self.viewModel.onScenePhaseChange(newPhase)
@@ -80,6 +72,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
-            .environmentObject(PreviewData.appState)
+            .defaultAppStorage(PreviewData.userDefaults)
     }
 }

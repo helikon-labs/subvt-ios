@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct OnboardingParentView: View {
-    @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @EnvironmentObject var appState: AppState
+    @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    @AppStorage(AppStorageKey.hasBeenOnboarded) private var hasBeenOnboarded = false
     @State private var step: OnboardingStep = .step1
     @State private var displayState: BasicViewDisplayState = .notAppeared
     private let pageCount: Int = OnboardingStep.allCases.count
@@ -58,7 +58,7 @@ struct OnboardingParentView: View {
                         .onTapGesture {
                             self.displayState = .dissolved
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                self.appState.stage = .networkSelection
+                                self.hasBeenOnboarded = true
                             }
                         }
                     Spacer()
@@ -93,7 +93,7 @@ struct OnboardingParentView: View {
                             if self.step == .step4 {
                                 self.displayState = .dissolved
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                    self.appState.stage = .networkSelection
+                                    self.hasBeenOnboarded = true
                                 }
                             } else {
                                 withAnimation {
@@ -115,7 +115,6 @@ struct OnboardingParentView: View {
         .opacity(self.displayState == .appeared ? 1 : 0)
         .animation(.easeOut(duration: 0.5))
         .onAppear {
-            Settings.hasOnboarded = true
             self.displayState = .appeared
         }
     }
@@ -124,7 +123,6 @@ struct OnboardingParentView: View {
 struct OnboardingParentView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingParentView()
-            .environmentObject(AppState())
             .preferredColorScheme(.dark)
     }
 }

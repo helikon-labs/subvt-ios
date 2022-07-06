@@ -11,16 +11,17 @@ import SwiftUI
 @main
 struct SubVTApp: App {
     let persistenceController = PersistenceController.shared
-    private var appState = AppState()
     
     var body: some Scene {
         WindowGroup {
             AppView()
-                .environmentObject(appState)
                 .environment(
                     \.managedObjectContext,
                      persistenceController.container.viewContext
                 )
+                .defaultAppStorage(UserDefaults.init(
+                    suiteName: "io.helikon.subvt.user_defaults"
+                )!)
         }
     }
 }

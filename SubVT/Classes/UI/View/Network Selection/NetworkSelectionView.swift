@@ -9,17 +9,22 @@ import SwiftUI
 import SubVTData
 
 struct NetworkSelectionView: View {
-    @EnvironmentObject var appState: AppState
+    @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
+    @AppStorage(AppStorageKey.selectedNetwork) private var appSelectedNetwork: Network! = nil
     @StateObject private var viewModel = NetworkSelectionViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networksDisplayState: BasicViewDisplayState = .notAppeared
-    @State private var selectedNetwork: Network? = nil
     @State private var actionButtonIsEnabled = false
+    @State private var selectedNetwork: Network! = nil
     
     private let gridItemLayout = [
         GridItem(.fixed(UI.Dimension.NetworkSelection.networkButtonSize)),
         GridItem(.fixed(UI.Dimension.NetworkSelection.networkButtonSize))
     ]
+    
+    func onGetNetworksSuccess(networks: [Network]) {
+        self.networks = networks
+    }
     
     var body: some View {
         ZStack(alignment: .leading) {
@@ -119,10 +124,7 @@ struct NetworkSelectionView: View {
                         self.displayState = .dissolved
                         self.networksDisplayState = .dissolved
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.viewModel.selectNetwork(
-                                appState: self.appState,
-                                network: network
-                            )
+                            self.appSelectedNetwork = network
                         }
                     }
                     .disabled(selectedNetwork == nil)
@@ -152,7 +154,10 @@ struct NetworkSelectionView: View {
                     message: LocalizedStringKey("network_selection.error.network_list"),
                     type: .error(canRetry: true)
                 ) {
-                    self.viewModel.getNetworks()
+                    self.viewModel.fetchNetworks(
+                        storedNetworks: self.networks,
+                        onSuccess: self.onGetNetworksSuccess
+                    )
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .offset(
@@ -172,7 +177,10 @@ struct NetworkSelectionView: View {
         .onAppear {
             self.displayState = .appeared
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.viewModel.getNetworks()
+                self.viewModel.fetchNetworks(
+                    storedNetworks: self.networks,
+                    onSuccess: self.onGetNetworksSuccess
+                )
             }
         }
     }
@@ -181,7 +189,6 @@ struct NetworkSelectionView: View {
 struct NetworkSelectionView_Previews: PreviewProvider {
     static var previews: some View {
         NetworkSelectionView()
-            .environmentObject(AppState())
             // .preferredColorScheme(.dark)
     }
 }

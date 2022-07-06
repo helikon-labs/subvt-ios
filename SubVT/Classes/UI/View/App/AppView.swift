@@ -5,11 +5,11 @@
 //  Created by Kutsal Kaan Bilgin on 2.06.2022.
 //
 
-import SwiftUI
 import CoreData
+import SubVTData
+import SwiftUI
 
 struct AppView: View {
-    @EnvironmentObject var appState: AppState
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(
@@ -19,34 +19,32 @@ struct AppView: View {
         animation: .default
     )
     private var items: FetchedResults<Item>
+    @AppStorage(AppStorageKey.hasCompletedIntroduction) private var hasCompletedIntroduction = false
+    @AppStorage(AppStorageKey.hasBeenOnboarded) private var hasBeenOnboarded = false
+    @AppStorage(AppStorageKey.selectedNetwork) private var selectedNetwork: Network! = nil
     
     
     var body: some View {
         ZStack {
             Color("Bg").ignoresSafeArea()
-            switch self.appState.stage {
-            case .introduction:
+            if !hasCompletedIntroduction {
                 IntroductionView()
-                    .environmentObject(self.appState)
-            case .onboarding:
+            } else if !hasBeenOnboarded {
                 OnboardingParentView()
-                    .environmentObject(self.appState)
-            case .networkSelection:
+            } else if selectedNetwork == nil {
                 NetworkSelectionView()
-                    .environmentObject(self.appState)
-            case .home:
+            } else {
                 HomeView()
-                    .environmentObject(self.appState)
             }
         }
-        .animation(nil, value: self.appState.stage)
+        //.animation(nil, value: self.appState.stage)
+        .animation(nil)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         AppView()
-            .environmentObject(AppState())
             .environment(
                 \.managedObjectContext,
                  PersistenceController.preview.container.viewContext

@@ -10,29 +10,24 @@ import SubVTData
 import SwiftUI
 
 class NetworkStatusViewModel: ObservableObject {
-    @Published private(set) var network: Network
     @Published private(set) var networkStatus = NetworkStatus()
     @Published private(set) var networkStatusServiceStatus: RPCSubscriptionServiceStatus = .idle
     
     private var networkStatusServiceStatusSubscription: AnyCancellable? = nil
     private var networkStatusServiceSubscription: AnyCancellable? = nil
-    private let networkStatusService: SubVTData.NetworkStatusService
-    
+    private var networkStatusService: SubVTData.NetworkStatusService! = nil
+    private var network: Network! = nil
     private var subscriptionIsInProgress = false
     
-    init() {
-        guard let network = Settings.getSelectedNetwork() else {
-            fatalError("Network not selected before network status screen.")
-        }
-        self.network = network
-        if let host = network.networkStatusServiceHost,
-           let port = network.networkStatusServicePort {
-            self.networkStatusService = NetworkStatusService(
-                rpcHost: host,
-                rpcPort: port
+    private func initNetworkStatusService() {
+        if let rpcHost = self.network?.networkStatusServiceHost,
+           let rpcPort = self.network?.networkStatusServicePort {
+            self.networkStatusService = SubVTData.NetworkStatusService(
+                rpcHost: rpcHost,
+                rpcPort: rpcPort
             )
         } else {
-            self.networkStatusService = NetworkStatusService()
+            self.networkStatusService = SubVTData.NetworkStatusService()
         }
     }
     
@@ -45,15 +40,19 @@ class NetworkStatusViewModel: ObservableObject {
             subscriptionIsInProgress = false
         case .active:
             if !subscriptionIsInProgress {
-                self.subscribeToNetworkStatus()
+                self.subscribeToNetworkStatus(network: self.network)
             }
         @unknown default:
             fatalError("Unknown scene phase: \(scenePhase)")
         }
     }
     
-    func subscribeToNetworkStatus() {
+    func subscribeToNetworkStatus(network: Network) {
         self.subscriptionIsInProgress = true
+        self.network = network
+        if self.networkStatusService == nil {
+            self.initNetworkStatusService()
+        }
         if self.networkStatusServiceStatusSubscription == nil {
             self.networkStatusServiceStatusSubscription = self.networkStatusService.$status
                 .sink {
