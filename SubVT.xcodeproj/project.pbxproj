@@ -82,6 +82,17 @@
 		A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC5A284B8E2B00914237 /* UI+Image.swift */; };
 		A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC60284B990B00914237 /* BgMorphView.swift */; };
 		A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC60284B990B00914237 /* BgMorphView.swift */; };
+		A0BCDE592878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */; };
+		A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */; };
+		A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE5E28784DD0008047D7 /* Format.swift */; };
+		A0BCDE6028784DD0008047D7 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE5E28784DD0008047D7 /* Format.swift */; };
+		A0BCDE6128784DD0008047D7 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE5E28784DD0008047D7 /* Format.swift */; };
+		A0BCDE6328785293008047D7 /* LastEraTotalRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */; };
+		A0BCDE6428785293008047D7 /* LastEraTotalRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */; };
+		A0BCDE6528785293008047D7 /* LastEraTotalRewardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */; };
+		A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */; };
+		A0BCDE6828785645008047D7 /* ValidatorBackingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */; };
+		A0BCDE6928785645008047D7 /* ValidatorBackingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */; };
 		A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90942848C1EB0053389A /* SubVTApp.swift */; };
 		A0BF90992848C1EC0053389A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0BF90982848C1EC0053389A /* Assets.xcassets */; };
 		A0BF909C2848C1EC0053389A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0BF909B2848C1EC0053389A /* Preview Assets.xcassets */; };
@@ -94,6 +105,9 @@
 		A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */; };
 		A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
 		A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
+		A0C90E882878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
+		A0C90E892878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
+		A0C90E8A2878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
 		A0C9838D2875ABF40008C370 /* OptionalCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* OptionalCodable.swift */; };
 		A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* OptionalCodable.swift */; };
 		A0C9838F2875ABF40008C370 /* OptionalCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* OptionalCodable.swift */; };
@@ -184,6 +198,10 @@
 		A0A1DC56284B8E0000914237 /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
 		A0A1DC5A284B8E2B00914237 /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
 		A0A1DC60284B990B00914237 /* BgMorphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgMorphView.swift; sourceTree = "<group>"; };
+		A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraPointsBlocksProducedView.swift; sourceTree = "<group>"; };
+		A0BCDE5E28784DD0008047D7 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
+		A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastEraTotalRewardView.swift; sourceTree = "<group>"; };
+		A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorBackingsView.swift; sourceTree = "<group>"; };
 		A0BF90912848C1EB0053389A /* SubVT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubVT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0BF90942848C1EB0053389A /* SubVTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTApp.swift; sourceTree = "<group>"; };
 		A0BF90982848C1EC0053389A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,6 +216,7 @@
 		A0BF90C32848C2140053389A /* SubVT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SubVT.entitlements; sourceTree = "<group>"; };
 		A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+TabBar.swift"; sourceTree = "<group>"; };
 		A0C062A4286721E9001FE459 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		A0C90E872878615600A91996 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		A0C9838C2875ABF40008C370 /* OptionalCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalCodable.swift; sourceTree = "<group>"; };
 		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
 		A0C9A781285749940071C7AC /* BasicDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDisplayState.swift; sourceTree = "<group>"; };
@@ -323,6 +342,7 @@
 		A03C5BE428783C4F00D9D4FD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				A0BCDE5E28784DD0008047D7 /* Format.swift */,
 				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
 			);
 			path = Utility;
@@ -331,6 +351,7 @@
 		A04B37B92876BA7E00912BF3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A0C90E872878615600A91996 /* Formatter.swift */,
 				A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */,
 				A04B37BD2876C3BB00912BF3 /* UIApplication.swift */,
 			);
@@ -459,9 +480,12 @@
 			children = (
 				A04B37D228771CA900912BF3 /* BlockNumberView.swift */,
 				A072C336287805A6001636F9 /* EraEpochView.swift */,
+				A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */,
+				A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */,
 				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
 				A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */,
 				A093F0472865F08600778293 /* NetworkStatusViewModel.swift */,
+				A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */,
 				A04B37CF287712C400912BF3 /* ValidatorListButtonView.swift */,
 			);
 			path = "Network Status";
@@ -702,6 +726,7 @@
 				A04B37D0287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A04B37C12876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
+				A0BCDE592878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
 				A0A1DC5B284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A07BA827285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
@@ -722,11 +747,13 @@
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
 				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
+				A0BCDE6328785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A0128A51284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A07BA818285B8C0600575683 /* UI+Dimension+Common.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A07BA81E285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
+				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
 				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
@@ -740,7 +767,9 @@
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
+				A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */,
 				A04B37C42876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
+				A0C90E882878615600A91996 /* Formatter.swift in Sources */,
 				A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */,
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A04C428E285334E2007C970B /* ActionButton.swift in Sources */,
@@ -753,10 +782,14 @@
 			files = (
 				A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */,
+				A0C90E892878615600A91996 /* Formatter.swift in Sources */,
+				A0BCDE6028784DD0008047D7 /* Format.swift in Sources */,
 				A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */,
+				A0BCDE6828785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */,
 				A072C33C28780685001636F9 /* Either.swift in Sources */,
+				A0BCDE6428785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -768,6 +801,7 @@
 				A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A03C5BE828783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
+				A0BCDE6528785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
 				A04B37C22876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
@@ -780,6 +814,7 @@
 				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A0128A6E284A4EAE000C2307 /* Color.swift in Sources */,
+				A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */,
@@ -787,6 +822,7 @@
 				A072C33D28780685001636F9 /* Either.swift in Sources */,
 				A0C9838F2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
+				A0C90E8A2878615600A91996 /* Formatter.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
 				A072C338287805A6001636F9 /* EraEpochView.swift in Sources */,
@@ -794,6 +830,7 @@
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A04C428F285334E2007C970B /* ActionButton.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
+				A0BCDE6128784DD0008047D7 /* Format.swift in Sources */,
 				A0A1DC58284B8E0000914237 /* UI+Font.swift in Sources */,
 				A04B37D428771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A0128A52284A150C000C2307 /* OnboardingParentView.swift in Sources */,
@@ -802,6 +839,7 @@
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
 				A04B37BF2876C3BB00912BF3 /* UIApplication.swift in Sources */,
 				A02839C52867A456009CA8BA /* Tab.swift in Sources */,
+				A0BCDE6928785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A07BA825285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04C429A2853BA18007C970B /* OnboardingStep.swift in Sources */,

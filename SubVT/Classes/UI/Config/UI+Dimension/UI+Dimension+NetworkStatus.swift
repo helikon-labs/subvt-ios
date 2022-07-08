@@ -52,5 +52,11 @@ extension UI.Dimension {
                 return NetworkStatus.titleMarginTop + 68
             }
         }
+        static var scrollContentMarginBottom: CGFloat {
+            get {
+                return UI.Dimension.TabBar.marginBottom
+                + UI.Dimension.TabBar.height
+            }
+        }
     }
 }

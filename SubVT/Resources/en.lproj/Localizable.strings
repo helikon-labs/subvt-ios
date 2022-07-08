@@ -45,7 +45,9 @@
 "network_status.finalized_block_number"="Finalized Block Number";
 "network_status.era_points"="Era Points";
 "network_status.number_of_blocks"="Blocks in Era";
+"network_status.my_validators"="My Validators";
 "network_status.last_era_total_rewards"="Last Era Total Rewards";
+"network_status.validator_backings"="Validator Backings";
 "network_status.minimum"="Minimum";
 "network_status.average"="Average";
 "network_status.maximum"="Maximum";

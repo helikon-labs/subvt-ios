@@ -109,6 +109,8 @@ extension UI {
             }
             static let dataXLarge = LexendDeca.semiBold.withSize(40)
             static let dataSmall = LexendDeca.light.withSize(10)
+            static let lastEraTotalReward = LexendDeca.semiBold.withSize(28)
+            static let lastEraTotalRewardTicker = LexendDeca.regular.withSize(28)
         }
     }
 }

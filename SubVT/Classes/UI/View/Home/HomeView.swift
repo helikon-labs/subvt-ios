@@ -32,13 +32,22 @@ struct HomeView: View {
                 NetworkStatusView()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(EdgeInsets(
-                top: 0,
-                leading: UI.Dimension.Common.padding,
-                bottom: 0,
-                trailing: UI.Dimension.Common.padding
-            ))
             .ignoresSafeArea()
+            Rectangle()
+                .fill(LinearGradient(
+                    gradient: Gradient(
+                        colors: [
+                            Color("Bg"),
+                            Color("BgClear")
+                        ]
+                    ),
+                    startPoint: .bottom,
+                    endPoint: .top
+                ))
+                .frame(height: UI.Dimension.TabBar.marginBottom
+                       + UI.Dimension.TabBar.height * 2)
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .ignoresSafeArea()
             VStack {
                 TabBarView(currentTab: $currentTab)
                     .frame(maxHeight: .infinity, alignment: .bottom)

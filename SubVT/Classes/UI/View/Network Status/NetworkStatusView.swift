@@ -51,6 +51,12 @@ struct NetworkStatusView: View {
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
+                .padding(EdgeInsets(
+                    top: 0,
+                    leading: UI.Dimension.Common.padding,
+                    bottom: 0,
+                    trailing: UI.Dimension.Common.padding
+                ))
                 .zIndex(1)
                 ScrollView {
                     VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
@@ -90,7 +96,36 @@ struct NetworkStatusView: View {
                             EraEpochView(eraOrEpoch: .left(self.viewModel.networkStatus.activeEra))
                             EraEpochView(eraOrEpoch: .right(self.viewModel.networkStatus.currentEpoch))
                         }
+                        HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
+                            EraPointsBlocksProducedView(
+                                title: localized("network_status.era_points"),
+                                value: self.viewModel.networkStatus.eraRewardPoints,
+                                myValidatorsValue: nil
+                            )
+                            EraPointsBlocksProducedView(
+                                title: localized("network_status.number_of_blocks"),
+                                value: 0,
+                                myValidatorsValue: nil
+                            )
+                        }
+                        LastEraTotalRewardView(
+                            network: self.network,
+                            reward: self.viewModel.networkStatus.lastEraTotalReward
+                        )
+                        ValidatorBackingsView(
+                            minimum: self.viewModel.networkStatus.minStake,
+                            maximum: self.viewModel.networkStatus.maxStake,
+                            average: self.viewModel.networkStatus.averageStake
+                        )
+                        Spacer()
+                            .frame(height: UI.Dimension.NetworkStatus.scrollContentMarginBottom)
                     }
+                    .padding(EdgeInsets(
+                        top: 0,
+                        leading: UI.Dimension.Common.padding,
+                        bottom: 0,
+                        trailing: UI.Dimension.Common.padding
+                    ))
                 }
                 .zIndex(0)
             }
