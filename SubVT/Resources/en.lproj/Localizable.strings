@@ -14,6 +14,7 @@
 
 "common.era"="Era";
 "common.epoch"="Epoch";
+"common.int_percentage"="%d%%";
 
 "introduction.title"="Welcome to SubVT";
 "introduction.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";
@@ -48,6 +49,8 @@
 "network_status.minimum"="Minimum";
 "network_status.average"="Average";
 "network_status.maximum"="Maximum";
+"network_status.hours_minutes_left"="%d hr %d mins left";
+"network_status.minutes_left"="%d mins left";
 
 "active_validator_list.title"="Active Validators";
 "inactive_validator_list.title"="Inactive Validators";

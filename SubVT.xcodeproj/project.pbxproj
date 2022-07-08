@@ -24,6 +24,9 @@
 		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
+		A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
+		A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
+		A03C5BE828783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
 		A04B37BB2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */; };
 		A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */; };
 		A04B37BE2876C3BB00912BF3 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BD2876C3BB00912BF3 /* UIApplication.swift */; };
@@ -152,6 +155,7 @@
 		A0128A6C284A4EAE000C2307 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
+		A03C5BE528783C9F00D9D4FD /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
 		A04B37BD2876C3BB00912BF3 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
 		A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkStatus.swift"; sourceTree = "<group>"; };
@@ -316,6 +320,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		A03C5BE428783C4F00D9D4FD /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		A04B37B92876BA7E00912BF3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
@@ -445,12 +457,12 @@
 		A0C983942875AC690008C370 /* Network Status */ = {
 			isa = PBXGroup;
 			children = (
+				A04B37D228771CA900912BF3 /* BlockNumberView.swift */,
+				A072C336287805A6001636F9 /* EraEpochView.swift */,
 				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
 				A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */,
 				A093F0472865F08600778293 /* NetworkStatusViewModel.swift */,
 				A04B37CF287712C400912BF3 /* ValidatorListButtonView.swift */,
-				A04B37D228771CA900912BF3 /* BlockNumberView.swift */,
-				A072C336287805A6001636F9 /* EraEpochView.swift */,
 			);
 			path = "Network Status";
 			sourceTree = "<group>";
@@ -512,6 +524,7 @@
 				A0128A43284A09C6000C2307 /* Persistence */,
 				A072C33928780676001636F9 /* Type */,
 				A0E0F6852848CEDD0029DDBF /* UI */,
+				A03C5BE428783C4F00D9D4FD /* Utility */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -717,6 +730,7 @@
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
 				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
+				A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
 				A04B37BB2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A072C33B28780685001636F9 /* Either.swift in Sources */,
@@ -739,6 +753,7 @@
 			files = (
 				A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */,
+				A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */,
 				A072C33C28780685001636F9 /* Either.swift in Sources */,
@@ -751,6 +766,7 @@
 			files = (
 				A04B37CE2876EB8200912BF3 /* Network.swift in Sources */,
 				A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
+				A03C5BE828783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,

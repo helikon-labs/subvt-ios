@@ -31,13 +31,13 @@ struct EraEpochView: View {
         }
     }
     
-    private var title: LocalizedStringKey {
+    private var title: String {
         get {
             switch eraOrEpoch {
             case .left(_):
-                return LocalizedStringKey("common.era")
+                return localized("common.era")
             case .right(_):
-                return LocalizedStringKey("common.epoch")
+                return localized("common.epoch")
             }
         }
     }
@@ -82,16 +82,11 @@ struct EraEpochView: View {
     
     private var elapsedSeconds: Double {
         get {
-            Date().timeIntervalSince1970 - self.startSeconds
-        }
-    }
-    
-    private var remainingHoursMinutes: (Int, Int) {
-        get {
-            let seconds = Int(self.endSeconds - Date().timeIntervalSince1970)
-            let hours = seconds / (60 * 60)
-            let minutes = (seconds - (hours * 60 * 60)) / 60
-            return (hours, minutes)
+            if self.startSeconds == 0 {
+                return 0
+            } else {
+                return Date().timeIntervalSince1970 - self.startSeconds
+            }
         }
     }
     
@@ -117,6 +112,26 @@ struct EraEpochView: View {
         }
     }
     
+    private var timeLeftFormatted: String {
+        get {
+            let seconds = max(0, Int(self.endSeconds - Date().timeIntervalSince1970))
+            let hours = seconds / (60 * 60)
+            let minutes = (seconds - (hours * 60 * 60)) / 60
+            if hours > 0 {
+                return String(
+                    format: localized("network_status.hours_minutes_left"),
+                    hours,
+                    minutes
+                )
+            } else {
+                return String(
+                    format: localized("network_status.minutes_left"),
+                    minutes
+                )
+            }
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(self.title)
@@ -130,23 +145,46 @@ struct EraEpochView: View {
             Spacer()
                 .frame(height: 16)
             HStack (alignment: .top) {
-                Text("\(self.elapsedPercentage)%")
-                    .font(UI.Font.NetworkStatus.dataMedium)
-                    .foregroundColor(Color("Text"))
+                Text(
+                    String(
+                        format: localized("common.int_percentage"),
+                        self.elapsedPercentage
+                    )
+                )
+                .font(UI.Font.NetworkStatus.dataMedium)
+                .foregroundColor(Color("Text"))
                 Spacer()
                     .frame(width: 16)
                 VStack (alignment: .leading) {
                     Spacer()
-                        .frame(height: 16)
-                    ProgressView(
-                        value: self.elapsedSeconds,
-                        total: self.endSeconds - self.startSeconds
-                    )
-                    .frame(height: 4)
-                    .background(Color("StatusActive"))
+                        .frame(height: 14)
+                    ZStack {
+                        ProgressView(
+                            value: self.elapsedSeconds,
+                            total: self.endSeconds - self.startSeconds
+                        )
+                        .frame(height: 4)
+                        .progressViewStyle(LinearProgressViewStyle(
+                            tint: Color("Progress")
+                        ))
+                        .background(Color("StatusActive"))
+                        // shadow
+                        ProgressView(
+                            value: self.elapsedSeconds,
+                            total: self.endSeconds - self.startSeconds
+                        )
+                        .frame(height: 4)
+                        .progressViewStyle(LinearProgressViewStyle(
+                            tint: Color("Progress")
+                        ))
+                        .background(Color("StatusActive"))
+                        .blur(radius: 3)
+                        .opacity(0.2)
+                        .offset(x: 0, y: 3)
+                    }
                     Spacer()
-                        .frame(height: 2)
-                    Text("\(self.remainingHoursMinutes.0) hr \(self.remainingHoursMinutes.1) mins left")
+                        .frame(height: 4)
+                    Text(self.timeLeftFormatted)
                         .font(UI.Font.NetworkStatus.dataSmall)
                         .foregroundColor(Color("RemainingTime"))
                 }

@@ -26,6 +26,33 @@ struct ValidatorListButtonView: View {
     let title: LocalizedStringKey
     var count: Int
     
+    private let gradient = LinearGradient(
+        gradient: Gradient(
+            colors: [
+                Color(
+                    red: 0.01,
+                    green: 0.9,
+                    blue: 0.18,
+                    opacity: 1.0
+                ),
+                Color(
+                    red: 0.01,
+                    green: 0.9,
+                    blue: 0.18,
+                    opacity: 1.0
+                ),
+                Color(
+                    red: 0.23,
+                    green: 0.44,
+                    blue: 1.00,
+                    opacity: 1.0
+                )
+            ]
+        ),
+        startPoint: .leading,
+        endPoint: .trailing
+    )
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center) {
@@ -51,32 +78,7 @@ struct ValidatorListButtonView: View {
                         path.addLine(to: CGPoint(x: width + 5, y: 7))
                     }
                     .stroke(
-                        LinearGradient(
-                            gradient: Gradient(
-                                colors: [
-                                    Color(
-                                        red: 0.01,
-                                        green: 0.9,
-                                        blue: 0.18,
-                                        opacity: 1.0
-                                    ),
-                                    Color(
-                                        red: 0.01,
-                                        green: 0.9,
-                                        blue: 0.18,
-                                        opacity: 1.0
-                                    ),
-                                    Color(
-                                        red: 0.23,
-                                        green: 0.44,
-                                        blue: 1.00,
-                                        opacity: 1.0
-                                    )
-                                ]
-                            ),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        ),
+                        self.gradient,
                         style: StrokeStyle(
                             lineWidth: 4,
                             lineJoin: .round
@@ -88,32 +90,7 @@ struct ValidatorListButtonView: View {
                         path.addLine(to: CGPoint(x: width + 5, y: 7))
                     }
                     .stroke(
-                        LinearGradient(
-                            gradient: Gradient(
-                                colors: [
-                                    Color(
-                                        red: 0.01,
-                                        green: 0.9,
-                                        blue: 0.18,
-                                        opacity: 1.0
-                                    ),
-                                    Color(
-                                        red: 0.01,
-                                        green: 0.9,
-                                        blue: 0.18,
-                                        opacity: 1.0
-                                    ),
-                                    Color(
-                                        red: 0.23,
-                                        green: 0.44,
-                                        blue: 1.00,
-                                        opacity: 1.0
-                                    )
-                                ]
-                            ),
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        ),
+                        self.gradient,
                         style: StrokeStyle(
                             lineWidth: 4,
                             lineJoin: .round
