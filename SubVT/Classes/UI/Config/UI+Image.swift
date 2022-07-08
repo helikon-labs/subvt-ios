@@ -71,5 +71,39 @@ extension UI {
                 }
             }
         }
+        
+        enum NetworkStatus {
+            static func arrowDown(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("NetworkStatusArrowDownDark")
+                } else {
+                    return SwiftUI.Image("NetworkStatusArrowDownLight")
+                }
+            }
+            
+            static func arrowUp(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("NetworkStatusArrowUpDark")
+                } else {
+                    return SwiftUI.Image("NetworkStatusArrowUpLight")
+                }
+            }
+            
+            static func arrowRight(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return SwiftUI.Image("DataPanelRightArrowDarkPhone")
+                    } else {
+                        return SwiftUI.Image("DataPanelRightArrowDarkPad")
+                    }
+                } else {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        return SwiftUI.Image("DataPanelRightArrowLightPhone")
+                    } else {
+                        return SwiftUI.Image("DataPanelRightArrowLightPad")
+                    }
+                }
+            }
+        }
     }
 }

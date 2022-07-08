@@ -18,14 +18,26 @@ struct TabBarButtonStyle: ButtonStyle {
 struct TabBarButtonView: View {
     let tab: Tab
     @State var isActive = false
+    let onSelect: () -> ()
     
-    init(tab: Tab) {
+    init(
+        tab: Tab,
+        isActive: Bool,
+        onSelect: @escaping () -> ()
+    ) {
         self.tab = tab
+        self.isActive = isActive
+        self.onSelect = onSelect
     }
     
     var body: some View {
         Button(
-            action: {},
+            action: {
+                if !self.isActive {
+                    isActive.toggle()
+                    self.onSelect()
+                }
+            },
             label: {
                 VStack(alignment: .center, spacing: 0) {
                     self.tab.getImage(isActive: self.isActive)
@@ -45,15 +57,21 @@ struct TabBarButtonView: View {
 }
 
 struct TabBarView: View {
+    @Binding var currentTab: Tab
+    
     var body: some View {
         HStack(
             alignment: .center,
             spacing: UI.Dimension.TabBar.itemSpacing
         ) {
-            TabBarButtonView(tab: .network)
-            TabBarButtonView(tab: .myValidators)
-            TabBarButtonView(tab: .notifications)
-            TabBarButtonView(tab: .eraReports)
+            ForEach(Tab.allCases, id: \.self) { tab in
+                TabBarButtonView(
+                    tab: tab,
+                    isActive: tab == self.currentTab
+                ) {
+                    currentTab = tab
+                }
+            }
         }
         .frame(height: UI.Dimension.TabBar.height)
         .frame(maxWidth: .infinity)
@@ -63,7 +81,9 @@ struct TabBarView: View {
 }
 
 struct TabBarView_Previews: PreviewProvider {
+    @State static private var currentTab: Tab = .network
+    
     static var previews: some View {
-        TabBarView()
+        TabBarView(currentTab: $currentTab)
     }
 }

@@ -10,7 +10,7 @@ import SubVTData
 
 struct NetworkSelectionView: View {
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
-    @AppStorage(AppStorageKey.selectedNetwork) private var appSelectedNetwork: Network! = nil
+    @AppStorage(AppStorageKey.selectedNetwork) private var appSelectedNetwork: Network? = nil
     @StateObject private var viewModel = NetworkSelectionViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networksDisplayState: BasicViewDisplayState = .notAppeared

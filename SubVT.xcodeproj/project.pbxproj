@@ -24,6 +24,22 @@
 		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
+		A04B37BB2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */; };
+		A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */; };
+		A04B37BE2876C3BB00912BF3 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BD2876C3BB00912BF3 /* UIApplication.swift */; };
+		A04B37BF2876C3BB00912BF3 /* UIApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BD2876C3BB00912BF3 /* UIApplication.swift */; };
+		A04B37C12876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */; };
+		A04B37C22876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */; };
+		A04B37C42876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */; };
+		A04B37C52876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */; };
+		A04B37CA2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */; };
+		A04B37CB2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */; };
+		A04B37CD2876EB8200912BF3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37CC2876EB8200912BF3 /* Network.swift */; };
+		A04B37CE2876EB8200912BF3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37CC2876EB8200912BF3 /* Network.swift */; };
+		A04B37D0287712C400912BF3 /* ValidatorListButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37CF287712C400912BF3 /* ValidatorListButtonView.swift */; };
+		A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37CF287712C400912BF3 /* ValidatorListButtonView.swift */; };
+		A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37D228771CA900912BF3 /* BlockNumberView.swift */; };
+		A04B37D428771CA900912BF3 /* BlockNumberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37D228771CA900912BF3 /* BlockNumberView.swift */; };
 		A04C428E285334E2007C970B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C428D285334E2007C970B /* ActionButton.swift */; };
 		A04C428F285334E2007C970B /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C428D285334E2007C970B /* ActionButton.swift */; };
 		A04C429628533564007C970B /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C429528533564007C970B /* AppView.swift */; };
@@ -33,6 +49,11 @@
 		A0607BE42868CF1B0048947D /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0607BE32868CF1B0048947D /* data-env.json */; };
 		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
+		A072C337287805A6001636F9 /* EraEpochView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C336287805A6001636F9 /* EraEpochView.swift */; };
+		A072C338287805A6001636F9 /* EraEpochView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C336287805A6001636F9 /* EraEpochView.swift */; };
+		A072C33B28780685001636F9 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C33A28780685001636F9 /* Either.swift */; };
+		A072C33C28780685001636F9 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C33A28780685001636F9 /* Either.swift */; };
+		A072C33D28780685001636F9 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C33A28780685001636F9 /* Either.swift */; };
 		A07BA815285B556E00575683 /* SnackbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA814285B556E00575683 /* SnackbarView.swift */; };
 		A07BA818285B8C0600575683 /* UI+Dimension+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA817285B8C0600575683 /* UI+Dimension+Common.swift */; };
 		A07BA819285B8C0600575683 /* UI+Dimension+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA817285B8C0600575683 /* UI+Dimension+Common.swift */; };
@@ -70,12 +91,9 @@
 		A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */; };
 		A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
 		A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
-		A0C9838D2875ABF40008C370 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* Optional.swift */; };
-		A0C9838E2875ABF40008C370 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* Optional.swift */; };
-		A0C9838F2875ABF40008C370 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* Optional.swift */; };
-		A0C983912875AC020008C370 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C983902875AC020008C370 /* Network.swift */; };
-		A0C983922875AC020008C370 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C983902875AC020008C370 /* Network.swift */; };
-		A0C983932875AC020008C370 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C983902875AC020008C370 /* Network.swift */; };
+		A0C9838D2875ABF40008C370 /* OptionalCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* OptionalCodable.swift */; };
+		A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* OptionalCodable.swift */; };
+		A0C9838F2875ABF40008C370 /* OptionalCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* OptionalCodable.swift */; };
 		A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */; };
 		A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */; };
 		A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
@@ -134,11 +152,21 @@
 		A0128A6C284A4EAE000C2307 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
+		A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
+		A04B37BD2876C3BB00912BF3 /* UIApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.swift; sourceTree = "<group>"; };
+		A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkStatus.swift"; sourceTree = "<group>"; };
+		A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCSubscriptionServiceStatus.swift; sourceTree = "<group>"; };
+		A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectorButtonView.swift; sourceTree = "<group>"; };
+		A04B37CC2876EB8200912BF3 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		A04B37CF287712C400912BF3 /* ValidatorListButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorListButtonView.swift; sourceTree = "<group>"; };
+		A04B37D228771CA900912BF3 /* BlockNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockNumberView.swift; sourceTree = "<group>"; };
 		A04C428D285334E2007C970B /* ActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		A04C429528533564007C970B /* AppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		A04C42982853BA18007C970B /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
+		A072C336287805A6001636F9 /* EraEpochView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraEpochView.swift; sourceTree = "<group>"; };
+		A072C33A28780685001636F9 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		A07BA814285B556E00575683 /* SnackbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnackbarView.swift; sourceTree = "<group>"; };
 		A07BA817285B8C0600575683 /* UI+Dimension+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Common.swift"; sourceTree = "<group>"; };
 		A07BA81A285B943A00575683 /* UI+Dimension+BgMorph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+BgMorph.swift"; sourceTree = "<group>"; };
@@ -166,8 +194,7 @@
 		A0BF90C32848C2140053389A /* SubVT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SubVT.entitlements; sourceTree = "<group>"; };
 		A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+TabBar.swift"; sourceTree = "<group>"; };
 		A0C062A4286721E9001FE459 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
-		A0C9838C2875ABF40008C370 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
-		A0C983902875AC020008C370 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		A0C9838C2875ABF40008C370 /* OptionalCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalCodable.swift; sourceTree = "<group>"; };
 		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
 		A0C9A781285749940071C7AC /* BasicDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDisplayState.swift; sourceTree = "<group>"; };
 		A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionViewModel.swift; sourceTree = "<group>"; };
@@ -289,6 +316,15 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		A04B37B92876BA7E00912BF3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */,
+				A04B37BD2876C3BB00912BF3 /* UIApplication.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		A04C428B285321ED007C970B /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -308,6 +344,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		A072C33928780676001636F9 /* Type */ = {
+			isa = PBXGroup;
+			children = (
+				A072C33A28780685001636F9 /* Either.swift */,
+			);
+			path = Type;
+			sourceTree = "<group>";
+		};
 		A07BA816285B8BEB00575683 /* UI+Dimension */ = {
 			isa = PBXGroup;
 			children = (
@@ -316,6 +360,7 @@
 				A07BA817285B8C0600575683 /* UI+Dimension+Common.swift */,
 				A07BA820285B94B400575683 /* UI+Dimension+Introduction.swift */,
 				A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */,
+				A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */,
 				A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */,
 				A07BA81D285B948D00575683 /* UI+Dimension+Snackbar.swift */,
 				A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */,
@@ -391,8 +436,8 @@
 		A0C9838B2875ABE20008C370 /* CodableAppStorage */ = {
 			isa = PBXGroup;
 			children = (
-				A0C983902875AC020008C370 /* Network.swift */,
-				A0C9838C2875ABF40008C370 /* Optional.swift */,
+				A0C9838C2875ABF40008C370 /* OptionalCodable.swift */,
+				A04B37CC2876EB8200912BF3 /* Network.swift */,
 			);
 			path = CodableAppStorage;
 			sourceTree = "<group>";
@@ -400,7 +445,12 @@
 		A0C983942875AC690008C370 /* Network Status */ = {
 			isa = PBXGroup;
 			children = (
+				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
+				A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */,
 				A093F0472865F08600778293 /* NetworkStatusViewModel.swift */,
+				A04B37CF287712C400912BF3 /* ValidatorListButtonView.swift */,
+				A04B37D228771CA900912BF3 /* BlockNumberView.swift */,
+				A072C336287805A6001636F9 /* EraEpochView.swift */,
 			);
 			path = "Network Status";
 			sourceTree = "<group>";
@@ -458,7 +508,9 @@
 			children = (
 				A0128A48284A0B46000C2307 /* App */,
 				A0C9838528759E0E0008C370 /* Data */,
+				A04B37B92876BA7E00912BF3 /* Extension */,
 				A0128A43284A09C6000C2307 /* Persistence */,
+				A072C33928780676001636F9 /* Type */,
 				A0E0F6852848CEDD0029DDBF /* UI */,
 			);
 			path = Classes;
@@ -633,22 +685,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0C983912875AC020008C370 /* Network.swift in Sources */,
 				A07BA821285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
+				A04B37D0287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
+				A04B37C12876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
 				A0A1DC5B284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A07BA827285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
 				A0128A4D284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0BF909E2848C1EC0053389A /* Persistence.swift in Sources */,
+				A04B37BE2876C3BB00912BF3 /* UIApplication.swift in Sources */,
 				A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */,
 				A0128A6D284A4EAE000C2307 /* Color.swift in Sources */,
 				A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
-				A0C9838D2875ABF40008C370 /* Optional.swift in Sources */,
+				A0C9838D2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A04C429628533564007C970B /* AppView.swift in Sources */,
 				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
+				A04B37CA2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
@@ -660,12 +715,18 @@
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A07BA81E285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
+				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
+				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
+				A04B37BB2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
+				A072C33B28780685001636F9 /* Either.swift in Sources */,
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
+				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
+				A04B37C42876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
 				A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */,
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A04C428E285334E2007C970B /* ActionButton.swift in Sources */,
@@ -677,10 +738,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
-				A0C9838E2875ABF40008C370 /* Optional.swift in Sources */,
-				A0C983922875AC020008C370 /* Network.swift in Sources */,
+				A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */,
+				A072C33C28780685001636F9 /* Either.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,33 +749,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A04B37CE2876EB8200912BF3 /* Network.swift in Sources */,
 				A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
+				A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
+				A04B37C22876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
 				A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */,
-				A0C983932875AC020008C370 /* Network.swift in Sources */,
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
+				A04B37C52876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
 				A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
 				A07BA81F285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
+				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A0128A6E284A4EAE000C2307 /* Color.swift in Sources */,
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
-				A0C9838F2875ABF40008C370 /* Optional.swift in Sources */,
+				A072C33D28780685001636F9 /* Either.swift in Sources */,
+				A0C9838F2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
+				A072C338287805A6001636F9 /* EraEpochView.swift in Sources */,
 				A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A04C428F285334E2007C970B /* ActionButton.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A0A1DC58284B8E0000914237 /* UI+Font.swift in Sources */,
+				A04B37D428771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A0128A52284A150C000C2307 /* OnboardingParentView.swift in Sources */,
+				A04B37CB2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
 				A0128A4F284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
+				A04B37BF2876C3BB00912BF3 /* UIApplication.swift in Sources */,
 				A02839C52867A456009CA8BA /* Tab.swift in Sources */,
 				A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A07BA825285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
@@ -869,6 +939,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -881,7 +952,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -904,6 +975,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -916,7 +988,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

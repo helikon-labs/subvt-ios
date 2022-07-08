@@ -10,10 +10,8 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @Environment(\.scenePhase) var scenePhase
-    @AppStorage(AppStorageKey.selectedNetwork) private var network: Network = PreviewData.kusama
-    @StateObject private var viewModel = NetworkStatusViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
+    @State private var currentTab: Tab = .network
     
     var body: some View {
         ZStack {
@@ -29,43 +27,36 @@ struct HomeView: View {
                     .easeOut(duration: 0.75),
                     value: self.displayState
                 )
-            //Color("NetworkSelectionOverlayBg")
-            //    .ignoresSafeArea()
+            // tab content
             ZStack(alignment: .topLeading) {
-                HStack(alignment: .center) {
-                    Text(LocalizedStringKey("network_status.title"))
-                        .font(UI.Font.NetworkStatus.title)
-                        .foregroundColor(Color("Text"))
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                Spacer()
+                NetworkStatusView()
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(EdgeInsets(
                 top: 0,
-                leading: UI.Dimension.Common.horizontalPadding,
+                leading: UI.Dimension.Common.padding,
                 bottom: 0,
-                trailing: UI.Dimension.Common.horizontalPadding
+                trailing: UI.Dimension.Common.padding
             ))
+            .ignoresSafeArea()
             VStack {
+                TabBarView(currentTab: $currentTab)
+                    .frame(maxHeight: .infinity, alignment: .bottom)
                 Spacer()
-                TabBarView()
+                    .frame(height: UI.Dimension.TabBar.marginBottom)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .padding(EdgeInsets(
                 top: 0,
-                leading: UI.Dimension.Common.horizontalPadding,
+                leading: UI.Dimension.Common.padding,
                 bottom: 0,
-                trailing: UI.Dimension.Common.horizontalPadding
+                trailing: UI.Dimension.Common.padding
             ))
+            .ignoresSafeArea()
         }
         .onAppear() {
             self.displayState = .appeared
-            self.viewModel.subscribeToNetworkStatus(network: self.network)
         }
-        .onChange(of: scenePhase) { newPhase in
-            self.viewModel.onScenePhaseChange(newPhase)
-        }
+        
     }
 }
 

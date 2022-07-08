@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum Tab {
+enum Tab: CaseIterable {
     case network
     case myValidators
     case notifications

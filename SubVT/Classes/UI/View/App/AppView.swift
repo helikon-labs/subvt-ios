@@ -21,7 +21,7 @@ struct AppView: View {
     private var items: FetchedResults<Item>
     @AppStorage(AppStorageKey.hasCompletedIntroduction) private var hasCompletedIntroduction = false
     @AppStorage(AppStorageKey.hasBeenOnboarded) private var hasBeenOnboarded = false
-    @AppStorage(AppStorageKey.selectedNetwork) private var selectedNetwork: Network! = nil
+    @AppStorage(AppStorageKey.selectedNetwork) private var selectedNetwork: Network? = nil
     
     
     var body: some View {

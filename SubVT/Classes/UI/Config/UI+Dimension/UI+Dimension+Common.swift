@@ -10,7 +10,7 @@ import SwiftUI
 extension UI.Dimension {
     enum Common {
         static let cornerRadius: CGFloat = 12
-        static var horizontalPadding: CGFloat {
+        static var padding: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     return 16
@@ -62,5 +62,17 @@ extension UI.Dimension {
                 return 180
             }
         }
+        
+        static var dataPanelSpacing: CGFloat {
+            get {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return 8
+                } else {
+                    return 16
+                }
+            }
+        }
+        static let dataPanelCornerRadius: CGFloat = 16
+        static let dataPanelPadding: CGFloat = 16
     }
 }

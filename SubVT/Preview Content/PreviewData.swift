@@ -9,6 +9,12 @@ import Foundation
 import SubVTData
 
 enum PreviewData {
+    static let era = Era(
+        index: 3926,
+        startTimestamp: 1657214874008,
+        endTimestamp: 1657236474008
+    )
+    
     static let kusama = Network(
         id: 1,
         hash: "0xABC",
@@ -34,9 +40,10 @@ enum PreviewData {
             suiteName: "io.helikon.subvt.user_defaults.preview"
         )!
         defaults.set(
-            try! JSONEncoder().encode(kusama),
+            try! JSONEncoder().encode(PreviewData.kusama),
             forKey: AppStorageKey.selectedNetwork
         )
+        defaults.synchronize()
         return defaults
     }()
 }

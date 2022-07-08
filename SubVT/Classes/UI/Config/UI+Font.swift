@@ -11,6 +11,13 @@ extension UI {
     enum Font {
         enum Common {
             static let actionButton = LexendDeca.semiBold.withSize(18)
+            static var dataPanelTitle: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.light.withSize(12)
+                } else {
+                    return LexendDeca.light.withSize(14)
+                }
+            }
         }
         
         enum Snackbar {
@@ -91,6 +98,17 @@ extension UI {
                     return LexendDeca.semiBold.withSize(36)
                 }
             }
+            static let networkSelector = LexendDeca.regular.withSize(12)
+            static let dataMedium = LexendDeca.semiBold.withSize(20)
+            static var dataLarge: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.semiBold.withSize(28)
+                } else {
+                    return LexendDeca.semiBold.withSize(40)
+                }
+            }
+            static let dataXLarge = LexendDeca.semiBold.withSize(40)
+            static let dataSmall = LexendDeca.light.withSize(10)
         }
     }
 }

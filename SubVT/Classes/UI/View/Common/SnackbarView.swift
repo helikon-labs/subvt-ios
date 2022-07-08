@@ -31,12 +31,12 @@ struct SnackbarView: View {
             label: {
                 HStack {
                     Spacer()
-                        .frame(width: UI.Dimension.Common.horizontalPadding)
+                        .frame(width: UI.Dimension.Common.padding)
                     ZStack(alignment: .leading) {
                         VStack {
                             HStack {
                                 Spacer()
-                                    .frame(width: UI.Dimension.Common.horizontalPadding)
+                                    .frame(width: UI.Dimension.Common.padding)
                                 Image("SnackbarExclamationIcon")
                                 Spacer()
                                     .frame(width: UI.Dimension.Snackbar.messageMarginLeft)
@@ -47,7 +47,7 @@ struct SnackbarView: View {
                                 switch self.type {
                                 case .info:
                                     Spacer()
-                                        .frame(width: UI.Dimension.Common.horizontalPadding)
+                                        .frame(width: UI.Dimension.Common.padding)
                                 case .error(let canRetry):
                                     if canRetry {
                                         Spacer()
@@ -56,7 +56,7 @@ struct SnackbarView: View {
                                             .font(UI.Font.Snackbar.message)
                                             .foregroundColor(Color("SnackbarAction"))
                                         Spacer()
-                                            .frame(width: UI.Dimension.Common.horizontalPadding)
+                                            .frame(width: UI.Dimension.Common.padding)
                                     }
                                 }
                             }
@@ -71,7 +71,7 @@ struct SnackbarView: View {
                     .background(Color("SnackbarBg"))
                     .cornerRadius(UI.Dimension.Common.cornerRadius)
                     Spacer()
-                        .frame(width: UI.Dimension.Common.horizontalPadding)
+                        .frame(width: UI.Dimension.Common.padding)
                 }
                 .frame(maxWidth: .infinity)
             }

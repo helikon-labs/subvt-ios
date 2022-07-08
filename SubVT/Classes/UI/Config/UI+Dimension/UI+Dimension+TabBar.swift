@@ -37,5 +37,14 @@ extension UI.Dimension {
                 }
             }
         }
+        static var marginBottom: CGFloat {
+            get {
+                if UIApplication.hasBottomNotch {
+                    return 30
+                } else {
+                    return UI.Dimension.Common.padding
+                }
+            }
+        }
     }
 }
