@@ -142,6 +142,15 @@
 		A0E0F6872848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
 		A0E0F6882848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
 		A0E0F68B2848D2B40029DDBF /* SubVTData in Frameworks */ = {isa = PBXBuildFile; productRef = A0E0F68A2848D2B40029DDBF /* SubVTData */; };
+		A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
+		A0F285092879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
+		A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */; };
+		A0F2850C2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */; };
+		A0F2850E2879AD0500E69C6B /* BlockWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */; };
+		A0F2850F2879AD0500E69C6B /* BlockWaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */; };
+		A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
+		A0F285122879C08000E69C6B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
+		A0F285132879C08000E69C6B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -236,6 +245,10 @@
 		A0E0F6702848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-ExtraLight.ttf"; sourceTree = "<group>"; };
 		A0E0F6832848CD9B0029DDBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0E0F6862848CF120029DDBF /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		A0F285072879A96A00E69C6B /* BlockWaveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveShape.swift; sourceTree = "<group>"; };
+		A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveContainerView.swift; sourceTree = "<group>"; };
+		A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveView.swift; sourceTree = "<group>"; };
+		A0F285102879C08000E69C6B /* BlockWaveParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveParameters.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -482,6 +495,7 @@
 		A0C983942875AC690008C370 /* Network Status */ = {
 			isa = PBXGroup;
 			children = (
+				A0F285062879A93D00E69C6B /* Block Wave */,
 				A04B37D228771CA900912BF3 /* BlockNumberView.swift */,
 				A072C336287805A6001636F9 /* EraEpochView.swift */,
 				A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */,
@@ -566,6 +580,17 @@
 				A0128A49284A0B50000C2307 /* View */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		A0F285062879A93D00E69C6B /* Block Wave */ = {
+			isa = PBXGroup;
+			children = (
+				A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */,
+				A0F285072879A96A00E69C6B /* BlockWaveShape.swift */,
+				A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */,
+				A0F285102879C08000E69C6B /* BlockWaveParameters.swift */,
+			);
+			path = "Block Wave";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -748,12 +773,14 @@
 				A04B37CA2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
 				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
+				A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
 				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0BCDE6328785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A0128A51284A150C000C2307 /* OnboardingParentView.swift in Sources */,
+				A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */,
 				A07BA818285B8C0600575683 /* UI+Dimension+Common.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
@@ -768,6 +795,7 @@
 				A072C33B28780685001636F9 /* Either.swift in Sources */,
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
+				A0F2850E2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
@@ -778,6 +806,7 @@
 				A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */,
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A04C428E285334E2007C970B /* ActionButton.swift in Sources */,
+				A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +822,7 @@
 				A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0BCDE6828785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */,
+				A0F285122879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A072C33C28780685001636F9 /* Either.swift in Sources */,
 				A0BCDE6428785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 			);
@@ -809,7 +839,10 @@
 				A0BCDE6528785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
+				A0F2850F2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
 				A04B37C22876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
+				A0F285092879A96A00E69C6B /* BlockWaveShape.swift in Sources */,
+				A0F285132879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
@@ -844,6 +877,7 @@
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
 				A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A04B37BF2876C3BB00912BF3 /* UIApplication.swift in Sources */,
+				A0F2850C2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
 				A02839C52867A456009CA8BA /* Tab.swift in Sources */,
 				A0BCDE6928785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */,

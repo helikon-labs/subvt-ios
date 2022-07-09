@@ -31,7 +31,10 @@ class NetworkStatusViewModel: ObservableObject {
         }
     }
     
-    func onScenePhaseChange(_ scenePhase: ScenePhase) {
+    func onScenePhaseChange(
+        _ scenePhase: ScenePhase,
+        _ onNetworkStatusUpdate: @escaping () -> ()
+    ) {
         switch scenePhase {
         case .background:
             break
@@ -40,14 +43,20 @@ class NetworkStatusViewModel: ObservableObject {
             subscriptionIsInProgress = false
         case .active:
             if !subscriptionIsInProgress {
-                self.subscribeToNetworkStatus(network: self.network)
+                self.subscribeToNetworkStatus(
+                    network: self.network,
+                    onNetworkStatusUpdate
+                )
             }
         @unknown default:
             fatalError("Unknown scene phase: \(scenePhase)")
         }
     }
     
-    func subscribeToNetworkStatus(network: Network) {
+    func subscribeToNetworkStatus(
+        network: Network,
+        _ onUpdate: @escaping () -> ()
+    ) {
         self.subscriptionIsInProgress = true
         self.network = network
         if self.networkStatusService == nil {
@@ -87,9 +96,11 @@ class NetworkStatusViewModel: ObservableObject {
                 case .update(let statusUpdate):
                     if let status = statusUpdate.status {
                         print("received network status \(status.bestBlockNumber)")
+                        onUpdate()
                         self.networkStatus = status
                     } else if let diff = statusUpdate.diff {
                         print("received network status update \(diff.bestBlockNumber ?? 0)")
+                        onUpdate()
                         self.networkStatus.apply(diff: diff)
                     }
                 case .unsubscribed:

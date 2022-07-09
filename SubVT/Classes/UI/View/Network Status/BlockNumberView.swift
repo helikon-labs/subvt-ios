@@ -11,6 +11,8 @@ struct BlockNumberView: View {
     let title: LocalizedStringKey
     var blockNumber: UInt64
     
+    let blockWaveParameters: BlockWaveParameters
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading) {
@@ -31,9 +33,10 @@ struct BlockNumberView: View {
                 bottom: 0,
                 trailing: 0))
             Spacer()
-            Circle()
+            ZStack {
+                BlockWaveView(parameters: self.blockWaveParameters)
                 .frame(width: 40, height: 40)
-                .foregroundColor(Color.red)
+            }
             Spacer()
                 .frame(width: 42)
             
@@ -48,7 +51,12 @@ struct BlockNumberView_Previews: PreviewProvider {
     static var previews: some View {
         BlockNumberView(
             title: LocalizedStringKey("network_status.finalized_block_number"),
-            blockNumber: 11423657
+            blockNumber: 11423657,
+            blockWaveParameters: BlockWaveParameters(
+                offset: Angle(degrees: 0),
+                progress: 0.5,
+                amplitude: 0.15
+            )
         )
     }
 }

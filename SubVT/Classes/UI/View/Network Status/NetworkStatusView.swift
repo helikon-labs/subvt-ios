@@ -5,8 +5,16 @@
 //  Created by Kutsal Kaan Bilgin on 7.07.2022.
 //
 
+import Combine
 import SubVTData
 import SwiftUI
+
+fileprivate var avgBlockTimeSec = 6.0
+fileprivate var blockWaveMaxOffsetDegrees = -1440.0
+fileprivate var blockTimerStartTimeSec = 0.0
+fileprivate let blockTimerPeriodSec = 0.01
+fileprivate let blockWaveAmplitudeRange = 0.05...0.1
+fileprivate var currentBlockWaveAmplitude = blockWaveAmplitudeRange.lowerBound
 
 struct NetworkStatusView: View {
     @Environment(\.scenePhase) private var scenePhase
@@ -14,6 +22,30 @@ struct NetworkStatusView: View {
     @StateObject private var viewModel = NetworkStatusViewModel()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @State private var networkSelectorIsOpen = false
+    @State private var blockTimerSubscription: Cancellable?
+    @State private var blockTimer = Timer.publish(every: blockTimerPeriodSec, on: .main, in: .common)
+    @State private var blockWaveParameters = BlockWaveParameters(
+        offset: Angle(degrees: 0),
+        progress: 0.0,
+        amplitude: currentBlockWaveAmplitude
+    )
+    
+    func onNetworkStatusUpdate() {
+        blockTimerStartTimeSec = Date().timeIntervalSince1970
+        blockWaveMaxOffsetDegrees = -Double.random(in: 1000...1500)
+        currentBlockWaveAmplitude = Double.random(in: blockWaveAmplitudeRange)
+    }
+    
+    func startTimer() {
+        self.blockTimer = Timer.publish(every: blockTimerPeriodSec, on: .main, in: .common)
+        self.blockTimerSubscription = self.blockTimer.connect()
+        blockTimerStartTimeSec = Date().timeIntervalSince1970
+    }
+    
+    func cancelTimer() {
+        self.blockTimerSubscription?.cancel()
+        self.blockTimerSubscription = nil
+    }
     
     var body: some View {
         VStack {
@@ -90,7 +122,8 @@ struct NetworkStatusView: View {
                         }
                         BlockNumberView(
                             title: LocalizedStringKey("network_status.best_block_number"),
-                            blockNumber: self.viewModel.networkStatus.bestBlockNumber
+                            blockNumber: self.viewModel.networkStatus.bestBlockNumber,
+                            blockWaveParameters: self.blockWaveParameters
                         )
                         HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
                             EraEpochView(eraOrEpoch: .left(self.viewModel.networkStatus.activeEra))
@@ -138,10 +171,35 @@ struct NetworkStatusView: View {
             alignment: .leading
         )
         .onAppear() {
-            self.viewModel.subscribeToNetworkStatus(network: network)
+            self.viewModel.subscribeToNetworkStatus(
+                network: network,
+                self.onNetworkStatusUpdate
+            )
+        }
+        .onReceive(blockTimer) { _ in
+            let elapsedSec = Date().timeIntervalSince1970 - blockTimerStartTimeSec
+            let progress = elapsedSec  / avgBlockTimeSec
+            self.blockWaveParameters = BlockWaveParameters(
+                offset: Angle(degrees: blockWaveMaxOffsetDegrees * progress),
+                progress: progress,
+                amplitude: currentBlockWaveAmplitude
+            )
         }
         .onChange(of: scenePhase) { newPhase in
-            self.viewModel.onScenePhaseChange(newPhase)
+            self.viewModel.onScenePhaseChange(
+                newPhase,
+                self.onNetworkStatusUpdate
+            )
+            switch newPhase {
+            case .background:
+                break
+            case .inactive:
+                self.cancelTimer()
+            case .active:
+                self.startTimer()
+            @unknown default:
+                fatalError("Unknown scene phase: \(scenePhase)")
+            }
         }
     }
 }
