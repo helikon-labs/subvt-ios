@@ -165,7 +165,6 @@ struct EraEpochView: View {
                         )
                         .frame(height: 4)
                         .progressViewStyle(LinearGradientProgressViewStyle())
-                        .background(Color("StatusActive"))
                         // shadow
                         ProgressView(
                             value: self.elapsedSeconds,
@@ -173,9 +172,8 @@ struct EraEpochView: View {
                         )
                         .frame(height: 4)
                         .progressViewStyle(LinearGradientProgressViewStyle())
-                        .background(Color("StatusActive"))
                         .blur(radius: 3)
-                        .opacity(0.3)
+                        .opacity(0.2)
                         .offset(x: 0, y: 3)
                     }
                     Spacer()

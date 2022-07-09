@@ -16,7 +16,7 @@ struct BlockWaveView: View {
             BlockWaveContainerView(parameters: self.parameters)
             .blur(radius: 10)
             .scaleEffect(1.05)
-            .opacity(0.75)
+            .opacity(0.65)
             .blendMode(.normal)
         }
     }

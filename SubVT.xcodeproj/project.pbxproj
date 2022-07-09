@@ -495,7 +495,6 @@
 		A0C983942875AC690008C370 /* Network Status */ = {
 			isa = PBXGroup;
 			children = (
-				A0F285062879A93D00E69C6B /* Block Wave */,
 				A04B37D228771CA900912BF3 /* BlockNumberView.swift */,
 				A072C336287805A6001636F9 /* EraEpochView.swift */,
 				A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */,
@@ -505,6 +504,7 @@
 				A093F0472865F08600778293 /* NetworkStatusViewModel.swift */,
 				A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */,
 				A04B37CF287712C400912BF3 /* ValidatorListButtonView.swift */,
+				A0F285062879A93D00E69C6B /* Block Wave */,
 			);
 			path = "Network Status";
 			sourceTree = "<group>";
@@ -586,9 +586,9 @@
 			isa = PBXGroup;
 			children = (
 				A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */,
+				A0F285102879C08000E69C6B /* BlockWaveParameters.swift */,
 				A0F285072879A96A00E69C6B /* BlockWaveShape.swift */,
 				A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */,
-				A0F285102879C08000E69C6B /* BlockWaveParameters.swift */,
 			);
 			path = "Block Wave";
 			sourceTree = "<group>";

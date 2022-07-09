@@ -9,7 +9,7 @@ import SwiftUI
 
 fileprivate let maxAmplitude = 0.25
 
-struct BlockWaveParameters {
+struct BlockWaveParameters: Equatable {
     let offset: Angle
     let progress: Double
     let amplitude: Double

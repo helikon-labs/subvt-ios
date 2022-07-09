@@ -9,9 +9,18 @@ import SwiftUI
 
 struct BlockNumberView: View {
     let title: LocalizedStringKey
-    var blockNumber: UInt64
+    let blockNumber: UInt64
+    let blockWaveParameters: BlockWaveParameters?
     
-    let blockWaveParameters: BlockWaveParameters
+    init(
+        title: LocalizedStringKey,
+        blockNumber: UInt64,
+        blockWaveParameters: BlockWaveParameters? = nil
+    ) {
+        self.title = title
+        self.blockNumber = blockNumber
+        self.blockWaveParameters = blockWaveParameters
+    }
     
     var body: some View {
         HStack {
@@ -33,12 +42,12 @@ struct BlockNumberView: View {
                 bottom: 0,
                 trailing: 0))
             Spacer()
-            ZStack {
-                BlockWaveView(parameters: self.blockWaveParameters)
+            if let blockWaveParameters = self.blockWaveParameters {
+                BlockWaveView(parameters: blockWaveParameters)
                 .frame(width: 40, height: 40)
+                Spacer()
+                    .frame(width: 42)
             }
-            Spacer()
-                .frame(width: 42)
             
         }
         .frame(maxWidth: .infinity)

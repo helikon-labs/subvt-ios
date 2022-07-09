@@ -125,6 +125,10 @@ struct NetworkStatusView: View {
                             blockNumber: self.viewModel.networkStatus.bestBlockNumber,
                             blockWaveParameters: self.blockWaveParameters
                         )
+                        BlockNumberView(
+                            title: LocalizedStringKey("network_status.finalized_block_number"),
+                            blockNumber: self.viewModel.networkStatus.finalizedBlockNumber
+                        )
                         HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
                             EraEpochView(eraOrEpoch: .left(self.viewModel.networkStatus.activeEra))
                             EraEpochView(eraOrEpoch: .right(self.viewModel.networkStatus.currentEpoch))
