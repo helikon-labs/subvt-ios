@@ -120,15 +120,29 @@ struct NetworkStatusView: View {
                             )
                             .buttonStyle(ValidatorListButtonStyle())
                         }
-                        BlockNumberView(
-                            title: LocalizedStringKey("network_status.best_block_number"),
-                            blockNumber: self.viewModel.networkStatus.bestBlockNumber,
-                            blockWaveParameters: self.blockWaveParameters
-                        )
-                        BlockNumberView(
-                            title: LocalizedStringKey("network_status.finalized_block_number"),
-                            blockNumber: self.viewModel.networkStatus.finalizedBlockNumber
-                        )
+                        if UIDevice.current.userInterfaceIdiom == .phone {
+                            BlockNumberView(
+                                title: LocalizedStringKey("network_status.best_block_number"),
+                                blockNumber: self.viewModel.networkStatus.bestBlockNumber,
+                                blockWaveParameters: self.blockWaveParameters
+                            )
+                            BlockNumberView(
+                                title: LocalizedStringKey("network_status.finalized_block_number"),
+                                blockNumber: self.viewModel.networkStatus.finalizedBlockNumber
+                            )
+                        } else {
+                            HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                                BlockNumberView(
+                                    title: LocalizedStringKey("network_status.best_block_number"),
+                                    blockNumber: self.viewModel.networkStatus.bestBlockNumber,
+                                    blockWaveParameters: self.blockWaveParameters
+                                )
+                                BlockNumberView(
+                                    title: LocalizedStringKey("network_status.finalized_block_number"),
+                                    blockNumber: self.viewModel.networkStatus.finalizedBlockNumber
+                                )
+                            }
+                        }
                         HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
                             EraEpochView(eraOrEpoch: .left(self.viewModel.networkStatus.activeEra))
                             EraEpochView(eraOrEpoch: .right(self.viewModel.networkStatus.currentEpoch))
@@ -145,15 +159,29 @@ struct NetworkStatusView: View {
                                 myValidatorsValue: nil
                             )
                         }
-                        LastEraTotalRewardView(
-                            network: self.network,
-                            reward: self.viewModel.networkStatus.lastEraTotalReward
-                        )
-                        ValidatorBackingsView(
-                            minimum: self.viewModel.networkStatus.minStake,
-                            maximum: self.viewModel.networkStatus.maxStake,
-                            average: self.viewModel.networkStatus.averageStake
-                        )
+                        if UIDevice.current.userInterfaceIdiom == .phone {
+                            LastEraTotalRewardView(
+                                network: self.network,
+                                reward: self.viewModel.networkStatus.lastEraTotalReward
+                            )
+                            ValidatorBackingsView(
+                                minimum: self.viewModel.networkStatus.minStake,
+                                maximum: self.viewModel.networkStatus.maxStake,
+                                average: self.viewModel.networkStatus.averageStake
+                            )
+                        } else {
+                            HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                                LastEraTotalRewardView(
+                                    network: self.network,
+                                    reward: self.viewModel.networkStatus.lastEraTotalReward
+                                )
+                                ValidatorBackingsView(
+                                    minimum: self.viewModel.networkStatus.minStake,
+                                    maximum: self.viewModel.networkStatus.maxStake,
+                                    average: self.viewModel.networkStatus.averageStake
+                                )
+                            }
+                        }
                         Spacer()
                             .frame(height: UI.Dimension.NetworkStatus.scrollContentMarginBottom)
                     }

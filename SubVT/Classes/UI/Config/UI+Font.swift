@@ -99,6 +99,7 @@ extension UI {
                 }
             }
             static let networkSelector = LexendDeca.regular.withSize(12)
+            static let eraEpochTimestamp = LexendDeca.light.withSize(12)
             static let dataMedium = LexendDeca.semiBold.withSize(20)
             static var dataLarge: SwiftUI.Font {
                 if UIDevice.current.userInterfaceIdiom == .phone {

@@ -133,65 +133,128 @@ struct EraEpochView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(self.title)
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            Spacer()
-                .frame(height: 10)
-            Text(self.timespanFormatted)
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            Spacer()
-                .frame(height: 16)
-            HStack (alignment: .top) {
-                Text(
-                    String(
-                        format: localized("common.int_percentage"),
-                        self.elapsedPercentage
-                    )
-                )
-                .font(UI.Font.NetworkStatus.dataMedium)
-                .foregroundColor(Color("Text"))
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            VStack(alignment: .leading) {
+                Text(self.title)
+                    .font(UI.Font.Common.dataPanelTitle)
+                    .foregroundColor(Color("Text"))
                 Spacer()
-                    .frame(width: 16)
-                VStack (alignment: .leading) {
+                    .frame(height: 10)
+                Text(self.timespanFormatted)
+                    .font(UI.Font.NetworkStatus.eraEpochTimestamp)
+                    .foregroundColor(Color("Text"))
+                Spacer()
+                    .frame(height: 16)
+                HStack (alignment: .top) {
+                    Text(
+                        String(
+                            format: localized("common.int_percentage"),
+                            self.elapsedPercentage
+                        )
+                    )
+                    .font(UI.Font.NetworkStatus.dataMedium)
+                    .foregroundColor(Color("Text"))
                     Spacer()
-                        .frame(height: 14)
-                    ZStack {
-                        ProgressView(
-                            value: self.elapsedSeconds,
-                            total: self.endSeconds - self.startSeconds
-                        )
-                        .frame(height: 4)
-                        .progressViewStyle(LinearGradientProgressViewStyle())
-                        // shadow
-                        ProgressView(
-                            value: self.elapsedSeconds,
-                            total: self.endSeconds - self.startSeconds
-                        )
-                        .frame(height: 4)
-                        .progressViewStyle(LinearGradientProgressViewStyle())
-                        .blur(radius: 3)
-                        .opacity(0.2)
-                        .offset(x: 0, y: 3)
+                        .frame(width: 16)
+                    VStack (alignment: .leading) {
+                        Spacer()
+                            .frame(height: 14)
+                        ZStack {
+                            ProgressView(
+                                value: self.elapsedSeconds,
+                                total: self.endSeconds - self.startSeconds
+                            )
+                            .frame(height: 4)
+                            .progressViewStyle(LinearGradientProgressViewStyle())
+                            // shadow
+                            ProgressView(
+                                value: self.elapsedSeconds,
+                                total: self.endSeconds - self.startSeconds
+                            )
+                            .frame(height: 4)
+                            .progressViewStyle(LinearGradientProgressViewStyle())
+                            .blur(radius: 3)
+                            .opacity(0.2)
+                            .offset(x: 0, y: 3)
+                        }
+                        Spacer()
+                            .frame(height: 4)
+                        Text(self.timeLeftFormatted)
+                            .font(UI.Font.NetworkStatus.dataSmall)
+                            .foregroundColor(Color("RemainingTime"))
                     }
-                    Spacer()
-                        .frame(height: 4)
-                    Text(self.timeLeftFormatted)
-                        .font(UI.Font.NetworkStatus.dataSmall)
-                        .foregroundColor(Color("RemainingTime"))
                 }
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(
+                top: UI.Dimension.Common.dataPanelPadding,
+                leading: UI.Dimension.Common.dataPanelPadding,
+                bottom: UI.Dimension.Common.dataPanelPadding,
+                trailing: UI.Dimension.Common.dataPanelPadding))
+            .background(Color("DataPanelBg"))
+            .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+        } else {
+            HStack(alignment: .center) {
+                VStack(alignment: .leading) {
+                    Text(self.title)
+                        .font(UI.Font.Common.dataPanelTitle)
+                        .foregroundColor(Color("Text"))
+                    Spacer()
+                        .frame(height: 10)
+                    Text(self.timespanFormatted)
+                        .font(UI.Font.NetworkStatus.eraEpochTimestamp)
+                        .foregroundColor(Color("Text"))
+                }
+                Spacer()
+                HStack (alignment: .top) {
+                    Text(
+                        String(
+                            format: localized("common.int_percentage"),
+                            self.elapsedPercentage
+                        )
+                    )
+                    .font(UI.Font.NetworkStatus.dataMedium)
+                    .foregroundColor(Color("Text"))
+                    Spacer()
+                        .frame(width: 16)
+                    VStack (alignment: .leading) {
+                        Spacer()
+                            .frame(height: 14)
+                        ZStack {
+                            ProgressView(
+                                value: self.elapsedSeconds,
+                                total: self.endSeconds - self.startSeconds
+                            )
+                            .frame(width: 80, height: 4)
+                            .progressViewStyle(LinearGradientProgressViewStyle())
+                            // shadow
+                            ProgressView(
+                                value: self.elapsedSeconds,
+                                total: self.endSeconds - self.startSeconds
+                            )
+                            .frame(width: 80, height: 4)
+                            .progressViewStyle(LinearGradientProgressViewStyle())
+                            .blur(radius: 3)
+                            .opacity(0.2)
+                            .offset(x: 0, y: 3)
+                        }
+                        Spacer()
+                            .frame(height: 4)
+                        Text(self.timeLeftFormatted)
+                            .font(UI.Font.NetworkStatus.dataSmall)
+                            .foregroundColor(Color("RemainingTime"))
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(EdgeInsets(
+                top: UI.Dimension.Common.dataPanelPadding,
+                leading: UI.Dimension.Common.dataPanelPadding,
+                bottom: UI.Dimension.Common.dataPanelPadding,
+                trailing: UI.Dimension.Common.dataPanelPadding))
+            .background(Color("DataPanelBg"))
+            .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
 }
 
