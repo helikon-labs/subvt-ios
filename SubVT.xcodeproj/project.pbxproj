@@ -117,6 +117,8 @@
 		A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
 		A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
 		A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
+		A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */; };
+		A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */; };
 		A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCABB6285CA36A00E458F4 /* HomeView.swift */; };
 		A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCABB6285CA36A00E458F4 /* HomeView.swift */; };
 		A0E0F6712848CD1C0029DDBF /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */; };
@@ -221,6 +223,7 @@
 		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
 		A0C9A781285749940071C7AC /* BasicDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDisplayState.swift; sourceTree = "<group>"; };
 		A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionViewModel.swift; sourceTree = "<group>"; };
+		A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientProgressViewStyle.swift; sourceTree = "<group>"; };
 		A0DCABB6285CA36A00E458F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-SemiBold.ttf"; sourceTree = "<group>"; };
 		A0E0F6692848CD1C0029DDBF /* LexendDeca-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-Light.ttf"; sourceTree = "<group>"; };
@@ -364,6 +367,7 @@
 				A04C428D285334E2007C970B /* ActionButton.swift */,
 				A0C9A781285749940071C7AC /* BasicDisplayState.swift */,
 				A0A1DC60284B990B00914237 /* BgMorphView.swift */,
+				A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */,
 				A07BA814285B556E00575683 /* SnackbarView.swift */,
 			);
 			path = Common;
@@ -742,6 +746,7 @@
 				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
 				A04B37CA2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
+				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
@@ -837,6 +842,7 @@
 				A04B37CB2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
 				A0128A4F284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
+				A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A04B37BF2876C3BB00912BF3 /* UIApplication.swift in Sources */,
 				A02839C52867A456009CA8BA /* Tab.swift in Sources */,
 				A0BCDE6928785645008047D7 /* ValidatorBackingsView.swift in Sources */,
