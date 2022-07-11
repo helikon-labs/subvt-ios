@@ -23,7 +23,6 @@ struct ValidatorBackingsView: View {
                 .font(UI.Font.Common.dataPanelTitle)
                 .foregroundColor(Color("Text"))
             Spacer()
-                .frame(height: UI.Dimension.Common.dataPanelPadding)
             HStack(alignment: .bottom, spacing: 12) {
                 VStack(alignment: .leading, spacing: 6) {
                     Text(localized("network_status.minimum"))
@@ -81,6 +80,7 @@ struct ValidatorBackingsView: View {
             bottom: UI.Dimension.Common.dataPanelPadding,
             trailing: UI.Dimension.Common.dataPanelPadding))
         .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: UI.Dimension.NetworkStatus.validatorBackingsViewHeight.get())
         .background(Color("DataPanelBg"))
         .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }

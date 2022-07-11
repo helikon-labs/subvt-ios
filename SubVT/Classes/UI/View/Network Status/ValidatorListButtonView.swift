@@ -121,7 +121,7 @@ struct ValidatorListButtonView: View {
             bottom: UI.Dimension.Common.dataPanelPadding,
             trailing: 0
         ))
-        .frame(height: UI.Dimension.NetworkStatus.validatorCountPanelHeight)
+        .frame(height: UI.Dimension.NetworkStatus.validatorCountPanelHeight.get())
         .background(Color("DataPanelBg"))
         .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }

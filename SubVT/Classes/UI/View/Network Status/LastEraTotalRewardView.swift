@@ -19,7 +19,6 @@ struct LastEraTotalRewardView: View {
                 .font(UI.Font.Common.dataPanelTitle)
                 .foregroundColor(Color("Text"))
             Spacer()
-                .frame(height: 12)
             HStack(alignment: .center, spacing: 8) {
                 Text(formatBalance(
                     balance: self.reward,
@@ -39,6 +38,7 @@ struct LastEraTotalRewardView: View {
             bottom: UI.Dimension.Common.dataPanelPadding,
             trailing: UI.Dimension.Common.dataPanelPadding))
         .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: UI.Dimension.NetworkStatus.lastEraTotalRewardViewHeight.get())
         .background(Color("DataPanelBg"))
         .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }

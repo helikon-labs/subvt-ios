@@ -63,11 +63,11 @@ struct NetworkStatusView: View {
                                 .font(UI.Font.NetworkStatus.title)
                                 .foregroundColor(Color("Text"))
                             Spacer()
-                                .frame(width: UI.Dimension.NetworkStatus.connectionStatusMarginLeft)
+                                .frame(width: UI.Dimension.NetworkStatus.connectionStatusMarginLeft.get())
                             Circle()
                                 .frame(
-                                    width: UI.Dimension.NetworkStatus.connectionStatusSize,
-                                    height: UI.Dimension.NetworkStatus.connectionStatusSize
+                                    width: UI.Dimension.NetworkStatus.connectionStatusSize.get(),
+                                    height: UI.Dimension.NetworkStatus.connectionStatusSize.get()
                                 )
                                 .foregroundColor(viewModel.networkStatusServiceStatus.color)
                         }

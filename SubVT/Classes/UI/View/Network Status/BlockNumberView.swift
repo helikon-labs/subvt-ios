@@ -29,27 +29,28 @@ struct BlockNumberView: View {
                     .font(UI.Font.Common.dataPanelTitle)
                     .foregroundColor(Color("Text"))
                 Spacer()
-                    .frame(height: UI.Dimension.Common.dataPanelPadding)
                 Text(String(self.blockNumber))
                     .font(UI.Font.NetworkStatus.dataXLarge)
                     .foregroundColor(Color("Text"))
-                Spacer()
-                    .frame(height: UI.Dimension.Common.dataPanelPadding)
             }
             .padding(EdgeInsets(
                 top: UI.Dimension.Common.dataPanelPadding,
                 leading: UI.Dimension.Common.dataPanelPadding,
-                bottom: 0,
+                bottom: UI.Dimension.Common.dataPanelPadding,
                 trailing: 0))
             Spacer()
             if let blockWaveParameters = self.blockWaveParameters {
                 BlockWaveView(parameters: blockWaveParameters)
-                .frame(width: 40, height: 40)
+                .frame(
+                    width: UI.Dimension.NetworkStatus.blockWaveViewSize.get(),
+                    height: UI.Dimension.NetworkStatus.blockWaveViewSize.get()
+                )
                 Spacer()
                     .frame(width: 42)
             }
             
         }
+        .frame(height: UI.Dimension.NetworkStatus.blockNumberViewHeight)
         .frame(maxWidth: .infinity)
         .background(Color("DataPanelBg"))
         .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)

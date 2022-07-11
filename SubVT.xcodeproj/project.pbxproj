@@ -325,12 +325,12 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		A0128A4A284A1189000C2307 /* Util */ = {
+		A0128A4A284A1189000C2307 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
 				A0E0F6862848CF120029DDBF /* Font.swift */,
 			);
-			path = Util;
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		A0128A53284A1855000C2307 /* Onboarding */ = {
@@ -586,7 +586,7 @@
 			children = (
 				A0128A60284A3BB8000C2307 /* Config */,
 				A0128A6B284A4E9D000C2307 /* Extension */,
-				A0128A4A284A1189000C2307 /* Util */,
+				A0128A4A284A1189000C2307 /* Utility */,
 				A0128A49284A0B50000C2307 /* View */,
 			);
 			path = UI;
