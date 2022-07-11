@@ -6,6 +6,7 @@
   
 */
 "common.go"="Go!";
+"common.ok"="OK";
 "common.retry"="Retry";
 
 "common.error.connection"="Connection error";
@@ -19,6 +20,7 @@
 "introduction.title"="Welcome to SubVT";
 "introduction.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";
 "introduction.get_started"="Get started";
+"introduction.error.create_user"="Error while creating a user for you. Please check your connection.";
 
 "onboarding.skip"="Skip";
 "onboarding.next"="Next";

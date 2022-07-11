@@ -66,7 +66,7 @@ struct OnboardingParentView: View {
                         ForEach(OnboardingStep.allCases, id: \.rawValue) { step in
                             Circle()
                                 .fill((step == self.step)
-                                      ? Color("ActionButton")
+                                      ? Color("ActionButtonBg")
                                       : Color("OnboardingPageCircleBg")
                                 )
                                 .frame(
@@ -74,7 +74,7 @@ struct OnboardingParentView: View {
                                     height: UI.Dimension.Onboarding.pageCircleSize
                                 )
                                 .shadow(
-                                    color: (step == self.step) ? Color("ActionButton") : Color.clear,
+                                    color: (step == self.step) ? Color("ActionButtonBg") : Color.clear,
                                     radius: 3,
                                     x: 0,
                                     y: UI.Dimension.Onboarding.pageCircleSize / 2

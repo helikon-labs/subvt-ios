@@ -14,7 +14,7 @@ struct NetworkSelectionView: View {
     @StateObject private var viewModel = NetworkSelectionViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networksDisplayState: BasicViewDisplayState = .notAppeared
-    @State private var actionButtonIsEnabled = false
+    @State private var actionButtonState: ActionButtonView.State = .disabled
     @State private var selectedNetwork: Network! = nil
     
     private let gridItemLayout = [
@@ -22,7 +22,7 @@ struct NetworkSelectionView: View {
         GridItem(.fixed(UI.Dimension.NetworkSelection.networkButtonSize))
     ]
     
-    func onGetNetworksSuccess(networks: [Network]) {
+    private func onGetNetworksSuccess(networks: [Network]) {
         self.networks = networks
     }
     
@@ -78,7 +78,7 @@ struct NetworkSelectionView: View {
                                 Button(
                                     action: {
                                         self.selectedNetwork = networks[i]
-                                        self.actionButtonIsEnabled = true
+                                        self.actionButtonState = .enabled
                                     },
                                     label: {
                                         NetworkButtonView(
@@ -116,19 +116,28 @@ struct NetworkSelectionView: View {
                 } else {
                     Spacer()
                 }
-                VStack(alignment: .leading) {
-                    Button(LocalizedStringKey("common.go")) {
-                        guard let network = selectedNetwork else {
-                            return
+                VStack(alignment: .center) {
+                    Button(
+                        action: {
+                            guard let network = selectedNetwork else {
+                                return
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                self.displayState = .dissolved
+                                self.networksDisplayState = .dissolved
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    self.appSelectedNetwork = network
+                                }
+                            }
+                        },
+                        label: {
+                            ActionButtonView(
+                                title: localized("common.go"),
+                                state: self.actionButtonState
+                            )
                         }
-                        self.displayState = .dissolved
-                        self.networksDisplayState = .dissolved
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                            self.appSelectedNetwork = network
-                        }
-                    }
-                    .disabled(selectedNetwork == nil)
-                    .buttonStyle(ActionButtonStyle(isEnabled: $actionButtonIsEnabled))
+                    )
+                    .buttonStyle(ActionButtonStyle(state: self.actionButtonState))
                     .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
                     .offset(
                         x: 0,
@@ -151,7 +160,7 @@ struct NetworkSelectionView: View {
             }
             ZStack {
                 SnackbarView(
-                    message: LocalizedStringKey("network_selection.error.network_list"),
+                    message: localized("network_selection.error.network_list"),
                     type: .error(canRetry: true)
                 ) {
                     self.viewModel.fetchNetworks(

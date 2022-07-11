@@ -21,7 +21,7 @@ struct SnackbarView: View {
         case info
         case error(canRetry: Bool)
     }
-    let message: LocalizedStringKey
+    let message: String
     let type: SnackbarType
     let action: () -> ()
     
@@ -49,15 +49,20 @@ struct SnackbarView: View {
                                     Spacer()
                                         .frame(width: UI.Dimension.Common.padding)
                                 case .error(let canRetry):
+                                    Spacer()
                                     if canRetry {
-                                        Spacer()
                                         Text(LocalizedStringKey("common.retry"))
                                             .lineLimit(1)
                                             .font(UI.Font.Snackbar.message)
                                             .foregroundColor(Color("SnackbarAction"))
-                                        Spacer()
-                                            .frame(width: UI.Dimension.Common.padding)
+                                    } else {
+                                        Text(LocalizedStringKey("common.ok"))
+                                            .lineLimit(1)
+                                            .font(UI.Font.Snackbar.message)
+                                            .foregroundColor(Color("SnackbarAction"))
                                     }
+                                    Spacer()
+                                        .frame(width: UI.Dimension.Common.padding)
                                 }
                             }
                         }
@@ -83,7 +88,7 @@ struct SnackbarView: View {
 struct SnackbarView_Previews: PreviewProvider {
     static var previews: some View {
         SnackbarView(
-            message: LocalizedStringKey("network_selection.error.network_list"),
+            message: localized("network_selection.error.network_list"),
             type: .error(canRetry: true)
         ) {
             // no-op

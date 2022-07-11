@@ -34,15 +34,19 @@ struct NetworkStatusView: View {
         blockTimerStartTimeSec = Date().timeIntervalSince1970
         blockWaveMaxOffsetDegrees = -Double.random(in: 1000...1500)
         currentBlockWaveAmplitude = Double.random(in: blockWaveAmplitudeRange)
+        self.startBlockTimer()
     }
     
-    func startTimer() {
+    private func startBlockTimer() {
+        guard self.blockTimerSubscription == nil else {
+            return
+        }
         self.blockTimer = Timer.publish(every: blockTimerPeriodSec, on: .main, in: .common)
         self.blockTimerSubscription = self.blockTimer.connect()
         blockTimerStartTimeSec = Date().timeIntervalSince1970
     }
     
-    func cancelTimer() {
+    private func cancelBlockTimer() {
         self.blockTimerSubscription?.cancel()
         self.blockTimerSubscription = nil
     }
@@ -226,9 +230,9 @@ struct NetworkStatusView: View {
             case .background:
                 break
             case .inactive:
-                self.cancelTimer()
+                self.cancelBlockTimer()
             case .active:
-                self.startTimer()
+                break
             @unknown default:
                 fatalError("Unknown scene phase: \(scenePhase)")
             }

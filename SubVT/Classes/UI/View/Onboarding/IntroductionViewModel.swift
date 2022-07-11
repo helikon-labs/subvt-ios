@@ -1,29 +1,25 @@
 //
-//  NetworkSelectionViewModel.swift
+//  IntroductionViewModel.swift
 //  SubVT
 //
-//  Created by Kutsal Kaan Bilgin on 13.06.2022.
+//  Created by Kutsal Kaan Bilgin on 11.07.2022.
 //
 
 import Combine
-import SwiftUI
 import SubVTData
+import SwiftUI
 
-class NetworkSelectionViewModel: ObservableObject {
-    @Published var fetchState: DataFetchState<[Network]> = .idle
+class IntroductionViewModel: ObservableObject {
+    @Published var fetchState: DataFetchState<User> = .idle
     private let service = AppService()
     private var cancellables: Set<AnyCancellable> = []
     private var fetchTimer: Timer? = nil
-    private var result: Either<[Network], APIError>? = nil
+    private var result: Either<User, APIError>? = nil
     
-    func fetchNetworks(
-        storedNetworks: [Network]?,
-        onSuccess: @escaping ([Network]) -> ()
+    func createUser(
+        onSuccess: @escaping (User) -> (),
+        onError: @escaping (APIError) -> ()
     ) {
-        if let networks = storedNetworks {
-            self.fetchState = .success(result: networks)
-            return
-        }
         self.fetchState = .loading
         self.result = nil
         self.fetchTimer = Timer.scheduledTimer(
@@ -34,15 +30,16 @@ class NetworkSelectionViewModel: ObservableObject {
             guard let self = self else { return }
             if let result = self.result {
                 switch result {
-                case .left(let networks):
-                    self.fetchState = .success(result: networks)
-                    onSuccess(networks)
+                case .left(let user):
+                    self.fetchState = .success(result: user)
+                    onSuccess(user)
                 case .right(let error):
                     self.fetchState = .error(error: error)
+                    onError(error)
                 }
             }
         }
-        service.getNetworks()
+        self.service.createUser()
             .sink {
                 [weak self] response in
                 guard let self = self else { return }
@@ -51,7 +48,7 @@ class NetworkSelectionViewModel: ObservableObject {
                         self.result = .right(error)
                     } else {
                         self.fetchState = .error(error: error)
-                        self.fetchTimer?.invalidate()
+                        onError(error)
                     }
                 } else {
                     if self.fetchTimer?.isValid ?? false {
@@ -62,6 +59,6 @@ class NetworkSelectionViewModel: ObservableObject {
                     }
                 }
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
     }
 }

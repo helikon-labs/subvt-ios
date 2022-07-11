@@ -146,6 +146,9 @@ struct EraEpochView: View {
                 Spacer()
                     .frame(height: 16)
                 HStack (alignment: .top) {
+                    let spanSeconds = self.endSeconds - self.startSeconds
+                    let progressValue = min(self.elapsedSeconds, spanSeconds)
+                    let progressTotal = max(spanSeconds, 0)
                     Text(
                         String(
                             format: localized("common.int_percentage"),
@@ -161,15 +164,15 @@ struct EraEpochView: View {
                             .frame(height: 14)
                         ZStack {
                             ProgressView(
-                                value: self.elapsedSeconds,
-                                total: self.endSeconds - self.startSeconds
+                                value: progressValue,
+                                total: progressTotal
                             )
                             .frame(height: 4)
                             .progressViewStyle(LinearGradientProgressViewStyle())
                             // shadow
                             ProgressView(
-                                value: self.elapsedSeconds,
-                                total: self.endSeconds - self.startSeconds
+                                value: progressValue,
+                                total: progressTotal
                             )
                             .frame(height: 4)
                             .progressViewStyle(LinearGradientProgressViewStyle())

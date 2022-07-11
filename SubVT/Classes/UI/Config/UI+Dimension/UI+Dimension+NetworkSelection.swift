@@ -90,7 +90,7 @@ extension UI.Dimension {
             }
         }
         
-        static func snackbarYOffset(fetchState: NetworkSelectionViewModel.FetchState) -> CGFloat {
+        static func snackbarYOffset<T>(fetchState: DataFetchState<T>) -> CGFloat {
             switch fetchState {
             case .idle:
                 fallthrough
@@ -103,7 +103,7 @@ extension UI.Dimension {
             }
         }
         
-        static func snackbarOpacity(fetchState: NetworkSelectionViewModel.FetchState) -> Double {
+        static func snackbarOpacity<T>(fetchState: DataFetchState<T>) -> Double {
             switch fetchState {
             case .idle:
                 fallthrough

@@ -61,5 +61,20 @@ extension UI.Dimension {
             }
         }
         
+        static func snackbarYOffset(isVisible: Bool) -> CGFloat {
+            if isVisible {
+                return -96
+            } else {
+                return 92
+            }
+        }
+        
+        static func snackbarOpacity(isVisible: Bool) -> CGFloat {
+            if isVisible {
+                return 1
+            } else {
+                return 0
+            }
+        }
     }
 }
