@@ -74,5 +74,6 @@ extension UI.Dimension {
         }
         static let dataPanelCornerRadius: CGFloat = 16
         static let dataPanelPadding: CGFloat = 16
+        static let lineChartLineWidth = UI.Dimension(3, 4)
     }
 }

@@ -29,11 +29,17 @@ struct NetworkStatusView: View {
         progress: 0.0,
         amplitude: currentBlockWaveAmplitude
     )
+    @State private var titleOpacity = 1.0
     
-    func onNetworkStatusUpdate() {
-        blockTimerStartTimeSec = Date().timeIntervalSince1970
-        blockWaveMaxOffsetDegrees = -Double.random(in: 1000...1500)
-        currentBlockWaveAmplitude = Double.random(in: blockWaveAmplitudeRange)
+    func onNetworkStatusReceived() {
+        self.startBlockTimer()
+        self.viewModel.fetchEraValidatorCounts(
+            currentEraIndex: self.viewModel.networkStatus.activeEra.index
+        )
+    }
+    
+    func onNetworkStatusDiffReceived() {
+        self.cancelBlockTimer()
         self.startBlockTimer()
     }
     
@@ -41,9 +47,15 @@ struct NetworkStatusView: View {
         guard self.blockTimerSubscription == nil else {
             return
         }
-        self.blockTimer = Timer.publish(every: blockTimerPeriodSec, on: .main, in: .common)
-        self.blockTimerSubscription = self.blockTimer.connect()
         blockTimerStartTimeSec = Date().timeIntervalSince1970
+        blockWaveMaxOffsetDegrees = -Double.random(in: 1000...1500)
+        currentBlockWaveAmplitude = Double.random(in: blockWaveAmplitudeRange)
+        self.blockTimer = Timer.publish(
+            every: blockTimerPeriodSec,
+            on: .main,
+            in: .common
+        )
+        self.blockTimerSubscription = self.blockTimer.connect()
     }
     
     private func cancelBlockTimer() {
@@ -71,6 +83,7 @@ struct NetworkStatusView: View {
                                 )
                                 .foregroundColor(viewModel.networkStatusServiceStatus.color)
                         }
+                        .opacity(self.titleOpacity)
                         Spacer()
                         Button(
                             action: {
@@ -106,7 +119,8 @@ struct NetworkStatusView: View {
                                 label: {
                                     ValidatorListButtonView(
                                         title: LocalizedStringKey("active_validator_list.title"),
-                                        count: self.viewModel.networkStatus.activeValidatorCount
+                                        count: self.viewModel.networkStatus.activeValidatorCount,
+                                        eraValidatorCounts: self.viewModel.eraActiveValidatorCounts
                                     )
                                 }
                             )
@@ -118,7 +132,8 @@ struct NetworkStatusView: View {
                                 label: {
                                     ValidatorListButtonView(
                                         title: LocalizedStringKey("inactive_validator_list.title"),
-                                        count: self.viewModel.networkStatus.inactiveValidatorCount
+                                        count: self.viewModel.networkStatus.inactiveValidatorCount,
+                                        eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts
                                     )
                                 }
                             )
@@ -189,6 +204,15 @@ struct NetworkStatusView: View {
                         Spacer()
                             .frame(height: UI.Dimension.NetworkStatus.scrollContentMarginBottom)
                     }
+                    .background(GeometryReader {
+                        Color.clear.preference(
+                            key: ViewOffsetKey.self,
+                            value: -$0.frame(in: .named("scroll")).origin.y)
+                    })
+                    .onPreferenceChange(ViewOffsetKey.self) {
+                        let offset = max($0, 0)
+                        self.titleOpacity = max(1.0 - offset / 70.0, 0)
+                    }
                     .padding(EdgeInsets(
                         top: 0,
                         leading: UI.Dimension.Common.padding,
@@ -209,7 +233,8 @@ struct NetworkStatusView: View {
         .onAppear() {
             self.viewModel.subscribeToNetworkStatus(
                 network: network,
-                self.onNetworkStatusUpdate
+                onStatus: self.onNetworkStatusReceived,
+                onDiff: self.onNetworkStatusDiffReceived
             )
         }
         .onReceive(blockTimer) { _ in
@@ -224,7 +249,8 @@ struct NetworkStatusView: View {
         .onChange(of: scenePhase) { newPhase in
             self.viewModel.onScenePhaseChange(
                 newPhase,
-                self.onNetworkStatusUpdate
+                onStatus: self.onNetworkStatusReceived,
+                onDiff: self.onNetworkStatusDiffReceived
             )
             switch newPhase {
             case .background:
@@ -237,6 +263,14 @@ struct NetworkStatusView: View {
                 fatalError("Unknown scene phase: \(scenePhase)")
             }
         }
+    }
+}
+
+struct ViewOffsetKey: PreferenceKey {
+    typealias Value = CGFloat
+    static var defaultValue = CGFloat.zero
+    static func reduce(value: inout Value, nextValue: () -> Value) {
+        value += nextValue()
     }
 }
 

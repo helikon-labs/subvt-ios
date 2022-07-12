@@ -88,6 +88,10 @@
 		A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC5A284B8E2B00914237 /* UI+Image.swift */; };
 		A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC60284B990B00914237 /* BgMorphView.swift */; };
 		A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC60284B990B00914237 /* BgMorphView.swift */; };
+		A0B3A6B8287D768A005DA484 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A6B7287D768A005DA484 /* LineChartView.swift */; };
+		A0B3A6B9287D768A005DA484 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A6B7287D768A005DA484 /* LineChartView.swift */; };
+		A0B3A6BB287D9BE9005DA484 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */; };
+		A0B3A6BC287D9BE9005DA484 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */; };
 		A0BCDE592878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */; };
 		A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */; };
 		A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE5E28784DD0008047D7 /* Format.swift */; };
@@ -217,6 +221,8 @@
 		A0A1DC56284B8E0000914237 /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
 		A0A1DC5A284B8E2B00914237 /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
 		A0A1DC60284B990B00914237 /* BgMorphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgMorphView.swift; sourceTree = "<group>"; };
+		A0B3A6B7287D768A005DA484 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
+		A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
 		A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraPointsBlocksProducedView.swift; sourceTree = "<group>"; };
 		A0BCDE5E28784DD0008047D7 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastEraTotalRewardView.swift; sourceTree = "<group>"; };
@@ -316,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				A04C429428533554007C970B /* App */,
+				A0B3A6B6287D7663005DA484 /* Chart */,
 				A04C428B285321ED007C970B /* Common */,
 				A0DCABB5285CA35700E458F4 /* Home */,
 				A0C9A77D28573D930071C7AC /* Network Selection */,
@@ -360,6 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				A0128A6C284A4EAE000C2307 /* Color.swift */,
+				A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -425,6 +433,14 @@
 				A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */,
 			);
 			path = "UI+Dimension";
+			sourceTree = "<group>";
+		};
+		A0B3A6B6287D7663005DA484 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				A0B3A6B7287D768A005DA484 /* LineChartView.swift */,
+			);
+			path = Chart;
 			sourceTree = "<group>";
 		};
 		A0BF90882848C1EB0053389A = {
@@ -761,6 +777,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0B3A6BB287D9BE9005DA484 /* CGFloat.swift in Sources */,
 				A07BA821285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A04B37D0287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
@@ -786,6 +803,7 @@
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
+				A0B3A6B8287D768A005DA484 /* LineChartView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
 				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
@@ -862,6 +880,7 @@
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
 				A04B37C52876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
 				A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
+				A0B3A6BC287D9BE9005DA484 /* CGFloat.swift in Sources */,
 				A07BA81F285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
 				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
@@ -892,6 +911,7 @@
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
 				A078727E287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
+				A0B3A6B9287D768A005DA484 /* LineChartView.swift in Sources */,
 				A04B37BF2876C3BB00912BF3 /* UIApplication.swift in Sources */,
 				A0F2850C2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
 				A02839C52867A456009CA8BA /* Tab.swift in Sources */,

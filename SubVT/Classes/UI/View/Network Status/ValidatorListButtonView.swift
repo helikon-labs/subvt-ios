@@ -24,7 +24,8 @@ struct ValidatorListButtonStyle: ButtonStyle {
 struct ValidatorListButtonView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     let title: LocalizedStringKey
-    var count: Int
+    let count: Int
+    let eraValidatorCounts: [(UInt, UInt)]
     
     private let gradient = LinearGradient(
         gradient: Gradient(
@@ -53,6 +54,32 @@ struct ValidatorListButtonView: View {
         endPoint: .trailing
     )
     
+    private var chartDataPoints: [(Int, Int)] {
+        get {
+            self.eraValidatorCounts.map { (index, count) in
+                (Int(index), Int(count))
+            }
+        }
+    }
+    
+    private var minValidatorCount: Int {
+        get {
+            let min = self.eraValidatorCounts.min(by: { p1, p2 in
+                return p1.1 < p2.1
+            })?.1 ?? 0
+            return Int(min)
+        }
+    }
+    
+    private var maxValidatorCount: Int {
+        get {
+            let min = self.eraValidatorCounts.max(by: { p1, p2 in
+                return p1.1 < p2.1
+            })?.1 ?? 0
+            return Int(min)
+        }
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             HStack(alignment: .center) {
@@ -68,43 +95,17 @@ struct ValidatorListButtonView: View {
                 bottom: 0,
                 trailing: UI.Dimension.Common.dataPanelPadding
             ))
-            ZStack {
-                GeometryReader { geometry in
-                    let height = geometry.size.height
-                    let width = geometry.size.width
-                    
-                    Path { path in
-                        path.move(to: CGPoint(x: -5, y: height - 7))
-                        path.addLine(to: CGPoint(x: width + 5, y: 7))
-                    }
-                    .stroke(
-                        self.gradient,
-                        style: StrokeStyle(
-                            lineWidth: 4,
-                            lineJoin: .round
-                        )
-                    )
-                    
-                    Path { path in
-                        path.move(to: CGPoint(x: -5, y: height - 7))
-                        path.addLine(to: CGPoint(x: width + 5, y: 7))
-                    }
-                    .stroke(
-                        self.gradient,
-                        style: StrokeStyle(
-                            lineWidth: 4,
-                            lineJoin: .round
-                        )
-                    )
-                    .offset(
-                        x: 0,
-                        y: 7
-                    )
-                    .opacity(0.3)
-                    .blur(radius: 4)
-                }
-            }
-            .frame(maxHeight: .infinity)
+            LineChartView(
+                dataPoints: self.chartDataPoints,
+                chartMinY: self.minValidatorCount - 10,
+                chartMaxY: self.maxValidatorCount + 10
+            )
+            .padding(EdgeInsets(
+                top: 0,
+                leading: 4,
+                bottom: 0,
+                trailing: 4
+            ))
             Text(String(self.count))
                 .font(UI.Font.NetworkStatus.dataLarge)
                 .foregroundColor(Color("Text"))
@@ -131,7 +132,19 @@ struct ValidatorListButtonView_Previews: PreviewProvider {
     static var previews: some View {
         ValidatorListButtonView(
             title: LocalizedStringKey("active_validator_list.title"),
-            count: 1234
+            count: 1234,
+            eraValidatorCounts: [
+                (0, 900),
+                (1, 1000),
+                (2, 1002),
+                (3, 1004),
+                (4, 982),
+                (5, 990),
+                (6, 1010),
+                (7, 1050),
+                (8, 1045),
+                (9, 965)
+            ]
         )
     }
 }

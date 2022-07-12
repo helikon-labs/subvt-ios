@@ -9,6 +9,8 @@ import Combine
 import SubVTData
 import SwiftUI
 
+private let eraReportCount: UInt = 15
+
 class NetworkStatusViewModel: ObservableObject {
     @Published private(set) var networkStatus = NetworkStatus()
     @Published private(set) var networkStatusServiceStatus: RPCSubscriptionServiceStatus = .idle
@@ -18,6 +20,12 @@ class NetworkStatusViewModel: ObservableObject {
     private var networkStatusService: SubVTData.NetworkStatusService! = nil
     private var network: Network! = nil
     private var subscriptionIsInProgress = false
+    
+    @Published private(set) var eraActiveValidatorCounts: [(UInt, UInt)] = []
+    @Published private(set) var eraInactiveValidatorCounts: [(UInt, UInt)] = []
+    
+    private var reportService: SubVTData.ReportService! = nil
+    private var reportServiceCancellable: AnyCancellable? = nil
     
     private func initNetworkStatusService() {
         if let rpcHost = self.network?.networkStatusServiceHost,
@@ -33,7 +41,8 @@ class NetworkStatusViewModel: ObservableObject {
     
     func onScenePhaseChange(
         _ scenePhase: ScenePhase,
-        _ onNetworkStatusUpdate: @escaping () -> ()
+        onStatus: @escaping () -> (),
+        onDiff: @escaping () -> ()
     ) {
         switch scenePhase {
         case .background:
@@ -45,7 +54,8 @@ class NetworkStatusViewModel: ObservableObject {
             if !subscriptionIsInProgress {
                 self.subscribeToNetworkStatus(
                     network: self.network,
-                    onNetworkStatusUpdate
+                    onStatus: onStatus,
+                    onDiff: onDiff
                 )
             }
         @unknown default:
@@ -55,7 +65,8 @@ class NetworkStatusViewModel: ObservableObject {
     
     func subscribeToNetworkStatus(
         network: Network,
-        _ onUpdate: @escaping () -> ()
+        onStatus: @escaping () -> (),
+        onDiff: @escaping () -> ()
     ) {
         self.subscriptionIsInProgress = true
         self.network = network
@@ -96,12 +107,13 @@ class NetworkStatusViewModel: ObservableObject {
                 case .update(let statusUpdate):
                     if let status = statusUpdate.status {
                         print("received network status \(status.bestBlockNumber)")
-                        onUpdate()
                         self.networkStatus = status
+                        onStatus()
                     } else if let diff = statusUpdate.diff {
                         print("received network status update \(diff.bestBlockNumber ?? 0)")
-                        onUpdate()
+                        
                         self.networkStatus.apply(diff: diff)
+                        onDiff()
                     }
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false
@@ -110,5 +122,48 @@ class NetworkStatusViewModel: ObservableObject {
                     break
                 }
             }
+    }
+    
+    private func initReportService() {
+        if let host = self.network?.reportServiceHost,
+           let port = self.network?.reportServicePort {
+            self.reportService = SubVTData.ReportService(
+                baseURL: "https://\(host):\(port)"
+            )
+        } else {
+            self.reportService = SubVTData.ReportService()
+        }
+    }
+    
+    func fetchEraValidatorCounts(currentEraIndex: UInt) {
+        guard currentEraIndex > eraReportCount else {
+            return
+        }
+        if self.reportService == nil {
+            initReportService()
+        }
+        self.reportServiceCancellable = self.reportService?.getEraReport(
+            startEraIndex: Int(currentEraIndex - eraReportCount),
+            endEraIndex: UInt(currentEraIndex)
+        ).sink {
+            [weak self] response in
+            guard let self = self else { return }
+            // error case ignored for now
+            if response.error == nil {
+                let reports = response.value!
+                self.eraActiveValidatorCounts = reports.map { eraReport in
+                    (
+                        eraReport.era.index,
+                        UInt(eraReport.activeValidatorCount)
+                    )
+                }
+                self.eraInactiveValidatorCounts = reports.map { eraReport in
+                    (
+                        eraReport.era.index,
+                        UInt(eraReport.inactiveValidatorCount)
+                    )
+                }
+            }
+        }
     }
 }

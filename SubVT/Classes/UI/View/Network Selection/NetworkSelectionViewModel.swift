@@ -10,7 +10,7 @@ import SwiftUI
 import SubVTData
 
 class NetworkSelectionViewModel: ObservableObject {
-    @Published var fetchState: DataFetchState<[Network]> = .idle
+    @Published private(set) var fetchState: DataFetchState<[Network]> = .idle
     private let service = AppService()
     private var cancellables: Set<AnyCancellable> = []
     private var fetchTimer: Timer? = nil
