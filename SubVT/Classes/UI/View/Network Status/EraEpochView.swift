@@ -13,6 +13,7 @@ struct EraEpochView: View {
     
     private let dateFormatter = DateFormatter()
     private let timeFormatter = DateFormatter()
+    private let percentageFormat = localized("common.int_percentage")
     
     init(eraOrEpoch: Either<Era, Epoch>) {
         self.eraOrEpoch = eraOrEpoch
@@ -151,9 +152,17 @@ struct EraEpochView: View {
                     let progressTotal = max(spanSeconds, 0)
                     Text(
                         String(
-                            format: localized("common.int_percentage"),
+                            format: percentageFormat,
                             self.elapsedPercentage
                         )
+                    )
+                    .modifier(Counter(
+                        format: percentageFormat,
+                        value: CGFloat(self.elapsedPercentage)
+                    ))
+                    .animation(
+                        .easeInOut(duration: UI.Duration.counterAnimation),
+                        value: self.elapsedPercentage
                     )
                     .font(UI.Font.NetworkStatus.dataMedium)
                     .foregroundColor(Color("Text"))

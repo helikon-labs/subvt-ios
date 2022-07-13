@@ -123,7 +123,8 @@ struct NetworkStatusView: View {
                                     ValidatorListButtonView(
                                         title: LocalizedStringKey("active_validator_list.title"),
                                         count: self.viewModel.networkStatus.activeValidatorCount,
-                                        eraValidatorCounts: self.viewModel.eraActiveValidatorCounts
+                                        eraValidatorCounts: self.viewModel.eraActiveValidatorCounts,
+                                        chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0
                                     )
                                 }
                             )
@@ -137,7 +138,8 @@ struct NetworkStatusView: View {
                                     ValidatorListButtonView(
                                         title: LocalizedStringKey("inactive_validator_list.title"),
                                         count: self.viewModel.networkStatus.inactiveValidatorCount,
-                                        eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts
+                                        eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts,
+                                        chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0
                                     )
                                 }
                             )

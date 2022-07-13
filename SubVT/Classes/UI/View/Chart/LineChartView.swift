@@ -13,11 +13,13 @@ struct LineChartView: View {
     private let maxX: Int
     private let chartMinY: Int
     private let chartMaxY: Int
+    private let revealPercentage: CGFloat
     
     init(
         dataPoints: [(Int, Int)],
         chartMinY: Int,
-        chartMaxY: Int
+        chartMaxY: Int,
+        revealPercentage: CGFloat
     ) {
         self.dataPoints = dataPoints.sorted { pair1, pair2 in
             pair1.0 < pair2.0
@@ -26,6 +28,7 @@ struct LineChartView: View {
         self.maxX = self.dataPoints.last?.0 ?? 0
         self.chartMinY = chartMinY
         self.chartMaxY = chartMaxY
+        self.revealPercentage = revealPercentage
     }
     
     private let gradient = LinearGradient(
@@ -156,6 +159,7 @@ struct LineChartView: View {
                             }
                         }
                     }
+                    .trim(from: 0, to: self.revealPercentage)
                     .stroke(
                         self.gradient,
                         style: StrokeStyle(
@@ -170,6 +174,10 @@ struct LineChartView: View {
                     )
                     .opacity(1.0 - 0.7 * Double(i))
                     .blur(radius: 4 * CGFloat(i))
+                    .animation(
+                        .easeInOut(duration: UI.Duration.counterAnimation),
+                        value: self.revealPercentage
+                    )
                 }
             }
         }
@@ -192,7 +200,8 @@ struct LineChartView_Previews: PreviewProvider {
                 (9, -2)
             ],
             chartMinY: -10,
-            chartMaxY: 10
+            chartMaxY: 10,
+            revealPercentage: 1.0
         )
         .frame(maxWidth: .infinity)
         .frame(height: 150)

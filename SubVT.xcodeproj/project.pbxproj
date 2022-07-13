@@ -49,6 +49,10 @@
 		A04C429A2853BA18007C970B /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C42982853BA18007C970B /* OnboardingStep.swift */; };
 		A05B25A1287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
 		A05B25A2287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
+		A05B25A4287ECBE30070EF81 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A3287ECBE30070EF81 /* Counter.swift */; };
+		A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A3287ECBE30070EF81 /* Counter.swift */; };
+		A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A9287EDB530070EF81 /* UI+Duration.swift */; };
+		A05B25AB287EDB530070EF81 /* UI+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A9287EDB530070EF81 /* UI+Duration.swift */; };
 		A0607BE42868CF1B0048947D /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0607BE32868CF1B0048947D /* data-env.json */; };
 		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
@@ -204,6 +208,8 @@
 		A04C429528533564007C970B /* AppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		A04C42982853BA18007C970B /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
 		A05B25A0287EB7450070EF81 /* PanelAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelAppearance.swift; sourceTree = "<group>"; };
+		A05B25A3287ECBE30070EF81 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
+		A05B25A9287EDB530070EF81 /* UI+Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Duration.swift"; sourceTree = "<group>"; };
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
 		A072C336287805A6001636F9 /* EraEpochView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraEpochView.swift; sourceTree = "<group>"; };
@@ -358,10 +364,11 @@
 		A0128A60284A3BB8000C2307 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				A07BA816285B8BEB00575683 /* UI+Dimension */,
 				A0128A61284A3BCC000C2307 /* UI.swift */,
+				A05B25A9287EDB530070EF81 /* UI+Duration.swift */,
 				A0A1DC56284B8E0000914237 /* UI+Font.swift */,
 				A0A1DC5A284B8E2B00914237 /* UI+Image.swift */,
+				A07BA816285B8BEB00575683 /* UI+Dimension */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -417,6 +424,7 @@
 		A05B259F287EB6FD0070EF81 /* View Modifier */ = {
 			isa = PBXGroup;
 			children = (
+				A05B25A3287ECBE30070EF81 /* Counter.swift */,
 				A05B25A0287EB7450070EF81 /* PanelAppearance.swift */,
 			);
 			path = "View Modifier";
@@ -826,6 +834,7 @@
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A07BA81E285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
+				A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */,
 				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
@@ -837,6 +846,7 @@
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
 				A05B25A1287EB7450070EF81 /* PanelAppearance.swift in Sources */,
+				A05B25A4287ECBE30070EF81 /* Counter.swift in Sources */,
 				A0F2850E2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
 				A0787280287C456300BED374 /* ActionButtonView.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
@@ -899,6 +909,7 @@
 				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A0128A6E284A4EAE000C2307 /* Color.swift in Sources */,
+				A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */,
 				A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
@@ -906,6 +917,7 @@
 				A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A072C33D28780685001636F9 /* Either.swift in Sources */,
 				A0C9838F2875ABF40008C370 /* OptionalCodable.swift in Sources */,
+				A05B25AB287EDB530070EF81 /* UI+Duration.swift in Sources */,
 				A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A0C90E8A2878615600A91996 /* Formatter.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,

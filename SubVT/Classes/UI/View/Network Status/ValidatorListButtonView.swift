@@ -26,6 +26,7 @@ struct ValidatorListButtonView: View {
     let title: LocalizedStringKey
     let count: Int
     let eraValidatorCounts: [(UInt, UInt)]
+    let chartRevealPercentage: CGFloat
     
     private let gradient = LinearGradient(
         gradient: Gradient(
@@ -98,7 +99,8 @@ struct ValidatorListButtonView: View {
             LineChartView(
                 dataPoints: self.chartDataPoints,
                 chartMinY: self.minValidatorCount - 10,
-                chartMaxY: self.maxValidatorCount + 10
+                chartMaxY: self.maxValidatorCount + 10,
+                revealPercentage: self.chartRevealPercentage
             )
             .padding(EdgeInsets(
                 top: 0,
@@ -107,6 +109,14 @@ struct ValidatorListButtonView: View {
                 trailing: 4
             ))
             Text(String(self.count))
+                .modifier(Counter(
+                    format: "%d",
+                    value: CGFloat(self.count)
+                ))
+                .animation(
+                    .easeInOut(duration: UI.Duration.counterAnimation),
+                    value: self.count
+                )
                 .font(UI.Font.NetworkStatus.dataLarge)
                 .foregroundColor(Color("Text"))
                 .padding(EdgeInsets(
@@ -144,7 +154,8 @@ struct ValidatorListButtonView_Previews: PreviewProvider {
                 (7, 1050),
                 (8, 1045),
                 (9, 965)
-            ]
+            ],
+            chartRevealPercentage: 1.0
         )
     }
 }
