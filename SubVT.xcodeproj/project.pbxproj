@@ -47,6 +47,8 @@
 		A04C429728533564007C970B /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C429528533564007C970B /* AppView.swift */; };
 		A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C42982853BA18007C970B /* OnboardingStep.swift */; };
 		A04C429A2853BA18007C970B /* OnboardingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C42982853BA18007C970B /* OnboardingStep.swift */; };
+		A05B25A1287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
+		A05B25A2287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
 		A0607BE42868CF1B0048947D /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0607BE32868CF1B0048947D /* data-env.json */; };
 		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
@@ -201,6 +203,7 @@
 		A04B37D228771CA900912BF3 /* BlockNumberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockNumberView.swift; sourceTree = "<group>"; };
 		A04C429528533564007C970B /* AppView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		A04C42982853BA18007C970B /* OnboardingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingStep.swift; sourceTree = "<group>"; };
+		A05B25A0287EB7450070EF81 /* PanelAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelAppearance.swift; sourceTree = "<group>"; };
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
 		A072C336287805A6001636F9 /* EraEpochView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraEpochView.swift; sourceTree = "<group>"; };
@@ -411,6 +414,14 @@
 			path = App;
 			sourceTree = "<group>";
 		};
+		A05B259F287EB6FD0070EF81 /* View Modifier */ = {
+			isa = PBXGroup;
+			children = (
+				A05B25A0287EB7450070EF81 /* PanelAppearance.swift */,
+			);
+			path = "View Modifier";
+			sourceTree = "<group>";
+		};
 		A072C33928780676001636F9 /* Type */ = {
 			isa = PBXGroup;
 			children = (
@@ -604,6 +615,7 @@
 				A0128A6B284A4E9D000C2307 /* Extension */,
 				A0128A4A284A1189000C2307 /* Utility */,
 				A0128A49284A0B50000C2307 /* View */,
+				A05B259F287EB6FD0070EF81 /* View Modifier */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -824,6 +836,7 @@
 				A072C33B28780685001636F9 /* Either.swift in Sources */,
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
+				A05B25A1287EB7450070EF81 /* PanelAppearance.swift in Sources */,
 				A0F2850E2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
 				A0787280287C456300BED374 /* ActionButtonView.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
@@ -868,6 +881,7 @@
 				A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A03C5BE828783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0C9A78028573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
+				A05B25A2287EB7450070EF81 /* PanelAppearance.swift in Sources */,
 				A0BCDE6528785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,

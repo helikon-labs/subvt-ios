@@ -75,5 +75,16 @@ extension UI.Dimension {
         static let dataPanelCornerRadius: CGFloat = 16
         static let dataPanelPadding: CGFloat = 16
         static let lineChartLineWidth = UI.Dimension(3, 4)
+        
+        static func dataPanelYOffset(_ displayState: BasicViewDisplayState) -> CGFloat {
+            switch displayState {
+            case .notAppeared:
+                return 20
+            case .appeared:
+                return 0
+            case .dissolved:
+                return 20
+            }
+        }
     }
 }

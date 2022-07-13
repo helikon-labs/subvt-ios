@@ -21,6 +21,7 @@ struct NetworkStatusView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @StateObject private var viewModel = NetworkStatusViewModel()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
+    @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networkSelectorIsOpen = false
     @State private var blockTimerSubscription: Cancellable?
     @State private var blockTimer = Timer.publish(every: blockTimerPeriodSec, on: .main, in: .common)
@@ -84,6 +85,7 @@ struct NetworkStatusView: View {
                                 .foregroundColor(viewModel.networkStatusServiceStatus.color)
                         }
                         .opacity(self.titleOpacity)
+                        .modifier(PanelAppearance(0, self.displayState))
                         Spacer()
                         Button(
                             action: {
@@ -97,6 +99,7 @@ struct NetworkStatusView: View {
                             }
                         )
                         .buttonStyle(NetworkSelectorButtonStyle())
+                        .modifier(PanelAppearance(1, self.displayState))
                     }
                 }
                 .frame(maxHeight: .infinity, alignment: .top)
@@ -125,6 +128,7 @@ struct NetworkStatusView: View {
                                 }
                             )
                             .buttonStyle(ValidatorListButtonStyle())
+                            .modifier(PanelAppearance(2, self.displayState))
                             Button(
                                 action: {
                                     print("Go to inactive validator list.")
@@ -138,6 +142,7 @@ struct NetworkStatusView: View {
                                 }
                             )
                             .buttonStyle(ValidatorListButtonStyle())
+                            .modifier(PanelAppearance(3, self.displayState))
                         }
                         if UIDevice.current.userInterfaceIdiom == .phone {
                             BlockNumberView(
@@ -145,10 +150,12 @@ struct NetworkStatusView: View {
                                 blockNumber: self.viewModel.networkStatus.bestBlockNumber,
                                 blockWaveParameters: self.blockWaveParameters
                             )
+                            .modifier(PanelAppearance(4, self.displayState))
                             BlockNumberView(
                                 title: LocalizedStringKey("network_status.finalized_block_number"),
                                 blockNumber: self.viewModel.networkStatus.finalizedBlockNumber
                             )
+                            .modifier(PanelAppearance(5, self.displayState))
                         } else {
                             HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                                 BlockNumberView(
@@ -156,15 +163,19 @@ struct NetworkStatusView: View {
                                     blockNumber: self.viewModel.networkStatus.bestBlockNumber,
                                     blockWaveParameters: self.blockWaveParameters
                                 )
+                                .modifier(PanelAppearance(4, self.displayState))
                                 BlockNumberView(
                                     title: LocalizedStringKey("network_status.finalized_block_number"),
                                     blockNumber: self.viewModel.networkStatus.finalizedBlockNumber
                                 )
+                                .modifier(PanelAppearance(5, self.displayState))
                             }
                         }
                         HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
                             EraEpochView(eraOrEpoch: .left(self.viewModel.networkStatus.activeEra))
+                                .modifier(PanelAppearance(6, self.displayState))
                             EraEpochView(eraOrEpoch: .right(self.viewModel.networkStatus.currentEpoch))
+                                .modifier(PanelAppearance(7, self.displayState))
                         }
                         HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
                             EraPointsBlocksProducedView(
@@ -172,33 +183,39 @@ struct NetworkStatusView: View {
                                 value: self.viewModel.networkStatus.eraRewardPoints,
                                 myValidatorsValue: nil
                             )
+                            .modifier(PanelAppearance(8, self.displayState))
                             EraPointsBlocksProducedView(
                                 title: localized("network_status.number_of_blocks"),
                                 value: 0,
                                 myValidatorsValue: nil
                             )
+                            .modifier(PanelAppearance(9, self.displayState))
                         }
                         if UIDevice.current.userInterfaceIdiom == .phone {
                             LastEraTotalRewardView(
                                 network: self.network,
                                 reward: self.viewModel.networkStatus.lastEraTotalReward
                             )
+                            .modifier(PanelAppearance(10, self.displayState))
                             ValidatorBackingsView(
                                 minimum: self.viewModel.networkStatus.minStake,
                                 maximum: self.viewModel.networkStatus.maxStake,
                                 average: self.viewModel.networkStatus.averageStake
                             )
+                            .modifier(PanelAppearance(11, self.displayState))
                         } else {
                             HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                                 LastEraTotalRewardView(
                                     network: self.network,
                                     reward: self.viewModel.networkStatus.lastEraTotalReward
                                 )
+                                .modifier(PanelAppearance(10, self.displayState))
                                 ValidatorBackingsView(
                                     minimum: self.viewModel.networkStatus.minStake,
                                     maximum: self.viewModel.networkStatus.maxStake,
                                     average: self.viewModel.networkStatus.averageStake
                                 )
+                                .modifier(PanelAppearance(11, self.displayState))
                             }
                         }
                         Spacer()
@@ -231,6 +248,7 @@ struct NetworkStatusView: View {
             alignment: .leading
         )
         .onAppear() {
+            self.displayState = .appeared
             self.viewModel.subscribeToNetworkStatus(
                 network: network,
                 onStatus: self.onNetworkStatusReceived,
