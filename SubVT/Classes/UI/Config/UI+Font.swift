@@ -113,5 +113,15 @@ extension UI {
             static let lastEraTotalReward = LexendDeca.semiBold.withSize(28)
             static let lastEraTotalRewardTicker = LexendDeca.regular.withSize(28)
         }
+        
+        enum ValidatorList {
+            static var title: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.semiBold.withSize(18)
+                } else {
+                    return LexendDeca.semiBold.withSize(28)
+                }
+            }
+        }
     }
 }

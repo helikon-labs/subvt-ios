@@ -12,6 +12,19 @@ struct HomeView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var currentTab: Tab = .network
+    @State private var showsTabBar = false
+    @State private var showsValidatorList = false
+    
+    private var tabBarYOffset: CGFloat {
+        get {
+            if self.showsTabBar {
+                return 0
+            } else {
+                let offset = UI.Dimension.TabBar.height + UI.Dimension.TabBar.marginBottom
+                return offset
+            }
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -29,7 +42,13 @@ struct HomeView: View {
                 )
             // tab content
             ZStack(alignment: .topLeading) {
-                NetworkStatusView()
+                NetworkStatusView(
+                    showsTabBar: $showsTabBar,
+                    showsValidatorList: $showsValidatorList
+                )
+                if self.showsValidatorList {
+                    ValidatorListView(isRunning: $showsValidatorList)
+                }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
@@ -60,12 +79,17 @@ struct HomeView: View {
                 bottom: 0,
                 trailing: UI.Dimension.Common.padding
             ))
+            .offset(
+                x: 0,
+                y: self.tabBarYOffset
+            )
+            .animation(.easeInOut(duration: 0.5), value: self.showsTabBar)
             .ignoresSafeArea()
         }
         .onAppear() {
             self.displayState = .appeared
+            self.showsTabBar = true
         }
-        
     }
 }
 

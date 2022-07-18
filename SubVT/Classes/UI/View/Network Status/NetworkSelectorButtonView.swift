@@ -26,7 +26,7 @@ struct NetworkSelectorButtonStyle: ButtonStyle {
 struct NetworkSelectorButtonView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
-    var isOpen = false
+    var isOpen: Bool?
     
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -41,12 +41,14 @@ struct NetworkSelectorButtonView: View {
             Text(network.display)
                 .font(UI.Font.NetworkStatus.networkSelector)
                 .foregroundColor(Color("Text"))
-            Spacer()
-                .frame(width: UI.Dimension.NetworkStatus.networkSelectorPadding)
-            if self.isOpen {
-                UI.Image.NetworkStatus.arrowUp(self.colorScheme)
-            } else {
-                UI.Image.NetworkStatus.arrowDown(self.colorScheme)
+            if let isOpen = self.isOpen {
+                Spacer()
+                    .frame(width: UI.Dimension.NetworkStatus.networkSelectorPadding)
+                if isOpen == true {
+                    UI.Image.NetworkStatus.arrowUp(self.colorScheme)
+                } else {
+                    UI.Image.NetworkStatus.arrowDown(self.colorScheme)
+                }
             }
         }
         .padding(UI.Dimension.NetworkStatus.networkSelectorPadding)
@@ -57,7 +59,7 @@ struct NetworkSelectorButtonView: View {
 
 struct NetworkSelectorButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        NetworkSelectorButtonView()
+        NetworkSelectorButtonView(isOpen: false)
             .defaultAppStorage(PreviewData.userDefaults)
     }
 }

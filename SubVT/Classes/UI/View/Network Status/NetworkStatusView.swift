@@ -21,6 +21,8 @@ struct NetworkStatusView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @StateObject private var viewModel = NetworkStatusViewModel()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
+    @Binding var showsTabBar: Bool
+    @Binding var showsValidatorList: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networkSelectorIsOpen = false
     @State private var blockTimerSubscription: Cancellable?
@@ -65,59 +67,65 @@ struct NetworkStatusView: View {
     }
     
     var body: some View {
-        VStack {
-            ZStack() {
-                VStack {
-                    Spacer()
-                        .frame(height: UI.Dimension.NetworkStatus.titleMarginTop)
-                    HStack(alignment: .center) {
-                        HStack(alignment: .top, spacing: 0) {
-                            Text(LocalizedStringKey("network_status.title"))
-                                .font(UI.Font.NetworkStatus.title)
-                                .foregroundColor(Color("Text"))
-                            Spacer()
-                                .frame(width: UI.Dimension.NetworkStatus.connectionStatusMarginLeft.get())
-                            Circle()
-                                .frame(
-                                    width: UI.Dimension.NetworkStatus.connectionStatusSize.get(),
-                                    height: UI.Dimension.NetworkStatus.connectionStatusSize.get()
-                                )
-                                .foregroundColor(viewModel.networkStatusServiceStatus.color)
-                        }
-                        .opacity(self.titleOpacity)
-                        .modifier(PanelAppearance(0, self.displayState))
+        ZStack {
+            VStack {
+                Spacer()
+                    .frame(height: UI.Dimension.Common.titleMarginTop)
+                HStack(alignment: .center) {
+                    HStack(alignment: .top, spacing: 0) {
+                        Text(localized("network_status.title"))
+                            .font(UI.Font.NetworkStatus.title)
+                            .foregroundColor(Color("Text"))
                         Spacer()
-                        Button(
-                            action: {
-                                self.networkSelectorIsOpen.toggle()
-                            },
-                            label: {
-                                NetworkSelectorButtonView(
-                                    network: self.network,
-                                    isOpen: networkSelectorIsOpen
-                                )
-                            }
-                        )
-                        .buttonStyle(NetworkSelectorButtonStyle())
-                        .modifier(PanelAppearance(1, self.displayState))
+                            .frame(width: UI.Dimension.NetworkStatus.connectionStatusMarginLeft.get())
+                        Circle()
+                            .frame(
+                                width: UI.Dimension.NetworkStatus.connectionStatusSize.get(),
+                                height: UI.Dimension.NetworkStatus.connectionStatusSize.get()
+                            )
+                            .foregroundColor(viewModel.networkStatusServiceStatus.color)
                     }
+                    .opacity(self.titleOpacity)
+                    .modifier(PanelAppearance(0, self.displayState))
+                    Spacer()
+                    Button(
+                        action: {
+                            self.networkSelectorIsOpen.toggle()
+                        },
+                        label: {
+                            NetworkSelectorButtonView(
+                                network: self.network,
+                                isOpen: networkSelectorIsOpen
+                            )
+                        }
+                    )
+                    .buttonStyle(NetworkSelectorButtonStyle())
+                    .modifier(PanelAppearance(1, self.displayState))
                 }
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding(EdgeInsets(
-                    top: 0,
-                    leading: UI.Dimension.Common.padding,
-                    bottom: 0,
-                    trailing: UI.Dimension.Common.padding
-                ))
-                .zIndex(1)
-                ScrollView {
+            }
+            .frame(maxHeight: .infinity, alignment: .top)
+            .padding(EdgeInsets(
+                top: 0,
+                leading: UI.Dimension.Common.padding,
+                bottom: 0,
+                trailing: UI.Dimension.Common.padding
+            ))
+            .zIndex(1)
+            ScrollView {
+                ScrollViewReader { scroll in
                     VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                         Spacer()
-                            .frame(height: UI.Dimension.NetworkStatus.scrollContentMarginTop)
+                            .id(0)
+                            .frame(height: UI.Dimension.Common.contentAfterTitleMarginTop)
                         HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                             Button(
                                 action: {
-                                    print("Go to active validator list.")
+                                    self.displayState = .dissolved
+                                    self.showsTabBar = false
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                                        scroll.scrollTo(0)
+                                        self.showsValidatorList = true
+                                    }
                                 },
                                 label: {
                                     ValidatorListButtonView(
@@ -239,10 +247,10 @@ struct NetworkStatusView: View {
                         trailing: UI.Dimension.Common.padding
                     ))
                 }
-                .zIndex(0)
             }
-            .frame(maxHeight: .infinity, alignment: .top)
+            .zIndex(0)
         }
+        .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea()
         .frame(
             maxWidth: .infinity,
@@ -296,7 +304,10 @@ struct ViewOffsetKey: PreferenceKey {
 
 struct NetworkStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        NetworkStatusView()
+        NetworkStatusView(
+            showsTabBar: .constant(false),
+            showsValidatorList: .constant(false)
+        )
             .defaultAppStorage(PreviewData.userDefaults)
     }
 }

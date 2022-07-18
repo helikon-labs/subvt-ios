@@ -10,6 +10,20 @@ import SwiftUI
 extension UI.Dimension {
     enum Common {
         static let cornerRadius: CGFloat = 12
+        static var titleMarginTop: CGFloat {
+            get {
+                if UIApplication.hasTopNotch {
+                    return 70
+                } else {
+                    return 40
+                }
+            }
+        }
+        static var contentAfterTitleMarginTop: CGFloat {
+            get {
+                return titleMarginTop + 68
+            }
+        }
         static var padding: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {

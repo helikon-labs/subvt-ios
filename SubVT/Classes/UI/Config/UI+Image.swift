@@ -10,6 +10,16 @@ import SubVTData
 
 extension UI {
     enum Image {
+        enum Common {
+            static func backArrow(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("BackArrowDark")
+                } else {
+                    return SwiftUI.Image("BackArrowLight")
+                }
+            }
+        }
+        
         enum Introduction {
             static func iconVolume(_ colorScheme: ColorScheme) -> SwiftUI.Image {
                 if colorScheme == .dark {
