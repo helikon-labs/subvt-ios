@@ -8,6 +8,7 @@
 "common.go"="Go!";
 "common.ok"="OK";
 "common.retry"="Retry";
+"common.search"="Search";
 
 "common.error.connection"="Connection error";
 "common.error.unexpected"="Unexpected error";

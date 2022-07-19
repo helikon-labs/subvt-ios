@@ -18,6 +18,20 @@ extension UI {
                     return SwiftUI.Image("BackArrowLight")
                 }
             }
+            static func searchIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("SearchIconDark")
+                } else {
+                    return SwiftUI.Image("SearchIconLight")
+                }
+            }
+            static func filterIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("FilterIconDark")
+                } else {
+                    return SwiftUI.Image("FilterIconLight")
+                }
+            }
         }
         
         enum Introduction {

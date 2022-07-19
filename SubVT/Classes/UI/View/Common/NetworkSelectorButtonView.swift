@@ -24,9 +24,14 @@ struct NetworkSelectorButtonStyle: ButtonStyle {
 }
 
 struct NetworkSelectorButtonView: View {
+    enum DisplayType: Equatable {
+        case display
+        case selector(isOpen: Bool)
+    }
+    
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
-    var isOpen: Bool?
+    var displayType: DisplayType?
     
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
@@ -41,14 +46,14 @@ struct NetworkSelectorButtonView: View {
             Text(network.display)
                 .font(UI.Font.NetworkStatus.networkSelector)
                 .foregroundColor(Color("Text"))
-            if let isOpen = self.isOpen {
+            if self.displayType == DisplayType.selector(isOpen: true) {
                 Spacer()
                     .frame(width: UI.Dimension.NetworkStatus.networkSelectorPadding)
-                if isOpen == true {
-                    UI.Image.NetworkStatus.arrowUp(self.colorScheme)
-                } else {
-                    UI.Image.NetworkStatus.arrowDown(self.colorScheme)
-                }
+                UI.Image.NetworkStatus.arrowUp(self.colorScheme)
+            } else if self.displayType == .selector(isOpen: false) {
+                Spacer()
+                    .frame(width: UI.Dimension.NetworkStatus.networkSelectorPadding)
+                UI.Image.NetworkStatus.arrowDown(self.colorScheme)
             }
         }
         .padding(UI.Dimension.NetworkStatus.networkSelectorPadding)
@@ -59,7 +64,7 @@ struct NetworkSelectorButtonView: View {
 
 struct NetworkSelectorButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        NetworkSelectorButtonView(isOpen: false)
+        NetworkSelectorButtonView(displayType: .selector(isOpen: false))
             .defaultAppStorage(PreviewData.userDefaults)
     }
 }

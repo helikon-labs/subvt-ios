@@ -113,7 +113,7 @@ struct OnboardingParentView: View {
             }
         }
         .opacity(self.displayState == .appeared ? 1 : 0)
-        .animation(.easeOut(duration: 0.5))
+        .animation(.easeOut(duration: 0.5), value: self.displayState)
         .onAppear {
             self.displayState = .appeared
         }

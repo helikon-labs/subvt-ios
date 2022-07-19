@@ -54,6 +54,8 @@
 		A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A9287EDB530070EF81 /* UI+Duration.swift */; };
 		A05B25AB287EDB530070EF81 /* UI+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A9287EDB530070EF81 /* UI+Duration.swift */; };
 		A0607BE42868CF1B0048947D /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0607BE32868CF1B0048947D /* data-env.json */; };
+		A0643DCB2886813400E46213 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */; };
+		A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */; };
 		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A072C337287805A6001636F9 /* EraEpochView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C336287805A6001636F9 /* EraEpochView.swift */; };
@@ -177,6 +179,8 @@
 		A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
 		A0F285122879C08000E69C6B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
 		A0F285132879C08000E69C6B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
+		A0F574DA28870467002849FC /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F574D928870467002849FC /* VisualEffectView.swift */; };
+		A0F574DB28870467002849FC /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F574D928870467002849FC /* VisualEffectView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +225,7 @@
 		A05B25A3287ECBE30070EF81 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		A05B25A9287EDB530070EF81 /* UI+Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Duration.swift"; sourceTree = "<group>"; };
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
+		A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummaryView.swift; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
 		A072C336287805A6001636F9 /* EraEpochView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraEpochView.swift; sourceTree = "<group>"; };
 		A072C33A28780685001636F9 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
@@ -286,6 +291,7 @@
 		A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveContainerView.swift; sourceTree = "<group>"; };
 		A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveView.swift; sourceTree = "<group>"; };
 		A0F285102879C08000E69C6B /* BlockWaveParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveParameters.swift; sourceTree = "<group>"; };
+		A0F574D928870467002849FC /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,7 +430,9 @@
 				A0C9A781285749940071C7AC /* BasicDisplayState.swift */,
 				A0A1DC60284B990B00914237 /* BgMorphView.swift */,
 				A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */,
+				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
 				A07BA814285B556E00575683 /* SnackbarView.swift */,
+				A0F574D928870467002849FC /* VisualEffectView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -459,6 +467,7 @@
 			children = (
 				A0744D8D2885866B008A06DD /* ValidatorListView.swift */,
 				A0744D892885865D008A06DD /* ValidatorListViewModel.swift */,
+				A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */,
 			);
 			path = "Validator List";
 			sourceTree = "<group>";
@@ -570,7 +579,6 @@
 				A072C336287805A6001636F9 /* EraEpochView.swift */,
 				A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */,
 				A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */,
-				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
 				A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */,
 				A093F0472865F08600778293 /* NetworkStatusViewModel.swift */,
 				A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */,
@@ -851,6 +859,7 @@
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
+				A0643DCB2886813400E46213 /* ValidatorSummaryView.swift in Sources */,
 				A0B3A6B8287D768A005DA484 /* LineChartView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
@@ -866,6 +875,7 @@
 				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
+				A0F574DA28870467002849FC /* VisualEffectView.swift in Sources */,
 				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
 				A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
@@ -955,6 +965,7 @@
 				A05B25AB287EDB530070EF81 /* UI+Duration.swift in Sources */,
 				A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A0C90E8A2878615600A91996 /* Formatter.swift in Sources */,
+				A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
 				A072C338287805A6001636F9 /* EraEpochView.swift in Sources */,
@@ -968,6 +979,7 @@
 				A078727A287C198F00BED374 /* IntroductionViewModel.swift in Sources */,
 				A0128A52284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A04B37CB2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
+				A0F574DB28870467002849FC /* VisualEffectView.swift in Sources */,
 				A0128A4F284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0744D902885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
@@ -1062,7 +1074,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1116,7 +1128,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1147,7 +1159,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1183,7 +1195,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

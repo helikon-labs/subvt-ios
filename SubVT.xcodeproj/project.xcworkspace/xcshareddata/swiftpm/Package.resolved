@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "354dda32d89fc8cd4f5c46487f64957d355f53d8",
-        "version" : "5.6.1"
+        "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
+        "version" : "5.6.2"
       }
     },
     {
@@ -19,12 +19,30 @@
       }
     },
     {
+      "identity" : "base58swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/keefertaylor/Base58Swift.git",
+      "state" : {
+        "revision" : "1c13ea6b07f1584660526f8bde3d4cc150e91acd",
+        "version" : "2.1.14"
+      }
+    },
+    {
       "identity" : "bigint",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/attaswift/BigInt.git",
       "state" : {
         "revision" : "0ed110f7555c34ff468e72e1686e59721f2b0da6",
         "version" : "5.3.0"
+      }
+    },
+    {
+      "identity" : "blake2.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tesseract-one/Blake2.swift.git",
+      "state" : {
+        "revision" : "106f68231100021e1f745779e241f81a065ad0de",
+        "version" : "0.1.2"
       }
     },
     {
@@ -60,7 +78,7 @@
       "location" : "https://github.com/helikon-labs/subvt-data-swift.git",
       "state" : {
         "branch" : "main",
-        "revision" : "e8348c12023b6a9403886d8d22e462f2689afb13"
+        "revision" : "aca8827e036a6e0bac5eb8a3d6541208002f543c"
       }
     },
     {

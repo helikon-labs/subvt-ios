@@ -37,8 +37,6 @@ struct AppView: View {
                 HomeView()
             }
         }
-        //.animation(nil, value: self.appState.stage)
-        .animation(nil)
     }
 }
 

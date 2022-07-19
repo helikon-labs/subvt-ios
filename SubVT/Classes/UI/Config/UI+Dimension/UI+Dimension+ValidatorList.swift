@@ -19,4 +19,11 @@ extension UI.Dimension {
             }
         }
     }
+    
+    enum ValidatorSummary {
+        static let padding: CGFloat = 16
+        static let iconSize: CGFloat = 18
+        static let iconSpacing: CGFloat = 6
+        static let balanceTopMargin: CGFloat = 12
+    }
 }

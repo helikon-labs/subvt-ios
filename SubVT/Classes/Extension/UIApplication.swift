@@ -8,14 +8,16 @@
 import SwiftUI
 
 extension UIApplication {
-    static var hasBottomNotch: Bool {
-        get {
-            shared.windows.first?.safeAreaInsets.bottom ?? 0 > 0
-        }
-    }
     static var hasTopNotch: Bool {
         get {
-            shared.windows.first?.safeAreaInsets.top ?? 0 > 0
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            return windowScene?.keyWindow?.safeAreaInsets.top ?? 0 > 0
+        }
+    }
+    static var hasBottomNotch: Bool {
+        get {
+            let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+            return windowScene?.keyWindow?.safeAreaInsets.bottom ?? 0 > 0
         }
     }
 }

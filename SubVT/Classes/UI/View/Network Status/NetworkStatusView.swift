@@ -95,7 +95,7 @@ struct NetworkStatusView: View {
                         label: {
                             NetworkSelectorButtonView(
                                 network: self.network,
-                                isOpen: networkSelectorIsOpen
+                                displayType: .selector(isOpen: networkSelectorIsOpen)
                             )
                         }
                     )
@@ -112,7 +112,7 @@ struct NetworkStatusView: View {
             ))
             .zIndex(1)
             ScrollView {
-                ScrollViewReader { scroll in
+                ScrollViewReader { scrollViewProxy in
                     VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                         Spacer()
                             .id(0)
@@ -123,7 +123,7 @@ struct NetworkStatusView: View {
                                     self.displayState = .dissolved
                                     self.showsTabBar = false
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                                        scroll.scrollTo(0)
+                                        scrollViewProxy.scrollTo(0)
                                         self.showsValidatorList = true
                                     }
                                 },

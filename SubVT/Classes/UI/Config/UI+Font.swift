@@ -122,6 +122,12 @@ extension UI {
                     return LexendDeca.semiBold.withSize(28)
                 }
             }
+            static let search = LexendDeca.regular.withSize(16)
+        }
+        
+        enum ValidatorSummary {
+            static let display = LexendDeca.semiBold.withSize(18)
+            static let balance = LexendDeca.light.withSize(12)
         }
     }
 }

@@ -100,5 +100,14 @@ extension UI.Dimension {
                 return 20
             }
         }
+        static var searchBarHeight: CGFloat {
+            get {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return 36
+                } else {
+                    return 48
+                }
+            }
+        }
     }
 }

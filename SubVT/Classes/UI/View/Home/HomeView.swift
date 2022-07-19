@@ -63,6 +63,7 @@ struct HomeView: View {
                     startPoint: .bottom,
                     endPoint: .top
                 ))
+                .allowsHitTesting(false)
                 .frame(height: UI.Dimension.TabBar.marginBottom
                        + UI.Dimension.TabBar.height * 2)
                 .frame(maxHeight: .infinity, alignment: .bottom)
