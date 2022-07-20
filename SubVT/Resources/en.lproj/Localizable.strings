@@ -10,6 +10,7 @@
 "common.retry"="Retry";
 "common.search"="Search";
 
+"common.error"="Error";
 "common.error.connection"="Connection error";
 "common.error.unexpected"="Unexpected error";
 "common.error.server"="Server error";

@@ -39,8 +39,8 @@ extension UI.Dimension {
         }
         static var marginBottom: CGFloat {
             get {
-                if UIApplication.hasBottomNotch {
-                    return 30
+                if UI.Dimension.Common.bottomNotchHeight > 0 {
+                    return UI.Dimension.Common.bottomNotchHeight
                 } else {
                     return UI.Dimension.Common.padding
                 }

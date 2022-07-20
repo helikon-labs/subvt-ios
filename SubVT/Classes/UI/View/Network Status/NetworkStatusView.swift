@@ -32,7 +32,6 @@ struct NetworkStatusView: View {
         progress: 0.0,
         amplitude: currentBlockWaveAmplitude
     )
-    @State private var titleOpacity = 1.0
     
     func onNetworkStatusReceived() {
         self.startBlockTimer()
@@ -67,7 +66,7 @@ struct NetworkStatusView: View {
     }
     
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             VStack {
                 Spacer()
                     .frame(height: UI.Dimension.Common.titleMarginTop)
@@ -85,7 +84,6 @@ struct NetworkStatusView: View {
                             )
                             .foregroundColor(viewModel.networkStatusServiceStatus.color)
                     }
-                    .opacity(self.titleOpacity)
                     .modifier(PanelAppearance(0, self.displayState))
                     Spacer()
                     Button(
@@ -103,13 +101,22 @@ struct NetworkStatusView: View {
                     .modifier(PanelAppearance(1, self.displayState))
                 }
             }
-            .frame(maxHeight: .infinity, alignment: .top)
             .padding(EdgeInsets(
                 top: 0,
                 leading: UI.Dimension.Common.padding,
-                bottom: 0,
+                bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
                 trailing: UI.Dimension.Common.padding
             ))
+            .background(
+                VisualEffectView(effect: UIBlurEffect(
+                    style: .systemUltraThinMaterial
+                ))
+                .cornerRadius(
+                    UI.Dimension.Common.headerBlurViewCornerRadius,
+                    corners: [.bottomLeft, .bottomRight]
+                )
+                .modifier(PanelAppearance(0, self.displayState, animateOffset: false))
+            )
             .zIndex(1)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
@@ -231,15 +238,6 @@ struct NetworkStatusView: View {
                         Spacer()
                             .frame(height: UI.Dimension.NetworkStatus.scrollContentMarginBottom)
                     }
-                    .background(GeometryReader {
-                        Color.clear.preference(
-                            key: ViewOffsetKey.self,
-                            value: -$0.frame(in: .named("scroll")).origin.y)
-                    })
-                    .onPreferenceChange(ViewOffsetKey.self) {
-                        let offset = max($0, 0)
-                        self.titleOpacity = max(1.0 - offset / 70.0, 0)
-                    }
                     .padding(EdgeInsets(
                         top: 0,
                         leading: UI.Dimension.Common.padding,
@@ -291,14 +289,6 @@ struct NetworkStatusView: View {
                 fatalError("Unknown scene phase: \(scenePhase)")
             }
         }
-    }
-}
-
-struct ViewOffsetKey: PreferenceKey {
-    typealias Value = CGFloat
-    static var defaultValue = CGFloat.zero
-    static func reduce(value: inout Value, nextValue: () -> Value) {
-        value += nextValue()
     }
 }
 

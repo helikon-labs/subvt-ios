@@ -12,12 +12,12 @@ import SwiftUI
 class ValidatorListViewModel: ObservableObject {
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
     @Published private(set) var validators: [ValidatorSummary] = []
+    @Published private(set) var subscriptionIsInProgress = false
     
     private var serviceStatusSubscription: AnyCancellable? = nil
     private var serviceSubscription: AnyCancellable? = nil
     private var service: SubVTData.ValidatorListService! = nil
     private var network: Network! = nil
-    private var subscriptionIsInProgress = false
     
     private func initService() {
         if let rpcHost = self.network?.activeValidatorListServiceHost,
@@ -94,8 +94,25 @@ class ValidatorListViewModel: ObservableObject {
                     print("insert \(update.insert.count) validators")
                     print("update \(update.update.count) validators")
                     print("remove \(update.removeIds.count) validators")
-                    self.validators.insert(contentsOf: update.insert, at: 0)
-                    // self.validators = update.insert
+                    for validator in update.insert {
+                        withAnimation(.spring()) {
+                            self.validators.append(validator)
+                        }
+                    }
+                    for removeAccountIdHex in update.removeIds {
+                        let accountId = AccountId(hex: removeAccountIdHex)
+                        self.validators.removeAll { validator in
+                            validator.accountId == accountId
+                        }
+                    }
+                    for validatorDiff in update.update {
+                        let index = self.validators.firstIndex { validator in
+                            validator.accountId == validatorDiff.accountId
+                        }
+                        if let index = index {
+                            self.validators[index].apply(diff: validatorDiff)
+                        }
+                    }
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false
                     print("validator list unsubscribed")

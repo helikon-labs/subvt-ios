@@ -18,6 +18,33 @@ extension UI.Dimension {
                 }
             }
         }
+        static var searchBarMarginTop: CGFloat {
+            get {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return 32
+                } else {
+                    return 40
+                }
+            }
+        }
+        static var scrollContentMarginTop: CGFloat {
+            get {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return 168 + UI.Dimension.Common.topNotchHeight
+                } else {
+                    return 182 + UI.Dimension.Common.topNotchHeight
+                }
+            }
+        }
+        static var itemSpacing: CGFloat {
+            get {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return 8
+                } else {
+                    return 12
+                }
+            }
+        }
     }
     
     enum ValidatorSummary {

@@ -10,15 +10,20 @@ import SwiftUI
 extension UI.Dimension {
     enum Common {
         static let cornerRadius: CGFloat = 12
-        static var titleMarginTop: CGFloat {
+        static var topNotchHeight: CGFloat {
             get {
-                if UIApplication.hasTopNotch {
-                    return 70
-                } else {
-                    return 40
-                }
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                return windowScene?.keyWindow?.safeAreaInsets.top ?? 0
             }
         }
+        static var bottomNotchHeight: CGFloat {
+            get {
+                let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+                return windowScene?.keyWindow?.safeAreaInsets.bottom ?? 0
+            }
+        }
+        
+        static var titleMarginTop: CGFloat = 40 + UI.Dimension.Common.topNotchHeight
         static var contentAfterTitleMarginTop: CGFloat {
             get {
                 return titleMarginTop + 68
@@ -89,7 +94,8 @@ extension UI.Dimension {
         static let dataPanelCornerRadius: CGFloat = 16
         static let dataPanelPadding: CGFloat = 16
         static let lineChartLineWidth = UI.Dimension(3, 4)
-        
+        static let headerBlurViewBottomPadding: CGFloat = 16
+        static let headerBlurViewCornerRadius: CGFloat = 20
         static func dataPanelYOffset(_ displayState: BasicViewDisplayState) -> CGFloat {
             switch displayState {
             case .notAppeared:
