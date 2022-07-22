@@ -60,3 +60,9 @@
 
 "active_validator_list.title"="Active Validators";
 "inactive_validator_list.title"="Inactive Validators";
+"validator_list.sort_by"="Sort by";
+"validator_list.sort_by.id_address"="Identity/Address";
+"validator_list.sort_by.active_stake"="Active stake";
+"validator_list.sort_by.nomination_total"="Nomination total";
+"validator_list.filter"="Filter";
+"validator_list.filter.by_identity"="With identity only";

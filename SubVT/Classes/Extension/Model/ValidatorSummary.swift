@@ -8,14 +8,18 @@
 import SubVTData
 
 extension ValidatorSummary {
-    func filter(ss58Prefix: UInt16, _ filter: String) -> Bool {
+    func filter(_ filter: String) -> Bool {
         if filter.isEmpty {
             return true
         }
         let fullText = (self.display ?? "")
             + (self.parentDisplay ?? "")
             + (self.childDisplay ?? "")
-            //+ ((try? self.accountId.toSS58Check(prefix: ss58Prefix)) ?? "")
+            + self.address
         return fullText.lowercased().contains(filter.lowercased())
+    }
+    
+    func hasIdentity() -> Bool {
+        return self.display != nil || self.parentDisplay != nil
     }
 }

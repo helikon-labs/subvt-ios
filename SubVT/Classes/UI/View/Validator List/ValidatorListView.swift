@@ -11,18 +11,18 @@ import SwiftUI
 struct ValidatorListView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @StateObject private var viewModel = ValidatorListViewModel()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
+    @StateObject private var viewModel = ValidatorListViewModel()
     @Binding var isRunning: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
-    @State private var searchText = ""
     @State private var filterSectionIsVisible = true
     @State private var lastScroll: CGFloat = 0
-    private let filterSectionHeight = UI.Dimension.ValidatorList.searchBarMarginTop
+    @State private var popupIsVisible = false
+    
+    static let filterSectionHeight = UI.Dimension.ValidatorList.searchBarMarginTop
         + UI.Dimension.Common.searchBarHeight
     private let filterSectionToggleThreshold: CGFloat = 30
     private let filterSectionToggleDuration: Double = 0.1
-    
     
     private var showProgressView: Bool {
         if self.viewModel.validators.count == 0 {
@@ -57,7 +57,7 @@ struct ValidatorListView: View {
                                     BackButtonView()
                                 }
                             )
-                            .buttonStyle(BackButtonStyle())
+                            .buttonStyle(PushButtonStyle())
                             Spacer()
                                 .frame(width: UI.Dimension.ValidatorList.titleMarginLeft)
                             Text(localized("active_validator_list.title"))
@@ -68,15 +68,15 @@ struct ValidatorListView: View {
                         Spacer()
                         NetworkSelectorButtonView()
                     }
+                    .frame(height: UI.Dimension.ValidatorList.titleSectionHeight)
                     .modifier(PanelAppearance(1, self.displayState))
                     HStack {
                         HStack(alignment: .center) {
                             UI.Image.Common.searchIcon(self.colorScheme)
                             TextField(
                                 localized("common.search"),
-                                text: $searchText
-                            )
-                                .font(UI.Font.ValidatorList.search)
+                                text: self.$viewModel.searchText
+                            ).font(UI.Font.ValidatorList.search)
                         }
                         .frame(height: UI.Dimension.Common.searchBarHeight)
                         .padding(EdgeInsets(
@@ -89,29 +89,30 @@ struct ValidatorListView: View {
                         .cornerRadius(UI.Dimension.Common.cornerRadius)
                         Button(
                             action: {
-                                
+                                self.popupIsVisible = true
                             },
                             label: {
                                 ZStack {
                                     UI.Image.Common.filterIcon(self.colorScheme)
                                 }
+                                .frame(
+                                    width: UI.Dimension.Common.searchBarHeight,
+                                    height: UI.Dimension.Common.searchBarHeight
+                                )
+                                .background(Color("DataPanelBg"))
+                                .cornerRadius(UI.Dimension.Common.cornerRadius)
                             }
                         )
-                        .frame(
-                            width: UI.Dimension.Common.searchBarHeight,
-                            height: UI.Dimension.Common.searchBarHeight
-                        )
-                        .background(Color("DataPanelBg"))
-                        .cornerRadius(UI.Dimension.Common.cornerRadius)
+                        .buttonStyle(PushButtonStyle())
+                        .opacity(self.popupIsVisible ? 0 : 1)
                     }
                     .frame(
                         height: self.filterSectionIsVisible
-                            ? self.filterSectionHeight
+                            ? Self.filterSectionHeight
                             : 0,
                         alignment: .bottom
                     )
                     .opacity(self.filterSectionIsVisible ? 1 : 0)
-                    .clipped()
                     .modifier(PanelAppearance(2, self.displayState))
                 }
                 .padding(EdgeInsets(
@@ -120,6 +121,7 @@ struct ValidatorListView: View {
                     bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
                     trailing: UI.Dimension.Common.padding
                 ))
+                
             }
             .background(
                 VisualEffectView(effect: UIBlurEffect(
@@ -137,6 +139,13 @@ struct ValidatorListView: View {
             )
             .frame(maxHeight: .infinity, alignment: .top)
             .zIndex(1)
+            if self.popupIsVisible {
+                ValidatorListSortFilterView(
+                    isVisible: self.$popupIsVisible,
+                    sortOption: self.$viewModel.sortOption,
+                    filterById: self.$viewModel.filterById
+                ).zIndex(2)
+            }
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
@@ -145,13 +154,8 @@ struct ValidatorListView: View {
                             .frame(height: UI.Dimension.ValidatorList.scrollContentMarginTop)
                         ForEach(self.viewModel.validators, id: \.self.accountId) {
                             validator in
-                            if validator.filter(
-                                ss58Prefix: UInt16(self.network.ss58Prefix),
-                                self.searchText
-                            ) {
-                                ValidatorSummaryView(validatorSummary: validator)
-                                    .transition(.opacity.combined(with: .move(edge: .bottom)))
-                            }
+                            ValidatorSummaryView(validatorSummary: validator)
+                                .transition(.opacity.combined(with: .move(edge: .bottom)))
                         }
                     }
                     .padding(EdgeInsets(
@@ -221,6 +225,12 @@ struct ValidatorListView: View {
         }
         .onChange(of: scenePhase) { newPhase in
             self.viewModel.onScenePhaseChange(newPhase)
+        }
+        .onChange(of: self.viewModel.searchText) { _ in
+            self.viewModel.filterAndSortValidators()
+        }
+        .onChange(of: self.viewModel.filterById) { _ in
+            self.viewModel.filterAndSortValidators()
         }
     }
 }

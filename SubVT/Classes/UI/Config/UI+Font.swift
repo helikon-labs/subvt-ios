@@ -123,6 +123,8 @@ extension UI {
                 }
             }
             static let search = LexendDeca.regular.withSize(16)
+            static let listSortSectionTitle = LexendDeca.light.withSize(12)
+            static let listSortField = LexendDeca.light.withSize(14)
         }
         
         enum ValidatorSummary {

@@ -152,6 +152,14 @@
 		A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
 		A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
 		A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
+		A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03342288AE065001F78D2 /* PushButtonStyle.swift */; };
+		A0D03344288AE065001F78D2 /* PushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03342288AE065001F78D2 /* PushButtonStyle.swift */; };
+		A0D03346288AE7E9001F78D2 /* ValidatorListSortFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03345288AE7E9001F78D2 /* ValidatorListSortFilterView.swift */; };
+		A0D03347288AE7E9001F78D2 /* ValidatorListSortFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03345288AE7E9001F78D2 /* ValidatorListSortFilterView.swift */; };
+		A0D03349288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03348288B01C5001F78D2 /* SmallCheckboxButtonView.swift */; };
+		A0D0334A288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03348288B01C5001F78D2 /* SmallCheckboxButtonView.swift */; };
+		A0D0334C288B08E2001F78D2 /* PressAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D0334B288B08E2001F78D2 /* PressAction.swift */; };
+		A0D0334D288B08E2001F78D2 /* PressAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D0334B288B08E2001F78D2 /* PressAction.swift */; };
 		A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */; };
 		A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */; };
 		A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCABB6285CA36A00E458F4 /* HomeView.swift */; };
@@ -284,6 +292,10 @@
 		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
 		A0C9A781285749940071C7AC /* BasicDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDisplayState.swift; sourceTree = "<group>"; };
 		A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionViewModel.swift; sourceTree = "<group>"; };
+		A0D03342288AE065001F78D2 /* PushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButtonStyle.swift; sourceTree = "<group>"; };
+		A0D03345288AE7E9001F78D2 /* ValidatorListSortFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorListSortFilterView.swift; sourceTree = "<group>"; };
+		A0D03348288B01C5001F78D2 /* SmallCheckboxButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCheckboxButtonView.swift; sourceTree = "<group>"; };
+		A0D0334B288B08E2001F78D2 /* PressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressAction.swift; sourceTree = "<group>"; };
 		A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientProgressViewStyle.swift; sourceTree = "<group>"; };
 		A0DCABB6285CA36A00E458F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -443,8 +455,10 @@
 				A0A1DC60284B990B00914237 /* BgMorphView.swift */,
 				A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */,
 				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
+				A0D03342288AE065001F78D2 /* PushButtonStyle.swift */,
 				A07BA814285B556E00575683 /* SnackbarView.swift */,
 				A0F574D928870467002849FC /* VisualEffectView.swift */,
+				A0D03348288B01C5001F78D2 /* SmallCheckboxButtonView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -478,6 +492,7 @@
 			children = (
 				A05B25A3287ECBE30070EF81 /* Counter.swift */,
 				A05B25A0287EB7450070EF81 /* PanelAppearance.swift */,
+				A0D0334B288B08E2001F78D2 /* PressAction.swift */,
 			);
 			path = "View Modifier";
 			sourceTree = "<group>";
@@ -496,6 +511,7 @@
 				A0744D8D2885866B008A06DD /* ValidatorListView.swift */,
 				A0744D892885865D008A06DD /* ValidatorListViewModel.swift */,
 				A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */,
+				A0D03345288AE7E9001F78D2 /* ValidatorListSortFilterView.swift */,
 			);
 			path = "Validator List";
 			sourceTree = "<group>";
@@ -863,10 +879,12 @@
 				A0B3A6BB287D9BE9005DA484 /* CGFloat.swift in Sources */,
 				A07BA821285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A04B37D0287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
+				A0D0334C288B08E2001F78D2 /* PressAction.swift in Sources */,
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A04B37C12876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
 				A0744D8A2885865D008A06DD /* ValidatorListViewModel.swift in Sources */,
 				A0BCDE592878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
+				A0D03346288AE7E9001F78D2 /* ValidatorListSortFilterView.swift in Sources */,
 				A0A1DC5B284B8E2B00914237 /* UI+Image.swift in Sources */,
 				A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A0744D982885AB05008A06DD /* BackButtonView.swift in Sources */,
@@ -890,6 +908,7 @@
 				A0643DCB2886813400E46213 /* ValidatorSummaryView.swift in Sources */,
 				A0B3A6B8287D768A005DA484 /* LineChartView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
+				A0D03349288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
 				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0BCDE6328785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
@@ -922,6 +941,7 @@
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A04C473128882AC40004A46A /* ValidatorSummary.swift in Sources */,
+				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A04C47272887F19F0004A46A /* RoundedCorner.swift in Sources */,
@@ -969,6 +989,7 @@
 				A05B25A2287EB7450070EF81 /* PanelAppearance.swift in Sources */,
 				A0BCDE6528785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
+				A0D03344288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
 				A0F2850F2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
 				A04B37C22876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
@@ -1000,10 +1021,13 @@
 				A0C90E8A2878615600A91996 /* Formatter.swift in Sources */,
 				A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
+				A0D0334D288B08E2001F78D2 /* PressAction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
 				A072C338287805A6001636F9 /* EraEpochView.swift in Sources */,
+				A0D03347288AE7E9001F78D2 /* ValidatorListSortFilterView.swift in Sources */,
 				A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
+				A0D0334A288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A04C47282887F19F0004A46A /* RoundedCorner.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A0BCDE6128784DD0008047D7 /* Format.swift in Sources */,

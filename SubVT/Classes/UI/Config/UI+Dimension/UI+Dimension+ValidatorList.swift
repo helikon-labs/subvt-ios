@@ -9,6 +9,7 @@ import SwiftUI
 
 extension UI.Dimension {
     enum ValidatorList {
+        static var titleSectionHeight: CGFloat = 40
         static var titleMarginLeft: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {
@@ -49,7 +50,7 @@ extension UI.Dimension {
     
     enum ValidatorSummary {
         static let padding: CGFloat = 16
-        static let iconSize: CGFloat = 18
+        static let iconSize: CGFloat = 24
         static let iconSpacing: CGFloat = 6
         static let balanceTopMargin: CGFloat = 12
     }

@@ -32,6 +32,27 @@ extension UI {
                     return SwiftUI.Image("FilterIconLight")
                 }
             }
+            static func smallCheckboxUnchecked(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("SmallCheckboxUncheckedDark")
+                } else {
+                    return SwiftUI.Image("SmallCheckboxUncheckedLight")
+                }
+            }
+            static func smallCheckboxPressed(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("SmallCheckboxPressedDark")
+                } else {
+                    return SwiftUI.Image("SmallCheckboxPressedLight")
+                }
+            }
+            static func smallCheckboxChecked(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("SmallCheckboxCheckedDark")
+                } else {
+                    return SwiftUI.Image("SmallCheckboxCheckedLight")
+                }
+            }
         }
         
         enum Introduction {

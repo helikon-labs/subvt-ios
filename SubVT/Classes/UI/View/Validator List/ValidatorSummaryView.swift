@@ -182,43 +182,7 @@ struct ValidatorSummaryView: View {
 }
 
 struct ValidatorSummaryView_Previews: PreviewProvider {
-    static let validatorSummary = ValidatorSummary(
-        accountId: AccountId(hex: "0xBB4E1D9EFBE50D88F02DC608509BA4EF589646ABB8DDE69C9398738BECC8CD48"),
-        controllerAccountId: AccountId(hex: "0xBB4E1D9EFBE50D88F02DC608509BA4EF589646ABB8DDE69C9398738BECC8CD48"),
-        display: "Display",
-        parentDisplay: "Parent",
-        childDisplay: "Child",
-        confirmed: true,
-        preferences: ValidatorPreferences(
-            commissionPerBillion: 0,
-            blocksNominations: true
-        ),
-        selfStake: StakeSummary(
-            stashAccountId: AccountId(hex: "0xBB4E1D9EFBE50D88F02DC608509BA4EF589646ABB8DDE69C9398738BECC8CD48"),
-            activeAmount: Balance(integerLiteral: 0)
-        ),
-        isActive: true,
-        activeNextSession: true,
-        inactiveNominations: InactiveNominationsSummary(
-            nominationCount: 130,
-            totalAmount: Balance(integerLiteral: 47002001388000000)
-        ),
-        oversubscribed: true,
-        slashCount: 1,
-        isEnrolledIn1Kv: true,
-        isParaValidator: true,
-        paraId: 1000,
-        returnRatePerBillion: 150000000,
-        blocksAuthored: 3,
-        rewardPoints: 1010,
-        heartbeatReceived: true,
-        validatorStake: ValidatorStakeSummary(
-            selfStake: Balance(integerLiteral: 15937871000000),
-            totalStake: Balance(integerLiteral: 5031267908000000),
-            nominatorCount: 12
-        )
-    )
     static var previews: some View {
-        ValidatorSummaryView(validatorSummary: validatorSummary)
+        ValidatorSummaryView(validatorSummary: PreviewData.validatorSummary)
     }
 }

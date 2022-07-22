@@ -12,3 +12,16 @@ extension View {
         clipShape( RoundedCorner(radius: radius, corners: corners) )
     }
 }
+
+extension View {
+    func pressAction(
+        onPress: @escaping (() -> Void),
+        onRelease: @escaping (() -> Void)
+    ) -> some View {
+        modifier(PressAction(onPress: {
+            onPress()
+        }, onRelease: {
+            onRelease()
+        }))
+    }
+}
