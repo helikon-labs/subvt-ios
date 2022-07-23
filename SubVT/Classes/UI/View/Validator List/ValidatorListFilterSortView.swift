@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-struct ValidatorListSortFilterView: View {
+struct ValidatorListFilterSortView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Binding var isVisible: Bool
     @Binding var sortOption: ValidatorListViewModel.SortOption?
-    @Binding var filterById: Bool
+    @Binding var filterOptions: Set<ValidatorListViewModel.FilterOption>
     @State private var sortByIdButtonPressed = false
     @State private var sortByStakePressed = false
     @State private var sortByNominationPressed = false
@@ -87,11 +87,11 @@ struct ValidatorListSortFilterView: View {
                             HStack(alignment: .center, spacing: 12) {
                                 Button(
                                     action: {
-                                        self.sortOption = .stake
+                                        self.sortOption = .stakeDescending
                                     },
                                     label: {
                                         SmallCheckboxButtonView(
-                                            isChecked: self.sortOption == .stake,
+                                            isChecked: self.sortOption == .stakeDescending,
                                             isPressed: self.sortByStakePressed
                                         )
                                     }
@@ -108,11 +108,11 @@ struct ValidatorListSortFilterView: View {
                             HStack(alignment: .center, spacing: 12) {
                                 Button(
                                     action: {
-                                        self.sortOption = .nomination
+                                        self.sortOption = .nominationDescending
                                     },
                                     label: {
                                         SmallCheckboxButtonView(
-                                            isChecked: self.sortOption == .nomination,
+                                            isChecked: self.sortOption == .nominationDescending,
                                             isPressed: self.sortByNominationPressed
                                         )
                                     }
@@ -141,11 +141,15 @@ struct ValidatorListSortFilterView: View {
                             HStack(alignment: .center, spacing: 12) {
                                 Button(
                                     action: {
-                                        self.filterById.toggle()
+                                        if self.filterOptions.contains(.hasIdentity) {
+                                            self.filterOptions.remove(.hasIdentity)
+                                        } else {
+                                            self.filterOptions.insert(.hasIdentity)
+                                        }
                                     },
                                     label: {
                                         SmallCheckboxButtonView(
-                                            isChecked: self.filterById,
+                                            isChecked: self.filterOptions.contains(.hasIdentity),
                                             isPressed: self.filterByIdPressed
                                         )
                                     }
@@ -187,10 +191,10 @@ struct ValidatorListSortFilterView: View {
 
 struct ValidatorListSortFilterView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorListSortFilterView(
+        ValidatorListFilterSortView(
             isVisible: .constant(true),
             sortOption: .constant(nil),
-            filterById: .constant(false)
+            filterOptions: .constant([])
         ).preferredColorScheme(.light)
     }
 }

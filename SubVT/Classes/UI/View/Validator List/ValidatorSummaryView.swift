@@ -16,25 +16,6 @@ struct ValidatorSummaryView: View {
         self.validatorSummary = validatorSummary
     }
     
-    var display: String {
-        get {
-            if let parentDisplay = self.validatorSummary.parentDisplay,
-               let childDisplay = self.validatorSummary.childDisplay {
-                return "\(parentDisplay) / \(childDisplay)"
-            } else if let display = self.validatorSummary.display {
-                return display
-            } else {
-                if let address = try? self.validatorSummary.accountId.toSS58Check(
-                    prefix: UInt16(self.network.ss58Prefix)
-                ) {
-                    return "\(address.prefix(5))...\(address.suffix(5))"
-                } else {
-                    return ""
-                }
-            }
-        }
-    }
-    
     var amountDisplay: String {
         get {
             let inactive = formatBalance(
@@ -59,48 +40,48 @@ struct ValidatorSummaryView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Text(self.display)
+                // identity
+                if self.validatorSummary.parentDisplay != nil {
+                    if self.validatorSummary.confirmed {
+                        Image("ParentIdentityConfirmedIconSmall")
+                            
+                            .resizable()
+                            .frame(
+                                width: UI.Dimension.ValidatorSummary.iconSize,
+                                height: UI.Dimension.ValidatorSummary.iconSize
+                            )
+                    } else {
+                        Image("ParentIdentityNotConfirmedIconSmall")
+                            .resizable()
+                            .frame(
+                                width: UI.Dimension.ValidatorSummary.iconSize,
+                                height: UI.Dimension.ValidatorSummary.iconSize
+                            )
+                    }
+                } else if self.validatorSummary.display != nil {
+                    if self.validatorSummary.confirmed {
+                        Image("IdentityConfirmedIconSmall")
+                            .resizable()
+                            .frame(
+                                width: UI.Dimension.ValidatorSummary.iconSize,
+                                height: UI.Dimension.ValidatorSummary.iconSize
+                            )
+                    } else {
+                        Image("IdentityNotConfirmedIconSmall")
+                            .resizable()
+                            .frame(
+                                width: UI.Dimension.ValidatorSummary.iconSize,
+                                height: UI.Dimension.ValidatorSummary.iconSize
+                            )
+                    }
+                }
+                Text(validatorSummary.identityDisplay)
                     .font(UI.Font.ValidatorSummary.display)
                     .foregroundColor(Color("Text"))
                     .lineLimit(1)
                     .truncationMode(.middle)
                 Spacer()
                 HStack(spacing: UI.Dimension.ValidatorSummary.iconSpacing) {
-                    // identity
-                    if self.validatorSummary.parentDisplay != nil {
-                        if self.validatorSummary.confirmed {
-                            Image("ParentIdentityConfirmedIcon")
-                                
-                                .resizable()
-                                .frame(
-                                    width: UI.Dimension.ValidatorSummary.iconSize,
-                                    height: UI.Dimension.ValidatorSummary.iconSize
-                                )
-                        } else {
-                            Image("ParentIdentityNotConfirmedIcon")
-                                .resizable()
-                                .frame(
-                                    width: UI.Dimension.ValidatorSummary.iconSize,
-                                    height: UI.Dimension.ValidatorSummary.iconSize
-                                )
-                        }
-                    } else if self.validatorSummary.display != nil {
-                        if self.validatorSummary.confirmed {
-                            Image("IdentityConfirmedIcon")
-                                .resizable()
-                                .frame(
-                                    width: UI.Dimension.ValidatorSummary.iconSize,
-                                    height: UI.Dimension.ValidatorSummary.iconSize
-                                )
-                        } else {
-                            Image("IdentityNotConfirmedIcon")
-                                .resizable()
-                                .frame(
-                                    width: UI.Dimension.ValidatorSummary.iconSize,
-                                    height: UI.Dimension.ValidatorSummary.iconSize
-                                )
-                        }
-                    }
                     if self.validatorSummary.isEnrolledIn1Kv {
                         Image("1KVIcon")
                             .resizable()
@@ -110,7 +91,7 @@ struct ValidatorSummaryView: View {
                             )
                     }
                     if self.validatorSummary.isParaValidator {
-                        Image("ParaValidatorIcon")
+                        Image("ParaValidatorIconSmall")
                             .resizable()
                             .frame(
                                 width: UI.Dimension.ValidatorSummary.iconSize,
@@ -118,7 +99,7 @@ struct ValidatorSummaryView: View {
                             )
                     }
                     if self.validatorSummary.activeNextSession {
-                        Image("ActiveNextSessionIcon")
+                        Image("ActiveNextSessionIconSmall")
                             .resizable()
                             .frame(
                                 width: UI.Dimension.ValidatorSummary.iconSize,
@@ -126,7 +107,7 @@ struct ValidatorSummaryView: View {
                             )
                     }
                     if self.validatorSummary.heartbeatReceived ?? false {
-                        Image("HeartbeatReceivedIcon")
+                        Image("HeartbeatReceivedIconSmall")
                             .resizable()
                             .frame(
                                 width: UI.Dimension.ValidatorSummary.iconSize,
@@ -134,7 +115,7 @@ struct ValidatorSummaryView: View {
                             )
                     }
                     if self.validatorSummary.oversubscribed {
-                        Image("OversubscribedIcon")
+                        Image("OversubscribedIconSmall")
                             .resizable()
                             .frame(
                                 width: UI.Dimension.ValidatorSummary.iconSize,
@@ -142,7 +123,7 @@ struct ValidatorSummaryView: View {
                             )
                     }
                     if self.validatorSummary.preferences.blocksNominations {
-                        Image("BlocksNominationsIcon")
+                        Image("BlocksNominationsIconSmall")
                             .resizable()
                             .frame(
                                 width: UI.Dimension.ValidatorSummary.iconSize,
@@ -150,7 +131,7 @@ struct ValidatorSummaryView: View {
                             )
                     }
                     if self.validatorSummary.slashCount > 0 {
-                        Image("SlashedIcon")
+                        Image("SlashedIconSmall")
                             .resizable()
                             .frame(
                                 width: UI.Dimension.ValidatorSummary.iconSize,

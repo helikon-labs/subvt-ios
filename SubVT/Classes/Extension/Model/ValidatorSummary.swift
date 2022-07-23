@@ -22,4 +22,48 @@ extension ValidatorSummary {
     func hasIdentity() -> Bool {
         return self.display != nil || self.parentDisplay != nil
     }
+    
+    var identityDisplay: String {
+        get {
+            if let parentDisplay = self.parentDisplay,
+               let childDisplay = self.childDisplay {
+                return "\(parentDisplay) / \(childDisplay)"
+            } else if let display = self.display {
+                return display
+            } else {
+                return self.address
+            }
+        }
+    }
+    
+    func compare(
+        sortOption: ValidatorListViewModel.SortOption,
+        _ other: ValidatorSummary
+    ) -> Bool {
+        let zeroBalance = Balance(integerLiteral: 0).value
+        switch sortOption {
+        case .identity:
+            if !self.hasIdentity() {
+                if other.hasIdentity() {
+                    return false
+                } else {
+                    return self.address.compare(other.address) == .orderedAscending
+                }
+            } else {
+                if other.hasIdentity() {
+                    return self.identityDisplay.compare(other.identityDisplay) == .orderedAscending
+                } else {
+                    return true
+                }
+            }
+        case .stakeDescending:
+            let thisBalance = self.validatorStake?.totalStake.value ?? zeroBalance
+            let otherBalance = other.validatorStake?.totalStake.value ?? zeroBalance
+            return thisBalance > otherBalance
+        case .nominationDescending:
+            let thisNomination = self.inactiveNominations.totalAmount.value
+            let otherNomination = other.inactiveNominations.totalAmount.value
+            return thisNomination > otherNomination
+        }
+    }
 }

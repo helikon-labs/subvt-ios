@@ -43,31 +43,15 @@ struct HomeView: View {
             // tab content
             ZStack(alignment: .topLeading) {
                 NetworkStatusView(
-                    showsTabBar: $showsTabBar,
-                    showsValidatorList: $showsValidatorList
+                    showsTabBar: self.$showsTabBar,
+                    showsValidatorList: self.$showsValidatorList
                 )
                 if self.showsValidatorList {
-                    ValidatorListView(isRunning: $showsValidatorList)
+                    ValidatorListView(mode: .inactive, isRunning: $showsValidatorList)
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea()
-            Rectangle()
-                .fill(LinearGradient(
-                    gradient: Gradient(
-                        colors: [
-                            Color("Bg"),
-                            Color("BgClear")
-                        ]
-                    ),
-                    startPoint: .bottom,
-                    endPoint: .top
-                ))
-                .allowsHitTesting(false)
-                .frame(height: UI.Dimension.TabBar.marginBottom
-                       + UI.Dimension.TabBar.height * 2)
-                .frame(maxHeight: .infinity, alignment: .bottom)
-                .ignoresSafeArea()
             VStack {
                 TabBarView(currentTab: $currentTab)
                     .frame(maxHeight: .infinity, alignment: .bottom)

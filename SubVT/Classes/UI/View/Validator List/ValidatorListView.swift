@@ -9,31 +9,65 @@ import SubVTData
 import SwiftUI
 
 struct ValidatorListView: View {
+    enum Mode {
+        case active
+        case inactive
+    }
+    
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @StateObject private var viewModel = ValidatorListViewModel()
     @Binding var isRunning: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
+    @State private var headerMaterialOpacity = 0.0
     @State private var filterSectionIsVisible = true
     @State private var lastScroll: CGFloat = 0
     @State private var popupIsVisible = false
     
+    let mode: Mode
     static let filterSectionHeight = UI.Dimension.ValidatorList.searchBarMarginTop
         + UI.Dimension.Common.searchBarHeight
     private let filterSectionToggleThreshold: CGFloat = 30
     private let filterSectionToggleDuration: Double = 0.1
     
-    private var showProgressView: Bool {
-        if self.viewModel.validators.count == 0 {
-            switch self.viewModel.serviceStatus {
-            case .idle, .connected, .subscribed:
-                return true
-            default:
-                break
+    init(mode: Mode, isRunning: Binding<Bool>) {
+        self.mode = mode
+        self._isRunning = isRunning
+    }
+    
+    private var filterSectionOpacity: Double {
+        if self.filterSectionIsVisible {
+            if self.viewModel.isLoading {
+                return 0.5
+            }
+            return 1.0
+        } else {
+            return 0
+        }
+    }
+    
+    private func onScroll(_ scroll: CGFloat) {
+        self.headerMaterialOpacity = scroll / 20.0
+        if self.filterSectionIsVisible {
+            if scroll < self.lastScroll {
+                self.lastScroll = scroll
+            } else if (scroll - self.lastScroll) >= self.filterSectionToggleThreshold {
+                self.lastScroll = scroll
+                withAnimation(.linear(duration: self.filterSectionToggleDuration)) {
+                    self.filterSectionIsVisible = false
+                }
+            }
+        } else {
+            if scroll > self.lastScroll {
+                self.lastScroll = scroll
+            } else if (self.lastScroll - scroll) >= self.filterSectionToggleThreshold {
+                self.lastScroll = scroll
+                withAnimation(.linear(duration: self.filterSectionToggleDuration)) {
+                    self.filterSectionIsVisible = true
+                }
             }
         }
-        return false
     }
     
     var body: some View {
@@ -60,9 +94,12 @@ struct ValidatorListView: View {
                             .buttonStyle(PushButtonStyle())
                             Spacer()
                                 .frame(width: UI.Dimension.ValidatorList.titleMarginLeft)
-                            Text(localized("active_validator_list.title"))
-                                .font(UI.Font.ValidatorList.title)
-                                .foregroundColor(Color("Text"))
+                            Text(self.mode == .active
+                                 ? localized("active_validator_list.title")
+                                 : localized("inactive_validator_list.title")
+                            )
+                            .font(UI.Font.ValidatorList.title)
+                            .foregroundColor(Color("Text"))
                         }
                         .opacity(1.0)
                         Spacer()
@@ -76,7 +113,8 @@ struct ValidatorListView: View {
                             TextField(
                                 localized("common.search"),
                                 text: self.$viewModel.searchText
-                            ).font(UI.Font.ValidatorList.search)
+                            )
+                            .font(UI.Font.ValidatorList.search)
                         }
                         .frame(height: UI.Dimension.Common.searchBarHeight)
                         .padding(EdgeInsets(
@@ -112,7 +150,8 @@ struct ValidatorListView: View {
                             : 0,
                         alignment: .bottom
                     )
-                    .opacity(self.filterSectionIsVisible ? 1 : 0)
+                    .disabled(self.viewModel.isLoading)
+                    .opacity(self.filterSectionOpacity)
                     .modifier(PanelAppearance(2, self.displayState))
                 }
                 .padding(EdgeInsets(
@@ -131,6 +170,7 @@ struct ValidatorListView: View {
                     UI.Dimension.Common.headerBlurViewCornerRadius,
                     corners: [.bottomLeft, .bottomRight]
                 )
+                .opacity(self.headerMaterialOpacity)
                 .modifier(PanelAppearance(
                     0,
                     self.displayState,
@@ -140,10 +180,10 @@ struct ValidatorListView: View {
             .frame(maxHeight: .infinity, alignment: .top)
             .zIndex(1)
             if self.popupIsVisible {
-                ValidatorListSortFilterView(
+                ValidatorListFilterSortView(
                     isVisible: self.$popupIsVisible,
                     sortOption: self.$viewModel.sortOption,
-                    filterById: self.$viewModel.filterById
+                    filterOptions: self.$viewModel.filterOptions
                 ).zIndex(2)
             }
             ScrollView {
@@ -152,11 +192,16 @@ struct ValidatorListView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorList.scrollContentMarginTop)
-                        ForEach(self.viewModel.validators, id: \.self.accountId) {
+                        ForEach(self.viewModel.validators, id: \.self.address) {
                             validator in
                             ValidatorSummaryView(validatorSummary: validator)
                                 .transition(.opacity.combined(with: .move(edge: .bottom)))
                         }
+                        Spacer()
+                            .frame(
+                                height: UI.Dimension.Common.bottomNotchHeight
+                                    + UI.Dimension.Common.padding / 2
+                            )
                     }
                     .padding(EdgeInsets(
                         top: 0,
@@ -165,37 +210,27 @@ struct ValidatorListView: View {
                         trailing: UI.Dimension.Common.padding
                     ))
                     .background(GeometryReader {
-                        Color.clear.preference(
-                            key: ViewOffsetKey.self,
-                            value: -$0.frame(in: .named("scroll")).origin.y
-                        )
+                        Color.clear
+                            .preference(
+                                key: ViewOffsetKey.self,
+                                value: -$0.frame(in: .named("scroll")).origin.y
+                            )
                     })
                     .onPreferenceChange(ViewOffsetKey.self) {
-                        let scroll = max($0, 0)
-                        if self.filterSectionIsVisible {
-                            if scroll < self.lastScroll {
-                                self.lastScroll = scroll
-                            } else if (scroll - self.lastScroll) >= self.filterSectionToggleThreshold {
-                                self.lastScroll = scroll
-                                withAnimation(.linear(duration: self.filterSectionToggleDuration)) {
-                                    self.filterSectionIsVisible = false
-                                }
-                            }
-                        } else {
-                            if scroll > self.lastScroll {
-                                self.lastScroll = scroll
-                            } else if (self.lastScroll - scroll) >= self.filterSectionToggleThreshold {
-                                self.lastScroll = scroll
-                                withAnimation(.linear(duration: self.filterSectionToggleDuration)) {
-                                    self.filterSectionIsVisible = true
-                                }
-                            }
+                        self.onScroll(max($0, 0))
+                    }
+                    .onChange(of: self.viewModel.sortOption) { _ in
+                        withAnimation(.easeInOut) {
+                            scrollViewProxy.scrollTo(0)
                         }
                     }
                 }
             }
+            .disabled(self.viewModel.isLoading)
             .zIndex(0)
-            if self.showProgressView {
+            FooterGradientView()
+                .zIndex(1)
+            if self.viewModel.isLoading {
                 ZStack {
                     ProgressView()
                         .progressViewStyle(
@@ -208,7 +243,7 @@ struct ValidatorListView: View {
                 .transition(.opacity)
                 .animation(
                     .linear(duration: 0.1),
-                    value: self.showProgressView
+                    value: self.viewModel.isLoading
                 )
             }
         }
@@ -220,23 +255,21 @@ struct ValidatorListView: View {
             alignment: .leading
         )
         .onAppear() {
+            UITextField.appearance().clearButtonMode = .whileEditing
             self.displayState = .appeared
-            self.viewModel.subscribeToValidatorList(network: self.network)
+            self.viewModel.subscribeToValidatorList(
+                network: self.network,
+                mode: self.mode
+            )
         }
         .onChange(of: scenePhase) { newPhase in
             self.viewModel.onScenePhaseChange(newPhase)
-        }
-        .onChange(of: self.viewModel.searchText) { _ in
-            self.viewModel.filterAndSortValidators()
-        }
-        .onChange(of: self.viewModel.filterById) { _ in
-            self.viewModel.filterAndSortValidators()
         }
     }
 }
 
 struct ValidatorListView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorListView(isRunning: .constant(true))
+        ValidatorListView(mode: .active, isRunning: .constant(true))
     }
 }

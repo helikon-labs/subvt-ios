@@ -10,34 +10,64 @@ import SubVTData
 import SwiftUI
 
 class ValidatorListViewModel: ObservableObject {
-    enum SortOption: Equatable {
+    enum SortOption: String {
         case identity
-        case stake
-        case nomination
+        case stakeDescending
+        case nominationDescending
+    }
+    
+    enum FilterOption: String {
+        case hasIdentity
     }
     
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
     @Published private(set) var validators: [ValidatorSummary] = []
-    @Published private(set) var subscriptionIsInProgress = false
     @Published var sortOption: SortOption? = nil
-    @Published var filterById = false
+    @Published var filterOptions = Set<FilterOption>()
     @Published var searchText: String = ""
+    @Published var isLoading = false
     
+    private var mode: ValidatorListView.Mode = .active
     private var serviceStatusSubscription: AnyCancellable? = nil
     private var serviceSubscription: AnyCancellable? = nil
+    private(set) var subscriptionIsInProgress = false
     private var service: SubVTData.ValidatorListService! = nil
     private var network: Network! = nil
     private var innerValidators: [ValidatorSummary] = []
+    private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        Publishers.CombineLatest3(
+            self.$searchText,
+            self.$filterOptions,
+            self.$sortOption
+        )
+        .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
+        .sink(receiveValue: { (searchText, filterOptions, sortOption) in
+            self.filterAndSortValidators(
+                searchText: searchText,
+                filterOptions: filterOptions,
+                sortOption: sortOption
+            )
+        })
+        .store(in: &cancellables)
+    }
     
     private func initService() {
-        if let rpcHost = self.network?.activeValidatorListServiceHost,
-           let rpcPort = self.network?.activeValidatorListServicePort {
+        
+        
+        if let rpcHost = (self.mode == .active)
+            ? self.network?.activeValidatorListServiceHost
+            : self.network?.inactiveValidatorListServiceHost,
+           let rpcPort = (self.mode == .active)
+            ? self.network?.activeValidatorListServicePort
+            : self.network?.inactiveValidatorListServicePort {
             self.service = SubVTData.ValidatorListService(
                 rpcHost: rpcHost,
                 rpcPort: rpcPort
             )
         } else {
-            self.service = SubVTData.ValidatorListService(active: true)
+            self.service = SubVTData.ValidatorListService(active: self.mode == .active)
         }
     }
     
@@ -55,15 +85,20 @@ class ValidatorListViewModel: ObservableObject {
             self.subscriptionIsInProgress = false
         case .active:
             if !self.subscriptionIsInProgress {
-                self.subscribeToValidatorList(network: self.network)
+                self.subscribeToValidatorList(network: self.network, mode: self.mode)
             }
         @unknown default:
             fatalError("Unknown scene phase: \(scenePhase)")
         }
     }
     
-    func subscribeToValidatorList(network: Network) {
+    func subscribeToValidatorList(
+        network: Network,
+        mode: ValidatorListView.Mode
+    ) {
+        self.mode = mode
         self.subscriptionIsInProgress = true
+        self.isLoading = true
         self.network = network
         if self.service == nil {
             self.initService()
@@ -87,9 +122,11 @@ class ValidatorListViewModel: ObservableObject {
                 case .finished:
                     print("validator list service finished.")
                     self.subscriptionIsInProgress = false
+                    self.isLoading = false
                 case .failure(let rpcError):
                     print("validator list service error: \(rpcError)")
                     self.subscriptionIsInProgress = false
+                    self.isLoading = false
                 }
             } receiveValue: {
                 [weak self]
@@ -100,6 +137,7 @@ class ValidatorListViewModel: ObservableObject {
                     self.subscriptionIsInProgress = false
                     print("validator list subscribed")
                 case .update(let update):
+                    self.isLoading = false
                     print("validator list update block #\(update.finalizedBlockNumber ?? 0)")
                     print("insert \(update.insert.count) validators")
                     print("update \(update.update.count) validators")
@@ -123,9 +161,14 @@ class ValidatorListViewModel: ObservableObject {
                             self.innerValidators[index].apply(diff: validatorDiff)
                         }
                     }
-                    self.filterAndSortValidators()
+                    self.filterAndSortValidators(
+                        searchText: self.searchText,
+                        filterOptions: self.filterOptions,
+                        sortOption: self.sortOption
+                    )
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false
+                    self.isLoading = false
                     print("validator list unsubscribed")
                 case .reconnectSuggested:
                     break
@@ -133,18 +176,19 @@ class ValidatorListViewModel: ObservableObject {
             }
     }
     
-    func filterAndSortValidators() {
+    func filterAndSortValidators(
+        searchText: String,
+        filterOptions: Set<FilterOption>,
+        sortOption: SortOption?
+    ) {
         self.validators = self.innerValidators
-            .filter { self.searchText.isEmpty || $0.filter(self.searchText) }
-            .filter { !self.filterById || $0.hasIdentity() }
-        
-        /*
-        if validator.filter(
-            ss58Prefix: UInt16(self.network.ss58Prefix),
-            self.searchText
-        ) && (!self.filterById || validator.hasIdentity()) {
-            
-        }
-         */
+            .filter { searchText.isEmpty || $0.filter(searchText) }
+            .filter { !filterOptions.contains(.hasIdentity) || $0.hasIdentity() }
+            .sorted {
+                guard let sortOption = sortOption else {
+                    return true
+                }
+                return $0.compare(sortOption: sortOption, $1)
+            }
     }
 }

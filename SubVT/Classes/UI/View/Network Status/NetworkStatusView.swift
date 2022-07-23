@@ -24,6 +24,7 @@ struct NetworkStatusView: View {
     @Binding var showsTabBar: Bool
     @Binding var showsValidatorList: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
+    @State private var headerMaterialOpacity = 0.0
     @State private var networkSelectorIsOpen = false
     @State private var blockTimerSubscription: Cancellable?
     @State private var blockTimer = Timer.publish(every: blockTimerPeriodSec, on: .main, in: .common)
@@ -115,9 +116,14 @@ struct NetworkStatusView: View {
                     UI.Dimension.Common.headerBlurViewCornerRadius,
                     corners: [.bottomLeft, .bottomRight]
                 )
-                .modifier(PanelAppearance(0, self.displayState, animateOffset: false))
+                .opacity(self.headerMaterialOpacity)
+                .modifier(PanelAppearance(
+                    0,
+                    self.displayState,
+                    animateOffset: false
+                ))
             )
-            .zIndex(1)
+            .zIndex(2)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
@@ -244,9 +250,22 @@ struct NetworkStatusView: View {
                         bottom: 0,
                         trailing: UI.Dimension.Common.padding
                     ))
+                    .background(GeometryReader {
+                        Color.clear
+                            .preference(
+                                key: ViewOffsetKey.self,
+                                value: -$0.frame(in: .named("scroll")).origin.y
+                            )
+                    })
+                    .onPreferenceChange(ViewOffsetKey.self) {
+                        let scroll = max($0, 0)
+                        self.headerMaterialOpacity = scroll / 40.0
+                    }
                 }
             }
             .zIndex(0)
+            FooterGradientView()
+                .zIndex(1)
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea()

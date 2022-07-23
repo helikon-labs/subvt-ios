@@ -14,4 +14,6 @@ enum AppStorageKey {
     static let hasBeenOnboarded = "io.subvt.has_been_onboarded"
     static let networks = "io.subvt.networks"
     static let selectedNetwork = "io.subvt.selected_network"
+    static let activeValidatorListSortOption = "io.subvt.active_validator_list.sort_option"
+    static let inactiveValidatorListSortOption = "io.subvt.active_validator_list.sort_option"
 }
