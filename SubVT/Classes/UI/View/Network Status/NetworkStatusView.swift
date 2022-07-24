@@ -21,8 +21,6 @@ struct NetworkStatusView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @StateObject private var viewModel = NetworkStatusViewModel()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
-    @Binding var showsTabBar: Bool
-    @Binding var showsValidatorList: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var networkSelectorIsOpen = false
@@ -33,6 +31,8 @@ struct NetworkStatusView: View {
         progress: 0.0,
         amplitude: currentBlockWaveAmplitude
     )
+    @State private var showsActiveValidatorList = false
+    @State private var showsInactiveValidatorList = false
     
     func onNetworkStatusReceived() {
         self.startBlockTimer()
@@ -131,14 +131,21 @@ struct NetworkStatusView: View {
                             .id(0)
                             .frame(height: UI.Dimension.Common.contentAfterTitleMarginTop)
                         HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                            NavigationLink(
+                                destination: ValidatorListView(
+                                    isVisible: self.$showsActiveValidatorList,
+                                    mode: .active
+                                ),
+                                isActive: self.$showsActiveValidatorList
+                            ) { EmptyView() }
                             Button(
                                 action: {
-                                    self.displayState = .dissolved
-                                    self.showsTabBar = false
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                                    self.showsActiveValidatorList = true
+                                    /*
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                                         scrollViewProxy.scrollTo(0)
-                                        self.showsValidatorList = true
                                     }
+                                     */
                                 },
                                 label: {
                                     ValidatorListButtonView(
@@ -151,9 +158,16 @@ struct NetworkStatusView: View {
                             )
                             .buttonStyle(ValidatorListButtonStyle())
                             .modifier(PanelAppearance(2, self.displayState))
+                            NavigationLink(
+                                destination: ValidatorListView(
+                                    isVisible: self.$showsInactiveValidatorList,
+                                    mode: .inactive
+                                ),
+                                isActive: self.$showsInactiveValidatorList
+                            ) { EmptyView() }
                             Button(
                                 action: {
-                                    print("Go to inactive validator list.")
+                                    self.showsInactiveValidatorList = true
                                 },
                                 label: {
                                     ValidatorListButtonView(
@@ -267,6 +281,7 @@ struct NetworkStatusView: View {
             FooterGradientView()
                 .zIndex(1)
         }
+        .navigationBarHidden(true)
         .frame(maxHeight: .infinity, alignment: .top)
         .ignoresSafeArea()
         .frame(
@@ -275,7 +290,9 @@ struct NetworkStatusView: View {
             alignment: .leading
         )
         .onAppear() {
-            self.displayState = .appeared
+            DispatchQueue.main.asyncAfter(deadline: .now()) {
+                self.displayState = .appeared
+            }
             self.viewModel.subscribeToNetworkStatus(
                 network: network,
                 onStatus: self.onNetworkStatusReceived,
@@ -313,10 +330,7 @@ struct NetworkStatusView: View {
 
 struct NetworkStatusView_Previews: PreviewProvider {
     static var previews: some View {
-        NetworkStatusView(
-            showsTabBar: .constant(false),
-            showsValidatorList: .constant(false)
-        )
+        NetworkStatusView()
             .defaultAppStorage(PreviewData.userDefaults)
     }
 }

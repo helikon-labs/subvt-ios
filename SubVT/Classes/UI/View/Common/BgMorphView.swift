@@ -123,6 +123,7 @@ struct BgMorphView: View {
             )
             .frame(maxWidth: .infinity)
             .ignoresSafeArea()
+            .background(Color.clear)
             .onReceive(timer) { _ in
                 self.step = self.step.next
             }

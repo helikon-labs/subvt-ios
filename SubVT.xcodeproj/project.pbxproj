@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0118246288D48C500EC51BD /* UINavigationController.swift */; };
+		A0118248288D48C500EC51BD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0118246288D48C500EC51BD /* UINavigationController.swift */; };
 		A0128A46284A0A32000C2307 /* data-env-example.json in Resources */ = {isa = PBXBuildFile; fileRef = A0128A45284A0A32000C2307 /* data-env-example.json */; };
 		A0128A4D284A1297000C2307 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A4C284A1297000C2307 /* AppStorageKey.swift */; };
 		A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A4C284A1297000C2307 /* AppStorageKey.swift */; };
@@ -218,6 +220,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A0118246288D48C500EC51BD /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		A0128A45284A0A32000C2307 /* data-env-example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env-example.json"; sourceTree = "<group>"; };
 		A0128A4C284A1297000C2307 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
 		A0128A50284A150C000C2307 /* OnboardingParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingParentView.swift; sourceTree = "<group>"; };
@@ -426,6 +429,7 @@
 				A0128A6C284A4EAE000C2307 /* Color.swift */,
 				A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */,
 				A04C47292887F1C30004A46A /* View.swift */,
+				A0118246288D48C500EC51BD /* UINavigationController.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -925,6 +929,7 @@
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A07BA81E285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
 				A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */,
+				A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */,
 				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
@@ -1026,6 +1031,7 @@
 				A0C90E8A2878615600A91996 /* Formatter.swift in Sources */,
 				A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
+				A0118248288D48C500EC51BD /* UINavigationController.swift in Sources */,
 				A0D0334D288B08E2001F78D2 /* PressAction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0D205D3288C1E7D0040CB08 /* FooterGradientView.swift in Sources */,

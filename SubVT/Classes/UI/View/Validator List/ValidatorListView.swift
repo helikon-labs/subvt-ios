@@ -18,7 +18,7 @@ struct ValidatorListView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @StateObject private var viewModel = ValidatorListViewModel()
-    @Binding var isRunning: Bool
+    @Binding var isVisible: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var filterSectionIsVisible = true
@@ -30,11 +30,6 @@ struct ValidatorListView: View {
         + UI.Dimension.Common.searchBarHeight
     private let filterSectionToggleThreshold: CGFloat = 30
     private let filterSectionToggleDuration: Double = 0.1
-    
-    init(mode: Mode, isRunning: Binding<Bool>) {
-        self.mode = mode
-        self._isRunning = isRunning
-    }
     
     private var filterSectionOpacity: Double {
         if self.filterSectionIsVisible {
@@ -72,6 +67,20 @@ struct ValidatorListView: View {
     
     var body: some View {
         ZStack {
+            Color("Bg")
+                .ignoresSafeArea()
+            BgMorphView()
+                .offset(
+                    x: 0,
+                    y: UI.Dimension.BgMorph.yOffset(
+                        displayState: self.displayState
+                    )
+                )
+                .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
+                .animation(
+                    .easeOut(duration: 0.75),
+                    value: self.displayState
+                )
             ZStack {
                 VStack(spacing: 0) {
                     Spacer()
@@ -81,11 +90,14 @@ struct ValidatorListView: View {
                             Button(
                                 action: {
                                     self.viewModel.unsubscribe()
+                                    /*
                                     self.displayState = .dissolved
                                     DispatchQueue.main.asyncAfter(
                                         deadline: .now() + 1.0) {
-                                            self.isRunning = false
+                                            // self.isRunning = false
                                         }
+                                     */
+                                    self.isVisible = false
                                 },
                                 label: {
                                     BackButtonView()
@@ -247,6 +259,7 @@ struct ValidatorListView: View {
                 )
             }
         }
+        .navigationBarHidden(true)
         .ignoresSafeArea()
         .frame(maxHeight: .infinity, alignment: .top)
         .frame(
@@ -255,12 +268,14 @@ struct ValidatorListView: View {
             alignment: .leading
         )
         .onAppear() {
-            UITextField.appearance().clearButtonMode = .whileEditing
-            self.displayState = .appeared
-            self.viewModel.subscribeToValidatorList(
-                network: self.network,
-                mode: self.mode
-            )
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                UITextField.appearance().clearButtonMode = .whileEditing
+                self.displayState = .appeared
+                self.viewModel.subscribeToValidatorList(
+                    network: self.network,
+                    mode: self.mode
+                )
+            }
         }
         .onChange(of: scenePhase) { newPhase in
             self.viewModel.onScenePhaseChange(newPhase)
@@ -270,6 +285,6 @@ struct ValidatorListView: View {
 
 struct ValidatorListView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorListView(mode: .active, isRunning: .constant(true))
+        ValidatorListView(isVisible: .constant(true), mode: .active)
     }
 }
