@@ -271,10 +271,12 @@ struct ValidatorListView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 UITextField.appearance().clearButtonMode = .whileEditing
                 self.displayState = .appeared
-                self.viewModel.subscribeToValidatorList(
-                    network: self.network,
-                    mode: self.mode
-                )
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                    self.viewModel.subscribeToValidatorList(
+                        network: self.network,
+                        mode: self.mode
+                    )
+                }
             }
         }
         .onChange(of: scenePhase) { newPhase in

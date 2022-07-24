@@ -9,21 +9,23 @@ import SwiftUI
 
 struct FooterGradientView: View {
     var body: some View {
-        Rectangle()
-            .fill(LinearGradient(
-                gradient: Gradient(
-                    colors: [
-                        Color("Bg"),
-                        Color("BgClear")
-                    ]
-                ),
-                startPoint: .bottom,
-                endPoint: .top
-            ))
+        LinearGradient(
+            gradient: Gradient(
+                colors: [
+                    Color("Bg"),
+                    Color("BgClear")
+                ]
+            ),
+            startPoint: .bottom,
+            endPoint: .top
+        )
             .allowsHitTesting(false)
             .frame(height: UI.Dimension.TabBar.marginBottom
                    + UI.Dimension.TabBar.height * 2)
-            .frame(maxHeight: .infinity, alignment: .bottom)
+            .frame(
+                maxHeight: .infinity,
+                alignment: .bottom
+            )
             .ignoresSafeArea()
     }
 }
