@@ -114,7 +114,6 @@ struct ValidatorListView: View {
                                     isConnected: self.networkMonitor.isConnected,
                                     size: UI.Dimension.Common.connectionStatusSizeSmall.get()
                                 )
-                                .modifier(PanelAppearance(5, self.displayState))
                             }
                         }
                         .opacity(1.0)
@@ -166,7 +165,7 @@ struct ValidatorListView: View {
                             : 0,
                         alignment: .bottom
                     )
-                    .disabled(self.viewModel.isLoading)
+                    .disabled(self.viewModel.isLoading && self.viewModel.validators.count == 0)
                     .opacity(self.filterSectionOpacity)
                     .modifier(PanelAppearance(2, self.displayState))
                 }
@@ -242,7 +241,7 @@ struct ValidatorListView: View {
                     }
                 }
             }
-            .disabled(self.viewModel.isLoading)
+            .disabled(self.viewModel.isLoading && self.viewModel.validators.count == 0)
             .zIndex(0)
             FooterGradientView()
                 .zIndex(1)
