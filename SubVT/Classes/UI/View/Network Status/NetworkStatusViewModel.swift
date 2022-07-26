@@ -75,6 +75,7 @@ class NetworkStatusViewModel: ObservableObject {
         }
         if self.networkStatusServiceStatusSubscription == nil {
             self.networkStatusServiceStatusSubscription = self.networkStatusService.$status
+                .receive(on: DispatchQueue.main)
                 .sink {
                     [weak self]
                     (status) in
@@ -84,6 +85,7 @@ class NetworkStatusViewModel: ObservableObject {
         self.networkStatusServiceSubscription?.cancel()
         self.networkStatusServiceSubscription = self.networkStatusService
             .subscribe()
+            .receive(on: DispatchQueue.main)
             .sink {
                 [weak self]
                 (completion) in
@@ -118,8 +120,6 @@ class NetworkStatusViewModel: ObservableObject {
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false
                     print("network status unsubscribed")
-                case .reconnectSuggested:
-                    break
                 }
             }
     }

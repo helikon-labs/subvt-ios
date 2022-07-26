@@ -115,5 +115,7 @@ extension UI.Dimension {
                 }
             }
         }
+        static var connectionStatusSize = UI.Dimension(7, 10)
+        static var connectionStatusSizeSmall = UI.Dimension(5, 7.2)
     }
 }

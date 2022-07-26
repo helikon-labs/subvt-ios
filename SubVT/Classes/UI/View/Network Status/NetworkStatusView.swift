@@ -20,6 +20,7 @@ struct NetworkStatusView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @StateObject private var viewModel = NetworkStatusViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
@@ -66,64 +67,84 @@ struct NetworkStatusView: View {
         self.blockTimerSubscription = nil
     }
     
+    private var headerView: some View {
+        VStack {
+            Spacer()
+                .frame(height: UI.Dimension.Common.titleMarginTop)
+            HStack(alignment: .center) {
+                HStack(alignment: .top, spacing: 0) {
+                    Text(localized("network_status.title"))
+                        .font(UI.Font.NetworkStatus.title)
+                        .foregroundColor(Color("Text"))
+                    Spacer()
+                        .frame(
+                            width: UI.Dimension.NetworkStatus.connectionStatusMarginLeft.get()
+                        )
+                    WSRPCStatusIndicatorView(
+                        status: self.viewModel.networkStatusServiceStatus,
+                        isConnected: self.networkMonitor.isConnected,
+                        size: UI.Dimension.Common.connectionStatusSize.get()
+                    )
+                    .modifier(PanelAppearance(5, self.displayState))
+                }
+                .modifier(PanelAppearance(0, self.displayState))
+                Spacer()
+                Button(
+                    action: {
+                        self.networkSelectorIsOpen.toggle()
+                    },
+                    label: {
+                        NetworkSelectorButtonView(
+                            network: self.network,
+                            displayType: .selector(isOpen: networkSelectorIsOpen)
+                        )
+                    }
+                )
+                .buttonStyle(NetworkSelectorButtonStyle())
+                .modifier(PanelAppearance(1, self.displayState))
+            }
+        }
+        .padding(EdgeInsets(
+            top: 0,
+            leading: UI.Dimension.Common.padding,
+            bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
+            trailing: UI.Dimension.Common.padding
+        ))
+        .background(
+            VisualEffectView(effect: UIBlurEffect(
+                style: .systemUltraThinMaterial
+            ))
+            .cornerRadius(
+                UI.Dimension.Common.headerBlurViewCornerRadius,
+                corners: [.bottomLeft, .bottomRight]
+            )
+            .opacity(self.headerMaterialOpacity)
+            .modifier(PanelAppearance(
+                0,
+                self.displayState,
+                animateOffset: false
+            ))
+        )
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
-            VStack {
-                Spacer()
-                    .frame(height: UI.Dimension.Common.titleMarginTop)
-                HStack(alignment: .center) {
-                    HStack(alignment: .top, spacing: 0) {
-                        Text(localized("network_status.title"))
-                            .font(UI.Font.NetworkStatus.title)
-                            .foregroundColor(Color("Text"))
-                        Spacer()
-                            .frame(width: UI.Dimension.NetworkStatus.connectionStatusMarginLeft.get())
-                        Circle()
-                            .frame(
-                                width: UI.Dimension.NetworkStatus.connectionStatusSize.get(),
-                                height: UI.Dimension.NetworkStatus.connectionStatusSize.get()
-                            )
-                            .foregroundColor(viewModel.networkStatusServiceStatus.color)
-                    }
-                    .modifier(PanelAppearance(0, self.displayState))
-                    Spacer()
-                    Button(
-                        action: {
-                            self.networkSelectorIsOpen.toggle()
-                        },
-                        label: {
-                            NetworkSelectorButtonView(
-                                network: self.network,
-                                displayType: .selector(isOpen: networkSelectorIsOpen)
-                            )
-                        }
-                    )
-                    .buttonStyle(NetworkSelectorButtonStyle())
-                    .modifier(PanelAppearance(1, self.displayState))
-                }
-            }
-            .padding(EdgeInsets(
-                top: 0,
-                leading: UI.Dimension.Common.padding,
-                bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
-                trailing: UI.Dimension.Common.padding
-            ))
-            .background(
-                VisualEffectView(effect: UIBlurEffect(
-                    style: .systemUltraThinMaterial
-                ))
-                .cornerRadius(
-                    UI.Dimension.Common.headerBlurViewCornerRadius,
-                    corners: [.bottomLeft, .bottomRight]
-                )
-                .opacity(self.headerMaterialOpacity)
-                .modifier(PanelAppearance(
-                    0,
-                    self.displayState,
-                    animateOffset: false
-                ))
-            )
-            .zIndex(2)
+            NavigationLink(
+                destination: ValidatorListView(
+                    isVisible: self.$showsActiveValidatorList,
+                    mode: .active
+                ),
+                isActive: self.$showsActiveValidatorList
+            ) {}
+            NavigationLink(
+                destination: ValidatorListView(
+                    isVisible: self.$showsInactiveValidatorList,
+                    mode: .inactive
+                ),
+                isActive: self.$showsInactiveValidatorList
+            ) { }
+            headerView
+                .zIndex(2)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
@@ -131,21 +152,9 @@ struct NetworkStatusView: View {
                             .id(0)
                             .frame(height: UI.Dimension.Common.contentAfterTitleMarginTop)
                         HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                            NavigationLink(
-                                destination: ValidatorListView(
-                                    isVisible: self.$showsActiveValidatorList,
-                                    mode: .active
-                                ),
-                                isActive: self.$showsActiveValidatorList
-                            ) { EmptyView() }
                             Button(
                                 action: {
                                     self.showsActiveValidatorList = true
-                                    /*
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                                        scrollViewProxy.scrollTo(0)
-                                    }
-                                     */
                                 },
                                 label: {
                                     ValidatorListButtonView(
@@ -158,13 +167,6 @@ struct NetworkStatusView: View {
                             )
                             .buttonStyle(ValidatorListButtonStyle())
                             .modifier(PanelAppearance(2, self.displayState))
-                            NavigationLink(
-                                destination: ValidatorListView(
-                                    isVisible: self.$showsInactiveValidatorList,
-                                    mode: .inactive
-                                ),
-                                isActive: self.$showsInactiveValidatorList
-                            ) { EmptyView() }
                             Button(
                                 action: {
                                     self.showsInactiveValidatorList = true
