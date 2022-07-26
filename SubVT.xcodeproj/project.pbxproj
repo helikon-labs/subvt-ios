@@ -67,6 +67,9 @@
 		A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */; };
 		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
+		A06E15A3288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */; };
+		A06E15A6288FF69F00694CC8 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */; };
+		A06E15A7288FF69F00694CC8 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */; };
 		A072C337287805A6001636F9 /* EraEpochView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C336287805A6001636F9 /* EraEpochView.swift */; };
 		A072C338287805A6001636F9 /* EraEpochView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C336287805A6001636F9 /* EraEpochView.swift */; };
 		A072C33B28780685001636F9 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = A072C33A28780685001636F9 /* Either.swift */; };
@@ -250,6 +253,8 @@
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 		A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummaryView.swift; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
+		A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRPCStatusIndicatorView.swift; sourceTree = "<group>"; };
+		A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		A072C336287805A6001636F9 /* EraEpochView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraEpochView.swift; sourceTree = "<group>"; };
 		A072C33A28780685001636F9 /* Either.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		A0744D892885865D008A06DD /* ValidatorListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorListViewModel.swift; sourceTree = "<group>"; };
@@ -426,10 +431,10 @@
 		A0128A6B284A4E9D000C2307 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				A0128A6C284A4EAE000C2307 /* Color.swift */,
 				A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */,
-				A04C47292887F1C30004A46A /* View.swift */,
+				A0128A6C284A4EAE000C2307 /* Color.swift */,
 				A0118246288D48C500EC51BD /* UINavigationController.swift */,
+				A04C47292887F1C30004A46A /* View.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -467,6 +472,7 @@
 				A0D03348288B01C5001F78D2 /* SmallCheckboxButtonView.swift */,
 				A07BA814285B556E00575683 /* SnackbarView.swift */,
 				A0F574D928870467002849FC /* VisualEffectView.swift */,
+				A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -503,6 +509,14 @@
 				A0D0334B288B08E2001F78D2 /* PressAction.swift */,
 			);
 			path = "View Modifier";
+			sourceTree = "<group>";
+		};
+		A06E15A4288FF68B00694CC8 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		A072C33928780676001636F9 /* Type */ = {
@@ -694,6 +708,7 @@
 				A0128A48284A0B46000C2307 /* App */,
 				A0C9838528759E0E0008C370 /* Data */,
 				A04B37B92876BA7E00912BF3 /* Extension */,
+				A06E15A4288FF68B00694CC8 /* Network */,
 				A0128A43284A09C6000C2307 /* Persistence */,
 				A072C33928780676001636F9 /* Type */,
 				A0E0F6852848CEDD0029DDBF /* UI */,
@@ -901,6 +916,7 @@
 				A0BF909E2848C1EC0053389A /* Persistence.swift in Sources */,
 				A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */,
 				A078727C287C1A3300BED374 /* DataFetchState.swift in Sources */,
+				A06E15A6288FF69F00694CC8 /* NetworkMonitor.swift in Sources */,
 				A0128A6D284A4EAE000C2307 /* Color.swift in Sources */,
 				A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
@@ -948,6 +964,7 @@
 				A0D205D2288C1E7D0040CB08 /* FooterGradientView.swift in Sources */,
 				A0744D8E2885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0787280287C456300BED374 /* ActionButtonView.swift in Sources */,
+				A06E15A3288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A04C473128882AC40004A46A /* ValidatorSummary.swift in Sources */,
@@ -977,6 +994,7 @@
 				A04C473228882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */,
+				A06E15A7288FF69F00694CC8 /* NetworkMonitor.swift in Sources */,
 				A0744D8F2885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0BCDE6828785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */,

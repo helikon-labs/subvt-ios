@@ -18,6 +18,7 @@ struct ValidatorListView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @StateObject private var viewModel = ValidatorListViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor()
     @Binding var isVisible: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
@@ -90,13 +91,6 @@ struct ValidatorListView: View {
                             Button(
                                 action: {
                                     self.viewModel.unsubscribe()
-                                    /*
-                                    self.displayState = .dissolved
-                                    DispatchQueue.main.asyncAfter(
-                                        deadline: .now() + 1.0) {
-                                            // self.isRunning = false
-                                        }
-                                     */
                                     self.isVisible = false
                                 },
                                 label: {
@@ -106,12 +100,22 @@ struct ValidatorListView: View {
                             .buttonStyle(PushButtonStyle())
                             Spacer()
                                 .frame(width: UI.Dimension.ValidatorList.titleMarginLeft)
-                            Text(self.mode == .active
-                                 ? localized("active_validator_list.title")
-                                 : localized("inactive_validator_list.title")
-                            )
-                            .font(UI.Font.ValidatorList.title)
-                            .foregroundColor(Color("Text"))
+                            HStack(alignment: .top, spacing: 0) {
+                                Text(self.mode == .active
+                                     ? localized("active_validator_list.title")
+                                     : localized("inactive_validator_list.title")
+                                )
+                                .font(UI.Font.ValidatorList.title)
+                                .foregroundColor(Color("Text"))
+                                Spacer()
+                                    .frame(width: 6)
+                                WSRPCStatusIndicatorView(
+                                    status: self.viewModel.serviceStatus,
+                                    isConnected: self.networkMonitor.isConnected,
+                                    size: UI.Dimension.Common.connectionStatusSizeSmall.get()
+                                )
+                                .modifier(PanelAppearance(5, self.displayState))
+                            }
                         }
                         .opacity(1.0)
                         Spacer()
@@ -242,7 +246,7 @@ struct ValidatorListView: View {
             .zIndex(0)
             FooterGradientView()
                 .zIndex(1)
-            if self.viewModel.isLoading {
+            if self.viewModel.isLoading && self.viewModel.validators.count == 0 {
                 ZStack {
                     ProgressView()
                         .progressViewStyle(
@@ -268,8 +272,8 @@ struct ValidatorListView: View {
             alignment: .leading
         )
         .onAppear() {
+            UITextField.appearance().clearButtonMode = .whileEditing
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                UITextField.appearance().clearButtonMode = .whileEditing
                 self.displayState = .appeared
                 self.viewModel.subscribeToValidatorList(
                     network: self.network,

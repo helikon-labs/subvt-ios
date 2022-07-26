@@ -20,7 +20,7 @@ extension RPCSubscriptionServiceStatus {
                 return Color("StatusWaiting")
             case .idle:
                 return Color("StatusIdle")
-            case .disconnected(_, _):
+            case .disconnected:
                 fallthrough
             case .error(_):
                 return Color("StatusError")

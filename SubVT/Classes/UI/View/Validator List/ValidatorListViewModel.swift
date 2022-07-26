@@ -35,6 +35,7 @@ class ValidatorListViewModel: ObservableObject {
     private var network: Network! = nil
     private var innerValidators: [ValidatorSummary] = []
     private var cancellables = Set<AnyCancellable>()
+    private let lock = NSLock()
     
     init() {
         Publishers.CombineLatest3(
@@ -54,8 +55,6 @@ class ValidatorListViewModel: ObservableObject {
     }
     
     private func initService() {
-        
-        
         if let rpcHost = (self.mode == .active)
             ? self.network?.activeValidatorListServiceHost
             : self.network?.inactiveValidatorListServiceHost,
@@ -105,6 +104,7 @@ class ValidatorListViewModel: ObservableObject {
         }
         if self.serviceStatusSubscription == nil {
             self.serviceStatusSubscription = self.service.$status
+                .receive(on: DispatchQueue.main)
                 .sink {
                     [weak self]
                     (status) in
@@ -114,6 +114,7 @@ class ValidatorListViewModel: ObservableObject {
         self.serviceSubscription?.cancel()
         self.serviceSubscription = self.service
             .subscribe()
+            .receive(on: DispatchQueue.main)
             .sink {
                 [weak self]
                 (completion) in
@@ -142,8 +143,12 @@ class ValidatorListViewModel: ObservableObject {
                     print("insert \(update.insert.count) validators")
                     print("update \(update.update.count) validators")
                     print("remove \(update.removeIds.count) validators")
+                    self.lock.lock()
                     for validator in update.insert {
-                        withAnimation(.spring()) {
+                        let index = self.innerValidators.firstIndex { existingValidator in
+                            validator.accountId == existingValidator.accountId
+                        }
+                        if index == nil {
                             self.innerValidators.append(validator)
                         }
                     }
@@ -161,6 +166,7 @@ class ValidatorListViewModel: ObservableObject {
                             self.innerValidators[index].apply(diff: validatorDiff)
                         }
                     }
+                    self.lock.unlock()
                     self.filterAndSortValidators(
                         searchText: self.searchText,
                         filterOptions: self.filterOptions,
@@ -170,8 +176,6 @@ class ValidatorListViewModel: ObservableObject {
                     self.subscriptionIsInProgress = false
                     self.isLoading = false
                     print("validator list unsubscribed")
-                case .reconnectSuggested:
-                    break
                 }
             }
     }
@@ -181,6 +185,7 @@ class ValidatorListViewModel: ObservableObject {
         filterOptions: Set<FilterOption>,
         sortOption: SortOption?
     ) {
+        self.lock.lock()
         self.validators = self.innerValidators
             .filter { searchText.isEmpty || $0.filter(searchText) }
             .filter { !filterOptions.contains(.hasIdentity) || $0.hasIdentity() }
@@ -190,5 +195,6 @@ class ValidatorListViewModel: ObservableObject {
                 }
                 return $0.compare(sortOption: sortOption, $1)
             }
+        self.lock.unlock()
     }
 }
