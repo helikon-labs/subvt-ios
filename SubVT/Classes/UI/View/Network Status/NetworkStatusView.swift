@@ -26,7 +26,11 @@ struct NetworkStatusView: View {
     @State private var headerMaterialOpacity = 0.0
     @State private var networkSelectorIsOpen = false
     @State private var blockTimerSubscription: Cancellable?
-    @State private var blockTimer = Timer.publish(every: blockTimerPeriodSec, on: .main, in: .common)
+    @State private var blockTimer = Timer.publish(
+        every: blockTimerPeriodSec,
+        on: .main,
+        in: .common
+    )
     @State private var blockWaveParameters = BlockWaveParameters(
         offset: Angle(degrees: 0),
         progress: 0.0,
@@ -85,7 +89,7 @@ struct NetworkStatusView: View {
                         isConnected: self.networkMonitor.isConnected,
                         size: UI.Dimension.Common.connectionStatusSize.get()
                     )
-                    .modifier(PanelAppearance(5, self.displayState))
+                    //.modifier(PanelAppearance(5, self.displayState))
                 }
                 .modifier(PanelAppearance(0, self.displayState))
                 Spacer()
@@ -131,14 +135,14 @@ struct NetworkStatusView: View {
         ZStack(alignment: .top) {
             NavigationLink(
                 destination: ValidatorListView(
-                    isVisible: self.$showsActiveValidatorList,
+                    isActive: self.$showsActiveValidatorList,
                     mode: .active
                 ),
                 isActive: self.$showsActiveValidatorList
             ) {}
             NavigationLink(
                 destination: ValidatorListView(
-                    isVisible: self.$showsInactiveValidatorList,
+                    isActive: self.$showsInactiveValidatorList,
                     mode: .inactive
                 ),
                 isActive: self.$showsInactiveValidatorList

@@ -10,8 +10,6 @@ import SwiftUI
 extension UI.Dimension {
     enum NetworkStatus {
         static var connectionStatusMarginLeft = UI.Dimension(4, 9)
-        static let networkIconSize: CGFloat = 18
-        static let networkSelectorPadding: CGFloat = 10
         static var validatorCountPanelHeight = UI.Dimension(128, 190)
         static var scrollContentMarginBottom: CGFloat {
             get {

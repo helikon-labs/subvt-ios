@@ -95,6 +95,12 @@ class ValidatorListViewModel: ObservableObject {
         network: Network,
         mode: ValidatorListView.Mode
     ) {
+        switch self.serviceStatus {
+        case .subscribed(_):
+            return
+        default:
+            break
+        }
         self.mode = mode
         self.subscriptionIsInProgress = true
         self.isLoading = true

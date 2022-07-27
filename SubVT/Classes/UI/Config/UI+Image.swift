@@ -150,5 +150,23 @@ extension UI {
                 }
             }
         }
+        
+        enum ValidatorDetails {
+            static func addValidatorIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("AddValidatorIconDark")
+                } else {
+                    return SwiftUI.Image("AddValidatorIconLight")
+                }
+            }
+            
+            static func validatorReportsIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("ValidatorReportsIconDark")
+                } else {
+                    return SwiftUI.Image("ValidatorReportsIconLight")
+                }
+            }
+        }
     }
 }

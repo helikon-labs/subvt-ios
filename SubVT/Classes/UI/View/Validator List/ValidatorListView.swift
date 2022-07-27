@@ -19,7 +19,7 @@ struct ValidatorListView: View {
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @StateObject private var viewModel = ValidatorListViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
-    @Binding var isVisible: Bool
+    @Binding var isActive: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var filterSectionIsVisible = true
@@ -91,7 +91,7 @@ struct ValidatorListView: View {
                             Button(
                                 action: {
                                     self.viewModel.unsubscribe()
-                                    self.isVisible = false
+                                    self.isActive = false
                                 },
                                 label: {
                                     BackButtonView()
@@ -209,8 +209,12 @@ struct ValidatorListView: View {
                             .frame(height: UI.Dimension.ValidatorList.scrollContentMarginTop)
                         ForEach(self.viewModel.validators, id: \.self.address) {
                             validator in
-                            ValidatorSummaryView(validatorSummary: validator)
-                                .transition(.opacity.combined(with: .move(edge: .bottom)))
+                            NavigationLink {
+                                ValidatorDetailsView(accountId: validator.accountId)
+                            } label: {
+                                ValidatorSummaryView(validatorSummary: validator)
+                            }
+                            .buttonStyle(PushButtonStyle())
                         }
                         Spacer()
                             .frame(
@@ -290,6 +294,6 @@ struct ValidatorListView: View {
 
 struct ValidatorListView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorListView(isVisible: .constant(true), mode: .active)
+        ValidatorListView(isActive: .constant(true), mode: .active)
     }
 }

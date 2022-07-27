@@ -38,25 +38,31 @@ struct NetworkSelectorButtonView: View {
             UI.Image.NetworkSelection.networkIcon(network: network)
                 .resizable()
             .frame(
-                width: UI.Dimension.NetworkStatus.networkIconSize,
-                height: UI.Dimension.NetworkStatus.networkIconSize
+                width: UI.Dimension.Common.networkSelectorIconSize,
+                height: UI.Dimension.Common.networkSelectorIconSize
             )
             Spacer()
-                .frame(width: UI.Dimension.NetworkStatus.networkSelectorPadding)
+                .frame(width: UI.Dimension.Common.networkSelectorPadding)
             Text(network.display)
                 .font(UI.Font.NetworkStatus.networkSelector)
                 .foregroundColor(Color("Text"))
             if self.displayType == DisplayType.selector(isOpen: true) {
                 Spacer()
-                    .frame(width: UI.Dimension.NetworkStatus.networkSelectorPadding)
+                    .frame(width: UI.Dimension.Common.networkSelectorPadding)
                 UI.Image.NetworkStatus.arrowUp(self.colorScheme)
             } else if self.displayType == .selector(isOpen: false) {
                 Spacer()
-                    .frame(width: UI.Dimension.NetworkStatus.networkSelectorPadding)
+                    .frame(width: UI.Dimension.Common.networkSelectorPadding)
                 UI.Image.NetworkStatus.arrowDown(self.colorScheme)
             }
         }
-        .padding(UI.Dimension.NetworkStatus.networkSelectorPadding)
+        .frame(height: UI.Dimension.Common.networkSelectorHeight)
+        .padding(EdgeInsets(
+            top: 0,
+            leading: UI.Dimension.Common.networkSelectorPadding,
+            bottom: 0,
+            trailing: UI.Dimension.Common.networkSelectorPadding
+        ))
         .background(Color("NetworkSelectorBg"))
         .cornerRadius(UI.Dimension.Common.cornerRadius)
     }

@@ -56,6 +56,8 @@
 		A04C473128882AC40004A46A /* ValidatorSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C473028882AC40004A46A /* ValidatorSummary.swift */; };
 		A04C473228882AC40004A46A /* ValidatorSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C473028882AC40004A46A /* ValidatorSummary.swift */; };
 		A04C473328882AC40004A46A /* ValidatorSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04C473028882AC40004A46A /* ValidatorSummary.swift */; };
+		A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052C15028913C4400622D9F /* ValidatorDetailsView.swift */; };
+		A052C15228913C4400622D9F /* ValidatorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052C15028913C4400622D9F /* ValidatorDetailsView.swift */; };
 		A05B25A1287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
 		A05B25A2287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
 		A05B25A4287ECBE30070EF81 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A3287ECBE30070EF81 /* Counter.swift */; };
@@ -313,6 +315,7 @@
 		A04C47292887F1C30004A46A /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		A04C472C288814DA0004A46A /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
 		A04C473028882AC40004A46A /* ValidatorSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummary.swift; sourceTree = "<group>"; };
+		A052C15028913C4400622D9F /* ValidatorDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailsView.swift; sourceTree = "<group>"; };
 		A05B25A0287EB7450070EF81 /* PanelAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelAppearance.swift; sourceTree = "<group>"; };
 		A05B25A3287ECBE30070EF81 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		A05B25A9287EDB530070EF81 /* UI+Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Duration.swift"; sourceTree = "<group>"; };
@@ -494,6 +497,7 @@
 				A0C9A77D28573D930071C7AC /* Network Selection */,
 				A0C983942875AC690008C370 /* Network Status */,
 				A0128A53284A1855000C2307 /* Onboarding */,
+				A052C14F289137B600622D9F /* Validator Details */,
 				A0744D8828858639008A06DD /* Validator List */,
 			);
 			path = View;
@@ -603,6 +607,14 @@
 				A04C473028882AC40004A46A /* ValidatorSummary.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A052C14F289137B600622D9F /* Validator Details */ = {
+			isa = PBXGroup;
+			children = (
+				A052C15028913C4400622D9F /* ValidatorDetailsView.swift */,
+			);
+			path = "Validator Details";
 			sourceTree = "<group>";
 		};
 		A05B259F287EB6FD0070EF81 /* View Modifier */ = {
@@ -1253,6 +1265,7 @@
 				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
+				A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A04C47272887F19F0004A46A /* RoundedCorner.swift in Sources */,
 				A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */,
 				A0787278287C198F00BED374 /* IntroductionViewModel.swift in Sources */,
@@ -1313,6 +1326,7 @@
 				A0B3A6BC287D9BE9005DA484 /* CGFloat.swift in Sources */,
 				A07BA81F285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
 				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
+				A052C15228913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A0128A6E284A4EAE000C2307 /* Color.swift in Sources */,
 				A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */,

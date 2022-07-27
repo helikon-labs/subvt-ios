@@ -70,6 +70,7 @@ struct HomeView: View {
             }
         }
         //.navigationBarTitleDisplayMode(.inline)
+        .navigationViewStyle(.stack)
         .onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 self.displayState = .appeared

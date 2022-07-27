@@ -68,6 +68,12 @@ class NetworkStatusViewModel: ObservableObject {
         onStatus: @escaping () -> (),
         onDiff: @escaping () -> ()
     ) {
+        switch self.networkStatusServiceStatus {
+        case .subscribed(_):
+            return
+        default:
+            break
+        }
         self.subscriptionIsInProgress = true
         self.network = network
         if self.networkStatusService == nil {

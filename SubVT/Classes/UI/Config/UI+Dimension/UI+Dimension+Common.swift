@@ -117,5 +117,9 @@ extension UI.Dimension {
         }
         static var connectionStatusSize = UI.Dimension(7, 10)
         static var connectionStatusSizeSmall = UI.Dimension(5, 7.2)
+        
+        static let networkSelectorIconSize: CGFloat = 18
+        static let networkSelectorPadding: CGFloat = 10
+        static let networkSelectorHeight: CGFloat = 36
     }
 }
