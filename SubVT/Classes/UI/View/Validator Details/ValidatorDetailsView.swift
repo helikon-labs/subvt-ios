@@ -228,7 +228,7 @@ struct ValidatorDetailsView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
-                        IdenticonSceneView()
+                        IdenticonSceneView(accountId: self.validatorSummary.accountId)
                             .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
                             // .background(Color.clear)
                             .modifier(PanelAppearance(5, self.displayState))
