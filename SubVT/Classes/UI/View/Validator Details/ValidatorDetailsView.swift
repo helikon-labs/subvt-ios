@@ -320,6 +320,12 @@ struct ValidatorDetailsView: View {
             alignment: .leading
         )
         .onAppear() {
+            UIApplication.shared.sendAction(
+                #selector(UIResponder.resignFirstResponder),
+                to: nil,
+                from: nil,
+                for: nil
+            )
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {

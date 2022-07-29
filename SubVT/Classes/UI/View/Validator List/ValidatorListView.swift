@@ -136,6 +136,7 @@ struct ValidatorListView: View {
                                 text: self.$viewModel.searchText
                             )
                             .font(UI.Font.ValidatorList.search)
+                            .disableAutocorrection(true)
                         }
                         .frame(height: UI.Dimension.Common.searchBarHeight)
                         .padding(EdgeInsets(

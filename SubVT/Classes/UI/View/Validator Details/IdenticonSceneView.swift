@@ -9,6 +9,8 @@ import SceneKit
 import SubVTData
 import SwiftUI
 
+fileprivate let sphereOrdering = [18, 13, 16, 15, 7, 4, 3, 6, 5, 10, 11, 0, 8, 1, 9, 17, 2, 14, 12]
+
 fileprivate var cubeMaterial: SCNMaterial = {
     let material = SCNMaterial()
     material.lightingModel = .blinn
@@ -29,7 +31,7 @@ fileprivate var cubeMaterial: SCNMaterial = {
     return material
 }()
 
-fileprivate func getBallMaterial(color: Color) -> SCNMaterial {
+fileprivate func getSphereMaterial(color: Color) -> SCNMaterial {
     let material = SCNMaterial()
     material.lightingModel = .phong
     material.diffuse.contents = UIColor(color) // color
@@ -38,14 +40,14 @@ fileprivate func getBallMaterial(color: Color) -> SCNMaterial {
     return material
 }
 
-fileprivate func getBallPBRMaterial(color: Color) -> SCNMaterial {
+fileprivate func getSpherePBRMaterial(color: Color) -> SCNMaterial {
     let material = SCNMaterial()
     material.lightingModel = .physicallyBased
     material.diffuse.contents = UIColor(color)
-    material.roughness.contents = UIImage(named: "ball-roughness.png")!
-    material.metalness.contents = UIColor.black // UIImage(named: "ball-metallic.png")!
-    material.normal.contents = UIImage(named: "ball-normal-ogl.png")!
-    material.ambientOcclusion.contents = UIImage(named: "ball-ao.png")!
+    material.roughness.contents = UIImage(named: "sphere-roughness.png")!
+    material.metalness.contents = UIColor.black // UIImage(named: "sphere-metallic.png")!
+    material.normal.contents = UIImage(named: "sphere-normal-ogl.png")!
+    material.ambientOcclusion.contents = UIImage(named: "sphere-ao.png")!
     return material
 }
 
@@ -77,25 +79,33 @@ fileprivate func getOmniLight(
 }
 
 fileprivate func getScene(accountId: AccountId) -> SCNScene {
-    let ballsScene = SCNScene(named: "balls_gather.scn")!
+    let spheresScene = SCNScene(named: "spheres_gather.scn")!
     let cubeScene = SCNScene(named: "cube.obj")!
-    let child = cubeScene.rootNode.childNodes[0]
-    child.name = "cube"
-    child.geometry?.firstMaterial = cubeMaterial
-    let ballsClone = ballsScene.rootNode.clone()
+    let cube = cubeScene.rootNode.childNodes[0]
+    cube.name = "cube"
+    cube.geometry?.firstMaterial = cubeMaterial
+    let spheres = spheresScene.rootNode.clone()
     if let colors = try? accountId.getIdenticonColors() {
-        print("colors \(colors.count)")
-        for (index, child) in ballsClone.childNodes.enumerated() {
+        for (index, color) in colors.enumerated() {
+            let sphere = spheres.childNodes[sphereOrdering[index]]
+            let player = sphere.animationPlayer(forKey: sphere.animationKeys[0])
+            player?.animation.repeatCount = 1
+            player?.animation.startDelay = 0.5
+            sphere.geometry?.firstMaterial = getSpherePBRMaterial(color: color)
+        }
+        /*
+        for (index, child) in spheresClone.childNodes.enumerated() {
             // child.removeAllAnimations(withBlendOutDuration: 0)
             let player = child.animationPlayer(forKey: child.animationKeys[0])
             player?.animation.repeatCount = 1
             player?.animation.startDelay = 0.5
-            child.geometry?.firstMaterial = getBallPBRMaterial(color: colors[index])
+            child.geometry?.firstMaterial = getSpherePBRMaterial(color: colors[index])
             //child.geometry?.firstMaterial?.diffuse.contents = UIColor(colors[index])
         }
+         */
     }
-    ballsClone.name = "balls"
-    cubeScene.rootNode.addChildNode(ballsClone)
+    spheres.name = "spheres"
+    cubeScene.rootNode.addChildNode(spheres)
     // add lights
     cubeScene.rootNode.addChildNode(getAmbientLight("ambient-0"))
     cubeScene.rootNode.addChildNode(getOmniLight("light-0", 0.0, 12.0, -12.0))
