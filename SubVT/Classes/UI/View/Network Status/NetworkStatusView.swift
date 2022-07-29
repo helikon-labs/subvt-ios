@@ -36,8 +36,6 @@ struct NetworkStatusView: View {
         progress: 0.0,
         amplitude: currentBlockWaveAmplitude
     )
-    @State private var showsActiveValidatorList = false
-    @State private var showsInactiveValidatorList = false
     
     func onNetworkStatusReceived() {
         self.startBlockTimer()
@@ -133,20 +131,6 @@ struct NetworkStatusView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            NavigationLink(
-                destination: ValidatorListView(
-                    isActive: self.$showsActiveValidatorList,
-                    mode: .active
-                ),
-                isActive: self.$showsActiveValidatorList
-            ) {}
-            NavigationLink(
-                destination: ValidatorListView(
-                    isActive: self.$showsInactiveValidatorList,
-                    mode: .inactive
-                ),
-                isActive: self.$showsInactiveValidatorList
-            ) { }
             headerView
                 .zIndex(2)
             ScrollView {
@@ -156,36 +140,30 @@ struct NetworkStatusView: View {
                             .id(0)
                             .frame(height: UI.Dimension.Common.contentAfterTitleMarginTop)
                         HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                            Button(
-                                action: {
-                                    self.showsActiveValidatorList = true
-                                },
-                                label: {
-                                    ValidatorListButtonView(
-                                        title: LocalizedStringKey("active_validator_list.title"),
-                                        count: self.viewModel.networkStatus.activeValidatorCount,
-                                        eraValidatorCounts: self.viewModel.eraActiveValidatorCounts,
-                                        chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0
-                                    )
-                                }
-                            )
+                            NavigationLink {
+                                ValidatorListView(mode: .active)
+                            } label: {
+                                ValidatorListButtonView(
+                                    title: LocalizedStringKey("active_validator_list.title"),
+                                    count: self.viewModel.networkStatus.activeValidatorCount,
+                                    eraValidatorCounts: self.viewModel.eraActiveValidatorCounts,
+                                    chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0
+                                )
+                            }
                             .buttonStyle(ValidatorListButtonStyle())
                             .modifier(PanelAppearance(2, self.displayState))
-                            Button(
-                                action: {
-                                    self.showsInactiveValidatorList = true
-                                },
-                                label: {
-                                    ValidatorListButtonView(
-                                        title: LocalizedStringKey("inactive_validator_list.title"),
-                                        count: self.viewModel.networkStatus.inactiveValidatorCount,
-                                        eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts,
-                                        chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0
-                                    )
-                                }
-                            )
+                            NavigationLink {
+                                ValidatorListView(mode: .inactive)
+                            } label: {
+                                ValidatorListButtonView(
+                                    title: LocalizedStringKey("inactive_validator_list.title"),
+                                    count: self.viewModel.networkStatus.inactiveValidatorCount,
+                                    eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts,
+                                    chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0
+                                )
+                            }
                             .buttonStyle(ValidatorListButtonStyle())
-                            .modifier(PanelAppearance(3, self.displayState))
+                            .modifier(PanelAppearance(2, self.displayState))
                         }
                         if UIDevice.current.userInterfaceIdiom == .phone {
                             BlockNumberView(

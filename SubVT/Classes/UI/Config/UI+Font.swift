@@ -131,5 +131,9 @@ extension UI {
             static let display = LexendDeca.semiBold.withSize(18)
             static let balance = LexendDeca.light.withSize(12)
         }
+        
+        enum ValidatorDetails {
+            static let identityDisplay = LexendDeca.regular.withSize(28)
+        }
     }
 }

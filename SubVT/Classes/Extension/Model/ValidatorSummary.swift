@@ -31,7 +31,9 @@ extension ValidatorSummary {
             } else if let display = self.display {
                 return display
             } else {
-                return self.address
+                return self.address.prefix(UI.Text.addressPrefixCount)
+                    + "..."
+                    + self.address.suffix(UI.Text.addressPrefixCount)
             }
         }
     }

@@ -16,10 +16,10 @@ struct ValidatorListView: View {
     
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    @Environment(\.presentationMode) private var presentationMode
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @StateObject private var viewModel = ValidatorListViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
-    @Binding var isActive: Bool
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var filterSectionIsVisible = true
@@ -44,6 +44,12 @@ struct ValidatorListView: View {
     }
     
     private func onScroll(_ scroll: CGFloat) {
+        UIApplication.shared.sendAction(
+            #selector(UIResponder.resignFirstResponder),
+            to: nil,
+            from: nil,
+            for: nil
+        )
         self.headerMaterialOpacity = scroll / 20.0
         if self.filterSectionIsVisible {
             if scroll < self.lastScroll {
@@ -91,7 +97,7 @@ struct ValidatorListView: View {
                             Button(
                                 action: {
                                     self.viewModel.unsubscribe()
-                                    self.isActive = false
+                                    self.presentationMode.wrappedValue.dismiss()
                                 },
                                 label: {
                                     BackButtonView()
@@ -142,6 +148,12 @@ struct ValidatorListView: View {
                         .cornerRadius(UI.Dimension.Common.cornerRadius)
                         Button(
                             action: {
+                                UIApplication.shared.sendAction(
+                                    #selector(UIResponder.resignFirstResponder),
+                                    to: nil,
+                                    from: nil,
+                                    for: nil
+                                )
                                 self.popupIsVisible = true
                             },
                             label: {
@@ -210,7 +222,7 @@ struct ValidatorListView: View {
                         ForEach(self.viewModel.validators, id: \.self.address) {
                             validator in
                             NavigationLink {
-                                ValidatorDetailsView(accountId: validator.accountId)
+                                ValidatorDetailsView(validatorSummary: validator)
                             } label: {
                                 ValidatorSummaryView(validatorSummary: validator)
                             }
@@ -294,6 +306,6 @@ struct ValidatorListView: View {
 
 struct ValidatorListView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorListView(isActive: .constant(true), mode: .active)
+        ValidatorListView(mode: .active)
     }
 }

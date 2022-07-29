@@ -12,10 +12,120 @@ struct ValidatorDetailsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationMode) private var presentationMode
+    @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
+    @StateObject private var viewModel = ValidatorDetailsViewModel()
+    @StateObject private var networkMonitor = NetworkMonitor()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var lastScroll: CGFloat = 0
-    let accountId: AccountId
+    let validatorSummary: ValidatorSummary
+    
+    var identityDisplay: String {
+        return self.viewModel.validatorDetails?.identityDisplay
+            ?? validatorSummary.identityDisplay
+    }
+    
+    private var identityIcon: Image? {
+        if let account = self.viewModel.validatorDetails?.account {
+            if let _ = account.parent?.boxed.identity?.display {
+                if account.parent?.boxed.identity?.confirmed == true {
+                    return Image("ParentIdentityConfirmedIcon")
+                } else {
+                    return Image("ParentIdentityNotConfirmedIcon")
+                }
+            } else if account.identity?.display != nil {
+                if account.identity?.confirmed == true {
+                    return Image("IdentityConfirmedIcon")
+                } else {
+                    return Image("IdentityNotConfirmedIcon")
+                }
+            }
+        } else if self.validatorSummary.parentDisplay != nil {
+            if self.validatorSummary.confirmed {
+                return Image("ParentIdentityConfirmedIcon")
+            } else {
+                return Image("ParentIdentityNotConfirmedIcon")
+            }
+        } else if self.validatorSummary.display != nil {
+            if self.validatorSummary.confirmed {
+                return Image("IdentityConfirmedIcon")
+            } else {
+                return Image("IdentityNotConfirmedIcon")
+            }
+        }
+        return nil
+    }
+    
+    private func getIcon(_ name: String) -> some View {
+        return Button {
+            // no-op
+        } label: {
+            Image(name)
+                .resizable()
+                .frame(
+                    width: UI.Dimension.ValidatorDetails.iconSize,
+                    height: UI.Dimension.ValidatorDetails.iconSize
+                )
+        }
+        .buttonStyle(PushButtonStyle())
+
+    }
+    
+    private var isOneKV: Bool {
+        if let details = self.viewModel.validatorDetails {
+            return details.onekvCandidateRecordId != nil
+        } else {
+            return self.validatorSummary.isEnrolledIn1Kv
+        }
+    }
+    
+    private var isParaValidator: Bool {
+        if let details = self.viewModel.validatorDetails {
+            return details.isParaValidator
+        } else {
+            return self.validatorSummary.isParaValidator
+        }
+    }
+    
+    private var isActiveNextSession: Bool {
+        if let details = self.viewModel.validatorDetails {
+            return details.activeNextSession
+        } else {
+            return self.validatorSummary.activeNextSession
+        }
+    }
+    
+    private var heartbeatReceived: Bool {
+        if let details = self.viewModel.validatorDetails {
+            return details.heartbeatReceived ?? false
+        } else {
+            return self.validatorSummary.heartbeatReceived ?? false
+        }
+    }
+    
+    private var isOversubscribed: Bool {
+        if let details = self.viewModel.validatorDetails {
+            return details.oversubscribed
+        } else {
+            return self.validatorSummary.oversubscribed
+        }
+    }
+    
+    private var blocksNominations: Bool {
+        if let details = self.viewModel.validatorDetails {
+            return details.preferences.blocksNominations
+        } else {
+            return self.validatorSummary.preferences.blocksNominations
+        }
+    }
+    
+    private var hasBeenSlashed: Bool {
+        if let details = self.viewModel.validatorDetails {
+            return details.slashCount > 0
+        } else {
+            return self.validatorSummary.slashCount > 0
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -40,6 +150,7 @@ struct ValidatorDetailsView: View {
                     HStack(alignment: .center) {
                         Button(
                             action: {
+                                self.viewModel.unsubscribe()
                                 self.presentationMode.wrappedValue.dismiss()
                             },
                             label: {
@@ -51,7 +162,7 @@ struct ValidatorDetailsView: View {
                         NetworkSelectorButtonView()
                         Button(
                             action: {
-                                
+                                // add validator
                             },
                             label: {
                                 ZStack {
@@ -68,7 +179,7 @@ struct ValidatorDetailsView: View {
                         .buttonStyle(PushButtonStyle())
                         Button(
                             action: {
-                                
+                                // validator reports
                             },
                             label: {
                                 ZStack {
@@ -113,15 +224,46 @@ struct ValidatorDetailsView: View {
             .zIndex(1)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
-                    VStack {
-                        
+                    VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                        Spacer()
+                            .id(0)
+                            .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
+                        ZStack {
+                            Text("identicon")
+                        }
+                        .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
+                        .frame(maxWidth: .infinity)
+                        .background(Color.red)
+                        VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                            HStack(
+                                alignment: .center,
+                                spacing: UI.Dimension.ValidatorDetails.identityIconMarginRight
+                            ) {
+                                if let identityIcon = self.identityIcon {
+                                    identityIcon
+                                        .resizable()
+                                        .frame(
+                                            width: UI.Dimension.ValidatorDetails.identityIconSize,
+                                            height: UI.Dimension.ValidatorDetails.identityIconSize
+                                        )
+                                }
+                                Text(self.identityDisplay)
+                                    .font(UI.Font.ValidatorDetails.identityDisplay)
+                                    .foregroundColor(Color("Text"))
+                                    .lineLimit(1)
+                                    .minimumScaleFactor(0.5)
+                                    .truncationMode(.middle)
+                                Spacer()
+                                    .frame(width: UI.Dimension.ValidatorDetails.identityIconSize / 2)
+                            }
+                        }
+                        .padding(EdgeInsets(
+                            top: 0,
+                            leading: UI.Dimension.Common.padding,
+                            bottom: 0,
+                            trailing: UI.Dimension.Common.padding
+                        ))
                     }
-                    .padding(EdgeInsets(
-                        top: 0,
-                        leading: UI.Dimension.Common.padding,
-                        bottom: 0,
-                        trailing: UI.Dimension.Common.padding
-                    ))
                     .background(GeometryReader {
                         Color.clear
                             .preference(
@@ -134,6 +276,41 @@ struct ValidatorDetailsView: View {
                     }
                 }
             }
+            HStack(alignment: .center) {
+                if self.isOneKV {
+                    self.getIcon("1KVIcon")
+                }
+                if self.isParaValidator {
+                    self.getIcon("ParaValidatorIcon")
+                }
+                if self.isActiveNextSession {
+                    self.getIcon("ActiveNextSessionIcon")
+                }
+                if self.heartbeatReceived {
+                    self.getIcon("HeartbeatReceivedIcon")
+                }
+                if self.isOversubscribed {
+                    self.getIcon("OversubscribedIcon")
+                }
+                if self.blocksNominations {
+                    self.getIcon("BlocksNominationsIcon")
+                }
+                if self.blocksNominations {
+                    self.getIcon("BlocksNominationsIcon")
+                }
+                /*
+                if self.hasBeenSlashed {
+                    self.getIcon("SlashedIcon")
+                }
+                 */
+            }
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding(EdgeInsets(
+                top: 0,
+                leading: 0,
+                bottom: UI.Dimension.ValidatorDetails.iconContainerMarginBottom,
+                trailing: 0
+            ))
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
@@ -147,7 +324,10 @@ struct ValidatorDetailsView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                    // fetch data
+                    self.viewModel.subscribeToValidatorDetails(
+                        network: self.network,
+                        accountId: self.validatorSummary.accountId
+                    )
                 }
             }
         }
@@ -156,8 +336,6 @@ struct ValidatorDetailsView: View {
 
 struct ValidatorDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorDetailsView(accountId: AccountId.init(
-            hex: "0xA00505EB2A4607F27837F57232F0C456602E39540582685B4F58CDE293F1A116"
-        ))
+        ValidatorDetailsView(validatorSummary: PreviewData.validatorSummary)
     }
 }
