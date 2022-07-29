@@ -226,6 +226,14 @@
 		A0F285132879C08000E69C6B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
 		A0F574DA28870467002849FC /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F574D928870467002849FC /* VisualEffectView.swift */; };
 		A0F574DB28870467002849FC /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F574D928870467002849FC /* VisualEffectView.swift */; };
+		A0FD88282893B98000479C10 /* cube_environment.hdr in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88272893B98000479C10 /* cube_environment.hdr */; };
+		A0FD88292893B98000479C10 /* cube_environment.hdr in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88272893B98000479C10 /* cube_environment.hdr */; };
+		A0FD882C2893C1D300479C10 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = A0FD882A2893C1D300479C10 /* cube.obj */; };
+		A0FD882D2893C1D300479C10 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = A0FD882A2893C1D300479C10 /* cube.obj */; };
+		A0FD882E2893C1D300479C10 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = A0FD882B2893C1D300479C10 /* cube.mtl */; };
+		A0FD882F2893C1D300479C10 /* cube.mtl in Resources */ = {isa = PBXBuildFile; fileRef = A0FD882B2893C1D300479C10 /* cube.mtl */; };
+		A0FD88312893D3D500479C10 /* IdenticonSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FD88302893D3D500479C10 /* IdenticonSceneView.swift */; };
+		A0FD88322893D3D500479C10 /* IdenticonSceneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FD88302893D3D500479C10 /* IdenticonSceneView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -422,6 +430,10 @@
 		A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveView.swift; sourceTree = "<group>"; };
 		A0F285102879C08000E69C6B /* BlockWaveParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveParameters.swift; sourceTree = "<group>"; };
 		A0F574D928870467002849FC /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		A0FD88272893B98000479C10 /* cube_environment.hdr */ = {isa = PBXFileReference; lastKnownFileType = file; path = cube_environment.hdr; sourceTree = "<group>"; };
+		A0FD882A2893C1D300479C10 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
+		A0FD882B2893C1D300479C10 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.mtl; sourceTree = "<group>"; };
+		A0FD88302893D3D500479C10 /* IdenticonSceneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdenticonSceneView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -624,6 +636,7 @@
 		A052C14F289137B600622D9F /* Validator Details */ = {
 			isa = PBXGroup;
 			children = (
+				A0FD88302893D3D500479C10 /* IdenticonSceneView.swift */,
 				A052C15028913C4400622D9F /* ValidatorDetailsView.swift */,
 				A0AFF7F028926C8400B0CB4F /* ValidatorDetailsViewModel.swift */,
 			);
@@ -865,10 +878,11 @@
 			isa = PBXGroup;
 			children = (
 				A0BF90982848C1EC0053389A /* Assets.xcassets */,
+				A0FD88232893B65E00479C10 /* 3D */,
 				A0128A44284A0A14000C2307 /* Config */,
 				A0E0F6672848CD0A0029DDBF /* Fonts */,
-				A0BF909F2848C1EC0053389A /* SubVT.xcdatamodeld */,
 				A0128A6A284A47AD000C2307 /* Localizable.strings */,
+				A0BF909F2848C1EC0053389A /* SubVT.xcdatamodeld */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -926,6 +940,32 @@
 				A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */,
 			);
 			path = "Block Wave";
+			sourceTree = "<group>";
+		};
+		A0FD88232893B65E00479C10 /* 3D */ = {
+			isa = PBXGroup;
+			children = (
+				A0FD88342893D6F800479C10 /* Balls */,
+				A0FD88332893D6EB00479C10 /* Cube */,
+			);
+			path = 3D;
+			sourceTree = "<group>";
+		};
+		A0FD88332893D6EB00479C10 /* Cube */ = {
+			isa = PBXGroup;
+			children = (
+				A0FD882B2893C1D300479C10 /* cube.mtl */,
+				A0FD882A2893C1D300479C10 /* cube.obj */,
+				A0FD88272893B98000479C10 /* cube_environment.hdr */,
+			);
+			path = Cube;
+			sourceTree = "<group>";
+		};
+		A0FD88342893D6F800479C10 /* Balls */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Balls;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1128,11 +1168,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0FD882E2893C1D300479C10 /* cube.mtl in Resources */,
+				A0FD88282893B98000479C10 /* cube_environment.hdr in Resources */,
 				A0128A46284A0A32000C2307 /* data-env-example.json in Resources */,
 				A0E0F6752848CD1C0029DDBF /* LexendDeca-Regular.ttf in Resources */,
 				A0E0F67D2848CD1C0029DDBF /* LexendDeca-ExtraBold.ttf in Resources */,
 				A0128A67284A47AD000C2307 /* Localizable.strings in Resources */,
 				A0BF909C2848C1EC0053389A /* Preview Assets.xcassets in Resources */,
+				A0FD882C2893C1D300479C10 /* cube.obj in Resources */,
 				A0E0F6812848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf in Resources */,
 				A0E0F6792848CD1C0029DDBF /* LexendDeca-Medium.ttf in Resources */,
 				A0E0F6772848CD1C0029DDBF /* LexendDeca-Bold.ttf in Resources */,
@@ -1159,7 +1202,10 @@
 				A0E0F6742848CD1C0029DDBF /* LexendDeca-Light.ttf in Resources */,
 				A0E0F67A2848CD1C0029DDBF /* LexendDeca-Medium.ttf in Resources */,
 				A0128A68284A47AD000C2307 /* Localizable.strings in Resources */,
+				A0FD882D2893C1D300479C10 /* cube.obj in Resources */,
 				A0E0F67E2848CD1C0029DDBF /* LexendDeca-ExtraBold.ttf in Resources */,
+				A0FD88292893B98000479C10 /* cube_environment.hdr in Resources */,
+				A0FD882F2893C1D300479C10 /* cube.mtl in Resources */,
 				A0E0F6762848CD1C0029DDBF /* LexendDeca-Regular.ttf in Resources */,
 				A0E0F6802848CD1C0029DDBF /* LexendDeca-Thin.ttf in Resources */,
 				A0E0F6782848CD1C0029DDBF /* LexendDeca-Bold.ttf in Resources */,
@@ -1225,6 +1271,7 @@
 				A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */,
 				A078727C287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A06E15A6288FF69F00694CC8 /* NetworkMonitor.swift in Sources */,
+				A0FD88312893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
 				A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
 				A0C9838D2875ABF40008C370 /* OptionalCodable.swift in Sources */,
@@ -1346,6 +1393,7 @@
 				A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
 				A0B3A6BC287D9BE9005DA484 /* CGFloat.swift in Sources */,
 				A07BA81F285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
+				A0FD88322893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
 				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A052C15228913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,

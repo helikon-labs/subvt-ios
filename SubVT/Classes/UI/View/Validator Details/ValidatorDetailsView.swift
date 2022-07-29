@@ -20,6 +20,8 @@ struct ValidatorDetailsView: View {
     @State private var lastScroll: CGFloat = 0
     let validatorSummary: ValidatorSummary
     
+    
+    
     var identityDisplay: String {
         return self.viewModel.validatorDetails?.identityDisplay
             ?? validatorSummary.identityDisplay
@@ -158,8 +160,10 @@ struct ValidatorDetailsView: View {
                             }
                         )
                         .buttonStyle(PushButtonStyle())
+                        .modifier(PanelAppearance(1, self.displayState))
                         Spacer()
                         NetworkSelectorButtonView()
+                            .modifier(PanelAppearance(2, self.displayState))
                         Button(
                             action: {
                                 // add validator
@@ -177,6 +181,7 @@ struct ValidatorDetailsView: View {
                             }
                         )
                         .buttonStyle(PushButtonStyle())
+                        .modifier(PanelAppearance(3, self.displayState))
                         Button(
                             action: {
                                 // validator reports
@@ -194,9 +199,9 @@ struct ValidatorDetailsView: View {
                             }
                         )
                         .buttonStyle(PushButtonStyle())
+                        .modifier(PanelAppearance(4, self.displayState))
                     }
                     .frame(height: UI.Dimension.ValidatorList.titleSectionHeight)
-                    .modifier(PanelAppearance(1, self.displayState))
                 }
                 .padding(EdgeInsets(
                     top: 0,
@@ -214,11 +219,6 @@ struct ValidatorDetailsView: View {
                     corners: [.bottomLeft, .bottomRight]
                 )
                 .opacity(self.headerMaterialOpacity)
-                .modifier(PanelAppearance(
-                    0,
-                    self.displayState,
-                    animateOffset: false
-                ))
             )
             .frame(maxHeight: .infinity, alignment: .top)
             .zIndex(1)
@@ -228,12 +228,10 @@ struct ValidatorDetailsView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
-                        ZStack {
-                            Text("identicon")
-                        }
-                        .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.red)
+                        IdenticonSceneView()
+                            .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
+                            // .background(Color.clear)
+                            .modifier(PanelAppearance(5, self.displayState))
                         VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                             HStack(
                                 alignment: .center,
@@ -256,6 +254,7 @@ struct ValidatorDetailsView: View {
                                 Spacer()
                                     .frame(width: UI.Dimension.ValidatorDetails.identityIconSize / 2)
                             }
+                            .modifier(PanelAppearance(6, self.displayState))
                         }
                         .padding(EdgeInsets(
                             top: 0,
