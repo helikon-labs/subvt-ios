@@ -35,14 +35,17 @@ enum PreviewData {
         inactiveValidatorListServicePort: nil
     )
     
+    static let stashAccountId = AccountId(
+        hex: "0xDC89C6865C029C1088FB27B41C1A715B0BB611B94E1D625FA0BB8A1294187454"
+    )
+    static let controllerAccountId = AccountId(
+        hex: "0xC4F34F45D16DA9B285984A37A9FE72C7DB4A96E267B9A5313BE5DEC1A0843352"
+    )
+    
     static let validatorSummary = ValidatorSummary(
-        accountId: AccountId(
-            hex: "0xDC89C6865C029C1088FB27B41C1A715B0BB611B94E1D625FA0BB8A1294187454"
-        ),
+        accountId: stashAccountId,
         address: "HZUyowqk6wH6o8B4Asf7P7hLuRXy8hPheNCKevN5QFFRRdd",
-        controllerAccountId: AccountId(
-            hex: "0xC4F34F45D16DA9B285984A37A9FE72C7DB4A96E267B9A5313BE5DEC1A0843352"
-        ),
+        controllerAccountId: controllerAccountId,
         display: "Display",
         parentDisplay: "Parent",
         childDisplay: "Child",

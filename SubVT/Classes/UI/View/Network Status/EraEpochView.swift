@@ -164,7 +164,7 @@ struct EraEpochView: View {
                         .easeInOut(duration: UI.Duration.counterAnimation),
                         value: self.elapsedPercentage
                     )
-                    .font(UI.Font.NetworkStatus.dataMedium)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
                     Spacer()
                         .frame(width: 16)
@@ -225,7 +225,7 @@ struct EraEpochView: View {
                             self.elapsedPercentage
                         )
                     )
-                    .font(UI.Font.NetworkStatus.dataMedium)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
                     Spacer()
                         .frame(width: 16)

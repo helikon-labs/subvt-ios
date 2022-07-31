@@ -21,7 +21,7 @@ struct EraPointsBlocksProducedView: View {
                 Spacer()
                     .frame(height: 12)
                 Text(String(self.value))
-                    .font(UI.Font.NetworkStatus.dataMedium)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
                 Spacer()
                     .frame(height: UI.Dimension.Common.dataPanelPadding)
@@ -31,7 +31,7 @@ struct EraPointsBlocksProducedView: View {
                 Spacer()
                     .frame(height: 12)
                 Text(myValidatorsValue == nil ? "-" : String(myValidatorsValue!))
-                    .font(UI.Font.NetworkStatus.dataMedium)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
             }
             .padding(EdgeInsets(
@@ -51,7 +51,7 @@ struct EraPointsBlocksProducedView: View {
                     Spacer()
                         .frame(height: 12)
                     Text(String(self.value))
-                        .font(UI.Font.NetworkStatus.dataMedium)
+                        .font(UI.Font.Common.dataMedium)
                         .foregroundColor(Color("Text"))
                 }
                 Spacer()
@@ -62,7 +62,7 @@ struct EraPointsBlocksProducedView: View {
                     Spacer()
                         .frame(height: 12)
                     Text(myValidatorsValue == nil ? "-" : String(myValidatorsValue!))
-                        .font(UI.Font.NetworkStatus.dataMedium)
+                        .font(UI.Font.Common.dataMedium)
                         .foregroundColor(Color("Text"))
                 }
                 Spacer()

@@ -42,7 +42,7 @@ extension UI.Dimension {
         static func getLeftViewSize(
             colorScheme: ColorScheme,
             geometry: GeometryProxy,
-            step: BgMorphView.Step
+            step: BgMorphViewModel.Step
         ) -> (CGFloat, CGFloat) {
             if colorScheme == .dark {
                 switch step {
@@ -73,7 +73,7 @@ extension UI.Dimension {
         static func getLeftViewOffset(
             colorScheme: ColorScheme,
             geometry: GeometryProxy,
-            step: BgMorphView.Step
+            step: BgMorphViewModel.Step
         ) -> (CGFloat, CGFloat) {
             if colorScheme == .dark {
                 switch step {
@@ -136,7 +136,7 @@ extension UI.Dimension {
         
         static func leftViewRotation(
             colorScheme: ColorScheme,
-            step: BgMorphView.Step
+            step: BgMorphViewModel.Step
         ) -> Double {
             if colorScheme == .dark {
                 switch step {
@@ -181,7 +181,7 @@ extension UI.Dimension {
         
         static func getMiddleViewOffset(
             geometry: GeometryProxy,
-            step: BgMorphView.Step
+            step: BgMorphViewModel.Step
         ) -> (CGFloat, CGFloat) {
             switch step {
             case .start, .mid:
@@ -223,7 +223,7 @@ extension UI.Dimension {
         
         static func getRightViewOffset(
             geometry: GeometryProxy,
-            step: BgMorphView.Step
+            step: BgMorphViewModel.Step
         ) -> (CGFloat, CGFloat) {
             switch step {
             case .start:

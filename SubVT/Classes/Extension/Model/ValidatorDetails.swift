@@ -16,9 +16,7 @@ extension ValidatorDetails {
             } else if let display = self.account.identity?.display {
                 return display
             } else {
-                return self.account.address.prefix(UI.Text.addressPrefixCount)
-                    + "..."
-                    + self.account.address.suffix(UI.Text.addressPrefixCount)
+                return truncateAddress(self.account.address)
             }
         }
     }

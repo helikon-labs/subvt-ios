@@ -10,17 +10,17 @@ import SubVTData
 
 func formatBalance(
     balance: Balance,
-    tokenDecimalCount: Int,
+    tokenDecimalCount: UInt8,
     integerOnly: Bool = false
 ) -> String {
     var balanceString = balance.value.description
-    let addZeroCount = max(0, tokenDecimalCount + 1 - balanceString.count)
+    let addZeroCount = max(0, Int(tokenDecimalCount) + 1 - balanceString.count)
     if addZeroCount > 0 {
         for _ in 0..<addZeroCount {
             balanceString = "0" + balanceString
         }
     }
-    var decimalsString = balanceString.suffix(tokenDecimalCount)
+    var decimalsString = balanceString.suffix(Int(tokenDecimalCount))
     var integerString = String(balanceString.prefix(balanceString.count - decimalsString.count))
     integerString = Int(integerString)!.formattedWithSeparator
     if integerOnly {
@@ -28,4 +28,33 @@ func formatBalance(
     }
     decimalsString = decimalsString.prefix(4)
     return "\(integerString).\(decimalsString)"
+}
+
+func formatDecimal(
+    integer: UInt64,
+    decimalCount: UInt8,
+    formatDecimalCount: UInt8,
+    integerOnly: Bool = false
+) -> String {
+    var string = String(integer)
+    let addZeroCount = max(0, Int(decimalCount) + 1 - string.count)
+    if addZeroCount > 0 {
+        for _ in 0..<addZeroCount {
+            string = "0" + string
+        }
+    }
+    var decimalsString = string.suffix(Int(decimalCount))
+    var integerString = String(string.prefix(string.count - decimalsString.count))
+    integerString = Int(integerString)!.formattedWithSeparator
+    if integerOnly {
+        return integerString
+    }
+    decimalsString = decimalsString.prefix(Int(formatDecimalCount))
+    return "\(integerString).\(decimalsString)"
+}
+
+func truncateAddress(_ address: String) -> String {
+    return address.prefix(UI.Text.addressPrefixCount)
+        + "..."
+        + address.suffix(UI.Text.addressPrefixCount)
 }

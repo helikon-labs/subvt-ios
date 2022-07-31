@@ -34,5 +34,9 @@ extension UI.Dimension {
         static let iconSize: CGFloat = 40
         static let iconContainerMarginBottom: CGFloat = UI.Dimension.Common.bottomNotchHeight
             + UI.Dimension.Common.padding
+        static let balancePanelHeight: CGFloat = 62
+        static let scrollContentBottomSpacerHeight: CGFloat = iconContainerMarginBottom
+            + iconSize
+            + UI.Dimension.Common.padding * 2
     }
 }

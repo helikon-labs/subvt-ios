@@ -22,12 +22,12 @@ struct LastEraTotalRewardView: View {
             HStack(alignment: .center, spacing: 8) {
                 Text(formatBalance(
                     balance: self.reward,
-                    tokenDecimalCount: Int(self.network.tokenDecimalCount)
+                    tokenDecimalCount: self.network.tokenDecimalCount
                 ))
-                .font(UI.Font.NetworkStatus.lastEraTotalReward)
+                .font(UI.Font.Common.balanceLarge)
                 .foregroundColor(Color("Text"))
                 Text(self.network.tokenTicker)
-                    .font(UI.Font.NetworkStatus.lastEraTotalRewardTicker)
+                    .font(UI.Font.Common.tickerLarge)
                     .foregroundColor(Color("Text"))
                     .opacity(0.6)
             }

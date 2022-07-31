@@ -8,57 +8,34 @@
 import SwiftUI
 
 struct BgMorphView: View {
-    enum Step {
-        case start
-        case mid
-        case end
-        
-        var next: Step {
-            switch self {
-            case .start:
-                return .mid
-            case .mid:
-                return .end
-            case .end:
-                return .start
-            }
-        }
-    }
-    
     @Environment (\.colorScheme) var colorScheme: ColorScheme
-    @State var step: Step = .start
-    
-    let timer = Timer.publish(
-        every: 4,
-        on: .main,
-        in: .common
-    ).autoconnect()
+    @StateObject private var viewModel = BgMorphViewModel()
     
     var body: some View {
         GeometryReader { geometry in
             let leftViewSize = UI.Dimension.BgMorph.getLeftViewSize(
                 colorScheme: colorScheme,
                 geometry: geometry,
-                step: step
+                step: self.viewModel.step
             )
             let leftViewOffset = UI.Dimension.BgMorph.getLeftViewOffset(
                 colorScheme: colorScheme,
                 geometry: geometry,
-                step: step
+                step: self.viewModel.step
             )
             let middleViewSize = UI.Dimension.BgMorph.getMiddleViewSize(
                 geometry: geometry
             )
             let middleViewOffset = UI.Dimension.BgMorph.getMiddleViewOffset(
                 geometry: geometry,
-                step: step
+                step: self.viewModel.step
             )
             let rightViewSize = UI.Dimension.BgMorph.getRightViewSize(
                 geometry: geometry
             )
             let rightViewOffset = UI.Dimension.BgMorph.getRightViewOffset(
                 geometry: geometry,
-                step: step
+                step: self.viewModel.step
             )
             ZStack(alignment: .leading) {
                 Ellipse()
@@ -76,7 +53,7 @@ struct BgMorphView: View {
                     .rotationEffect(.degrees(
                         UI.Dimension.BgMorph.leftViewRotation(
                             colorScheme: self.colorScheme,
-                            step: self.step
+                            step: self.viewModel.step
                         )
                     ))
                     .position(
@@ -119,17 +96,14 @@ struct BgMorphView: View {
             }
             .animation(
                 .easeInOut(duration: 3.5),
-                value: self.step
+                value: self.viewModel.step
             )
             .frame(maxWidth: .infinity)
             .ignoresSafeArea()
             .background(Color.clear)
-            .onReceive(timer) { _ in
-                self.step = self.step.next
-            }
             .onAppear() {
-                DispatchQueue.main.async() {
-                    self.step = self.step.next
+                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                    self.viewModel.startTimer()
                 }
             }
         }

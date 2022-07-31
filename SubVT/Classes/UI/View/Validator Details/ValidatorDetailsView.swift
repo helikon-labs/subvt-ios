@@ -230,31 +230,31 @@ struct ValidatorDetailsView: View {
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
                         IdenticonSceneView(accountId: self.validatorSummary.accountId)
                             .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
-                            // .background(Color.clear)
                             .modifier(PanelAppearance(5, self.displayState))
                         VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                            HStack(
-                                alignment: .center,
-                                spacing: UI.Dimension.ValidatorDetails.identityIconMarginRight
-                            ) {
-                                if let identityIcon = self.identityIcon {
-                                    identityIcon
-                                        .resizable()
-                                        .frame(
-                                            width: UI.Dimension.ValidatorDetails.identityIconSize,
-                                            height: UI.Dimension.ValidatorDetails.identityIconSize
-                                        )
-                                }
-                                Text(self.identityDisplay)
-                                    .font(UI.Font.ValidatorDetails.identityDisplay)
-                                    .foregroundColor(Color("Text"))
-                                    .lineLimit(1)
-                                    .minimumScaleFactor(0.5)
-                                    .truncationMode(.middle)
-                                Spacer()
-                                    .frame(width: UI.Dimension.ValidatorDetails.identityIconSize / 2)
+                            self.identityDisplayView
+                                .modifier(PanelAppearance(6, self.displayState))
+                            Spacer()
+                                .frame(height: 4)
+                            self.nominationTotalView
+                                .modifier(PanelAppearance(7, self.displayState))
+                            self.selfStakeView
+                                .modifier(PanelAppearance(8, self.displayState))
+                            self.activeStakeView
+                                .modifier(PanelAppearance(9, self.displayState))
+                            self.inactiveNominationsView
+                                .modifier(PanelAppearance(10, self.displayState))
+                            self.rewardDestinationView
+                                .modifier(PanelAppearance(11, self.displayState))
+                            HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                                self.commissionView
+                                self.aprView
                             }
-                            .modifier(PanelAppearance(6, self.displayState))
+                            .modifier(PanelAppearance(12, self.displayState))
+                            self.unclaimedErasView
+                                .modifier(PanelAppearance(13, self.displayState))
+                            Spacer()
+                                .frame(height: UI.Dimension.ValidatorDetails.scrollContentBottomSpacerHeight)
                         }
                         .padding(EdgeInsets(
                             top: 0,
@@ -275,6 +275,7 @@ struct ValidatorDetailsView: View {
                     }
                 }
             }
+            FooterGradientView()
             HStack(alignment: .center) {
                 if self.isOneKV {
                     self.getIcon("1KVIcon")
@@ -297,11 +298,9 @@ struct ValidatorDetailsView: View {
                 if self.blocksNominations {
                     self.getIcon("BlocksNominationsIcon")
                 }
-                /*
                 if self.hasBeenSlashed {
                     self.getIcon("SlashedIcon")
                 }
-                 */
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
             .padding(EdgeInsets(
@@ -336,6 +335,326 @@ struct ValidatorDetailsView: View {
                 }
             }
         }
+    }
+}
+
+extension ValidatorDetailsView {
+    private var identityDisplayView: some View {
+        HStack(
+            alignment: .center,
+            spacing: UI.Dimension.ValidatorDetails.identityIconMarginRight
+        ) {
+            if let identityIcon = self.identityIcon {
+                identityIcon
+                    .resizable()
+                    .frame(
+                        width: UI.Dimension.ValidatorDetails.identityIconSize,
+                        height: UI.Dimension.ValidatorDetails.identityIconSize
+                    )
+            }
+            Text(self.identityDisplay)
+                .font(UI.Font.ValidatorDetails.identityDisplay)
+                .foregroundColor(Color("Text"))
+                .lineLimit(1)
+                .minimumScaleFactor(0.5)
+                .truncationMode(.middle)
+            Spacer()
+                .frame(width: UI.Dimension.ValidatorDetails.identityIconSize / 2)
+        }
+    }
+    
+    private var nominationTotalView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(localized("validator_details.nomination_total"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            Spacer()
+            HStack(alignment: .center, spacing: 8) {
+                if let validatorDetails = self.viewModel.validatorDetails {
+                    Text(formatBalance(
+                        balance: validatorDetails.nominationTotal,
+                        tokenDecimalCount: self.network.tokenDecimalCount,
+                        integerOnly: false
+                    ))
+                    .font(UI.Font.Common.balanceLarge)
+                    .foregroundColor(Color("Text"))
+                    Text(self.network.tokenTicker)
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                        .opacity(0.6)
+                } else {
+                    Text("-")
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var selfStakeView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(localized("validator_details.self_stake"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            Spacer()
+            HStack(alignment: .center, spacing: 8) {
+                if let selfStake = self.viewModel.validatorDetails?.selfStake {
+                    Text(formatBalance(
+                        balance: selfStake.activeAmount,
+                        tokenDecimalCount: self.network.tokenDecimalCount,
+                        integerOnly: false
+                    ))
+                    .font(UI.Font.Common.balanceLarge)
+                    .foregroundColor(Color("Text"))
+                    Text(self.network.tokenTicker)
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                        .opacity(0.6)
+                } else {
+                    Text("-")
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var activeStakeView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if let activeStakeCount = self.viewModel.validatorDetails?.validatorStake?.nominators.count {
+                Text(String(
+                    format: localized("validator_details.active_stake_with_count"),
+                    activeStakeCount
+                ))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            } else {
+                Text(localized("validator_details.active_stake"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            }
+            Spacer()
+            HStack(alignment: .center, spacing: 8) {
+                if let activeStake = self.viewModel.validatorDetails?.validatorStake {
+                    Text(formatBalance(
+                        balance: activeStake.totalStake,
+                        tokenDecimalCount: self.network.tokenDecimalCount,
+                        integerOnly: false
+                    ))
+                    .font(UI.Font.Common.balanceLarge)
+                    .foregroundColor(Color("Text"))
+                    Text(self.network.tokenTicker)
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                        .opacity(0.6)
+                } else {
+                    Text("-")
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var inactiveNominationsView: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            if let inactiveNominationCount = self.viewModel.validatorDetails?.inactiveNominations.count {
+                Text(String(
+                    format: localized("validator_details.inactive_nominations_with_count"),
+                    inactiveNominationCount
+                ))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            } else {
+                Text(localized("validator_details.inactive_nominations"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            }
+            Spacer()
+            HStack(alignment: .center, spacing: 8) {
+                if let inactiveNominationTotal = self.viewModel.validatorDetails?.inactiveNominationTotal {
+                    Text(formatBalance(
+                        balance: inactiveNominationTotal,
+                        tokenDecimalCount: self.network.tokenDecimalCount,
+                        integerOnly: false
+                    ))
+                    .font(UI.Font.Common.balanceLarge)
+                    .foregroundColor(Color("Text"))
+                    Text(self.network.tokenTicker)
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                        .opacity(0.6)
+                } else {
+                    Text("-")
+                        .font(UI.Font.Common.tickerLarge)
+                        .foregroundColor(Color("Text"))
+                }
+            }
+        }
+        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var rewardDestinationView: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(localized("validator_details.reward_destination"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            if let destination = self.viewModel.validatorDetails?.rewardDestination {
+                Text(destination.getDisplay(
+                    ss58Prefix: UInt16(self.network.ss58Prefix))
+                )
+                .font(UI.Font.Common.dataMedium)
+                .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.tickerLarge)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var commissionView: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(localized("validator_details.commission"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            if let commissionPerBillion = self.viewModel.validatorDetails?.preferences.commissionPerBillion {
+                Text(String(
+                    format: localized("common.percentage"),
+                    formatDecimal(
+                        integer: commissionPerBillion,
+                        decimalCount: 7,
+                        formatDecimalCount: 2
+                    )
+                ))
+                .font(UI.Font.Common.dataMedium)
+                .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.tickerLarge)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var aprView: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(localized("validator_details.apr"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            if let aprPerBillion = self.viewModel.validatorDetails?.returnRatePerBillion {
+                Text(String(
+                    format: localized("common.percentage"),
+                    formatDecimal(
+                        integer: aprPerBillion,
+                        decimalCount: 7,
+                        formatDecimalCount: 2
+                    )
+                ))
+                .font(UI.Font.Common.dataMedium)
+                .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.tickerLarge)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var unclaimedErasView: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text(localized("validator_details.unclaimed_eras"))
+                .font(UI.Font.Common.dataPanelTitle)
+                .foregroundColor(Color("Text"))
+            if let unclaimedEraIndices = self.viewModel.validatorDetails?.unclaimedEraIndices,
+               unclaimedEraIndices.count > 0 {
+                let text = unclaimedEraIndices.map { "\($0)" }.joined(separator: ", ")
+                Text(text)
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.1)
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.tickerLarge)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: UI.Dimension.Common.dataPanelPadding,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: UI.Dimension.Common.dataPanelPadding
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
 }
 

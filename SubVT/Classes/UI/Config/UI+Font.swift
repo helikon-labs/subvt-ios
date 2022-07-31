@@ -18,6 +18,9 @@ extension UI {
                     return LexendDeca.light.withSize(14)
                 }
             }
+            static let balanceLarge = LexendDeca.semiBold.withSize(28)
+            static let tickerLarge = LexendDeca.regular.withSize(28)
+            static let dataMedium = LexendDeca.semiBold.withSize(20)
         }
         
         enum Snackbar {
@@ -100,7 +103,6 @@ extension UI {
             }
             static let networkSelector = LexendDeca.regular.withSize(12)
             static let eraEpochTimestamp = LexendDeca.light.withSize(12)
-            static let dataMedium = LexendDeca.semiBold.withSize(20)
             static var dataLarge: SwiftUI.Font {
                 if UIDevice.current.userInterfaceIdiom == .phone {
                     return LexendDeca.semiBold.withSize(28)
@@ -110,8 +112,6 @@ extension UI {
             }
             static let dataXLarge = LexendDeca.semiBold.withSize(40)
             static let dataSmall = LexendDeca.light.withSize(10)
-            static let lastEraTotalReward = LexendDeca.semiBold.withSize(28)
-            static let lastEraTotalRewardTicker = LexendDeca.regular.withSize(28)
         }
         
         enum ValidatorList {

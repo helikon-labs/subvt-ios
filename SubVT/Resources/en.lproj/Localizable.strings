@@ -17,7 +17,13 @@
 
 "common.era"="Era";
 "common.epoch"="Epoch";
+"common.percentage"="%@%%";
 "common.int_percentage"="%d%%";
+
+"reward_destination.controller"="Controller";
+"reward_destination.staked"="Staked";
+"reward_destination.stash"="Stash";
+"reward_destination.none"="None";
 
 "introduction.title"="Welcome to SubVT";
 "introduction.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";
@@ -66,3 +72,14 @@
 "validator_list.sort_by.nomination_total"="Nomination total";
 "validator_list.filter"="Filter";
 "validator_list.filter.by_identity"="With identity only";
+
+"validator_details.nomination_total"="Nomination Total";
+"validator_details.active_stake"="Active Stake";
+"validator_details.active_stake_with_count"="Active Stake (%d)";
+"validator_details.inactive_nominations"="Inactive Nominations";
+"validator_details.inactive_nominations_with_count"="Inactive Nominations (%d)";
+"validator_details.self_stake"="Self Stake";
+"validator_details.reward_destination"="Reward Destination";
+"validator_details.commission"="Commission";
+"validator_details.apr"="APR";
+"validator_details.unclaimed_eras"="Unclaimed Eras";

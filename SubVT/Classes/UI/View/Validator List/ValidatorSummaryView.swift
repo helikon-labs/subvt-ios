@@ -20,14 +20,14 @@ struct ValidatorSummaryView: View {
         get {
             let inactive = formatBalance(
                 balance: self.validatorSummary.inactiveNominations.totalAmount,
-                tokenDecimalCount: Int(self.network.tokenDecimalCount)
+                tokenDecimalCount: self.network.tokenDecimalCount
             )
             let inactiveCount = self.validatorSummary.inactiveNominations.nominationCount
             if self.validatorSummary.isActive,
                let stakeSummary = self.validatorSummary.validatorStake {
                 let active = formatBalance(
                     balance: stakeSummary.totalStake,
-                    tokenDecimalCount: Int(self.network.tokenDecimalCount)
+                    tokenDecimalCount: self.network.tokenDecimalCount
                 )
                 let activeCount = stakeSummary.nominatorCount
                 return "(\(activeCount)) \(active) / (\(inactiveCount)) \(inactive) \(self.network.tokenTicker)"

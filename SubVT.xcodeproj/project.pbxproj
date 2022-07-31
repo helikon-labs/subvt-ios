@@ -151,6 +151,11 @@
 		A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90AA2848C1EC0053389A /* SubVTTests.swift */; };
 		A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90B42848C1EC0053389A /* SubVTUITests.swift */; };
 		A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BF90B62848C1EC0053389A /* SubVTUITestsLaunchTests.swift */; };
+		A0C03D85289666FC001C1B54 /* BgMorphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C03D84289666FC001C1B54 /* BgMorphViewModel.swift */; };
+		A0C03D86289666FC001C1B54 /* BgMorphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C03D84289666FC001C1B54 /* BgMorphViewModel.swift */; };
+		A0C03D8828967048001C1B54 /* RewardDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C03D8728967048001C1B54 /* RewardDestination.swift */; };
+		A0C03D8928967048001C1B54 /* RewardDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C03D8728967048001C1B54 /* RewardDestination.swift */; };
+		A0C03D8A28967048001C1B54 /* RewardDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C03D8728967048001C1B54 /* RewardDestination.swift */; };
 		A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */; };
 		A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */; };
 		A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
@@ -397,6 +402,8 @@
 		A0BF90B42848C1EC0053389A /* SubVTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTUITests.swift; sourceTree = "<group>"; };
 		A0BF90B62848C1EC0053389A /* SubVTUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A0BF90C32848C2140053389A /* SubVT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SubVT.entitlements; sourceTree = "<group>"; };
+		A0C03D84289666FC001C1B54 /* BgMorphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BgMorphViewModel.swift; sourceTree = "<group>"; };
+		A0C03D8728967048001C1B54 /* RewardDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDestination.swift; sourceTree = "<group>"; };
 		A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+TabBar.swift"; sourceTree = "<group>"; };
 		A0C062A4286721E9001FE459 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A0C90E872878615600A91996 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
@@ -617,6 +624,7 @@
 				A0744D972885AB05008A06DD /* BackButtonView.swift */,
 				A0C9A781285749940071C7AC /* BasicDisplayState.swift */,
 				A0A1DC60284B990B00914237 /* BgMorphView.swift */,
+				A0C03D84289666FC001C1B54 /* BgMorphViewModel.swift */,
 				A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */,
 				A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */,
 				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
@@ -650,6 +658,7 @@
 			children = (
 				A0AFF7F62892AC2900B0CB4F /* ValidatorDetails.swift */,
 				A04C473028882AC40004A46A /* ValidatorSummary.swift */,
+				A0C03D8728967048001C1B54 /* RewardDestination.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1327,6 +1336,7 @@
 				A0C9838D2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A04C429628533564007C970B /* AppView.swift in Sources */,
 				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
+				A0C03D85289666FC001C1B54 /* BgMorphViewModel.swift in Sources */,
 				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
 				A04B37CA2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
 				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
@@ -1349,6 +1359,7 @@
 				A04C472D288814DA0004A46A /* PreferenceKeys.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
+				A0C03D8828967048001C1B54 /* RewardDestination.swift in Sources */,
 				A07BA81E285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
 				A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */,
 				A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */,
@@ -1397,6 +1408,7 @@
 			files = (
 				A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */,
+				A0C03D8928967048001C1B54 /* RewardDestination.swift in Sources */,
 				A078727D287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A0C90E892878615600A91996 /* Formatter.swift in Sources */,
 				A0AFF7F82892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
@@ -1431,6 +1443,7 @@
 				A0BCDE6528785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A04B37D1287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0D03344288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
+				A0C03D8A28967048001C1B54 /* RewardDestination.swift in Sources */,
 				A0BF90B52848C1EC0053389A /* SubVTUITests.swift in Sources */,
 				A0F2850F2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
 				A04B37C22876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
@@ -1438,6 +1451,7 @@
 				A0F285132879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */,
+				A0C03D86289666FC001C1B54 /* BgMorphViewModel.swift in Sources */,
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
 				A04B37C52876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
 				A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
