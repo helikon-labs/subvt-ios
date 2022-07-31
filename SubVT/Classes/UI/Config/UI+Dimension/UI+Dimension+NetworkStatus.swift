@@ -11,12 +11,8 @@ extension UI.Dimension {
     enum NetworkStatus {
         static var connectionStatusMarginLeft = UI.Dimension(4, 9)
         static var validatorCountPanelHeight = UI.Dimension(128, 190)
-        static var scrollContentMarginBottom: CGFloat {
-            get {
-                return UI.Dimension.TabBar.marginBottom
-                + UI.Dimension.TabBar.height
-            }
-        }
+        static var scrollContentMarginBottom: CGFloat = UI.Dimension.TabBar.marginBottom
+            + UI.Dimension.TabBar.height
         static var blockNumberViewHeight: CGFloat = 124
         static var blockWaveViewSize = UI.Dimension(40, 74)
         static var lastEraTotalRewardViewHeight = UI.Dimension(98, 112)

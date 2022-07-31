@@ -70,64 +70,48 @@ struct ValidatorDetailsView: View {
         .buttonStyle(PushButtonStyle())
     }
     
-    private func getAccountAgeString(discoveredAt: UInt64) -> String {
+    private func getTimePeriodString(timestampMs: UInt64) -> String {
         let components = Calendar.current.dateComponents(
-            [.year, .month, .weekOfMonth, .day, .hour],
-            from: Date(timeIntervalSince1970: Double(discoveredAt / 1000)),
+            [.year, .month, .weekOfMonth, .day, .hour, .minute],
+            from: Date(timeIntervalSince1970: Double(timestampMs / 1000)),
             to: Date()
         )
         var stringComponents = [String]()
         if let year = components.year, year > 0 {
-            if year == 1 {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.year"),
-                    year
-                ))
-            } else {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.years"),
-                    year
-                ))
-            }
+            stringComponents.append(String(
+                format: localized("common.date_components.year"),
+                year
+            ))
         }
         if let month = components.month, month > 0 {
-            if month == 1 {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.month"),
-                    month
-                ))
-            } else {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.months"),
-                    month
-                ))
-            }
+            stringComponents.append(String(
+                format: localized("common.date_components.month"),
+                month
+            ))
         }
         if let week = components.weekOfMonth, week > 0 {
-            if week == 1 {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.week"),
-                    week
-                ))
-            } else {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.weeks"),
-                    week
-                ))
-            }
+            stringComponents.append(String(
+                format: localized("common.date_components.week"),
+                week
+            ))
         }
         if let day = components.day, day > 0 {
-            if day == 1 {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.day"),
-                    day
-                ))
-            } else {
-                stringComponents.append(String(
-                    format: localized("common.date_componets.days"),
-                    day
-                ))
-            }
+            stringComponents.append(String(
+                format: localized("common.date_components.day"),
+                day
+            ))
+        }
+        if let hour = components.hour, hour > 0 {
+            stringComponents.append(String(
+                format: localized("common.date_components.hour"),
+                hour
+            ))
+        }
+        if let minute = components.minute, minute > 0 {
+            stringComponents.append(String(
+                format: localized("common.date_components.minute"),
+                minute
+            ))
         }
         return stringComponents.joined(separator: " ")
     }
@@ -288,13 +272,13 @@ struct ValidatorDetailsView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
-                        HStack {
-                            EmptyView()
-                        }
                         IdenticonSceneView(accountId: self.validatorSummary.accountId)
                             .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
                             .modifier(PanelAppearance(5, self.displayState))
-                        VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                        VStack(
+                            alignment: .leading,
+                            spacing: UI.Dimension.Common.dataPanelSpacing
+                        ) {
                             self.identityDisplayView
                                 .modifier(PanelAppearance(6, self.displayState))
                             Spacer()
@@ -331,6 +315,33 @@ struct ValidatorDetailsView: View {
                                         self.eraPointsView
                                     }
                                     .modifier(PanelAppearance(15, self.displayState))
+                                }
+                            }
+                            if self.validatorSummary.isEnrolledIn1Kv {
+                                Group {
+                                    Spacer()
+                                        .frame(height: 8)
+                                    Text(localized("validator_details.onekv_section_title"))
+                                        .font(UI.Font.ValidatorDetails.subsectionTitle)
+                                        .foregroundColor(Color("Text"))
+                                        .modifier(PanelAppearance(16, self.displayState))
+                                    Spacer()
+                                        .frame(height: 8)
+                                    self.onekvRankView
+                                        .modifier(PanelAppearance(17, self.displayState))
+                                    self.onekvLocationView
+                                        .modifier(PanelAppearance(18, self.displayState))
+                                    self.onekvBinaryVersionView
+                                        .modifier(PanelAppearance(19, self.displayState))
+                                    if self.viewModel.validatorDetails?.onekvOnlineSince ?? 0 > 0 {
+                                        self.onekvUptimeView
+                                            .modifier(PanelAppearance(20, self.displayState))
+                                    } else if self.viewModel.validatorDetails?.onekvOfflineSince ?? 0 > 0 {
+                                        self.onekvDowntimeView
+                                            .modifier(PanelAppearance(21, self.displayState))
+                                    }
+                                    self.onekvValidityView
+                                        .modifier(PanelAppearance(22, self.displayState))
                                 }
                             }
                             Spacer()
@@ -393,6 +404,7 @@ struct ValidatorDetailsView: View {
                 trailing: 0
             ))
             .zIndex(2)
+            .modifier(PanelAppearance(5, self.displayState))
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
@@ -445,6 +457,7 @@ extension ValidatorDetailsView {
             Spacer()
                 .frame(width: UI.Dimension.ValidatorDetails.identityIconSize / 2)
         }
+        .frame(maxWidth: .infinity)
     }
     
     private var nominationTotalView: some View {
@@ -636,7 +649,7 @@ extension ValidatorDetailsView {
     private var accountAgeView: some View {
         DataPanelView(localized("validator_details.account_age")) {
             if let discoveredAt = self.viewModel.validatorDetails?.account.discoveredAt {
-                Text(self.getAccountAgeString(discoveredAt: discoveredAt))
+                Text(self.getTimePeriodString(timestampMs: discoveredAt))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
                     .minimumScaleFactor(0.1)
@@ -679,25 +692,136 @@ extension ValidatorDetailsView {
     private var offlineFaultsView: some View {
         DataPanelView(
             localized("validator_details.offline_faults"),
-            isVertical: false) {
-                if let offenceCount = self.viewModel.validatorDetails?.offlineOffenceCount {
-                    HStack(
-                        alignment: .center,
-                        spacing: UI.Dimension.Common.dataPanelPadding
-                    ) {
-                        Text(String(offenceCount))
-                            .font(UI.Font.Common.dataMedium)
-                            .foregroundColor(Color("Text"))
-                        if offenceCount > 0 {
-                            Image("OfflineFaultExclamationIcon")
-                        }
+            isVertical: false
+        ) {
+            if let offenceCount = self.viewModel.validatorDetails?.offlineOffenceCount {
+                HStack(
+                    alignment: .center,
+                    spacing: 12
+                ) {
+                    Text(String(offenceCount))
+                        .font(UI.Font.Common.dataMedium)
+                        .foregroundColor(Color("Text"))
+                    if offenceCount > 0 {
+                        Image("OfflineFaultExclamationIcon")
                     }
+                }
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+    
+    private var onekvRankView: some View {
+        DataPanelView(
+            localized("validator_details.onekv.rank"),
+            isVertical: false
+        ) {
+            if let rank = self.viewModel.validatorDetails?.onekvRank {
+                Text(String(rank))
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+    
+    private var onekvLocationView: some View {
+        DataPanelView(
+            localized("validator_details.onekv.location"),
+            isVertical: false
+        ) {
+            if let location = self.viewModel.validatorDetails?.onekvLocation {
+                Text(location)
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+    
+    private var onekvBinaryVersionView: some View {
+        DataPanelView(
+            localized("validator_details.onekv.binary_version"),
+            isVertical: false
+        ) {
+            if let version = self.viewModel.validatorDetails?.onekvBinaryVersion {
+                Text(version)
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+    
+    private var onekvUptimeView: some View {
+        DataPanelView(localized("validator_details.onekv.uptime")) {
+            HStack(alignment: .center, spacing: 8) {
+                Image("UptimeIcon")
+                if let onlineSince = self.viewModel.validatorDetails?.onekvOnlineSince,
+                   onlineSince > 0 {
+                    Text(self.getTimePeriodString(timestampMs: onlineSince))
+                        .font(UI.Font.Common.dataMedium)
+                        .foregroundColor(Color("Text"))
                 } else {
                     Text("-")
                         .font(UI.Font.Common.dataMedium)
                         .foregroundColor(Color("Text"))
                 }
             }
+        }
+    }
+    
+    private var onekvDowntimeView: some View {
+        DataPanelView(localized("validator_details.onekv.downtime")) {
+            HStack(alignment: .center, spacing: 8) {
+                Image("DowntimeIcon")
+                if let offlineSince = self.viewModel.validatorDetails?.onekvOfflineSince,
+                   offlineSince > 0 {
+                    Text(self.getTimePeriodString(timestampMs: offlineSince))
+                        .font(UI.Font.Common.dataMedium)
+                        .foregroundColor(Color("StatusError"))
+                } else {
+                    Text("-")
+                        .font(UI.Font.Common.dataMedium)
+                        .foregroundColor(Color("StatusError"))
+                }
+            }
+        }
+    }
+    
+    private var onekvValidityView: some View {
+        DataPanelView(
+            localized("validator_details.onekv.validity"),
+            isVertical: false
+        ) {
+            if let isValid = self.viewModel.validatorDetails?.onekvIsValid {
+                if isValid {
+                    Text(localized("validator_details.onekv.valid"))
+                        .font(UI.Font.Common.dataMedium)
+                        .foregroundColor(Color("Text"))
+                } else {
+                    Text(localized("validator_details.onekv.invalid"))
+                        .font(UI.Font.Common.dataMedium)
+                        .foregroundColor(Color("StatusError"))
+                }
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
     }
 }
 

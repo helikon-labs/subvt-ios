@@ -19,16 +19,12 @@
 "common.epoch"="Epoch";
 "common.percentage"="%@%%";
 "common.int_percentage"="%d%%";
-"common.date_componets.year"="%d year";
-"common.date_componets.years"="%d years";
-"common.date_componets.month"="%d month";
-"common.date_componets.months"="%d months";
-"common.date_componets.week"="%d week";
-"common.date_componets.weeks"="%d weeks";
-"common.date_componets.day"="%d day";
-"common.date_componets.days"="%d days";
-"common.date_componets.hour"="%d hour";
-"common.date_componets.hours"="%d hour";
+"common.date_components.year"="%dy";
+"common.date_components.month"="%dm";
+"common.date_components.week"="%dw";
+"common.date_components.day"="%dd";
+"common.date_components.hour"="%dh";
+"common.date_components.minute"="%dm";
 
 "reward_destination.controller"="Controller";
 "reward_destination.staked"="Staked";
@@ -98,3 +94,12 @@
 "validator_details.era_points"="Era Points";
 "validator_details.era_blocks"="Era Blocks";
 "validator_details.offline_faults"="Offline Faults";
+"validator_details.onekv_section_title"="1KV";
+"validator_details.onekv.rank"="Rank";
+"validator_details.onekv.location"="Location";
+"validator_details.onekv.binary_version"="Binary Version";
+"validator_details.onekv.uptime"="Uptime";
+"validator_details.onekv.downtime"="Downtime";
+"validator_details.onekv.validity"="Validity";
+"validator_details.onekv.valid"="Valid";
+"validator_details.onekv.invalid"="Invalid";

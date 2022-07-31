@@ -122,5 +122,8 @@ extension UI.Dimension {
         static let networkSelectorIconSize: CGFloat = 18
         static let networkSelectorPadding: CGFloat = 10
         static let networkSelectorHeight: CGFloat = 36
+        
+        static let footerGradientViewHeight: CGFloat = UI.Dimension.TabBar.marginBottom
+            + UI.Dimension.TabBar.height
     }
 }

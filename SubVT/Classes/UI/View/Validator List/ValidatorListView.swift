@@ -231,8 +231,7 @@ struct ValidatorListView: View {
                         }
                         Spacer()
                             .frame(
-                                height: UI.Dimension.Common.bottomNotchHeight
-                                    + UI.Dimension.Common.padding / 2
+                                height: UI.Dimension.Common.footerGradientViewHeight
                             )
                     }
                     .padding(EdgeInsets(

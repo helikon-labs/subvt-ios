@@ -134,6 +134,7 @@ extension UI {
         
         enum ValidatorDetails {
             static let identityDisplay = LexendDeca.regular.withSize(28)
+            static let subsectionTitle = LexendDeca.semiBold.withSize(24)
         }
     }
 }

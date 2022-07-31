@@ -20,8 +20,7 @@ struct FooterGradientView: View {
             endPoint: .top
         )
             .allowsHitTesting(false)
-            .frame(height: UI.Dimension.TabBar.marginBottom
-                   + UI.Dimension.TabBar.height * 2)
+            .frame(height: UI.Dimension.Common.footerGradientViewHeight)
             .frame(
                 maxHeight: .infinity,
                 alignment: .bottom
