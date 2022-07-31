@@ -19,6 +19,16 @@
 "common.epoch"="Epoch";
 "common.percentage"="%@%%";
 "common.int_percentage"="%d%%";
+"common.date_componets.year"="%d year";
+"common.date_componets.years"="%d years";
+"common.date_componets.month"="%d month";
+"common.date_componets.months"="%d months";
+"common.date_componets.week"="%d week";
+"common.date_componets.weeks"="%d weeks";
+"common.date_componets.day"="%d day";
+"common.date_componets.days"="%d days";
+"common.date_componets.hour"="%d hour";
+"common.date_componets.hours"="%d hour";
 
 "reward_destination.controller"="Controller";
 "reward_destination.staked"="Staked";
@@ -72,6 +82,7 @@
 "validator_list.sort_by.nomination_total"="Nomination total";
 "validator_list.filter"="Filter";
 "validator_list.filter.by_identity"="With identity only";
+"validator_list.filter.by_onekv"="1KV only";
 
 "validator_details.nomination_total"="Nomination Total";
 "validator_details.active_stake"="Active Stake";
@@ -83,3 +94,7 @@
 "validator_details.commission"="Commission";
 "validator_details.apr"="APR";
 "validator_details.unclaimed_eras"="Unclaimed Eras";
+"validator_details.account_age"="Account Age";
+"validator_details.era_points"="Era Points";
+"validator_details.era_blocks"="Era Blocks";
+"validator_details.offline_faults"="Offline Faults";

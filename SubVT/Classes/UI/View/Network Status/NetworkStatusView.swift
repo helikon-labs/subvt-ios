@@ -256,8 +256,7 @@ struct NetworkStatusView: View {
                             )
                     })
                     .onPreferenceChange(ViewOffsetKey.self) {
-                        let scroll = max($0, 0)
-                        self.headerMaterialOpacity = scroll / 40.0
+                        self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
                     }
                 }
             }

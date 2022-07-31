@@ -93,6 +93,7 @@ extension UI.Dimension {
         }
         static let dataPanelCornerRadius: CGFloat = 16
         static let dataPanelPadding: CGFloat = 16
+        static let dataPanelContentMarginTop: CGFloat = 12
         static let lineChartLineWidth = UI.Dimension(3, 4)
         static let headerBlurViewBottomPadding: CGFloat = 16
         static let headerBlurViewCornerRadius: CGFloat = 20

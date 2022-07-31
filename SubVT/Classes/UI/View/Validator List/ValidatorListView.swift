@@ -50,7 +50,7 @@ struct ValidatorListView: View {
             from: nil,
             for: nil
         )
-        self.headerMaterialOpacity = scroll / 20.0
+        self.headerMaterialOpacity = min(scroll / 20.0, 1.0)
         if self.filterSectionIsVisible {
             if scroll < self.lastScroll {
                 self.lastScroll = scroll

@@ -16,6 +16,7 @@ struct ValidatorListFilterSortView: View {
     @State private var sortByStakePressed = false
     @State private var sortByNominationPressed = false
     @State private var filterByIdPressed = false
+    @State private var filterByOneKVPressed = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -160,6 +161,31 @@ struct ValidatorListFilterSortView: View {
                                     self.filterByIdPressed = false
                                 }
                                 Text(localized("validator_list.filter.by_identity"))
+                                    .foregroundColor(Color("Text"))
+                                    .font(UI.Font.ValidatorList.listSortField)
+                            }
+                            HStack(alignment: .center, spacing: 12) {
+                                Button(
+                                    action: {
+                                        if self.filterOptions.contains(.isOneKV) {
+                                            self.filterOptions.remove(.isOneKV)
+                                        } else {
+                                            self.filterOptions.insert(.isOneKV)
+                                        }
+                                    },
+                                    label: {
+                                        SmallCheckboxButtonView(
+                                            isChecked: self.filterOptions.contains(.isOneKV),
+                                            isPressed: self.filterByOneKVPressed
+                                        )
+                                    }
+                                )
+                                .pressAction {
+                                    self.filterByOneKVPressed = true
+                                } onRelease: {
+                                    self.filterByOneKVPressed = false
+                                }
+                                Text(localized("validator_list.filter.by_onekv"))
                                     .foregroundColor(Color("Text"))
                                     .font(UI.Font.ValidatorList.listSortField)
                             }

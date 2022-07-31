@@ -20,8 +20,6 @@ struct ValidatorDetailsView: View {
     @State private var lastScroll: CGFloat = 0
     let validatorSummary: ValidatorSummary
     
-    
-    
     var identityDisplay: String {
         return self.viewModel.validatorDetails?.identityDisplay
             ?? validatorSummary.identityDisplay
@@ -70,7 +68,68 @@ struct ValidatorDetailsView: View {
                 )
         }
         .buttonStyle(PushButtonStyle())
-
+    }
+    
+    private func getAccountAgeString(discoveredAt: UInt64) -> String {
+        let components = Calendar.current.dateComponents(
+            [.year, .month, .weekOfMonth, .day, .hour],
+            from: Date(timeIntervalSince1970: Double(discoveredAt / 1000)),
+            to: Date()
+        )
+        var stringComponents = [String]()
+        if let year = components.year, year > 0 {
+            if year == 1 {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.year"),
+                    year
+                ))
+            } else {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.years"),
+                    year
+                ))
+            }
+        }
+        if let month = components.month, month > 0 {
+            if month == 1 {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.month"),
+                    month
+                ))
+            } else {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.months"),
+                    month
+                ))
+            }
+        }
+        if let week = components.weekOfMonth, week > 0 {
+            if week == 1 {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.week"),
+                    week
+                ))
+            } else {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.weeks"),
+                    week
+                ))
+            }
+        }
+        if let day = components.day, day > 0 {
+            if day == 1 {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.day"),
+                    day
+                ))
+            } else {
+                stringComponents.append(String(
+                    format: localized("common.date_componets.days"),
+                    day
+                ))
+            }
+        }
+        return stringComponents.joined(separator: " ")
     }
     
     private var isOneKV: Bool {
@@ -219,15 +278,19 @@ struct ValidatorDetailsView: View {
                     corners: [.bottomLeft, .bottomRight]
                 )
                 .opacity(self.headerMaterialOpacity)
+                .zIndex(1)
             )
             .frame(maxHeight: .infinity, alignment: .top)
-            .zIndex(1)
+            .zIndex(3)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
+                        HStack {
+                            EmptyView()
+                        }
                         IdenticonSceneView(accountId: self.validatorSummary.accountId)
                             .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
                             .modifier(PanelAppearance(5, self.displayState))
@@ -236,25 +299,43 @@ struct ValidatorDetailsView: View {
                                 .modifier(PanelAppearance(6, self.displayState))
                             Spacer()
                                 .frame(height: 4)
-                            self.nominationTotalView
-                                .modifier(PanelAppearance(7, self.displayState))
-                            self.selfStakeView
-                                .modifier(PanelAppearance(8, self.displayState))
-                            self.activeStakeView
-                                .modifier(PanelAppearance(9, self.displayState))
-                            self.inactiveNominationsView
-                                .modifier(PanelAppearance(10, self.displayState))
-                            self.rewardDestinationView
-                                .modifier(PanelAppearance(11, self.displayState))
-                            HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                                self.commissionView
-                                self.aprView
+                            Group {
+                                self.nominationTotalView
+                                    .modifier(PanelAppearance(7, self.displayState))
+                                self.selfStakeView
+                                    .modifier(PanelAppearance(8, self.displayState))
+                                if let _ = self.viewModel.validatorDetails?.validatorStake {
+                                    self.activeStakeView
+                                        .modifier(PanelAppearance(9, self.displayState))
+                                }
+                                self.inactiveNominationsView
+                                    .modifier(PanelAppearance(10, self.displayState))
+                                if let _ = self.viewModel.validatorDetails?.account.discoveredAt {
+                                    self.accountAgeView
+                                        .modifier(PanelAppearance(11, self.displayState))
+                                }
+                                self.offlineFaultsView
+                                    .modifier(PanelAppearance(12, self.displayState))
+                                self.rewardDestinationView
+                                    .modifier(PanelAppearance(13, self.displayState))
                             }
-                            .modifier(PanelAppearance(12, self.displayState))
-                            self.unclaimedErasView
-                                .modifier(PanelAppearance(13, self.displayState))
+                            Group {
+                                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                                    self.commissionView
+                                    self.aprView
+                                }
+                                .modifier(PanelAppearance(14, self.displayState))
+                                if let _ = self.viewModel.validatorDetails?.validatorStake {
+                                    HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                                        self.eraBlocksView
+                                        self.eraPointsView
+                                    }
+                                    .modifier(PanelAppearance(15, self.displayState))
+                                }
+                            }
                             Spacer()
                                 .frame(height: UI.Dimension.ValidatorDetails.scrollContentBottomSpacerHeight)
+                            
                         }
                         .padding(EdgeInsets(
                             top: 0,
@@ -271,11 +352,13 @@ struct ValidatorDetailsView: View {
                             )
                     })
                     .onPreferenceChange(ViewOffsetKey.self) {
-                        self.headerMaterialOpacity = max($0, 0) / 20.0
+                        self.headerMaterialOpacity = min(max($0, 0) / 50.0, 1.0)
                     }
                 }
             }
+            .zIndex(0)
             FooterGradientView()
+                .zIndex(1)
             HStack(alignment: .center) {
                 if self.isOneKV {
                     self.getIcon("1KVIcon")
@@ -309,6 +392,7 @@ struct ValidatorDetailsView: View {
                 bottom: UI.Dimension.ValidatorDetails.iconContainerMarginBottom,
                 trailing: 0
             ))
+            .zIndex(2)
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
@@ -325,9 +409,9 @@ struct ValidatorDetailsView: View {
                 from: nil,
                 for: nil
             )
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.viewModel.subscribeToValidatorDetails(
                         network: self.network,
                         accountId: self.validatorSummary.accountId
@@ -364,11 +448,7 @@ extension ValidatorDetailsView {
     }
     
     private var nominationTotalView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(localized("validator_details.nomination_total"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            Spacer()
+        DataPanelView(localized("validator_details.nomination_total")) {
             HStack(alignment: .center, spacing: 8) {
                 if let validatorDetails = self.viewModel.validatorDetails {
                     Text(formatBalance(
@@ -389,24 +469,10 @@ extension ValidatorDetailsView {
                 }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var selfStakeView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text(localized("validator_details.self_stake"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            Spacer()
+        DataPanelView(localized("validator_details.self_stake")) {
             HStack(alignment: .center, spacing: 8) {
                 if let selfStake = self.viewModel.validatorDetails?.selfStake {
                     Text(formatBalance(
@@ -427,33 +493,17 @@ extension ValidatorDetailsView {
                 }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var activeStakeView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            if let activeStakeCount = self.viewModel.validatorDetails?.validatorStake?.nominators.count {
-                Text(String(
-                    format: localized("validator_details.active_stake_with_count"),
-                    activeStakeCount
-                ))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            } else {
-                Text(localized("validator_details.active_stake"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            }
-            Spacer()
+        let activeStakeCount = self.viewModel.validatorDetails?.validatorStake?.nominators.count
+        let title = (activeStakeCount == nil)
+            ? localized("validator_details.active_stake")
+            : String(
+                format: localized("validator_details.active_stake_with_count"),
+                activeStakeCount!
+            )
+        return DataPanelView(title) {
             HStack(alignment: .center, spacing: 8) {
                 if let activeStake = self.viewModel.validatorDetails?.validatorStake {
                     Text(formatBalance(
@@ -474,33 +524,17 @@ extension ValidatorDetailsView {
                 }
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var inactiveNominationsView: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            if let inactiveNominationCount = self.viewModel.validatorDetails?.inactiveNominations.count {
-                Text(String(
-                    format: localized("validator_details.inactive_nominations_with_count"),
-                    inactiveNominationCount
-                ))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            } else {
-                Text(localized("validator_details.inactive_nominations"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
-            }
-            Spacer()
+        let inactiveNominationCount = self.viewModel.validatorDetails?.inactiveNominations.count
+        let title = (inactiveNominationCount == nil)
+            ? localized("validator_details.inactive_nominations")
+            : String(
+                format: localized("validator_details.inactive_nominations_with_count"),
+                inactiveNominationCount!
+            )
+        return DataPanelView(title) {
             HStack(alignment: .center, spacing: 8) {
                 if let inactiveNominationTotal = self.viewModel.validatorDetails?.inactiveNominationTotal {
                     Text(formatBalance(
@@ -521,23 +555,10 @@ extension ValidatorDetailsView {
                 }
             }
         }
-        .frame(height: UI.Dimension.ValidatorDetails.balancePanelHeight)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var rewardDestinationView: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(localized("validator_details.reward_destination"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
+        DataPanelView(localized("validator_details.reward_destination")) {
             if let destination = self.viewModel.validatorDetails?.rewardDestination {
                 Text(destination.getDisplay(
                     ss58Prefix: UInt16(self.network.ss58Prefix))
@@ -546,26 +567,14 @@ extension ValidatorDetailsView {
                 .foregroundColor(Color("Text"))
             } else {
                 Text("-")
-                    .font(UI.Font.Common.tickerLarge)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var commissionView: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(localized("validator_details.commission"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
+        DataPanelView(localized("validator_details.commission")) {
             if let commissionPerBillion = self.viewModel.validatorDetails?.preferences.commissionPerBillion {
                 Text(String(
                     format: localized("common.percentage"),
@@ -579,26 +588,14 @@ extension ValidatorDetailsView {
                 .foregroundColor(Color("Text"))
             } else {
                 Text("-")
-                    .font(UI.Font.Common.tickerLarge)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var aprView: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(localized("validator_details.apr"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
+        DataPanelView(localized("validator_details.apr")) {
             if let aprPerBillion = self.viewModel.validatorDetails?.returnRatePerBillion {
                 Text(String(
                     format: localized("common.percentage"),
@@ -612,26 +609,14 @@ extension ValidatorDetailsView {
                 .foregroundColor(Color("Text"))
             } else {
                 Text("-")
-                    .font(UI.Font.Common.tickerLarge)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var unclaimedErasView: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text(localized("validator_details.unclaimed_eras"))
-                .font(UI.Font.Common.dataPanelTitle)
-                .foregroundColor(Color("Text"))
+        DataPanelView(localized("validator_details.unclaimed_eras")) {
             if let unclaimedEraIndices = self.viewModel.validatorDetails?.unclaimedEraIndices,
                unclaimedEraIndices.count > 0 {
                 let text = unclaimedEraIndices.map { "\($0)" }.joined(separator: ", ")
@@ -642,19 +627,77 @@ extension ValidatorDetailsView {
                     .minimumScaleFactor(0.1)
             } else {
                 Text("-")
-                    .font(UI.Font.Common.tickerLarge)
+                    .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
             }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(EdgeInsets(
-            top: UI.Dimension.Common.dataPanelPadding,
-            leading: UI.Dimension.Common.dataPanelPadding,
-            bottom: UI.Dimension.Common.dataPanelPadding,
-            trailing: UI.Dimension.Common.dataPanelPadding
-        ))
-        .background(Color("DataPanelBg"))
-        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+    }
+    
+    private var accountAgeView: some View {
+        DataPanelView(localized("validator_details.account_age")) {
+            if let discoveredAt = self.viewModel.validatorDetails?.account.discoveredAt {
+                Text(self.getAccountAgeString(discoveredAt: discoveredAt))
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+                    .minimumScaleFactor(0.1)
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+    
+    private var eraPointsView: some View {
+        DataPanelView(localized("validator_details.era_points")) {
+            if let points = self.viewModel.validatorDetails?.rewardPoints {
+                Text(String(points))
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+    
+    private var eraBlocksView: some View {
+        DataPanelView(localized("validator_details.era_blocks")) {
+            if let blocks = self.viewModel.validatorDetails?.blocksAuthored {
+                Text(String(blocks))
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            } else {
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+    
+    private var offlineFaultsView: some View {
+        DataPanelView(
+            localized("validator_details.offline_faults"),
+            isVertical: false) {
+                if let offenceCount = self.viewModel.validatorDetails?.offlineOffenceCount {
+                    HStack(
+                        alignment: .center,
+                        spacing: UI.Dimension.Common.dataPanelPadding
+                    ) {
+                        Text(String(offenceCount))
+                            .font(UI.Font.Common.dataMedium)
+                            .foregroundColor(Color("Text"))
+                        if offenceCount > 0 {
+                            Image("OfflineFaultExclamationIcon")
+                        }
+                    }
+                } else {
+                    Text("-")
+                        .font(UI.Font.Common.dataMedium)
+                        .foregroundColor(Color("Text"))
+                }
+            }
     }
 }
 

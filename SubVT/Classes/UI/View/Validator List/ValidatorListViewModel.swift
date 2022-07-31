@@ -18,6 +18,7 @@ class ValidatorListViewModel: ObservableObject {
     
     enum FilterOption: String {
         case hasIdentity
+        case isOneKV
     }
     
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
@@ -195,6 +196,7 @@ class ValidatorListViewModel: ObservableObject {
         self.validators = self.innerValidators
             .filter { searchText.isEmpty || $0.filter(searchText) }
             .filter { !filterOptions.contains(.hasIdentity) || $0.hasIdentity() }
+            .filter { !filterOptions.contains(.isOneKV) || $0.isEnrolledIn1Kv }
             .sorted {
                 guard let sortOption = sortOption else {
                     return true

@@ -95,14 +95,14 @@ struct BgMorphView: View {
                     )
             }
             .animation(
-                .easeInOut(duration: 3.5),
+                .easeInOut(duration: 4.0),
                 value: self.viewModel.step
             )
             .frame(maxWidth: .infinity)
             .ignoresSafeArea()
             .background(Color.clear)
             .onAppear() {
-                DispatchQueue.main.asyncAfter(deadline: .now()) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.viewModel.startTimer()
                 }
             }
