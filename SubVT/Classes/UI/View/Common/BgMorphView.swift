@@ -10,6 +10,18 @@ import SwiftUI
 struct BgMorphView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel = BgMorphViewModel()
+
+    let isActive: Bool
+    
+    init(isActive: Bool = true) {
+        self.isActive = isActive
+    }
+    
+    let timer = Timer.publish(
+        every: 4,
+        on: .main,
+        in: .common
+    ).autoconnect()
     
     var body: some View {
         GeometryReader { geometry in
@@ -77,7 +89,11 @@ struct BgMorphView: View {
                         )
                 }
                 Ellipse()
-                    .fill(Color("BgMorphRightView"))
+                    .fill(
+                        self.isActive
+                            ? Color("BgMorphRightViewActive")
+                            : Color("BgMorphRightViewInactive")
+                    )
                     .blur(radius: UI.Dimension.BgMorph.rightViewBlurRadius)
                     .frame(
                         width: rightViewSize.0,

@@ -9,7 +9,7 @@ import SubVTData
 import SwiftUI
 
 struct ValidatorListView: View {
-    enum Mode {
+    enum Mode: Equatable {
         case active
         case inactive
     }
@@ -76,7 +76,7 @@ struct ValidatorListView: View {
         ZStack {
             Color("Bg")
                 .ignoresSafeArea()
-            BgMorphView()
+            BgMorphView(isActive: self.mode == .active)
                 .offset(
                     x: 0,
                     y: UI.Dimension.BgMorph.yOffset(

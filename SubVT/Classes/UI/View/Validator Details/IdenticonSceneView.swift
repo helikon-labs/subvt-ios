@@ -5,6 +5,7 @@
 //  Created by Kutsal Kaan Bilgin on 29.07.2022.
 //
 
+import CoreMotion
 import SceneKit
 import SubVTData
 import SwiftUI
@@ -125,6 +126,7 @@ fileprivate func getScene(accountId: AccountId) -> SCNScene {
     cubeScene.rootNode.filters?.append(bloomFilter)
     cubeScene.rootNode.addChildNode(cameraNode)
     
+    /*
     cubeScene.rootNode.childNode(
         withName: "cube",
         recursively: false
@@ -134,8 +136,14 @@ fileprivate func getScene(accountId: AccountId) -> SCNScene {
         z: 0,
         duration: 10.0
     ))
+     */
     
     return cubeScene
+}
+
+// Func to get degrees from a double - use if you want to do something like if your user lifts up device (see below)
+fileprivate func degrees(_ radians: Double) -> Double {
+    return 180 / Double.pi * radians
 }
 
 final class IdenticonSceneView: UIViewRepresentable {
@@ -143,6 +151,12 @@ final class IdenticonSceneView: UIViewRepresentable {
     typealias Context = UIViewRepresentableContext<IdenticonSceneView>
     
     private let accountId: AccountId
+    private let motion = CMMotionManager()
+    private var motionTimer: Timer? = nil
+    
+    private var pitch = 0.0
+    private var roll = 0.0
+    private var yaw = 0.0
     
     init(accountId: AccountId) {
         self.accountId = accountId
@@ -166,6 +180,71 @@ final class IdenticonSceneView: UIViewRepresentable {
         view.cameraControlConfiguration.allowsTranslation = false
         // view.isJitteringEnabled = true
         return view
+    }
+    
+    func startDeviceMotion() {
+        if self.motion.isDeviceMotionAvailable {
+            print("start gyro")
+            self.motion.deviceMotionUpdateInterval = 1.0 / 60.0
+            self.motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
+            
+            self.motion.startDeviceMotionUpdates(
+                using: .xMagneticNorthZVertical,
+                to: OperationQueue.current!
+            ) { motion, _ in
+                if let motion = motion {
+                        // Get the attitude relative to the magnetic north reference frame.
+                        self.pitch += motion.rotationRate.x
+                        self.roll += motion.rotationRate.y
+                        self.yaw += motion.rotationRate.z
+                        
+                        self.scene?.rootNode.childNodes[0].rotation = SCNVector4(
+                            0.0,
+                            1.0,
+                            0,
+                            self.roll * 180.0 / (Double.pi * 2) / 2000
+                        )
+                        
+                        // Use the motion data in your app.
+                        print("(\(self.pitch), \(self.roll), \(self.yaw)")
+                    }
+                }
+            
+            /*
+            // Configure a timer to fetch the motion data.
+            self.motionTimer = Timer(fire: Date(), interval: (1.0 / 60.0), repeats: true) {
+                _ in
+                if let data = self.motion.deviceMotion {
+                    // Get the attitude relative to the magnetic north reference frame.
+                    self.pitch += data.rotationRate.x
+                    self.roll += data.rotationRate.y
+                    self.yaw += data.rotationRate.z
+                    
+                    self.scene?.rootNode.childNodes[0].rotation = SCNVector4(
+                        0.0,
+                        1.0,
+                        0,
+                        self.roll * 180.0 / (Double.pi * 2) / 2000
+                    )
+                    
+                    // Use the motion data in your app.
+                    print("(\(self.pitch), \(self.roll), \(self.yaw)")
+                }
+            }
+            
+            // Add the timer to the current run loop.
+            RunLoop.current.add(
+                self.motionTimer!,
+                forMode: .default
+            )
+             */
+        }
+    }
+    
+    func stopDeviceMotion() {
+        print("stop")
+        self.motionTimer?.invalidate()
+        self.motion.stopDeviceMotionUpdates()
     }
 }
 

@@ -19,6 +19,12 @@ struct ValidatorDetailsView: View {
     @State private var headerMaterialOpacity = 0.0
     @State private var lastScroll: CGFloat = 0
     let validatorSummary: ValidatorSummary
+    private let identiconSceneView: IdenticonSceneView!
+    
+    init(validatorSummary: ValidatorSummary) {
+        self.validatorSummary = validatorSummary
+        self.identiconSceneView = IdenticonSceneView(accountId: validatorSummary.accountId)
+    }
     
     var identityDisplay: String {
         return self.viewModel.validatorDetails?.identityDisplay
@@ -176,7 +182,7 @@ struct ValidatorDetailsView: View {
         ZStack {
             Color("Bg")
                 .ignoresSafeArea()
-            BgMorphView()
+            BgMorphView(isActive: self.validatorSummary.isActive)
                 .offset(
                     x: 0,
                     y: UI.Dimension.BgMorph.yOffset(
@@ -272,7 +278,7 @@ struct ValidatorDetailsView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
-                        IdenticonSceneView(accountId: self.validatorSummary.accountId)
+                        self.identiconSceneView
                             .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
                             .modifier(PanelAppearance(5, self.displayState))
                         VStack(
@@ -424,12 +430,16 @@ struct ValidatorDetailsView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.identiconSceneView.startDeviceMotion()
                     self.viewModel.subscribeToValidatorDetails(
                         network: self.network,
                         accountId: self.validatorSummary.accountId
                     )
                 }
             }
+        }
+        .onDisappear() {
+            self.identiconSceneView.stopDeviceMotion()
         }
     }
 }
