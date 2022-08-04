@@ -6,13 +6,19 @@
 //
 
 import Combine
+import CoreMotion
 import Foundation
 import SubVTData
 import SwiftUI
+import SceneKit
 
 class ValidatorDetailsViewModel: ObservableObject {
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
     @Published private(set) var validatorDetails: ValidatorDetails? = nil
+    
+    private let motion = CMMotionManager()
+    private let queue = OperationQueue()
+    @Published private(set) var deviceRotation = SCNVector3(0.0, 0.0, 0.0)
     
     private var service: SubVTData.ValidatorDetailsService! = nil
     private var serviceStatusSubscription: AnyCancellable? = nil
@@ -115,4 +121,31 @@ class ValidatorDetailsViewModel: ObservableObject {
             }
     }
     
+    func startDeviceMotion() {
+        if self.motion.isDeviceMotionAvailable {
+            self.motion.deviceMotionUpdateInterval = 1.0 / 30.0
+            self.motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
+            
+            self.motion.startDeviceMotionUpdates(
+                using: .xMagneticNorthZVertical,
+                to: self.queue
+            ) { motion, _ in
+                if let motion = motion {
+                    DispatchQueue.main.async {
+                        // Get the attitude relative to the magnetic north reference frame.
+                        self.deviceRotation.x += Float(motion.rotationRate.x) / 80
+                        self.deviceRotation.y += Float(motion.rotationRate.y) / 56
+                        // ignore z rotation for the 3D model
+                        self.deviceRotation.z += 0
+                    }
+                }
+            }
+        }
+    }
+    
+    func stopDeviceMotion() {
+        print("stop")
+        self.queue.cancelAllOperations()
+        self.motion.stopDeviceMotionUpdates()
+    }
 }

@@ -110,6 +110,8 @@
 		A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
 		A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
 		A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098E593285DDE3D00AAA68A /* PreviewData.swift */; };
+		A09905A02897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */; };
+		A09905A12897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */; };
 		A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC56284B8E0000914237 /* UI+Font.swift */; };
@@ -378,6 +380,7 @@
 		A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkSelection.swift"; sourceTree = "<group>"; };
 		A093F0472865F08600778293 /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
 		A098E593285DDE3D00AAA68A /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailsIconsView.swift; sourceTree = "<group>"; };
 		A0A1DC53284B8DD200914237 /* UI+Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension.swift"; sourceTree = "<group>"; };
 		A0A1DC56284B8E0000914237 /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
 		A0A1DC5A284B8E2B00914237 /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
@@ -671,6 +674,7 @@
 			isa = PBXGroup;
 			children = (
 				A0FD88302893D3D500479C10 /* IdenticonSceneView.swift */,
+				A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */,
 				A052C15028913C4400622D9F /* ValidatorDetailsView.swift */,
 				A0AFF7F028926C8400B0CB4F /* ValidatorDetailsViewModel.swift */,
 			);
@@ -1403,6 +1407,7 @@
 				A0C90E882878615600A91996 /* Formatter.swift in Sources */,
 				A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */,
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
+				A09905A02897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */,
 				A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1496,6 +1501,7 @@
 				A0BCDE6128784DD0008047D7 /* Format.swift in Sources */,
 				A04C473328882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A0A1DC58284B8E0000914237 /* UI+Font.swift in Sources */,
+				A09905A12897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */,
 				A0787281287C456300BED374 /* ActionButtonView.swift in Sources */,
 				A04B37D428771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A0AFF7F52892A94900B0CB4F /* UI+Dimension+ValidatorDetails.swift in Sources */,

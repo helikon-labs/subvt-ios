@@ -20,11 +20,12 @@
 "common.percentage"="%@%%";
 "common.int_percentage"="%d%%";
 "common.date_components.year"="%dy";
-"common.date_components.month"="%dm";
+"common.date_components.month"="%dmo";
 "common.date_components.week"="%dw";
 "common.date_components.day"="%dd";
 "common.date_components.hour"="%dh";
 "common.date_components.minute"="%dm";
+"common.date_components.second"="%ds";
 
 "reward_destination.controller"="Controller";
 "reward_destination.staked"="Staked";
@@ -77,8 +78,9 @@
 "validator_list.sort_by.active_stake"="Active stake";
 "validator_list.sort_by.nomination_total"="Nomination total";
 "validator_list.filter"="Filter";
-"validator_list.filter.by_identity"="With identity only";
-"validator_list.filter.by_onekv"="1KV only";
+"validator_list.filter.identity"="With identity";
+"validator_list.filter.onekv"="Enrolled in 1KV";
+"validator_list.filter.paravalidator"="Parachain validator";
 
 "validator_details.nomination_total"="Nomination Total";
 "validator_details.active_stake"="Active Stake";
@@ -103,3 +105,10 @@
 "validator_details.onekv.validity"="Validity";
 "validator_details.onekv.valid"="Valid";
 "validator_details.onekv.invalid"="Invalid";
+"validator_details.tooltip.onekv"="Enrolled in 1KV";
+"validator_details.tooltip.paravalidator"="Parachain Validator";
+"validator_details.tooltip.active_next_session"="Active Next Session";
+"validator_details.tooltip.heartbeat_received"="Heartbeat Received";
+"validator_details.tooltip.oversubscribed"="Oversubscribed";
+"validator_details.tooltip.blocks_nominations"="Blocks Nominations";
+"validator_details.tooltip.slashed"="Slashed";

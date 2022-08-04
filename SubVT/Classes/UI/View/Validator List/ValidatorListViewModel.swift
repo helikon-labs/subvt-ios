@@ -10,6 +10,11 @@ import SubVTData
 import SwiftUI
 
 class ValidatorListViewModel: ObservableObject {
+    enum Mode: Equatable {
+        case active
+        case inactive
+    }
+    
     enum SortOption: String {
         case identity
         case stakeDescending
@@ -19,6 +24,7 @@ class ValidatorListViewModel: ObservableObject {
     enum FilterOption: String {
         case hasIdentity
         case isOneKV
+        case isParavalidator
     }
     
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
@@ -28,7 +34,7 @@ class ValidatorListViewModel: ObservableObject {
     @Published var searchText: String = ""
     @Published var isLoading = false
     
-    private var mode: ValidatorListView.Mode = .active
+    private var mode: Mode = .active
     private var serviceStatusSubscription: AnyCancellable? = nil
     private var serviceSubscription: AnyCancellable? = nil
     private(set) var subscriptionIsInProgress = false
@@ -94,7 +100,7 @@ class ValidatorListViewModel: ObservableObject {
     
     func subscribeToValidatorList(
         network: Network,
-        mode: ValidatorListView.Mode
+        mode: ValidatorListViewModel.Mode
     ) {
         switch self.serviceStatus {
         case .subscribed(_):
@@ -197,6 +203,7 @@ class ValidatorListViewModel: ObservableObject {
             .filter { searchText.isEmpty || $0.filter(searchText) }
             .filter { !filterOptions.contains(.hasIdentity) || $0.hasIdentity() }
             .filter { !filterOptions.contains(.isOneKV) || $0.isEnrolledIn1Kv }
+            .filter { !filterOptions.contains(.isParavalidator) || $0.isParaValidator }
             .sorted {
                 guard let sortOption = sortOption else {
                     return true

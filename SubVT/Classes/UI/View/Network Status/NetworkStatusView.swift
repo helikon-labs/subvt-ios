@@ -22,6 +22,7 @@ struct NetworkStatusView: View {
     @StateObject private var viewModel = NetworkStatusViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
+    @AppStorage(AppStorageKey.hasCompletedAPNSRegistration) private var hasCompletedAPNSRegistration = false
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var networkSelectorIsOpen = false
@@ -273,14 +274,26 @@ struct NetworkStatusView: View {
             alignment: .leading
         )
         .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now()) {
-                self.displayState = .appeared
-            }
             self.viewModel.subscribeToNetworkStatus(
                 network: network,
                 onStatus: self.onNetworkStatusReceived,
                 onDiff: self.onNetworkStatusDiffReceived
             )
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.displayState = .appeared
+            }
+            if !self.hasCompletedAPNSRegistration {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    UNUserNotificationCenter.current().requestAuthorization(
+                        options: [.alert, .sound]
+                    ) { (granted, _) in
+                        guard granted else { return }
+                        DispatchQueue.main.async {
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                }
+            }
         }
         .onReceive(blockTimer) { _ in
             let elapsedSec = Date().timeIntervalSince1970 - blockTimerStartTimeSec

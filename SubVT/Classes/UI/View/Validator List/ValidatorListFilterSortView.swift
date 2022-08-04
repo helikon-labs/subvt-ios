@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ValidatorListFilterSortView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    let mode: ValidatorListViewModel.Mode
     @Binding var isVisible: Bool
     @Binding var sortOption: ValidatorListViewModel.SortOption?
     @Binding var filterOptions: Set<ValidatorListViewModel.FilterOption>
@@ -17,6 +18,7 @@ struct ValidatorListFilterSortView: View {
     @State private var sortByNominationPressed = false
     @State private var filterByIdPressed = false
     @State private var filterByOneKVPressed = false
+    @State private var filterByParavalidatorPressed = false
     
     var body: some View {
         ZStack(alignment: .top) {
@@ -160,7 +162,7 @@ struct ValidatorListFilterSortView: View {
                                 } onRelease: {
                                     self.filterByIdPressed = false
                                 }
-                                Text(localized("validator_list.filter.by_identity"))
+                                Text(localized("validator_list.filter.identity"))
                                     .foregroundColor(Color("Text"))
                                     .font(UI.Font.ValidatorList.listSortField)
                             }
@@ -185,9 +187,36 @@ struct ValidatorListFilterSortView: View {
                                 } onRelease: {
                                     self.filterByOneKVPressed = false
                                 }
-                                Text(localized("validator_list.filter.by_onekv"))
+                                Text(localized("validator_list.filter.onekv"))
                                     .foregroundColor(Color("Text"))
                                     .font(UI.Font.ValidatorList.listSortField)
+                            }
+                            if self.mode == .active {
+                                HStack(alignment: .center, spacing: 12) {
+                                    Button(
+                                        action: {
+                                            if self.filterOptions.contains(.isParavalidator) {
+                                                self.filterOptions.remove(.isParavalidator)
+                                            } else {
+                                                self.filterOptions.insert(.isParavalidator)
+                                            }
+                                        },
+                                        label: {
+                                            SmallCheckboxButtonView(
+                                                isChecked: self.filterOptions.contains(.isParavalidator),
+                                                isPressed: self.filterByParavalidatorPressed
+                                            )
+                                        }
+                                    )
+                                    .pressAction {
+                                        self.filterByParavalidatorPressed = true
+                                    } onRelease: {
+                                        self.filterByParavalidatorPressed = false
+                                    }
+                                    Text(localized("validator_list.filter.paravalidator"))
+                                        .foregroundColor(Color("Text"))
+                                        .font(UI.Font.ValidatorList.listSortField)
+                                }
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -218,6 +247,7 @@ struct ValidatorListFilterSortView: View {
 struct ValidatorListSortFilterView_Previews: PreviewProvider {
     static var previews: some View {
         ValidatorListFilterSortView(
+            mode: .active,
             isVisible: .constant(true),
             sortOption: .constant(nil),
             filterOptions: .constant([])

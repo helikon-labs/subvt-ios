@@ -16,19 +16,15 @@ fileprivate var cubeMaterial: SCNMaterial = {
     let material = SCNMaterial()
     material.lightingModel = .blinn
     material.transparent.contents = UIColor(white: 0.0, alpha: 0.15)
-    //material.transparent.contents = UIColor(white: 0.0, alpha: 0.25)
     material.transparencyMode = .dualLayer
     material.fresnelExponent = 1.0
-    //material.fresnelExponent = 1
     material.reflective.intensity = 2.0
     material.isDoubleSided = false
     material.specular.contents = UIColor(white: 0.6, alpha: 1.0)
     material.diffuse.contents = UIColor.black
-    //material.diffuse.contents = UIColor.blue
     material.shininess = 1.0
     material.reflective.contents = "cube_environment.hdr"
     material.reflective.intensity = 10.0
-    //material.blendMode = .add
     return material
 }()
 
@@ -99,14 +95,6 @@ fileprivate func getScene(accountId: AccountId) -> SCNScene {
     cube.addChildNode(spheres)
     // add lights
     cubeScene.rootNode.addChildNode(getAmbientLight("ambient-0"))
-    /*
-    cubeScene.rootNode.addChildNode(getOmniLight("light-0", 0.0, 0.0, 15.0))
-    cubeScene.rootNode.addChildNode(getOmniLight("light-0", -12.0, 0.0, 0.0))
-    cubeScene.rootNode.addChildNode(getOmniLight("light-0", 12.0, 0.0, 0.0))
-    cubeScene.rootNode.addChildNode(getOmniLight("light-0", 0.0, 12.0, 0.0))
-    cubeScene.rootNode.addChildNode(getOmniLight("light-0", 0.0, -12.0, 0.0))
-     */
-    
     cubeScene.rootNode.addChildNode(getOmniLight("light-0", 0.0, 12.0, -12.0))
     cubeScene.rootNode.addChildNode(getOmniLight("light-1", 0.0, 9.4, 4.3))
     cubeScene.rootNode.addChildNode(getOmniLight("light-1-clone", 0.0, 9.4, 4.3))
@@ -126,24 +114,7 @@ fileprivate func getScene(accountId: AccountId) -> SCNScene {
     cubeScene.rootNode.filters?.append(bloomFilter)
     cubeScene.rootNode.addChildNode(cameraNode)
     
-    /*
-    cubeScene.rootNode.childNode(
-        withName: "cube",
-        recursively: false
-    )!.runAction(SCNAction.rotateBy(
-        x: 0,
-        y: Double.pi,
-        z: 0,
-        duration: 10.0
-    ))
-     */
-    
     return cubeScene
-}
-
-// Func to get degrees from a double - use if you want to do something like if your user lifts up device (see below)
-fileprivate func degrees(_ radians: Double) -> Double {
-    return 180 / Double.pi * radians
 }
 
 final class IdenticonSceneView: UIViewRepresentable {
@@ -151,107 +122,38 @@ final class IdenticonSceneView: UIViewRepresentable {
     typealias Context = UIViewRepresentableContext<IdenticonSceneView>
     
     private let accountId: AccountId
-    private let motion = CMMotionManager()
-    private var motionTimer: Timer? = nil
+    private let rotation: SCNVector3
     
-    private var pitch = 0.0
-    private var roll = 0.0
-    private var yaw = 0.0
-    
-    init(accountId: AccountId) {
+    init(accountId: AccountId, rotation: SCNVector3) {
         self.accountId = accountId
+        self.rotation = rotation
     }
     
-    deinit {
-        self.scene = nil
-    }
-    
-    private lazy var scene: SCNScene? = getScene(accountId: accountId)
-
-    func updateUIView(_ uiView: UIViewType, context: Context) {}
     func makeUIView(context: Context) -> UIViewType {
         let view = SCNView()
         view.backgroundColor = UIColor.clear
         view.allowsCameraControl = false
         view.isTemporalAntialiasingEnabled = false
         view.autoenablesDefaultLighting = false
-        view.scene = self.scene
+        view.scene = getScene(accountId: accountId)
         view.antialiasingMode = .multisampling2X
         view.cameraControlConfiguration.allowsTranslation = false
         // view.isJitteringEnabled = true
         return view
     }
-    
-    func startDeviceMotion() {
-        if self.motion.isDeviceMotionAvailable {
-            print("start gyro")
-            self.motion.deviceMotionUpdateInterval = 1.0 / 60.0
-            self.motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
-            
-            self.motion.startDeviceMotionUpdates(
-                using: .xMagneticNorthZVertical,
-                to: OperationQueue.current!
-            ) { motion, _ in
-                if let motion = motion {
-                        // Get the attitude relative to the magnetic north reference frame.
-                        self.pitch += motion.rotationRate.x
-                        self.roll += motion.rotationRate.y
-                        self.yaw += motion.rotationRate.z
-                        
-                        self.scene?.rootNode.childNodes[0].rotation = SCNVector4(
-                            0.0,
-                            1.0,
-                            0,
-                            self.roll * 180.0 / (Double.pi * 2) / 2000
-                        )
-                        
-                        // Use the motion data in your app.
-                        print("(\(self.pitch), \(self.roll), \(self.yaw)")
-                    }
-                }
-            
-            /*
-            // Configure a timer to fetch the motion data.
-            self.motionTimer = Timer(fire: Date(), interval: (1.0 / 60.0), repeats: true) {
-                _ in
-                if let data = self.motion.deviceMotion {
-                    // Get the attitude relative to the magnetic north reference frame.
-                    self.pitch += data.rotationRate.x
-                    self.roll += data.rotationRate.y
-                    self.yaw += data.rotationRate.z
-                    
-                    self.scene?.rootNode.childNodes[0].rotation = SCNVector4(
-                        0.0,
-                        1.0,
-                        0,
-                        self.roll * 180.0 / (Double.pi * 2) / 2000
-                    )
-                    
-                    // Use the motion data in your app.
-                    print("(\(self.pitch), \(self.roll), \(self.yaw)")
-                }
-            }
-            
-            // Add the timer to the current run loop.
-            RunLoop.current.add(
-                self.motionTimer!,
-                forMode: .default
-            )
-             */
-        }
-    }
-    
-    func stopDeviceMotion() {
-        print("stop")
-        self.motionTimer?.invalidate()
-        self.motion.stopDeviceMotionUpdates()
+
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+        uiView.scene!.rootNode.childNodes[0].eulerAngles = self.rotation
     }
 }
 
 struct IdenticonSceneView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
-            IdenticonSceneView(accountId: PreviewData.stashAccountId)
+            IdenticonSceneView(
+                accountId: PreviewData.stashAccountId,
+                rotation: SCNVector3(0, 0, 0)
+            )
                 .frame(height: UI.Dimension.ValidatorDetails.identiconHeight * 1.3)
         }
         .frame(maxHeight: .infinity)

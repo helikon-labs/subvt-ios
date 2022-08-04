@@ -21,6 +21,7 @@ extension UI {
             static let balanceLarge = LexendDeca.semiBold.withSize(28)
             static let tickerLarge = LexendDeca.regular.withSize(28)
             static let dataMedium = LexendDeca.semiBold.withSize(20)
+            static let tooltip = LexendDeca.light.withSize(12)
         }
         
         enum Snackbar {

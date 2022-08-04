@@ -9,11 +9,6 @@ import SubVTData
 import SwiftUI
 
 struct ValidatorListView: View {
-    enum Mode: Equatable {
-        case active
-        case inactive
-    }
-    
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationMode) private var presentationMode
@@ -26,7 +21,7 @@ struct ValidatorListView: View {
     @State private var lastScroll: CGFloat = 0
     @State private var popupIsVisible = false
     
-    let mode: Mode
+    let mode: ValidatorListViewModel.Mode
     static let filterSectionHeight = UI.Dimension.ValidatorList.searchBarMarginTop
         + UI.Dimension.Common.searchBarHeight
     private let filterSectionToggleThreshold: CGFloat = 30
@@ -209,6 +204,7 @@ struct ValidatorListView: View {
             .zIndex(1)
             if self.popupIsVisible {
                 ValidatorListFilterSortView(
+                    mode: self.mode,
                     isVisible: self.$popupIsVisible,
                     sortOption: self.$viewModel.sortOption,
                     filterOptions: self.$viewModel.filterOptions

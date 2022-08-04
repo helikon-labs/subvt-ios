@@ -5,6 +5,7 @@
 //  Created by Kutsal Kaan Bilgin on 27.07.2022.
 //
 
+import Combine
 import SubVTData
 import SwiftUI
 
@@ -19,12 +20,6 @@ struct ValidatorDetailsView: View {
     @State private var headerMaterialOpacity = 0.0
     @State private var lastScroll: CGFloat = 0
     let validatorSummary: ValidatorSummary
-    private let identiconSceneView: IdenticonSceneView!
-    
-    init(validatorSummary: ValidatorSummary) {
-        self.validatorSummary = validatorSummary
-        self.identiconSceneView = IdenticonSceneView(accountId: validatorSummary.accountId)
-    }
     
     var identityDisplay: String {
         return self.viewModel.validatorDetails?.identityDisplay
@@ -60,20 +55,6 @@ struct ValidatorDetailsView: View {
             }
         }
         return nil
-    }
-    
-    private func getIcon(_ name: String) -> some View {
-        return Button {
-            // no-op
-        } label: {
-            Image(name)
-                .resizable()
-                .frame(
-                    width: UI.Dimension.ValidatorDetails.iconSize,
-                    height: UI.Dimension.ValidatorDetails.iconSize
-                )
-        }
-        .buttonStyle(PushButtonStyle())
     }
     
     private func getTimePeriodString(timestampMs: UInt64) -> String {
@@ -278,7 +259,10 @@ struct ValidatorDetailsView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
-                        self.identiconSceneView
+                        IdenticonSceneView(
+                            accountId: validatorSummary.accountId,
+                            rotation: self.viewModel.deviceRotation
+                        )
                             .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
                             .modifier(PanelAppearance(5, self.displayState))
                         VStack(
@@ -376,39 +360,13 @@ struct ValidatorDetailsView: View {
             .zIndex(0)
             FooterGradientView()
                 .zIndex(1)
-            HStack(alignment: .center) {
-                if self.isOneKV {
-                    self.getIcon("1KVIcon")
-                }
-                if self.isParaValidator {
-                    self.getIcon("ParaValidatorIcon")
-                }
-                if self.isActiveNextSession {
-                    self.getIcon("ActiveNextSessionIcon")
-                }
-                if self.heartbeatReceived {
-                    self.getIcon("HeartbeatReceivedIcon")
-                }
-                if self.isOversubscribed {
-                    self.getIcon("OversubscribedIcon")
-                }
-                if self.blocksNominations {
-                    self.getIcon("BlocksNominationsIcon")
-                }
-                if self.blocksNominations {
-                    self.getIcon("BlocksNominationsIcon")
-                }
-                if self.hasBeenSlashed {
-                    self.getIcon("SlashedIcon")
-                }
-            }
-            .frame(maxHeight: .infinity, alignment: .bottom)
-            .padding(EdgeInsets(
-                top: 0,
-                leading: 0,
-                bottom: UI.Dimension.ValidatorDetails.iconContainerMarginBottom,
-                trailing: 0
-            ))
+            ValidatorDetailsIconsView(
+                validatorSummary: self.validatorSummary
+            )
+            .offset(
+                x: 0,
+                y: -UI.Dimension.ValidatorDetails.iconContainerMarginBottom
+            )
             .zIndex(2)
             .modifier(PanelAppearance(5, self.displayState))
         }
@@ -430,7 +388,7 @@ struct ValidatorDetailsView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.identiconSceneView.startDeviceMotion()
+                    self.viewModel.startDeviceMotion()
                     self.viewModel.subscribeToValidatorDetails(
                         network: self.network,
                         accountId: self.validatorSummary.accountId
@@ -439,7 +397,7 @@ struct ValidatorDetailsView: View {
             }
         }
         .onDisappear() {
-            self.identiconSceneView.stopDeviceMotion()
+            self.viewModel.stopDeviceMotion()
         }
     }
 }
