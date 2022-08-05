@@ -9,7 +9,7 @@
 "common.ok"="OK";
 "common.retry"="Retry";
 "common.search"="Search";
-
+"common.done"="Done";
 "common.error"="Error";
 "common.error.connection"="Connection error";
 "common.error.unexpected"="Unexpected error";
@@ -112,3 +112,7 @@
 "validator_details.tooltip.oversubscribed"="Oversubscribed";
 "validator_details.tooltip.blocks_nominations"="Blocks Nominations";
 "validator_details.tooltip.slashed"="Slashed";
+"validator_details.validator_added"="Added";
+"validator_details.validator_removed"="Removed";
+
+"my_validators.title"="My Validators";

@@ -38,5 +38,6 @@ extension UI.Dimension {
         static let scrollContentBottomSpacerHeight: CGFloat = iconContainerMarginBottom
             + iconSize
             + UI.Dimension.Common.padding * 2
+        static let actionFeedbackViewYOffset: CGFloat = -(iconContainerMarginBottom + iconSize + UI.Dimension.Common.padding)
     }
 }

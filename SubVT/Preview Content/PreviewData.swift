@@ -46,6 +46,7 @@ enum PreviewData {
         accountId: stashAccountId,
         address: "HZUyowqk6wH6o8B4Asf7P7hLuRXy8hPheNCKevN5QFFRRdd",
         controllerAccountId: controllerAccountId,
+        networkId: kusama.id,
         display: "Display",
         parentDisplay: "Parent",
         childDisplay: "Child",

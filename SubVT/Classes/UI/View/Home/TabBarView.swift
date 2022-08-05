@@ -17,7 +17,7 @@ struct TabBarButtonStyle: ButtonStyle {
 
 struct TabBarButtonView: View {
     let tab: Tab
-    @State var isActive = false
+    let isActive: Bool
     let onSelect: () -> ()
     
     init(
@@ -33,10 +33,7 @@ struct TabBarButtonView: View {
     var body: some View {
         Button(
             action: {
-                if !self.isActive {
-                    isActive.toggle()
-                    self.onSelect()
-                }
+                self.onSelect()
             },
             label: {
                 VStack(alignment: .center, spacing: 0) {
@@ -69,7 +66,7 @@ struct TabBarView: View {
                     tab: tab,
                     isActive: tab == self.currentTab
                 ) {
-                    currentTab = tab
+                    self.currentTab = tab
                 }
             }
         }

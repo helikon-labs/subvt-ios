@@ -219,7 +219,10 @@ struct ValidatorListView: View {
                         ForEach(self.viewModel.validators, id: \.self.address) {
                             validator in
                             NavigationLink {
-                                ValidatorDetailsView(validatorSummary: validator)
+                                ValidatorDetailsView(
+                                    network: self.network,
+                                    validatorSummary: validator
+                                )
                             } label: {
                                 ValidatorSummaryView(validatorSummary: validator)
                             }

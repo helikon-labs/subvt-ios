@@ -22,10 +22,21 @@ extension UI {
             static let tickerLarge = LexendDeca.regular.withSize(28)
             static let dataMedium = LexendDeca.semiBold.withSize(20)
             static let tooltip = LexendDeca.light.withSize(12)
+            static var tabViewTitle: SwiftUI.Font {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return LexendDeca.semiBold.withSize(24)
+                } else {
+                    return LexendDeca.semiBold.withSize(36)
+                }
+            }
         }
         
         enum Snackbar {
             static let message = LexendDeca.light.withSize(15)
+        }
+        
+        enum ActionFeedbackView {
+            static let text = LexendDeca.semiBold.withSize(16)
         }
         
         enum Introduction {
@@ -95,13 +106,6 @@ extension UI {
         }
         
         enum NetworkStatus {
-            static var title: SwiftUI.Font {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return LexendDeca.semiBold.withSize(24)
-                } else {
-                    return LexendDeca.semiBold.withSize(36)
-                }
-            }
             static let networkSelector = LexendDeca.regular.withSize(12)
             static let eraEpochTimestamp = LexendDeca.light.withSize(12)
             static var dataLarge: SwiftUI.Font {

@@ -67,6 +67,11 @@
 		A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */; };
 		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
+		A067DD5C289D398E005BE98C /* ActionFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */; };
+		A067DD60289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */; };
+		A067DD61289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */; };
+		A067DD64289D56A9005BE98C /* MyValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD63289D56A9005BE98C /* MyValidatorsView.swift */; };
+		A067DD65289D56A9005BE98C /* MyValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD63289D56A9005BE98C /* MyValidatorsView.swift */; };
 		A06E15A3288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */; };
 		A06E15A6288FF69F00694CC8 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */; };
 		A06E15A7288FF69F00694CC8 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */; };
@@ -360,6 +365,9 @@
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 		A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummaryView.swift; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
+		A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFeedbackView.swift; sourceTree = "<group>"; };
+		A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+ActionFeedback.swift"; sourceTree = "<group>"; };
+		A067DD63289D56A9005BE98C /* MyValidatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsView.swift; sourceTree = "<group>"; };
 		A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRPCStatusIndicatorView.swift; sourceTree = "<group>"; };
 		A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		A072C336287805A6001636F9 /* EraEpochView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraEpochView.swift; sourceTree = "<group>"; };
@@ -551,6 +559,7 @@
 				A0B3A6B6287D7663005DA484 /* Chart */,
 				A04C428B285321ED007C970B /* Common */,
 				A0DCABB5285CA35700E458F4 /* Home */,
+				A067DD62289D5694005BE98C /* My Validators */,
 				A0C9A77D28573D930071C7AC /* Network Selection */,
 				A0C983942875AC690008C370 /* Network Status */,
 				A0128A53284A1855000C2307 /* Onboarding */,
@@ -627,6 +636,7 @@
 			isa = PBXGroup;
 			children = (
 				A078727F287C456300BED374 /* ActionButtonView.swift */,
+				A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */,
 				A0744D972885AB05008A06DD /* BackButtonView.swift */,
 				A0C9A781285749940071C7AC /* BasicDisplayState.swift */,
 				A0A1DC60284B990B00914237 /* BgMorphView.swift */,
@@ -691,6 +701,14 @@
 			path = "View Modifier";
 			sourceTree = "<group>";
 		};
+		A067DD62289D5694005BE98C /* My Validators */ = {
+			isa = PBXGroup;
+			children = (
+				A067DD63289D56A9005BE98C /* MyValidatorsView.swift */,
+			);
+			path = "My Validators";
+			sourceTree = "<group>";
+		};
 		A06E15A4288FF68B00694CC8 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -722,6 +740,7 @@
 			isa = PBXGroup;
 			children = (
 				A0A1DC53284B8DD200914237 /* UI+Dimension.swift */,
+				A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */,
 				A07BA81A285B943A00575683 /* UI+Dimension+BgMorph.swift */,
 				A07BA817285B8C0600575683 /* UI+Dimension+Common.swift */,
 				A07BA820285B94B400575683 /* UI+Dimension+Introduction.swift */,
@@ -730,8 +749,8 @@
 				A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */,
 				A07BA81D285B948D00575683 /* UI+Dimension+Snackbar.swift */,
 				A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */,
-				A0744D912885A033008A06DD /* UI+Dimension+ValidatorList.swift */,
 				A0AFF7F32892A94900B0CB4F /* UI+Dimension+ValidatorDetails.swift */,
+				A0744D912885A033008A06DD /* UI+Dimension+ValidatorList.swift */,
 			);
 			path = "UI+Dimension";
 			sourceTree = "<group>";
@@ -1357,6 +1376,7 @@
 				A0B3A6B8287D768A005DA484 /* LineChartView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A0D03349288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
+				A067DD60289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
 				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0AFF7F72892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
@@ -1375,6 +1395,7 @@
 				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
+				A067DD5C289D398E005BE98C /* ActionFeedbackView.swift in Sources */,
 				A0F574DA28870467002849FC /* VisualEffectView.swift in Sources */,
 				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
 				A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */,
@@ -1409,6 +1430,7 @@
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A09905A02897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */,
 				A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
+				A067DD64289D56A9005BE98C /* MyValidatorsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1469,6 +1491,7 @@
 				A07BA81F285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
 				A0FD88322893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
 				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
+				A067DD61289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */,
 				A052C15228913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */,
@@ -1494,6 +1517,7 @@
 				A072C338287805A6001636F9 /* EraEpochView.swift in Sources */,
 				A0D03347288AE7E9001F78D2 /* ValidatorListFilterSortView.swift in Sources */,
 				A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */,
+				A067DD65289D56A9005BE98C /* MyValidatorsView.swift in Sources */,
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A0D0334A288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A04C47282887F19F0004A46A /* RoundedCorner.swift in Sources */,

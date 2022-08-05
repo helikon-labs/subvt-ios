@@ -30,6 +30,7 @@ struct HomeView: View {
             ZStack {
                 Color("Bg")
                     .ignoresSafeArea()
+                    .zIndex(1)
                 BgMorphView()
                     .offset(
                         x: 0,
@@ -42,15 +43,15 @@ struct HomeView: View {
                         .easeOut(duration: 0.75),
                         value: self.displayState
                     )
+                    .zIndex(2)
                 // tab content
-                ZStack(alignment: .topLeading) {
-                    NetworkStatusView()
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .ignoresSafeArea()
+                NetworkStatusView()
+                    .zIndex((self.currentTab == .network) ? 3.0 : 0.0)
+                MyValidatorsView()
+                    .zIndex((self.currentTab == .myValidators) ? 3.0 : 0.0)
                 // tab bar
                 VStack {
-                    TabBarView(currentTab: $currentTab)
+                    TabBarView(currentTab: self.$currentTab)
                         .frame(maxHeight: .infinity, alignment: .bottom)
                     Spacer()
                         .frame(height: UI.Dimension.TabBar.marginBottom)
@@ -67,6 +68,7 @@ struct HomeView: View {
                 )
                 .animation(.easeInOut(duration: 0.5), value: self.showsTabBar)
                 .ignoresSafeArea()
+                .zIndex(4)
             }
         }
         //.navigationBarTitleDisplayMode(.inline)

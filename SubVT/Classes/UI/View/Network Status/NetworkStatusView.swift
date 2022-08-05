@@ -77,7 +77,7 @@ struct NetworkStatusView: View {
             HStack(alignment: .center) {
                 HStack(alignment: .top, spacing: 0) {
                     Text(localized("network_status.title"))
-                        .font(UI.Font.NetworkStatus.title)
+                        .font(UI.Font.Common.tabViewTitle)
                         .foregroundColor(Color("Text"))
                     Spacer()
                         .frame(

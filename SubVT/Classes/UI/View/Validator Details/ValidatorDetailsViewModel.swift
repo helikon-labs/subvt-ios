@@ -15,28 +15,32 @@ import SceneKit
 class ValidatorDetailsViewModel: ObservableObject {
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
     @Published private(set) var validatorDetails: ValidatorDetails? = nil
+    @Published private(set) var userValidatorsFetchState: DataFetchState<[UserValidator]> = .idle
+    @Published private(set) var userValidator: UserValidator? = nil
     
     private let motion = CMMotionManager()
     private let queue = OperationQueue()
     @Published private(set) var deviceRotation = SCNVector3(0.0, 0.0, 0.0)
     
+    private var appService = SubVTData.AppService()
     private var service: SubVTData.ValidatorDetailsService! = nil
     private var serviceStatusSubscription: AnyCancellable? = nil
     private var serviceSubscription: AnyCancellable? = nil
-    private var network: Network! = nil
-    private var accountId: AccountId! = nil
     private(set) var subscriptionIsInProgress = false
+    private var cancellables: Set<AnyCancellable> = []
+    
+    var network: Network? = nil
+    var accountId: AccountId? = nil
     
     private func initService() {
-        if let rpcHost = self.network?.validatorDetailsServiceHost,
-           let rpcPort = self.network?.validatorDetailsServicePort {
-            self.service = SubVTData.ValidatorDetailsService(
-                rpcHost: rpcHost,
-                rpcPort: rpcPort
-            )
-        } else {
-            self.service = SubVTData.ValidatorDetailsService()
+        guard let rpcHost = self.network?.validatorDetailsServiceHost,
+              let rpcPort = self.network?.validatorDetailsServicePort else {
+            return
         }
+        self.service = SubVTData.ValidatorDetailsService(
+            rpcHost: rpcHost,
+            rpcPort: rpcPort
+        )
     }
     
     func unsubscribe() {
@@ -53,17 +57,17 @@ class ValidatorDetailsViewModel: ObservableObject {
             self.subscriptionIsInProgress = false
         case .active:
             if !self.subscriptionIsInProgress {
-                self.subscribeToValidatorDetails(network: self.network, accountId: accountId)
+                self.subscribeToValidatorDetails()
             }
         @unknown default:
             fatalError("Unknown scene phase: \(scenePhase)")
         }
     }
     
-    func subscribeToValidatorDetails(
-        network: Network,
-        accountId: AccountId
-    ) {
+    func subscribeToValidatorDetails() {
+        guard let accountId = self.accountId else {
+            return
+        }
         switch self.serviceStatus {
         case .subscribed(_):
             return
@@ -71,7 +75,6 @@ class ValidatorDetailsViewModel: ObservableObject {
             break
         }
         self.subscriptionIsInProgress = true
-        self.network = network
         if self.service == nil {
             self.initService()
         }
@@ -144,8 +147,104 @@ class ValidatorDetailsViewModel: ObservableObject {
     }
     
     func stopDeviceMotion() {
-        print("stop")
         self.queue.cancelAllOperations()
         self.motion.stopDeviceMotionUpdates()
+    }
+    
+    func fetchUserValidators(
+        onSuccess: (() -> ())?,
+        onError: @escaping (Error) -> ()
+    ) {
+        guard let network = self.network,
+              let accountId = self.accountId else {
+            return
+        }
+        self.userValidatorsFetchState = .loading
+        self.appService.getUserValidators()
+            .sink {
+                [weak self] response in
+                guard let self = self else { return }
+                if let error = response.error {
+                    self.userValidatorsFetchState = .error(error: error)
+                    onError(error)
+                } else {
+                    self.userValidatorsFetchState = .success(result: response.value!)
+                    self.userValidator = response.value!.first { userValidator in
+                        userValidator.networkId == network.id
+                            && userValidator.validatorAccountId == accountId
+                    }
+                    onSuccess?()
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    func addOrRemoveValidator(
+        onAdded: (() -> ())?,
+        onRemoved: (() -> ())?,
+        onError: @escaping (Error) -> ()
+    ) {
+        if let _ = self.userValidator {
+            self.removeValidator(
+                onSuccess: onRemoved,
+                onError: onError
+            )
+        } else {
+            self.addValidator(
+                onSuccess: onAdded,
+                onError: onError
+            )
+        }
+    }
+    
+    private func addValidator(
+        onSuccess: (() -> ())?,
+        onError: @escaping (Error) -> ()
+    ) {
+        guard let network = self.network,
+              let accountId = self.accountId else {
+            return
+        }
+        self.appService.createUserValidator(
+            validator: NewUserValidator(
+                networkId: network.id,
+                validatorAccountId: accountId
+            )
+        ).sink {
+            [weak self] response in
+            guard let self = self else { return }
+            if let error = response.error {
+                onError(error)
+            } else {
+                self.fetchUserValidators(
+                    onSuccess: onSuccess,
+                    onError: onError
+                )
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
+    private func removeValidator(
+        onSuccess: (() -> ())?,
+        onError: @escaping (Error) -> ()
+    ) {
+        guard let userValidator = self.userValidator else {
+            return
+        }
+        self.appService.deleteUserValidator(id: userValidator.id)
+            .sink {
+                [weak self] response in
+                guard let self = self else { return }
+                if let error = response.error {
+                    onError(error)
+                } else {
+                    self.fetchUserValidators(
+                        onSuccess: onSuccess,
+                        onError: onError
+                    )
+                }
+            }
+            .store(in: &cancellables)
     }
 }

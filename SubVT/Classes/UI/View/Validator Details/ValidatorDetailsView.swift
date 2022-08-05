@@ -13,12 +13,17 @@ struct ValidatorDetailsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationMode) private var presentationMode
-    @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @StateObject private var viewModel = ValidatorDetailsViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var lastScroll: CGFloat = 0
+    
+    @State private var actionFeedbackViewState = ActionFeedbackView.State.success
+    @State private var actionFeedbackViewText = localized("common.done")
+    @State private var actionFeedbackViewIsVisible = false
+    
+    let network: Network
     let validatorSummary: ValidatorSummary
     
     var identityDisplay: String {
@@ -159,6 +164,45 @@ struct ValidatorDetailsView: View {
         }
     }
     
+    private var addRemoveValidatorButtonIsEnabled: Bool {
+        switch self.viewModel.userValidatorsFetchState {
+        case .success:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    private var addRemoveValidatorButtonView: some View {
+        ZStack {
+            switch self.viewModel.userValidatorsFetchState {
+            case .success(_):
+                if let _ = self.viewModel.userValidator {
+                    UI.Image.ValidatorDetails.removeValidatorIcon(self.colorScheme)
+                } else {
+                    UI.Image.ValidatorDetails.addValidatorIcon(self.colorScheme)
+                }
+            case .idle, .loading:
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(
+                        tint: Color("Text")
+                    ))
+            case .error:
+                UI.Image.ValidatorDetails.addValidatorIcon(self.colorScheme)
+            }
+        }
+        .frame(
+            width: UI.Dimension.Common.networkSelectorHeight,
+            height: UI.Dimension.Common.networkSelectorHeight
+        )
+        .background(Color("NetworkSelectorBg"))
+        .cornerRadius(UI.Dimension.Common.cornerRadius)
+        .animation(
+            .easeInOut(duration: 0.5),
+            value: self.viewModel.userValidatorsFetchState
+        )
+    }
+    
     var body: some View {
         ZStack {
             Color("Bg")
@@ -196,22 +240,36 @@ struct ValidatorDetailsView: View {
                             .modifier(PanelAppearance(2, self.displayState))
                         Button(
                             action: {
-                                // add validator
+                                self.viewModel.addOrRemoveValidator {
+                                    self.actionFeedbackViewState = .success
+                                    self.actionFeedbackViewText = localized("validator_details.validator_added")
+                                    self.actionFeedbackViewIsVisible = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                        self.actionFeedbackViewIsVisible = false
+                                    }
+                                } onRemoved: {
+                                    self.actionFeedbackViewState = .success
+                                    self.actionFeedbackViewText = localized("validator_details.validator_removed")
+                                    self.actionFeedbackViewIsVisible = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                        self.actionFeedbackViewIsVisible = false
+                                    }
+                                } onError: { _ in
+                                    self.actionFeedbackViewState = .error
+                                    self.actionFeedbackViewText = localized("common.error")
+                                    self.actionFeedbackViewIsVisible = true
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                        self.actionFeedbackViewIsVisible = false
+                                    }
+                                }
                             },
                             label: {
-                                ZStack {
-                                    UI.Image.ValidatorDetails.addValidatorIcon(self.colorScheme)
-                                }
-                                .frame(
-                                    width: UI.Dimension.Common.networkSelectorHeight,
-                                    height: UI.Dimension.Common.networkSelectorHeight
-                                )
-                                .background(Color("NetworkSelectorBg"))
-                                .cornerRadius(UI.Dimension.Common.cornerRadius)
+                                self.addRemoveValidatorButtonView
                             }
                         )
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(3, self.displayState))
+                        .disabled(!self.addRemoveValidatorButtonIsEnabled)
                         Button(
                             action: {
                                 // validator reports
@@ -360,6 +418,13 @@ struct ValidatorDetailsView: View {
             .zIndex(0)
             FooterGradientView()
                 .zIndex(1)
+            ActionFeedbackView(
+                state: self.actionFeedbackViewState,
+                text: self.actionFeedbackViewText,
+                visibleYOffset: UI.Dimension.ValidatorDetails.actionFeedbackViewYOffset,
+                isVisible: self.$actionFeedbackViewIsVisible
+            )
+            .zIndex(1)
             ValidatorDetailsIconsView(
                 validatorSummary: self.validatorSummary
             )
@@ -388,11 +453,18 @@ struct ValidatorDetailsView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    self.viewModel.network = self.network
+                    self.viewModel.accountId = self.validatorSummary.accountId
                     self.viewModel.startDeviceMotion()
-                    self.viewModel.subscribeToValidatorDetails(
-                        network: self.network,
-                        accountId: self.validatorSummary.accountId
-                    )
+                    self.viewModel.subscribeToValidatorDetails()
+                    self.viewModel.fetchUserValidators {
+                        // no-op
+                    } onError: { _ in
+                        self.actionFeedbackViewState = .error
+                        self.actionFeedbackViewText = localized("common.error")
+                        self.actionFeedbackViewIsVisible = true
+                    }
+
                 }
             }
         }
@@ -795,6 +867,9 @@ extension ValidatorDetailsView {
 
 struct ValidatorDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorDetailsView(validatorSummary: PreviewData.validatorSummary)
+        ValidatorDetailsView(
+            network: PreviewData.kusama,
+            validatorSummary: PreviewData.validatorSummary
+        )
     }
 }

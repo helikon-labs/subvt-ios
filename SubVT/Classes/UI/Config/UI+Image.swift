@@ -160,6 +160,14 @@ extension UI {
                 }
             }
             
+            static func removeValidatorIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("RemoveValidatorIconDark")
+                } else {
+                    return SwiftUI.Image("RemoveValidatorIconLight")
+                }
+            }
+            
             static func validatorReportsIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
                 if colorScheme == .dark {
                     return SwiftUI.Image("ValidatorReportsIconDark")
