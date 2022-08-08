@@ -98,7 +98,7 @@ struct ValidatorSummaryView: View {
                                 height: UI.Dimension.ValidatorSummary.iconSize
                             )
                     }
-                    if self.validatorSummary.activeNextSession {
+                    if self.validatorSummary.isActiveNextSession {
                         Image("ActiveNextSessionIconSmall")
                             .resizable()
                             .frame(

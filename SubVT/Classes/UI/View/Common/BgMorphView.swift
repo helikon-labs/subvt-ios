@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+fileprivate let inactiveGrayscaleAmount = 0.75
+
 struct BgMorphView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @StateObject private var viewModel = BgMorphViewModel()
@@ -53,6 +55,7 @@ struct BgMorphView: View {
                 Ellipse()
                     .fill(Color("BgMorphLeftView"))
                     .blur(radius: UI.Dimension.BgMorph.leftViewBlurRadius)
+                    .grayscale(self.isActive ? 0.0 : inactiveGrayscaleAmount)
                     .frame(
                         width: leftViewSize.0,
                         height: leftViewSize.1
@@ -76,6 +79,7 @@ struct BgMorphView: View {
                     Ellipse()
                         .fill(Color("BgMorphMiddleView"))
                         .blur(radius: UI.Dimension.BgMorph.middleViewBlurRadius)
+                        .grayscale(self.isActive ? 0.0 : inactiveGrayscaleAmount)
                         .frame(
                             width: middleViewSize.0,
                             height: middleViewSize.1
@@ -89,12 +93,9 @@ struct BgMorphView: View {
                         )
                 }
                 Ellipse()
-                    .fill(
-                        self.isActive
-                            ? Color("BgMorphRightViewActive")
-                            : Color("BgMorphRightViewInactive")
-                    )
+                    .fill(Color("BgMorphRightViewActive"))
                     .blur(radius: UI.Dimension.BgMorph.rightViewBlurRadius)
+                    .grayscale(self.isActive ? 0.0 : inactiveGrayscaleAmount)
                     .frame(
                         width: rightViewSize.0,
                         height: rightViewSize.1

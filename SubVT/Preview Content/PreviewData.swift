@@ -62,7 +62,7 @@ enum PreviewData {
             activeAmount: Balance(integerLiteral: 0)
         ),
         isActive: true,
-        activeNextSession: true,
+        isActiveNextSession: true,
         inactiveNominations: InactiveNominationsSummary(
             nominationCount: 130,
             totalAmount: Balance(integerLiteral: 47002001388000000)

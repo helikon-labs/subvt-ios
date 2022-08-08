@@ -126,9 +126,9 @@ struct ValidatorDetailsView: View {
     
     private var isActiveNextSession: Bool {
         if let details = self.viewModel.validatorDetails {
-            return details.activeNextSession
+            return details.isActiveNextSession
         } else {
-            return self.validatorSummary.activeNextSession
+            return self.validatorSummary.isActiveNextSession
         }
     }
     

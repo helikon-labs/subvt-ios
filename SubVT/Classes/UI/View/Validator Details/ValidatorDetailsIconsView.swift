@@ -177,7 +177,7 @@ struct ValidatorDetailsIconsView: View {
         if details.isParaValidator {
             icons.append(.paravalidator)
         }
-        if details.activeNextSession {
+        if details.isActiveNextSession {
             icons.append(.activeNextSession)
         }
         if details.heartbeatReceived ?? false {
@@ -203,7 +203,7 @@ struct ValidatorDetailsIconsView: View {
         if summary.isParaValidator {
             icons.append(.paravalidator)
         }
-        if summary.activeNextSession {
+        if summary.isActiveNextSession {
             icons.append(.activeNextSession)
         }
         if summary.heartbeatReceived ?? false {
