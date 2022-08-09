@@ -23,6 +23,8 @@ struct ValidatorDetailsView: View {
     @State private var actionFeedbackViewText = localized("common.done")
     @State private var actionFeedbackViewIsVisible = false
     
+    @State private var phase: Double = 0.0
+    
     let network: Network
     let validatorSummary: ValidatorSummary
     
@@ -321,8 +323,9 @@ struct ValidatorDetailsView: View {
                             accountId: validatorSummary.accountId,
                             rotation: self.viewModel.deviceRotation
                         )
-                            .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
-                            .modifier(PanelAppearance(5, self.displayState))
+                        .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
+                        .offset(y: sin(self.phase) * 8)
+                        .modifier(PanelAppearance(5, self.displayState))
                         VStack(
                             alignment: .leading,
                             spacing: UI.Dimension.Common.dataPanelSpacing
@@ -453,6 +456,11 @@ struct ValidatorDetailsView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                    if self.validatorSummary.isActive {
+                        withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
+                            self.phase = 180.0
+                        }
+                    }
                     self.viewModel.network = self.network
                     self.viewModel.accountId = self.validatorSummary.accountId
                     self.viewModel.startDeviceMotion()
@@ -464,7 +472,6 @@ struct ValidatorDetailsView: View {
                         self.actionFeedbackViewText = localized("common.error")
                         self.actionFeedbackViewIsVisible = true
                     }
-
                 }
             }
         }
