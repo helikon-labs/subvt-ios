@@ -478,6 +478,9 @@ struct ValidatorDetailsView: View {
         .onDisappear() {
             self.viewModel.stopDeviceMotion()
         }
+        .onChange(of: scenePhase) { newPhase in
+            self.viewModel.onScenePhaseChange(newPhase)
+        }
     }
 }
 

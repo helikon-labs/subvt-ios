@@ -55,7 +55,9 @@ class ValidatorDetailsViewModel: ObservableObject {
         case .inactive:
             self.service.unsubscribe()
             self.subscriptionIsInProgress = false
+            self.stopDeviceMotion()
         case .active:
+            self.startDeviceMotion()
             if !self.subscriptionIsInProgress {
                 self.subscribeToValidatorDetails()
             }
@@ -125,6 +127,9 @@ class ValidatorDetailsViewModel: ObservableObject {
     }
     
     func startDeviceMotion() {
+        self.deviceRotation.x = 0
+        self.deviceRotation.y = 0
+        self.deviceRotation.z = 0
         if self.motion.isDeviceMotionAvailable {
             self.motion.deviceMotionUpdateInterval = 1.0 / 30.0
             self.motion.startDeviceMotionUpdates(using: .xMagneticNorthZVertical)
