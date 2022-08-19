@@ -21,7 +21,7 @@ struct SubVTApp: App {
                     \.managedObjectContext,
                      persistenceController.container.viewContext
                 )
-                .defaultAppStorage(UserDefaults.init(
+                .defaultAppStorage(UserDefaults(
                     suiteName: "io.helikon.subvt.user_defaults"
                 )!)
         }

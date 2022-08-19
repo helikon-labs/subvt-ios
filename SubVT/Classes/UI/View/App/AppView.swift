@@ -23,7 +23,6 @@ struct AppView: View {
     @AppStorage(AppStorageKey.hasBeenOnboarded) private var hasBeenOnboarded = false
     @AppStorage(AppStorageKey.selectedNetwork) private var selectedNetwork: Network? = nil
     
-    
     var body: some View {
         ZStack {
             Color("Bg").ignoresSafeArea()

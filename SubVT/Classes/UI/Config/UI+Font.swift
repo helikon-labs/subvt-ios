@@ -107,6 +107,7 @@ extension UI {
         
         enum NetworkStatus {
             static let networkSelector = LexendDeca.regular.withSize(12)
+            static let networkSelectorList = LexendDeca.regular.withSize(16)
             static let eraEpochTimestamp = LexendDeca.light.withSize(12)
             static var dataLarge: SwiftUI.Font {
                 if UIDevice.current.userInterfaceIdiom == .phone {

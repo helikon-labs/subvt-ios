@@ -49,7 +49,7 @@ class NetworkStatusViewModel: ObservableObject {
             break
         case .inactive:
             self.networkStatusService.unsubscribe()
-            subscriptionIsInProgress = false
+            self.subscriptionIsInProgress = false
         case .active:
             if !subscriptionIsInProgress {
                 self.subscribeToNetworkStatus(
@@ -61,6 +61,17 @@ class NetworkStatusViewModel: ObservableObject {
         @unknown default:
             fatalError("Unknown scene phase: \(scenePhase)")
         }
+    }
+    
+    func changeNetwork(network: Network) {
+        self.network = network
+        self.networkStatusService.unsubscribe()
+        self.subscriptionIsInProgress = false
+        self.networkStatus = NetworkStatus()
+        self.eraActiveValidatorCounts = []
+        self.eraInactiveValidatorCounts = []
+        self.initNetworkStatusService()
+        self.initReportService()
     }
     
     func subscribeToNetworkStatus(
@@ -79,15 +90,14 @@ class NetworkStatusViewModel: ObservableObject {
         if self.networkStatusService == nil {
             self.initNetworkStatusService()
         }
-        if self.networkStatusServiceStatusSubscription == nil {
-            self.networkStatusServiceStatusSubscription = self.networkStatusService.$status
-                .receive(on: DispatchQueue.main)
-                .sink {
-                    [weak self]
-                    (status) in
-                    self?.networkStatusServiceStatus = status
-                }
-        }
+        self.networkStatusServiceStatusSubscription?.cancel()
+        self.networkStatusServiceStatusSubscription = self.networkStatusService.$status
+            .receive(on: DispatchQueue.main)
+            .sink {
+                [weak self]
+                (status) in
+                self?.networkStatusServiceStatus = status
+            }
         self.networkStatusServiceSubscription?.cancel()
         self.networkStatusServiceSubscription = self.networkStatusService
             .subscribe()

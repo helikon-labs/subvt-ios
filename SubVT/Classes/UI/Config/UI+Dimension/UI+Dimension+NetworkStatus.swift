@@ -17,5 +17,7 @@ extension UI.Dimension {
         static var blockWaveViewSize = UI.Dimension(40, 74)
         static var lastEraTotalRewardViewHeight = UI.Dimension(98, 112)
         static let validatorBackingsViewHeight = UI.Dimension(112, 112)
+        static let networkListMarginTop = UI.Dimension(8, 12)
+        static let networkListIconSize: CGFloat = 24
     }
 }

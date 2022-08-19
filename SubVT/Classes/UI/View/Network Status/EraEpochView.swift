@@ -10,13 +10,15 @@ import SwiftUI
 
 struct EraEpochView: View {
     let eraOrEpoch: Either<Era, Epoch>
+    let isAnimated: Bool
     
     private let dateFormatter = DateFormatter()
     private let timeFormatter = DateFormatter()
     private let percentageFormat = localized("common.int_percentage")
     
-    init(eraOrEpoch: Either<Era, Epoch>) {
+    init(eraOrEpoch: Either<Era, Epoch>, isAnimated: Bool) {
         self.eraOrEpoch = eraOrEpoch
+        self.isAnimated = isAnimated
         dateFormatter.dateFormat = "dd MMM ''YY"
         timeFormatter.dateFormat = "HH:mm"
     }
@@ -161,7 +163,7 @@ struct EraEpochView: View {
                         value: CGFloat(self.elapsedPercentage)
                     ))
                     .animation(
-                        .easeInOut(duration: UI.Duration.counterAnimation),
+                        self.isAnimated ? .easeInOut(duration: UI.Duration.counterAnimation) : nil,
                         value: self.elapsedPercentage
                     )
                     .font(UI.Font.Common.dataMedium)
@@ -272,6 +274,6 @@ struct EraEpochView: View {
 
 struct EraEpochView_Previews: PreviewProvider {
     static var previews: some View {
-        EraEpochView(eraOrEpoch: .left(PreviewData.era))
+        EraEpochView(eraOrEpoch: .left(PreviewData.era), isAnimated: true)
     }
 }

@@ -17,6 +17,24 @@ struct ValidatorBackingsView: View {
     
     private let separatorOpacity = 0.4
     
+    private var tokenTicker: String {
+        if self.network.tokenTicker == "DOT" {
+            return "MDOT"
+        }
+        return self.network.tokenTicker
+    }
+    
+    private var tokenDecimalCount: UInt8 {
+        if self.network.tokenTicker == "DOT" {
+            return self.network.tokenDecimalCount + 6
+        }
+        return self.network.tokenDecimalCount
+    }
+    
+    private var showsDecimals: Bool {
+        return self.network.tokenTicker == "DOT"
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(localized("network_status.validator_backings"))
@@ -30,8 +48,8 @@ struct ValidatorBackingsView: View {
                         .foregroundColor(Color("Text"))
                     Text(formatBalance(
                         balance: self.minimum,
-                        tokenDecimalCount: self.network.tokenDecimalCount,
-                        integerOnly: true
+                        tokenDecimalCount: self.tokenDecimalCount,
+                        integerOnly: !self.showsDecimals
                     ))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
@@ -46,8 +64,8 @@ struct ValidatorBackingsView: View {
                         .foregroundColor(Color("Text"))
                     Text(formatBalance(
                         balance: self.average,
-                        tokenDecimalCount: self.network.tokenDecimalCount,
-                        integerOnly: true
+                        tokenDecimalCount: self.tokenDecimalCount,
+                        integerOnly: !self.showsDecimals
                     ))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
@@ -62,13 +80,13 @@ struct ValidatorBackingsView: View {
                         .foregroundColor(Color("Text"))
                     Text(formatBalance(
                         balance: self.maximum,
-                        tokenDecimalCount: self.network.tokenDecimalCount,
-                        integerOnly: true
+                        tokenDecimalCount: self.tokenDecimalCount,
+                        integerOnly: !self.showsDecimals
                     ))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
                 }
-                Text(self.network.tokenTicker)
+                Text(self.tokenTicker)
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
                     .opacity(0.6)

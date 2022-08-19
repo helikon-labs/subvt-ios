@@ -33,6 +33,22 @@ struct NetworkSelectorButtonView: View {
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     var displayType: DisplayType?
     
+    private var bgColor: Color {
+        get {
+            if let displayType = self.displayType {
+                switch displayType {
+                case .selector(let isOpen):
+                    if isOpen {
+                        return Color("NetworkSelectorOpenBg")
+                    }
+                default:
+                    break
+                }
+            }
+            return Color("NetworkSelectorClosedBg")
+        }
+    }
+    
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
             UI.Image.NetworkSelection.networkIcon(network: network)
@@ -63,7 +79,7 @@ struct NetworkSelectorButtonView: View {
             bottom: 0,
             trailing: UI.Dimension.Common.networkSelectorPadding
         ))
-        .background(Color("NetworkSelectorBg"))
+        .background(self.bgColor)
         .cornerRadius(UI.Dimension.Common.cornerRadius)
     }
 }

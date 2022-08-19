@@ -37,6 +37,8 @@ struct NetworkStatusView: View {
         progress: 0.0,
         amplitude: currentBlockWaveAmplitude
     )
+    @State private var isAnimated: Bool = true
+    @State private var changeNetworkDebounce: Timer? = nil
     
     func onNetworkStatusReceived() {
         self.startBlockTimer()
@@ -99,8 +101,9 @@ struct NetworkStatusView: View {
                     label: {
                         NetworkSelectorButtonView(
                             network: self.network,
-                            displayType: .selector(isOpen: networkSelectorIsOpen)
+                            displayType: .selector(isOpen: false)
                         )
+                        .opacity(self.networkSelectorIsOpen ? 0 : 1)
                     }
                 )
                 .buttonStyle(NetworkSelectorButtonStyle())
@@ -148,7 +151,8 @@ struct NetworkStatusView: View {
                                     title: LocalizedStringKey("active_validator_list.title"),
                                     count: self.viewModel.networkStatus.activeValidatorCount,
                                     eraValidatorCounts: self.viewModel.eraActiveValidatorCounts,
-                                    chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0
+                                    chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+                                    isAnimated: self.isAnimated
                                 )
                             }
                             .buttonStyle(ValidatorListButtonStyle())
@@ -160,7 +164,8 @@ struct NetworkStatusView: View {
                                     title: LocalizedStringKey("inactive_validator_list.title"),
                                     count: self.viewModel.networkStatus.inactiveValidatorCount,
                                     eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts,
-                                    chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0
+                                    chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+                                    isAnimated: self.isAnimated
                                 )
                             }
                             .buttonStyle(ValidatorListButtonStyle())
@@ -194,9 +199,15 @@ struct NetworkStatusView: View {
                             }
                         }
                         HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
-                            EraEpochView(eraOrEpoch: .left(self.viewModel.networkStatus.activeEra))
+                            EraEpochView(
+                                eraOrEpoch: .left(self.viewModel.networkStatus.activeEra),
+                                isAnimated: self.isAnimated
+                            )
                                 .modifier(PanelAppearance(6, self.displayState))
-                            EraEpochView(eraOrEpoch: .right(self.viewModel.networkStatus.currentEpoch))
+                            EraEpochView(
+                                eraOrEpoch: .right(self.viewModel.networkStatus.currentEpoch),
+                                isAnimated: self.isAnimated
+                            )
                                 .modifier(PanelAppearance(7, self.displayState))
                         }
                         HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
@@ -264,6 +275,34 @@ struct NetworkStatusView: View {
             .zIndex(0)
             FooterGradientView()
                 .zIndex(1)
+            if self.networkSelectorIsOpen {
+                NetworkSelectorView(
+                    isOpen: self.$networkSelectorIsOpen,
+                    serviceStatus: self.viewModel.networkStatusServiceStatus,
+                    serviceIsConnected: self.networkMonitor.isConnected
+                ) { network in
+                    self.cancelBlockTimer()
+                    self.blockWaveParameters = BlockWaveParameters(
+                        offset: Angle(degrees: 0),
+                        progress: 0,
+                        amplitude: currentBlockWaveAmplitude
+                    )
+                    self.isAnimated = false
+                    self.viewModel.changeNetwork(network: network)
+                    self.changeNetworkDebounce?.invalidate()
+                    self.changeNetworkDebounce = Timer.scheduledTimer(
+                        withTimeInterval: 0.5,
+                        repeats: false) { _ in
+                            self.isAnimated = true
+                            self.viewModel.subscribeToNetworkStatus(
+                                network: self.network,
+                                onStatus: self.onNetworkStatusReceived,
+                                onDiff: self.onNetworkStatusDiffReceived
+                            )
+                        }
+                }
+                .zIndex(5)
+            }
         }
         .navigationBarHidden(true)
         .frame(maxHeight: .infinity, alignment: .top)
@@ -275,7 +314,7 @@ struct NetworkStatusView: View {
         )
         .onAppear() {
             self.viewModel.subscribeToNetworkStatus(
-                network: network,
+                network: self.network,
                 onStatus: self.onNetworkStatusReceived,
                 onDiff: self.onNetworkStatusDiffReceived
             )

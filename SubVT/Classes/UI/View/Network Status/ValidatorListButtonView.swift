@@ -27,6 +27,7 @@ struct ValidatorListButtonView: View {
     let count: Int
     let eraValidatorCounts: [(UInt, UInt)]
     let chartRevealPercentage: CGFloat
+    let isAnimated: Bool
     
     private let gradient = LinearGradient(
         gradient: Gradient(
@@ -114,7 +115,7 @@ struct ValidatorListButtonView: View {
                     value: CGFloat(self.count)
                 ))
                 .animation(
-                    .easeInOut(duration: UI.Duration.counterAnimation),
+                    self.isAnimated ? .easeInOut(duration: UI.Duration.counterAnimation) : nil,
                     value: self.count
                 )
                 .font(UI.Font.NetworkStatus.dataLarge)
@@ -155,7 +156,8 @@ struct ValidatorListButtonView_Previews: PreviewProvider {
                 (8, 1045),
                 (9, 965)
             ],
-            chartRevealPercentage: 1.0
+            chartRevealPercentage: 1.0,
+            isAnimated: true
         )
     }
 }

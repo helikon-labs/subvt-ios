@@ -111,6 +111,8 @@
 		A07BA825285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */; };
 		A07BA827285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */; };
 		A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */; };
+		A088B18728AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A088B18628AF6E990086A15E /* NetworkSelectorView.swift */; };
+		A088B18828AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A088B18628AF6E990086A15E /* NetworkSelectorView.swift */; };
 		A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
 		A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
 		A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
@@ -386,6 +388,7 @@
 		A07BA820285B94B400575683 /* UI+Dimension+Introduction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Introduction.swift"; sourceTree = "<group>"; };
 		A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Onboarding.swift"; sourceTree = "<group>"; };
 		A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkSelection.swift"; sourceTree = "<group>"; };
+		A088B18628AF6E990086A15E /* NetworkSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectorView.swift; sourceTree = "<group>"; };
 		A093F0472865F08600778293 /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
 		A098E593285DDE3D00AAA68A /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailsIconsView.swift; sourceTree = "<group>"; };
@@ -853,6 +856,7 @@
 				A072C336287805A6001636F9 /* EraEpochView.swift */,
 				A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */,
 				A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */,
+				A088B18628AF6E990086A15E /* NetworkSelectorView.swift */,
 				A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */,
 				A093F0472865F08600778293 /* NetworkStatusViewModel.swift */,
 				A0BCDE6628785645008047D7 /* ValidatorBackingsView.swift */,
@@ -1366,6 +1370,7 @@
 				A0C03D85289666FC001C1B54 /* BgMorphViewModel.swift in Sources */,
 				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
 				A04B37CA2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
+				A088B18728AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */,
 				A0A7CAE628968C4E005440FF /* DataPanelView.swift in Sources */,
 				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
@@ -1499,6 +1504,7 @@
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0744D932885A033008A06DD /* UI+Dimension+ValidatorList.swift in Sources */,
+				A088B18828AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */,
 				A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A0744D992885AB05008A06DD /* BackButtonView.swift in Sources */,

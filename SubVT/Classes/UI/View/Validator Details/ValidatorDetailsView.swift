@@ -197,7 +197,7 @@ struct ValidatorDetailsView: View {
             width: UI.Dimension.Common.networkSelectorHeight,
             height: UI.Dimension.Common.networkSelectorHeight
         )
-        .background(Color("NetworkSelectorBg"))
+        .background(Color("NetworkSelectorClosedBg"))
         .cornerRadius(UI.Dimension.Common.cornerRadius)
         .animation(
             .easeInOut(duration: 0.5),
@@ -284,7 +284,7 @@ struct ValidatorDetailsView: View {
                                     width: UI.Dimension.Common.networkSelectorHeight,
                                     height: UI.Dimension.Common.networkSelectorHeight
                                 )
-                                .background(Color("NetworkSelectorBg"))
+                                .background(Color("NetworkSelectorClosedBg"))
                                 .cornerRadius(UI.Dimension.Common.cornerRadius)
                             }
                         )
