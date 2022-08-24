@@ -73,7 +73,7 @@ struct NetworkSelectorView: View {
                                     HStack(alignment: .center, spacing: 0) {
                                         Spacer()
                                             .frame(width: 12)
-                                        UI.Image.NetworkSelection.networkIcon(
+                                        UI.Image.Common.networkIcon(
                                             network: networks[i]
                                         )
                                         .resizable()

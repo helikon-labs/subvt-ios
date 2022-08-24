@@ -224,7 +224,10 @@ struct ValidatorListView: View {
                                     validatorSummary: validator
                                 )
                             } label: {
-                                ValidatorSummaryView(validatorSummary: validator)
+                                ValidatorSummaryView(
+                                    validatorSummary: validator,
+                                    network: self.network
+                                )
                             }
                             .buttonStyle(PushButtonStyle())
                         }

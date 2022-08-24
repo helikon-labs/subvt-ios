@@ -5,8 +5,8 @@
 //  Created by Kutsal Kaan Bilgin on 13.06.2022.
 //
 
-import SwiftUI
 import SubVTData
+import SwiftUI
 
 struct NetworkSelectionView: View {
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil

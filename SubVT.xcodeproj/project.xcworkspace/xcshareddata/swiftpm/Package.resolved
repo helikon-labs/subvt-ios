@@ -69,7 +69,16 @@
       "location" : "https://github.com/helikon-labs/subvt-data-swift.git",
       "state" : {
         "branch" : "main",
-        "revision" : "ad11e8f23a1df847f0b20824228a85cb37fd6b24"
+        "revision" : "1eb6ec53a302b46dfa4832dec2a54b0ff4e344a4"
+      }
+    },
+    {
+      "identity" : "swifteventbus",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/cesarferreira/SwiftEventBus.git",
+      "state" : {
+        "revision" : "a30ff35e616f507d8a8d122dac32a2150371a87e",
+        "version" : "5.1.0"
       }
     },
     {

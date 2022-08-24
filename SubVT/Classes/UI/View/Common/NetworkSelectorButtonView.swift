@@ -51,7 +51,7 @@ struct NetworkSelectorButtonView: View {
     
     var body: some View {
         HStack(alignment: .center, spacing: 0) {
-            UI.Image.NetworkSelection.networkIcon(network: network)
+            UI.Image.Common.networkIcon(network: network)
                 .resizable()
             .frame(
                 width: UI.Dimension.Common.networkSelectorIconSize,

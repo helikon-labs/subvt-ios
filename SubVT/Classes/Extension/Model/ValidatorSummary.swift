@@ -41,6 +41,9 @@ extension ValidatorSummary {
         _ other: ValidatorSummary
     ) -> Bool {
         let zeroBalance = Balance(integerLiteral: 0).value
+        if self.networkId != other.networkId {
+            return self.networkId < other.networkId
+        }
         switch sortOption {
         case .identity:
             if !self.hasIdentity() {
@@ -51,7 +54,9 @@ extension ValidatorSummary {
                 }
             } else {
                 if other.hasIdentity() {
-                    return self.identityDisplay.compare(other.identityDisplay) == .orderedAscending
+                    return self.identityDisplay.uppercased().compare(
+                        other.identityDisplay.uppercased()
+                    ) == .orderedAscending
                 } else {
                     return true
                 }

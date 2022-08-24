@@ -9,11 +9,18 @@ import SubVTData
 import SwiftUI
 
 struct ValidatorSummaryView: View {
-    @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     private var validatorSummary: ValidatorSummary
+    private var network: Network
+    private var displaysNetworkIcon: Bool
     
-    init(validatorSummary: ValidatorSummary) {
+    init(
+        validatorSummary: ValidatorSummary,
+        network: Network,
+        displaysNetworkIcon: Bool = false
+    ) {
         self.validatorSummary = validatorSummary
+        self.network = network
+        self.displaysNetworkIcon = displaysNetworkIcon
     }
     
     var amountDisplay: String {
@@ -40,11 +47,17 @@ struct ValidatorSummaryView: View {
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                // identity
+                if displaysNetworkIcon {
+                    UI.Image.Common.networkIcon(network: self.network)
+                        .resizable()
+                        .frame(
+                            width: UI.Dimension.ValidatorSummary.iconSize,
+                            height: UI.Dimension.ValidatorSummary.iconSize
+                        )
+                }
                 if self.validatorSummary.parentDisplay != nil {
                     if self.validatorSummary.confirmed {
                         Image("ParentIdentityConfirmedIconSmall")
-                            
                             .resizable()
                             .frame(
                                 width: UI.Dimension.ValidatorSummary.iconSize,
@@ -164,6 +177,9 @@ struct ValidatorSummaryView: View {
 
 struct ValidatorSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorSummaryView(validatorSummary: PreviewData.validatorSummary)
+        ValidatorSummaryView(
+            validatorSummary: PreviewData.validatorSummary,
+            network: PreviewData.kusama
+        )
     }
 }

@@ -8,6 +8,7 @@
 import Combine
 import SubVTData
 import SwiftUI
+import SwiftEventBus
 
 struct ValidatorDetailsView: View {
     @Environment(\.scenePhase) private var scenePhase
@@ -246,6 +247,7 @@ struct ValidatorDetailsView: View {
                                     self.actionFeedbackViewState = .success
                                     self.actionFeedbackViewText = localized("validator_details.validator_added")
                                     self.actionFeedbackViewIsVisible = true
+                                    SwiftEventBus.post(Event.validatorAdded.rawValue)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                         self.actionFeedbackViewIsVisible = false
                                     }
@@ -253,6 +255,7 @@ struct ValidatorDetailsView: View {
                                     self.actionFeedbackViewState = .success
                                     self.actionFeedbackViewText = localized("validator_details.validator_removed")
                                     self.actionFeedbackViewIsVisible = true
+                                    SwiftEventBus.post(Event.validatorRemoved.rawValue)
                                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                                         self.actionFeedbackViewIsVisible = false
                                     }

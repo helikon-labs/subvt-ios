@@ -53,6 +53,15 @@ extension UI {
                     return SwiftUI.Image("SmallCheckboxCheckedLight")
                 }
             }
+            static func networkIcon(
+                network: Network
+            ) -> SwiftUI.Image {
+                if UIDevice.current.userInterfaceIdiom == .phone {
+                    return SwiftUI.Image("\(network.chain.capitalized)IconPhone")
+                } else {
+                    return SwiftUI.Image("\(network.chain.capitalized)IconPad")
+                }
+            }
         }
         
         enum Introduction {
@@ -101,18 +110,6 @@ extension UI {
                     } else {
                         return SwiftUI.Image("Onboarding\(name)LightPad")
                     }
-                }
-            }
-        }
-        
-        enum NetworkSelection {
-            static func networkIcon(
-                network: Network
-            ) -> SwiftUI.Image {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return SwiftUI.Image("\(network.chain.capitalized)IconPhone")
-                } else {
-                    return SwiftUI.Image("\(network.chain.capitalized)IconPad")
                 }
             }
         }
@@ -173,6 +170,16 @@ extension UI {
                     return SwiftUI.Image("ValidatorReportsIconDark")
                 } else {
                     return SwiftUI.Image("ValidatorReportsIconLight")
+                }
+            }
+        }
+        
+        enum MyValidators {
+            static func unionIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("UnionIconDark")
+                } else {
+                    return SwiftUI.Image("UnionIconLight")
                 }
             }
         }
