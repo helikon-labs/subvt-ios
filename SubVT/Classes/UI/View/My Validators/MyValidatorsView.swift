@@ -14,6 +14,7 @@ struct MyValidatorsView: View {
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
     @StateObject private var viewModel = MyValidatorsViewModel()
     @State private var headerMaterialOpacity = 0.0
+    @State private var swipedValidator: ValidatorSummary? = nil
     
     private var headerView: some View {
         VStack {
@@ -97,35 +98,43 @@ struct MyValidatorsView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                        switch self.viewModel.fetchState {
-                        case .success(let validators):
-                            ForEach(validators, id: \.self.address) {
-                                validator in
-                                let network = networks!.first(where: { network in
-                                    network.id == validator.networkId
-                                })!
-                                NavigationLink {
-                                    ValidatorDetailsView(
-                                        network: network,
-                                        validatorSummary: validator
-                                    )
-                                } label: {
-                                    ValidatorSummaryView(
-                                        validatorSummary: validator,
-                                        network: network,
-                                        displaysNetworkIcon: true
-                                    )
-                                }
-                                .buttonStyle(PushButtonStyle())
-                            }
-                            Spacer()
-                                .frame(
-                                    height: UI.Dimension.MyValidators.scrollContentBottomSpacerHeight
+                        ForEach(self.viewModel.userValidatorSummaries, id: \.self.validatorSummary.address) {
+                            userValidatorSummary in
+                            let validator = userValidatorSummary.validatorSummary
+                            let network = networks!.first(where: { network in
+                                network.id == validator.networkId
+                            })!
+                            NavigationLink {
+                                ValidatorDetailsView(
+                                    network: network,
+                                    validatorSummary: validator
                                 )
-                        default:
-                            EmptyView()
+                            } label: {
+                                ValidatorSummaryView(
+                                    validatorSummary: validator,
+                                    network: network,
+                                    displaysNetworkIcon: true
+                                )
+                                .modifier(SwipeDeleteViewModifier(
+                                    validator: validator,
+                                    action: {
+                                        self.viewModel.deleteUserValidator(userValidatorSummary)
+                                    }
+                                ))
+
+                            }
+                            .transition(.move(edge: .leading))
+                            .buttonStyle(PushButtonStyle())
+                            .simultaneousGesture(TapGesture().onEnded{
+                                self.swipedValidator = nil
+                            })
                         }
+                        Spacer()
+                            .frame(
+                                height: UI.Dimension.MyValidators.scrollContentBottomSpacerHeight
+                            )
                     }
+                    .animation(.interactiveSpring(), value: self.viewModel.userValidatorSummaries)
                     .padding(EdgeInsets(
                         top: 0,
                         leading: UI.Dimension.Common.padding,
@@ -161,7 +170,7 @@ struct MyValidatorsView: View {
             
             ZStack {
                 SnackbarView(
-                    message: localized("network_selection.error.network_list"),
+                    message: localized("my_validators.error.validator_list"),
                     type: .error(canRetry: true)
                 ) {
                     self.viewModel.fetchMyValidators()

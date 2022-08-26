@@ -24,6 +24,9 @@
 		A0128A63284A3BCC000C2307 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A61284A3BCC000C2307 /* UI.swift */; };
 		A0128A67284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
 		A0128A68284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
+		A018C2AD28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
+		A018C2AE28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
+		A018C2AF28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
 		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
@@ -93,6 +96,8 @@
 		A0744D932885A033008A06DD /* UI+Dimension+ValidatorList.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0744D912885A033008A06DD /* UI+Dimension+ValidatorList.swift */; };
 		A0744D982885AB05008A06DD /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0744D972885AB05008A06DD /* BackButtonView.swift */; };
 		A0744D992885AB05008A06DD /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0744D972885AB05008A06DD /* BackButtonView.swift */; };
+		A07475B228B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07475B128B8ACF300EC7071 /* SwipeDeleteViewModifier.swift */; };
+		A07475B328B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07475B128B8ACF300EC7071 /* SwipeDeleteViewModifier.swift */; };
 		A0787278287C198F00BED374 /* IntroductionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0787277287C198F00BED374 /* IntroductionViewModel.swift */; };
 		A0787279287C198F00BED374 /* IntroductionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0787277287C198F00BED374 /* IntroductionViewModel.swift */; };
 		A078727A287C198F00BED374 /* IntroductionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0787277287C198F00BED374 /* IntroductionViewModel.swift */; };
@@ -355,6 +360,7 @@
 		A0128A54284A19C5000C2307 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		A0128A61284A3BCC000C2307 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		A0128A69284A47AD000C2307 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A018C2AC28B90C0500C9A276 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		A03C5BE528783C9F00D9D4FD /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
@@ -389,6 +395,7 @@
 		A0744D8D2885866B008A06DD /* ValidatorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorListView.swift; sourceTree = "<group>"; };
 		A0744D912885A033008A06DD /* UI+Dimension+ValidatorList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+ValidatorList.swift"; sourceTree = "<group>"; };
 		A0744D972885AB05008A06DD /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		A07475B128B8ACF300EC7071 /* SwipeDeleteViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeDeleteViewModifier.swift; sourceTree = "<group>"; };
 		A0787277287C198F00BED374 /* IntroductionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionViewModel.swift; sourceTree = "<group>"; };
 		A078727B287C1A3300BED374 /* DataFetchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetchState.swift; sourceTree = "<group>"; };
 		A078727F287C456300BED374 /* ActionButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonView.swift; sourceTree = "<group>"; };
@@ -632,6 +639,14 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		A018C2AB28B90BD500C9A276 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A018C2AC28B90C0500C9A276 /* File.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A03C5BE428783C4F00D9D4FD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -725,6 +740,7 @@
 			children = (
 				A067DD63289D56A9005BE98C /* MyValidatorsView.swift */,
 				A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */,
+				A07475B128B8ACF300EC7071 /* SwipeDeleteViewModifier.swift */,
 			);
 			path = "My Validators";
 			sourceTree = "<group>";
@@ -989,6 +1005,7 @@
 				A0C9838528759E0E0008C370 /* Data */,
 				A0FC976D28B63DD400B75A9B /* Event */,
 				A04B37B92876BA7E00912BF3 /* Extension */,
+				A018C2AB28B90BD500C9A276 /* Model */,
 				A06E15A4288FF68B00694CC8 /* Network */,
 				A0128A43284A09C6000C2307 /* Persistence */,
 				A072C33928780676001636F9 /* Type */,
@@ -1428,6 +1445,7 @@
 				A04C472A2887F1C30004A46A /* View.swift in Sources */,
 				A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */,
 				A07BA818285B8C0600575683 /* UI+Dimension+Common.swift in Sources */,
+				A07475B228B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */,
 				A04C472D288814DA0004A46A /* PreferenceKeys.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
@@ -1476,6 +1494,7 @@
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A09905A02897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */,
 				A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
+				A018C2AD28B90C0500C9A276 /* File.swift in Sources */,
 				A067DD64289D56A9005BE98C /* MyValidatorsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1490,6 +1509,7 @@
 				A078727D287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A0C90E892878615600A91996 /* Formatter.swift in Sources */,
 				A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
+				A018C2AE28B90C0500C9A276 /* File.swift in Sources */,
 				A0AFF7F82892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
 				A0BCDE6028784DD0008047D7 /* Format.swift in Sources */,
 				A0AFF7FC2892B5F700B0CB4F /* UI+Text.swift in Sources */,
@@ -1536,6 +1556,7 @@
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
 				A04B37C52876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
 				A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
+				A018C2AF28B90C0500C9A276 /* File.swift in Sources */,
 				A0B3A6BC287D9BE9005DA484 /* CGFloat.swift in Sources */,
 				A07BA81F285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
 				A0FD88322893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
@@ -1543,6 +1564,7 @@
 				A067DD61289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */,
 				A052C15228913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
+				A07475B328B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */,
 				A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,

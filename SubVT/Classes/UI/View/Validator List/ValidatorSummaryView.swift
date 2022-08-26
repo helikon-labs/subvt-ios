@@ -170,7 +170,8 @@ struct ValidatorSummaryView: View {
             leading: UI.Dimension.ValidatorSummary.padding,
             bottom: UI.Dimension.ValidatorSummary.padding,
             trailing: UI.Dimension.ValidatorSummary.padding
-        )).background(Color("DataPanelBg"))
+        ))
+        .background(Color("DataPanelBg"))
         .cornerRadius(16)
     }
 }

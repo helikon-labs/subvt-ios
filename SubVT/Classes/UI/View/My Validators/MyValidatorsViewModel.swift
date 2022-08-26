@@ -11,7 +11,11 @@ import SubVTData
 import SwiftEventBus
 
 class MyValidatorsViewModel: ObservableObject {
-    @Published private(set) var fetchState: DataFetchState<[ValidatorSummary]> = .idle
+    @Published private(set) var fetchState: DataFetchState<String> = .idle
+    
+    private var userValidators: [UserValidator] = []
+    @Published private(set) var userValidatorSummaries: [UserValidatorSummary] = []
+    
     private var appService = SubVTData.AppService()
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
     private var cancellables = Set<AnyCancellable>()
@@ -38,24 +42,69 @@ class MyValidatorsViewModel: ObservableObject {
     }
     
     func fetchMyValidators() {
+        guard self.fetchState != .loading else { return }
         self.fetchState = .loading
         self.appService.getUserValidators().sink {
             response in
             if let error = response.error {
                 self.fetchState = .error(error: error)
             } else if let userValidators = response.value {
-                self.fetchValidatorSummaries(userValidators: userValidators)
+                self.userValidators = userValidators
+                // remove non existent validators
+                self.userValidatorSummaries.removeAll { userValidatorSummary in
+                    return self.userValidators.firstIndex { userValidator in
+                        return userValidator.networkId == userValidatorSummary.userValidator.networkId
+                            && userValidator.validatorAccountId == userValidatorSummary.userValidator.validatorAccountId
+                    } == nil
+                }
+                self.fetchValidatorSummaries()
             }
         }
         .store(in: &cancellables)
     }
     
-    private func fetchValidatorSummaries(userValidators: [UserValidator]) {
-        if userValidators.isEmpty {
-            self.fetchState = .success(result: [])
+    private func addOrUpdateValidatorSummary(_ validatorSummary: ValidatorSummary) {
+        if let userValidator = self.userValidators.first(where: { userValidator in
+            return userValidator.networkId == validatorSummary.networkId
+            && userValidator.validatorAccountId == validatorSummary.accountId
+        }) {
+            if let index = self.userValidatorSummaries.firstIndex(where: { userValidatorSummary in
+                return userValidatorSummary.userValidator.networkId == userValidator.networkId
+                    && userValidatorSummary.userValidator.validatorAccountId == userValidator.validatorAccountId
+            }) {
+                self.userValidatorSummaries[index] = UserValidatorSummary(
+                    userValidator: userValidator,
+                    validatorSummary: validatorSummary
+                )
+            } else {
+                self.userValidatorSummaries.append(UserValidatorSummary(
+                    userValidator: userValidator,
+                    validatorSummary: validatorSummary
+                ))
+            }
+            self.sortUserValidatorSummaries()
+        }
+    }
+    
+    private func removeValidator(networkId: UInt64, accountId: AccountId) {
+        self.userValidatorSummaries.removeAll { existing in
+            return existing.userValidator.networkId == networkId
+            && existing.userValidator.validatorAccountId == accountId
+        }
+    }
+    
+    private func sortUserValidatorSummaries() {
+        self.userValidatorSummaries.sort {
+            return $0.validatorSummary.compare(sortOption: .identity, $1.validatorSummary)
+        }
+    }
+    
+    private func fetchValidatorSummaries() {
+        if self.userValidators.isEmpty {
+            self.fetchState = .success(result: "")
         }
         var publishers: [ServiceResponsePublisher<ValidatorSummaryReport>] = []
-        for userValidator in userValidators {
+        for userValidator in self.userValidators {
             if let reportService = self.reportServiceMap[userValidator.networkId] {
                 publishers.append(reportService.getValidatorSummaryReport(
                     validatorAccountId: userValidator.validatorAccountId
@@ -69,15 +118,30 @@ class MyValidatorsViewModel: ObservableObject {
                 } else if let validatorSummaryReport = response.value {
                     switch self.fetchState {
                     case .loading:
-                        self.fetchState = .success(result: [validatorSummaryReport.validatorSummary])
-                    case .success(var validatorSummaries):
-                        validatorSummaries.append(validatorSummaryReport.validatorSummary)
-                        self.fetchState = .success(result: validatorSummaries.sorted {
-                            return $0.compare(sortOption: .identity, $1)
-                        })
+                        let validatorSummary = validatorSummaryReport.validatorSummary
+                        self.addOrUpdateValidatorSummary(validatorSummary)
+                        self.fetchState = .success(result: "")
+                    case .success:
+                        self.addOrUpdateValidatorSummary(validatorSummaryReport.validatorSummary)
+                        self.fetchState = .success(result: "")
                     default:
                         break
                     }
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    func deleteUserValidator(_ toDelete: UserValidatorSummary) {
+        self.removeValidator(
+            networkId: toDelete.userValidator.networkId,
+            accountId: toDelete.userValidator.validatorAccountId
+        )
+        self.appService
+            .deleteUserValidator(id: toDelete.userValidator.id)
+            .sink { response in
+                if let _ = response.error {
+                    self.addOrUpdateValidatorSummary(toDelete.validatorSummary)
                 }
             }
             .store(in: &cancellables)

@@ -6,8 +6,14 @@
 //
 
 import Foundation
+import SwiftEventBus
+import SubVTData
 
 enum Event: String {
-    case validatorAdded
-    case validatorRemoved
+    case validatorAdded = "io.subvt.event.validator_added"
+    case validatorRemoved = "io.subvt.event.validator_removed"
+    
+    func post(_ object: Any?) {
+        SwiftEventBus.post(self.rawValue, sender: object)
+    }
 }
