@@ -80,7 +80,7 @@ struct MyValidatorsView: View {
     private var addValidatorButtonOpacity: Double {
         get {
             switch self.viewModel.fetchState {
-            case .success:
+            case .success, .loading, .idle:
                 return 1.0
             default:
                 return 0.0

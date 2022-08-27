@@ -18,6 +18,7 @@ class MyValidatorsViewModel: ObservableObject {
     
     private var appService = SubVTData.AppService()
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
+    private var updateTimer: Timer? = nil
     private var cancellables = Set<AnyCancellable>()
     
     init() {
@@ -44,6 +45,7 @@ class MyValidatorsViewModel: ObservableObject {
     func fetchMyValidators() {
         guard self.fetchState != .loading else { return }
         self.fetchState = .loading
+        self.updateTimer?.invalidate()
         self.appService.getUserValidators().sink {
             response in
             if let error = response.error {
@@ -121,9 +123,11 @@ class MyValidatorsViewModel: ObservableObject {
                         let validatorSummary = validatorSummaryReport.validatorSummary
                         self.addOrUpdateValidatorSummary(validatorSummary)
                         self.fetchState = .success(result: "")
+                        self.setupUpdateTimer()
                     case .success:
                         self.addOrUpdateValidatorSummary(validatorSummaryReport.validatorSummary)
                         self.fetchState = .success(result: "")
+                        self.setupUpdateTimer()
                     default:
                         break
                     }
@@ -145,5 +149,17 @@ class MyValidatorsViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    private func setupUpdateTimer() {
+        self.updateTimer?.invalidate()
+        self.updateTimer = Timer.scheduledTimer(
+            withTimeInterval: 10,
+            repeats: true
+        ) {
+            [weak self] _ in
+            guard let self = self else { return }
+            self.fetchMyValidators()
+        }
     }
 }
