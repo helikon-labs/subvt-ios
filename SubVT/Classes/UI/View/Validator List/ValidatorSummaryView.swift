@@ -12,15 +12,18 @@ struct ValidatorSummaryView: View {
     private var validatorSummary: ValidatorSummary
     private var network: Network
     private var displaysNetworkIcon: Bool
+    private var displaysActiveStatus: Bool
     
     init(
         validatorSummary: ValidatorSummary,
         network: Network,
-        displaysNetworkIcon: Bool = false
+        displaysNetworkIcon: Bool = false,
+        displaysActiveStatus: Bool = false
     ) {
         self.validatorSummary = validatorSummary
         self.network = network
         self.displaysNetworkIcon = displaysNetworkIcon
+        self.displaysActiveStatus = displaysActiveStatus
     }
     
     var amountDisplay: String {
@@ -156,11 +159,25 @@ struct ValidatorSummaryView: View {
             .frame(maxWidth: .infinity)
             Spacer()
                 .frame(height: UI.Dimension.ValidatorSummary.balanceTopMargin)
-            HStack {
+            HStack(alignment: .center, spacing: 0) {
                 Text(self.amountDisplay)
                     .font(UI.Font.ValidatorSummary.balance)
                     .foregroundColor(Color("Text"))
                 Spacer()
+                if self.displaysActiveStatus {
+                    Text(
+                        self.validatorSummary.isActive
+                            ? localized("common.validator.active")
+                            : localized("common.validator.inactive")
+                    )
+                    .font(UI.Font.ValidatorSummary.balance)
+                    .foregroundColor(
+                        self.validatorSummary.isActive
+                            ? Color("ValidatorActive")
+                            : Color("ValidatorInactive")
+                    )
+                }
+                
             }
             .frame(maxWidth: .infinity)
         }

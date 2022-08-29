@@ -113,7 +113,8 @@ struct MyValidatorsView: View {
                                 ValidatorSummaryView(
                                     validatorSummary: validator,
                                     network: network,
-                                    displaysNetworkIcon: true
+                                    displaysNetworkIcon: true,
+                                    displaysActiveStatus: true
                                 )
                                 .modifier(SwipeDeleteViewModifier(
                                     validator: validator,

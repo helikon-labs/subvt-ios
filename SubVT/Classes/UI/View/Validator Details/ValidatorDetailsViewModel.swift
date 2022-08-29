@@ -17,6 +17,8 @@ class ValidatorDetailsViewModel: ObservableObject {
     @Published private(set) var validatorDetails: ValidatorDetails? = nil
     @Published private(set) var userValidatorsFetchState: DataFetchState<[UserValidator]> = .idle
     @Published private(set) var userValidator: UserValidator? = nil
+    @Published private(set) var inactiveNominationCount: Int? = nil
+    @Published private(set) var inactiveNominationTotal: Balance? = nil
     
     private let motion = CMMotionManager()
     private let queue = OperationQueue()
@@ -118,6 +120,21 @@ class ValidatorDetailsViewModel: ObservableObject {
                         self.validatorDetails = validatorDetails
                     } else if let update = update.validatorDetailsUpdate {
                         self.validatorDetails?.apply(diff: update)
+                    }
+                    DispatchQueue.global(qos: .background).async {
+                        [weak self] in
+                        guard let self = self else { return }
+                        let inactiveNominations = self.validatorDetails?.inactiveNominations
+                        let inactiveNominationCount = inactiveNominations?.count
+                        let inactiveNominationTotal = inactiveNominations?
+                            .map { $0.stake.activeAmount }
+                            .reduce(Balance(integerLiteral: 0)) { $0 + $1 }
+                        DispatchQueue.main.async {
+                            [weak self] in
+                            guard let self = self else { return }
+                            self.inactiveNominationCount = inactiveNominationCount
+                            self.inactiveNominationTotal = inactiveNominationTotal
+                        }
                     }
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false

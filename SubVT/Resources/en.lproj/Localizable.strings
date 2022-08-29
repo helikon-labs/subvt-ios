@@ -27,6 +27,9 @@
 "common.date_components.minute"="%dm";
 "common.date_components.second"="%ds";
 
+"common.validator.active"="Active";
+"common.validator.inactive"="Inactive";
+
 "reward_destination.controller"="Controller";
 "reward_destination.staked"="Staked";
 "reward_destination.stash"="Stash";

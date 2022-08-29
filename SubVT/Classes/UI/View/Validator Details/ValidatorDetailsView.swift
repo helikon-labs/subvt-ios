@@ -593,16 +593,15 @@ extension ValidatorDetailsView {
     }
     
     private var inactiveNominationsView: some View {
-        let inactiveNominationCount = self.viewModel.validatorDetails?.inactiveNominations.count
-        let title = (inactiveNominationCount == nil)
+        let title = (self.viewModel.inactiveNominationCount == nil)
             ? localized("validator_details.inactive_nominations")
             : String(
                 format: localized("validator_details.inactive_nominations_with_count"),
-                inactiveNominationCount!
+                self.viewModel.inactiveNominationCount ?? 0
             )
         return DataPanelView(title) {
             HStack(alignment: .center, spacing: 8) {
-                if let inactiveNominationTotal = self.viewModel.validatorDetails?.inactiveNominationTotal {
+                if let inactiveNominationTotal = self.viewModel.inactiveNominationTotal {
                     Text(formatBalance(
                         balance: inactiveNominationTotal,
                         tokenDecimalCount: self.network.tokenDecimalCount,
