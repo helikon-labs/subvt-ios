@@ -11,7 +11,7 @@ struct BackButtonView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     
     var body: some View {
-        UI.Image.Common.backArrow(self.colorScheme)
+        UI.Image.Common.arrowBack(self.colorScheme)
     }
 }
 

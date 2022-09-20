@@ -65,11 +65,11 @@ struct NetworkSelectorButtonView: View {
             if self.displayType == DisplayType.selector(isOpen: true) {
                 Spacer()
                     .frame(width: UI.Dimension.Common.networkSelectorPadding)
-                UI.Image.NetworkStatus.arrowUp(self.colorScheme)
+                UI.Image.Common.arrowUp(self.colorScheme)
             } else if self.displayType == .selector(isOpen: false) {
                 Spacer()
                     .frame(width: UI.Dimension.Common.networkSelectorPadding)
-                UI.Image.NetworkStatus.arrowDown(self.colorScheme)
+                UI.Image.Common.arrowDown(self.colorScheme)
             }
         }
         .frame(height: UI.Dimension.Common.networkSelectorHeight)

@@ -10,6 +10,14 @@ import SubVTData
 import SwiftUI
 import SwiftEventBus
 
+fileprivate struct NominationListButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .opacity(configuration.isPressed ? 0.8 : 1.0)
+            .animation(.none, value: configuration.isPressed)
+    }
+}
+
 struct ValidatorDetailsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
@@ -23,6 +31,9 @@ struct ValidatorDetailsView: View {
     @State private var actionFeedbackViewState = ActionFeedbackView.State.success
     @State private var actionFeedbackViewText = localized("common.done")
     @State private var actionFeedbackViewIsVisible = false
+    
+    @State private var activeNominatorListIsVisible = false
+    @State private var inactiveNominatorListIsVisible = false
     
     @State private var phase: Double = 0.0
     
@@ -343,11 +354,21 @@ struct ValidatorDetailsView: View {
                                 self.selfStakeView
                                     .modifier(PanelAppearance(8, self.displayState))
                                 if let _ = self.viewModel.validatorDetails?.validatorStake {
-                                    self.activeStakeView
-                                        .modifier(PanelAppearance(9, self.displayState))
+                                    Button {
+                                        self.activeNominatorListIsVisible.toggle()
+                                    } label: {
+                                        self.activeStakeView
+                                    }
+                                    .modifier(PanelAppearance(9, self.displayState))
+                                    .buttonStyle(NominationListButtonStyle())
                                 }
-                                self.inactiveNominationsView
-                                    .modifier(PanelAppearance(10, self.displayState))
+                                Button {
+                                    self.inactiveNominatorListIsVisible.toggle()
+                                } label: {
+                                    self.inactiveNominationsView
+                                }
+                                .modifier(PanelAppearance(10, self.displayState))
+                                .buttonStyle(NominationListButtonStyle())
                                 if let _ = self.viewModel.validatorDetails?.account.discoveredAt {
                                     self.accountAgeView
                                         .modifier(PanelAppearance(11, self.displayState))
@@ -569,28 +590,92 @@ extension ValidatorDetailsView {
                 format: localized("validator_details.active_stake_with_count"),
                 activeStakeCount!
             )
-        return DataPanelView(title) {
-            HStack(alignment: .center, spacing: 8) {
-                if let activeStake = self.viewModel.validatorDetails?.validatorStake {
-                    Text(formatBalance(
-                        balance: activeStake.totalStake,
-                        tokenDecimalCount: self.network.tokenDecimalCount,
-                        integerOnly: false
-                    ))
-                    .font(UI.Font.Common.balanceLarge)
-                    .foregroundColor(Color("Text"))
-                    Text(self.network.tokenTicker)
-                        .font(UI.Font.Common.tickerLarge)
+        return VStack(
+            alignment: .leading,
+            spacing: UI.Dimension.Common.dataPanelContentMarginTop
+        ) {
+            Group {
+                HStack {
+                    Text(title)
+                        .font(UI.Font.Common.dataPanelTitle)
                         .foregroundColor(Color("Text"))
-                        .opacity(0.6)
-                } else {
-                    Text("-")
-                        .font(UI.Font.Common.tickerLarge)
+                    Spacer()
+                    if self.activeNominatorListIsVisible {
+                        UI.Image.Common.arrowUp(self.colorScheme)
+                    } else {
+                        UI.Image.Common.arrowDown(self.colorScheme)
+                    }
+
+                }
+                HStack(alignment: .center, spacing: 8) {
+                    if let activeStake = self.viewModel.validatorDetails?.validatorStake {
+                        Text(formatBalance(
+                            balance: activeStake.totalStake,
+                            tokenDecimalCount: self.network.tokenDecimalCount,
+                            integerOnly: false
+                        ))
+                        .font(UI.Font.Common.balanceLarge)
                         .foregroundColor(Color("Text"))
+                        Text(self.network.tokenTicker)
+                            .font(UI.Font.Common.tickerLarge)
+                            .foregroundColor(Color("Text"))
+                            .opacity(0.6)
+                    } else {
+                        Text("-")
+                            .font(UI.Font.Common.tickerLarge)
+                            .foregroundColor(Color("Text"))
+                    }
+                }
+            }
+            .padding(EdgeInsets(
+                top: 0,
+                leading: UI.Dimension.Common.dataPanelPadding,
+                bottom: 0,
+                trailing: UI.Dimension.Common.dataPanelPadding
+            ))
+            if self.activeNominatorListIsVisible {
+                if let nominators = self.viewModel.activeNominations {
+                    ScrollView {
+                        LazyVStack(spacing: 4) {
+                            ForEach(nominators, id: \.self.account.id) { nominator in
+                                HStack(alignment: .center) {
+                                    Text(truncateAddress(nominator.account.address))
+                                        .font(UI.Font.ValidatorDetails.nominator)
+                                        .foregroundColor(Color("Text"))
+                                        .lineLimit(1)
+                                    Spacer()
+                                    Text(formatBalance(
+                                        balance: nominator.stake,
+                                        tokenDecimalCount: self.network.tokenDecimalCount
+                                    ))
+                                    .font(UI.Font.ValidatorDetails.nominator)
+                                    .foregroundColor(Color("Text"))
+                                    .lineLimit(1)
+                                }
+                                .padding(EdgeInsets(
+                                    top: 0,
+                                    leading: UI.Dimension.Common.dataPanelPadding,
+                                    bottom: 0,
+                                    trailing: UI.Dimension.Common.dataPanelPadding
+                                ))
+                            }
+                        }
+                    }
+                    .frame(minHeight: .zero, maxHeight: 250)
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: 0,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: 0
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
+    
     
     private var inactiveNominationsView: some View {
         let title = (self.viewModel.inactiveNominationCount == nil)
@@ -599,27 +684,90 @@ extension ValidatorDetailsView {
                 format: localized("validator_details.inactive_nominations_with_count"),
                 self.viewModel.inactiveNominationCount ?? 0
             )
-        return DataPanelView(title) {
-            HStack(alignment: .center, spacing: 8) {
-                if let inactiveNominationTotal = self.viewModel.inactiveNominationTotal {
-                    Text(formatBalance(
-                        balance: inactiveNominationTotal,
-                        tokenDecimalCount: self.network.tokenDecimalCount,
-                        integerOnly: false
-                    ))
-                    .font(UI.Font.Common.balanceLarge)
-                    .foregroundColor(Color("Text"))
-                    Text(self.network.tokenTicker)
-                        .font(UI.Font.Common.tickerLarge)
+        return VStack(
+            alignment: .leading,
+            spacing: UI.Dimension.Common.dataPanelContentMarginTop
+        ) {
+            Group {
+                HStack {
+                    Text(title)
+                        .font(UI.Font.Common.dataPanelTitle)
                         .foregroundColor(Color("Text"))
-                        .opacity(0.6)
-                } else {
-                    Text("-")
-                        .font(UI.Font.Common.tickerLarge)
+                    Spacer()
+                    if self.inactiveNominatorListIsVisible {
+                        UI.Image.Common.arrowUp(self.colorScheme)
+                    } else {
+                        UI.Image.Common.arrowDown(self.colorScheme)
+                    }
+
+                }
+                HStack(alignment: .center, spacing: 8) {
+                    if let inactiveNominationTotal = self.viewModel.inactiveNominationTotal {
+                        Text(formatBalance(
+                            balance: inactiveNominationTotal,
+                            tokenDecimalCount: self.network.tokenDecimalCount,
+                            integerOnly: false
+                        ))
+                        .font(UI.Font.Common.balanceLarge)
                         .foregroundColor(Color("Text"))
+                        Text(self.network.tokenTicker)
+                            .font(UI.Font.Common.tickerLarge)
+                            .foregroundColor(Color("Text"))
+                            .opacity(0.6)
+                    } else {
+                        Text("-")
+                            .font(UI.Font.Common.tickerLarge)
+                            .foregroundColor(Color("Text"))
+                    }
+                }
+            }
+            .padding(EdgeInsets(
+                top: 0,
+                leading: UI.Dimension.Common.dataPanelPadding,
+                bottom: 0,
+                trailing: UI.Dimension.Common.dataPanelPadding
+            ))
+            if self.inactiveNominatorListIsVisible {
+                if let nominators = self.viewModel.inactiveNominations {
+                    ScrollView {
+                        LazyVStack(spacing: 4) {
+                            ForEach(nominators, id: \.self.stashAccount.id) { nominator in
+                                HStack(alignment: .center) {
+                                    Text(truncateAddress(nominator.stashAccount.address))
+                                        .font(UI.Font.ValidatorDetails.nominator)
+                                        .foregroundColor(Color("Text"))
+                                        .lineLimit(1)
+                                    Spacer()
+                                    Text(formatBalance(
+                                        balance: nominator.stake.activeAmount,
+                                        tokenDecimalCount: self.network.tokenDecimalCount
+                                    ))
+                                    .font(UI.Font.ValidatorDetails.nominator)
+                                    .foregroundColor(Color("Text"))
+                                    .lineLimit(1)
+                                }
+                                .padding(EdgeInsets(
+                                    top: 0,
+                                    leading: UI.Dimension.Common.dataPanelPadding,
+                                    bottom: 0,
+                                    trailing: UI.Dimension.Common.dataPanelPadding
+                                ))
+                            }
+                        }
+                    }
+                    .frame(minHeight: .zero, maxHeight: 250)
                 }
             }
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(EdgeInsets(
+            top: UI.Dimension.Common.dataPanelPadding,
+            leading: 0,
+            bottom: UI.Dimension.Common.dataPanelPadding,
+            trailing: 0
+        ))
+        .background(Color("DataPanelBg"))
+        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }
     
     private var rewardDestinationView: some View {

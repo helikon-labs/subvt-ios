@@ -17,6 +17,8 @@ class ValidatorDetailsViewModel: ObservableObject {
     @Published private(set) var validatorDetails: ValidatorDetails? = nil
     @Published private(set) var userValidatorsFetchState: DataFetchState<[UserValidator]> = .idle
     @Published private(set) var userValidator: UserValidator? = nil
+    @Published private(set) var activeNominations: [NominatorStake]? = nil
+    @Published private(set) var inactiveNominations: [Nomination]? = nil
     @Published private(set) var inactiveNominationCount: Int? = nil
     @Published private(set) var inactiveNominationTotal: Balance? = nil
     
@@ -124,7 +126,16 @@ class ValidatorDetailsViewModel: ObservableObject {
                     DispatchQueue.global(qos: .background).async {
                         [weak self] in
                         guard let self = self else { return }
-                        let inactiveNominations = self.validatorDetails?.inactiveNominations
+                        let activeNominations = self.validatorDetails?.validatorStake?.nominators.sorted(
+                            by: { stake1, stake2 in
+                                stake1.stake.value > stake2.stake.value
+                            }
+                        )
+                        let inactiveNominations = self.validatorDetails?.inactiveNominations.sorted(
+                            by: { stake1, stake2 in
+                                stake1.stake.activeAmount.value > stake2.stake.activeAmount.value
+                            }
+                        )
                         let inactiveNominationCount = inactiveNominations?.count
                         let inactiveNominationTotal = inactiveNominations?
                             .map { $0.stake.activeAmount }
@@ -132,6 +143,8 @@ class ValidatorDetailsViewModel: ObservableObject {
                         DispatchQueue.main.async {
                             [weak self] in
                             guard let self = self else { return }
+                            self.activeNominations = activeNominations
+                            self.inactiveNominations = inactiveNominations
                             self.inactiveNominationCount = inactiveNominationCount
                             self.inactiveNominationTotal = inactiveNominationTotal
                         }

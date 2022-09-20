@@ -11,11 +11,26 @@ import SubVTData
 extension UI {
     enum Image {
         enum Common {
-            static func backArrow(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+            static func arrowDown(_ colorScheme: ColorScheme) -> SwiftUI.Image {
                 if colorScheme == .dark {
-                    return SwiftUI.Image("BackArrowDark")
+                    return SwiftUI.Image("ArrowDownDark")
                 } else {
-                    return SwiftUI.Image("BackArrowLight")
+                    return SwiftUI.Image("ArrowDownLight")
+                }
+            }
+            
+            static func arrowUp(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("ArrowUpDark")
+                } else {
+                    return SwiftUI.Image("ArrowUpLight")
+                }
+            }
+            static func arrowBack(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("ArrowBackDark")
+                } else {
+                    return SwiftUI.Image("ArrowBackLight")
                 }
             }
             static func searchIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
@@ -115,22 +130,6 @@ extension UI {
         }
         
         enum NetworkStatus {
-            static func arrowDown(_ colorScheme: ColorScheme) -> SwiftUI.Image {
-                if colorScheme == .dark {
-                    return SwiftUI.Image("NetworkStatusArrowDownDark")
-                } else {
-                    return SwiftUI.Image("NetworkStatusArrowDownLight")
-                }
-            }
-            
-            static func arrowUp(_ colorScheme: ColorScheme) -> SwiftUI.Image {
-                if colorScheme == .dark {
-                    return SwiftUI.Image("NetworkStatusArrowUpDark")
-                } else {
-                    return SwiftUI.Image("NetworkStatusArrowUpLight")
-                }
-            }
-            
             static func arrowRight(_ colorScheme: ColorScheme) -> SwiftUI.Image {
                 if colorScheme == .dark {
                     if UIDevice.current.userInterfaceIdiom == .phone {
