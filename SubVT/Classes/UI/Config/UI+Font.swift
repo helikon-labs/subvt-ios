@@ -29,6 +29,7 @@ extension UI {
                     return LexendDeca.semiBold.withSize(36)
                 }
             }
+            static var title = LexendDeca.semiBold.withSize(18)
         }
         
         enum Snackbar {
@@ -146,6 +147,11 @@ extension UI {
         
         enum MyValidators {
             static let addValidatorsButton = LexendDeca.regular.withSize(14)
+        }
+        
+        enum AddValidators {
+            static let subtitle = LexendDeca.light.withSize(12)
+            static let network = LexendDeca.medium.withSize(16)
         }
     }
 }

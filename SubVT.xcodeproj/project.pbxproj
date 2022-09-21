@@ -151,6 +151,11 @@
 		A0B3A6B9287D768A005DA484 /* LineChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A6B7287D768A005DA484 /* LineChartView.swift */; };
 		A0B3A6BB287D9BE9005DA484 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */; };
 		A0B3A6BC287D9BE9005DA484 /* CGFloat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */; };
+		A0B48C6828DB00D7002987C0 /* AddValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B48C6728DB00D7002987C0 /* AddValidatorsViewModel.swift */; };
+		A0B48C6928DB00D7002987C0 /* AddValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B48C6728DB00D7002987C0 /* AddValidatorsViewModel.swift */; };
+		A0B48C6B28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */; };
+		A0B48C6C28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */; };
+		A0B48C6D28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */; };
 		A0BCDE592878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */; };
 		A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */; };
 		A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BCDE5E28784DD0008047D7 /* Format.swift */; };
@@ -421,6 +426,8 @@
 		A0AFF7FA2892B5F700B0CB4F /* UI+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Text.swift"; sourceTree = "<group>"; };
 		A0B3A6B7287D768A005DA484 /* LineChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChartView.swift; sourceTree = "<group>"; };
 		A0B3A6BA287D9BE9005DA484 /* CGFloat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGFloat.swift; sourceTree = "<group>"; };
+		A0B48C6728DB00D7002987C0 /* AddValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddValidatorsViewModel.swift; sourceTree = "<group>"; };
+		A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+AddValidators.swift"; sourceTree = "<group>"; };
 		A0BCDE582878495C008047D7 /* EraPointsBlocksProducedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraPointsBlocksProducedView.swift; sourceTree = "<group>"; };
 		A0BCDE5E28784DD0008047D7 /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		A0BCDE6228785293008047D7 /* LastEraTotalRewardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LastEraTotalRewardView.swift; sourceTree = "<group>"; };
@@ -788,6 +795,7 @@
 				A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */,
 				A0AFF7F32892A94900B0CB4F /* UI+Dimension+ValidatorDetails.swift */,
 				A0744D912885A033008A06DD /* UI+Dimension+ValidatorList.swift */,
+				A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */,
 			);
 			path = "UI+Dimension";
 			sourceTree = "<group>";
@@ -1043,6 +1051,7 @@
 			isa = PBXGroup;
 			children = (
 				A0FC976728B62CCF00B75A9B /* AddValidatorsView.swift */,
+				A0B48C6728DB00D7002987C0 /* AddValidatorsViewModel.swift */,
 			);
 			path = "Add Validators";
 			sourceTree = "<group>";
@@ -1410,6 +1419,7 @@
 				A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */,
 				A0744D982885AB05008A06DD /* BackButtonView.swift in Sources */,
 				A07BA827285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */,
+				A0B48C6828DB00D7002987C0 /* AddValidatorsViewModel.swift in Sources */,
 				A0128A4D284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A0BF909E2848C1EC0053389A /* Persistence.swift in Sources */,
 				A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */,
@@ -1462,6 +1472,7 @@
 				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
 				A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */,
 				A0E0F6872848CF120029DDBF /* Font.swift in Sources */,
+				A0B48C6B28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */,
 				A04B37BB2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A072C33B28780685001636F9 /* Either.swift in Sources */,
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
@@ -1508,6 +1519,7 @@
 				A0C03D8928967048001C1B54 /* RewardDestination.swift in Sources */,
 				A078727D287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A0C90E892878615600A91996 /* Formatter.swift in Sources */,
+				A0B48C6928DB00D7002987C0 /* AddValidatorsViewModel.swift in Sources */,
 				A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
 				A018C2AE28B90C0500C9A276 /* File.swift in Sources */,
 				A0AFF7F82892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
@@ -1526,6 +1538,7 @@
 				A072C33C28780685001636F9 /* Either.swift in Sources */,
 				A0BCDE6428785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A0744D8B2885865D008A06DD /* ValidatorListViewModel.swift in Sources */,
+				A0B48C6C28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1571,6 +1584,7 @@
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0744D932885A033008A06DD /* UI+Dimension+ValidatorList.swift in Sources */,
+				A0B48C6D28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */,
 				A0FC976928B62CCF00B75A9B /* AddValidatorsView.swift in Sources */,
 				A088B18828AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */,
 				A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */,

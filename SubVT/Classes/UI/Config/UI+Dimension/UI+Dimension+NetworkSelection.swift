@@ -68,7 +68,6 @@ extension UI.Dimension {
                 }
             }
         }
-        static let networkSelectionIndicatorSize: CGFloat = 7
         static var networkButtonShadowOffset: CGFloat {
             get {
                 if UIDevice.current.userInterfaceIdiom == .phone {

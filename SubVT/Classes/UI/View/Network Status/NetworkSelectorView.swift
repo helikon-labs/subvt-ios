@@ -91,14 +91,14 @@ struct NetworkSelectorView: View {
                                             Circle()
                                                 .fill(Color("NetworkButtonSelectionIndicator"))
                                                 .frame(
-                                                    width: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize,
-                                                    height: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize
+                                                    width: UI.Dimension.Common.networkSelectionIndicatorSize,
+                                                    height: UI.Dimension.Common.networkSelectionIndicatorSize
                                                 )
                                                 .shadow(
                                                     color: Color("NetworkButtonSelectionIndicator"),
                                                     radius: 3,
                                                     x: 0,
-                                                    y: UI.Dimension.NetworkSelection.networkSelectionIndicatorSize / 2
+                                                    y: UI.Dimension.Common.networkSelectionIndicatorSize / 2
                                                 )
                                             Spacer()
                                                 .frame(width: 24)
