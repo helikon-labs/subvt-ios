@@ -27,7 +27,16 @@ struct AddValidatorsView: View {
     @State private var actionFeedbackViewState = ActionFeedbackView.State.success
     @State private var actionFeedbackViewText = localized("common.done")
     @State private var actionFeedbackViewIsVisible = false
-    @State private var snackbarViewText = ""
+    @State private var snackbarIsVisible = false
+    
+    private var networkButtonIsEnabled: Bool {
+        switch self.viewModel.networkValidatorsFetchState {
+        case .success(_):
+            return true
+        default:
+            return false
+        }
+    }
     
     var body: some View {
         ZStack {
@@ -42,9 +51,10 @@ struct AddValidatorsView: View {
                 )
                 .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
                 .animation(
-                    .easeOut(duration: 0.75),
+                    .easeOut(duration: 0.65),
                     value: self.displayState
                 )
+                .zIndex(0)
             switch self.viewModel.userValidatorsFetchState {
             case .idle, .loading:
                 ProgressView()
@@ -54,7 +64,7 @@ struct AddValidatorsView: View {
                         )
                     )
                     .animation(.spring(), value: self.viewModel.userValidatorsFetchState)
-                    .animation(nil, value: self.viewModel.userValidatorsFetchState)
+                    .zIndex(3)
             default:
                 Group {}
             }
@@ -85,6 +95,9 @@ struct AddValidatorsView: View {
                         Group{}
                     case .success(_):
                         self.searchView
+                        Spacer()
+                            .frame(height: 8)
+                        self.validatorListView
                     }
                 default:
                     Group {}
@@ -97,34 +110,36 @@ struct AddValidatorsView: View {
                 trailing: UI.Dimension.Common.padding
             ))
             .frame(maxHeight: .infinity, alignment: .top)
-            .zIndex(3)
+            .zIndex(1)
             FooterGradientView()
-                .zIndex(1)
+                .zIndex(2)
             ActionFeedbackView(
                 state: self.actionFeedbackViewState,
                 text: self.actionFeedbackViewText,
                 visibleYOffset: UI.Dimension.ValidatorDetails.actionFeedbackViewYOffset,
                 isVisible: self.$actionFeedbackViewIsVisible
             )
-            .zIndex(1)
+            .zIndex(3)
             SnackbarView(
-                message: self.snackbarViewText,
+                message: localized("common.error.validator_list"),
                 type: .error(canRetry: true)
             ) {
-                self.fetchData()
+                self.snackbarIsVisible = false
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.fetchData()
+                }
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
+            .zIndex(3)
             .offset(
-                y: UI.Dimension.MyValidators.snackbarYOffset(
-                    fetchState: self.viewModel.userValidatorsFetchState
-                )
+                y: self.snackbarIsVisible
+                    ? UI.Dimension.AddValidators.snackbarVisibleYOffset
+                    : UI.Dimension.AddValidators.snackbarHiddenYOffset
             )
-            .opacity(UI.Dimension.MyValidators.snackbarOpacity(
-                fetchState: self.viewModel.userValidatorsFetchState
-            ))
+            .opacity(self.snackbarIsVisible ? 1.0 : 0.0)
             .animation(
                 .spring(),
-                value: self.viewModel.userValidatorsFetchState
+                value: self.snackbarIsVisible
             )
         }
         .navigationBarHidden(true)
@@ -136,6 +151,7 @@ struct AddValidatorsView: View {
             alignment: .leading
         )
         .onAppear() {
+            UITextField.appearance().clearButtonMode = .whileEditing
             guard let networks = self.networks else {
                 return
             }
@@ -231,6 +247,8 @@ struct AddValidatorsView: View {
                 .background(Color("DataPanelBg"))
                 .cornerRadius(UI.Dimension.Common.cornerRadius)
             }
+            .disabled(!self.networkButtonIsEnabled)
+            .opacity(self.networkButtonIsEnabled ? 1.0 : 0.75)
             .buttonStyle(NetworkListButtonStyle())
             .modifier(PanelAppearance(2, self.displayState))
         }
@@ -246,6 +264,7 @@ struct AddValidatorsView: View {
                         let network = networks[i]
                         Button(
                             action: {
+                                self.viewModel.searchText = ""
                                 self.viewModel.network = network
                                 self.fetchData()
                             },
@@ -294,7 +313,8 @@ struct AddValidatorsView: View {
                             }
                         )
                         .buttonStyle(NetworkListButtonStyle())
-                        .zIndex(100 - Double(i))
+                        .disabled(!self.networkButtonIsEnabled)
+                        .opacity(self.networkButtonIsEnabled ? 1.0 : 0.65)
                         if i < networks.count - 1 {
                             Color("NetworkSelectorListDivider")
                                 .frame(height: 1)
@@ -337,16 +357,35 @@ struct AddValidatorsView: View {
         }
     }
     
+    private var validatorListView: some View {
+        ScrollView {
+            LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
+                ForEach(self.viewModel.validators, id: \.self.address) {
+                    validator in
+                    ValidatorSummaryView(
+                        validatorSummary: validator,
+                        network: self.viewModel.network
+                    )
+                }
+                Spacer()
+                    .frame(
+                        height: UI.Dimension.Common.footerGradientViewHeight
+                    )
+            }
+        }
+        .frame(maxHeight: .infinity)
+    }
+    
     private func fetchData() {
         self.viewModel.fetchUserValidators {
             self.viewModel.fetchNetworkValidators() {
-                
+                // no-op
             } onError: { _ in
-                // show snackbar
+                snackbarIsVisible = true
             }
 
         } onError: { _ in
-            // show snackbar
+            snackbarIsVisible = true
         }
     }
 }

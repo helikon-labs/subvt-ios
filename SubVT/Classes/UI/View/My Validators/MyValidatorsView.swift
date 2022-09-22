@@ -171,7 +171,7 @@ struct MyValidatorsView: View {
             
             ZStack {
                 SnackbarView(
-                    message: localized("my_validators.error.validator_list"),
+                    message: localized("common.error.validator_list"),
                     type: .error(canRetry: true)
                 ) {
                     self.viewModel.fetchMyValidators()

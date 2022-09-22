@@ -784,6 +784,7 @@
 			children = (
 				A0A1DC53284B8DD200914237 /* UI+Dimension.swift */,
 				A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */,
+				A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */,
 				A07BA81A285B943A00575683 /* UI+Dimension+BgMorph.swift */,
 				A07BA817285B8C0600575683 /* UI+Dimension+Common.swift */,
 				A07BA820285B94B400575683 /* UI+Dimension+Introduction.swift */,
@@ -795,7 +796,6 @@
 				A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */,
 				A0AFF7F32892A94900B0CB4F /* UI+Dimension+ValidatorDetails.swift */,
 				A0744D912885A033008A06DD /* UI+Dimension+ValidatorList.swift */,
-				A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */,
 			);
 			path = "UI+Dimension";
 			sourceTree = "<group>";

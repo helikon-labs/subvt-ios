@@ -15,6 +15,8 @@
 "common.error.unexpected"="Unexpected error";
 "common.error.server"="Server error";
 
+"common.error.validator_list"="Error while getting the validator list. Please check your connection.";
+
 "common.era"="Era";
 "common.epoch"="Epoch";
 "common.percentage"="%@%%";
@@ -120,7 +122,6 @@
 
 "my_validators.title"="My Validators";
 "my_validators.add_validators"="Add Validators";
-"my_validators.error.validator_list"="Error while getting the validator list. Please check your connection.";
 
 "add_validators.title"="Add New Validator";
 "add_validators.network"="Network";

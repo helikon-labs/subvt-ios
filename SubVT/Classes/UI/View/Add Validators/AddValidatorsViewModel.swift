@@ -12,11 +12,21 @@ import SubVTData
 class AddValidatorsViewModel: ObservableObject {
     @Published private(set) var userValidatorsFetchState: DataFetchState<[UserValidator]> = .idle
     @Published private(set) var networkValidatorsFetchState: DataFetchState<[ValidatorSummary]> = .idle
+    @Published private(set) var validators: [ValidatorSummary] = []
     @Published var searchText: String = ""
     @Published var network = PreviewData.kusama
     
     private var appService = SubVTData.AppService()
     private var cancellables: Set<AnyCancellable> = []
+    
+    init() {
+        self.$searchText
+            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
+            .sink { searchText in
+                self.filterAndSortValidators(searchText: searchText)
+            }
+            .store(in: &cancellables)
+    }
     
     func fetchUserValidators(
         onSuccess: (() -> ())?,
@@ -77,5 +87,24 @@ class AddValidatorsViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
+    }
+    
+    func filterAndSortValidators(
+        searchText: String
+    ) {
+        if searchText.trimmingCharacters(in: .whitespaces).isEmpty {
+            self.validators.removeAll()
+            return
+        }
+        switch self.networkValidatorsFetchState {
+        case .success(let validators):
+            self.validators = validators
+                .filter { searchText.isEmpty || $0.filter(searchText) }
+                .sorted {
+                    return $0.compare(sortOption: .identity, $1)
+                }
+        default:
+            break
+        }
     }
 }
