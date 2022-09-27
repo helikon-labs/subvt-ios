@@ -83,6 +83,14 @@ enum PreviewData {
         )
     )
     
+    static let validatorSearchSummary = ValidatorSearchSummary(
+        address: "HZUyowqk6wH6o8B4Asf7P7hLuRXy8hPheNCKevN5QFFRRdd",
+        display: "Display",
+        parentDisplay: "Parent",
+        childDisplay: "Child",
+        confirmed: true
+    )
+    
     static let userDefaults: UserDefaults = {
         let defaults = UserDefaults.init(
             suiteName: "io.helikon.subvt.user_defaults.preview"

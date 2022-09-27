@@ -406,17 +406,12 @@ struct ValidatorDetailsView: View {
                                         .modifier(PanelAppearance(17, self.displayState))
                                     self.onekvLocationView
                                         .modifier(PanelAppearance(18, self.displayState))
-                                    self.onekvBinaryVersionView
-                                        .modifier(PanelAppearance(19, self.displayState))
-                                    if self.viewModel.validatorDetails?.onekvOnlineSince ?? 0 > 0 {
-                                        self.onekvUptimeView
-                                            .modifier(PanelAppearance(20, self.displayState))
-                                    } else if self.viewModel.validatorDetails?.onekvOfflineSince ?? 0 > 0 {
+                                    if self.viewModel.validatorDetails?.onekvOfflineSince ?? 0 > 0 {
                                         self.onekvDowntimeView
-                                            .modifier(PanelAppearance(21, self.displayState))
+                                            .modifier(PanelAppearance(19, self.displayState))
                                     }
                                     self.onekvValidityView
-                                        .modifier(PanelAppearance(22, self.displayState))
+                                        .modifier(PanelAppearance(20, self.displayState))
                                 }
                             }
                             Spacer()
@@ -948,37 +943,13 @@ extension ValidatorDetailsView {
         }
     }
     
-    private var onekvBinaryVersionView: some View {
-        DataPanelView(
-            localized("validator_details.onekv.binary_version"),
-            isVertical: false
-        ) {
-            if let version = self.viewModel.validatorDetails?.onekvBinaryVersion {
-                Text(version)
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            } else {
-                Text("-")
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            }
-        }
-    }
-    
     private var onekvUptimeView: some View {
         DataPanelView(localized("validator_details.onekv.uptime")) {
             HStack(alignment: .center, spacing: 8) {
                 Image("UptimeIcon")
-                if let onlineSince = self.viewModel.validatorDetails?.onekvOnlineSince,
-                   onlineSince > 0 {
-                    Text(self.getTimePeriodString(timestampMs: onlineSince))
-                        .font(UI.Font.Common.dataMedium)
-                        .foregroundColor(Color("Text"))
-                } else {
-                    Text("-")
-                        .font(UI.Font.Common.dataMedium)
-                        .foregroundColor(Color("Text"))
-                }
+                Text("-")
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(Color("Text"))
             }
         }
     }

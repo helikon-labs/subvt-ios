@@ -11,19 +11,20 @@ import SubVTData
 
 class AddValidatorsViewModel: ObservableObject {
     @Published private(set) var userValidatorsFetchState: DataFetchState<[UserValidator]> = .idle
-    @Published private(set) var networkValidatorsFetchState: DataFetchState<[ValidatorSummary]> = .idle
-    @Published private(set) var validators: [ValidatorSummary] = []
+    @Published private(set) var networkValidatorsFetchState: DataFetchState<[ValidatorSearchSummary]> = .idle
+    @Published private(set) var validators: [ValidatorSearchSummary] = []
     @Published var searchText: String = ""
     @Published var network = PreviewData.kusama
+    private var searchCancellable: AnyCancellable? = nil
     
     private var appService = SubVTData.AppService()
     private var cancellables: Set<AnyCancellable> = []
     
     init() {
         self.$searchText
-            .debounce(for: .seconds(0.1), scheduler: DispatchQueue.main)
+            .debounce(for: .seconds(0.25), scheduler: DispatchQueue.main)
             .sink { searchText in
-                self.filterAndSortValidators(searchText: searchText)
+                self.searchValidators(query: searchText)
             }
             .store(in: &cancellables)
     }
@@ -57,54 +58,31 @@ class AddValidatorsViewModel: ObservableObject {
             .store(in: &cancellables)
     }
     
-    func fetchNetworkValidators(
-        onSuccess: (() -> ())?,
-        onError: @escaping (Error) -> ()
-    ) {
+    func searchValidators(query: String) {
         guard let host = self.network.reportServiceHost,
               let port = self.network.reportServicePort,
               self.networkValidatorsFetchState != .loading else {
             return
         }
-        switch self.networkValidatorsFetchState {
-        case .loading:
+        self.searchCancellable?.cancel()
+        let query = query.trimmingCharacters(in: .whitespaces)
+        guard !query.isEmpty else {
+            self.networkValidatorsFetchState = .success(result: [])
+            self.validators.removeAll()
             return
-        default:
-            break
         }
         self.networkValidatorsFetchState = .loading
         let reportService = SubVTData.ReportService(baseURL: "https://\(host):\(port)")
-        reportService.getValidatorListReport()
+        self.searchCancellable = reportService.searchValidators(query: query)
             .sink {
                 [weak self] response in
                 guard let self = self else { return }
                 if let error = response.error {
                     self.networkValidatorsFetchState = .error(error: error)
-                    onError(error)
                 } else {
-                    self.networkValidatorsFetchState = .success(result: response.value!.validators)
-                    onSuccess?()
+                    self.networkValidatorsFetchState = .success(result: response.value!)
+                    self.validators = response.value!
                 }
             }
-            .store(in: &cancellables)
-    }
-    
-    func filterAndSortValidators(
-        searchText: String
-    ) {
-        if searchText.trimmingCharacters(in: .whitespaces).isEmpty {
-            self.validators.removeAll()
-            return
-        }
-        switch self.networkValidatorsFetchState {
-        case .success(let validators):
-            self.validators = validators
-                .filter { searchText.isEmpty || $0.filter(searchText) }
-                .sorted {
-                    return $0.compare(sortOption: .identity, $1)
-                }
-        default:
-            break
-        }
     }
 }

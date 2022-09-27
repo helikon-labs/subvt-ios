@@ -76,8 +76,11 @@ struct AddValidatorsView: View {
                     self.networkListView
                     Spacer()
                         .frame(height: 24)
+                    self.searchView
+                    Spacer()
+                        .frame(height: 8)
                     switch self.viewModel.networkValidatorsFetchState {
-                    case .idle, .loading:
+                    case .loading:
                         HStack {
                             ProgressView()
                                 .progressViewStyle(
@@ -91,13 +94,10 @@ struct AddValidatorsView: View {
                         }
                         .frame(maxWidth: .infinity)
                         .frame(alignment: .center)
-                    case .error(_):
-                        Group{}
                     case .success(_):
-                        self.searchView
-                        Spacer()
-                            .frame(height: 8)
                         self.validatorListView
+                    default:
+                        Group {}
                     }
                 default:
                     Group {}
@@ -266,6 +266,7 @@ struct AddValidatorsView: View {
                             action: {
                                 self.viewModel.searchText = ""
                                 self.viewModel.network = network
+                                self.networkListIsVisible = false
                                 self.fetchData()
                             },
                             label: {
@@ -362,10 +363,7 @@ struct AddValidatorsView: View {
             LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
                 ForEach(self.viewModel.validators, id: \.self.address) {
                     validator in
-                    ValidatorSummaryView(
-                        validatorSummary: validator,
-                        network: self.viewModel.network
-                    )
+                    ValidatorSearchSummaryView(validatorSearchSummary: validator)
                 }
                 Spacer()
                     .frame(
@@ -378,12 +376,7 @@ struct AddValidatorsView: View {
     
     private func fetchData() {
         self.viewModel.fetchUserValidators {
-            self.viewModel.fetchNetworkValidators() {
-                // no-op
-            } onError: { _ in
-                snackbarIsVisible = true
-            }
-
+            // no-op
         } onError: { _ in
             snackbarIsVisible = true
         }
