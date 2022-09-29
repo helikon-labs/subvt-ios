@@ -9,12 +9,44 @@ import SubVTData
 import SwiftUI
 
 struct ValidatorSearchSummaryView: View {
-    private var validatorSearchSummary: ValidatorSearchSummary
+    private let validatorSearchSummary: ValidatorSearchSummary
+    private var network: Network
+    private let canAdd: Bool
+    private let isLoading: Bool
+    private let onAdd: () -> ()
+    
+    var amountDisplay: String {
+        get {
+            let inactive = formatBalance(
+                balance: self.validatorSearchSummary.inactiveNominations.totalAmount,
+                tokenDecimalCount: self.network.tokenDecimalCount
+            )
+            let inactiveCount = self.validatorSearchSummary.inactiveNominations.nominationCount
+            if let stakeSummary = self.validatorSearchSummary.validatorStake {
+                let active = formatBalance(
+                    balance: stakeSummary.totalStake,
+                    tokenDecimalCount: self.network.tokenDecimalCount
+                )
+                let activeCount = stakeSummary.nominatorCount
+                return "(\(activeCount)) \(active) / (\(inactiveCount)) \(inactive) \(self.network.tokenTicker)"
+            } else {
+                return "(\(inactiveCount)) \(inactive) \(self.network.tokenTicker)"
+            }
+        }
+    }
     
     init(
-        validatorSearchSummary: ValidatorSearchSummary
+        validatorSearchSummary: ValidatorSearchSummary,
+        network: Network,
+        canAdd: Bool,
+        isLoading: Bool,
+        onAdd: @escaping (() -> ())
     ) {
         self.validatorSearchSummary = validatorSearchSummary
+        self.network = network
+        self.canAdd = canAdd
+        self.isLoading = isLoading
+        self.onAdd = onAdd
     }
     
     var body: some View {
@@ -65,7 +97,7 @@ struct ValidatorSearchSummaryView: View {
                 Spacer()
                     .frame(height: UI.Dimension.ValidatorSummary.balanceTopMargin)
                 HStack {
-                    Text("20384.0000 / 5042.4252 KSM")
+                    Text(self.amountDisplay)
                         .font(UI.Font.ValidatorSummary.balance)
                         .foregroundColor(Color("Text"))
                     Spacer()
@@ -74,16 +106,21 @@ struct ValidatorSearchSummaryView: View {
             Spacer()
             ZStack {
                 Button {
-                    // action
+                    self.onAdd()
                 } label: {
                     Image("AddValidatorButton")
+                        .saturation(self.canAdd ? 1.0 : 0.0)
                 }
-                ProgressView()
-                    .progressViewStyle(
-                        CircularProgressViewStyle(
-                            tint: Color("Text")
+                .opacity(self.isLoading ? 0.0 : 1.0)
+                .disabled(self.isLoading || !self.canAdd)
+                if self.isLoading {
+                    ProgressView()
+                        .progressViewStyle(
+                            CircularProgressViewStyle(
+                                tint: Color("Text").opacity(0.5)
+                            )
                         )
-                    )
+                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -101,7 +138,12 @@ struct ValidatorSearchSummaryView: View {
 struct ValidatorSearchSummaryView_Previews: PreviewProvider {
     static var previews: some View {
         ValidatorSearchSummaryView(
-            validatorSearchSummary: PreviewData.validatorSearchSummary
-        )
+            validatorSearchSummary: PreviewData.validatorSearchSummary,
+            network: PreviewData.kusama,
+            canAdd: true,
+            isLoading: false
+        ) {
+            // no-op
+        }
     }
 }

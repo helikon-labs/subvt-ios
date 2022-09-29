@@ -14,18 +14,6 @@ struct ValidatorSummaryView: View {
     private var displaysNetworkIcon: Bool
     private var displaysActiveStatus: Bool
     
-    init(
-        validatorSummary: ValidatorSummary,
-        network: Network,
-        displaysNetworkIcon: Bool = false,
-        displaysActiveStatus: Bool = false
-    ) {
-        self.validatorSummary = validatorSummary
-        self.network = network
-        self.displaysNetworkIcon = displaysNetworkIcon
-        self.displaysActiveStatus = displaysActiveStatus
-    }
-    
     var amountDisplay: String {
         get {
             let inactive = formatBalance(
@@ -45,6 +33,18 @@ struct ValidatorSummaryView: View {
                 return "(\(inactiveCount)) \(inactive) \(self.network.tokenTicker)"
             }
         }
+    }
+    
+    init(
+        validatorSummary: ValidatorSummary,
+        network: Network,
+        displaysNetworkIcon: Bool = false,
+        displaysActiveStatus: Bool = false
+    ) {
+        self.validatorSummary = validatorSummary
+        self.network = network
+        self.displaysNetworkIcon = displaysNetworkIcon
+        self.displaysActiveStatus = displaysActiveStatus
     }
     
     var body: some View {

@@ -84,11 +84,17 @@ enum PreviewData {
     )
     
     static let validatorSearchSummary = ValidatorSearchSummary(
+        accountId: stashAccountId,
         address: "HZUyowqk6wH6o8B4Asf7P7hLuRXy8hPheNCKevN5QFFRRdd",
         display: "Display",
         parentDisplay: "Parent",
         childDisplay: "Child",
-        confirmed: true
+        confirmed: true,
+        inactiveNominations: InactiveNominationsSummary(
+            nominationCount: 130,
+            totalAmount: Balance(integerLiteral: 47002001388000000)
+        ),
+        validatorStake: nil
     )
     
     static let userDefaults: UserDefaults = {

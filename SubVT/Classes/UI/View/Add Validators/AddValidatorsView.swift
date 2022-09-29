@@ -363,7 +363,14 @@ struct AddValidatorsView: View {
             LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
                 ForEach(self.viewModel.validators, id: \.self.address) {
                     validator in
-                    ValidatorSearchSummaryView(validatorSearchSummary: validator)
+                    ValidatorSearchSummaryView(
+                        validatorSearchSummary: validator,
+                        network: self.viewModel.network,
+                        canAdd: !self.viewModel.isUserValidator(address: validator.address),
+                        isLoading: self.viewModel.addValidatorStatuses[validator.accountId] != nil
+                    ) {
+                        self.viewModel.addValidator(accountId: validator.accountId)
+                    }
                 }
                 Spacer()
                     .frame(

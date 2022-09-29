@@ -10,11 +10,13 @@ import Foundation
 import SubVTData
 
 class AddValidatorsViewModel: ObservableObject {
-    @Published private(set) var userValidatorsFetchState: DataFetchState<[UserValidator]> = .idle
-    @Published private(set) var networkValidatorsFetchState: DataFetchState<[ValidatorSearchSummary]> = .idle
+    @Published private(set) var userValidatorsFetchState: DataFetchState<String> = .idle
+    @Published private(set) var userValidators: [UserValidator] = []
+    @Published private(set) var networkValidatorsFetchState: DataFetchState<String> = .idle
     @Published private(set) var validators: [ValidatorSearchSummary] = []
     @Published var searchText: String = ""
     @Published var network = PreviewData.kusama
+    @Published private(set) var addValidatorStatuses: [AccountId: DataFetchState<String>] = [:]
     private var searchCancellable: AnyCancellable? = nil
     
     private var appService = SubVTData.AppService()
@@ -51,7 +53,8 @@ class AddValidatorsViewModel: ObservableObject {
                     self.userValidatorsFetchState = .error(error: error)
                     onError(error)
                 } else {
-                    self.userValidatorsFetchState = .success(result: response.value!)
+                    self.userValidatorsFetchState = .success(result: "")
+                    self.userValidators = response.value!
                     onSuccess?()
                 }
             }
@@ -67,7 +70,7 @@ class AddValidatorsViewModel: ObservableObject {
         self.searchCancellable?.cancel()
         let query = query.trimmingCharacters(in: .whitespaces)
         guard !query.isEmpty else {
-            self.networkValidatorsFetchState = .success(result: [])
+            self.networkValidatorsFetchState = .success(result: "")
             self.validators.removeAll()
             return
         }
@@ -80,9 +83,40 @@ class AddValidatorsViewModel: ObservableObject {
                 if let error = response.error {
                     self.networkValidatorsFetchState = .error(error: error)
                 } else {
-                    self.networkValidatorsFetchState = .success(result: response.value!)
+                    self.networkValidatorsFetchState = .success(result: "")
                     self.validators = response.value!
                 }
             }
+    }
+    
+    func isUserValidator(address: String) -> Bool {
+        return self.userValidators.contains { userValidator in
+            let otherAddress = try! userValidator.validatorAccountId.toSS58Check(
+                prefix: UInt16(self.network.ss58Prefix)
+            )
+            return otherAddress == address
+        }
+    }
+    
+    func addValidator(accountId: AccountId) {
+        if let status = addValidatorStatuses[accountId], status == .loading {
+            return
+        }
+        addValidatorStatuses[accountId] = .loading
+        self.appService.createUserValidator(
+            validator: NewUserValidator(
+                networkId: network.id,
+                validatorAccountId: accountId
+            )
+        ).sink {
+            [weak self] response in
+            guard let self = self else { return }
+            self.addValidatorStatuses[accountId] = nil
+            if let userValidator = response.value, response.error == nil {
+                Event.validatorAdded.post(nil)
+                self.userValidators.append(userValidator)
+            }
+        }
+        .store(in: &cancellables)
     }
 }

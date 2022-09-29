@@ -251,6 +251,7 @@ class ValidatorDetailsViewModel: ObservableObject {
             if let error = response.error {
                 onError(error)
             } else {
+                Event.validatorAdded.post(nil)
                 self.fetchUserValidators(
                     onSuccess: onSuccess,
                     onError: onError
@@ -274,6 +275,7 @@ class ValidatorDetailsViewModel: ObservableObject {
                 if let error = response.error {
                     onError(error)
                 } else {
+                    Event.validatorRemoved.post(nil)
                     self.fetchUserValidators(
                         onSuccess: onSuccess,
                         onError: onError

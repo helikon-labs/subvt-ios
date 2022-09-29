@@ -22,10 +22,10 @@ class MyValidatorsViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     
     init() {
-        SwiftEventBus.onMainThread(self, name: Event.validatorAdded.rawValue) { result in
+        SwiftEventBus.onMainThread(self, name: Event.validatorAdded.rawValue) { _ in
             self.fetchMyValidators()
         }
-        SwiftEventBus.onMainThread(self, name: Event.validatorRemoved.rawValue) { result in
+        SwiftEventBus.onMainThread(self, name: Event.validatorRemoved.rawValue) { _ in
             self.fetchMyValidators()
         }
     }
