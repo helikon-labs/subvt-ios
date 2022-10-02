@@ -108,4 +108,19 @@ enum PreviewData {
         defaults.synchronize()
         return defaults
     }()
+    
+    static let notificationRule = UserNotificationRule(
+        id: 1,
+        userId: 1,
+        notificationType: NotificationType(code: "", paramTypes: []),
+        name: "Test Rule",
+        network: nil,
+        isForAllValidators: true,
+        periodType: .hour,
+        period: 2,
+        validators: [],
+        notificationChannels: [],
+        parameters: [],
+        notes: nil
+    )
 }

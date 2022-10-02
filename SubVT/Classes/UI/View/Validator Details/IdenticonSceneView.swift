@@ -117,7 +117,7 @@ fileprivate func getScene(accountId: AccountId) -> SCNScene {
     return cubeScene
 }
 
-final class IdenticonSceneView: UIViewRepresentable {
+struct IdenticonSceneView: UIViewRepresentable {
     typealias UIViewType = SCNView
     typealias Context = UIViewRepresentableContext<IdenticonSceneView>
     

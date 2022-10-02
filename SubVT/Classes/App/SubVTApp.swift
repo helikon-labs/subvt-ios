@@ -29,7 +29,10 @@ struct SubVTApp: App {
 }
 
 class AppDelegate: NSObject, UIApplicationDelegate {
+    @AppStorage(AppStorageKey.apnsToken) private var apnsToken = ""
     @AppStorage(AppStorageKey.hasCompletedAPNSRegistration) private var hasCompletedAPNSRegistration = false
+    @AppStorage(AppStorageKey.hasCreatedDefaultNotificationRules) private var hasCreatedDefaultNotificationRules = false
+    @AppStorage(AppStorageKey.notificationChannelId) private var notificationChannelId = 0
     private var cancellables = Set<AnyCancellable>()
     
     func application(
@@ -38,20 +41,18 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) {
         guard !self.hasCompletedAPNSRegistration else { return }
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        AppService().createUserNotificationChannel(
-            channel: NewUserNotificationChannel(
-                channel: .apns,
-                target: token
-            )
-        ).sink { (response) in
-            if let error = response.error {
-                print("APNS backend error: \(error)")
-            } else {
-                print("APNS backend success.")
-                self.hasCompletedAPNSRegistration = true
+        self.apnsToken = token
+        NotificationUtil.createAPNSNotificationChannel(token: token) { channelId in
+            self.hasCompletedAPNSRegistration = true
+            self.notificationChannelId = Int(channelId)
+            NotificationUtil.createDefaultUserNotificationRules(channelId: channelId) {
+                self.hasCreatedDefaultNotificationRules = true
+            } onError: { error in
+                print("err \(error)")
             }
+        } onError: { error in
+            print("err \(error)")
         }
-        .store(in: &cancellables)
     }
     
     func application(

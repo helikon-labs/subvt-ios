@@ -182,5 +182,15 @@ extension UI {
                 }
             }
         }
+        
+        enum Notifications {
+            static func settingsIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("SettingsIconDark")
+                } else {
+                    return SwiftUI.Image("SettingsIconLight")
+                }
+            }
+        }
     }
 }

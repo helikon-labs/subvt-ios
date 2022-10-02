@@ -14,7 +14,6 @@ struct MyValidatorsView: View {
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
     @StateObject private var viewModel = MyValidatorsViewModel()
     @State private var headerMaterialOpacity = 0.0
-    @State private var swipedValidator: ValidatorSummary? = nil
     
     private var headerView: some View {
         VStack {
@@ -126,9 +125,6 @@ struct MyValidatorsView: View {
                             }
                             .transition(.move(edge: .leading))
                             .buttonStyle(PushButtonStyle())
-                            .simultaneousGesture(TapGesture().onEnded{
-                                self.swipedValidator = nil
-                            })
                         }
                         Spacer()
                             .frame(
@@ -203,18 +199,6 @@ struct MyValidatorsView: View {
             if self.viewModel.fetchState == .idle {
                 self.viewModel.initReportServices(networks: self.networks ?? [])
                 self.viewModel.fetchMyValidators()
-            }
-        }
-        .onChange(of: scenePhase) { newPhase in
-            switch newPhase {
-            case .background:
-                break
-            case .inactive:
-                break
-            case .active:
-                break
-            @unknown default:
-                fatalError("Unknown scene phase: \(scenePhase)")
             }
         }
     }

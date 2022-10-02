@@ -322,16 +322,7 @@ struct NetworkStatusView: View {
                 self.displayState = .appeared
             }
             if !self.hasCompletedAPNSRegistration {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                    UNUserNotificationCenter.current().requestAuthorization(
-                        options: [.alert, .sound]
-                    ) { (granted, _) in
-                        guard granted else { return }
-                        DispatchQueue.main.async {
-                            UIApplication.shared.registerForRemoteNotifications()
-                        }
-                    }
-                }
+                NotificationUtil.setupAPNS()
             }
         }
         .onReceive(blockTimer) { _ in

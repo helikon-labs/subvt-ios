@@ -132,6 +132,8 @@
 		A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098E593285DDE3D00AAA68A /* PreviewData.swift */; };
 		A09905A02897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */; };
 		A09905A12897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */; };
+		A09AC41528E9B03500C43E2B /* NotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */; };
+		A09AC41628E9B03500C43E2B /* NotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */; };
 		A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC53284B8DD200914237 /* UI+Dimension.swift */; };
 		A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC56284B8E0000914237 /* UI+Font.swift */; };
@@ -213,6 +215,17 @@
 		A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */; };
 		A0D205D2288C1E7D0040CB08 /* FooterGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */; };
 		A0D205D3288C1E7D0040CB08 /* FooterGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */; };
+		A0D5498828E70132007794E2 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498728E70132007794E2 /* NotificationsView.swift */; };
+		A0D5498928E70132007794E2 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498728E70132007794E2 /* NotificationsView.swift */; };
+		A0D5498B28E70140007794E2 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */; };
+		A0D5498C28E70140007794E2 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */; };
+		A0D5498D28E70140007794E2 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */; };
+		A0D5498F28E71782007794E2 /* NotificationRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498E28E71782007794E2 /* NotificationRulesView.swift */; };
+		A0D5499028E71782007794E2 /* NotificationRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498E28E71782007794E2 /* NotificationRulesView.swift */; };
+		A0D5499128E71782007794E2 /* NotificationRulesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498E28E71782007794E2 /* NotificationRulesView.swift */; };
+		A0D5499328E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */; };
+		A0D5499428E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */; };
+		A0D5499528E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */; };
 		A0DB1F2F289078A3006357D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DB1F2E289078A3006357D2 /* Assets.xcassets */; };
 		A0DB1F35289078A3006357D2 /* SubVTWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A0DB1F34289078A3006357D2 /* SubVTWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A0DB1F3A289078A3006357D2 /* SubVTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F39289078A3006357D2 /* SubVTApp.swift */; };
@@ -249,6 +262,8 @@
 		A0E0F6872848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
 		A0E0F6882848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
 		A0E0F68B2848D2B40029DDBF /* SubVTData in Frameworks */ = {isa = PBXBuildFile; productRef = A0E0F68A2848D2B40029DDBF /* SubVTData */; };
+		A0EFDC5F28E994C2000A2BCC /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */; };
+		A0EFDC6028E994C2000A2BCC /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */; };
 		A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
 		A0F285092879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
 		A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */; };
@@ -422,6 +437,7 @@
 		A093F0472865F08600778293 /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
 		A098E593285DDE3D00AAA68A /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailsIconsView.swift; sourceTree = "<group>"; };
+		A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRuleView.swift; sourceTree = "<group>"; };
 		A0A1DC53284B8DD200914237 /* UI+Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension.swift"; sourceTree = "<group>"; };
 		A0A1DC56284B8E0000914237 /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
 		A0A1DC5A284B8E2B00914237 /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
@@ -466,6 +482,10 @@
 		A0D0334B288B08E2001F78D2 /* PressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressAction.swift; sourceTree = "<group>"; };
 		A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientProgressViewStyle.swift; sourceTree = "<group>"; };
 		A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterGradientView.swift; sourceTree = "<group>"; };
+		A0D5498728E70132007794E2 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		A0D5498E28E71782007794E2 /* NotificationRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRulesView.swift; sourceTree = "<group>"; };
+		A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRulesViewModel.swift; sourceTree = "<group>"; };
 		A0DB1F2C289078A3006357D2 /* SubVT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubVT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DB1F2E289078A3006357D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0DB1F34289078A3006357D2 /* SubVTWatch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SubVTWatch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -495,6 +515,7 @@
 		A0E0F6702848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-ExtraLight.ttf"; sourceTree = "<group>"; };
 		A0E0F6832848CD9B0029DDBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0E0F6862848CF120029DDBF /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
 		A0F285072879A96A00E69C6B /* BlockWaveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveShape.swift; sourceTree = "<group>"; };
 		A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveContainerView.swift; sourceTree = "<group>"; };
 		A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveView.swift; sourceTree = "<group>"; };
@@ -602,6 +623,7 @@
 				A067DD62289D5694005BE98C /* My Validators */,
 				A0C9A77D28573D930071C7AC /* Network Selection */,
 				A0C983942875AC690008C370 /* Network Status */,
+				A0D5498628E70118007794E2 /* Notifications */,
 				A0128A53284A1855000C2307 /* Onboarding */,
 				A052C14F289137B600622D9F /* Validator Details */,
 				A0744D8828858639008A06DD /* Validator List */,
@@ -666,6 +688,7 @@
 			children = (
 				A0BCDE5E28784DD0008047D7 /* Format.swift */,
 				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
+				A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -925,6 +948,18 @@
 				A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */,
 			);
 			path = "Network Selection";
+			sourceTree = "<group>";
+		};
+		A0D5498628E70118007794E2 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				A0D5498E28E71782007794E2 /* NotificationRulesView.swift */,
+				A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */,
+				A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */,
+				A0D5498728E70132007794E2 /* NotificationsView.swift */,
+				A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */,
+			);
+			path = Notifications;
 			sourceTree = "<group>";
 		};
 		A0DB1F2D289078A3006357D2 /* SubVTWatch */ = {
@@ -1435,9 +1470,11 @@
 				A078727C287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A06E15A6288FF69F00694CC8 /* NetworkMonitor.swift in Sources */,
 				A0FD88312893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
+				A0EFDC5F28E994C2000A2BCC /* NotificationUtil.swift in Sources */,
 				A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
 				A0058CEA28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
+				A0D5498828E70132007794E2 /* NotificationsView.swift in Sources */,
 				A0C9838D2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A04C429628533564007C970B /* AppView.swift in Sources */,
 				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
@@ -1449,6 +1486,7 @@
 				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
+				A0D5498B28E70140007794E2 /* NotificationsViewModel.swift in Sources */,
 				A06B1E3228E30910006F8DF9 /* ValidatorSearchSummaryView.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A0643DCB2886813400E46213 /* ValidatorSummaryView.swift in Sources */,
@@ -1458,6 +1496,7 @@
 				A0D03349288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A067DD60289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
+				A0D5499328E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */,
 				A0C9A77F28573DAE0071C7AC /* NetworkSelectionView.swift in Sources */,
 				A0AFF7F72892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
 				A0BCDE6328785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
@@ -1478,6 +1517,8 @@
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A06B1E3528E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
+				A09AC41528E9B03500C43E2B /* NotificationRuleView.swift in Sources */,
+				A0D5498F28E71782007794E2 /* NotificationRulesView.swift in Sources */,
 				A067DD5C289D398E005BE98C /* ActionFeedbackView.swift in Sources */,
 				A0F574DA28870467002849FC /* VisualEffectView.swift in Sources */,
 				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
@@ -1527,10 +1568,13 @@
 			files = (
 				A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */,
+				A0D5499428E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */,
 				A0C03D8928967048001C1B54 /* RewardDestination.swift in Sources */,
 				A078727D287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A0C90E892878615600A91996 /* Formatter.swift in Sources */,
+				A0D5498C28E70140007794E2 /* NotificationsViewModel.swift in Sources */,
 				A0B48C6928DB00D7002987C0 /* AddValidatorsViewModel.swift in Sources */,
+				A0D5499028E71782007794E2 /* NotificationRulesView.swift in Sources */,
 				A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
 				A06B1E3628E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
 				A018C2AE28B90C0500C9A276 /* File.swift in Sources */,
@@ -1548,6 +1592,7 @@
 				A0F285122879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0AFF7F228926C8400B0CB4F /* ValidatorDetailsViewModel.swift in Sources */,
 				A072C33C28780685001636F9 /* Either.swift in Sources */,
+				A0EFDC6028E994C2000A2BCC /* NotificationUtil.swift in Sources */,
 				A0BCDE6428785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A0744D8B2885865D008A06DD /* ValidatorListViewModel.swift in Sources */,
 				A0B48C6C28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */,
@@ -1587,11 +1632,13 @@
 				A0FD88322893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
 				A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A067DD61289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */,
+				A0D5498D28E70140007794E2 /* NotificationsViewModel.swift in Sources */,
 				A052C15228913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
 				A07475B328B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
 				A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */,
+				A09AC41628E9B03500C43E2B /* NotificationRuleView.swift in Sources */,
 				A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
@@ -1602,6 +1649,7 @@
 				A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A06B1E3328E30910006F8DF9 /* ValidatorSearchSummaryView.swift in Sources */,
+				A0D5499128E71782007794E2 /* NotificationRulesView.swift in Sources */,
 				A0744D992885AB05008A06DD /* BackButtonView.swift in Sources */,
 				A072C33D28780685001636F9 /* Either.swift in Sources */,
 				A0744D8C2885865D008A06DD /* ValidatorListViewModel.swift in Sources */,
@@ -1639,12 +1687,14 @@
 				A04B37CB2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,
 				A0F574DB28870467002849FC /* VisualEffectView.swift in Sources */,
 				A0128A4F284A1297000C2307 /* AppStorageKey.swift in Sources */,
+				A0D5498928E70132007794E2 /* NotificationsView.swift in Sources */,
 				A06B1E3728E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
 				A0744D902885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0E0F6882848CF120029DDBF /* Font.swift in Sources */,
 				A078727E287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A0B3A6B9287D768A005DA484 /* LineChartView.swift in Sources */,
+				A0D5499528E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */,
 				A0F2850C2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
 				A02839C52867A456009CA8BA /* Tab.swift in Sources */,
 				A0BCDE6928785645008047D7 /* ValidatorBackingsView.swift in Sources */,

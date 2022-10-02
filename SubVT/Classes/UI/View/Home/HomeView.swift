@@ -49,6 +49,8 @@ struct HomeView: View {
                     .zIndex((self.currentTab == .network) ? 3.0 : 0.0)
                 MyValidatorsView()
                     .zIndex((self.currentTab == .myValidators) ? 3.0 : 0.0)
+                NotificationsView()
+                    .zIndex((self.currentTab == .notifications) ? 3.0 : 0.0)
                 // tab bar
                 VStack {
                     TabBarView(currentTab: self.$currentTab)

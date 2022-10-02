@@ -47,7 +47,9 @@ class MyValidatorsViewModel: ObservableObject {
         self.fetchState = .loading
         self.updateTimer?.invalidate()
         self.appService.getUserValidators().sink {
+            [weak self]
             response in
+            guard let self = self else { return }
             if let error = response.error {
                 self.fetchState = .error(error: error)
             } else if let userValidators = response.value {

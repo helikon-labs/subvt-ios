@@ -153,5 +153,14 @@ extension UI {
             static let subtitle = LexendDeca.light.withSize(12)
             static let network = LexendDeca.medium.withSize(16)
         }
+        
+        enum Notifications {
+            static let noNotifications = LexendDeca.light.withSize(14)
+        }
+        
+        enum NotificationRules {
+            static let title = LexendDeca.semiBold.withSize(18)
+            static let info = LexendDeca.light.withSize(12)
+        }
     }
 }
