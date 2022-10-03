@@ -17,7 +17,6 @@ struct SwipeDeleteViewModifier: ViewModifier {
     @State private var contentWidth: CGFloat = .zero
     @State private var trashIconOpacity: Double = .zero
     
-    let validator: ValidatorSummary
     let action: () -> Void
    
     func body(content: Content) -> some View {
@@ -76,5 +75,10 @@ struct SwipeDeleteViewModifier: ViewModifier {
     
     private func delete() {
         action()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.offset = .zero
+            self.initialOffset = .zero
+            self.trashIconOpacity = .zero
+        }
     }
 }

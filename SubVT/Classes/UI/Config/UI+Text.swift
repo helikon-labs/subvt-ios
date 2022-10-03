@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 extension UI {
     enum Text {
         static let addressPrefixCount = 5

@@ -10,6 +10,9 @@ import SwiftUI
 struct NotificationsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    @AppStorage(AppStorageKey.apnsIsEnabled) private var apnsIsEnabled = false
+    @AppStorage(AppStorageKey.apnsSetupHasFailed) private var apnsSetupHasFailed = false
+    @AppStorage(AppStorageKey.hasCreatedDefaultNotificationRules) private var hasCreatedDefaultNotificationRules = false
     @StateObject private var viewModel = NotificationsViewModel()
     @State private var headerMaterialOpacity = 0.0
     
@@ -37,6 +40,8 @@ struct NotificationsView: View {
                     .cornerRadius(UI.Dimension.Common.cornerRadius)
                 }
                 .buttonStyle(PushButtonStyle())
+                .disabled(!self.hasCreatedDefaultNotificationRules)
+                .opacity(!self.hasCreatedDefaultNotificationRules ? UI.Value.disabledControlOpacity : 1.0)
             }
             .frame(height: UI.Dimension.Common.networkSelectorHeight)
         }
@@ -89,7 +94,76 @@ struct NotificationsView: View {
             }
             .zIndex(0)
             .disabled(self.viewModel.notifications.isEmpty)
-            if self.viewModel.notifications.isEmpty {
+            if !self.apnsIsEnabled {
+                VStack {
+                    Text(localized("notifications.apns_disabled"))
+                        .font(UI.Font.Notifications.noNotifications)
+                        .foregroundColor(Color("Text"))
+                    Spacer()
+                        .frame(height: UI.Dimension.Common.dataPanelSpacing)
+                    Button {
+                        if let appSettings = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(appSettings) {
+                            UIApplication.shared.open(appSettings)
+                        }
+                    } label: {
+                        ZStack {
+                            Text(localized("notifications.enable_notifications"))
+                                .font(UI.Font.Notifications.enableNotifications)
+                                .foregroundColor(Color("EnablePushNotificationsButtonText"))
+                        }
+                        .frame(
+                            width: UI.Dimension.Notifications.enableNotificationsButtonWidth,
+                            height: UI.Dimension.Notifications.enableNotificationsButtonHeight,
+                            alignment: .center
+                        )
+                        .background(Color("TabBarBg"))
+                        .cornerRadius(UI.Dimension.Common.cornerRadius)
+                        .shadow(color: Color.black.opacity(0.1), radius: 10)
+                    }
+                    .buttonStyle(PushButtonStyle())
+
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .zIndex(1)
+            } else if self.apnsSetupHasFailed {
+                VStack {
+                    Text(localized("notifications.apns_setup_has_failed"))
+                        .font(UI.Font.Notifications.noNotifications)
+                        .foregroundColor(Color("Text"))
+                    Spacer()
+                        .frame(height: UI.Dimension.Common.dataPanelSpacing)
+                    Button {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    } label: {
+                        ZStack {
+                            Text(localized("common.retry"))
+                                .font(UI.Font.Notifications.enableNotifications)
+                                .foregroundColor(Color("EnablePushNotificationsButtonText"))
+                        }
+                        .frame(
+                            width: UI.Dimension.Notifications.enableNotificationsButtonWidth,
+                            height: UI.Dimension.Notifications.enableNotificationsButtonHeight,
+                            alignment: .center
+                        )
+                        .background(Color("TabBarBg"))
+                        .cornerRadius(UI.Dimension.Common.cornerRadius)
+                        .shadow(color: Color.black.opacity(0.1), radius: 10)
+                    }
+                    .buttonStyle(PushButtonStyle())
+
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .zIndex(1)
+            } else if !self.hasCreatedDefaultNotificationRules {
+                ZStack {
+                    Text(localized("notifications.apns_setup_in_progress"))
+                        .font(UI.Font.Notifications.noNotifications)
+                        .foregroundColor(Color("Text"))
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .zIndex(1)
+            } else if self.viewModel.notifications.isEmpty {
                 ZStack {
                     Text(localized("notifications.no_notifications"))
                         .font(UI.Font.Notifications.noNotifications)
@@ -110,6 +184,31 @@ struct NotificationsView: View {
             alignment: .leading
         )
         .onAppear() {
+            NotificationUtil.requestAPNSAuthorization { granted in
+                self.apnsIsEnabled = granted
+                if granted {
+                    DispatchQueue.main.async {
+                        UIApplication.shared.registerForRemoteNotifications()
+                    }
+                }
+            }
+        }
+        .onChange(of: scenePhase) { newPhase in
+            switch newPhase {
+            case .active:
+                if !self.apnsIsEnabled {
+                    NotificationUtil.requestAPNSAuthorization { granted in
+                        self.apnsIsEnabled = granted
+                        if granted {
+                            UIApplication.shared.registerForRemoteNotifications()
+                        }
+                    }
+                } else if !self.hasCreatedDefaultNotificationRules {
+                    UIApplication.shared.registerForRemoteNotifications()
+                }
+            default:
+                break
+            }
         }
     }
 }

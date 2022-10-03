@@ -75,6 +75,16 @@
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0659D0A28EAA38100A6E251 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0928EAA38100A6E251 /* Logging.swift */; };
 		A0659D0B28EAA38100A6E251 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0928EAA38100A6E251 /* Logging.swift */; };
+		A0659D0D28EAC09F00A6E251 /* UI+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0C28EAC09F00A6E251 /* UI+Value.swift */; };
+		A0659D0E28EAC09F00A6E251 /* UI+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0C28EAC09F00A6E251 /* UI+Value.swift */; };
+		A0659D1028EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0F28EACF4300A6E251 /* UI+Dimension+Notifications.swift */; };
+		A0659D1128EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0F28EACF4300A6E251 /* UI+Dimension+Notifications.swift */; };
+		A0659D1328EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D1228EAD9FE00A6E251 /* UserDefaultsUtil.swift */; };
+		A0659D1428EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D1228EAD9FE00A6E251 /* UserDefaultsUtil.swift */; };
+		A0659D1528EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D1228EAD9FE00A6E251 /* UserDefaultsUtil.swift */; };
+		A0659D1728EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D1628EB003400A6E251 /* UI+Dimension+NotificationRules.swift */; };
+		A0659D1828EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D1628EB003400A6E251 /* UI+Dimension+NotificationRules.swift */; };
+		A0659D1928EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D1628EB003400A6E251 /* UI+Dimension+NotificationRules.swift */; };
 		A067DD5C289D398E005BE98C /* ActionFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */; };
 		A067DD60289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */; };
 		A067DD61289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */; };
@@ -412,6 +422,10 @@
 		A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummaryView.swift; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
 		A0659D0928EAA38100A6E251 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		A0659D0C28EAC09F00A6E251 /* UI+Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Value.swift"; sourceTree = "<group>"; };
+		A0659D0F28EACF4300A6E251 /* UI+Dimension+Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Notifications.swift"; sourceTree = "<group>"; };
+		A0659D1228EAD9FE00A6E251 /* UserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsUtil.swift; sourceTree = "<group>"; };
+		A0659D1628EB003400A6E251 /* UI+Dimension+NotificationRules.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NotificationRules.swift"; sourceTree = "<group>"; };
 		A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFeedbackView.swift; sourceTree = "<group>"; };
 		A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+ActionFeedback.swift"; sourceTree = "<group>"; };
 		A067DD63289D56A9005BE98C /* MyValidatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsView.swift; sourceTree = "<group>"; };
@@ -663,6 +677,7 @@
 				A0A1DC56284B8E0000914237 /* UI+Font.swift */,
 				A0A1DC5A284B8E2B00914237 /* UI+Image.swift */,
 				A0AFF7FA2892B5F700B0CB4F /* UI+Text.swift */,
+				A0659D0C28EAC09F00A6E251 /* UI+Value.swift */,
 				A07BA816285B8BEB00575683 /* UI+Dimension */,
 			);
 			path = Config;
@@ -693,6 +708,7 @@
 				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
 				A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */,
 				A0659D0928EAA38100A6E251 /* Logging.swift */,
+				A0659D1228EAD9FE00A6E251 /* UserDefaultsUtil.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -827,6 +843,8 @@
 				A0F596FE28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift */,
 				A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */,
 				A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */,
+				A0659D1628EB003400A6E251 /* UI+Dimension+NotificationRules.swift */,
+				A0659D0F28EACF4300A6E251 /* UI+Dimension+Notifications.swift */,
 				A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */,
 				A07BA81D285B948D00575683 /* UI+Dimension+Snackbar.swift */,
 				A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */,
@@ -1457,6 +1475,7 @@
 				A0B3A6BB287D9BE9005DA484 /* CGFloat.swift in Sources */,
 				A07BA821285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A04B37D0287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
+				A0659D1728EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */,
 				A0D0334C288B08E2001F78D2 /* PressAction.swift in Sources */,
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A04B37C12876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
@@ -1481,6 +1500,7 @@
 				A0D5498828E70132007794E2 /* NotificationsView.swift in Sources */,
 				A0C9838D2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A04C429628533564007C970B /* AppView.swift in Sources */,
+				A0659D0D28EAC09F00A6E251 /* UI+Value.swift in Sources */,
 				A0C9A782285749940071C7AC /* BasicDisplayState.swift in Sources */,
 				A0C03D85289666FC001C1B54 /* BgMorphViewModel.swift in Sources */,
 				A03B954128524E0500836A94 /* IntroductionView.swift in Sources */,
@@ -1490,6 +1510,7 @@
 				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
+				A0659D1328EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */,
 				A0D5498B28E70140007794E2 /* NotificationsViewModel.swift in Sources */,
 				A06B1E3228E30910006F8DF9 /* ValidatorSearchSummaryView.swift in Sources */,
 				A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */,
@@ -1547,6 +1568,7 @@
 				A04C473128882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A0659D0A28EAA38100A6E251 /* Logging.swift in Sources */,
 				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
+				A0659D1028EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
@@ -1575,6 +1597,7 @@
 				A0C9838E2875ABF40008C370 /* OptionalCodable.swift in Sources */,
 				A0D5499428E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */,
 				A0C03D8928967048001C1B54 /* RewardDestination.swift in Sources */,
+				A0659D1428EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */,
 				A078727D287C1A3300BED374 /* DataFetchState.swift in Sources */,
 				A0C90E892878615600A91996 /* Formatter.swift in Sources */,
 				A0D5498C28E70140007794E2 /* NotificationsViewModel.swift in Sources */,
@@ -1585,6 +1608,7 @@
 				A018C2AE28B90C0500C9A276 /* File.swift in Sources */,
 				A0AFF7F82892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
 				A0BCDE6028784DD0008047D7 /* Format.swift in Sources */,
+				A0659D1828EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */,
 				A0AFF7FC2892B5F700B0CB4F /* UI+Text.swift in Sources */,
 				A04C473228882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */,
@@ -1653,6 +1677,7 @@
 				A0FC976928B62CCF00B75A9B /* AddValidatorsView.swift in Sources */,
 				A088B18828AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */,
 				A0A1DC55284B8DD200914237 /* UI+Dimension.swift in Sources */,
+				A0659D1928EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */,
 				A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
 				A06B1E3328E30910006F8DF9 /* ValidatorSearchSummaryView.swift in Sources */,
 				A0D5499128E71782007794E2 /* NotificationRulesView.swift in Sources */,
@@ -1665,6 +1690,7 @@
 				A0C90E8A2878615600A91996 /* Formatter.swift in Sources */,
 				A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */,
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
+				A0659D1528EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */,
 				A0118248288D48C500EC51BD /* UINavigationController.swift in Sources */,
 				A0D0334D288B08E2001F78D2 /* PressAction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
@@ -1676,6 +1702,7 @@
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A0D0334A288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A04C47282887F19F0004A46A /* RoundedCorner.swift in Sources */,
+				A0659D1128EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,
 				A0128A56284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A0BCDE6128784DD0008047D7 /* Format.swift in Sources */,
 				A04C473328882AC40004A46A /* ValidatorSummary.swift in Sources */,
@@ -1688,6 +1715,7 @@
 				A0AFF7F92892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
 				A0A7CAE728968C4E005440FF /* DataPanelView.swift in Sources */,
 				A078727A287C198F00BED374 /* IntroductionViewModel.swift in Sources */,
+				A0659D0E28EAC09F00A6E251 /* UI+Value.swift in Sources */,
 				A04C472B2887F1C30004A46A /* View.swift in Sources */,
 				A0128A52284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A04B37CB2876DBD600912BF3 /* NetworkSelectorButtonView.swift in Sources */,

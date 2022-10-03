@@ -258,21 +258,21 @@ struct ValidatorDetailsView: View {
                                     self.actionFeedbackViewState = .success
                                     self.actionFeedbackViewText = localized("validator_details.validator_added")
                                     self.actionFeedbackViewIsVisible = true
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
                                         self.actionFeedbackViewIsVisible = false
                                     }
                                 } onRemoved: {
                                     self.actionFeedbackViewState = .success
                                     self.actionFeedbackViewText = localized("validator_details.validator_removed")
                                     self.actionFeedbackViewIsVisible = true
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
                                         self.actionFeedbackViewIsVisible = false
                                     }
                                 } onError: { _ in
                                     self.actionFeedbackViewState = .error
                                     self.actionFeedbackViewText = localized("common.error")
                                     self.actionFeedbackViewIsVisible = true
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
                                         self.actionFeedbackViewIsVisible = false
                                     }
                                 }

@@ -129,9 +129,15 @@
 
 "notifications.title"="Notifications";
 "notifications.no_notifications"="You have no notifications.";
+"notifications.apns_disabled"="Push notifications are disabled.";
+"notifications.apns_setup_in_progress"="Push notification setup is in progress.\nPlease make sure you areconnected\nto the internet.";
+"notifications.enable_notifications"="Enable Notifications";
+"notifications.apns_setup_has_failed"="Notification setup has failed.";
 
 "notification_rules.title"="Notification Rules";
 "notification_rules.no_rules"="You have no notification rules.";
+"notification_rules.rule_deleted"="Rule deleted";
+"notification_rules.error.rule_list"="Error while getting the notification rule list. Please check your connection.";
 
 "notification_type.chain_validator_offline_offence"="Offline Offence";
 "notification_type.chain_validator_new_nomination"="New Nomination";

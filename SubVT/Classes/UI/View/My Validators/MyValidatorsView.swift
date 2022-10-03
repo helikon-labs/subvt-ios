@@ -115,12 +115,9 @@ struct MyValidatorsView: View {
                                     displaysNetworkIcon: true,
                                     displaysActiveStatus: true
                                 )
-                                .modifier(SwipeDeleteViewModifier(
-                                    validator: validator,
-                                    action: {
-                                        self.viewModel.deleteUserValidator(userValidatorSummary)
-                                    }
-                                ))
+                                .modifier(SwipeDeleteViewModifier {
+                                    self.viewModel.deleteUserValidator(userValidatorSummary)
+                                })
 
                             }
                             .transition(.move(edge: .leading))

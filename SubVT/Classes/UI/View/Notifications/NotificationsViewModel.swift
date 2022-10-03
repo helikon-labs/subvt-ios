@@ -7,7 +7,13 @@
 
 import Foundation
 import SubVTData
+import SwiftUI
 
 class NotificationsViewModel: ObservableObject {
     @Published private(set) var notifications: [String] = []
+    
+    /*
+     notifs enabled & setup not complete => complete setup w/ error cases + create rules
+     all done & rules not created => create rules
+     */
 }

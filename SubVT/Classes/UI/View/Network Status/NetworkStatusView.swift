@@ -22,6 +22,7 @@ struct NetworkStatusView: View {
     @StateObject private var viewModel = NetworkStatusViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
+    @AppStorage(AppStorageKey.apnsIsEnabled) var apnsIsEnabled = false
     @AppStorage(AppStorageKey.hasCompletedAPNSRegistration) private var hasCompletedAPNSRegistration = false
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
@@ -320,9 +321,6 @@ struct NetworkStatusView: View {
             )
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
-            }
-            if !self.hasCompletedAPNSRegistration {
-                NotificationUtil.setupAPNS()
             }
         }
         .onReceive(blockTimer) { _ in

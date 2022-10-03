@@ -27,10 +27,38 @@ class NotificationRulesViewModel: ObservableObject {
                 self.rulesFetchState = .error(error: error)
             } else if let rules = response.value {
                 self.rules = rules
+                self.sortRules()
                 self.rulesFetchState = .success(result: "")
             }
         }
         .store(in: &cancellables)
+    }
+    
+    private func sortRules() {
+        self.rules.sort(by: { rule1, rule2 in
+            localized("notification_type.\(rule1.notificationType.code)") < localized("notification_type.\(rule2.notificationType.code)")
+        })
+    }
+    
+    func deleteRule(
+        _ toDelete: UserNotificationRule,
+        onComplete: @escaping (Bool) -> ()
+    ) {
+        self.rules.removeAll { existing in
+            return existing.id == toDelete.id
+        }
+        self.appService
+            .deleteUserNotificationRule(id: toDelete.id)
+            .sink { response in
+                if let _ = response.error {
+                    onComplete(false)
+                    self.rules.append(toDelete)
+                    self.sortRules()
+                } else {
+                    onComplete(true)
+                }
+            }
+            .store(in: &cancellables)
     }
     
 }

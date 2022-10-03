@@ -156,6 +156,7 @@ extension UI {
         
         enum Notifications {
             static let noNotifications = LexendDeca.light.withSize(14)
+            static let enableNotifications = LexendDeca.regular.withSize(14)
         }
         
         enum NotificationRules {

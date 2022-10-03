@@ -14,19 +14,26 @@ struct NotificationUtil {
     static private let appService = AppService()
     static private var cancellables = Set<AnyCancellable>()
     
-    static func setupAPNS() {
+    static func apnsIsEnabled(onComplete: @escaping ((Bool) -> ())) {
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             switch settings.authorizationStatus {
             case .denied:
-              break
+                onComplete(false)
             default:
+                onComplete(true)
+            }
+        }
+    }
+    
+    static func requestAPNSAuthorization(onComplete: @escaping ((Bool) -> ())) {
+        NotificationUtil.apnsIsEnabled { isEnabled in
+            if isEnabled {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     UNUserNotificationCenter.current().requestAuthorization(
                         options: [.alert, .sound]
                     ) { (granted, _) in
-                        guard granted else { return }
                         DispatchQueue.main.async {
-                            UIApplication.shared.registerForRemoteNotifications()
+                            onComplete(granted)
                         }
                     }
                 }
@@ -39,6 +46,12 @@ struct NotificationUtil {
         onSuccess: @escaping (UInt64) -> (),
         onError: @escaping (APIError) -> ()
     ) {
+        let existingChannelId = UserDefaultsUtil.shared.integer(forKey: AppStorageKey.notificationChannelId)
+        if existingChannelId > 0 {
+            log.info("APNS notification channel exists with id \(existingChannelId).")
+            onSuccess(UInt64(existingChannelId))
+            return
+        }
         NotificationUtil.appService.createUserNotificationChannel(
             channel: NewUserNotificationChannel(
                 channel: .apns,
@@ -46,12 +59,15 @@ struct NotificationUtil {
             )
         ).sink { (response) in
             if let error = response.error {
+                log.error("Error while creating APNS notification channel: \(error)")
                 onError(error)
             } else {
                 switch response.result {
                 case .success(let channel):
+                    log.info("Successfully created APNS notification channel with id \(channel.id).")
                     onSuccess(channel.id)
                 case .failure(let error):
+                    log.error("Error while creating APNS notification channel: \(error)")
                     onError(error)
                 }
             }
@@ -64,17 +80,25 @@ struct NotificationUtil {
         onSuccess: @escaping () -> (),
         onError: @escaping (APIError) -> ()
     ) {
+        if UserDefaultsUtil.shared.bool(forKey: AppStorageKey.hasCreatedDefaultNotificationRules) {
+            log.info("Default notification rules are already created.")
+            onSuccess()
+            return
+        }
         NotificationUtil.appService.createDefaultUserNotificationRules(
             channelId: channelId
         )
         .sink { (response) in
             if let error = response.error {
+                log.error("Error while creating default notification rules: \(error)")
                 onError(error)
             } else {
                 switch response.result {
                 case .success:
+                    log.info("Successfully created default notification rules.")
                     onSuccess()
                 case .failure(let error):
+                    log.error("Error while creating default notification rules: \(error)")
                     onError(error)
                 }
             }

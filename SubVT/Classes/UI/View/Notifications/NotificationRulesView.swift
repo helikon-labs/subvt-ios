@@ -12,8 +12,20 @@ struct NotificationRulesView: View {
     @Environment(\.presentationMode) private var presentationMode
     @StateObject private var viewModel = NotificationRulesViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
-    @State private var snackbarIsVisible = false
     @State private var headerMaterialOpacity = 0.0
+    
+    @State private var actionFeedbackViewState = ActionFeedbackView.State.success
+    @State private var actionFeedbackViewText = localized("common.done")
+    @State private var actionFeedbackViewIsVisible = false
+    
+    private var snackbarIsVisible: Bool {
+        switch self.viewModel.rulesFetchState {
+        case .error:
+            return true
+        default:
+            return false
+        }
+    }
     
     private var headerView: some View {
         VStack {
@@ -93,12 +105,28 @@ struct NotificationRulesView: View {
                         ForEach(self.viewModel.rules, id: \.self.id) {
                             rule in
                             NotificationRuleView(rule: rule)
+                                .modifier(SwipeDeleteViewModifier {
+                                    self.viewModel.deleteRule(rule) { isSuccessful in
+                                        if isSuccessful {
+                                            self.actionFeedbackViewState = .success
+                                            self.actionFeedbackViewText = localized("notification_rules.rule_deleted")
+                                        } else {
+                                            self.actionFeedbackViewState = .error
+                                            self.actionFeedbackViewText = localized("common.error")
+                                        }
+                                        self.actionFeedbackViewIsVisible = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
+                                            self.actionFeedbackViewIsVisible = false
+                                        }
+                                    }
+                                })
                         }
                         Spacer()
                             .frame(
                                 height: UI.Dimension.Common.footerGradientViewHeight
                             )
                     }
+                    .animation(.interactiveSpring(), value: self.viewModel.rules)
                     .padding(EdgeInsets(
                         top: 0,
                         leading: UI.Dimension.Common.padding,
@@ -135,19 +163,16 @@ struct NotificationRulesView: View {
             FooterGradientView()
                 .zIndex(2)
             SnackbarView(
-                message: localized("common.error.validator_list"),
+                message: localized("notification_rules.error.rule_list"),
                 type: .error(canRetry: true)
             ) {
-                self.snackbarIsVisible = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    // self.fetchData()
-                }
+                self.viewModel.fetchRules()
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
             .offset(
                 y: self.snackbarIsVisible
-                    ? UI.Dimension.AddValidators.snackbarVisibleYOffset
-                    : UI.Dimension.AddValidators.snackbarHiddenYOffset
+                    ? UI.Dimension.NotificationRules.snackbarVisibleYOffset
+                    : UI.Dimension.NotificationRules.snackbarHiddenYOffset
             )
             .opacity(self.snackbarIsVisible ? 1.0 : 0.0)
             .animation(
@@ -155,6 +180,13 @@ struct NotificationRulesView: View {
                 value: self.snackbarIsVisible
             )
             .zIndex(3)
+            ActionFeedbackView(
+                state: self.actionFeedbackViewState,
+                text: self.actionFeedbackViewText,
+                visibleYOffset: UI.Dimension.NotificationRules.actionFeedbackViewYOffset,
+                isVisible: self.$actionFeedbackViewIsVisible
+            )
+            .zIndex(1)
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
