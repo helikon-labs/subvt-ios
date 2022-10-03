@@ -134,11 +134,11 @@ class ValidatorListViewModel: ObservableObject {
                 guard let self = self else { return }
                 switch completion {
                 case .finished:
-                    print("validator list service finished.")
+                    log.info("Validator list service subscription finished.")
                     self.subscriptionIsInProgress = false
                     self.isLoading = false
                 case .failure(let rpcError):
-                    print("validator list service error: \(rpcError)")
+                    log.error("Validator list service subscription finished with error: \(rpcError)")
                     self.subscriptionIsInProgress = false
                     self.isLoading = false
                 }
@@ -149,13 +149,13 @@ class ValidatorListViewModel: ObservableObject {
                 switch event {
                 case .subscribed(_):
                     self.subscriptionIsInProgress = false
-                    print("validator list subscribed")
+                    log.info("Subscribed to validator list service.")
                 case .update(let update):
                     self.isLoading = false
-                    print("validator list update block #\(update.finalizedBlockNumber ?? 0)")
-                    print("insert \(update.insert.count) validators")
-                    print("update \(update.update.count) validators")
-                    print("remove \(update.removeIds.count) validators")
+                    log.info("Validator list update block #\(update.finalizedBlockNumber ?? 0).")
+                    log.info("\tinsert \(update.insert.count) validators")
+                    log.info("\tupdate \(update.update.count) validators")
+                    log.info("\tremove \(update.removeIds.count) validators")
                     self.lock.lock()
                     for validator in update.insert {
                         let index = self.innerValidators.firstIndex { existingValidator in
@@ -188,7 +188,7 @@ class ValidatorListViewModel: ObservableObject {
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false
                     self.isLoading = false
-                    print("validator list unsubscribed")
+                    log.info("Unsubscribed from validator list service.")
                 }
             }
     }

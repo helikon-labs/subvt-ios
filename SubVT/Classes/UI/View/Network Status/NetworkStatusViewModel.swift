@@ -108,10 +108,10 @@ class NetworkStatusViewModel: ObservableObject {
                 guard let self = self else { return }
                 switch completion {
                 case .finished:
-                    print("network status finished.")
+                    log.info("Network status service subscription finished.")
                     self.subscriptionIsInProgress = false
                 case .failure(let rpcError):
-                    print("network status finished with error: \(rpcError)")
+                    log.error("Network status service subscription finished with error: \(rpcError)")
                     self.subscriptionIsInProgress = false
                 }
             } receiveValue: {
@@ -121,21 +121,20 @@ class NetworkStatusViewModel: ObservableObject {
                 switch event {
                 case .subscribed(_):
                     self.subscriptionIsInProgress = false
-                    print("network status subscribed")
+                    log.info("Subscribed to network status service.")
                 case .update(let statusUpdate):
                     if let status = statusUpdate.status {
-                        print("received network status \(status.bestBlockNumber)")
+                        log.info("Received initial network status for block \(status.bestBlockNumber).")
                         self.networkStatus = status
                         onStatus()
                     } else if let diff = statusUpdate.diff {
-                        print("received network status update \(diff.bestBlockNumber ?? 0)")
-                        
+                        log.info("Received network status update for block \(diff.bestBlockNumber ?? 0).")
                         self.networkStatus.apply(diff: diff)
                         onDiff()
                     }
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false
-                    print("network status unsubscribed")
+                    log.info("Unsubscribed from network status service.")
                 }
             }
     }

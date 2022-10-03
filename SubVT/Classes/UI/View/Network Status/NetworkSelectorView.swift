@@ -129,9 +129,6 @@ struct NetworkSelectorView: View {
             trailing: UI.Dimension.Common.padding
         ))
         .background(Color("Bg").opacity(0.9))
-        .onAppear {
-            print("\(self.networks?.count ?? 0) networks")
-        }
         .onTapGesture {
             self.isOpen = false
         }

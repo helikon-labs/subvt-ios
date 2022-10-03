@@ -103,10 +103,10 @@ class ValidatorDetailsViewModel: ObservableObject {
                 guard let self = self else { return }
                 switch completion {
                 case .finished:
-                    print("validator details service finished.")
+                    log.info("Validator details service subscription finished.")
                     self.subscriptionIsInProgress = false
                 case .failure(let rpcError):
-                    print("validator details service error: \(rpcError)")
+                    log.error("Validator details service subscription finished with error: \(rpcError)")
                     self.subscriptionIsInProgress = false
                 }
             } receiveValue: {
@@ -116,7 +116,7 @@ class ValidatorDetailsViewModel: ObservableObject {
                 switch event {
                 case .subscribed(_):
                     self.subscriptionIsInProgress = false
-                    print("validator details subscribed")
+                    log.info("Subscribed to validator details service.")
                 case .update(let update):
                     if let validatorDetails = update.validatorDetails {
                         self.validatorDetails = validatorDetails
@@ -151,7 +151,7 @@ class ValidatorDetailsViewModel: ObservableObject {
                     }
                 case .unsubscribed:
                     self.subscriptionIsInProgress = false
-                    print("validator details unsubscribed")
+                    log.info("Unsubscribed from validator details service.")
                 }
             }
     }

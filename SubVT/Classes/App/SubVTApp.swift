@@ -48,10 +48,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             NotificationUtil.createDefaultUserNotificationRules(channelId: channelId) {
                 self.hasCreatedDefaultNotificationRules = true
             } onError: { error in
-                print("err \(error)")
+                log.error("Error while creating default notification rules: \(error)")
             }
         } onError: { error in
-            print("err \(error)")
+            log.error("Error while creating APNS notification channel: \(error)")
         }
     }
     
@@ -59,6 +59,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
-        print("APNS registration error: \(error)")
+        log.error("APNS registration error: \(error)")
     }
 }

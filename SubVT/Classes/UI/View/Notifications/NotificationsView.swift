@@ -88,6 +88,7 @@ struct NotificationsView: View {
                 }
             }
             .zIndex(0)
+            .disabled(self.viewModel.notifications.isEmpty)
             if self.viewModel.notifications.isEmpty {
                 ZStack {
                     Text(localized("notifications.no_notifications"))

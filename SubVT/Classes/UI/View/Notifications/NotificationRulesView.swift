@@ -15,10 +15,60 @@ struct NotificationRulesView: View {
     @State private var snackbarIsVisible = false
     @State private var headerMaterialOpacity = 0.0
     
+    private var headerView: some View {
+        VStack {
+            Spacer()
+                .frame(height: UI.Dimension.Common.titleMarginTop)
+            ZStack {
+                HStack {
+                    Button(
+                        action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        },
+                        label: {
+                            BackButtonView()
+                        }
+                    )
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(0, self.displayState))
+                    .frame(alignment: .leading)
+                    Spacer()
+                }
+                Text(localized("notification_rules.title"))
+                    .font(UI.Font.Common.title)
+                    .foregroundColor(Color("Text"))
+                    .frame(alignment: .center)
+                    .modifier(PanelAppearance(1, self.displayState))
+            }
+            .frame(
+                height: UI.Dimension.ValidatorList.titleSectionHeight,
+                alignment: .center
+            )
+            .frame(maxWidth: .infinity)
+        }
+        .padding(EdgeInsets(
+            top: 0,
+            leading: UI.Dimension.Common.padding,
+            bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
+            trailing: UI.Dimension.Common.padding
+        ))
+        .background(
+            VisualEffectView(effect: UIBlurEffect(
+                style: .systemUltraThinMaterial
+            ))
+            .cornerRadius(
+                UI.Dimension.Common.headerBlurViewCornerRadius,
+                corners: [.bottomLeft, .bottomRight]
+            )
+            .opacity(self.headerMaterialOpacity)
+        )
+    }
+    
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
             Color("Bg")
                 .ignoresSafeArea()
+                .zIndex(0)
             BgMorphView()
                 .offset(
                     x: 0,
@@ -32,6 +82,8 @@ struct NotificationRulesView: View {
                     value: self.displayState
                 )
                 .zIndex(0)
+            self.headerView
+                .zIndex(2)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
@@ -65,6 +117,7 @@ struct NotificationRulesView: View {
                     }
                 }
             }
+            .zIndex(1)
             switch self.viewModel.rulesFetchState {
             case .idle, .loading:
                 ProgressView()
@@ -74,12 +127,11 @@ struct NotificationRulesView: View {
                         )
                     )
                     .animation(.spring(), value: self.viewModel.rulesFetchState)
-                    .zIndex(3)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .zIndex(10)
             default:
                 Group {}
             }
-            self.titleView
-                .zIndex(1)
             FooterGradientView()
                 .zIndex(2)
             SnackbarView(
@@ -92,7 +144,6 @@ struct NotificationRulesView: View {
                 }
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
-            .zIndex(3)
             .offset(
                 y: self.snackbarIsVisible
                     ? UI.Dimension.AddValidators.snackbarVisibleYOffset
@@ -103,6 +154,7 @@ struct NotificationRulesView: View {
                 .spring(),
                 value: self.snackbarIsVisible
             )
+            .zIndex(3)
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
@@ -121,55 +173,6 @@ struct NotificationRulesView: View {
                 }
             }
         }
-    }
-    
-    private var titleView: some View {
-        VStack {
-            Spacer()
-                .frame(height: UI.Dimension.Common.titleMarginTop)
-            ZStack {
-                HStack {
-                    Button(
-                        action: {
-                            self.presentationMode.wrappedValue.dismiss()
-                        },
-                        label: {
-                            BackButtonView()
-                        }
-                    )
-                    .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(0, self.displayState))
-                    .frame(alignment: .leading)
-                    Spacer()
-                }
-                Text(localized("notification_rules.title"))
-                    .font(UI.Font.Common.title)
-                    .foregroundColor(Color("Text"))
-                    .frame(alignment: .center)
-                    .modifier(PanelAppearance(1, self.displayState))
-            }
-            .frame(
-                height: UI.Dimension.ValidatorList.titleSectionHeight,
-                alignment: .center
-            )
-            .frame(maxWidth: .infinity)
-        }
-        .background(
-            VisualEffectView(effect: UIBlurEffect(
-                style: .systemUltraThinMaterial
-            ))
-            .cornerRadius(
-                UI.Dimension.Common.headerBlurViewCornerRadius,
-                corners: [.bottomLeft, .bottomRight]
-            )
-            .opacity(self.headerMaterialOpacity)
-        )
-        .padding(EdgeInsets(
-            top: 0,
-            leading: UI.Dimension.Common.padding,
-            bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
-            trailing: UI.Dimension.Common.padding
-        ))
     }
 }
 

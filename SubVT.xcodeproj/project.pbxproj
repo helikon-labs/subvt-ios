@@ -73,6 +73,8 @@
 		A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */; };
 		A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
 		A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0646D99285856FE00B687ED /* NetworkButtonView.swift */; };
+		A0659D0A28EAA38100A6E251 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0928EAA38100A6E251 /* Logging.swift */; };
+		A0659D0B28EAA38100A6E251 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0928EAA38100A6E251 /* Logging.swift */; };
 		A067DD5C289D398E005BE98C /* ActionFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */; };
 		A067DD60289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */; };
 		A067DD61289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */; };
@@ -409,6 +411,7 @@
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 		A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummaryView.swift; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
+		A0659D0928EAA38100A6E251 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFeedbackView.swift; sourceTree = "<group>"; };
 		A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+ActionFeedback.swift"; sourceTree = "<group>"; };
 		A067DD63289D56A9005BE98C /* MyValidatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsView.swift; sourceTree = "<group>"; };
@@ -689,6 +692,7 @@
 				A0BCDE5E28784DD0008047D7 /* Format.swift */,
 				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
 				A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */,
+				A0659D0928EAA38100A6E251 /* Logging.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -1541,6 +1545,7 @@
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A04C473128882AC40004A46A /* ValidatorSummary.swift in Sources */,
+				A0659D0A28EAA38100A6E251 /* Logging.swift in Sources */,
 				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
@@ -1592,6 +1597,7 @@
 				A0F285122879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0AFF7F228926C8400B0CB4F /* ValidatorDetailsViewModel.swift in Sources */,
 				A072C33C28780685001636F9 /* Either.swift in Sources */,
+				A0659D0B28EAA38100A6E251 /* Logging.swift in Sources */,
 				A0EFDC6028E994C2000A2BCC /* NotificationUtil.swift in Sources */,
 				A0BCDE6428785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
 				A0744D8B2885865D008A06DD /* ValidatorListViewModel.swift in Sources */,
