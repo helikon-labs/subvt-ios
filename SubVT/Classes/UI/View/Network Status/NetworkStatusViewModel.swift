@@ -143,7 +143,7 @@ class NetworkStatusViewModel: ObservableObject {
         if let host = self.network?.reportServiceHost,
            let port = self.network?.reportServicePort {
             self.reportService = SubVTData.ReportService(
-                baseURL: "https://\(host):\(port)"
+                host: host, port: port
             )
         } else {
             self.reportService = SubVTData.ReportService()

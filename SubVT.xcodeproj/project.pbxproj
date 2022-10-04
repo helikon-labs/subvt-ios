@@ -316,6 +316,11 @@
 		A0FD885D2893FF1900479C10 /* sphere-height.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88542893FF1900479C10 /* sphere-height.png */; };
 		A0FD885E2893FF1900479C10 /* sphere-roughness.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88552893FF1900479C10 /* sphere-roughness.png */; };
 		A0FD885F2893FF1900479C10 /* sphere-roughness.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88552893FF1900479C10 /* sphere-roughness.png */; };
+		A0FFD9AA28EC161E00FA76B6 /* EditNotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9A928EC161E00FA76B6 /* EditNotificationRuleView.swift */; };
+		A0FFD9AB28EC161E00FA76B6 /* EditNotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9A928EC161E00FA76B6 /* EditNotificationRuleView.swift */; };
+		A0FFD9AD28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */; };
+		A0FFD9AE28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */; };
+		A0FFD9AF28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -552,6 +557,8 @@
 		A0FD88532893FF1900479C10 /* sphere-normal-ogl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sphere-normal-ogl.png"; sourceTree = "<group>"; };
 		A0FD88542893FF1900479C10 /* sphere-height.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sphere-height.png"; sourceTree = "<group>"; };
 		A0FD88552893FF1900479C10 /* sphere-roughness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sphere-roughness.png"; sourceTree = "<group>"; };
+		A0FFD9A928EC161E00FA76B6 /* EditNotificationRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotificationRuleView.swift; sourceTree = "<group>"; };
+		A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotificationRuleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -975,6 +982,8 @@
 		A0D5498628E70118007794E2 /* Notifications */ = {
 			isa = PBXGroup;
 			children = (
+				A0FFD9A928EC161E00FA76B6 /* EditNotificationRuleView.swift */,
+				A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */,
 				A0D5498E28E71782007794E2 /* NotificationRulesView.swift */,
 				A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */,
 				A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */,
@@ -1570,6 +1579,7 @@
 				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0659D1028EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
+				A0FFD9AA28EC161E00FA76B6 /* EditNotificationRuleView.swift in Sources */,
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A0AFF7FB2892B5F700B0CB4F /* UI+Text.swift in Sources */,
@@ -1586,6 +1596,7 @@
 				A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
 				A018C2AD28B90C0500C9A276 /* File.swift in Sources */,
 				A067DD64289D56A9005BE98C /* MyValidatorsView.swift in Sources */,
+				A0FFD9AD28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1624,6 +1635,7 @@
 				A0659D0B28EAA38100A6E251 /* Logging.swift in Sources */,
 				A0EFDC6028E994C2000A2BCC /* NotificationUtil.swift in Sources */,
 				A0BCDE6428785293008047D7 /* LastEraTotalRewardView.swift in Sources */,
+				A0FFD9AE28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */,
 				A0744D8B2885865D008A06DD /* ValidatorListViewModel.swift in Sources */,
 				A0B48C6C28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */,
 			);
@@ -1634,6 +1646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A04B37CE2876EB8200912BF3 /* Network.swift in Sources */,
+				A0FFD9AB28EC161E00FA76B6 /* EditNotificationRuleView.swift in Sources */,
 				A0F5970028B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */,
 				A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A0AFF7FD2892B5F700B0CB4F /* UI+Text.swift in Sources */,
@@ -1692,6 +1705,7 @@
 				A07BA822285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A0659D1528EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */,
 				A0118248288D48C500EC51BD /* UINavigationController.swift in Sources */,
+				A0FFD9AF28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */,
 				A0D0334D288B08E2001F78D2 /* PressAction.swift in Sources */,
 				A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */,
 				A0D205D3288C1E7D0040CB08 /* FooterGradientView.swift in Sources */,

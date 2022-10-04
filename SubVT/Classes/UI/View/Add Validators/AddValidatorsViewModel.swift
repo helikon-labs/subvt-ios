@@ -75,7 +75,7 @@ class AddValidatorsViewModel: ObservableObject {
             return
         }
         self.networkValidatorsFetchState = .loading
-        let reportService = SubVTData.ReportService(baseURL: "https://\(host):\(port)")
+        let reportService = SubVTData.ReportService(host: host, port: port)
         self.searchCancellable = reportService.searchValidators(query: query)
             .sink {
                 [weak self] response in

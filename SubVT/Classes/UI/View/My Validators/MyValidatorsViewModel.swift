@@ -37,7 +37,9 @@ class MyValidatorsViewModel: ObservableObject {
         for network in networks {
             if let host = network.reportServiceHost,
                let port = network.reportServicePort {
-                reportServiceMap[network.id] = SubVTData.ReportService(baseURL: "https://\(host):\(port)")
+                reportServiceMap[network.id] = SubVTData.ReportService(
+                    host: host, port: port
+                )
             }
         }
     }
