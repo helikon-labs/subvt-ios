@@ -30,23 +30,25 @@ struct NetworkSelectorButtonView: View {
     }
     
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
-    var displayType: DisplayType?
+    
+    private let network: Network
+    private let displayType: DisplayType
+    
+    init(network: Network, displayType: DisplayType) {
+        self.network = network
+        self.displayType = displayType
+    }
     
     private var bgColor: Color {
-        get {
-            if let displayType = self.displayType {
-                switch displayType {
-                case .selector(let isOpen):
-                    if isOpen {
-                        return Color("NetworkSelectorOpenBg")
-                    }
-                default:
-                    break
-                }
+        switch displayType {
+        case .selector(let isOpen):
+            if isOpen {
+                return Color("NetworkSelectorOpenBg")
             }
-            return Color("NetworkSelectorClosedBg")
+        default:
+            break
         }
+        return Color("NetworkSelectorClosedBg")
     }
     
     var body: some View {
@@ -86,7 +88,10 @@ struct NetworkSelectorButtonView: View {
 
 struct NetworkSelectorButtonView_Previews: PreviewProvider {
     static var previews: some View {
-        NetworkSelectorButtonView(displayType: .selector(isOpen: false))
-            .defaultAppStorage(PreviewData.userDefaults)
+        NetworkSelectorButtonView(
+            network: PreviewData.kusama,
+            displayType: .selector(isOpen: false)
+        )
+        .defaultAppStorage(PreviewData.userDefaults)
     }
 }

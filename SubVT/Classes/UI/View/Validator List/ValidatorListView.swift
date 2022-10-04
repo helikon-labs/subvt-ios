@@ -119,7 +119,10 @@ struct ValidatorListView: View {
                         }
                         .opacity(1.0)
                         Spacer()
-                        NetworkSelectorButtonView()
+                        NetworkSelectorButtonView(
+                            network: self.network,
+                            displayType: .display
+                        )
                     }
                     .frame(height: UI.Dimension.ValidatorList.titleSectionHeight)
                     .modifier(PanelAppearance(1, self.displayState))

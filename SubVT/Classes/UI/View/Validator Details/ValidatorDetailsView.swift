@@ -22,6 +22,7 @@ struct ValidatorDetailsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationMode) private var presentationMode
+    @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
     @StateObject private var viewModel = ValidatorDetailsViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var displayState: BasicViewDisplayState = .notAppeared
@@ -250,8 +251,11 @@ struct ValidatorDetailsView: View {
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(1, self.displayState))
                         Spacer()
-                        NetworkSelectorButtonView()
-                            .modifier(PanelAppearance(2, self.displayState))
+                        NetworkSelectorButtonView(
+                            network: self.network,
+                            displayType: .display
+                        )
+                        .modifier(PanelAppearance(2, self.displayState))
                         Button(
                             action: {
                                 self.viewModel.addOrRemoveValidator {
