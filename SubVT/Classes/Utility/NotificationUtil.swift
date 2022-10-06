@@ -30,7 +30,7 @@ struct NotificationUtil {
             if isEnabled {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
                     UNUserNotificationCenter.current().requestAuthorization(
-                        options: [.alert, .sound]
+                        options: [.alert, .badge, .sound]
                     ) { (granted, _) in
                         DispatchQueue.main.async {
                             onComplete(granted)

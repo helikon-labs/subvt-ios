@@ -5,15 +5,18 @@
 //  Created by Kutsal Kaan Bilgin on 30.09.2022.
 //
 
+import CoreData
 import SwiftUI
 
 struct NotificationsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    @Environment(\.managedObjectContext) private var viewContext
     @AppStorage(AppStorageKey.apnsIsEnabled) private var apnsIsEnabled = false
     @AppStorage(AppStorageKey.apnsSetupHasFailed) private var apnsSetupHasFailed = false
     @AppStorage(AppStorageKey.hasCreatedDefaultNotificationRules) private var hasCreatedDefaultNotificationRules = false
     @StateObject private var viewModel = NotificationsViewModel()
+    @FetchRequest(sortDescriptors: []) var notifications: FetchedResults<Notification>
     @State private var headerMaterialOpacity = 0.0
     
     private var headerView: some View {
@@ -93,7 +96,7 @@ struct NotificationsView: View {
                 }
             }
             .zIndex(0)
-            .disabled(self.viewModel.notifications.isEmpty)
+            .disabled(self.notifications.isEmpty)
             if !self.apnsIsEnabled {
                 VStack {
                     Text(localized("notifications.apns_disabled"))
@@ -163,7 +166,7 @@ struct NotificationsView: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .zIndex(1)
-            } else if self.viewModel.notifications.isEmpty {
+            } else if self.notifications.isEmpty {
                 ZStack {
                     Text(localized("notifications.no_notifications"))
                         .font(UI.Font.Notifications.noNotifications)

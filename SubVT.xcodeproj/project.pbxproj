@@ -238,19 +238,6 @@
 		A0D5499328E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */; };
 		A0D5499428E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */; };
 		A0D5499528E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */; };
-		A0DB1F2F289078A3006357D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DB1F2E289078A3006357D2 /* Assets.xcassets */; };
-		A0DB1F35289078A3006357D2 /* SubVTWatch WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = A0DB1F34289078A3006357D2 /* SubVTWatch WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		A0DB1F3A289078A3006357D2 /* SubVTApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F39289078A3006357D2 /* SubVTApp.swift */; };
-		A0DB1F3C289078A3006357D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F3B289078A3006357D2 /* ContentView.swift */; };
-		A0DB1F3E289078A3006357D2 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F3D289078A3006357D2 /* NotificationController.swift */; };
-		A0DB1F40289078A3006357D2 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F3F289078A3006357D2 /* NotificationView.swift */; };
-		A0DB1F42289078A3006357D2 /* ComplicationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F41289078A3006357D2 /* ComplicationController.swift */; };
-		A0DB1F44289078A4006357D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DB1F43289078A4006357D2 /* Assets.xcassets */; };
-		A0DB1F47289078A4006357D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DB1F46289078A4006357D2 /* Preview Assets.xcassets */; };
-		A0DB1F53289078A4006357D2 /* SubVTWatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F52289078A4006357D2 /* SubVTWatchTests.swift */; };
-		A0DB1F5D289078A4006357D2 /* SubVTWatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F5C289078A4006357D2 /* SubVTWatchUITests.swift */; };
-		A0DB1F5F289078A4006357D2 /* SubVTWatchUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DB1F5E289078A4006357D2 /* SubVTWatchUITestsLaunchTests.swift */; };
-		A0DB1F62289078A4006357D2 /* SubVT.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = A0DB1F2C289078A3006357D2 /* SubVT.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCABB6285CA36A00E458F4 /* HomeView.swift */; };
 		A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCABB6285CA36A00E458F4 /* HomeView.swift */; };
 		A0E0F6712848CD1C0029DDBF /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */; };
@@ -338,57 +325,27 @@
 			remoteGlobalIDString = A0BF90902848C1EB0053389A;
 			remoteInfo = SubVT;
 		};
-		A0DB1F36289078A3006357D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0BF90892848C1EB0053389A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A0DB1F33289078A3006357D2;
-			remoteInfo = "SubVTWatch WatchKit Extension";
-		};
-		A0DB1F4F289078A4006357D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0BF90892848C1EB0053389A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A0DB1F33289078A3006357D2;
-			remoteInfo = "SubVTWatch WatchKit Extension";
-		};
-		A0DB1F59289078A4006357D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0BF90892848C1EB0053389A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A0DB1F2B289078A3006357D2;
-			remoteInfo = SubVTWatch;
-		};
-		A0DB1F60289078A4006357D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A0BF90892848C1EB0053389A /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = A0DB1F2B289078A3006357D2;
-			remoteInfo = SubVTWatch;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		A04BB35F28EEBD6A001E8B09 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A0DB1F63289078A4006357D2 /* Embed Watch Content */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				A0DB1F62289078A4006357D2 /* SubVT.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F66289078A4006357D2 /* Embed App Extensions */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 13;
-			files = (
-				A0DB1F35289078A3006357D2 /* SubVTWatch WatchKit Extension.appex in Embed App Extensions */,
-			);
-			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -508,23 +465,6 @@
 		A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		A0D5498E28E71782007794E2 /* NotificationRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRulesView.swift; sourceTree = "<group>"; };
 		A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRulesViewModel.swift; sourceTree = "<group>"; };
-		A0DB1F2C289078A3006357D2 /* SubVT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SubVT.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0DB1F2E289078A3006357D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A0DB1F34289078A3006357D2 /* SubVTWatch WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "SubVTWatch WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0DB1F39289078A3006357D2 /* SubVTApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTApp.swift; sourceTree = "<group>"; };
-		A0DB1F3B289078A3006357D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		A0DB1F3D289078A3006357D2 /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
-		A0DB1F3F289078A3006357D2 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
-		A0DB1F41289078A3006357D2 /* ComplicationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComplicationController.swift; sourceTree = "<group>"; };
-		A0DB1F43289078A4006357D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		A0DB1F46289078A4006357D2 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A0DB1F48289078A4006357D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0DB1F49289078A4006357D2 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
-		A0DB1F4E289078A4006357D2 /* SubVTWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubVTWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0DB1F52289078A4006357D2 /* SubVTWatchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTWatchTests.swift; sourceTree = "<group>"; };
-		A0DB1F58289078A4006357D2 /* SubVTWatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubVTWatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0DB1F5C289078A4006357D2 /* SubVTWatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTWatchUITests.swift; sourceTree = "<group>"; };
-		A0DB1F5E289078A4006357D2 /* SubVTWatchUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVTWatchUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		A0DCABB6285CA36A00E458F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-SemiBold.ttf"; sourceTree = "<group>"; };
 		A0E0F6692848CD1C0029DDBF /* LexendDeca-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-Light.ttf"; sourceTree = "<group>"; };
@@ -579,27 +519,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		A0BF90AD2848C1EC0053389A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F31289078A3006357D2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F4B289078A4006357D2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F55289078A4006357D2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -875,10 +794,6 @@
 				A0BF90932848C1EB0053389A /* SubVT */,
 				A0BF90A92848C1EC0053389A /* SubVTTests */,
 				A0BF90B32848C1EC0053389A /* SubVTUITests */,
-				A0DB1F2D289078A3006357D2 /* SubVTWatch */,
-				A0DB1F38289078A3006357D2 /* SubVTWatch WatchKit Extension */,
-				A0DB1F51289078A4006357D2 /* SubVTWatchTests */,
-				A0DB1F5B289078A4006357D2 /* SubVTWatchUITests */,
 				A0BF90922848C1EB0053389A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -889,10 +804,6 @@
 				A0BF90912848C1EB0053389A /* SubVT.app */,
 				A0BF90A62848C1EC0053389A /* SubVTTests.xctest */,
 				A0BF90B02848C1EC0053389A /* SubVTUITests.xctest */,
-				A0DB1F2C289078A3006357D2 /* SubVT.app */,
-				A0DB1F34289078A3006357D2 /* SubVTWatch WatchKit Extension.appex */,
-				A0DB1F4E289078A4006357D2 /* SubVTWatchTests.xctest */,
-				A0DB1F58289078A4006357D2 /* SubVTWatchUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -991,55 +902,6 @@
 				A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */,
 			);
 			path = Notifications;
-			sourceTree = "<group>";
-		};
-		A0DB1F2D289078A3006357D2 /* SubVTWatch */ = {
-			isa = PBXGroup;
-			children = (
-				A0DB1F2E289078A3006357D2 /* Assets.xcassets */,
-			);
-			path = SubVTWatch;
-			sourceTree = "<group>";
-		};
-		A0DB1F38289078A3006357D2 /* SubVTWatch WatchKit Extension */ = {
-			isa = PBXGroup;
-			children = (
-				A0DB1F39289078A3006357D2 /* SubVTApp.swift */,
-				A0DB1F3B289078A3006357D2 /* ContentView.swift */,
-				A0DB1F3D289078A3006357D2 /* NotificationController.swift */,
-				A0DB1F3F289078A3006357D2 /* NotificationView.swift */,
-				A0DB1F41289078A3006357D2 /* ComplicationController.swift */,
-				A0DB1F43289078A4006357D2 /* Assets.xcassets */,
-				A0DB1F48289078A4006357D2 /* Info.plist */,
-				A0DB1F49289078A4006357D2 /* PushNotificationPayload.apns */,
-				A0DB1F45289078A4006357D2 /* Preview Content */,
-			);
-			path = "SubVTWatch WatchKit Extension";
-			sourceTree = "<group>";
-		};
-		A0DB1F45289078A4006357D2 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				A0DB1F46289078A4006357D2 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		A0DB1F51289078A4006357D2 /* SubVTWatchTests */ = {
-			isa = PBXGroup;
-			children = (
-				A0DB1F52289078A4006357D2 /* SubVTWatchTests.swift */,
-			);
-			path = SubVTWatchTests;
-			sourceTree = "<group>";
-		};
-		A0DB1F5B289078A4006357D2 /* SubVTWatchUITests */ = {
-			isa = PBXGroup;
-			children = (
-				A0DB1F5C289078A4006357D2 /* SubVTWatchUITests.swift */,
-				A0DB1F5E289078A4006357D2 /* SubVTWatchUITestsLaunchTests.swift */,
-			);
-			path = SubVTWatchUITests;
 			sourceTree = "<group>";
 		};
 		A0DCABB5285CA35700E458F4 /* Home */ = {
@@ -1191,11 +1053,11 @@
 				A0BF908E2848C1EB0053389A /* Frameworks */,
 				A0BF908F2848C1EB0053389A /* Resources */,
 				A0DB1F63289078A4006357D2 /* Embed Watch Content */,
+				A04BB35F28EEBD6A001E8B09 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				A0DB1F61289078A4006357D2 /* PBXTargetDependency */,
 			);
 			name = SubVT;
 			packageProductDependencies = (
@@ -1242,76 +1104,6 @@
 			productReference = A0BF90B02848C1EC0053389A /* SubVTUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		A0DB1F2B289078A3006357D2 /* SubVTWatch */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A0DB1F6E289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatch" */;
-			buildPhases = (
-				A0DB1F2A289078A3006357D2 /* Resources */,
-				A0DB1F66289078A4006357D2 /* Embed App Extensions */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A0DB1F37289078A3006357D2 /* PBXTargetDependency */,
-			);
-			name = SubVTWatch;
-			productName = SubVTWatch;
-			productReference = A0DB1F2C289078A3006357D2 /* SubVT.app */;
-			productType = "com.apple.product-type.application.watchapp2";
-		};
-		A0DB1F33289078A3006357D2 /* SubVTWatch WatchKit Extension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A0DB1F6D289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatch WatchKit Extension" */;
-			buildPhases = (
-				A0DB1F30289078A3006357D2 /* Sources */,
-				A0DB1F31289078A3006357D2 /* Frameworks */,
-				A0DB1F32289078A3006357D2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "SubVTWatch WatchKit Extension";
-			productName = "SubVTWatch WatchKit Extension";
-			productReference = A0DB1F34289078A3006357D2 /* SubVTWatch WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit2-extension";
-		};
-		A0DB1F4D289078A4006357D2 /* SubVTWatchTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A0DB1F6F289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatchTests" */;
-			buildPhases = (
-				A0DB1F4A289078A4006357D2 /* Sources */,
-				A0DB1F4B289078A4006357D2 /* Frameworks */,
-				A0DB1F4C289078A4006357D2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A0DB1F50289078A4006357D2 /* PBXTargetDependency */,
-			);
-			name = SubVTWatchTests;
-			productName = SubVTWatchTests;
-			productReference = A0DB1F4E289078A4006357D2 /* SubVTWatchTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		A0DB1F57289078A4006357D2 /* SubVTWatchUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A0DB1F70289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatchUITests" */;
-			buildPhases = (
-				A0DB1F54289078A4006357D2 /* Sources */,
-				A0DB1F55289078A4006357D2 /* Frameworks */,
-				A0DB1F56289078A4006357D2 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				A0DB1F5A289078A4006357D2 /* PBXTargetDependency */,
-			);
-			name = SubVTWatchUITests;
-			productName = SubVTWatchUITests;
-			productReference = A0DB1F58289078A4006357D2 /* SubVTWatchUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1319,7 +1111,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1340;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
 					A0BF90902848C1EB0053389A = {
@@ -1332,20 +1124,6 @@
 					A0BF90AF2848C1EC0053389A = {
 						CreatedOnToolsVersion = 13.4;
 						TestTargetID = A0BF90902848C1EB0053389A;
-					};
-					A0DB1F2B289078A3006357D2 = {
-						CreatedOnToolsVersion = 13.4.1;
-					};
-					A0DB1F33289078A3006357D2 = {
-						CreatedOnToolsVersion = 13.4.1;
-					};
-					A0DB1F4D289078A4006357D2 = {
-						CreatedOnToolsVersion = 13.4.1;
-						TestTargetID = A0DB1F33289078A3006357D2;
-					};
-					A0DB1F57289078A4006357D2 = {
-						CreatedOnToolsVersion = 13.4.1;
-						TestTargetID = A0DB1F2B289078A3006357D2;
 					};
 				};
 			};
@@ -1369,10 +1147,6 @@
 				A0BF90902848C1EB0053389A /* SubVT */,
 				A0BF90A52848C1EC0053389A /* SubVTTests */,
 				A0BF90AF2848C1EC0053389A /* SubVTUITests */,
-				A0DB1F2B289078A3006357D2 /* SubVTWatch */,
-				A0DB1F33289078A3006357D2 /* SubVTWatch WatchKit Extension */,
-				A0DB1F4D289078A4006357D2 /* SubVTWatchTests */,
-				A0DB1F57289078A4006357D2 /* SubVTWatchUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1440,37 +1214,6 @@
 				A0E0F6822848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf in Resources */,
 				A0E0F67C2848CD1C0029DDBF /* LexendDeca-Black.ttf in Resources */,
 				A0FD88432893E86100479C10 /* spheres_fall.scn in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F2A289078A3006357D2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0DB1F2F289078A3006357D2 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F32289078A3006357D2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0DB1F47289078A4006357D2 /* Preview Assets.xcassets in Resources */,
-				A0DB1F44289078A4006357D2 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F4C289078A4006357D2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F56289078A4006357D2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1753,35 +1496,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A0DB1F30289078A3006357D2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0DB1F3E289078A3006357D2 /* NotificationController.swift in Sources */,
-				A0DB1F3C289078A3006357D2 /* ContentView.swift in Sources */,
-				A0DB1F42289078A3006357D2 /* ComplicationController.swift in Sources */,
-				A0DB1F3A289078A3006357D2 /* SubVTApp.swift in Sources */,
-				A0DB1F40289078A3006357D2 /* NotificationView.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F4A289078A4006357D2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0DB1F53289078A4006357D2 /* SubVTWatchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		A0DB1F54289078A4006357D2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0DB1F5D289078A4006357D2 /* SubVTWatchUITests.swift in Sources */,
-				A0DB1F5F289078A4006357D2 /* SubVTWatchUITestsLaunchTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1794,26 +1508,6 @@
 			isa = PBXTargetDependency;
 			target = A0BF90902848C1EB0053389A /* SubVT */;
 			targetProxy = A0BF90B12848C1EC0053389A /* PBXContainerItemProxy */;
-		};
-		A0DB1F37289078A3006357D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A0DB1F33289078A3006357D2 /* SubVTWatch WatchKit Extension */;
-			targetProxy = A0DB1F36289078A3006357D2 /* PBXContainerItemProxy */;
-		};
-		A0DB1F50289078A4006357D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A0DB1F33289078A3006357D2 /* SubVTWatch WatchKit Extension */;
-			targetProxy = A0DB1F4F289078A4006357D2 /* PBXContainerItemProxy */;
-		};
-		A0DB1F5A289078A4006357D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A0DB1F2B289078A3006357D2 /* SubVTWatch */;
-			targetProxy = A0DB1F59289078A4006357D2 /* PBXContainerItemProxy */;
-		};
-		A0DB1F61289078A4006357D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = A0DB1F2B289078A3006357D2 /* SubVTWatch */;
-			targetProxy = A0DB1F60289078A4006357D2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1946,6 +1640,7 @@
 		A0BF90BB2848C1EC0053389A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -1982,6 +1677,7 @@
 		A0BF90BC2848C1EC0053389A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
@@ -2091,198 +1787,6 @@
 			};
 			name = Release;
 		};
-		A0DB1F64289078A4006357D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = SubVTWatch_WatchKit_Extension;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = io.helikon.subvt;
-				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.watch;
-				PRODUCT_NAME = SubVT;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Debug;
-		};
-		A0DB1F65289078A4006357D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				GENERATE_INFOPLIST_FILE = YES;
-				IBSC_MODULE = SubVTWatch_WatchKit_Extension;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = io.helikon.subvt;
-				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.watch;
-				PRODUCT_NAME = SubVT;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Release;
-		};
-		A0DB1F67289078A4006357D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SubVTWatch WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "SubVTWatch WatchKit Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SubVTWatch WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = SubVTWatch_WatchKit_Extension.ComplicationController;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.watch.extension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Debug;
-		};
-		A0DB1F68289078A4006357D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_COMPLICATION_NAME = Complication;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"SubVTWatch WatchKit Extension/Preview Content\"";
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "SubVTWatch WatchKit Extension/Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "SubVTWatch WatchKit Extension";
-				INFOPLIST_KEY_CLKComplicationPrincipalClass = SubVTWatch_WatchKit_Extension.ComplicationController;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@executable_path/../../Frameworks",
-				);
-				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.watch.extension;
-				PRODUCT_NAME = "${TARGET_NAME}";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Release;
-		};
-		A0DB1F69289078A4006357D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.SubVTWatchTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SubVTWatch WatchKit Extension.appex/SubVTWatch WatchKit Extension";
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Debug;
-		};
-		A0DB1F6A289078A4006357D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.SubVTWatchTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SubVTWatch WatchKit Extension.appex/SubVTWatch WatchKit Extension";
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Release;
-		};
-		A0DB1F6B289078A4006357D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.SubVTWatchUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = SubVTWatch;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Debug;
-		};
-		A0DB1F6C289078A4006357D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TM389H3UFR;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt.SubVTWatchUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = SubVTWatch;
-				WATCHOS_DEPLOYMENT_TARGET = 8.5;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2318,42 +1822,6 @@
 			buildConfigurations = (
 				A0BF90C12848C1EC0053389A /* Debug */,
 				A0BF90C22848C1EC0053389A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0DB1F6D289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatch WatchKit Extension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0DB1F67289078A4006357D2 /* Debug */,
-				A0DB1F68289078A4006357D2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0DB1F6E289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatch" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0DB1F64289078A4006357D2 /* Debug */,
-				A0DB1F65289078A4006357D2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0DB1F6F289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatchTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0DB1F69289078A4006357D2 /* Debug */,
-				A0DB1F6A289078A4006357D2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A0DB1F70289078A4006357D2 /* Build configuration list for PBXNativeTarget "SubVTWatchUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				A0DB1F6B289078A4006357D2 /* Debug */,
-				A0DB1F6C289078A4006357D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

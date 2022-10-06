@@ -22,6 +22,10 @@ struct SubVTApp: App {
                      persistenceController.container.viewContext
                 )
                 .defaultAppStorage(UserDefaultsUtil.shared)
+                .onAppear() {
+                    print("set delegate")
+                    UNUserNotificationCenter.current().delegate = appDelegate
+                }
         }
     }
 }
@@ -48,6 +52,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         store: UserDefaultsUtil.shared
     ) private var notificationChannelId = 0
     private var cancellables = Set<AnyCancellable>()
+    private let viewContext = PersistenceController.shared.container.viewContext
+    
+    func application(
+        _ application: UIApplication,
+        willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
+        return true
+    }
     
     func application(
         _ application: UIApplication,
@@ -74,5 +86,45 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
         log.error("APNS registration error: \(error)")
+    }
+    
+    func application(
+        _ application: UIApplication,
+        didReceiveRemoteNotification userInfo: [AnyHashable : Any],
+        fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+    ) {
+        log.info("Received push notification.")
+        if let apsData = userInfo["aps"] as? [String: Any],
+           let customData = userInfo["notification_data"] as? [String: Any],
+           let networkId = customData["network_id"] as? Int32,
+           let notificationTypeCode = customData["notification_type_code"] as? String {
+            let notification = Notification(context: self.viewContext)
+            notification.id = UUID()
+            notification.isRead = false
+            notification.receivedAt = Date()
+            if let message = apsData["alert"] as? String {
+                notification.message = message
+            } else {
+                notification.message = ""
+            }
+            notification.networkId = networkId
+            notification.notificationTypeCode = notificationTypeCode
+            notification.validatorAccountId = customData["validator_account_id"] as? String
+            notification.validatorDisplay = customData["validator_display"] as? String
+            try? self.viewContext.save()
+        }
+        // persist notification
+        completionHandler(.noData)
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(
+        _ center: UNUserNotificationCenter,
+        didReceive response: UNNotificationResponse,
+        withCompletionHandler completionHandler: @escaping () -> Void
+    ) {
+        // process notification
+        completionHandler()
     }
 }
