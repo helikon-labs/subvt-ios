@@ -123,4 +123,17 @@ enum PreviewData {
         parameters: [],
         notes: nil
     )
+    
+    static var notification: Notification {
+        let notification = Notification()
+        notification.id = UUID()
+        notification.isRead = false
+        notification.receivedAt = Date()
+        notification.notificationTypeCode = "chain_validator_active"
+        notification.validatorDisplay = "Validator Display"
+        notification.validatorAccountId = "0xABCDEF0123456789"
+        notification.networkId = 1
+        notification.message = "Notification message."
+        return notification
+    }
 }

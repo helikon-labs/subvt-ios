@@ -23,7 +23,6 @@ struct SubVTApp: App {
                 )
                 .defaultAppStorage(UserDefaultsUtil.shared)
                 .onAppear() {
-                    print("set delegate")
                     UNUserNotificationCenter.current().delegate = appDelegate
                 }
         }
@@ -54,11 +53,8 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     private var cancellables = Set<AnyCancellable>()
     private let viewContext = PersistenceController.shared.container.viewContext
     
-    func application(
-        _ application: UIApplication,
-        willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
-    ) -> Bool {
-        return true
+    func applicationDidFinishLaunching(_ application: UIApplication) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     func application(

@@ -15,6 +15,72 @@ struct NotificationRuleView: View {
         self.rule = rule
     }
     
+    private var networkDisplay: String {
+        return self.rule.network?.display ?? localized("notification_rules.all_networks")
+    }
+    
+    private var validatorDisplay: String {
+        if self.rule.validators.count == 0 {
+            return localized("notification_rules.all_validators")
+        } else if self.rule.validators.count == 1 {
+            return localized("notification_rules.one_validator")
+        }  else {
+            return String(
+                format: localized("notification_rules.n_validators"),
+                self.rule.validators.count
+            )
+        }
+    }
+    
+    private var periodDisplay: String {
+        switch self.rule.periodType {
+        case .off:
+            return localized("notification_rules.off")
+        case .immediate:
+            return localized("notification_rules.immediate")
+        case .epoch:
+            if self.rule.period == 1 {
+                return localized("notification_rules.every_epoch")
+            } else {
+                return String(
+                    format: localized("notification_rules.every_n_epochs"),
+                    self.rule.period
+                )
+            }
+        case .era:
+            if self.rule.period == 1 {
+                return localized("notification_rules.every_era")
+            } else {
+                return String(
+                    format: localized("notification_rules.every_n_eras"),
+                    self.rule.period
+                )
+            }
+        case .hour:
+            if self.rule.period == 1 {
+                return localized("notification_rules.every_hour")
+            } else {
+                return String(
+                    format: localized("notification_rules.every_n_hours"),
+                    self.rule.period
+                )
+            }
+        case .day:
+            if self.rule.period == 1 {
+                return localized("notification_rules.every_day")
+            } else {
+                return String(
+                    format: localized("notification_rules.every_n_days"),
+                    self.rule.period
+                )
+            }
+        }
+    }
+    
+    private var detailsDisplay: String {
+        return "\(self.networkDisplay) / \(self.validatorDisplay) / \(self.periodDisplay)"
+    }
+    
     var body: some View {
         VStack(alignment: .leading) {
             Text(localized("notification_type.\(self.rule.notificationType.code)"))
@@ -25,7 +91,7 @@ struct NotificationRuleView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
                 .frame(height: 8)
-            Text(self.rule.periodType.rawValue)
+            Text(self.detailsDisplay)
                 .font(UI.Font.NotificationRules.info)
                 .foregroundColor(Color("Text"))
                 .lineLimit(1)

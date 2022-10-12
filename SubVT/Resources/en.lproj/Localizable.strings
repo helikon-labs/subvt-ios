@@ -121,6 +121,7 @@
 
 "my_validators.title"="My Validators";
 "my_validators.add_validators"="Add Validators";
+"my_validators.no_validators"="You haven't added\nany validators.";
 
 "add_validators.title"="Add New Validator";
 "add_validators.network"="Network";
@@ -137,6 +138,20 @@
 "notification_rules.no_rules"="You have no notification rules.";
 "notification_rules.rule_deleted"="Rule deleted";
 "notification_rules.error.rule_list"="Error while getting the notification rule list. Please check your connection.";
+"notification_rules.all_networks"="All networks";
+"notification_rules.one_validator"="1 validator";
+"notification_rules.n_validators"="%d validators";
+"notification_rules.all_validators"="All validators";
+"notification_rules.off"="Off";
+"notification_rules.immediate"="Immediate";
+"notification_rules.every_era"="Every era";
+"notification_rules.every_n_eras"="Every %d eras";
+"notification_rules.every_epoch"="Every epoch";
+"notification_rules.every_n_epochs"="Every %d epochs";
+"notification_rules.every_day"="Every day";
+"notification_rules.every_n_days"="Every %d days";
+"notification_rules.every_hour"="Every hour";
+"notification_rules.every_n_hours"="Every %d hours";
 
 "notification_type.chain_validator_offline_offence"="Offline Offence";
 "notification_type.chain_validator_new_nomination"="New Nomination";

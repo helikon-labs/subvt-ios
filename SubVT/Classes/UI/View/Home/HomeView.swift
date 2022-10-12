@@ -11,7 +11,7 @@ import SwiftUI
 struct HomeView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @State private var displayState: BasicViewDisplayState = .notAppeared
-    @State private var currentTab: Tab = .myValidators
+    @State private var currentTab: Tab = .network
     @State private var showsTabBar = false
     
     private var tabBarYOffset: CGFloat {

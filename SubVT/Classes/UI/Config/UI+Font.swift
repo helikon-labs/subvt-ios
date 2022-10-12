@@ -30,6 +30,7 @@ extension UI {
                 }
             }
             static var title = LexendDeca.semiBold.withSize(18)
+            static let listNoItems = LexendDeca.light.withSize(14)
         }
         
         enum Snackbar {
@@ -155,8 +156,12 @@ extension UI {
         }
         
         enum Notifications {
-            static let noNotifications = LexendDeca.light.withSize(14)
             static let enableNotifications = LexendDeca.regular.withSize(14)
+        }
+        
+        enum Notification {
+            static let validatorDisplay = LexendDeca.semiBold.withSize(18)
+            static let notificationType = LexendDeca.light.withSize(12)
         }
         
         enum NotificationRules {

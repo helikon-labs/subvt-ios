@@ -16,7 +16,9 @@ struct NotificationsView: View {
     @AppStorage(AppStorageKey.apnsSetupHasFailed) private var apnsSetupHasFailed = false
     @AppStorage(AppStorageKey.hasCreatedDefaultNotificationRules) private var hasCreatedDefaultNotificationRules = false
     @StateObject private var viewModel = NotificationsViewModel()
-    @FetchRequest(sortDescriptors: []) var notifications: FetchedResults<Notification>
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.receivedAt, order: .reverse)
+    ]) var notifications: FetchedResults<Notification>
     @State private var headerMaterialOpacity = 0.0
     
     private var headerView: some View {
@@ -72,10 +74,18 @@ struct NotificationsView: View {
                 .zIndex(2)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
-                    LazyVStack(spacing: 0) {
+                    LazyVStack(spacing: UI.Dimension.Common.listItemSpacing) {
                         Spacer()
                             .id(0)
-                            .frame(height: 20)
+                            .frame(height: UI.Dimension.Notifications.scrollContentMarginTop)
+                        ForEach(self.notifications, id: \.self.id) {
+                            notification in
+                            NotificationView(notification: notification)
+                        }
+                        Spacer()
+                            .frame(
+                                height: UI.Dimension.Notifications.scrollContentBottomSpacerHeight
+                            )
                     }
                     .padding(EdgeInsets(
                         top: 0,
@@ -100,7 +110,7 @@ struct NotificationsView: View {
             if !self.apnsIsEnabled {
                 VStack {
                     Text(localized("notifications.apns_disabled"))
-                        .font(UI.Font.Notifications.noNotifications)
+                        .font(UI.Font.Common.listNoItems)
                         .foregroundColor(Color("Text"))
                     Spacer()
                         .frame(height: UI.Dimension.Common.dataPanelSpacing)
@@ -131,7 +141,7 @@ struct NotificationsView: View {
             } else if self.apnsSetupHasFailed {
                 VStack {
                     Text(localized("notifications.apns_setup_has_failed"))
-                        .font(UI.Font.Notifications.noNotifications)
+                        .font(UI.Font.Common.listNoItems)
                         .foregroundColor(Color("Text"))
                     Spacer()
                         .frame(height: UI.Dimension.Common.dataPanelSpacing)
@@ -160,7 +170,7 @@ struct NotificationsView: View {
             } else if !self.hasCreatedDefaultNotificationRules {
                 ZStack {
                     Text(localized("notifications.apns_setup_in_progress"))
-                        .font(UI.Font.Notifications.noNotifications)
+                        .font(UI.Font.Common.listNoItems)
                         .foregroundColor(Color("Text"))
                         .multilineTextAlignment(.center)
                 }
@@ -169,8 +179,9 @@ struct NotificationsView: View {
             } else if self.notifications.isEmpty {
                 ZStack {
                     Text(localized("notifications.no_notifications"))
-                        .font(UI.Font.Notifications.noNotifications)
+                        .font(UI.Font.Common.listNoItems)
                         .foregroundColor(Color("Text"))
+                        .multilineTextAlignment(.center)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .zIndex(1)

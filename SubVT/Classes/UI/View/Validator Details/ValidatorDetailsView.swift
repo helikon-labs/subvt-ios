@@ -306,6 +306,8 @@ struct ValidatorDetailsView: View {
                         )
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(4, self.displayState))
+                        .disabled(true)
+                        .opacity(UI.Value.disabledControlOpacity)
                     }
                     .frame(height: UI.Dimension.ValidatorList.titleSectionHeight)
                 }

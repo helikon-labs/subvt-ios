@@ -10,6 +10,7 @@ import SwiftUI
 extension UI.Dimension {
     enum Common {
         static let cornerRadius: CGFloat = 12
+        static let listItemSpacing: CGFloat = 8
         static var topNotchHeight: CGFloat {
             get {
                 let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene

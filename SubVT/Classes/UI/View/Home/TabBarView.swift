@@ -37,19 +37,30 @@ struct TabBarButtonView: View {
             },
             label: {
                 VStack(alignment: .center, spacing: 0) {
-                    self.tab.getImage(isActive: self.isActive)
-                    Text(self.tab.text)
-                        .font(UI.Font.TabBar.text)
-                        .foregroundColor(
-                            self.isActive
-                            ? Color("TabBarItemTextActive")
-                            : Color("TabBarItemTextInactive")
-                        )
+                    if self.tab == .eraReports {
+                        self.tab.getImage(isActive: self.isActive)
+                            .grayscale(1.0)
+                            .opacity(UI.Value.disabledControlOpacity)
+                        Text(self.tab.text)
+                            .font(UI.Font.TabBar.text)
+                            .foregroundColor(Color("TabBarItemTextInactive"))
+                            .opacity(UI.Value.disabledControlOpacity)
+                    } else {
+                        self.tab.getImage(isActive: self.isActive)
+                        Text(self.tab.text)
+                            .font(UI.Font.TabBar.text)
+                            .foregroundColor(
+                                self.isActive
+                                ? Color("TabBarItemTextActive")
+                                : Color("TabBarItemTextInactive")
+                            )
+                    }
                 }
                 .frame(width: UI.Dimension.TabBar.itemWidth)
             }
         )
         .buttonStyle(TabBarButtonStyle())
+        .disabled(self.tab == .eraReports)
     }
 }
 

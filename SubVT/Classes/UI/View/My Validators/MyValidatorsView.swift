@@ -93,7 +93,7 @@ struct MyValidatorsView: View {
                 .zIndex(2)
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
-                    LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
+                    LazyVStack(spacing: UI.Dimension.Common.listItemSpacing) {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
@@ -148,6 +148,16 @@ struct MyValidatorsView: View {
                 }
             }
             .zIndex(0)
+            if self.viewModel.userValidatorSummaries.count == 0 {
+                ZStack {
+                    Text(localized("my_validators.no_validators"))
+                        .font(UI.Font.Common.listNoItems)
+                        .foregroundColor(Color("Text"))
+                        .multilineTextAlignment(.center)
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                .zIndex(1)
+            }
             FooterGradientView()
                 .zIndex(1)
             NavigationLink {

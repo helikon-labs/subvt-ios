@@ -303,6 +303,8 @@
 		A0FD885D2893FF1900479C10 /* sphere-height.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88542893FF1900479C10 /* sphere-height.png */; };
 		A0FD885E2893FF1900479C10 /* sphere-roughness.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88552893FF1900479C10 /* sphere-roughness.png */; };
 		A0FD885F2893FF1900479C10 /* sphere-roughness.png in Resources */ = {isa = PBXBuildFile; fileRef = A0FD88552893FF1900479C10 /* sphere-roughness.png */; };
+		A0FDE66328F2970800D1A590 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FDE66228F2970800D1A590 /* NotificationView.swift */; };
+		A0FDE66428F2970800D1A590 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FDE66228F2970800D1A590 /* NotificationView.swift */; };
 		A0FFD9AA28EC161E00FA76B6 /* EditNotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9A928EC161E00FA76B6 /* EditNotificationRuleView.swift */; };
 		A0FFD9AB28EC161E00FA76B6 /* EditNotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9A928EC161E00FA76B6 /* EditNotificationRuleView.swift */; };
 		A0FFD9AD28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */; };
@@ -497,6 +499,7 @@
 		A0FD88532893FF1900479C10 /* sphere-normal-ogl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sphere-normal-ogl.png"; sourceTree = "<group>"; };
 		A0FD88542893FF1900479C10 /* sphere-height.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sphere-height.png"; sourceTree = "<group>"; };
 		A0FD88552893FF1900479C10 /* sphere-roughness.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sphere-roughness.png"; sourceTree = "<group>"; };
+		A0FDE66228F2970800D1A590 /* NotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		A0FFD9A928EC161E00FA76B6 /* EditNotificationRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotificationRuleView.swift; sourceTree = "<group>"; };
 		A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditNotificationRuleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -900,6 +903,7 @@
 				A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */,
 				A0D5498728E70132007794E2 /* NotificationsView.swift */,
 				A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */,
+				A0FDE66228F2970800D1A590 /* NotificationView.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -1331,6 +1335,7 @@
 				A0F596FF28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */,
 				A0787278287C198F00BED374 /* IntroductionViewModel.swift in Sources */,
 				A04B37C42876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
+				A0FDE66328F2970800D1A590 /* NotificationView.swift in Sources */,
 				A0C90E882878615600A91996 /* Formatter.swift in Sources */,
 				A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */,
 				A0FC976828B62CCF00B75A9B /* AddValidatorsView.swift in Sources */,
@@ -1457,6 +1462,7 @@
 				A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */,
 				A067DD65289D56A9005BE98C /* MyValidatorsView.swift in Sources */,
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
+				A0FDE66428F2970800D1A590 /* NotificationView.swift in Sources */,
 				A0D0334A288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A04C47282887F19F0004A46A /* RoundedCorner.swift in Sources */,
 				A0659D1128EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,
