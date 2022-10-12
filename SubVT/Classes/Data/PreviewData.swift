@@ -9,12 +9,6 @@ import Foundation
 import SubVTData
 
 enum PreviewData {
-    static let era = Era(
-        index: 3926,
-        startTimestamp: 1657214874008,
-        endTimestamp: 1657236474008
-    )
-    
     static let kusama = Network(
         id: 1,
         hash: "0xABC",
@@ -35,6 +29,12 @@ enum PreviewData {
         inactiveValidatorListServicePort: nil
     )
     
+    static let era = Era(
+        index: 3926,
+        startTimestamp: 1657214874008,
+        endTimestamp: 1657236474008
+    )
+    
     static let stashAccountId = AccountId(
         hex: "0xDC89C6865C029C1088FB27B41C1A715B0BB611B94E1D625FA0BB8A1294187454"
     )
@@ -46,7 +46,7 @@ enum PreviewData {
         accountId: stashAccountId,
         address: "HZUyowqk6wH6o8B4Asf7P7hLuRXy8hPheNCKevN5QFFRRdd",
         controllerAccountId: controllerAccountId,
-        networkId: kusama.id,
+        networkId: PreviewData.kusama.id,
         display: "Display",
         parentDisplay: "Parent",
         childDisplay: "Child",

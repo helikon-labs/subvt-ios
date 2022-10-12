@@ -825,7 +825,6 @@
 			isa = PBXGroup;
 			children = (
 				A0BF909B2848C1EC0053389A /* Preview Assets.xcassets */,
-				A098E593285DDE3D00AAA68A /* PreviewData.swift */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -852,6 +851,7 @@
 			children = (
 				A0128A4C284A1297000C2307 /* AppStorageKey.swift */,
 				A078727B287C1A3300BED374 /* DataFetchState.swift */,
+				A098E593285DDE3D00AAA68A /* PreviewData.swift */,
 				A0C9838B2875ABE20008C370 /* CodableAppStorage */,
 			);
 			path = Data;
