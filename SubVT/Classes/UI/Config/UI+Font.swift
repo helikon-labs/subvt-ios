@@ -31,6 +31,8 @@ extension UI {
             }
             static var title = LexendDeca.semiBold.withSize(18)
             static let listNoItems = LexendDeca.light.withSize(14)
+            static let addItemButton = LexendDeca.regular.withSize(14)
+            static let formFieldTitle = LexendDeca.medium.withSize(16)
         }
         
         enum Snackbar {
@@ -146,13 +148,8 @@ extension UI {
             static let nominator = LexendDeca.regular.withSize(12).monospaced()
         }
         
-        enum MyValidators {
-            static let addValidatorsButton = LexendDeca.regular.withSize(14)
-        }
-        
         enum AddValidators {
             static let subtitle = LexendDeca.light.withSize(12)
-            static let network = LexendDeca.medium.withSize(16)
         }
         
         enum Notifications {
@@ -167,6 +164,10 @@ extension UI {
         enum NotificationRules {
             static let title = LexendDeca.semiBold.withSize(18)
             static let info = LexendDeca.light.withSize(12)
+        }
+        
+        enum EditNotificationRule {
+            static let actionButton = LexendDeca.medium.withSize(16)
         }
     }
 }

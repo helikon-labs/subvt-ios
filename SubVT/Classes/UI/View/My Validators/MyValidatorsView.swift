@@ -62,9 +62,9 @@ struct MyValidatorsView: View {
     private var addValidatorsButtonView: some View {
         HStack(alignment: .center, spacing: 12) {
             Text(localized("my_validators.add_validators"))
-                .font(UI.Font.MyValidators.addValidatorsButton)
-                .foregroundColor(Color("AddValidatorsButtonText"))
-            UI.Image.MyValidators.unionIcon(self.colorScheme)
+                .font(UI.Font.Common.addItemButton)
+                .foregroundColor(Color("AddItemButtonText"))
+            UI.Image.Common.unionIcon(self.colorScheme)
         }
         .frame(
             width: UI.Dimension.MyValidators.addValidatorsButtonWidth,
@@ -76,13 +76,13 @@ struct MyValidatorsView: View {
         .shadow(color: Color.black.opacity(0.1), radius: 10)
     }
     
-    private var addValidatorButtonOpacity: Double {
+    private var addValidatorButtonIsEnabled: Bool {
         get {
             switch self.viewModel.fetchState {
             case .success, .loading, .idle:
-                return 1.0
+                return true
             default:
-                return 0.0
+                return false
             }
         }
     }
@@ -165,7 +165,8 @@ struct MyValidatorsView: View {
             } label: {
                 self.addValidatorsButtonView
             }
-            .opacity(self.addValidatorButtonOpacity)
+            .opacity(self.addValidatorButtonIsEnabled ? 1.0 : 0.0)
+            .disabled(!self.addValidatorButtonIsEnabled)
             .animation(.spring(), value: self.viewModel.fetchState)
             .buttonStyle(PushButtonStyle())
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)

@@ -51,16 +51,16 @@ struct NetworkButtonView: View {
                     ZStack {
                         if isSelected {
                             Circle()
-                                .fill(Color("NetworkButtonSelectionIndicator"))
+                                .fill(Color("ItemListSelectionIndicator"))
                                 .frame(
-                                    width: UI.Dimension.Common.networkSelectionIndicatorSize,
-                                    height: UI.Dimension.Common.networkSelectionIndicatorSize
+                                    width: UI.Dimension.Common.itemSelectionIndicatorSize,
+                                    height: UI.Dimension.Common.itemSelectionIndicatorSize
                                 )
                                 .shadow(
-                                    color: Color("NetworkButtonSelectionIndicator"),
+                                    color: Color("ItemListSelectionIndicator"),
                                     radius: 3,
                                     x: 0,
-                                    y: UI.Dimension.Common.networkSelectionIndicatorSize / 2
+                                    y: UI.Dimension.Common.itemSelectionIndicatorSize / 2
                                 )
                         }
                     }

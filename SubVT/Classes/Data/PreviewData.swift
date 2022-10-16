@@ -112,7 +112,11 @@ enum PreviewData {
     static let notificationRule = UserNotificationRule(
         id: 1,
         userId: 1,
-        notificationType: NotificationType(code: "", paramTypes: []),
+        notificationType: NotificationType(
+            code: "chain_validator_active",
+            isEnabled: true,
+            paramTypes: []
+        ),
         name: "Test Rule",
         network: nil,
         isForAllValidators: true,

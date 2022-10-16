@@ -49,6 +49,23 @@ struct ActionButtonView: View {
     
     let title: String
     var state: State
+    let font: Font
+    let width: CGFloat
+    let height: CGFloat
+    
+    init(
+        title: String,
+        state: State,
+        font: Font = UI.Font.Common.actionButton,
+        width: CGFloat = UI.Dimension.Common.actionButtonWidth,
+        height: CGFloat = UI.Dimension.Common.actionButtonHeight
+    ) {
+        self.title = title
+        self.state = state
+        self.font = font
+        self.width = width
+        self.height = height
+    }
     
     private var backgroundColor: Color {
         switch self.state {
@@ -93,8 +110,8 @@ struct ActionButtonView: View {
         }
         .animation(nil, value: self.state)
         .frame(
-            width: UI.Dimension.Common.actionButtonWidth,
-            height: UI.Dimension.Common.actionButtonHeight
+            width: self.width,
+            height: self.height
         )
         .background(self.backgroundColor)
         .cornerRadius(10)

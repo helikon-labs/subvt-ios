@@ -77,6 +77,13 @@ extension UI {
                     return SwiftUI.Image("\(network.chain.capitalized)IconPad")
                 }
             }
+            static func unionIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("UnionIconDark")
+                } else {
+                    return SwiftUI.Image("UnionIconLight")
+                }
+            }
         }
         
         enum Introduction {
@@ -169,16 +176,6 @@ extension UI {
                     return SwiftUI.Image("ValidatorReportsIconDark")
                 } else {
                     return SwiftUI.Image("ValidatorReportsIconLight")
-                }
-            }
-        }
-        
-        enum MyValidators {
-            static func unionIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
-                if colorScheme == .dark {
-                    return SwiftUI.Image("UnionIconDark")
-                } else {
-                    return SwiftUI.Image("UnionIconLight")
                 }
             }
         }

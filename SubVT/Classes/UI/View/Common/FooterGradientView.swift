@@ -19,13 +19,13 @@ struct FooterGradientView: View {
             startPoint: .bottom,
             endPoint: .top
         )
-            .allowsHitTesting(false)
-            .frame(height: UI.Dimension.Common.footerGradientViewHeight)
-            .frame(
-                maxHeight: .infinity,
-                alignment: .bottom
-            )
-            .ignoresSafeArea()
+        .allowsHitTesting(false)
+        .frame(height: UI.Dimension.Common.footerGradientViewHeight)
+        .frame(
+            maxHeight: .infinity,
+            alignment: .bottom
+        )
+        .ignoresSafeArea()
     }
 }
 

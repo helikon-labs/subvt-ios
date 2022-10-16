@@ -45,7 +45,11 @@ struct SwipeDeleteViewModifier: ViewModifier {
             )
             .offset(x: self.offset.width, y: 0)
             .gesture (
-                DragGesture()
+                /*
+                 minimumDistance is utilized to avoid interference with navigation view's
+                 swipe-left gesture.
+                 */
+                DragGesture(minimumDistance: 20)
                     .onChanged { gesture in
                         if gesture.translation.width + self.initialOffset.width <= 0 {
                             self.offset.width = max(

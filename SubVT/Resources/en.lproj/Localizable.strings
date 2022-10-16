@@ -9,15 +9,19 @@
 "common.retry"="Retry";
 "common.search"="Search";
 "common.done"="Done";
+
 "common.error"="Error";
 "common.error.connection"="Connection error";
 "common.error.unexpected"="Unexpected error";
 "common.error.server"="Server error";
-
 "common.error.validator_list"="Error while getting the validator list. Please check your connection.";
 
+"common.off"="Off";
+"common.immediate"="Immediate";
 "common.era"="Era";
 "common.epoch"="Epoch";
+"common.hour"="Hour";
+"common.day"="Day";
 "common.percentage"="%@%%";
 "common.int_percentage"="%d%%";
 "common.date_components.year"="%dy";
@@ -28,8 +32,14 @@
 "common.date_components.minute"="%dm";
 "common.date_components.second"="%ds";
 
+"common.validator"="Validator";
 "common.validator.active"="Active";
 "common.validator.inactive"="Inactive";
+
+"common.network"="Network";
+"common.notification_type"="Notification Type";
+"common.period_type"="Period Type";
+"common.period"="Period";
 
 "reward_destination.controller"="Controller";
 "reward_destination.staked"="Staked";
@@ -137,13 +147,12 @@
 "notification_rules.title"="Notification Rules";
 "notification_rules.no_rules"="You have no notification rules.";
 "notification_rules.rule_deleted"="Rule deleted";
-"notification_rules.error.rule_list"="Error while getting the notification rule list. Please check your connection.";
+"notification_rules.error.rule_list"="Error while getting notification rules. Please check your connection.";
 "notification_rules.all_networks"="All networks";
 "notification_rules.one_validator"="1 validator";
 "notification_rules.n_validators"="%d validators";
 "notification_rules.all_validators"="All validators";
 "notification_rules.off"="Off";
-"notification_rules.immediate"="Immediate";
 "notification_rules.every_era"="Every era";
 "notification_rules.every_n_eras"="Every %d eras";
 "notification_rules.every_epoch"="Every epoch";
@@ -192,3 +201,12 @@
 "notification_type.democracy_started"="Democracy Referendum Started";
 "notification_type.democracy_undelegated"="Democracy Votes Undelegated";
 "notification_type.democracy_voted"="Democracy Voted";
+
+"edit_notification_rule.title.create"="New Notification Rule";
+"edit_notification_rule.title.edit"="Edit Notification Rule";
+"edit_notification_rule.error.data_fetch"="Error while getting necessary data. Please check your connection.";
+"edit_notification_rule.add_rule"="Add New Rule";
+"edit_notification_rule.all_networks"="All Networks";
+"edit_notification_rule.all_validators"="All of My Validators";
+"edit_notification_rule.all_network_validators"="All of My %@ Validators";
+"edit_notification_rule.create_rule"="Create Rule";

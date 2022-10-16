@@ -37,7 +37,7 @@ struct NotificationRuleView: View {
         case .off:
             return localized("notification_rules.off")
         case .immediate:
-            return localized("notification_rules.immediate")
+            return localized("common.immediate")
         case .epoch:
             if self.rule.period == 1 {
                 return localized("notification_rules.every_epoch")
@@ -77,8 +77,13 @@ struct NotificationRuleView: View {
         }
     }
     
-    private var detailsDisplay: String {
-        return "\(self.networkDisplay) / \(self.validatorDisplay) / \(self.periodDisplay)"
+    private var periodColor: Color {
+        switch self.rule.periodType {
+        case .off:
+            return Color("StatusError")
+        default:
+            return Color("Text")
+        }
     }
     
     var body: some View {
@@ -91,14 +96,32 @@ struct NotificationRuleView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             Spacer()
                 .frame(height: 8)
-            Text(self.detailsDisplay)
-                .font(UI.Font.NotificationRules.info)
-                .foregroundColor(Color("Text"))
-                .lineLimit(1)
-                .truncationMode(.middle)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack(spacing: 4) {
+                Text(self.networkDisplay)
+                    .font(UI.Font.NotificationRules.info)
+                    .foregroundColor(Color("Text"))
+                    .lineLimit(1)
+                Text("/")
+                    .font(UI.Font.NotificationRules.info)
+                    .foregroundColor(Color("Text"))
+                    .lineLimit(1)
+                Text(self.validatorDisplay)
+                    .font(UI.Font.NotificationRules.info)
+                    .foregroundColor(Color("Text"))
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                Text("/")
+                    .font(UI.Font.NotificationRules.info)
+                    .foregroundColor(Color("Text"))
+                    .lineLimit(1)
+                Text(self.periodDisplay)
+                    .font(UI.Font.NotificationRules.info)
+                    .foregroundColor(self.periodColor)
+                    .lineLimit(1)
+                Spacer()
+            }
         }
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(16)
         .background(Color("DataPanelBg"))
         .cornerRadius(16)

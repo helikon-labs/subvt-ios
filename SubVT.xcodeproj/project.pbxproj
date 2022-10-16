@@ -30,6 +30,8 @@
 		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
+		A03BA5E628F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
+		A03BA5E728F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
 		A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
 		A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
 		A03C5BE828783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
@@ -261,6 +263,11 @@
 		A0E0F6872848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
 		A0E0F6882848CF120029DDBF /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
 		A0E0F68B2848D2B40029DDBF /* SubVTData in Frameworks */ = {isa = PBXBuildFile; productRef = A0E0F68A2848D2B40029DDBF /* SubVTData */; };
+		A0E9F09228FC26EF000CCC02 /* ItemListButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9F09128FC26EF000CCC02 /* ItemListButtonStyle.swift */; };
+		A0E9F09328FC26EF000CCC02 /* ItemListButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9F09128FC26EF000CCC02 /* ItemListButtonStyle.swift */; };
+		A0E9F09528FC433F000CCC02 /* NotificationPeriodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9F09428FC433F000CCC02 /* NotificationPeriodType.swift */; };
+		A0E9F09628FC433F000CCC02 /* NotificationPeriodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9F09428FC433F000CCC02 /* NotificationPeriodType.swift */; };
+		A0E9F09728FC433F000CCC02 /* NotificationPeriodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9F09428FC433F000CCC02 /* NotificationPeriodType.swift */; };
 		A0EFDC5F28E994C2000A2BCC /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */; };
 		A0EFDC6028E994C2000A2BCC /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */; };
 		A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
@@ -364,6 +371,7 @@
 		A018C2AC28B90C0500C9A276 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
+		A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+EditNotificationRule.swift"; sourceTree = "<group>"; };
 		A03C5BE528783C9F00D9D4FD /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
 		A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkStatus.swift"; sourceTree = "<group>"; };
@@ -479,6 +487,8 @@
 		A0E0F6702848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-ExtraLight.ttf"; sourceTree = "<group>"; };
 		A0E0F6832848CD9B0029DDBF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0E0F6862848CF120029DDBF /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		A0E9F09128FC26EF000CCC02 /* ItemListButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListButtonStyle.swift; sourceTree = "<group>"; };
+		A0E9F09428FC433F000CCC02 /* NotificationPeriodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPeriodType.swift; sourceTree = "<group>"; };
 		A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
 		A0F285072879A96A00E69C6B /* BlockWaveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveShape.swift; sourceTree = "<group>"; };
 		A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveContainerView.swift; sourceTree = "<group>"; };
@@ -663,6 +673,7 @@
 				A0C03D84289666FC001C1B54 /* BgMorphViewModel.swift */,
 				A0A7CAE528968C4E005440FF /* DataPanelView.swift */,
 				A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */,
+				A0E9F09128FC26EF000CCC02 /* ItemListButtonStyle.swift */,
 				A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */,
 				A04B37C92876DBD600912BF3 /* NetworkSelectorButtonView.swift */,
 				A0D03342288AE065001F78D2 /* PushButtonStyle.swift */,
@@ -693,6 +704,7 @@
 		A04C472F28882AB50004A46A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				A0E9F09428FC433F000CCC02 /* NotificationPeriodType.swift */,
 				A0C03D8728967048001C1B54 /* RewardDestination.swift */,
 				A0AFF7F62892AC2900B0CB4F /* ValidatorDetails.swift */,
 				A06B1E3428E30A23006F8DF9 /* ValidatorSearchSummary.swift */,
@@ -768,6 +780,7 @@
 				A0B48C6A28DB16C8002987C0 /* UI+Dimension+AddValidators.swift */,
 				A07BA81A285B943A00575683 /* UI+Dimension+BgMorph.swift */,
 				A07BA817285B8C0600575683 /* UI+Dimension+Common.swift */,
+				A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */,
 				A07BA820285B94B400575683 /* UI+Dimension+Introduction.swift */,
 				A0F596FE28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift */,
 				A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */,
@@ -1274,6 +1287,7 @@
 				A0AFF7F42892A94900B0CB4F /* UI+Dimension+ValidatorDetails.swift in Sources */,
 				A0B3A6B8287D768A005DA484 /* LineChartView.swift in Sources */,
 				A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */,
+				A03BA5E628F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */,
 				A0D03349288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A067DD60289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */,
 				A07BA815285B556E00575683 /* SnackbarView.swift in Sources */,
@@ -1284,6 +1298,7 @@
 				A0128A51284A150C000C2307 /* OnboardingParentView.swift in Sources */,
 				A04C472A2887F1C30004A46A /* View.swift in Sources */,
 				A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */,
+				A0E9F09228FC26EF000CCC02 /* ItemListButtonStyle.swift in Sources */,
 				A07BA818285B8C0600575683 /* UI+Dimension+Common.swift in Sources */,
 				A07475B228B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */,
 				A04C472D288814DA0004A46A /* PreferenceKeys.swift in Sources */,
@@ -1330,6 +1345,7 @@
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A0AFF7FB2892B5F700B0CB4F /* UI+Text.swift in Sources */,
+				A0E9F09528FC433F000CCC02 /* NotificationPeriodType.swift in Sources */,
 				A04C47272887F19F0004A46A /* RoundedCorner.swift in Sources */,
 				A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */,
 				A0F596FF28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */,
@@ -1371,6 +1387,7 @@
 				A0AFF7FC2892B5F700B0CB4F /* UI+Text.swift in Sources */,
 				A04C473228882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */,
+				A0E9F09628FC433F000CCC02 /* NotificationPeriodType.swift in Sources */,
 				A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A06E15A7288FF69F00694CC8 /* NetworkMonitor.swift in Sources */,
 				A0744D8F2885866B008A06DD /* ValidatorListView.swift in Sources */,
@@ -1413,6 +1430,7 @@
 				A0F285132879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0646D9B285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */,
+				A0E9F09328FC26EF000CCC02 /* ItemListButtonStyle.swift in Sources */,
 				A0C03D86289666FC001C1B54 /* BgMorphViewModel.swift in Sources */,
 				A0128A63284A3BCC000C2307 /* UI.swift in Sources */,
 				A04B37C52876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
@@ -1428,12 +1446,14 @@
 				A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
 				A07475B328B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */,
 				A04C429728533564007C970B /* AppView.swift in Sources */,
+				A0E9F09728FC433F000CCC02 /* NotificationPeriodType.swift in Sources */,
 				A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */,
 				A09AC41628E9B03500C43E2B /* NotificationRuleView.swift in Sources */,
 				A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0744D932885A033008A06DD /* UI+Dimension+ValidatorList.swift in Sources */,
+				A03BA5E728F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */,
 				A0B48C6D28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */,
 				A0FC976928B62CCF00B75A9B /* AddValidatorsView.swift in Sources */,
 				A088B18828AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */,

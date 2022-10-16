@@ -76,6 +76,34 @@ struct NotificationRulesView: View {
         )
     }
     
+    private var addRuleButtonView: some View {
+        HStack(alignment: .center, spacing: 12) {
+            Text(localized("edit_notification_rule.add_rule"))
+                .font(UI.Font.Common.addItemButton)
+                .foregroundColor(Color("AddItemButtonText"))
+            UI.Image.Common.unionIcon(self.colorScheme)
+        }
+        .frame(
+            width: UI.Dimension.NotificationRules.addRuleButtonWidth,
+            height: UI.Dimension.NotificationRules.addRuleButtonHeight,
+            alignment: .center
+        )
+        .background(Color("TabBarBg"))
+        .cornerRadius(UI.Dimension.Common.cornerRadius)
+        .shadow(color: Color.black.opacity(0.1), radius: 10)
+    }
+    
+    private var addRuleButtonIsEnabled: Bool {
+        get {
+            switch self.viewModel.rulesFetchState {
+            case .success:
+                return true
+            default:
+                return false
+            }
+        }
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
             Color("Bg")
@@ -96,57 +124,58 @@ struct NotificationRulesView: View {
                 .zIndex(0)
             self.headerView
                 .zIndex(2)
-            ScrollView {
-                ScrollViewReader { scrollViewProxy in
-                    LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
-                        Spacer()
-                            .id(0)
-                            .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                        ForEach(self.viewModel.rules, id: \.self.id) {
-                            rule in
-                            NotificationRuleView(rule: rule)
-                                .modifier(SwipeDeleteViewModifier {
-                                    self.viewModel.deleteRule(rule) { isSuccessful in
-                                        if isSuccessful {
-                                            self.actionFeedbackViewState = .success
-                                            self.actionFeedbackViewText = localized("notification_rules.rule_deleted")
-                                        } else {
-                                            self.actionFeedbackViewState = .error
-                                            self.actionFeedbackViewText = localized("common.error")
+            switch self.viewModel.rulesFetchState {
+            case .success:
+                ScrollView {
+                    ScrollViewReader { scrollViewProxy in
+                        LazyVStack(spacing: UI.Dimension.ValidatorList.itemSpacing) {
+                            Spacer()
+                                .id(0)
+                                .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
+                            ForEach(self.viewModel.rules, id: \.self.id) {
+                                rule in
+                                NotificationRuleView(rule: rule)
+                                    .modifier(SwipeDeleteViewModifier {
+                                        self.viewModel.deleteRule(rule) { isSuccessful in
+                                            if isSuccessful {
+                                                self.actionFeedbackViewState = .success
+                                                self.actionFeedbackViewText = localized("notification_rules.rule_deleted")
+                                            } else {
+                                                self.actionFeedbackViewState = .error
+                                                self.actionFeedbackViewText = localized("common.error")
+                                            }
+                                            self.actionFeedbackViewIsVisible = true
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
+                                                self.actionFeedbackViewIsVisible = false
+                                            }
                                         }
-                                        self.actionFeedbackViewIsVisible = true
-                                        DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
-                                            self.actionFeedbackViewIsVisible = false
-                                        }
-                                    }
-                                })
+                                    })
+                            }
+                            Spacer()
+                                .frame(
+                                    height: UI.Dimension.Common.footerGradientViewHeight
+                                )
                         }
-                        Spacer()
-                            .frame(
-                                height: UI.Dimension.Common.footerGradientViewHeight
-                            )
-                    }
-                    .animation(.interactiveSpring(), value: self.viewModel.rules)
-                    .padding(EdgeInsets(
-                        top: 0,
-                        leading: UI.Dimension.Common.padding,
-                        bottom: 0,
-                        trailing: UI.Dimension.Common.padding
-                    ))
-                    .background(GeometryReader {
-                        Color.clear
-                            .preference(
-                                key: ViewOffsetKey.self,
-                                value: -$0.frame(in: .named("scroll")).origin.y
-                            )
-                    })
-                    .onPreferenceChange(ViewOffsetKey.self) {
-                        self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
+                        .animation(.interactiveSpring(), value: self.viewModel.rules)
+                        .padding(EdgeInsets(
+                            top: 0,
+                            leading: UI.Dimension.Common.padding,
+                            bottom: 0,
+                            trailing: UI.Dimension.Common.padding
+                        ))
+                        .background(GeometryReader {
+                            Color.clear
+                                .preference(
+                                    key: ViewOffsetKey.self,
+                                    value: -$0.frame(in: .named("scroll")).origin.y
+                                )
+                        })
+                        .onPreferenceChange(ViewOffsetKey.self) {
+                            self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
+                        }
                     }
                 }
-            }
-            .zIndex(1)
-            switch self.viewModel.rulesFetchState {
+                .zIndex(1)
             case .idle, .loading:
                 ProgressView()
                     .progressViewStyle(
@@ -162,6 +191,20 @@ struct NotificationRulesView: View {
             }
             FooterGradientView()
                 .zIndex(2)
+            NavigationLink {
+                EditNotificationRuleView(mode: .create)
+            } label: {
+                self.addRuleButtonView
+            }
+            .opacity(self.addRuleButtonIsEnabled ? 1.0 : 0.0)
+            .disabled(!self.addRuleButtonIsEnabled)
+            .animation(.spring(), value: self.viewModel.rulesFetchState)
+            .buttonStyle(PushButtonStyle())
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .offset(y: UI.Dimension.NotificationRules.addValidatorsButtonYOffset)
+            .animation(nil, value: self.viewModel.rulesFetchState)
+            .zIndex(2)
+            
             SnackbarView(
                 message: localized("notification_rules.error.rule_list"),
                 type: .error(canRetry: true)

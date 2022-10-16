@@ -8,14 +8,6 @@
 import SubVTData
 import SwiftUI
 
-fileprivate struct NetworkListButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .opacity(configuration.isPressed ? 0.8 : 1.0)
-            .animation(.none, value: configuration.isPressed)
-    }
-}
-
 struct AddValidatorsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
@@ -208,7 +200,7 @@ struct AddValidatorsView: View {
         Group {
             Spacer()
                 .frame(height: 30)
-            Text(localized("add_validators.network"))
+            Text(localized("common.network"))
                 .font(UI.Font.AddValidators.subtitle)
                 .foregroundColor(Color("Text"))
                 .modifier(PanelAppearance(2, self.displayState))
@@ -229,7 +221,7 @@ struct AddValidatorsView: View {
                     Spacer()
                         .frame(width: 16)
                     Text(self.viewModel.network.display)
-                        .font(UI.Font.AddValidators.network)
+                        .font(UI.Font.Common.formFieldTitle)
                         .foregroundColor(Color("Text"))
                     Spacer()
                     if self.networkListIsVisible {
@@ -249,7 +241,7 @@ struct AddValidatorsView: View {
             }
             .disabled(!self.networkButtonIsEnabled)
             .opacity(self.networkButtonIsEnabled ? 1.0 : 0.75)
-            .buttonStyle(NetworkListButtonStyle())
+            .buttonStyle(ItemListButtonStyle())
             .modifier(PanelAppearance(2, self.displayState))
         }
     }
@@ -282,22 +274,22 @@ struct AddValidatorsView: View {
                                     Spacer()
                                         .frame(width: 16)
                                     Text(network.display)
-                                        .font(UI.Font.AddValidators.network)
+                                        .font(UI.Font.Common.formFieldTitle)
                                         .foregroundColor(Color("Text"))
                                     if self.viewModel.network.id == network.id {
                                         Spacer()
                                             .frame(width: 16)
                                         Circle()
-                                            .fill(Color("NetworkButtonSelectionIndicator"))
+                                            .fill(Color("ItemListSelectionIndicator"))
                                             .frame(
-                                                width: UI.Dimension.Common.networkSelectionIndicatorSize,
-                                                height: UI.Dimension.Common.networkSelectionIndicatorSize
+                                                width: UI.Dimension.Common.itemSelectionIndicatorSize,
+                                                height: UI.Dimension.Common.itemSelectionIndicatorSize
                                             )
                                             .shadow(
-                                                color: Color("NetworkButtonSelectionIndicator"),
+                                                color: Color("ItemListSelectionIndicator"),
                                                 radius: 3,
                                                 x: 0,
-                                                y: UI.Dimension.Common.networkSelectionIndicatorSize / 2
+                                                y: UI.Dimension.Common.itemSelectionIndicatorSize / 2
                                             )
                                         Spacer()
                                             .frame(width: 24)
@@ -313,11 +305,11 @@ struct AddValidatorsView: View {
                                 .background(Color("DataPanelBg"))
                             }
                         )
-                        .buttonStyle(NetworkListButtonStyle())
+                        .buttonStyle(ItemListButtonStyle())
                         .disabled(!self.networkButtonIsEnabled)
                         .opacity(self.networkButtonIsEnabled ? 1.0 : 0.65)
                         if i < networks.count - 1 {
-                            Color("NetworkSelectorListDivider")
+                            Color("ItemSelectorListDivider")
                                 .frame(height: 1)
                         }
                     }

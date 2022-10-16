@@ -127,6 +127,6 @@ extension UI.Dimension {
         static let footerGradientViewHeight: CGFloat = UI.Dimension.TabBar.marginBottom
             + UI.Dimension.TabBar.height
         
-        static let networkSelectionIndicatorSize: CGFloat = 7
+        static let itemSelectionIndicatorSize: CGFloat = 7
     }
 }

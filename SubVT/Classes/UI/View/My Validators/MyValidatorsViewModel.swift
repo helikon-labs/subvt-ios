@@ -108,6 +108,8 @@ class MyValidatorsViewModel: ObservableObject {
     private func fetchValidatorSummaries() {
         if self.userValidators.isEmpty {
             self.fetchState = .success(result: "")
+            self.setupUpdateTimer()
+            return
         }
         var publishers: [ServiceResponsePublisher<ValidatorSummaryReport>] = []
         for userValidator in self.userValidators {
