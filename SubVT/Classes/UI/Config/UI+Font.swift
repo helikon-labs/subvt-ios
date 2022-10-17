@@ -167,7 +167,7 @@ extension UI {
         }
         
         enum EditNotificationRule {
-            static let actionButton = LexendDeca.medium.withSize(16)
+            static let actionButton = LexendDeca.semiBold.withSize(16)
         }
     }
 }

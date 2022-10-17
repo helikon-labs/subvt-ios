@@ -9,6 +9,8 @@
 "common.retry"="Retry";
 "common.search"="Search";
 "common.done"="Done";
+"common.overwrite"="Overwrite";
+"common.cancel"="Cancel";
 
 "common.error"="Error";
 "common.error.connection"="Connection error";
@@ -205,8 +207,10 @@
 "edit_notification_rule.title.create"="New Notification Rule";
 "edit_notification_rule.title.edit"="Edit Notification Rule";
 "edit_notification_rule.error.data_fetch"="Error while getting necessary data. Please check your connection.";
+"edit_notification_rule.error.data_persist"="Error while saving the rule. Please check your connection.";
 "edit_notification_rule.add_rule"="Add New Rule";
 "edit_notification_rule.all_networks"="All Networks";
 "edit_notification_rule.all_validators"="All of My Validators";
 "edit_notification_rule.all_network_validators"="All of My %@ Validators";
 "edit_notification_rule.create_rule"="Create Rule";
+"edit_notification_rule.update_confirmation"="SubVT currently supports a single notification rule per notification type. You already have a notification rule defined for type \"%@\".\n\nDo you want to overwrite the existing rule?";

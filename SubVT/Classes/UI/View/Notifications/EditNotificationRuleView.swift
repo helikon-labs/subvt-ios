@@ -26,13 +26,44 @@ struct EditNotificationRuleView: View {
     @State private var validatorListIsVisible = false
     @State private var periodTypeListIsVisible = false
     @State private var periodListIsVisible = false
-    @State private var actionButtonState : ActionButtonView.State = .enabled
+    @State private var showingUpdateRuleConfirmation: Bool = false
+    
+    private var controlsAreLocked: Bool {
+        switch self.viewModel.dataPersistState {
+        case .loading, .success:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    private var actionButtonState: ActionButtonView.State {
+        switch self.viewModel.dataFetchState {
+        case .idle, .loading, .error:
+            return .disabled
+        case .success:
+            switch self.viewModel.dataPersistState {
+            case .idle:
+                return .enabled
+            case .loading, .success:
+                return .loading
+            case .error:
+                return .disabled
+            }
+        }
+    }
     
     private var snackbarIsVisible: Bool {
         switch self.viewModel.dataFetchState {
         case .error:
             return true
         default:
+            switch self.viewModel.dataPersistState {
+            case .error:
+                return true
+            default:
+                break
+            }
             break
         }
         return false
@@ -44,6 +75,38 @@ struct EditNotificationRuleView: View {
             return localized("edit_notification_rule.title.create")
         case .edit:
             return localized("edit_notification_rule.title.edit")
+        }
+    }
+    
+    private var snackbarMessage: String {
+        switch self.viewModel.dataFetchState {
+        case .error:
+            return localized("edit_notification_rule.error.data_fetch")
+        default:
+            switch self.viewModel.dataPersistState {
+            case .error:
+                return localized("edit_notification_rule.error.data_persist")
+            default:
+                break
+            }
+        }
+        return ""
+    }
+    
+    private var snackbarCanRetry: Bool {
+        switch self.viewModel.dataFetchState {
+        case .error:
+            return true
+        default:
+            return false
+        }
+    }
+    
+    private var confirmationDialogTitle: String {
+        if let notificationType = self.viewModel.notificationType {
+            return localized("notification_type.\(notificationType.code)")
+        } else {
+            return ""
         }
     }
     
@@ -122,7 +185,7 @@ struct EditNotificationRuleView: View {
             case .success:
                 ScrollView {
                     ScrollViewReader { scrollViewProxy in
-                        VStack(alignment: .leading) {
+                        VStack(alignment: .leading, spacing: 0) {
                             Spacer()
                                 .frame(height: UI.Dimension.EditNotificationRule.scrollContentMarginTop)
                             Group {
@@ -180,6 +243,9 @@ struct EditNotificationRuleView: View {
                                     Group {}
                                 }
                             }
+                            Color.clear
+                                .frame(height: UI.Dimension.EditNotificationRule.scrollContentMarginBottom)
+                                .frame(maxWidth: .infinity)
                         }
                         .padding(EdgeInsets(
                             top: 0,
@@ -218,8 +284,16 @@ struct EditNotificationRuleView: View {
             ZStack {
                 Button(
                     action: {
+                        guard !self.viewModel.userHasNotificationType else {
+                            self.showingUpdateRuleConfirmation = true
+                            return
+                        }
+                        self.networkListIsVisible = false
+                        self.notificationTypeListIsVisible = false
+                        self.validatorListIsVisible = false
+                        self.periodTypeListIsVisible = false
+                        self.periodListIsVisible = false
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                            self.actionButtonState = .loading
                             self.viewModel.createRule(channelId: UInt64(self.notificationChannelId))
                         }
                     },
@@ -236,16 +310,25 @@ struct EditNotificationRuleView: View {
                 .buttonStyle(ActionButtonStyle(state: self.actionButtonState))
                 .offset(
                     x: 0,
-                    y: UI.Dimension.EditNotificationRule.actionButtonYOffset
+                    y: UI.Dimension.EditNotificationRule.actionButtonYOffset(
+                        dataFetchState: self.viewModel.dataFetchState,
+                        dataPersistState: self.viewModel.dataPersistState
+                    )
                 )
+                .animation(.spring(), value: self.viewModel.dataFetchState)
+                .animation(.spring(), value: self.viewModel.dataPersistState)
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
             .zIndex(3)
             SnackbarView(
-                message: localized("edit_notification_rule.error.data_fetch"),
-                type: .error(canRetry: true)
+                message: self.snackbarMessage,
+                type: .error(canRetry: self.snackbarCanRetry)
             ) {
-                self.viewModel.fetchData()
+                if self.snackbarCanRetry {
+                    self.viewModel.fetchData()
+                } else {
+                    self.viewModel.resetDataPersistState()
+                }
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
             .offset(
@@ -281,6 +364,22 @@ struct EditNotificationRuleView: View {
             self.networkListIsVisible = false
             self.notificationTypeListIsVisible = false
             self.validatorListIsVisible = false
+        }
+        .confirmationDialog(
+            String(
+                format: localized("edit_notification_rule.update_confirmation"),
+                self.confirmationDialogTitle
+            ),
+            isPresented: self.$showingUpdateRuleConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button(
+                localized("common.overwrite"),
+                role: .destructive
+            ) {
+                // first delete, then create
+            }
+            Button(localized("common.cancel"), role: .cancel) {}
         }
     }
     
@@ -337,6 +436,8 @@ struct EditNotificationRuleView: View {
             }
             .buttonStyle(ItemListButtonStyle())
             .modifier(PanelAppearance(2, self.displayState))
+            .disabled(self.controlsAreLocked)
+            .opacity(self.controlsAreLocked ? UI.Value.disabledControlOpacity : 1.0)
         }
     }
     
@@ -486,6 +587,8 @@ struct EditNotificationRuleView: View {
             }
             .buttonStyle(ItemListButtonStyle())
             .modifier(PanelAppearance(2, self.displayState))
+            .disabled(self.controlsAreLocked)
+            .opacity(self.controlsAreLocked ? UI.Value.disabledControlOpacity : 1.0)
         }
     }
     
@@ -597,6 +700,8 @@ struct EditNotificationRuleView: View {
             }
             .buttonStyle(ItemListButtonStyle())
             .modifier(PanelAppearance(2, self.displayState))
+            .disabled(self.controlsAreLocked)
+            .opacity(self.controlsAreLocked ? UI.Value.disabledControlOpacity : 1.0)
         }
     }
     
@@ -745,6 +850,8 @@ struct EditNotificationRuleView: View {
             }
             .buttonStyle(ItemListButtonStyle())
             .modifier(PanelAppearance(2, self.displayState))
+            .disabled(self.controlsAreLocked)
+            .opacity(self.controlsAreLocked ? UI.Value.disabledControlOpacity : 1.0)
         }
     }
     
@@ -838,6 +945,8 @@ struct EditNotificationRuleView: View {
             }
             .buttonStyle(ItemListButtonStyle())
             .modifier(PanelAppearance(2, self.displayState))
+            .disabled(self.controlsAreLocked)
+            .opacity(self.controlsAreLocked ? UI.Value.disabledControlOpacity : 1.0)
         }
     }
     

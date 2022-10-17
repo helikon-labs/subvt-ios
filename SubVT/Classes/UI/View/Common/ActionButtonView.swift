@@ -98,7 +98,7 @@ struct ActionButtonView: View {
         ZStack(alignment: .center) {
             if self.state != .loading {
                 Text(title)
-                    .font(UI.Font.Common.actionButton)
+                    .font(self.font)
                     .foregroundColor(self.textColor)
             }
             if self.state == .loading {

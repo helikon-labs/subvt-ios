@@ -11,6 +11,7 @@ import SubVTData
 
 class EditNotificationRuleViewModel: ObservableObject {
     @Published private(set) var dataFetchState: DataFetchState<String> = .idle
+    @Published private(set) var dataPersistState: DataFetchState<String> = .idle
     @Published private(set) var notificationTypes: [NotificationType] = []
     @Published private(set) var filteredUserValidatorSummaries: [UserValidatorSummary] = []
     @Published private(set) var userNotificationRules: [UserNotificationRule] = []
@@ -26,6 +27,12 @@ class EditNotificationRuleViewModel: ObservableObject {
     private var appService = SubVTData.AppService()
     private var cancellables: Set<AnyCancellable> = []
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
+    
+    var userHasNotificationType: Bool {
+        return self.userNotificationRules.contains {
+            $0.notificationType.code == self.notificationType.code
+        }
+    }
     
     init() {
         self.$network.sink { newNetwork in
@@ -66,6 +73,10 @@ class EditNotificationRuleViewModel: ObservableObject {
                 )
             }
         }
+    }
+    
+    func resetDataPersistState() {
+        self.dataPersistState = .idle
     }
     
     func fetchData() {
@@ -179,6 +190,7 @@ class EditNotificationRuleViewModel: ObservableObject {
     }
     
     func createRule(channelId: UInt64) {
+        self.dataPersistState = .loading
         var userValidatorIds: [UInt64] = []
         if let validator = self.validator {
             userValidatorIds.append(validator.userValidator.id)
@@ -198,11 +210,13 @@ class EditNotificationRuleViewModel: ObservableObject {
         appService.createUserNotificationRule(request: request)
             .sink {
                 [weak self] response in
-                guard let _ = self else { return }
+                guard let self = self else { return }
                 if let error = response.error {
-                    print("ERROR CREATING RULE: \(error)")
+                    log.error("Error creating notification rule: \(error)")
+                    self.dataPersistState = .error(error: error)
                 } else if let userNotificationRule = response.value {
-                    print("CREATED RULE WITH ID \(userNotificationRule.id)")
+                    log.info("Notification rule created with id \(userNotificationRule.id).")
+                    self.dataPersistState = .success(result: "")
                 }
             }
             .store(in: &self.cancellables)
