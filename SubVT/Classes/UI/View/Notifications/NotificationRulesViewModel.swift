@@ -8,6 +8,7 @@
 import Combine
 import Foundation
 import SubVTData
+import SwiftEventBus
 
 class NotificationRulesViewModel: ObservableObject {
     @Published private(set) var rulesFetchState: DataFetchState<String> = .idle
@@ -15,6 +16,20 @@ class NotificationRulesViewModel: ObservableObject {
     
     private let appService = AppService()
     private var cancellables = Set<AnyCancellable>()
+    
+    init() {
+        SwiftEventBus.onMainThread(self, name: Event.userNotificationRuleDeleted.rawValue) {
+            [weak self] result in
+            guard let self = self, let id = result?.object as? UInt64 else { return }
+            self.rules.removeAll { $0.id == id }
+        }
+        SwiftEventBus.onMainThread(self, name: Event.userNotificationRuleCreated.rawValue) {
+            [weak self] result in
+            guard let self = self, let rule = result?.object as? UserNotificationRule else { return }
+            self.rules.append(rule)
+            self.sortRules()
+        }
+    }
     
     func fetchRules() {
         guard self.rulesFetchState != .loading else { return }

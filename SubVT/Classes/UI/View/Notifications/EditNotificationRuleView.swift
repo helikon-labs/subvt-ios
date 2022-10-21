@@ -26,7 +26,7 @@ struct EditNotificationRuleView: View {
     @State private var validatorListIsVisible = false
     @State private var periodTypeListIsVisible = false
     @State private var periodListIsVisible = false
-    @State private var showingUpdateRuleConfirmation: Bool = false
+    @State private var overwriteRuleConfirmationDialogIsVisible: Bool = false
     
     private var controlsAreLocked: Bool {
         switch self.viewModel.dataPersistState {
@@ -110,7 +110,11 @@ struct EditNotificationRuleView: View {
         }
     }
     
-    let mode: Mode
+    private let mode: Mode
+    
+    init(mode: Mode) {
+        self.mode = mode
+    }
     
     private var headerView: some View {
         VStack {
@@ -284,8 +288,10 @@ struct EditNotificationRuleView: View {
             ZStack {
                 Button(
                     action: {
-                        guard !self.viewModel.userHasNotificationType else {
-                            self.showingUpdateRuleConfirmation = true
+                        guard self.viewModel.getUserNotificationRuleByType(
+                            typeCode: self.viewModel.notificationType.code
+                        ) == nil else {
+                            self.overwriteRuleConfirmationDialogIsVisible = true
                             return
                         }
                         self.networkListIsVisible = false
@@ -294,7 +300,11 @@ struct EditNotificationRuleView: View {
                         self.periodTypeListIsVisible = false
                         self.periodListIsVisible = false
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                            self.viewModel.createRule(channelId: UInt64(self.notificationChannelId))
+                            self.viewModel.createRule(
+                                channelId: UInt64(self.notificationChannelId)
+                            ) {
+                                self.presentationMode.wrappedValue.dismiss()
+                            }
                         }
                     },
                     label: {
@@ -370,14 +380,18 @@ struct EditNotificationRuleView: View {
                 format: localized("edit_notification_rule.update_confirmation"),
                 self.confirmationDialogTitle
             ),
-            isPresented: self.$showingUpdateRuleConfirmation,
+            isPresented: self.$overwriteRuleConfirmationDialogIsVisible,
             titleVisibility: .visible
         ) {
             Button(
                 localized("common.overwrite"),
                 role: .destructive
             ) {
-                // first delete, then create
+                self.viewModel.deleteAndCreateRule(
+                    channelId: UInt64(self.notificationChannelId)
+                ) {
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             }
             Button(localized("common.cancel"), role: .cancel) {}
         }

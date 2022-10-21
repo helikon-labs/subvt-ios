@@ -28,12 +28,6 @@ class EditNotificationRuleViewModel: ObservableObject {
     private var cancellables: Set<AnyCancellable> = []
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
     
-    var userHasNotificationType: Bool {
-        return self.userNotificationRules.contains {
-            $0.notificationType.code == self.notificationType.code
-        }
-    }
-    
     init() {
         self.$network.sink { newNetwork in
             self.filterNetworkValidators(network: newNetwork)
@@ -189,7 +183,33 @@ class EditNotificationRuleViewModel: ObservableObject {
         }
     }
     
-    func createRule(channelId: UInt64) {
+    func getUserNotificationRuleByType(typeCode: String) -> UserNotificationRule? {
+        return self.userNotificationRules.first { $0.notificationType.code == typeCode }
+    }
+    
+    func deleteAndCreateRule(channelId: UInt64, onSuccess: (() -> ())? = nil) {
+        guard let ruleToDelete = self.getUserNotificationRuleByType(typeCode: self.notificationType.code) else {
+            return
+        }
+        self.dataPersistState = .loading
+        appService.deleteUserNotificationRule(id: ruleToDelete.id)
+            .sink {
+                [weak self] response in
+                guard let self = self else { return }
+                if let error = response.error {
+                    log.error("Error deleting notification rule: \(error)")
+                    self.dataPersistState = .error(error: error)
+                } else {
+                    log.info("Successfully deleted notification rule of type \(ruleToDelete.notificationType.code).")
+                    self.userNotificationRules.removeAll { $0.id == ruleToDelete.id }
+                    Event.userNotificationRuleDeleted.post(ruleToDelete.id)
+                    self.createRule(channelId: channelId, onSuccess: onSuccess)
+                }
+            }
+            .store(in: &self.cancellables)
+    }
+    
+    func createRule(channelId: UInt64, onSuccess: (() -> ())? = nil) {
         self.dataPersistState = .loading
         var userValidatorIds: [UInt64] = []
         if let validator = self.validator {
@@ -217,6 +237,8 @@ class EditNotificationRuleViewModel: ObservableObject {
                 } else if let userNotificationRule = response.value {
                     log.info("Notification rule created with id \(userNotificationRule.id).")
                     self.dataPersistState = .success(result: "")
+                    Event.userNotificationRuleCreated.post(userNotificationRule)
+                    onSuccess?()
                 }
             }
             .store(in: &self.cancellables)

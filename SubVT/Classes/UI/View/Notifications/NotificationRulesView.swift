@@ -241,10 +241,15 @@ struct NotificationRulesView: View {
         )
         .onAppear() {
             UITextField.appearance().clearButtonMode = .whileEditing
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.displayState = .appeared
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.viewModel.fetchRules()
+            switch self.displayState {
+            case .appeared:
+                return
+            default:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.displayState = .appeared
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.viewModel.fetchRules()
+                    }
                 }
             }
         }
