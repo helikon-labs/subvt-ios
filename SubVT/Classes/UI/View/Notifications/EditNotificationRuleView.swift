@@ -110,6 +110,15 @@ struct EditNotificationRuleView: View {
         }
     }
     
+    private var actionButtonTitle: String {
+        switch self.mode {
+        case .create:
+            return localized("edit_notification_rule.create_rule")
+        case .edit:
+            return localized("edit_notification_rule.save_rule")
+        }
+    }
+    
     private let mode: Mode
     
     init(mode: Mode) {
@@ -288,11 +297,16 @@ struct EditNotificationRuleView: View {
             ZStack {
                 Button(
                     action: {
-                        guard self.viewModel.getUserNotificationRuleByType(
-                            typeCode: self.viewModel.notificationType.code
-                        ) == nil else {
-                            self.overwriteRuleConfirmationDialogIsVisible = true
-                            return
+                        switch self.mode {
+                        case .create:
+                            guard self.viewModel.getUserNotificationRuleByType(
+                                typeCode: self.viewModel.notificationType.code
+                            ) == nil else {
+                                self.overwriteRuleConfirmationDialogIsVisible = true
+                                return
+                            }
+                        default:
+                            break
                         }
                         self.networkListIsVisible = false
                         self.notificationTypeListIsVisible = false
@@ -300,16 +314,25 @@ struct EditNotificationRuleView: View {
                         self.periodTypeListIsVisible = false
                         self.periodListIsVisible = false
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                            self.viewModel.createRule(
-                                channelId: UInt64(self.notificationChannelId)
-                            ) {
-                                self.presentationMode.wrappedValue.dismiss()
+                            switch self.mode {
+                            case .create:
+                                self.viewModel.createRule(
+                                    channelId: UInt64(self.notificationChannelId)
+                                ) {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
+                            case .edit:
+                                self.viewModel.deleteAndCreateRule(
+                                    channelId: UInt64(self.notificationChannelId)
+                                ) {
+                                    self.presentationMode.wrappedValue.dismiss()
+                                }
                             }
                         }
                     },
                     label: {
                         ActionButtonView(
-                            title: localized("edit_notification_rule.create_rule"),
+                            title: self.actionButtonTitle,
                             state: self.actionButtonState,
                             font: UI.Font.EditNotificationRule.actionButton,
                             width: UI.Dimension.EditNotificationRule.actionButtonWidth,
@@ -362,11 +385,14 @@ struct EditNotificationRuleView: View {
             alignment: .leading
         )
         .onAppear() {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                self.displayState = .appeared
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    self.viewModel.initReportServices(networks: self.networks ?? [])
-                    self.viewModel.fetchData()
+            if self.displayState != .appeared {
+                self.viewModel.setMode(mode: self.mode, networks: self.networks)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.displayState = .appeared
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.viewModel.initReportServices(networks: self.networks ?? [])
+                        self.viewModel.fetchData()
+                    }
                 }
             }
         }
@@ -679,9 +705,22 @@ struct EditNotificationRuleView: View {
             } label: {
                 HStack(alignment: .center) {
                     if let userValidatorSummary = self.viewModel.validator {
+                        if self.viewModel.network == nil {
+                            if let network = self.networks?.first(where: {
+                                $0.id == userValidatorSummary.validatorSummary.networkId
+                            }) {
+                                UI.Image.Common.networkIcon(network: network)
+                                    .resizable()
+                                    .frame(
+                                        width: UI.Dimension.EditNotificationRule.validatorListNetworkIconSize,
+                                        height: UI.Dimension.EditNotificationRule.validatorListNetworkIconSize
+                                    )
+                            }
+                        }
                         Text(userValidatorSummary.validatorSummary.identityDisplay)
                             .font(UI.Font.Common.formFieldTitle)
                             .foregroundColor(Color("Text"))
+                            .truncationMode(.middle)
                     } else {
                         if let network = self.viewModel.network {
                             Text(String(
@@ -784,6 +823,18 @@ struct EditNotificationRuleView: View {
                         },
                         label: {
                             HStack(alignment: .center) {
+                                if self.viewModel.network == nil {
+                                    if let network = self.networks?.first(where: {
+                                        $0.id == validator.validatorSummary.networkId
+                                    }) {
+                                        UI.Image.Common.networkIcon(network: network)
+                                            .resizable()
+                                            .frame(
+                                                width: UI.Dimension.EditNotificationRule.validatorListNetworkIconSize,
+                                                height: UI.Dimension.EditNotificationRule.validatorListNetworkIconSize
+                                            )
+                                    }
+                                }
                                 Text(validator.validatorSummary.identityDisplay)
                                     .font(UI.Font.Common.formFieldTitle)
                                     .foregroundColor(Color("Text"))

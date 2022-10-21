@@ -213,4 +213,5 @@
 "edit_notification_rule.all_validators"="All of My Validators";
 "edit_notification_rule.all_network_validators"="All of My %@ Validators";
 "edit_notification_rule.create_rule"="Create Rule";
+"edit_notification_rule.save_rule"="Update Rule";
 "edit_notification_rule.update_confirmation"="SubVT currently supports a single notification rule per notification type. You already have a notification rule defined for type \"%@\".\n\nDo you want to overwrite the existing rule?";

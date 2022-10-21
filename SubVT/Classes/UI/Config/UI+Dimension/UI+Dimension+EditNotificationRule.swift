@@ -33,5 +33,6 @@ extension UI.Dimension {
                 }
             }
         }
+        static let validatorListNetworkIconSize: CGFloat = 22
     }
 }

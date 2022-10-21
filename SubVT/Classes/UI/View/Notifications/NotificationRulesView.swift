@@ -134,22 +134,28 @@ struct NotificationRulesView: View {
                                 .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
                             ForEach(self.viewModel.rules, id: \.self.id) {
                                 rule in
-                                NotificationRuleView(rule: rule)
-                                    .modifier(SwipeDeleteViewModifier {
-                                        self.viewModel.deleteRule(rule) { isSuccessful in
-                                            if isSuccessful {
-                                                self.actionFeedbackViewState = .success
-                                                self.actionFeedbackViewText = localized("notification_rules.rule_deleted")
-                                            } else {
-                                                self.actionFeedbackViewState = .error
-                                                self.actionFeedbackViewText = localized("common.error")
+                                NavigationLink {
+                                    EditNotificationRuleView(mode: .edit(rule: rule))
+                                } label: {
+                                    NotificationRuleView(rule: rule)
+                                        .modifier(SwipeDeleteViewModifier {
+                                            self.viewModel.deleteRule(rule) { isSuccessful in
+                                                if isSuccessful {
+                                                    self.actionFeedbackViewState = .success
+                                                    self.actionFeedbackViewText = localized("notification_rules.rule_deleted")
+                                                } else {
+                                                    self.actionFeedbackViewState = .error
+                                                    self.actionFeedbackViewText = localized("common.error")
+                                                }
+                                                self.actionFeedbackViewIsVisible = true
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
+                                                    self.actionFeedbackViewIsVisible = false
+                                                }
                                             }
-                                            self.actionFeedbackViewIsVisible = true
-                                            DispatchQueue.main.asyncAfter(deadline: .now() + UI.Duration.actionFeedbackViewVisibleDuration) {
-                                                self.actionFeedbackViewIsVisible = false
-                                            }
-                                        }
-                                    })
+                                        })
+
+                                }
+                                .buttonStyle(PushButtonStyle())
                             }
                             Spacer()
                                 .frame(

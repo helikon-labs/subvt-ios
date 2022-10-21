@@ -27,6 +27,7 @@ class EditNotificationRuleViewModel: ObservableObject {
     private var appService = SubVTData.AppService()
     private var cancellables: Set<AnyCancellable> = []
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
+    private var mode: EditNotificationRuleView.Mode = .create
     
     init() {
         self.$network.sink { newNetwork in
@@ -53,6 +54,23 @@ class EditNotificationRuleViewModel: ObservableObject {
             }
         }
         .store(in: &self.cancellables)
+    }
+    
+    func setMode(
+        mode: EditNotificationRuleView.Mode,
+        networks: [Network]?
+    ) {
+        self.mode = mode
+        switch self.mode {
+        case .edit(let rule):
+            if let networkId = rule.network?.id {
+                self.network = networks?.first(where: { $0.id == networkId })
+            }
+            self.periodType = rule.periodType
+            self.period = rule.period
+        default:
+            break
+        }
     }
     
     func initReportServices(networks: [Network]) {
@@ -91,7 +109,12 @@ class EditNotificationRuleViewModel: ObservableObject {
                     }).sorted(by: { notificationType1, notificationType2 in
                         localized("notification_type.\(notificationType1.code)") < localized("notification_type.\(notificationType2.code)")
                     })
-                    if self.notificationType == nil {
+                    switch self.mode {
+                    case .edit(let rule):
+                        self.notificationType = self.notificationTypes.first(where: {
+                            $0.code == rule.notificationType.code
+                        })
+                    case .create:
                         self.notificationType = self.notificationTypes[0]
                     }
                     self.fetchUserValidators()
@@ -160,6 +183,18 @@ class EditNotificationRuleViewModel: ObservableObject {
                         ))
                         self.filteredUserValidatorSummaries = self.userValidatorSummaries
                         self.sortUserValidatorSummaries()
+                        self.filterNetworkValidators(network: self.network)
+                        switch self.mode {
+                        case .edit(let rule):
+                            if rule.validators.count > 0 {
+                                let ruleUserValidatorId = rule.validators[0].id
+                                self.validator = self.userValidatorSummaries.first(where: {
+                                    $0.userValidator.id == ruleUserValidatorId
+                                })
+                            }
+                        default:
+                            break
+                        }
                     }
                     self.dataFetchState = .success(result: "")
                 }
