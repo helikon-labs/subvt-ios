@@ -18,15 +18,18 @@ struct TabBarButtonStyle: ButtonStyle {
 struct TabBarButtonView: View {
     let tab: Tab
     let isActive: Bool
+    let notificationCount: Int
     let onSelect: () -> ()
     
     init(
         tab: Tab,
         isActive: Bool,
+        notificationCount: Int,
         onSelect: @escaping () -> ()
     ) {
         self.tab = tab
         self.isActive = isActive
+        self.notificationCount = notificationCount
         self.onSelect = onSelect
     }
     
@@ -36,16 +39,8 @@ struct TabBarButtonView: View {
                 self.onSelect()
             },
             label: {
-                VStack(alignment: .center, spacing: 0) {
-                    if self.tab == .eraReports {
-                        self.tab.getImage(isActive: self.isActive)
-                            .grayscale(1.0)
-                            .opacity(UI.Value.disabledControlOpacity)
-                        Text(self.tab.text)
-                            .font(UI.Font.TabBar.text)
-                            .foregroundColor(Color("TabBarItemTextInactive"))
-                            .opacity(UI.Value.disabledControlOpacity)
-                    } else {
+                ZStack(alignment: .center) {
+                    VStack(alignment: .center, spacing: 0) {
                         self.tab.getImage(isActive: self.isActive)
                         Text(self.tab.text)
                             .font(UI.Font.TabBar.text)
@@ -54,6 +49,30 @@ struct TabBarButtonView: View {
                                 ? Color("TabBarItemTextActive")
                                 : Color("TabBarItemTextInactive")
                             )
+                    }
+                    if notificationCount > 0 {
+                        VStack {
+                            Spacer()
+                                .frame(height: 8)
+                            HStack {
+                                Spacer()
+                                Text("\(notificationCount)")
+                                    .font(UI.Font.TabBar.notificationCount)
+                                    .padding(EdgeInsets(
+                                        top: 0,
+                                        leading: 6,
+                                        bottom: 0,
+                                        trailing: 6
+                                    ))
+                                    .frame(height: 19)
+                                    .foregroundColor(.white)
+                                    .background(Color.red)
+                                    .cornerRadius(10)
+                                Spacer()
+                                    .frame(width: 4)
+                            }
+                            Spacer()
+                        }
                     }
                 }
                 .frame(width: UI.Dimension.TabBar.itemWidth)
@@ -66,6 +85,12 @@ struct TabBarButtonView: View {
 
 struct TabBarView: View {
     @Binding var currentTab: Tab
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.receivedAt, order: .reverse)
+    ], predicate: NSPredicate(
+        format: "isRead == %@",
+        NSNumber(value: false)
+    )) var unreadNotifications: FetchedResults<Notification>
     
     var body: some View {
         HStack(
@@ -75,7 +100,8 @@ struct TabBarView: View {
             ForEach(Tab.allCases, id: \.self) { tab in
                 TabBarButtonView(
                     tab: tab,
-                    isActive: tab == self.currentTab
+                    isActive: tab == self.currentTab,
+                    notificationCount: (tab == .notifications) ? self.unreadNotifications.count : 0
                 ) {
                     self.currentTab = tab
                 }

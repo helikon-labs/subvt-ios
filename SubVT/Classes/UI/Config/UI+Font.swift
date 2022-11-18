@@ -107,6 +107,7 @@ extension UI {
         
         enum TabBar {
             static let text = LexendDeca.light.withSize(10)
+            static let notificationCount = LexendDeca.regular.withSize(12)
         }
         
         enum NetworkStatus {
@@ -159,6 +160,7 @@ extension UI {
         enum Notification {
             static let validatorDisplay = LexendDeca.semiBold.withSize(18)
             static let notificationType = LexendDeca.light.withSize(12)
+            static let notificationMessage = LexendDeca.light.withSize(14)
         }
         
         enum NotificationRules {

@@ -10,14 +10,17 @@ import SwiftUI
 
 struct NotificationView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    @Environment(\.managedObjectContext) private var viewContext
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
     @State private(set) var isExpanded = false
     
     private let notification: Notification
+    private let onRead: (() -> ())?
     private let dateFormatter: DateFormatter
     
-    init(notification: Notification) {
+    init(notification: Notification, onRead: (() -> ())? = nil) {
         self.notification = notification
+        self.onRead = onRead
         self.dateFormatter = DateFormatter()
         self.dateFormatter.dateFormat = "HH:mm MMM dd, yyyy"
     }
@@ -60,7 +63,19 @@ struct NotificationView: View {
                     .font(UI.Font.Notification.notificationType)
                     .foregroundColor(Color("Text"))
             }
-            
+            if self.isExpanded {
+                Spacer()
+                    .frame(height: 8)
+                HStack {
+                    Text((self.notification.message ?? "-").trimmingCharacters(
+                        in: .whitespacesAndNewlines
+                    ))
+                        .font(UI.Font.Notification.notificationMessage)
+                        .foregroundColor(Color("Text"))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Spacer()
+                }
+            }
         }
         .frame(maxWidth: .infinity)
         .padding(EdgeInsets(
@@ -71,6 +86,12 @@ struct NotificationView: View {
         ))
         .background(Color("DataPanelBg"))
         .cornerRadius(16)
+        .onTapGesture {
+            self.isExpanded.toggle()
+            if self.isExpanded {
+                self.onRead?()
+            }
+        }
     }
 }
 

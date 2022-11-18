@@ -23,6 +23,7 @@ struct ValidatorDetailsView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationMode) private var presentationMode
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
+    @AppStorage(AppStorageKey.onekvNominators) private var onekvNominators: [UInt64:[String]] = [:]
     @StateObject private var viewModel = ValidatorDetailsViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var displayState: BasicViewDisplayState = .notAppeared
@@ -306,8 +307,6 @@ struct ValidatorDetailsView: View {
                         )
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(4, self.displayState))
-                        .disabled(true)
-                        .opacity(UI.Value.disabledControlOpacity)
                     }
                     .frame(height: UI.Dimension.ValidatorList.titleSectionHeight)
                 }
@@ -637,11 +636,19 @@ extension ValidatorDetailsView {
                     ScrollView {
                         LazyVStack(spacing: 4) {
                             ForEach(nominators, id: \.self.account.id) { nominator in
+                                let onekvNominators = self.onekvNominators[self.validatorSummary.networkId] ?? []
                                 HStack(alignment: .center) {
                                     Text(truncateAddress(nominator.account.address))
                                         .font(UI.Font.ValidatorDetails.nominator)
                                         .foregroundColor(Color("Text"))
                                         .lineLimit(1)
+                                    if onekvNominators.contains(nominator.account.address) {
+                                        Spacer()
+                                            .frame(width: 4)
+                                        Text("(1KV)")
+                                            .font(UI.Font.ValidatorDetails.nominator)
+                                            .foregroundColor(Color("Text"))
+                                    }
                                     Spacer()
                                     Text(formatBalance(
                                         balance: nominator.stake,

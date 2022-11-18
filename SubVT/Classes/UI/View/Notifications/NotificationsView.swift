@@ -5,6 +5,7 @@
 //  Created by Kutsal Kaan Bilgin on 30.09.2022.
 //
 
+import Combine
 import CoreData
 import SwiftUI
 
@@ -72,41 +73,63 @@ struct NotificationsView: View {
         ZStack(alignment: .top) {
             headerView
                 .zIndex(2)
-            ScrollView {
-                ScrollViewReader { scrollViewProxy in
-                    LazyVStack(spacing: UI.Dimension.Common.listItemSpacing) {
-                        Spacer()
-                            .id(0)
-                            .frame(height: UI.Dimension.Notifications.scrollContentMarginTop)
-                        ForEach(self.notifications, id: \.self.id) {
-                            notification in
-                            NotificationView(notification: notification)
+            GeometryReader { _ in
+                ScrollView {
+                    ScrollViewReader { scrollViewProxy in
+                        LazyVStack(spacing: UI.Dimension.Common.listItemSpacing) {
+                            Spacer()
+                                .id(0)
+                                .frame(height: UI.Dimension.Notifications.scrollContentMarginTop)
+                            ForEach(self.notifications, id: \.self.id) {
+                                notification in
+                                NotificationView(notification: notification) {
+                                    guard !notification.isRead else {
+                                        return
+                                    }
+                                    notification.isRead = true
+                                    do {
+                                        try self.viewContext.save()
+                                        DataUtil.updateAppNotificationBadge(context: self.viewContext)
+                                    } catch {
+                                        log.error("Error while updating notification: \(error)")
+                                    }
+                                }
+                                    .modifier(SwipeDeleteViewModifier {
+                                        self.viewContext.delete(notification)
+                                        do {
+                                            try self.viewContext.save()
+                                            DataUtil.updateAppNotificationBadge(context: self.viewContext)
+                                        } catch {
+                                            log.error("Error while deleting notificaiton: \(error)")
+                                        }
+                                    })
+                            }
+                            Spacer()
+                                .frame(
+                                    height: UI.Dimension.Notifications.scrollContentBottomSpacerHeight
+                                )
                         }
-                        Spacer()
-                            .frame(
-                                height: UI.Dimension.Notifications.scrollContentBottomSpacerHeight
-                            )
-                    }
-                    .padding(EdgeInsets(
-                        top: 0,
-                        leading: UI.Dimension.Common.padding,
-                        bottom: 0,
-                        trailing: UI.Dimension.Common.padding
-                    ))
-                    .background(GeometryReader {
-                        Color.clear
-                            .preference(
-                                key: ViewOffsetKey.self,
-                                value: -$0.frame(in: .named("scroll")).origin.y
-                            )
-                    })
-                    .onPreferenceChange(ViewOffsetKey.self) {
-                        self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
+                        .padding(EdgeInsets(
+                            top: 0,
+                            leading: UI.Dimension.Common.padding,
+                            bottom: 0,
+                            trailing: UI.Dimension.Common.padding
+                        ))
+                        .background(GeometryReader {
+                            Color.clear
+                                .preference(
+                                    key: ViewOffsetKey.self,
+                                    value: -$0.frame(in: .named("scroll")).origin.y
+                                )
+                        })
+                        .onPreferenceChange(ViewOffsetKey.self) {
+                            self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
+                        }
                     }
                 }
+                .zIndex(0)
+                .disabled(self.notifications.isEmpty)
             }
-            .zIndex(0)
-            .disabled(self.notifications.isEmpty)
             if !self.apnsIsEnabled {
                 VStack {
                     Text(localized("notifications.apns_disabled"))
@@ -198,6 +221,9 @@ struct NotificationsView: View {
             alignment: .leading
         )
         .onAppear() {
+            UIApplication.shared.applicationIconBadgeNumber = self.notifications.filter({
+                !$0.isRead
+            }).count
             NotificationUtil.requestAPNSAuthorization { granted in
                 self.apnsIsEnabled = granted
                 if granted {

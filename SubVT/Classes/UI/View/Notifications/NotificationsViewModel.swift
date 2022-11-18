@@ -11,8 +11,4 @@ import SwiftUI
 
 class NotificationsViewModel: ObservableObject {
     
-    /*
-     notifs enabled & setup not complete => complete setup w/ error cases + create rules
-     all done & rules not created => create rules
-     */
 }

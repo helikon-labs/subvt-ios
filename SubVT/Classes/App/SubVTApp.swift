@@ -6,6 +6,7 @@
 //
 
 import Combine
+import CoreData
 import SubVTData
 import SwiftUI
 
@@ -52,10 +53,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     ) private var notificationChannelId = 0
     private var cancellables = Set<AnyCancellable>()
     private let viewContext = PersistenceController.shared.container.viewContext
-    
-    func applicationDidFinishLaunching(_ application: UIApplication) {
-        UIApplication.shared.applicationIconBadgeNumber = 0
-    }
     
     func application(
         _ application: UIApplication,
@@ -109,7 +106,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             notification.validatorDisplay = customData["validator_display"] as? String
             try? self.viewContext.save()
         }
-        // persist notification
+        DataUtil.updateAppNotificationBadge(context: self.viewContext)
         completionHandler(.noData)
     }
 }

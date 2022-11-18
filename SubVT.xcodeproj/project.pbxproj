@@ -229,6 +229,10 @@
 		A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */; };
 		A0D205D2288C1E7D0040CB08 /* FooterGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */; };
 		A0D205D3288C1E7D0040CB08 /* FooterGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */; };
+		A0D3A73729277C760037EBC5 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73629277C760037EBC5 /* DataUtil.swift */; };
+		A0D3A73929279F120037EBC5 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73829279F120037EBC5 /* Array.swift */; };
+		A0D3A73B2927A0300037EBC5 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73A2927A0300037EBC5 /* AppViewModel.swift */; };
+		A0D3A73D2927A1770037EBC5 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73C2927A1770037EBC5 /* Dictionary.swift */; };
 		A0D5498828E70132007794E2 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498728E70132007794E2 /* NotificationsView.swift */; };
 		A0D5498928E70132007794E2 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498728E70132007794E2 /* NotificationsView.swift */; };
 		A0D5498B28E70140007794E2 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */; };
@@ -471,6 +475,10 @@
 		A0D0334B288B08E2001F78D2 /* PressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressAction.swift; sourceTree = "<group>"; };
 		A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientProgressViewStyle.swift; sourceTree = "<group>"; };
 		A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterGradientView.swift; sourceTree = "<group>"; };
+		A0D3A73629277C760037EBC5 /* DataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
+		A0D3A73829279F120037EBC5 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
+		A0D3A73A2927A0300037EBC5 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		A0D3A73C2927A1770037EBC5 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
 		A0D5498728E70132007794E2 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		A0D5498A28E70140007794E2 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		A0D5498E28E71782007794E2 /* NotificationRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRulesView.swift; sourceTree = "<group>"; };
@@ -643,6 +651,7 @@
 		A03C5BE428783C4F00D9D4FD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				A0D3A73629277C760037EBC5 /* DataUtil.swift */,
 				A0BCDE5E28784DD0008047D7 /* Format.swift */,
 				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
 				A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */,
@@ -655,6 +664,8 @@
 		A04B37B92876BA7E00912BF3 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				A0D3A73829279F120037EBC5 /* Array.swift */,
+				A0D3A73C2927A1770037EBC5 /* Dictionary.swift */,
 				A0C90E872878615600A91996 /* Formatter.swift */,
 				A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */,
 				A04C472F28882AB50004A46A /* Model */,
@@ -689,6 +700,7 @@
 			isa = PBXGroup;
 			children = (
 				A04C429528533564007C970B /* AppView.swift */,
+				A0D3A73A2927A0300037EBC5 /* AppViewModel.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1277,6 +1289,8 @@
 				A088B18728AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */,
 				A0A7CAE628968C4E005440FF /* DataPanelView.swift in Sources */,
 				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
+				A0D3A73729277C760037EBC5 /* DataUtil.swift in Sources */,
+				A0D3A73929279F120037EBC5 /* Array.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
 				A0659D1328EAD9FE00A6E251 /* UserDefaultsUtil.swift in Sources */,
@@ -1312,6 +1326,7 @@
 				A0FC976F28B63DEE00B75A9B /* Event.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A06B1E3528E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
+				A0D3A73D2927A1770037EBC5 /* Dictionary.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
 				A09AC41528E9B03500C43E2B /* NotificationRuleView.swift in Sources */,
 				A0D5498F28E71782007794E2 /* NotificationRulesView.swift in Sources */,
@@ -1349,6 +1364,7 @@
 				A04C47272887F19F0004A46A /* RoundedCorner.swift in Sources */,
 				A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */,
 				A0F596FF28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */,
+				A0D3A73B2927A0300037EBC5 /* AppViewModel.swift in Sources */,
 				A0787278287C198F00BED374 /* IntroductionViewModel.swift in Sources */,
 				A04B37C42876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
 				A0FDE66328F2970800D1A590 /* NotificationView.swift in Sources */,
