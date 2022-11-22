@@ -106,7 +106,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
             notification.validatorDisplay = customData["validator_display"] as? String
             try? self.viewContext.save()
         }
-        DataUtil.updateAppNotificationBadge(context: self.viewContext)
+        NotificationUtil.updateAppNotificationBadge(
+            context: self.viewContext
+        )
         completionHandler(.noData)
     }
 }

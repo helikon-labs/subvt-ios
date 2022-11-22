@@ -21,6 +21,11 @@ struct NotificationsView: View {
         SortDescriptor(\.receivedAt, order: .reverse)
     ]) var notifications: FetchedResults<Notification>
     @State private var headerMaterialOpacity = 0.0
+    @Binding var currentTab: Tab
+    
+    init(currentTab: Binding<Tab>) {
+        self._currentTab = currentTab
+    }
     
     private var headerView: some View {
         VStack {
@@ -89,7 +94,9 @@ struct NotificationsView: View {
                                     notification.isRead = true
                                     do {
                                         try self.viewContext.save()
-                                        DataUtil.updateAppNotificationBadge(context: self.viewContext)
+                                        NotificationUtil.updateAppNotificationBadge(
+                                            context: self.viewContext
+                                        )
                                     } catch {
                                         log.error("Error while updating notification: \(error)")
                                     }
@@ -98,11 +105,28 @@ struct NotificationsView: View {
                                         self.viewContext.delete(notification)
                                         do {
                                             try self.viewContext.save()
-                                            DataUtil.updateAppNotificationBadge(context: self.viewContext)
+                                            NotificationUtil.updateAppNotificationBadge(
+                                                context: self.viewContext
+                                            )
                                         } catch {
                                             log.error("Error while deleting notificaiton: \(error)")
                                         }
                                     })
+                                    .onAppear() {
+                                        if self.currentTab == .notifications {
+                                            notification.isRead = true
+                                            do {
+                                                try self.viewContext.save()
+                                                NotificationUtil.updateAppNotificationBadge(
+                                                    context: self.viewContext
+                                                )
+                                            } catch {
+                                                log.error("Error while updating notification: \(error)")
+                                            }
+                                        } else if let id = notification.id {
+                                            self.viewModel.notificationIsReadUpdateBuffer.append(id)
+                                        }
+                                    }
                             }
                             Spacer()
                                 .frame(
@@ -250,11 +274,31 @@ struct NotificationsView: View {
                 break
             }
         }
+        .onChange(of: self.currentTab) { newValue in
+            if newValue == .notifications {
+                var markedIds: [UUID] = []
+                for id in self.viewModel.notificationIsReadUpdateBuffer {
+                    for notification in self.notifications.filter({ $0.id == id }) {
+                        notification.isRead = true
+                        do {
+                            try self.viewContext.save()
+                            markedIds.append(id)
+                        } catch {
+                            log.error("Error while updating notification: \(error)")
+                        }
+                    }
+                }
+                self.viewModel.notificationIsReadUpdateBuffer.removeAll { markedIds.contains($0) }
+                NotificationUtil.updateAppNotificationBadge(
+                    context: self.viewContext
+                )
+            }
+        }
     }
 }
 
 struct NotificationsView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationsView()
+        NotificationsView(currentTab: .constant(.network))
     }
 }

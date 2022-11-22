@@ -12,7 +12,7 @@ struct NotificationView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) private var viewContext
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
-    @State private(set) var isExpanded = false
+    //@State private(set) var isExpanded = false
     
     private let notification: Notification
     private let onRead: (() -> ())?
@@ -25,10 +25,21 @@ struct NotificationView: View {
         self.dateFormatter.dateFormat = "HH:mm MMM dd, yyyy"
     }
     
+    private var message: String {
+        let message = self.notification.message ?? ""
+        if let validatorDisplay = self.notification.validatorDisplay {
+            return message.replacingOccurrences(
+                of:  validatorDisplay,
+                with: ""
+            ).trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return message.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+    
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Text(notification.validatorDisplay ?? "-")
+                Text(notification.validatorDisplay ?? "")
                     .font(UI.Font.Notification.validatorDisplay)
                     .foregroundColor(Color("Text"))
                 Spacer()
@@ -42,15 +53,27 @@ struct NotificationView: View {
                 } else {
                     EmptyView()
                 }
+                /*
                 if self.isExpanded {
                     UI.Image.Common.arrowUp(self.colorScheme)
                 } else {
                     UI.Image.Common.arrowDown(self.colorScheme)
                 }
+                 */
             }
             Spacer()
-                .frame(height: 12)
+                .frame(height: 8)
             HStack {
+                Text(self.message)
+                    .font(UI.Font.Notification.notificationMessage)
+                    .foregroundColor(Color("Text"))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                Spacer()
+            }
+            Spacer()
+                .frame(height: 6)
+            HStack {
+                /*
                 if let notificationTypeCode = notification.notificationTypeCode {
                     Text(localized("notification_type.\(notificationTypeCode)"))
                         .font(UI.Font.Notification.notificationType)
@@ -58,23 +81,11 @@ struct NotificationView: View {
                 } else {
                     Spacer()
                 }
+                 */
                 Spacer()
                 Text(notification.receivedAt ?? Date(), formatter: self.dateFormatter)
                     .font(UI.Font.Notification.notificationType)
                     .foregroundColor(Color("Text"))
-            }
-            if self.isExpanded {
-                Spacer()
-                    .frame(height: 8)
-                HStack {
-                    Text((self.notification.message ?? "-").trimmingCharacters(
-                        in: .whitespacesAndNewlines
-                    ))
-                        .font(UI.Font.Notification.notificationMessage)
-                        .foregroundColor(Color("Text"))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Spacer()
-                }
             }
         }
         .frame(maxWidth: .infinity)
@@ -87,10 +98,12 @@ struct NotificationView: View {
         .background(Color("DataPanelBg"))
         .cornerRadius(16)
         .onTapGesture {
+            /*
             self.isExpanded.toggle()
             if self.isExpanded {
                 self.onRead?()
             }
+             */
         }
     }
 }

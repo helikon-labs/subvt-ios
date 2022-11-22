@@ -35,6 +35,9 @@
 		A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
 		A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
 		A03C5BE828783C9F00D9D4FD /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
+		A0425553292CF1F200085DF3 /* ReportRangeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0425552292CF1F200085DF3 /* ReportRangeSelectionView.swift */; };
+		A0425555292CF20100085DF3 /* ReportRangeSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */; };
+		A0425556292CF20100085DF3 /* ReportRangeSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */; };
 		A04B37BB2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */; };
 		A04B37BC2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */; };
 		A04B37C12876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */; };
@@ -229,7 +232,6 @@
 		A0D1A2F1287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */; };
 		A0D205D2288C1E7D0040CB08 /* FooterGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */; };
 		A0D205D3288C1E7D0040CB08 /* FooterGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */; };
-		A0D3A73729277C760037EBC5 /* DataUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73629277C760037EBC5 /* DataUtil.swift */; };
 		A0D3A73929279F120037EBC5 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73829279F120037EBC5 /* Array.swift */; };
 		A0D3A73B2927A0300037EBC5 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73A2927A0300037EBC5 /* AppViewModel.swift */; };
 		A0D3A73D2927A1770037EBC5 /* Dictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D3A73C2927A1770037EBC5 /* Dictionary.swift */; };
@@ -377,6 +379,8 @@
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+EditNotificationRule.swift"; sourceTree = "<group>"; };
 		A03C5BE528783C9F00D9D4FD /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		A0425552292CF1F200085DF3 /* ReportRangeSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRangeSelectionView.swift; sourceTree = "<group>"; };
+		A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportRangeSelectionViewModel.swift; sourceTree = "<group>"; };
 		A04B37BA2876BD4B00912BF3 /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
 		A04B37C02876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkStatus.swift"; sourceTree = "<group>"; };
 		A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPCSubscriptionServiceStatus.swift; sourceTree = "<group>"; };
@@ -475,7 +479,6 @@
 		A0D0334B288B08E2001F78D2 /* PressAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PressAction.swift; sourceTree = "<group>"; };
 		A0D1A2EF287970E400A86E56 /* LinearGradientProgressViewStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinearGradientProgressViewStyle.swift; sourceTree = "<group>"; };
 		A0D205D1288C1E7D0040CB08 /* FooterGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterGradientView.swift; sourceTree = "<group>"; };
-		A0D3A73629277C760037EBC5 /* DataUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataUtil.swift; sourceTree = "<group>"; };
 		A0D3A73829279F120037EBC5 /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		A0D3A73A2927A0300037EBC5 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		A0D3A73C2927A1770037EBC5 /* Dictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dictionary.swift; sourceTree = "<group>"; };
@@ -589,6 +592,7 @@
 				A0C983942875AC690008C370 /* Network Status */,
 				A0D5498628E70118007794E2 /* Notifications */,
 				A0128A53284A1855000C2307 /* Onboarding */,
+				A0425551292CF1D100085DF3 /* Reports */,
 				A052C14F289137B600622D9F /* Validator Details */,
 				A0744D8828858639008A06DD /* Validator List */,
 			);
@@ -651,7 +655,6 @@
 		A03C5BE428783C4F00D9D4FD /* Utility */ = {
 			isa = PBXGroup;
 			children = (
-				A0D3A73629277C760037EBC5 /* DataUtil.swift */,
 				A0BCDE5E28784DD0008047D7 /* Format.swift */,
 				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
 				A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */,
@@ -659,6 +662,15 @@
 				A0659D1228EAD9FE00A6E251 /* UserDefaultsUtil.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		A0425551292CF1D100085DF3 /* Reports */ = {
+			isa = PBXGroup;
+			children = (
+				A0425552292CF1F200085DF3 /* ReportRangeSelectionView.swift */,
+				A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */,
+			);
+			path = Reports;
 			sourceTree = "<group>";
 		};
 		A04B37B92876BA7E00912BF3 /* Extension */ = {
@@ -1289,7 +1301,6 @@
 				A088B18728AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */,
 				A0A7CAE628968C4E005440FF /* DataPanelView.swift in Sources */,
 				A0D1A2F0287970E400A86E56 /* LinearGradientProgressViewStyle.swift in Sources */,
-				A0D3A73729277C760037EBC5 /* DataUtil.swift in Sources */,
 				A0D3A73929279F120037EBC5 /* Array.swift in Sources */,
 				A02839C42867A456009CA8BA /* Tab.swift in Sources */,
 				A0F285112879C08000E69C6B /* BlockWaveParameters.swift in Sources */,
@@ -1320,6 +1331,7 @@
 				A0646D9A285856FE00B687ED /* NetworkButtonView.swift in Sources */,
 				A0C03D8828967048001C1B54 /* RewardDestination.swift in Sources */,
 				A07BA81E285B948D00575683 /* UI+Dimension+Snackbar.swift in Sources */,
+				A0425555292CF20100085DF3 /* ReportRangeSelectionViewModel.swift in Sources */,
 				A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */,
 				A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */,
 				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
@@ -1331,6 +1343,7 @@
 				A09AC41528E9B03500C43E2B /* NotificationRuleView.swift in Sources */,
 				A0D5498F28E71782007794E2 /* NotificationRulesView.swift in Sources */,
 				A067DD5C289D398E005BE98C /* ActionFeedbackView.swift in Sources */,
+				A0425553292CF1F200085DF3 /* ReportRangeSelectionView.swift in Sources */,
 				A0F574DA28870467002849FC /* VisualEffectView.swift in Sources */,
 				A072C337287805A6001636F9 /* EraEpochView.swift in Sources */,
 				A03C5BE628783C9F00D9D4FD /* Localization.swift in Sources */,
@@ -1397,6 +1410,7 @@
 				A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
 				A06B1E3628E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
 				A018C2AE28B90C0500C9A276 /* File.swift in Sources */,
+				A0425556292CF20100085DF3 /* ReportRangeSelectionViewModel.swift in Sources */,
 				A0AFF7F82892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
 				A0BCDE6028784DD0008047D7 /* Format.swift in Sources */,
 				A0659D1828EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */,

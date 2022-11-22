@@ -6,6 +6,7 @@
 //
 
 import Combine
+import CoreData
 import Foundation
 import SubVTData
 import SwiftUI
@@ -104,5 +105,19 @@ struct NotificationUtil {
             }
         }
         .store(in: &cancellables)
+    }
+    
+    static func updateAppNotificationBadge(context: NSManagedObjectContext) {
+        do {
+            let fetchRequest : NSFetchRequest<Notification> = Notification.fetchRequest()
+            fetchRequest.predicate = NSPredicate(
+                format: "isRead == %@",
+                NSNumber(value: false)
+            )
+            let count = try context.count(for: fetchRequest)
+            UIApplication.shared.applicationIconBadgeNumber = count
+        } catch {
+            log.error("Error while updating app badge: \(error)")
+        }
     }
 }

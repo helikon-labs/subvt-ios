@@ -10,5 +10,5 @@ import SubVTData
 import SwiftUI
 
 class NotificationsViewModel: ObservableObject {
-    
+    var notificationIsReadUpdateBuffer: [UUID] = []
 }
