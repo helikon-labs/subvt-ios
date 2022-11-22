@@ -292,9 +292,10 @@ struct NetworkStatusView: View {
                     self.viewModel.changeNetwork(network: network)
                     self.changeNetworkDebounce?.invalidate()
                     self.changeNetworkDebounce = Timer.scheduledTimer(
-                        withTimeInterval: 0.5,
+                        withTimeInterval: 0.25,
                         repeats: false) { _ in
                             self.isAnimated = true
+                            self.networkSelectorIsOpen = false
                             self.viewModel.subscribeToNetworkStatus(
                                 network: self.network,
                                 onStatus: self.onNetworkStatusReceived,
