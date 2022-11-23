@@ -79,7 +79,6 @@ struct TabBarButtonView: View {
             }
         )
         .buttonStyle(TabBarButtonStyle())
-        .disabled(self.tab == .eraReports)
     }
 }
 

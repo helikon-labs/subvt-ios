@@ -128,7 +128,10 @@ struct MyValidatorsView: View {
                                 height: UI.Dimension.MyValidators.scrollContentBottomSpacerHeight
                             )
                     }
-                    .animation(.interactiveSpring(), value: self.viewModel.userValidatorSummaries)
+                    .animation(
+                        .interactiveSpring(),
+                        value: self.viewModel.userValidatorSummaries
+                    )
                     .padding(EdgeInsets(
                         top: 0,
                         leading: UI.Dimension.Common.padding,
