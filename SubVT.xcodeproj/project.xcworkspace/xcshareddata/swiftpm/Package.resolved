@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
-        "version" : "5.6.2"
+        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
+        "version" : "5.6.4"
       }
     },
     {
@@ -69,7 +69,7 @@
       "location" : "https://github.com/helikon-labs/subvt-data-swift.git",
       "state" : {
         "branch" : "main",
-        "revision" : "1309cd23d25bcd99289baf92a751f46d9cd6e361"
+        "revision" : "6eddc1a3be0b2290964301a092424764162d9925"
       }
     },
     {

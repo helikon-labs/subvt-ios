@@ -171,5 +171,11 @@ extension UI {
         enum EditNotificationRule {
             static let actionButton = LexendDeca.semiBold.withSize(16)
         }
+        
+        enum ReportRangeSelection {
+            static let subtitle = LexendDeca.light.withSize(12)
+            static let eraDisplay = LexendDeca.regular.withSize(16)
+            static let actionButton = LexendDeca.semiBold.withSize(16)
+        }
     }
 }

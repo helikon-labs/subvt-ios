@@ -34,5 +34,18 @@ extension UI.Dimension {
                 return 1
             }
         }
+        
+        static let networkIconSize = UI.Dimension(24, 24)
+        static let viewButtonWidth: CGFloat = 266
+        static let viewButtonHeight: CGFloat = 52
+        static let viewButtonMarginBottom = UI.Dimension.TabBar.marginBottom
+            + UI.Dimension.TabBar.height
+            + UI.Dimension.Common.padding
+        static let eraListHeight: CGFloat = 300
+        static let scrollViewBottomSpacerHeight = UI.Dimension.TabBar.marginBottom
+            + UI.Dimension.TabBar.height
+            + UI.Dimension.Common.padding
+            + viewButtonHeight
+            + UI.Dimension.Common.padding
     }
 }

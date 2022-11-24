@@ -24,6 +24,10 @@
 		A0128A63284A3BCC000C2307 /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A61284A3BCC000C2307 /* UI.swift */; };
 		A0128A67284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
 		A0128A68284A47AD000C2307 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
+		A015DD9D292FA1D000BF9D1B /* EraReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A015DD9C292FA1D000BF9D1B /* EraReportsView.swift */; };
+		A015DD9E292FA1D000BF9D1B /* EraReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A015DD9C292FA1D000BF9D1B /* EraReportsView.swift */; };
+		A015DDA0292FA3F200BF9D1B /* EraReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A015DD9F292FA3F200BF9D1B /* EraReportsViewModel.swift */; };
+		A015DDA1292FA3F200BF9D1B /* EraReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A015DD9F292FA3F200BF9D1B /* EraReportsViewModel.swift */; };
 		A018C2AD28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
 		A018C2AE28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
 		A018C2AF28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
@@ -375,6 +379,8 @@
 		A0128A54284A19C5000C2307 /* OnboardingPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		A0128A61284A3BCC000C2307 /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
 		A0128A69284A47AD000C2307 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A015DD9C292FA1D000BF9D1B /* EraReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraReportsView.swift; sourceTree = "<group>"; };
+		A015DD9F292FA3F200BF9D1B /* EraReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraReportsViewModel.swift; sourceTree = "<group>"; };
 		A018C2AC28B90C0500C9A276 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
@@ -669,6 +675,8 @@
 		A0425551292CF1D100085DF3 /* Reports */ = {
 			isa = PBXGroup;
 			children = (
+				A015DD9C292FA1D000BF9D1B /* EraReportsView.swift */,
+				A015DD9F292FA3F200BF9D1B /* EraReportsViewModel.swift */,
 				A0425552292CF1F200085DF3 /* ReportRangeSelectionView.swift */,
 				A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */,
 			);
@@ -1275,6 +1283,7 @@
 				A0D0334C288B08E2001F78D2 /* PressAction.swift in Sources */,
 				A0128A55284A19C5000C2307 /* OnboardingPageView.swift in Sources */,
 				A04B37C12876D55A00912BF3 /* UI+Dimension+NetworkStatus.swift in Sources */,
+				A015DDA0292FA3F200BF9D1B /* EraReportsViewModel.swift in Sources */,
 				A0744D8A2885865D008A06DD /* ValidatorListViewModel.swift in Sources */,
 				A0BCDE592878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
 				A0D03346288AE7E9001F78D2 /* ValidatorListFilterSortView.swift in Sources */,
@@ -1358,6 +1367,7 @@
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A0744D922885A033008A06DD /* UI+Dimension+ValidatorList.swift in Sources */,
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
+				A015DD9D292FA1D000BF9D1B /* EraReportsView.swift in Sources */,
 				A05B25A1287EB7450070EF81 /* PanelAppearance.swift in Sources */,
 				A05B25A4287ECBE30070EF81 /* Counter.swift in Sources */,
 				A0F2850E2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
@@ -1418,6 +1428,7 @@
 				A0AFF7F82892AC2900B0CB4F /* ValidatorDetails.swift in Sources */,
 				A0BCDE6028784DD0008047D7 /* Format.swift in Sources */,
 				A0659D1828EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */,
+				A015DDA1292FA3F200BF9D1B /* EraReportsViewModel.swift in Sources */,
 				A0AFF7FC2892B5F700B0CB4F /* UI+Text.swift in Sources */,
 				A04C473228882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A03C5BE728783C9F00D9D4FD /* Localization.swift in Sources */,
@@ -1485,6 +1496,7 @@
 				A09AC41628E9B03500C43E2B /* NotificationRuleView.swift in Sources */,
 				A0BCDE5A2878495C008047D7 /* EraPointsBlocksProducedView.swift in Sources */,
 				A07BA81C285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
+				A015DD9E292FA1D000BF9D1B /* EraReportsView.swift in Sources */,
 				A0BF90B72848C1EC0053389A /* SubVTUITestsLaunchTests.swift in Sources */,
 				A0744D932885A033008A06DD /* UI+Dimension+ValidatorList.swift in Sources */,
 				A03BA5E728F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */,
