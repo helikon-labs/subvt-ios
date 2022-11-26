@@ -187,8 +187,6 @@ struct ReportRangeSelectionView: View {
                 }
             }
             .zIndex(0)
-            .disabled(self.controlsAreDisabled)
-            .opacity(self.controlsAreDisabled ? UI.Value.disabledControlOpacity : 1.0)
             FooterGradientView()
                 .zIndex(1)
             switch self.viewModel.fetchState {
@@ -231,6 +229,7 @@ struct ReportRangeSelectionView: View {
                     Spacer()
                     NavigationLink {
                         EraReportsView(
+                            network: self.viewModel.network,
                             startEra: startEra,
                             endEra: endEra
                         )

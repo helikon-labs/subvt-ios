@@ -139,7 +139,7 @@ class MyValidatorsViewModel: ObservableObject {
                     }
                 }
             }
-            .store(in: &cancellables)
+            .store(in: &self.cancellables)
     }
     
     func deleteUserValidator(_ toDelete: UserValidatorSummary) {

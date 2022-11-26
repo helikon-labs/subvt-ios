@@ -15,10 +15,16 @@ struct EraReportsView: View {
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     
-    private var startEra: Era
-    private var endEra: Era
+    private let startEra: Era
+    private let endEra: Era
+    private let network: Network
     
-    init(startEra: Era, endEra: Era) {
+    init(
+        network: Network,
+        startEra: Era,
+        endEra: Era
+    ) {
+        self.network = network
         self.startEra = startEra
         self.endEra = endEra
     }
@@ -92,6 +98,47 @@ struct EraReportsView: View {
                 .zIndex(0)
             self.headerView
                 .zIndex(2)
+            switch self.viewModel.fetchState {
+            case .success:
+                self.chartCollectionView
+            case .idle, .loading:
+                ProgressView()
+                    .progressViewStyle(
+                        CircularProgressViewStyle(
+                            tint: Color("Text")
+                        )
+                    )
+                    .animation(.spring(), value: self.viewModel.fetchState)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    .zIndex(10)
+                    .modifier(PanelAppearance(2, self.displayState))
+            default:
+                Group {}
+            }
+            ZStack {
+                SnackbarView(
+                    message: localized("era_report_range_selection.error.era_list"),
+                    type: .error(canRetry: true)
+                ) {
+                    self.viewModel.fetchReports(
+                        startEraIndex: self.startEra.index,
+                        endEraIndex: self.endEra.index
+                    )
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .offset(
+                    y: UI.Dimension.ReportRangeSelection.snackbarYOffset(
+                        fetchState: self.viewModel.fetchState
+                    )
+                )
+                .opacity(UI.Dimension.ReportRangeSelection.snackbarOpacity(
+                    fetchState: self.viewModel.fetchState
+                ))
+                .animation(
+                    .spring(),
+                    value: self.viewModel.fetchState
+                )
+            }
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
@@ -103,12 +150,94 @@ struct EraReportsView: View {
         )
         .onAppear() {
             if self.displayState != .appeared {
+                self.viewModel.network = self.network
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.displayState = .appeared
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        // no-op yet
+                        self.viewModel.fetchReports(
+                            startEraIndex: self.startEra.index,
+                            endEraIndex: self.endEra.index
+                        )
                     }
                 }
+            }
+        }
+    }
+    
+    private var chartCollectionView: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 0) {
+                Spacer()
+                    .id(0)
+                    .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
+                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                    ZStack {
+                        LineChartView(
+                            dataPoints: self.viewModel.activeValidatorCounts,
+                            chartMinY: 0,
+                            chartMaxY: 2000,
+                            revealPercentage: self.viewModel.activeValidatorCounts.count > 0 ? 1.0 : 0.0
+                        )
+                        .frame(height: 128)
+                        .padding(EdgeInsets(
+                            top: 0,
+                            leading: 4,
+                            bottom: 0,
+                            trailing: 4
+                        ))
+                        .background(Color("DataPanelBg"))
+                        .cornerRadius(UI.Dimension.Common.cornerRadius)
+                        VStack {
+                            HStack(alignment: .center) {
+                                Text("Title X")
+                                    .font(UI.Font.Common.dataPanelTitle)
+                                    .foregroundColor(Color("Text"))
+                                Spacer()
+                                UI.Image.NetworkStatus.arrowRight(self.colorScheme)
+                            }
+                            .padding(EdgeInsets(
+                                top: UI.Dimension.Common.dataPanelPadding,
+                                leading: UI.Dimension.Common.dataPanelPadding,
+                                bottom: 0,
+                                trailing: UI.Dimension.Common.dataPanelPadding
+                            ))
+                            Spacer()
+                        }
+                    }
+                    ZStack {
+                        LineChartView(
+                            dataPoints: self.viewModel.inactiveValidatorCounts,
+                            chartMinY: 0,
+                            chartMaxY: 2000,
+                            revealPercentage: self.viewModel.activeValidatorCounts.count > 0 ? 1.0 : 0.0
+                        )
+                        .frame(height: 128)
+                        .padding(EdgeInsets(
+                            top: 0,
+                            leading: 4,
+                            bottom: 0,
+                            trailing: 4
+                        ))
+                        .background(Color("DataPanelBg"))
+                        .cornerRadius(UI.Dimension.Common.cornerRadius)
+                    }
+                }
+            }
+            .padding(EdgeInsets(
+                top: 0,
+                leading: UI.Dimension.Common.padding,
+                bottom: 0,
+                trailing: UI.Dimension.Common.padding
+            ))
+            .background(GeometryReader {
+                Color.clear
+                    .preference(
+                        key: ViewOffsetKey.self,
+                        value: -$0.frame(in: .named("scroll")).origin.y
+                    )
+            })
+            .onPreferenceChange(ViewOffsetKey.self) {
+                self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
             }
         }
     }
@@ -117,6 +246,7 @@ struct EraReportsView: View {
 struct EraReportsView_Previews: PreviewProvider {
     static var previews: some View {
         EraReportsView(
+            network: PreviewData.kusama,
             startEra: PreviewData.era,
             endEra: PreviewData.era
         )

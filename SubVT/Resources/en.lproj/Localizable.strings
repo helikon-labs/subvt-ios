@@ -223,3 +223,4 @@
 "era_report_range_selection.error.era_list"="Error while getting the era list. Please check your connection.";
 
 "era_reports.title"="Era Reports";
+"era_reports.error.era_reports"="Error while getting the reports. Please check your connection.";
