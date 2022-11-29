@@ -17,10 +17,14 @@ class EraReportsViewModel: ObservableObject {
     @Published private(set) var inactiveValidatorCounts: [(Int, Int)] = []
     @Published private(set) var rewardPoints: [(Int, Double)] = []
     @Published private(set) var totalRewards: [(Int, Double)] = []
+    @Published private(set) var totalRewardsBalance: [(Int, Balance)] = []
     @Published private(set) var totalStakes: [(Int, Double)] = []
+    @Published private(set) var totalStakesBalance: [(Int, Balance)] = []
     @Published private(set) var validatorRewards: [(Int, Double)] = []
+    @Published private(set) var validatorRewardsBalance: [(Int, Balance)] = []
     @Published private(set) var offlineOffenceCounts: [(Int, Double)] = []
     @Published private(set) var slashes: [(Int, Double)] = []
+    @Published private(set) var slashesBalance: [(Int, Balance)] = []
     
     var network: Network! = nil
     private var reportService: ReportService! = nil
@@ -80,16 +84,34 @@ class EraReportsViewModel: ObservableObject {
                 Double($0.totalReward.value) / Double(self.network.tokenDecimalCount)
             )
         }
+        self.totalRewardsBalance = reports.map {
+            (
+                (Int($0.era.index)),
+                $0.totalReward
+            )
+        }
         self.totalStakes = reports.map {
             (
                 (Int($0.era.index)),
                 Double($0.totalStake?.value ?? 0) / Double(self.network.tokenDecimalCount)
             )
         }
+        self.totalStakesBalance = reports.map {
+            (
+                (Int($0.era.index)),
+                $0.totalStake ?? Balance(value: 0)
+            )
+        }
         self.validatorRewards = reports.map {
             (
                 (Int($0.era.index)),
                 Double($0.totalValidatorReward?.value ?? 0) / Double(self.network.tokenDecimalCount)
+            )
+        }
+        self.validatorRewardsBalance = reports.map {
+            (
+                (Int($0.era.index)),
+                $0.totalValidatorReward ?? Balance(value: 0)
             )
         }
         self.offlineOffenceCounts = reports.map {
@@ -99,6 +121,12 @@ class EraReportsViewModel: ObservableObject {
             (
                 (Int($0.era.index)),
                 Double($0.slashedAmount.value) / Double(self.network.tokenDecimalCount)
+            )
+        }
+        self.slashesBalance = reports.map {
+            (
+                (Int($0.era.index)),
+                $0.slashedAmount
             )
         }
     }

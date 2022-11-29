@@ -23,6 +23,7 @@ struct EraReportsView: View {
     private let network: Network
     
     private let dateFormatter = DateFormatter()
+    private let singleEraReportDataPanelHeight: CGFloat = 66
     
     init(
         network: Network,
@@ -114,7 +115,13 @@ struct EraReportsView: View {
                 .zIndex(2)
             switch self.viewModel.fetchState {
             case .success:
-                self.chartsView
+                if self.startEra.index == self.endEra.index {
+                    self.singleEraReportView
+                        .zIndex(1)
+                } else {
+                    self.chartsView
+                        .zIndex(1)
+                }
             case .idle, .loading:
                 ProgressView()
                     .progressViewStyle(
@@ -129,6 +136,8 @@ struct EraReportsView: View {
             default:
                 Group {}
             }
+            FooterGradientView()
+                .zIndex(2)
             ZStack {
                 SnackbarView(
                     message: localized("era_report_range_selection.error.era_list"),
@@ -153,6 +162,7 @@ struct EraReportsView: View {
                     value: self.viewModel.fetchState
                 )
             }
+            .zIndex(3)
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
@@ -187,6 +197,43 @@ struct EraReportsView: View {
         }
     }
     
+    private var dateIntervalView: some View {
+        VStack {
+            HStack {
+                Text(localized("era_report_range_selection.start_date"))
+                    .font(UI.Font.EraReports.dateTitle)
+                    .foregroundColor(Color("Text"))
+                    .frame(width: 72, alignment: .leading)
+                Text(self.getDateDisplay(
+                    index: self.startEra.index,
+                    timestamp: self.startEra.startTimestamp
+                ))
+                .font(UI.Font.EraReports.date)
+            }
+            .modifier(PanelAppearance(0, self.chartDisplayState))
+            Spacer()
+                .frame(height: 6)
+            HStack {
+                Text(localized("era_report_range_selection.end_date"))
+                    .font(UI.Font.EraReports.dateTitle)
+                    .foregroundColor(Color("Text"))
+                    .frame(width: 72, alignment: .leading)
+                Text(self.getDateDisplay(
+                    index: self.endEra.index,
+                    timestamp: self.endEra.endTimestamp
+                ))
+                .font(UI.Font.EraReports.date)
+            }
+            .modifier(PanelAppearance(1, self.chartDisplayState))
+        }
+        .padding(EdgeInsets(
+            top: 0,
+            leading: UI.Dimension.Common.padding,
+            bottom: 0,
+            trailing: 0
+        ))
+    }
+    
     private var chartsView: some View {
         ScrollView {
             VStack(
@@ -196,40 +243,7 @@ struct EraReportsView: View {
                 Spacer()
                     .id(0)
                     .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                VStack {
-                    HStack {
-                        Text(localized("era_report_range_selection.start_date"))
-                            .font(UI.Font.EraReports.dateTitle)
-                            .foregroundColor(Color("Text"))
-                            .frame(width: 72, alignment: .leading)
-                        Text(self.getDateDisplay(
-                            index: self.startEra.index,
-                            timestamp: self.startEra.startTimestamp
-                        ))
-                        .font(UI.Font.EraReports.date)
-                    }
-                    .modifier(PanelAppearance(0, self.chartDisplayState))
-                    Spacer()
-                        .frame(height: 6)
-                    HStack {
-                        Text(localized("era_report_range_selection.end_date"))
-                            .font(UI.Font.EraReports.dateTitle)
-                            .foregroundColor(Color("Text"))
-                            .frame(width: 72, alignment: .leading)
-                        Text(self.getDateDisplay(
-                            index: self.endEra.index,
-                            timestamp: self.endEra.endTimestamp
-                        ))
-                        .font(UI.Font.EraReports.date)
-                    }
-                    .modifier(PanelAppearance(1, self.chartDisplayState))
-                }
-                .padding(EdgeInsets(
-                    top: 0,
-                    leading: UI.Dimension.Common.padding,
-                    bottom: 0,
-                    trailing: 0
-                ))
+                self.dateIntervalView
                 Spacer()
                     .frame(height: 16)
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
@@ -395,6 +409,30 @@ struct EraReportsView: View {
         }
     }
     
+    struct ReportDataPanelView: View {
+        let title: String
+        let content: String
+        
+        private let height: CGFloat = 66
+        
+        var body: some View {
+            VStack(alignment: .leading) {
+                Text(self.title)
+                    .font(UI.Font.Common.dataPanelTitle)
+                    .foregroundColor(Color("Text"))
+                Spacer()
+                Text(self.content)
+                    .font(UI.Font.NetworkStatus.dataLarge)
+                    .foregroundColor(Color("Text"))
+            }
+            .frame(height: self.height)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(UI.Dimension.Common.dataPanelPadding)
+            .background(Color("DataPanelBg"))
+            .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+        }
+    }
+    
     private var activeNominatorCountsView: some View {
         ReportLineChartView(
             title: localized("era_reports.active_nominators"),
@@ -493,6 +531,119 @@ struct EraReportsView: View {
             revealPercentage: self.chartRevealPercentage,
             colorScheme: self.colorScheme
         )
+    }
+    
+    private var singleEraReportView: some View {
+        ScrollView {
+            VStack(
+                alignment: .leading,
+                spacing: UI.Dimension.Common.dataPanelSpacing
+            ) {
+                Spacer()
+                    .id(0)
+                    .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
+                self.dateIntervalView
+                Spacer()
+                    .frame(height: UI.Dimension.Common.dataPanelSpacing)
+                Group {
+                    ReportDataPanelView(
+                        title: localized("era_reports.active_nominator_count"),
+                        content: String(self.viewModel.activeNominatorCounts[0].1)
+                    )
+                    .modifier(PanelAppearance(2, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("era_reports.total_stake"),
+                        content: String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.totalStakesBalance[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount,
+                                integerOnly: true
+                            ),
+                            self.network.tokenTicker
+                        )
+                    )
+                    .modifier(PanelAppearance(3, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("era_reports.reward_points"),
+                        content: formatDecimal(
+                            integer: UInt64(self.viewModel.rewardPoints[0].1),
+                            decimalCount: 0,
+                            formatDecimalCount: 0,
+                            integerOnly: true
+                        )
+                    )
+                    .modifier(PanelAppearance(4, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("era_reports.total_reward"),
+                        content: String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.totalRewardsBalance[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount,
+                                integerOnly: false
+                            ),
+                            self.network.tokenTicker
+                        )
+                    )
+                    .modifier(PanelAppearance(5, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("era_reports.active_validator_count"),
+                        content: String(self.viewModel.activeValidatorCounts[0].1)
+                    )
+                    .modifier(PanelAppearance(6, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("era_reports.total_validator_reward"),
+                        content: String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.validatorRewardsBalance[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount,
+                                integerOnly: false
+                            ),
+                            self.network.tokenTicker
+                        )
+                    )
+                    .modifier(PanelAppearance(7, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("era_reports.offline_offences"),
+                        content: String(Int(self.viewModel.offlineOffenceCounts[0].1))
+                    )
+                    .modifier(PanelAppearance(8, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("era_reports.slashed_plain"),
+                        content: String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.slashesBalance[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount,
+                                integerOnly: false
+                            ),
+                            self.network.tokenTicker
+                        )
+                    )
+                    .modifier(PanelAppearance(9, self.chartDisplayState))
+                }
+                Spacer()
+                    .frame(height: UI.Dimension.Common.bottomNotchHeight + UI.Dimension.Common.padding * 2)
+            }
+            .padding(EdgeInsets(
+                top: 0,
+                leading: UI.Dimension.Common.padding,
+                bottom: 0,
+                trailing: UI.Dimension.Common.padding
+            ))
+            .background(GeometryReader {
+                Color.clear
+                    .preference(
+                        key: ViewOffsetKey.self,
+                        value: -$0.frame(in: .named("scroll")).origin.y
+                    )
+            })
+            .onPreferenceChange(ViewOffsetKey.self) {
+                self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
+            }
+        }
     }
 }
 

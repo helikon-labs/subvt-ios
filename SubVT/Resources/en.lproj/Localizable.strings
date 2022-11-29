@@ -225,10 +225,16 @@
 "era_reports.title"="Era Reports";
 "era_reports.error.era_reports"="Error while getting the reports. Please check your connection.";
 "era_reports.active_nominators"="Active Nominators";
+"era_reports.active_nominator_count"="Active Nominator Count";
 "era_reports.active_validators"="Active Validators";
+"era_reports.active_validator_count"="Active Validator Count";
 "era_reports.reward_points"="Reward Points";
+"era_reports.total_reward"="Total Reward";
 "era_reports.total_rewards"="Total Rewards (%@)";
+"era_reports.total_stake"="Total Stake";
 "era_reports.total_stakes"="Total Stake (%@)";
 "era_reports.validator_rewards"="Validator Reward (%@)";
+"era_reports.total_validator_reward"="Total Validator Reward";
 "era_reports.offline_offences"="Offline Offences";
 "era_reports.slashed"="Slashed (%@)";
+"era_reports.slashed_plain"="Slashed";
