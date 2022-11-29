@@ -12,6 +12,7 @@
 		A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0118246288D48C500EC51BD /* UINavigationController.swift */; };
 		A0118248288D48C500EC51BD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0118246288D48C500EC51BD /* UINavigationController.swift */; };
+		A011BCF42934999800F819A5 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011BCF32934999800F819A5 /* BarChartView.swift */; };
 		A0128A46284A0A32000C2307 /* data-env-example.json in Resources */ = {isa = PBXBuildFile; fileRef = A0128A45284A0A32000C2307 /* data-env-example.json */; };
 		A0128A4D284A1297000C2307 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A4C284A1297000C2307 /* AppStorageKey.swift */; };
 		A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0128A4C284A1297000C2307 /* AppStorageKey.swift */; };
@@ -373,6 +374,7 @@
 /* Begin PBXFileReference section */
 		A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsViewModel.swift; sourceTree = "<group>"; };
 		A0118246288D48C500EC51BD /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
+		A011BCF32934999800F819A5 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		A0128A45284A0A32000C2307 /* data-env-example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env-example.json"; sourceTree = "<group>"; };
 		A0128A4C284A1297000C2307 /* AppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStorageKey.swift; sourceTree = "<group>"; };
 		A0128A50284A150C000C2307 /* OnboardingParentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingParentView.swift; sourceTree = "<group>"; };
@@ -834,6 +836,7 @@
 		A0B3A6B6287D7663005DA484 /* Chart */ = {
 			isa = PBXGroup;
 			children = (
+				A011BCF32934999800F819A5 /* BarChartView.swift */,
 				A0B3A6B7287D768A005DA484 /* LineChartView.swift */,
 			);
 			path = Chart;
@@ -1392,6 +1395,7 @@
 				A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */,
 				A0F596FF28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */,
 				A0D3A73B2927A0300037EBC5 /* AppViewModel.swift in Sources */,
+				A011BCF42934999800F819A5 /* BarChartView.swift in Sources */,
 				A0787278287C198F00BED374 /* IntroductionViewModel.swift in Sources */,
 				A04B37C42876D73000912BF3 /* RPCSubscriptionServiceStatus.swift in Sources */,
 				A0FDE66328F2970800D1A590 /* NotificationView.swift in Sources */,

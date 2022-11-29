@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct LineChartView: View {
-    private let dataPoints: [(Int, Int)]
-    private let minX: Int
-    private let maxX: Int
-    private let chartMinY: Int
-    private let chartMaxY: Int
+    private let dataPoints: [(Double, Double)]
+    private let minX: Double
+    private let maxX: Double
+    private let chartMinY: Double
+    private let chartMaxY: Double
     private let revealPercentage: CGFloat
     
     init(
-        dataPoints: [(Int, Int)],
-        chartMinY: Int,
-        chartMaxY: Int,
+        dataPoints: [(Double, Double)],
+        chartMinY: Double,
+        chartMaxY: Double,
         revealPercentage: CGFloat
     ) {
         self.dataPoints = dataPoints.sorted { pair1, pair2 in
@@ -31,11 +31,27 @@ struct LineChartView: View {
         self.revealPercentage = revealPercentage
     }
     
+    init(
+        dataPoints: [(Int, Int)],
+        chartMinY: Int,
+        chartMaxY: Int,
+        revealPercentage: CGFloat
+    ) {
+        self.dataPoints = dataPoints
+            .map({ (Double($0), Double($1)) })
+            .sorted { $0.0 < $1.0 }
+        self.minX = self.dataPoints.first?.0 ?? 0
+        self.maxX = self.dataPoints.last?.0 ?? 0
+        self.chartMinY = Double(chartMinY)
+        self.chartMaxY = Double(chartMaxY)
+        self.revealPercentage = revealPercentage
+    }
+    
     private let gradient = LinearGradient(
         gradient: Gradient(
             colors: [
-                Color("LineChartGradientStart"),
-                Color("LineChartGradientEnd")
+                Color("Blue"),
+                Color("Green")
             ]
         ),
         startPoint: .leading,

@@ -5,18 +5,28 @@
 //  Created by Kutsal Kaan Bilgin on 24.11.2022.
 //
 
+import BigInt
 import Combine
 import Foundation
 import SubVTData
 
 class EraReportsViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
+    @Published private(set) var activeNominatorCounts: [(Int, Int)] = []
     @Published private(set) var activeValidatorCounts: [(Int, Int)] = []
     @Published private(set) var inactiveValidatorCounts: [(Int, Int)] = []
+    @Published private(set) var rewardPoints: [(Int, Double)] = []
+    @Published private(set) var totalRewards: [(Int, Double)] = []
+    @Published private(set) var totalStakes: [(Int, Double)] = []
+    @Published private(set) var validatorRewards: [(Int, Double)] = []
+    @Published private(set) var offlineOffenceCounts: [(Int, Double)] = []
+    @Published private(set) var slashes: [(Int, Double)] = []
     
     var network: Network! = nil
     private var reportService: ReportService! = nil
     private var cancellables = Set<AnyCancellable>()
+    
+    private let barChartHeadroomCoefficient = 1.1
     
     private func initReportService() {
         guard self.reportService == nil else { return }
@@ -52,11 +62,88 @@ class EraReportsViewModel: ObservableObject {
     }
     
     private func processReports(reports: [EraReport]) {
+        self.activeNominatorCounts = reports.map {
+            (Int($0.era.index), Int($0.activeNominatorCount ?? 0))
+        }
         self.activeValidatorCounts = reports.map {
             (Int($0.era.index), Int($0.activeValidatorCount))
         }
         self.inactiveValidatorCounts = reports.map {
             (Int($0.era.index), Int($0.inactiveValidatorCount))
         }
+        self.rewardPoints = reports.map {
+            (Int($0.era.index), Double($0.totalRewardPoints ?? 0))
+        }
+        self.totalRewards = reports.map {
+            (
+                (Int($0.era.index)),
+                Double($0.totalReward.value) / Double(self.network.tokenDecimalCount)
+            )
+        }
+        self.totalStakes = reports.map {
+            (
+                (Int($0.era.index)),
+                Double($0.totalStake?.value ?? 0) / Double(self.network.tokenDecimalCount)
+            )
+        }
+        self.validatorRewards = reports.map {
+            (
+                (Int($0.era.index)),
+                Double($0.totalValidatorReward?.value ?? 0) / Double(self.network.tokenDecimalCount)
+            )
+        }
+        self.offlineOffenceCounts = reports.map {
+            (Int($0.era.index), Double($0.offlineOffenceCount))
+        }
+        self.slashes = reports.map {
+            (
+                (Int($0.era.index)),
+                Double($0.slashedAmount.value) / Double(self.network.tokenDecimalCount)
+            )
+        }
+    }
+    
+    var maxActiveNominatorCount: Int {
+        self.activeNominatorCounts.map{ $0.1 }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxActiveValidatorCount: Int {
+        self.activeValidatorCounts.map{ $0.1 }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxRewardPoint: Double {
+        let max = self.rewardPoints.map{ Double($0.1) }.max { $0 < $1 } ?? 0
+        return ceil(Double(max) * self.barChartHeadroomCoefficient)
+    }
+    
+    var maxTotalReward: Double {
+        let max = self.totalRewards.map{ $0.1 }.max { $0 < $1 } ?? 0
+        return max * self.barChartHeadroomCoefficient
+    }
+    
+    var maxTotalStake: Double {
+        let max = self.totalStakes.map{ $0.1 }.max { $0 < $1 } ?? 0
+        return max * self.barChartHeadroomCoefficient
+    }
+    
+    var maxValidatorReward: Double {
+        let max = self.validatorRewards.map{ $0.1 }.max { $0 < $1 } ?? 0
+        return max * self.barChartHeadroomCoefficient
+    }
+    
+    var maxOfflineOffenceCount: Double {
+        let max = self.offlineOffenceCounts.map{ Double($0.1) }.max { $0 < $1 } ?? 0.0
+        guard max > 0.0 else {
+            return 1.0
+        }
+        return ceil(max * self.barChartHeadroomCoefficient)
+    }
+    
+    var maxSlash: Double {
+        let max = self.slashes.map{ $0.1 }.max { $0 < $1 } ?? 0
+        guard max > 0 else {
+            return 1.0
+        }
+        return max * self.barChartHeadroomCoefficient
     }
 }

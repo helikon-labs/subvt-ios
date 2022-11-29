@@ -20,7 +20,7 @@ struct ReportRangeSelectionView: View {
     private let dateFormatter = DateFormatter()
     
     init() {
-        dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
+        self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
     }
     
     private var controlsAreDisabled: Bool {

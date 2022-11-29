@@ -19,7 +19,7 @@ class ReportRangeSelectionViewModel: ObservableObject {
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
     private var cancellables = Set<AnyCancellable>()
     
-    private let maxEraRange: UInt = 40
+    private let maxEraRange: UInt = 20
     
     func initReportServices(networks: [Network]) {
         guard self.reportServiceMap.count == 0 else {

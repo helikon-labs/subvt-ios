@@ -177,5 +177,10 @@ extension UI {
             static let eraDisplay = LexendDeca.regular.withSize(16)
             static let actionButton = LexendDeca.semiBold.withSize(16)
         }
+        
+        enum EraReports {
+            static let dateTitle = LexendDeca.light.withSize(12)
+            static let date = LexendDeca.regular.withSize(12)
+        }
     }
 }
