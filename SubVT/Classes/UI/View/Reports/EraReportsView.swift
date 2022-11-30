@@ -247,28 +247,171 @@ struct EraReportsView: View {
                 Spacer()
                     .frame(height: 16)
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    self.activeNominatorCountsView
-                        .modifier(PanelAppearance(2, self.chartDisplayState))
-                    self.totalStakesView
-                        .modifier(PanelAppearance(3, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .line,
+                            title: localized("era_reports.active_nominators"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.activeNominatorCounts.map({
+                                (Double($0.0), Double($0.1))
+                            }),
+                            minY: 0,
+                            maxY: Double(self.viewModel.maxActiveNominatorCount * 2)
+                        )
+                    } label: {
+                        self.activeNominatorCountsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(2, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            title: String(
+                                format: localized("era_reports.total_stakes"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.totalStakes.map({
+                                (Double($0.0), $0.1)
+                            }),
+                            minY: 0,
+                            maxY: self.viewModel.maxTotalStake
+                        )
+                    } label: {
+                        self.totalStakesView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(3, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    self.rewardPointsView
-                        .modifier(PanelAppearance(4, self.chartDisplayState))
-                    self.totalRewardsView
-                        .modifier(PanelAppearance(5, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            title: localized("era_reports.reward_points"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.rewardPoints.map({
+                                (Double($0.0), $0.1)
+                            }),
+                            minY: 0,
+                            maxY: self.viewModel.maxRewardPoint
+                        )
+                    } label: {
+                        self.rewardPointsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(4, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            title: String(
+                                format: localized("era_reports.total_rewards"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.totalRewards.map({
+                                (Double($0.0), $0.1)
+                            }),
+                            minY: 0,
+                            maxY: self.viewModel.maxTotalReward
+                        )
+                    } label: {
+                        self.totalRewardsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(5, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    self.activeValidatorCountsView
-                        .modifier(PanelAppearance(6, self.chartDisplayState))
-                    self.validatorRewardsView
-                        .modifier(PanelAppearance(7, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .line,
+                            title: localized("era_reports.active_validators"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.activeValidatorCounts.map({
+                                (Double($0.0), Double($0.1))
+                            }),
+                            minY: 0,
+                            maxY: Double(self.viewModel.maxActiveValidatorCount * 2)
+                        )
+                    } label: {
+                        self.activeValidatorCountsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(6, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            title: String(
+                                format: localized("era_reports.validator_rewards"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.validatorRewards.map({
+                                (Double($0.0), $0.1)
+                            }),
+                            minY: 0,
+                            maxY: self.viewModel.maxValidatorReward
+                        )
+                    } label: {
+                        self.validatorRewardsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(7, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    self.offlineOffenceCountsView
-                        .modifier(PanelAppearance(8, self.chartDisplayState))
-                    self.slashesView
-                        .modifier(PanelAppearance(9, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            title: String(
+                                format: localized("era_reports.offline_offences"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.offlineOffenceCounts.map({
+                                (Double($0.0), $0.1)
+                            }),
+                            minY: 0,
+                            maxY: self.viewModel.maxOfflineOffenceCount
+                        )
+                    } label: {
+                        self.offlineOffenceCountsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(8, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            title: String(
+                                format: localized("era_reports.slashed"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra,
+                            dataPoints: self.viewModel.slashes.map({
+                                (Double($0.0), $0.1)
+                            }),
+                            minY: 0,
+                            maxY: self.viewModel.maxSlash
+                        )
+                    } label: {
+                        self.slashesView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(9, self.chartDisplayState))
                 }
             }
             .padding(EdgeInsets(

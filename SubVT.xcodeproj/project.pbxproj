@@ -34,6 +34,8 @@
 		A018C2AF28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
 		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
+		A030024F2937466400F7BB1E /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030024E2937466400F7BB1E /* ReportView.swift */; };
+		A03002512937468900F7BB1E /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03002502937468900F7BB1E /* ReportViewModel.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
 		A03BA5E628F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
 		A03BA5E728F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
@@ -385,6 +387,8 @@
 		A015DD9F292FA3F200BF9D1B /* EraReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraReportsViewModel.swift; sourceTree = "<group>"; };
 		A018C2AC28B90C0500C9A276 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		A030024E2937466400F7BB1E /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		A03002502937468900F7BB1E /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+EditNotificationRule.swift"; sourceTree = "<group>"; };
 		A03C5BE528783C9F00D9D4FD /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
@@ -681,6 +685,8 @@
 				A015DD9F292FA3F200BF9D1B /* EraReportsViewModel.swift */,
 				A0425552292CF1F200085DF3 /* ReportRangeSelectionView.swift */,
 				A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */,
+				A030024E2937466400F7BB1E /* ReportView.swift */,
+				A03002502937468900F7BB1E /* ReportViewModel.swift */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -1303,6 +1309,7 @@
 				A0FD88312893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
 				A0EFDC5F28E994C2000A2BCC /* NotificationUtil.swift in Sources */,
 				A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */,
+				A03002512937468900F7BB1E /* ReportViewModel.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
 				A0058CEA28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
 				A0D5498828E70132007794E2 /* NotificationsView.swift in Sources */,
@@ -1377,6 +1384,7 @@
 				A0D205D2288C1E7D0040CB08 /* FooterGradientView.swift in Sources */,
 				A0744D8E2885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0AFF7F128926C8400B0CB4F /* ValidatorDetailsViewModel.swift in Sources */,
+				A030024F2937466400F7BB1E /* ReportView.swift in Sources */,
 				A0787280287C456300BED374 /* ActionButtonView.swift in Sources */,
 				A06E15A3288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
