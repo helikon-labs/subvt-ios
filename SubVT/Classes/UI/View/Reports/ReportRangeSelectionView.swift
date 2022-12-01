@@ -204,7 +204,7 @@ struct ReportRangeSelectionView: View {
             }
             ZStack {
                 SnackbarView(
-                    message: localized("network_report_range_selection.error.era_list"),
+                    message: localized("report_range_selection.error.era_list"),
                     type: .error(canRetry: true)
                 ) {
                     self.viewModel.fetchEras()
@@ -386,7 +386,7 @@ struct ReportRangeSelectionView: View {
     
     private var startEraTitleAndButtonView: some View {
         Group {
-            Text(localized("network_report_range_selection.start_date"))
+            Text(localized("report_range_selection.start_date"))
                 .font(UI.Font.ReportRangeSelection.subtitle)
                 .foregroundColor(Color("Text"))
             Spacer()
@@ -499,7 +499,7 @@ struct ReportRangeSelectionView: View {
     
     private var endEraTitleAndButtonView: some View {
         Group {
-            Text(localized("network_report_range_selection.end_date"))
+            Text(localized("report_range_selection.end_date"))
                 .font(UI.Font.ReportRangeSelection.subtitle)
                 .foregroundColor(Color("Text"))
             Spacer()

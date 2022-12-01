@@ -3,7 +3,7 @@
 //  SubVT
 //
 //  Created by Kutsal Kaan Bilgin on 30.11.2022.
-//
+//x
 
 import Charts
 import SwiftUI
@@ -15,17 +15,37 @@ struct ReportView: View {
         case bar
     }
     
+    enum Mode {
+        case integer(
+            dataPoints: [(Int, Int)],
+            min: Int? = nil,
+            max: Int? = nil
+        )
+        case double(
+            dataPoints: [(Int, Double)],
+            min: Double? = nil,
+            max: Double? = nil
+        )
+        case balance(
+            dataPoints: [(Int, Balance)],
+            min: Balance? = nil,
+            max: Balance? = nil
+        )
+    }
+    
     @Environment(\.presentationMode) private var presentationMode
     @StateObject private var viewModel = ReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var chartRevealPercentage: CGFloat = 1.0
     
     private let type: ChartType
+    private let mode: Mode
     private let title: String
+    private let chartTitle: String
     private let network: Network
     private let startEra: Era
     private let endEra: Era
-    private let dataPoints: [(Double, Double)]
+    private let eraIndices: [Int]
     
     private let dateFormatter = DateFormatter()
     private let axisSpace: CGFloat = 30
@@ -42,18 +62,28 @@ struct ReportView: View {
     
     init(
         type: ChartType,
+        mode: Mode,
         title: String,
+        chartTitle: String,
         network: Network,
         startEra: Era,
-        endEra: Era,
-        dataPoints: [(Double, Double)]
+        endEra: Era
     ) {
         self.type = type
+        self.mode = mode
+        switch mode {
+        case .integer(let dataPoints, _, _):
+            self.eraIndices = dataPoints.map { $0.0 }
+        case .double(let dataPoints, _, _):
+            self.eraIndices = dataPoints.map { $0.0 }
+        case .balance(let dataPoints, _, _):
+            self.eraIndices = dataPoints.map { $0.0 }
+        }
         self.title = title
+        self.chartTitle = chartTitle
         self.network = network
         self.startEra = startEra
         self.endEra = endEra
-        self.dataPoints = dataPoints
         self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
     }
     
@@ -106,7 +136,7 @@ struct ReportView: View {
     private var dateIntervalView: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(localized("network_report_range_selection.start_date"))
+                Text(localized("report_range_selection.start_date"))
                     .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
@@ -120,7 +150,7 @@ struct ReportView: View {
             Spacer()
                 .frame(height: 6)
             HStack {
-                Text(localized("network_report_range_selection.end_date"))
+                Text(localized("report_range_selection.end_date"))
                     .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
@@ -175,76 +205,13 @@ struct ReportView: View {
                     self.dateIntervalView
                     Spacer()
                         .frame(height: 16)
-                    ZStack {
-                        let firstEraIndex = self.dataPoints.first?.0 ?? 0
-                        let lastEraIndex = self.dataPoints.last?.0 ?? 0
-                        Chart {
-                            ForEach(self.dataPoints.indices, id: \.self) { i in
-                                let dataPoint = self.dataPoints[i]
-                                BarMark(
-                                    x: .value("Era", Int(dataPoint.0)),
-                                    y: .value("Value", Int(dataPoint.1))
-                                )
-                                .foregroundStyle(self.gradient)
-                            }
-                        }
-                        .chartXAxis {
-                            AxisMarks(
-                                values: .automatic(desiredCount: self.dataPoints.count)
-                            ) { value in
-                                AxisGridLine()
-                                AxisTick()
-                                AxisValueLabel(
-                                    anchor: UnitPoint(x: -0.5, y: 0.5),
-                                    collisionResolution: .disabled
-                                ) {
-                                    if let intValue = value.as(Int.self) {
-                                        Text(String(intValue))
-                                            .font(UI.Font.Report.axisValue)
-                                            .rotationEffect(Angle(degrees: -45))
-                                            .offset(x: -14, y : 3)
-                                            .foregroundColor(Color("Text"))
-                                    }
-                                }
-                              }
-                        }
-                        .chartXScale(domain: (firstEraIndex...lastEraIndex))
-                        .chartXAxisLabel(alignment: Alignment.trailing) {
-                            Text("Era")
-                                .font(UI.Font.Report.axisLabel)
-                                .foregroundColor(Color("Text"))
-                        }
-                        .chartYAxis {
-                            AxisMarks(
-                                position: .leading,
-                                values: .automatic(desiredCount: 10)
-                            ) { value in
-                                AxisGridLine()
-                                AxisTick(
-                                    length: 5
-                                )
-                                AxisValueLabel {
-                                    if let intValue = value.as(Int.self) {
-                                        Text(String(intValue))
-                                            .font(UI.Font.Report.axisValue)
-                                            .foregroundColor(Color("Text"))
-                                    }
-                                }
-                              }
-                        }
-                        .chartYAxisLabel(alignment: Alignment.leading) {
-                            Text("Offences")
-                                .font(UI.Font.Report.axisLabel)
-                                .foregroundColor(Color("Text"))
-                        }
-                        
-                    }
-                    .padding(UI.Dimension.Common.dataPanelPadding)
-                    .frame(height: geometry.size.width * 2 / 3)
-                    .frame(maxWidth: .infinity)
-                    .background(Color("DataPanelBg"))
-                    .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
-                    .modifier(PanelAppearance(4, self.displayState))
+                    self.chart
+                        .padding(UI.Dimension.Common.dataPanelPadding)
+                        .frame(height: geometry.size.width * 2 / 3)
+                        .frame(maxWidth: .infinity)
+                        .background(Color("DataPanelBg"))
+                        .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+                        .modifier(PanelAppearance(4, self.displayState))
                 }
                 .padding(EdgeInsets(
                     top: 0,
@@ -280,39 +247,122 @@ struct ReportView: View {
             }
         }
     }
+    
+    private var chart: some View {
+        ZStack {
+            let firstEraIndex = self.eraIndices.first ?? 0
+            let lastEraIndex = self.eraIndices.last ?? 0
+            Chart {
+                switch self.mode {
+                case .integer(let dataPoints, _, _):
+                    ForEach(dataPoints.indices, id: \.self) { i in
+                        let dataPoint = dataPoints[i]
+                        switch self.type {
+                        case .bar:
+                            BarMark(
+                                x: .value("Era", dataPoint.0),
+                                y: .value("Value", dataPoint.1)
+                            )
+                            .foregroundStyle(self.gradient)
+                        case .line:
+                            LineMark(
+                                x: .value("Era", dataPoint.0),
+                                y: .value("Value", dataPoint.1)
+                            )
+                            .foregroundStyle(self.gradient)
+                            .interpolationMethod(.catmullRom)
+                        }
+                    }
+                default:
+                    LineMark(
+                        x: .value("Era", 0),
+                        y: .value("Value", 1)
+                    )
+                    .foregroundStyle(self.gradient)
+                }
+            }
+            .chartXAxis {
+                AxisMarks(
+                    values: .automatic(desiredCount: lastEraIndex - firstEraIndex + 1)
+                ) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    AxisValueLabel(
+                        anchor: UnitPoint(x: -0.5, y: 0.5),
+                        collisionResolution: .disabled
+                    ) {
+                        Text(String(value.as(Int.self)!))
+                            .font(UI.Font.Report.axisValue)
+                            .rotationEffect(Angle(degrees: -45))
+                            .offset(x: -14, y : 3)
+                            .foregroundColor(Color("Text"))
+                    }
+                  }
+            }
+            .chartXScale(domain: (firstEraIndex...lastEraIndex))
+            .chartXAxisLabel(alignment: Alignment.trailing) {
+                Text(localized("common.era"))
+                    .font(UI.Font.Report.axisLabel)
+                    .foregroundColor(Color("Text"))
+            }
+            .chartYAxis {
+                AxisMarks(
+                    position: .leading,
+                    values: .automatic(desiredCount: 10)
+                ) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    AxisValueLabel {
+                        if let intValue = value.as(Int.self) {
+                            Text(String(intValue))
+                                .font(UI.Font.Report.axisValue)
+                                .foregroundColor(Color("Text"))
+                        }
+                    }
+                  }
+            }
+            .chartYAxisLabel(alignment: Alignment.leading) {
+                Text(self.chartTitle)
+                    .font(UI.Font.Report.axisLabel)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
 }
 
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
+        let dataPoints = [
+            (1000, 10),
+            (1001, 2),
+            (1002, 0),
+            (1003, 7.5),
+            (1004, 3.4),
+            (1005, 7.8),
+            (1006, 2.4),
+            (1007, 6),
+            (1008, 0),
+            (1009, 17),
+            (1010, 6),
+            (1011, 2),
+            (1012, 0),
+            (1013, 7.5),
+            (1014, 3.4),
+            (1015, 7.8),
+            (1016, 2.4),
+            (1017, 6),
+            (1018, 0),
+            (1019, 17),
+            (1020, 6)
+        ]
         ReportView(
             type: .line,
-            title: "Report",
+            mode: .double(dataPoints: dataPoints, max: 20),
+            title: "Kusama Report",
+            chartTitle: "Report",
             network: PreviewData.kusama,
             startEra: PreviewData.era,
-            endEra: PreviewData.era,
-            dataPoints: [
-                (1000, 10),
-                (1001, 2),
-                (1002, 0),
-                (1003, 7.5),
-                (1004, 3.4),
-                (1005, 7.8),
-                (1006, 2.4),
-                (1007, 6),
-                (1008, 0),
-                (1009, 17),
-                (1010, 6),
-                (1011, 2),
-                (1012, 0),
-                (1013, 7.5),
-                (1014, 3.4),
-                (1015, 7.8),
-                (1016, 2.4),
-                (1017, 6),
-                (1018, 0),
-                (1019, 17),
-                (1020, 6)
-            ]
+            endEra: PreviewData.era
         )
     }
 }

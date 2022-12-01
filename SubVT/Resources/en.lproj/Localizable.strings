@@ -68,7 +68,7 @@
 "tab.network_status"="Network";
 "tab.my_validators"="My Validators";
 "tab.notifications"="Notifications";
-"tab.network_reports"="Reports";
+"tab.network_reports"="Netw. Reports";
 
 "network_selection.selected_network"="Selected Network";
 "network_selection.select_network"="Select an available network";
@@ -217,15 +217,15 @@
 "edit_notification_rule.save_rule"="Update Rule";
 "edit_notification_rule.update_confirmation"="SubVT currently supports a single notification rule per notification type. You already have a notification rule defined for type \"%@\".\n\nDo you want to overwrite the existing rule?";
 
+"report_range_selection.start_date"="Start Date";
+"report_range_selection.end_date"="End Date";
+"report_range_selection.error.era_list"="Error while getting the era list. Please check your connection.";
+
 "network_report_range_selection.title"="Network Reports";
-"network_report_range_selection.start_date"="Start Date";
-"network_report_range_selection.end_date"="End Date";
-"network_report_range_selection.error.era_list"="Error while getting the era list. Please check your connection.";
 
 "network_reports.title"="Network Reports";
 "network_reports.error.network_reports"="Error while getting the reports. Please check your connection.";
 "network_reports.active_nominators"="Active Nominators";
-"network_reports.active_nominator_count"="Active Nominator Count";
 "network_reports.active_validators"="Active Validators";
 "network_reports.active_validator_count"="Active Validator Count";
 "network_reports.reward_points"="Reward Points";
@@ -238,3 +238,5 @@
 "network_reports.offline_offences"="Offline Offences";
 "network_reports.slashed"="Slashed (%@)";
 "network_reports.slashed_plain"="Slashed";
+
+"network_report.active_nominators_title"="%@ Active Nominators";

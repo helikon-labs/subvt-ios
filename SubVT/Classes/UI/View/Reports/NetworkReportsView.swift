@@ -36,11 +36,19 @@ struct NetworkReportsView: View {
         self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
     }
     
-    private func getDateDisplay(index: UInt, timestamp: UInt64) -> String {
+    private func getDateDisplay(
+        index: UInt,
+        timestamp: UInt64
+    ) -> String {
         let date = Date(
             timeIntervalSince1970: TimeInterval(timestamp / 1000)
         )
-        return "Era \(index) - \(dateFormatter.string(from: date))"
+        return String(
+            format: "%@ %d - %@",
+            localized("common.era"),
+            index,
+            dateFormatter.string(from: date)
+        )
     }
     
     private var headerView: some View {
@@ -62,11 +70,15 @@ struct NetworkReportsView: View {
                     .frame(alignment: .leading)
                     Spacer()
                 }
-                Text(localized("network_reports.title"))
-                    .font(UI.Font.Common.title)
-                    .foregroundColor(Color("Text"))
-                    .frame(alignment: .center)
-                    .modifier(PanelAppearance(1, self.displayState))
+                Text(String(
+                    format: "%@ %@",
+                    self.network.display,
+                    localized("network_reports.title")
+                ))
+                .font(UI.Font.Common.title)
+                .foregroundColor(Color("Text"))
+                .frame(alignment: .center)
+                .modifier(PanelAppearance(1, self.displayState))
             }
             .frame(
                 height: UI.Dimension.ValidatorList.titleSectionHeight,
@@ -197,9 +209,9 @@ struct NetworkReportsView: View {
     }
     
     private var dateIntervalView: some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
-                Text(localized("network_report_range_selection.start_date"))
+                Text(localized("report_range_selection.start_date"))
                     .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
@@ -213,7 +225,7 @@ struct NetworkReportsView: View {
             Spacer()
                 .frame(height: 6)
             HStack {
-                Text(localized("network_report_range_selection.end_date"))
+                Text(localized("report_range_selection.end_date"))
                     .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
@@ -249,13 +261,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .line,
-                            title: localized("network_reports.active_nominators"),
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
+                            title: String(
+                                format: localized("network_report.active_nominators_title"),
+                                self.network.display
+                            ),
+                            chartTitle: localized("network_reports.active_nominators"),
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.activeNominatorCounts.map({
-                                (Double($0.0), Double($0.1))
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.activeNominatorCountsView
@@ -265,16 +279,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             title: String(
                                 format: localized("network_reports.total_stakes"),
                                 self.network.tokenTicker
                             ),
+                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.totalStakes.map({
-                                (Double($0.0), $0.1)
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.totalStakesView
@@ -286,13 +299,12 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             title: localized("network_reports.reward_points"),
+                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.rewardPoints.map({
-                                (Double($0.0), $0.1)
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.rewardPointsView
@@ -302,16 +314,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             title: String(
                                 format: localized("network_reports.total_rewards"),
                                 self.network.tokenTicker
                             ),
+                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.totalRewards.map({
-                                (Double($0.0), $0.1)
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.totalRewardsView
@@ -323,13 +334,12 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .line,
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             title: localized("network_reports.active_validators"),
+                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.activeValidatorCounts.map({
-                                (Double($0.0), Double($0.1))
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.activeValidatorCountsView
@@ -339,16 +349,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             title: String(
                                 format: localized("network_reports.validator_rewards"),
                                 self.network.tokenTicker
                             ),
+                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.validatorRewards.map({
-                                (Double($0.0), $0.1)
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.validatorRewardsView
@@ -360,16 +369,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             title: String(
                                 format: localized("network_reports.offline_offences"),
                                 self.network.tokenTicker
                             ),
+                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.offlineOffenceCounts.map({
-                                (Double($0.0), $0.1)
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.offlineOffenceCountsView
@@ -379,16 +387,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
+                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             title: String(
                                 format: localized("network_reports.slashed"),
                                 self.network.tokenTicker
                             ),
+                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra,
-                            dataPoints: self.viewModel.slashes.map({
-                                (Double($0.0), $0.1)
-                            })
+                            endEra: self.endEra
                         )
                     } label: {
                         self.slashesView
@@ -673,7 +680,7 @@ struct NetworkReportsView: View {
                     .frame(height: UI.Dimension.Common.dataPanelSpacing)
                 Group {
                     ReportDataPanelView(
-                        title: localized("network_reports.active_nominator_count"),
+                        title: localized("network_reports.active_nominators"),
                         content: String(self.viewModel.activeNominatorCounts[0].1)
                     )
                     .modifier(PanelAppearance(2, self.chartDisplayState))
