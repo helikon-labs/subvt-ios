@@ -1,5 +1,5 @@
 //
-//  EraReportsViewModel.swift
+//  NetworkReportsViewModel.swift
 //  SubVT
 //
 //  Created by Kutsal Kaan Bilgin on 24.11.2022.
@@ -10,7 +10,7 @@ import Combine
 import Foundation
 import SubVTData
 
-class EraReportsViewModel: ObservableObject {
+class NetworkReportsViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
     @Published private(set) var activeNominatorCounts: [(Int, Int)] = []
     @Published private(set) var activeValidatorCounts: [(Int, Int)] = []

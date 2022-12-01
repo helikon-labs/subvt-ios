@@ -1,5 +1,5 @@
 //
-//  EraReportsView.swift
+//  NetworkReportsView.swift
 //  SubVT
 //
 //  Created by Kutsal Kaan Bilgin on 24.11.2022.
@@ -8,10 +8,10 @@
 import SwiftUI
 import SubVTData
 
-struct EraReportsView: View {
+struct NetworkReportsView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var viewModel = EraReportsViewModel()
+    @StateObject private var viewModel = NetworkReportsViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var chartDisplayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
@@ -23,7 +23,6 @@ struct EraReportsView: View {
     private let network: Network
     
     private let dateFormatter = DateFormatter()
-    private let singleEraReportDataPanelHeight: CGFloat = 66
     
     init(
         network: Network,
@@ -63,7 +62,7 @@ struct EraReportsView: View {
                     .frame(alignment: .leading)
                     Spacer()
                 }
-                Text(localized("era_reports.title"))
+                Text(localized("network_reports.title"))
                     .font(UI.Font.Common.title)
                     .foregroundColor(Color("Text"))
                     .frame(alignment: .center)
@@ -116,7 +115,7 @@ struct EraReportsView: View {
             switch self.viewModel.fetchState {
             case .success:
                 if self.startEra.index == self.endEra.index {
-                    self.singleEraReportView
+                    self.singleReportView
                         .zIndex(1)
                 } else {
                     self.chartsView
@@ -140,7 +139,7 @@ struct EraReportsView: View {
                 .zIndex(2)
             ZStack {
                 SnackbarView(
-                    message: localized("era_report_range_selection.error.era_list"),
+                    message: localized("network_reports.error.network_reports"),
                     type: .error(canRetry: true)
                 ) {
                     self.viewModel.fetchReports(
@@ -200,29 +199,29 @@ struct EraReportsView: View {
     private var dateIntervalView: some View {
         VStack {
             HStack {
-                Text(localized("era_report_range_selection.start_date"))
-                    .font(UI.Font.EraReports.dateTitle)
+                Text(localized("network_report_range_selection.start_date"))
+                    .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
                 Text(self.getDateDisplay(
                     index: self.startEra.index,
                     timestamp: self.startEra.startTimestamp
                 ))
-                .font(UI.Font.EraReports.date)
+                .font(UI.Font.NetworkReports.date)
             }
             .modifier(PanelAppearance(0, self.chartDisplayState))
             Spacer()
                 .frame(height: 6)
             HStack {
-                Text(localized("era_report_range_selection.end_date"))
-                    .font(UI.Font.EraReports.dateTitle)
+                Text(localized("network_report_range_selection.end_date"))
+                    .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
                 Text(self.getDateDisplay(
                     index: self.endEra.index,
                     timestamp: self.endEra.endTimestamp
                 ))
-                .font(UI.Font.EraReports.date)
+                .font(UI.Font.NetworkReports.date)
             }
             .modifier(PanelAppearance(1, self.chartDisplayState))
         }
@@ -250,7 +249,7 @@ struct EraReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .line,
-                            title: localized("era_reports.active_nominators"),
+                            title: localized("network_reports.active_nominators"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra,
@@ -267,7 +266,7 @@ struct EraReportsView: View {
                         ReportView(
                             type: .bar,
                             title: String(
-                                format: localized("era_reports.total_stakes"),
+                                format: localized("network_reports.total_stakes"),
                                 self.network.tokenTicker
                             ),
                             network: self.network,
@@ -287,7 +286,7 @@ struct EraReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
-                            title: localized("era_reports.reward_points"),
+                            title: localized("network_reports.reward_points"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra,
@@ -304,7 +303,7 @@ struct EraReportsView: View {
                         ReportView(
                             type: .bar,
                             title: String(
-                                format: localized("era_reports.total_rewards"),
+                                format: localized("network_reports.total_rewards"),
                                 self.network.tokenTicker
                             ),
                             network: self.network,
@@ -324,7 +323,7 @@ struct EraReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .line,
-                            title: localized("era_reports.active_validators"),
+                            title: localized("network_reports.active_validators"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra,
@@ -341,7 +340,7 @@ struct EraReportsView: View {
                         ReportView(
                             type: .bar,
                             title: String(
-                                format: localized("era_reports.validator_rewards"),
+                                format: localized("network_reports.validator_rewards"),
                                 self.network.tokenTicker
                             ),
                             network: self.network,
@@ -362,7 +361,7 @@ struct EraReportsView: View {
                         ReportView(
                             type: .bar,
                             title: String(
-                                format: localized("era_reports.offline_offences"),
+                                format: localized("network_reports.offline_offences"),
                                 self.network.tokenTicker
                             ),
                             network: self.network,
@@ -381,7 +380,7 @@ struct EraReportsView: View {
                         ReportView(
                             type: .bar,
                             title: String(
-                                format: localized("era_reports.slashed"),
+                                format: localized("network_reports.slashed"),
                                 self.network.tokenTicker
                             ),
                             network: self.network,
@@ -562,7 +561,7 @@ struct EraReportsView: View {
     
     private var activeNominatorCountsView: some View {
         ReportLineChartView(
-            title: localized("era_reports.active_nominators"),
+            title: localized("network_reports.active_nominators"),
             dataPoints: self.viewModel.activeNominatorCounts,
             minY: 0,
             maxY: self.viewModel.maxActiveNominatorCount * 2,
@@ -573,7 +572,7 @@ struct EraReportsView: View {
     
     private var activeValidatorCountsView: some View {
         ReportLineChartView(
-            title: localized("era_reports.active_validators"),
+            title: localized("network_reports.active_validators"),
             dataPoints: self.viewModel.activeValidatorCounts,
             minY: 0,
             maxY: self.viewModel.maxActiveValidatorCount * 2,
@@ -584,7 +583,7 @@ struct EraReportsView: View {
     
     private var rewardPointsView: some View {
         ReportBarChartView(
-            title: localized("era_reports.reward_points"),
+            title: localized("network_reports.reward_points"),
             dataPoints: self.viewModel.rewardPoints,
             minY: 0.0,
             maxY: self.viewModel.maxRewardPoint,
@@ -596,7 +595,7 @@ struct EraReportsView: View {
     private var totalRewardsView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("era_reports.total_rewards"),
+                format: localized("network_reports.total_rewards"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.totalRewards,
@@ -610,7 +609,7 @@ struct EraReportsView: View {
     private var totalStakesView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("era_reports.total_stakes"),
+                format: localized("network_reports.total_stakes"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.totalStakes,
@@ -624,7 +623,7 @@ struct EraReportsView: View {
     private var validatorRewardsView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("era_reports.validator_rewards"),
+                format: localized("network_reports.validator_rewards"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.validatorRewards,
@@ -637,7 +636,7 @@ struct EraReportsView: View {
     
     private var offlineOffenceCountsView: some View {
         ReportBarChartView(
-            title: localized("era_reports.offline_offences"),
+            title: localized("network_reports.offline_offences"),
             dataPoints: self.viewModel.offlineOffenceCounts,
             minY: 0.0,
             maxY: self.viewModel.maxOfflineOffenceCount,
@@ -649,7 +648,7 @@ struct EraReportsView: View {
     private var slashesView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("era_reports.slashed"),
+                format: localized("network_reports.slashed"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.slashes,
@@ -660,7 +659,7 @@ struct EraReportsView: View {
         )
     }
     
-    private var singleEraReportView: some View {
+    private var singleReportView: some View {
         ScrollView {
             VStack(
                 alignment: .leading,
@@ -674,12 +673,12 @@ struct EraReportsView: View {
                     .frame(height: UI.Dimension.Common.dataPanelSpacing)
                 Group {
                     ReportDataPanelView(
-                        title: localized("era_reports.active_nominator_count"),
+                        title: localized("network_reports.active_nominator_count"),
                         content: String(self.viewModel.activeNominatorCounts[0].1)
                     )
                     .modifier(PanelAppearance(2, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("era_reports.total_stake"),
+                        title: localized("network_reports.total_stake"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
@@ -692,7 +691,7 @@ struct EraReportsView: View {
                     )
                     .modifier(PanelAppearance(3, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("era_reports.reward_points"),
+                        title: localized("network_reports.reward_points"),
                         content: formatDecimal(
                             integer: UInt64(self.viewModel.rewardPoints[0].1),
                             decimalCount: 0,
@@ -702,7 +701,7 @@ struct EraReportsView: View {
                     )
                     .modifier(PanelAppearance(4, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("era_reports.total_reward"),
+                        title: localized("network_reports.total_reward"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
@@ -715,12 +714,12 @@ struct EraReportsView: View {
                     )
                     .modifier(PanelAppearance(5, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("era_reports.active_validator_count"),
+                        title: localized("network_reports.active_validator_count"),
                         content: String(self.viewModel.activeValidatorCounts[0].1)
                     )
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("era_reports.total_validator_reward"),
+                        title: localized("network_reports.total_validator_reward"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
@@ -733,12 +732,12 @@ struct EraReportsView: View {
                     )
                     .modifier(PanelAppearance(7, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("era_reports.offline_offences"),
+                        title: localized("network_reports.offline_offences"),
                         content: String(Int(self.viewModel.offlineOffenceCounts[0].1))
                     )
                     .modifier(PanelAppearance(8, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("era_reports.slashed_plain"),
+                        title: localized("network_reports.slashed_plain"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
@@ -774,9 +773,9 @@ struct EraReportsView: View {
     }
 }
 
-struct EraReportsView_Previews: PreviewProvider {
+struct NetworkReportsView_Previews: PreviewProvider {
     static var previews: some View {
-        EraReportsView(
+        NetworkReportsView(
             network: PreviewData.kusama,
             startEra: PreviewData.era,
             endEra: PreviewData.era

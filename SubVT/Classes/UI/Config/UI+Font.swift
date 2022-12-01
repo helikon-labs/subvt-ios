@@ -178,7 +178,7 @@ extension UI {
             static let actionButton = LexendDeca.semiBold.withSize(16)
         }
         
-        enum EraReports {
+        enum NetworkReports {
             static let dateTitle = LexendDeca.light.withSize(12)
             static let date = LexendDeca.regular.withSize(12)
         }

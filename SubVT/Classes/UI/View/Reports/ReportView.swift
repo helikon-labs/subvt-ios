@@ -106,29 +106,29 @@ struct ReportView: View {
     private var dateIntervalView: some View {
         VStack(alignment: .leading) {
             HStack {
-                Text(localized("era_report_range_selection.start_date"))
-                    .font(UI.Font.EraReports.dateTitle)
+                Text(localized("network_report_range_selection.start_date"))
+                    .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
                 Text(self.getDateDisplay(
                     index: self.startEra.index,
                     timestamp: self.startEra.startTimestamp
                 ))
-                .font(UI.Font.EraReports.date)
+                .font(UI.Font.NetworkReports.date)
             }
             .modifier(PanelAppearance(2, self.displayState))
             Spacer()
                 .frame(height: 6)
             HStack {
-                Text(localized("era_report_range_selection.end_date"))
-                    .font(UI.Font.EraReports.dateTitle)
+                Text(localized("network_report_range_selection.end_date"))
+                    .font(UI.Font.NetworkReports.dateTitle)
                     .foregroundColor(Color("Text"))
                     .frame(width: 72, alignment: .leading)
                 Text(self.getDateDisplay(
                     index: self.endEra.index,
                     timestamp: self.endEra.endTimestamp
                 ))
-                .font(UI.Font.EraReports.date)
+                .font(UI.Font.NetworkReports.date)
             }
             .modifier(PanelAppearance(3, self.displayState))
         }

@@ -68,7 +68,7 @@
 "tab.network_status"="Network";
 "tab.my_validators"="My Validators";
 "tab.notifications"="Notifications";
-"tab.era_reports"="Era Reports";
+"tab.network_reports"="Reports";
 
 "network_selection.selected_network"="Selected Network";
 "network_selection.select_network"="Select an available network";
@@ -217,24 +217,24 @@
 "edit_notification_rule.save_rule"="Update Rule";
 "edit_notification_rule.update_confirmation"="SubVT currently supports a single notification rule per notification type. You already have a notification rule defined for type \"%@\".\n\nDo you want to overwrite the existing rule?";
 
-"era_report_range_selection.title"="Era Reports";
-"era_report_range_selection.start_date"="Start Date";
-"era_report_range_selection.end_date"="End Date";
-"era_report_range_selection.error.era_list"="Error while getting the era list. Please check your connection.";
+"network_report_range_selection.title"="Network Reports";
+"network_report_range_selection.start_date"="Start Date";
+"network_report_range_selection.end_date"="End Date";
+"network_report_range_selection.error.era_list"="Error while getting the era list. Please check your connection.";
 
-"era_reports.title"="Era Reports";
-"era_reports.error.era_reports"="Error while getting the reports. Please check your connection.";
-"era_reports.active_nominators"="Active Nominators";
-"era_reports.active_nominator_count"="Active Nominator Count";
-"era_reports.active_validators"="Active Validators";
-"era_reports.active_validator_count"="Active Validator Count";
-"era_reports.reward_points"="Reward Points";
-"era_reports.total_reward"="Total Reward";
-"era_reports.total_rewards"="Total Rewards (%@)";
-"era_reports.total_stake"="Total Stake";
-"era_reports.total_stakes"="Total Stake (%@)";
-"era_reports.validator_rewards"="Validator Reward (%@)";
-"era_reports.total_validator_reward"="Total Validator Reward";
-"era_reports.offline_offences"="Offline Offences";
-"era_reports.slashed"="Slashed (%@)";
-"era_reports.slashed_plain"="Slashed";
+"network_reports.title"="Network Reports";
+"network_reports.error.network_reports"="Error while getting the reports. Please check your connection.";
+"network_reports.active_nominators"="Active Nominators";
+"network_reports.active_nominator_count"="Active Nominator Count";
+"network_reports.active_validators"="Active Validators";
+"network_reports.active_validator_count"="Active Validator Count";
+"network_reports.reward_points"="Reward Points";
+"network_reports.total_reward"="Total Reward";
+"network_reports.total_rewards"="Total Rewards (%@)";
+"network_reports.total_stake"="Total Stake";
+"network_reports.total_stakes"="Total Stake (%@)";
+"network_reports.validator_rewards"="Validator Reward (%@)";
+"network_reports.total_validator_reward"="Total Validator Reward";
+"network_reports.offline_offences"="Offline Offences";
+"network_reports.slashed"="Slashed (%@)";
+"network_reports.slashed_plain"="Slashed";

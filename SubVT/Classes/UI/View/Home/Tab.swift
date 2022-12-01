@@ -11,7 +11,7 @@ enum Tab: CaseIterable {
     case network
     case myValidators
     case notifications
-    case eraReports
+    case networkReports
     
     func getImage(isActive: Bool) -> Image {
         let name: String
@@ -22,8 +22,8 @@ enum Tab: CaseIterable {
             name = "MyValidators"
         case .notifications:
             name = "Notifications"
-        case .eraReports:
-            name = "EraReports"
+        case .networkReports:
+            name = "NetworkReports"
         }
         return Image("TabIcon\(name)\(isActive ? "Active" : "Inactive")")
     }
@@ -37,8 +37,8 @@ enum Tab: CaseIterable {
                 return LocalizedStringKey("tab.my_validators")
             case .notifications:
                 return LocalizedStringKey("tab.notifications")
-            case .eraReports:
-                return LocalizedStringKey("tab.era_reports")
+            case .networkReports:
+                return LocalizedStringKey("tab.network_reports")
             }
         }
     }
