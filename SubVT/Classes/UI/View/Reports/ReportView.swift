@@ -5,6 +5,7 @@
 //  Created by Kutsal Kaan Bilgin on 30.11.2022.
 //
 
+import Charts
 import SwiftUI
 import SubVTData
 
@@ -25,11 +26,19 @@ struct ReportView: View {
     private let startEra: Era
     private let endEra: Era
     private let dataPoints: [(Double, Double)]
-    private let minY: Double
-    private let maxY: Double
     
     private let dateFormatter = DateFormatter()
     private let axisSpace: CGFloat = 30
+    private let gradient = LinearGradient(
+        gradient: Gradient(
+            colors: [
+                Color("Green"),
+                Color("Blue")
+            ]
+        ),
+        startPoint: .bottom,
+        endPoint: .top
+    )
     
     init(
         type: ChartType,
@@ -37,9 +46,7 @@ struct ReportView: View {
         network: Network,
         startEra: Era,
         endEra: Era,
-        dataPoints: [(Double, Double)],
-        minY: Double,
-        maxY: Double
+        dataPoints: [(Double, Double)]
     ) {
         self.type = type
         self.title = title
@@ -48,8 +55,6 @@ struct ReportView: View {
         self.endEra = endEra
         self.dataPoints = dataPoints
         self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
-        self.minY = minY
-        self.maxY = maxY
     }
     
     private func getDateDisplay(index: UInt, timestamp: UInt64) -> String {
@@ -159,89 +164,95 @@ struct ReportView: View {
                 .zIndex(0)
             self.headerView
                 .zIndex(2)
-            VStack(
-                alignment: .leading,
-                spacing: UI.Dimension.Common.dataPanelSpacing
-            ) {
-                Spacer()
-                    .id(0)
-                    .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                self.dateIntervalView
-                Spacer()
-                    .frame(height: 16)
-                GeometryReader { geometry in
-                    HStack(spacing: 0) {
-                        // y-axis
-                        VStack(spacing: 0) {
-                            HStack(spacing: 0) {
-                                Color.red
-                                    .opacity(0)
-                                Color("Text")
-                                    .frame(width: 1)
-                            }
-                            Spacer()
-                                .frame(height: self.axisSpace)
-                        }
-                        .frame(width: self.axisSpace)
-                        VStack(spacing: 0) {
-                            switch self.type {
-                            case .line:
-                                LineChartView(
-                                    dataPoints: self.dataPoints,
-                                    chartMinY: self.minY,
-                                    chartMaxY: self.maxY,
-                                    revealPercentage: 1.0
+            GeometryReader { geometry in
+                VStack(
+                    alignment: .leading,
+                    spacing: UI.Dimension.Common.dataPanelSpacing
+                ) {
+                    Spacer()
+                        .id(0)
+                        .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
+                    self.dateIntervalView
+                    Spacer()
+                        .frame(height: 16)
+                    ZStack {
+                        let firstEraIndex = self.dataPoints.first?.0 ?? 0
+                        let lastEraIndex = self.dataPoints.last?.0 ?? 0
+                        Chart {
+                            ForEach(self.dataPoints.indices, id: \.self) { i in
+                                let dataPoint = self.dataPoints[i]
+                                BarMark(
+                                    x: .value("Era", Int(dataPoint.0)),
+                                    y: .value("Value", Int(dataPoint.1))
                                 )
-                                .padding(EdgeInsets(
-                                    top: 0,
-                                    leading: 1,
-                                    bottom: 1,
-                                    trailing: 1
-                                ))
-                            case .bar:
-                                let padding = UI.Dimension.Common.dataPanelPadding / 2;
-                                BarChartView(
-                                    dataPoints: self.dataPoints,
-                                    chartMinY: self.minY,
-                                    chartMaxY: self.maxY,
-                                    revealPercentage: 1.0
-                                )
-                                .padding(EdgeInsets(
-                                    top: 0,
-                                    leading: padding,
-                                    bottom: padding,
-                                    trailing: padding
-                                ))
+                                .foregroundStyle(self.gradient)
                             }
-                            Color("Text")
-                                .frame(height: 1)
-                            Color.red
-                                .frame(height: self.axisSpace)
-                                .opacity(0)
                         }
-                        .frame(maxWidth: .infinity)
+                        .chartXAxis {
+                            AxisMarks(
+                                values: .automatic(desiredCount: self.dataPoints.count)
+                            ) { value in
+                                AxisGridLine()
+                                AxisTick()
+                                AxisValueLabel(
+                                    anchor: UnitPoint(x: -0.5, y: 0.5),
+                                    collisionResolution: .disabled
+                                ) {
+                                    if let intValue = value.as(Int.self) {
+                                        Text(String(intValue))
+                                            .font(UI.Font.Report.axisValue)
+                                            .rotationEffect(Angle(degrees: -45))
+                                            .offset(x: -14, y : 3)
+                                            .foregroundColor(Color("Text"))
+                                    }
+                                }
+                              }
+                        }
+                        .chartXScale(domain: (firstEraIndex...lastEraIndex))
+                        .chartXAxisLabel(alignment: Alignment.trailing) {
+                            Text("Era")
+                                .font(UI.Font.Report.axisLabel)
+                                .foregroundColor(Color("Text"))
+                        }
+                        .chartYAxis {
+                            AxisMarks(
+                                position: .leading,
+                                values: .automatic(desiredCount: 10)
+                            ) { value in
+                                AxisGridLine()
+                                AxisTick(
+                                    length: 5
+                                )
+                                AxisValueLabel {
+                                    if let intValue = value.as(Int.self) {
+                                        Text(String(intValue))
+                                            .font(UI.Font.Report.axisValue)
+                                            .foregroundColor(Color("Text"))
+                                    }
+                                }
+                              }
+                        }
+                        .chartYAxisLabel(alignment: Alignment.leading) {
+                            Text("Offences")
+                                .font(UI.Font.Report.axisLabel)
+                                .foregroundColor(Color("Text"))
+                        }
+                        
                     }
-                    .padding(EdgeInsets(
-                        top: UI.Dimension.Common.dataPanelPadding,
-                        leading: 0,
-                        bottom: 0,
-                        trailing: UI.Dimension.Common.dataPanelPadding
-                    ))
-                    .frame(height: geometry.size.width / 2)
+                    .padding(UI.Dimension.Common.dataPanelPadding)
+                    .frame(height: geometry.size.width * 2 / 3)
                     .frame(maxWidth: .infinity)
                     .background(Color("DataPanelBg"))
                     .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
-                    
+                    .modifier(PanelAppearance(4, self.displayState))
                 }
+                .padding(EdgeInsets(
+                    top: 0,
+                    leading: UI.Dimension.Common.padding,
+                    bottom: 0,
+                    trailing: UI.Dimension.Common.padding
+                ))
             }
-            .frame(maxWidth: .infinity)
-            .padding(EdgeInsets(
-                top: 0,
-                leading: UI.Dimension.Common.padding,
-                bottom: 0,
-                trailing: UI.Dimension.Common.padding
-            ))
-            .modifier(PanelAppearance(4, self.displayState))
             FooterGradientView()
                 .zIndex(2)
         }
@@ -280,17 +291,28 @@ struct ReportView_Previews: PreviewProvider {
             startEra: PreviewData.era,
             endEra: PreviewData.era,
             dataPoints: [
-                (0, 10),
-                (1, 2),
-                (2, 0),
-                (3, 7.5),
-                (4, 3.4),
-                (5, 7.8),
-                (6, 2.4),
-                (7, 6)
-            ],
-            minY: 0,
-            maxY: 15
+                (1000, 10),
+                (1001, 2),
+                (1002, 0),
+                (1003, 7.5),
+                (1004, 3.4),
+                (1005, 7.8),
+                (1006, 2.4),
+                (1007, 6),
+                (1008, 0),
+                (1009, 17),
+                (1010, 6),
+                (1011, 2),
+                (1012, 0),
+                (1013, 7.5),
+                (1014, 3.4),
+                (1015, 7.8),
+                (1016, 2.4),
+                (1017, 6),
+                (1018, 0),
+                (1019, 17),
+                (1020, 6)
+            ]
         )
     }
 }

@@ -182,5 +182,10 @@ extension UI {
             static let dateTitle = LexendDeca.light.withSize(12)
             static let date = LexendDeca.regular.withSize(12)
         }
+        
+        enum Report {
+            static let axisLabel = LexendDeca.light.withSize(12)
+            static let axisValue = LexendDeca.light.withSize(9)
+        }
     }
 }

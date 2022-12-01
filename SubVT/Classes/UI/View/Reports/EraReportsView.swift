@@ -256,9 +256,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.activeNominatorCounts.map({
                                 (Double($0.0), Double($0.1))
-                            }),
-                            minY: 0,
-                            maxY: Double(self.viewModel.maxActiveNominatorCount * 2)
+                            })
                         )
                     } label: {
                         self.activeNominatorCountsView
@@ -277,9 +275,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.totalStakes.map({
                                 (Double($0.0), $0.1)
-                            }),
-                            minY: 0,
-                            maxY: self.viewModel.maxTotalStake
+                            })
                         )
                     } label: {
                         self.totalStakesView
@@ -297,9 +293,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.rewardPoints.map({
                                 (Double($0.0), $0.1)
-                            }),
-                            minY: 0,
-                            maxY: self.viewModel.maxRewardPoint
+                            })
                         )
                     } label: {
                         self.rewardPointsView
@@ -318,9 +312,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.totalRewards.map({
                                 (Double($0.0), $0.1)
-                            }),
-                            minY: 0,
-                            maxY: self.viewModel.maxTotalReward
+                            })
                         )
                     } label: {
                         self.totalRewardsView
@@ -338,9 +330,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.activeValidatorCounts.map({
                                 (Double($0.0), Double($0.1))
-                            }),
-                            minY: 0,
-                            maxY: Double(self.viewModel.maxActiveValidatorCount * 2)
+                            })
                         )
                     } label: {
                         self.activeValidatorCountsView
@@ -359,9 +349,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.validatorRewards.map({
                                 (Double($0.0), $0.1)
-                            }),
-                            minY: 0,
-                            maxY: self.viewModel.maxValidatorReward
+                            })
                         )
                     } label: {
                         self.validatorRewardsView
@@ -382,9 +370,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.offlineOffenceCounts.map({
                                 (Double($0.0), $0.1)
-                            }),
-                            minY: 0,
-                            maxY: self.viewModel.maxOfflineOffenceCount
+                            })
                         )
                     } label: {
                         self.offlineOffenceCountsView
@@ -403,9 +389,7 @@ struct EraReportsView: View {
                             endEra: self.endEra,
                             dataPoints: self.viewModel.slashes.map({
                                 (Double($0.0), $0.1)
-                            }),
-                            minY: 0,
-                            maxY: self.viewModel.maxSlash
+                            })
                         )
                     } label: {
                         self.slashesView
