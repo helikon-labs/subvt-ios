@@ -12,14 +12,19 @@ import SubVTData
 
 class NetworkReportsViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
+    
     @Published private(set) var activeNominatorCounts: [(Int, Int)] = []
+    
+    @Published private(set) var totalStakes: [(Int, Double)] = []
+    @Published private(set) var totalStakesBalance: [(Int, Balance)] = []
+    
     @Published private(set) var activeValidatorCounts: [(Int, Int)] = []
     @Published private(set) var inactiveValidatorCounts: [(Int, Int)] = []
     @Published private(set) var rewardPoints: [(Int, Double)] = []
     @Published private(set) var totalRewards: [(Int, Double)] = []
     @Published private(set) var totalRewardsBalance: [(Int, Balance)] = []
-    @Published private(set) var totalStakes: [(Int, Double)] = []
-    @Published private(set) var totalStakesBalance: [(Int, Balance)] = []
+    
+    
     @Published private(set) var validatorRewards: [(Int, Double)] = []
     @Published private(set) var validatorRewardsBalance: [(Int, Balance)] = []
     @Published private(set) var offlineOffenceCounts: [(Int, Double)] = []

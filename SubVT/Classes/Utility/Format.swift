@@ -11,6 +11,7 @@ import SubVTData
 func formatBalance(
     balance: Balance,
     tokenDecimalCount: UInt8,
+    formatDecimalCount: UInt8 = 4,
     integerOnly: Bool = false
 ) -> String {
     var balanceString = balance.value.description
@@ -26,7 +27,7 @@ func formatBalance(
     if integerOnly {
         return integerString
     }
-    decimalsString = decimalsString.prefix(4)
+    decimalsString = decimalsString.prefix(Int(formatDecimalCount))
     return "\(integerString).\(decimalsString)"
 }
 

@@ -81,6 +81,8 @@
 		A05B25A5287ECBE30070EF81 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A3287ECBE30070EF81 /* Counter.swift */; };
 		A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A9287EDB530070EF81 /* UI+Duration.swift */; };
 		A05B25AB287EDB530070EF81 /* UI+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A9287EDB530070EF81 /* UI+Duration.swift */; };
+		A05C4EF92939D3810050F210 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05C4EF82939D3810050F210 /* Balance.swift */; };
+		A05C4EFA2939D3810050F210 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05C4EF82939D3810050F210 /* Balance.swift */; };
 		A0607BE42868CF1B0048947D /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0607BE32868CF1B0048947D /* data-env.json */; };
 		A0643DCB2886813400E46213 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */; };
 		A0643DCC2886813400E46213 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */; };
@@ -412,6 +414,7 @@
 		A05B25A0287EB7450070EF81 /* PanelAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelAppearance.swift; sourceTree = "<group>"; };
 		A05B25A3287ECBE30070EF81 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		A05B25A9287EDB530070EF81 /* UI+Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Duration.swift"; sourceTree = "<group>"; };
+		A05C4EF82939D3810050F210 /* Balance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		A0607BE32868CF1B0048947D /* data-env.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env.json"; sourceTree = "<group>"; };
 		A0643DCA2886813400E46213 /* ValidatorSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummaryView.swift; sourceTree = "<group>"; };
 		A0646D99285856FE00B687ED /* NetworkButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkButtonView.swift; sourceTree = "<group>"; };
@@ -695,6 +698,7 @@
 			isa = PBXGroup;
 			children = (
 				A0D3A73829279F120037EBC5 /* Array.swift */,
+				A05C4EF82939D3810050F210 /* Balance.swift */,
 				A0D3A73C2927A1770037EBC5 /* Dictionary.swift */,
 				A0C90E872878615600A91996 /* Formatter.swift */,
 				A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */,
@@ -1391,6 +1395,7 @@
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A04C473128882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A0659D0A28EAA38100A6E251 /* Logging.swift in Sources */,
+				A05C4EF92939D3810050F210 /* Balance.swift in Sources */,
 				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0659D1028EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
@@ -1447,6 +1452,7 @@
 				A0E9F09628FC433F000CCC02 /* NotificationPeriodType.swift in Sources */,
 				A0128A4E284A1297000C2307 /* AppStorageKey.swift in Sources */,
 				A06E15A7288FF69F00694CC8 /* NetworkMonitor.swift in Sources */,
+				A05C4EFA2939D3810050F210 /* Balance.swift in Sources */,
 				A0744D8F2885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0BCDE6828785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0BF90AB2848C1EC0053389A /* SubVTTests.swift in Sources */,

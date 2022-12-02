@@ -13,6 +13,11 @@
 "common.cancel"="Cancel";
 "common.view"="View";
 
+"common.factor.thousand"="thousand";
+"common.factor.thousands"="thousands";
+"common.factor.million"="million";
+"common.factor.millions"="millions";
+
 "common.error"="Error";
 "common.error.connection"="Connection error";
 "common.error.unexpected"="Unexpected error";
@@ -240,3 +245,19 @@
 "network_reports.slashed_plain"="Slashed";
 
 "network_report.active_nominators_title"="%@ Active Nominators";
+"network_report.total_stake_title"="%@ Total Stake";
+"network_report.total_stake_with_factor"="Total Stake (%@ %@)";
+"network_report.reward_points_title"="%@ Reward Points";
+"network_report.reward_points_with_factor"="Reward Points (%@)";
+"network_report.total_rewards_title"="%@ Total Rewards";
+"network_report.total_reward"="Total Reward (%@)";
+"network_report.total_reward_with_factor"="Total Reward (%@ %@)";
+"network_report.active_validators_title"="%@ Active Validators";
+"network_report.active_validators"="Active Validators";
+"network_report.validator_rewards_title"="%@ Validator Rewards";
+"network_report.validator_reward"="Validator Reward (%@)";
+"network_report.validator_reward_with_factor"="Validator Reward (%@ %@)";
+"network_report.offline_offences_title"="%@ Offline Offences";
+"network_report.offline_offences"="Offences";
+"network_report.slashes_title"="%@ Slashes";
+"network_report.slashed"="Slashed (%@)";

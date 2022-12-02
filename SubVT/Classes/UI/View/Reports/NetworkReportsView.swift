@@ -261,7 +261,8 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .line,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
+                            data: .integer(dataPoints: self.viewModel.activeNominatorCounts),
+                            factor: .none,
                             title: String(
                                 format: localized("network_report.active_nominators_title"),
                                 self.network.display
@@ -277,14 +278,22 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(2, self.chartDisplayState))
                     NavigationLink {
+                        let factor = ReportView.Factor.million
                         ReportView(
                             type: .bar,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
+                            data: .balance(
+                                dataPoints: self.viewModel.totalStakesBalance
+                            ),
+                            factor: factor,
                             title: String(
-                                format: localized("network_reports.total_stakes"),
+                                format: localized("network_report.total_stake_title"),
+                                self.network.display
+                            ),
+                            chartTitle: String(
+                                format: localized("network_report.total_stake_with_factor"),
+                                factor.description!.capitalized,
                                 self.network.tokenTicker
                             ),
-                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -297,11 +306,22 @@ struct NetworkReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
+                        let factor = ReportView.Factor.million
                         ReportView(
                             type: .bar,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
-                            title: localized("network_reports.reward_points"),
-                            chartTitle: "",
+                            data: .integer(
+                                dataPoints: self.viewModel.rewardPoints.map{ ($0.0, Int($0.1)) }
+                            ),
+                            factor: factor,
+                            title: String(
+                                format: localized("network_report.reward_points_title"),
+                                self.network.display
+                            ),
+                            chartTitle: String(
+                                format: localized("network_report.reward_points_with_factor"),
+                                factor.descriptionPlural!.capitalized,
+                                self.network.tokenTicker
+                            ),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -312,14 +332,28 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(4, self.chartDisplayState))
                     NavigationLink {
+                        let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
+                        let chartTitle = self.network.tokenTicker == "DOT"
+                            ? String(
+                                format: localized("network_report.total_reward_with_factor"),
+                                factor.description!.capitalized,
+                                self.network.tokenTicker
+                            )
+                            : String(
+                                format: localized("network_report.total_reward"),
+                                self.network.tokenTicker
+                            )
                         ReportView(
                             type: .bar,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
-                            title: String(
-                                format: localized("network_reports.total_rewards"),
-                                self.network.tokenTicker
+                            data: .balance(
+                                dataPoints: self.viewModel.totalRewardsBalance
                             ),
-                            chartTitle: "",
+                            factor: factor,
+                            title: String(
+                                format: localized("network_report.total_rewards_title"),
+                                self.network.display
+                            ),
+                            chartTitle: chartTitle,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -334,9 +368,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .line,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
-                            title: localized("network_reports.active_validators"),
-                            chartTitle: "",
+                            data: .integer(
+                                dataPoints: self.viewModel.activeValidatorCounts
+                            ),
+                            factor: .none,
+                            title: String(
+                                format: localized("network_report.active_validators_title"),
+                                self.network.display
+                            ),
+                            chartTitle: localized("network_report.active_validators"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -347,14 +387,28 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                     NavigationLink {
+                        let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
+                        let chartTitle = self.network.tokenTicker == "DOT"
+                            ? String(
+                                format: localized("network_report.validator_reward_with_factor"),
+                                factor.description!.capitalized,
+                                self.network.tokenTicker
+                            )
+                            : String(
+                                format: localized("network_report.validator_reward"),
+                                self.network.tokenTicker
+                            )
                         ReportView(
                             type: .bar,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
-                            title: String(
-                                format: localized("network_reports.validator_rewards"),
-                                self.network.tokenTicker
+                            data: .balance(
+                                dataPoints: self.viewModel.validatorRewardsBalance
                             ),
-                            chartTitle: "",
+                            factor: factor,
+                            title: String(
+                                format: localized("network_report.validator_rewards_title"),
+                                self.network.display
+                            ),
+                            chartTitle: chartTitle,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -369,12 +423,15 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
-                            title: String(
-                                format: localized("network_reports.offline_offences"),
-                                self.network.tokenTicker
+                            data: .integer(
+                                dataPoints: self.viewModel.offlineOffenceCounts.map { ($0.0, Int($0.1)) }
                             ),
-                            chartTitle: "",
+                            factor: .none,
+                            title: String(
+                                format: localized("network_report.offline_offences_title"),
+                                self.network.display
+                            ),
+                            chartTitle: localized("network_report.offline_offences"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -387,12 +444,16 @@ struct NetworkReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
-                            mode: .integer(dataPoints: self.viewModel.activeNominatorCounts),
+                            data: .balance(dataPoints: self.viewModel.slashesBalance),
+                            factor: .none,
                             title: String(
-                                format: localized("network_reports.slashed"),
+                                format: localized("network_report.slashes_title"),
+                                self.network.display
+                            ),
+                            chartTitle: String(
+                                format: localized("network_report.slashed"),
                                 self.network.tokenTicker
                             ),
-                            chartTitle: "",
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
