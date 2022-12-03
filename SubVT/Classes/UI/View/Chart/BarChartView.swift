@@ -90,7 +90,7 @@ struct BarChartView: View {
                                     )
                                 self.gradient
                             }
-                            .cornerRadius(itemWidth / 2)
+                            .cornerRadius(min(itemWidth / 2, 6))
                             VStack {
                                 Spacer()
                                     .frame(
