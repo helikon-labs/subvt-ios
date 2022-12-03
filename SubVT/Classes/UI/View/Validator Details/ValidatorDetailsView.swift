@@ -538,8 +538,7 @@ extension ValidatorDetailsView {
                 if let validatorDetails = self.viewModel.validatorDetails {
                     Text(formatBalance(
                         balance: validatorDetails.nominationTotal,
-                        tokenDecimalCount: self.network.tokenDecimalCount,
-                        integerOnly: false
+                        tokenDecimalCount: self.network.tokenDecimalCount
                     ))
                     .font(UI.Font.Common.balanceLarge)
                     .foregroundColor(Color("Text"))
@@ -562,8 +561,7 @@ extension ValidatorDetailsView {
                 if let selfStake = self.viewModel.validatorDetails?.selfStake {
                     Text(formatBalance(
                         balance: selfStake.activeAmount,
-                        tokenDecimalCount: self.network.tokenDecimalCount,
-                        integerOnly: false
+                        tokenDecimalCount: self.network.tokenDecimalCount
                     ))
                     .font(UI.Font.Common.balanceLarge)
                     .foregroundColor(Color("Text"))
@@ -609,8 +607,7 @@ extension ValidatorDetailsView {
                     if let activeStake = self.viewModel.validatorDetails?.validatorStake {
                         Text(formatBalance(
                             balance: activeStake.totalStake,
-                            tokenDecimalCount: self.network.tokenDecimalCount,
-                            integerOnly: false
+                            tokenDecimalCount: self.network.tokenDecimalCount
                         ))
                         .font(UI.Font.Common.balanceLarge)
                         .foregroundColor(Color("Text"))
@@ -711,8 +708,7 @@ extension ValidatorDetailsView {
                     if let inactiveNominationTotal = self.viewModel.inactiveNominationTotal {
                         Text(formatBalance(
                             balance: inactiveNominationTotal,
-                            tokenDecimalCount: self.network.tokenDecimalCount,
-                            integerOnly: false
+                            tokenDecimalCount: self.network.tokenDecimalCount
                         ))
                         .font(UI.Font.Common.balanceLarge)
                         .foregroundColor(Color("Text"))

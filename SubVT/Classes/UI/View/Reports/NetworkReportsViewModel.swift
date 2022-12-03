@@ -21,12 +21,12 @@ class NetworkReportsViewModel: ObservableObject {
     @Published private(set) var activeValidatorCounts: [(Int, Int)] = []
     @Published private(set) var inactiveValidatorCounts: [(Int, Int)] = []
     @Published private(set) var rewardPoints: [(Int, Double)] = []
+    @Published private(set) var totalPaidOut: [(Int, Double)] = []
+    @Published private(set) var totalPaidOutBalance: [(Int, Balance)] = []
+    
+    
     @Published private(set) var totalRewards: [(Int, Double)] = []
     @Published private(set) var totalRewardsBalance: [(Int, Balance)] = []
-    
-    
-    @Published private(set) var validatorRewards: [(Int, Double)] = []
-    @Published private(set) var validatorRewardsBalance: [(Int, Balance)] = []
     @Published private(set) var offlineOffenceCounts: [(Int, Double)] = []
     @Published private(set) var slashes: [(Int, Double)] = []
     @Published private(set) var slashesBalance: [(Int, Balance)] = []
@@ -34,8 +34,6 @@ class NetworkReportsViewModel: ObservableObject {
     var network: Network! = nil
     private var reportService: ReportService! = nil
     private var cancellables = Set<AnyCancellable>()
-    
-    private let barChartHeadroomCoefficient = 1.1
     
     private func initReportService() {
         guard self.reportService == nil else { return }
@@ -83,16 +81,16 @@ class NetworkReportsViewModel: ObservableObject {
         self.rewardPoints = reports.map {
             (Int($0.era.index), Double($0.totalRewardPoints ?? 0))
         }
-        self.totalRewards = reports.map {
+        self.totalPaidOut = reports.map {
             (
                 (Int($0.era.index)),
-                Double($0.totalReward.value) / Double(self.network.tokenDecimalCount)
+                Double($0.totalPaidOut.value) / Double(self.network.tokenDecimalCount)
             )
         }
-        self.totalRewardsBalance = reports.map {
+        self.totalPaidOutBalance = reports.map {
             (
                 (Int($0.era.index)),
-                $0.totalReward
+                $0.totalPaidOut
             )
         }
         self.totalStakes = reports.map {
@@ -107,16 +105,16 @@ class NetworkReportsViewModel: ObservableObject {
                 $0.totalStake ?? Balance(value: 0)
             )
         }
-        self.validatorRewards = reports.map {
+        self.totalRewards = reports.map {
             (
                 (Int($0.era.index)),
-                Double($0.totalValidatorReward?.value ?? 0) / Double(self.network.tokenDecimalCount)
+                Double($0.totalReward?.value ?? 0) / Double(self.network.tokenDecimalCount)
             )
         }
-        self.validatorRewardsBalance = reports.map {
+        self.totalRewardsBalance = reports.map {
             (
                 (Int($0.era.index)),
-                $0.totalValidatorReward ?? Balance(value: 0)
+                $0.totalReward ?? Balance(value: 0)
             )
         }
         self.offlineOffenceCounts = reports.map {
@@ -146,22 +144,19 @@ class NetworkReportsViewModel: ObservableObject {
     
     var maxRewardPoint: Double {
         let max = self.rewardPoints.map{ Double($0.1) }.max { $0 < $1 } ?? 0
-        return ceil(Double(max) * self.barChartHeadroomCoefficient)
+        return Double(max)
     }
     
-    var maxTotalReward: Double {
-        let max = self.totalRewards.map{ $0.1 }.max { $0 < $1 } ?? 0
-        return max * self.barChartHeadroomCoefficient
+    var maxTotalPaidOut: Double {
+        return self.totalPaidOut.map{ $0.1 }.max { $0 < $1 } ?? 0
     }
     
     var maxTotalStake: Double {
-        let max = self.totalStakes.map{ $0.1 }.max { $0 < $1 } ?? 0
-        return max * self.barChartHeadroomCoefficient
+        return  self.totalStakes.map{ $0.1 }.max { $0 < $1 } ?? 0
     }
     
-    var maxValidatorReward: Double {
-        let max = self.validatorRewards.map{ $0.1 }.max { $0 < $1 } ?? 0
-        return max * self.barChartHeadroomCoefficient
+    var maxTotalReward: Double {
+        return self.totalRewards.map{ $0.1 }.max { $0 < $1 } ?? 0
     }
     
     var maxOfflineOffenceCount: Double {
@@ -169,7 +164,7 @@ class NetworkReportsViewModel: ObservableObject {
         guard max > 0.0 else {
             return 1.0
         }
-        return ceil(max * self.barChartHeadroomCoefficient)
+        return max
     }
     
     var maxSlash: Double {
@@ -177,6 +172,6 @@ class NetworkReportsViewModel: ObservableObject {
         guard max > 0 else {
             return 1.0
         }
-        return max * self.barChartHeadroomCoefficient
+        return max
     }
 }

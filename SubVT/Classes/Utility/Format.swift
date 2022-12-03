@@ -11,8 +11,7 @@ import SubVTData
 func formatBalance(
     balance: Balance,
     tokenDecimalCount: UInt8,
-    formatDecimalCount: UInt8 = 4,
-    integerOnly: Bool = false
+    formatDecimalCount: UInt8 = 4
 ) -> String {
     var balanceString = balance.value.description
     let addZeroCount = max(0, Int(tokenDecimalCount) + 1 - balanceString.count)
@@ -24,7 +23,7 @@ func formatBalance(
     var decimalsString = balanceString.suffix(Int(tokenDecimalCount))
     var integerString = String(balanceString.prefix(balanceString.count - decimalsString.count))
     integerString = Int(integerString)!.formattedWithSeparator
-    if integerOnly {
+    if formatDecimalCount == 0 {
         return integerString
     }
     decimalsString = decimalsString.prefix(Int(formatDecimalCount))
@@ -34,8 +33,7 @@ func formatBalance(
 func formatDecimal(
     integer: UInt64,
     decimalCount: UInt8,
-    formatDecimalCount: UInt8,
-    integerOnly: Bool = false
+    formatDecimalCount: UInt8
 ) -> String {
     var string = String(integer)
     let addZeroCount = max(0, Int(decimalCount) + 1 - string.count)
@@ -47,7 +45,7 @@ func formatDecimal(
     var decimalsString = string.suffix(Int(decimalCount))
     var integerString = String(string.prefix(string.count - decimalsString.count))
     integerString = Int(integerString)!.formattedWithSeparator
-    if integerOnly {
+    if formatDecimalCount == 0 {
         return integerString
     }
     decimalsString = decimalsString.prefix(Int(formatDecimalCount))

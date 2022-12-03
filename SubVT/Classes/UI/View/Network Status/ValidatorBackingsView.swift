@@ -49,7 +49,7 @@ struct ValidatorBackingsView: View {
                     Text(formatBalance(
                         balance: self.minimum,
                         tokenDecimalCount: self.tokenDecimalCount,
-                        integerOnly: !self.showsDecimals
+                        formatDecimalCount: self.showsDecimals ? 4 : 0
                     ))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
@@ -65,7 +65,7 @@ struct ValidatorBackingsView: View {
                     Text(formatBalance(
                         balance: self.average,
                         tokenDecimalCount: self.tokenDecimalCount,
-                        integerOnly: !self.showsDecimals
+                        formatDecimalCount: self.showsDecimals ? 4 : 0
                     ))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
@@ -81,7 +81,7 @@ struct ValidatorBackingsView: View {
                     Text(formatBalance(
                         balance: self.maximum,
                         tokenDecimalCount: self.tokenDecimalCount,
-                        integerOnly: !self.showsDecimals
+                        formatDecimalCount: self.showsDecimals ? 4 : 0
                     ))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))

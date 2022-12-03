@@ -68,7 +68,7 @@ struct ReportView: View {
     enum Data {
         case integer(dataPoints: [(Int, Int)])
         case double(dataPoints: [(Int, Double)])
-        case balance(dataPoints: [(Int, Balance)])
+        case balance(dataPoints: [(Int, Balance)], decimals: UInt8 = 2)
     }
     
     @Environment(\.presentationMode) private var presentationMode
@@ -303,7 +303,7 @@ struct ReportView: View {
                             .interpolationMethod(.catmullRom)
                         }
                     }
-                case .balance(let dataPoints):
+                case .balance(let dataPoints, _):
                     ForEach(dataPoints.indices, id: \.self) { i in
                         let dataPoint = dataPoints[i]
                         switch self.type {
@@ -376,20 +376,18 @@ struct ReportView: View {
                                     Text(formatDecimal(
                                         integer: UInt64(intValue),
                                         decimalCount: self.factor.decimals,
-                                        formatDecimalCount: 2,
-                                        integerOnly: false
+                                        formatDecimalCount: 2
                                     ))
                                     .font(UI.Font.Report.axisValue)
                                     .foregroundColor(Color("Text"))
                                 }
                             }
-                        case .balance(_):
+                        case .balance(_, let decimals):
                             if let balance = value.as(Balance.self) {
                                 Text(formatBalance(
                                     balance: balance,
                                     tokenDecimalCount: self.network.tokenDecimalCount + self.factor.decimals,
-                                    formatDecimalCount: 2,
-                                    integerOnly: false
+                                    formatDecimalCount: decimals
                                 ))
                                 .font(UI.Font.Report.axisValue)
                                 .foregroundColor(Color("Text"))

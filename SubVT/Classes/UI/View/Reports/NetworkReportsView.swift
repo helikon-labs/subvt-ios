@@ -335,22 +335,23 @@ struct NetworkReportsView: View {
                         let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
                         let chartTitle = self.network.tokenTicker == "DOT"
                             ? String(
-                                format: localized("network_report.total_reward_with_factor"),
+                                format: localized("network_report.total_paid_out_with_factor"),
                                 factor.description!.capitalized,
                                 self.network.tokenTicker
                             )
                             : String(
-                                format: localized("network_report.total_reward"),
+                                format: localized("network_report.total_paid_out"),
                                 self.network.tokenTicker
                             )
                         ReportView(
                             type: .bar,
                             data: .balance(
-                                dataPoints: self.viewModel.totalRewardsBalance
+                                dataPoints: self.viewModel.totalPaidOutBalance,
+                                decimals: 0
                             ),
                             factor: factor,
                             title: String(
-                                format: localized("network_report.total_rewards_title"),
+                                format: localized("network_report.total_paid_out_title"),
                                 self.network.display
                             ),
                             chartTitle: chartTitle,
@@ -359,7 +360,7 @@ struct NetworkReportsView: View {
                             endEra: self.endEra
                         )
                     } label: {
-                        self.totalRewardsView
+                        self.totalPaidOutView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(5, self.chartDisplayState))
@@ -390,22 +391,23 @@ struct NetworkReportsView: View {
                         let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
                         let chartTitle = self.network.tokenTicker == "DOT"
                             ? String(
-                                format: localized("network_report.validator_reward_with_factor"),
+                                format: localized("network_report.total_reward_with_factor"),
                                 factor.description!.capitalized,
                                 self.network.tokenTicker
                             )
                             : String(
-                                format: localized("network_report.validator_reward"),
+                                format: localized("network_report.total_reward"),
                                 self.network.tokenTicker
                             )
                         ReportView(
                             type: .bar,
                             data: .balance(
-                                dataPoints: self.viewModel.validatorRewardsBalance
+                                dataPoints: self.viewModel.totalRewardsBalance,
+                                decimals: 0
                             ),
                             factor: factor,
                             title: String(
-                                format: localized("network_report.validator_rewards_title"),
+                                format: localized("network_report.total_rewards_title"),
                                 self.network.display
                             ),
                             chartTitle: chartTitle,
@@ -414,7 +416,7 @@ struct NetworkReportsView: View {
                             endEra: self.endEra
                         )
                     } label: {
-                        self.validatorRewardsView
+                        self.totalRewardsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(7, self.chartDisplayState))
@@ -660,15 +662,15 @@ struct NetworkReportsView: View {
         )
     }
     
-    private var totalRewardsView: some View {
+    private var totalPaidOutView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("network_reports.total_rewards"),
+                format: localized("network_reports.total_paid_out_with_ticker"),
                 self.network.tokenTicker
             ),
-            dataPoints: self.viewModel.totalRewards,
+            dataPoints: self.viewModel.totalPaidOut,
             minY: 0.0,
-            maxY: self.viewModel.maxTotalReward,
+            maxY: self.viewModel.maxTotalPaidOut,
             revealPercentage: self.chartRevealPercentage,
             colorScheme: self.colorScheme
         )
@@ -688,15 +690,15 @@ struct NetworkReportsView: View {
         )
     }
     
-    private var validatorRewardsView: some View {
+    private var totalRewardsView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("network_reports.validator_rewards"),
+                format: localized("network_reports.total_rewards"),
                 self.network.tokenTicker
             ),
-            dataPoints: self.viewModel.validatorRewards,
+            dataPoints: self.viewModel.totalRewards,
             minY: 0.0,
-            maxY: self.viewModel.maxValidatorReward,
+            maxY: self.viewModel.maxTotalReward,
             revealPercentage: self.chartRevealPercentage,
             colorScheme: self.colorScheme
         )
@@ -752,7 +754,7 @@ struct NetworkReportsView: View {
                             formatBalance(
                                 balance: self.viewModel.totalStakesBalance[0].1,
                                 tokenDecimalCount: self.network.tokenDecimalCount,
-                                integerOnly: true
+                                formatDecimalCount: 0
                             ),
                             self.network.tokenTicker
                         )
@@ -763,19 +765,17 @@ struct NetworkReportsView: View {
                         content: formatDecimal(
                             integer: UInt64(self.viewModel.rewardPoints[0].1),
                             decimalCount: 0,
-                            formatDecimalCount: 0,
-                            integerOnly: true
+                            formatDecimalCount: 0
                         )
                     )
                     .modifier(PanelAppearance(4, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.total_reward"),
+                        title: localized("network_reports.total_paid_out"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.totalRewardsBalance[0].1,
-                                tokenDecimalCount: self.network.tokenDecimalCount,
-                                integerOnly: false
+                                balance: self.viewModel.totalPaidOutBalance[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
                         )
@@ -787,13 +787,12 @@ struct NetworkReportsView: View {
                     )
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.total_validator_reward"),
+                        title: localized("network_reports.total_reward"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.validatorRewardsBalance[0].1,
-                                tokenDecimalCount: self.network.tokenDecimalCount,
-                                integerOnly: false
+                                balance: self.viewModel.totalRewardsBalance[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
                         )
@@ -810,8 +809,7 @@ struct NetworkReportsView: View {
                             format: "%@ %@",
                             formatBalance(
                                 balance: self.viewModel.slashesBalance[0].1,
-                                tokenDecimalCount: self.network.tokenDecimalCount,
-                                integerOnly: false
+                                tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
                         )
