@@ -258,6 +258,8 @@
 		A0D5499528E7178E007794E2 /* NotificationRulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */; };
 		A0DCABB7285CA36A00E458F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCABB6285CA36A00E458F4 /* HomeView.swift */; };
 		A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DCABB6285CA36A00E458F4 /* HomeView.swift */; };
+		A0DEF18B293CBF1500BAFF89 /* ValidatorReportsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DEF18A293CBF1500BAFF89 /* ValidatorReportsView.swift */; };
+		A0DEF18D293CBF2000BAFF89 /* ValidatorReportsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DEF18C293CBF2000BAFF89 /* ValidatorReportsViewModel.swift */; };
 		A0E0F6712848CD1C0029DDBF /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */; };
 		A0E0F6722848CD1C0029DDBF /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */; };
 		A0E0F6732848CD1C0029DDBF /* LexendDeca-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6692848CD1C0029DDBF /* LexendDeca-Light.ttf */; };
@@ -504,6 +506,8 @@
 		A0D5498E28E71782007794E2 /* NotificationRulesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRulesView.swift; sourceTree = "<group>"; };
 		A0D5499228E7178E007794E2 /* NotificationRulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRulesViewModel.swift; sourceTree = "<group>"; };
 		A0DCABB6285CA36A00E458F4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A0DEF18A293CBF1500BAFF89 /* ValidatorReportsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorReportsView.swift; sourceTree = "<group>"; };
+		A0DEF18C293CBF2000BAFF89 /* ValidatorReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorReportsViewModel.swift; sourceTree = "<group>"; };
 		A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-SemiBold.ttf"; sourceTree = "<group>"; };
 		A0E0F6692848CD1C0029DDBF /* LexendDeca-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-Light.ttf"; sourceTree = "<group>"; };
 		A0E0F66A2848CD1C0029DDBF /* LexendDeca-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "LexendDeca-Regular.ttf"; sourceTree = "<group>"; };
@@ -690,6 +694,8 @@
 				A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */,
 				A030024E2937466400F7BB1E /* ReportView.swift */,
 				A03002502937468900F7BB1E /* ReportViewModel.swift */,
+				A0DEF18A293CBF1500BAFF89 /* ValidatorReportsView.swift */,
+				A0DEF18C293CBF2000BAFF89 /* ValidatorReportsViewModel.swift */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -1351,6 +1357,7 @@
 				A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */,
 				A0E9F09228FC26EF000CCC02 /* ItemListButtonStyle.swift in Sources */,
 				A07BA818285B8C0600575683 /* UI+Dimension+Common.swift in Sources */,
+				A0DEF18B293CBF1500BAFF89 /* ValidatorReportsView.swift in Sources */,
 				A07475B228B8ACF300EC7071 /* SwipeDeleteViewModifier.swift in Sources */,
 				A04C472D288814DA0004A46A /* PreferenceKeys.swift in Sources */,
 				A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */,
@@ -1395,6 +1402,7 @@
 				A0BF90952848C1EB0053389A /* SubVTApp.swift in Sources */,
 				A04C473128882AC40004A46A /* ValidatorSummary.swift in Sources */,
 				A0659D0A28EAA38100A6E251 /* Logging.swift in Sources */,
+				A0DEF18D293CBF2000BAFF89 /* ValidatorReportsViewModel.swift in Sources */,
 				A05C4EF92939D3810050F210 /* Balance.swift in Sources */,
 				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0659D1028EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,

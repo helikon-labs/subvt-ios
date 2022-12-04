@@ -24,7 +24,6 @@ class NetworkReportsViewModel: ObservableObject {
     @Published private(set) var totalPaidOut: [(Int, Double)] = []
     @Published private(set) var totalPaidOutBalance: [(Int, Balance)] = []
     
-    
     @Published private(set) var totalRewards: [(Int, Double)] = []
     @Published private(set) var totalRewardsBalance: [(Int, Balance)] = []
     @Published private(set) var offlineOffenceCounts: [(Int, Double)] = []

@@ -289,22 +289,25 @@ struct ValidatorDetailsView: View {
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(3, self.displayState))
                         .disabled(!self.addRemoveValidatorButtonIsEnabled)
-                        Button(
-                            action: {
-                                // validator reports
-                            },
-                            label: {
-                                ZStack {
-                                    UI.Image.ValidatorDetails.validatorReportsIcon(self.colorScheme)
-                                }
-                                .frame(
-                                    width: UI.Dimension.Common.networkSelectorHeight,
-                                    height: UI.Dimension.Common.networkSelectorHeight
+                        
+                        NavigationLink {
+                            ReportRangeSelectionView(
+                                mode: .validator(
+                                    validatorSummary: self.validatorSummary
                                 )
-                                .background(Color("NetworkSelectorClosedBg"))
-                                .cornerRadius(UI.Dimension.Common.cornerRadius)
+                            )
+                        } label: {
+                            ZStack {
+                                UI.Image.ValidatorDetails.validatorReportsIcon(self.colorScheme)
                             }
-                        )
+                            .frame(
+                                width: UI.Dimension.Common.networkSelectorHeight,
+                                height: UI.Dimension.Common.networkSelectorHeight
+                            )
+                            .background(Color("NetworkSelectorClosedBg"))
+                            .cornerRadius(UI.Dimension.Common.cornerRadius)
+                        }
+                        .transition(.move(edge: .leading))
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(4, self.displayState))
                     }

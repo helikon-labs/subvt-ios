@@ -9,17 +9,26 @@ import SubVTData
 import SwiftUI
 
 struct ReportRangeSelectionView: View {
+    enum Mode: Equatable {
+        case network
+        case validator(validatorSummary: ValidatorSummary)
+    }
+    
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
+    @Environment(\.presentationMode) private var presentationMode
     @AppStorage(AppStorageKey.networks) private var networks: [Network]! = nil
     @StateObject private var viewModel = ReportRangeSelectionViewModel()
+    @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
     @State private var networkListIsVisible = false
     @State private var startEraListIsVisible = false
     @State private var endEraListIsVisible = false
     
+    private let mode: Mode
     private let dateFormatter = DateFormatter()
     
-    init() {
+    init(mode: Mode) {
+        self.mode = mode
         self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
     }
     
@@ -61,12 +70,61 @@ struct ReportRangeSelectionView: View {
         }
     }
     
-    private var headerView: some View {
+    private var validatorHeaderView: some View {
+        VStack {
+            Spacer()
+                .frame(height: UI.Dimension.Common.titleMarginTop)
+            ZStack {
+                HStack {
+                    Button(
+                        action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        },
+                        label: {
+                            BackButtonView()
+                        }
+                    )
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(0, self.displayState))
+                    .frame(alignment: .leading)
+                    Spacer()
+                }
+                Text(localized("report_range_selection.validator.title"))
+                .font(UI.Font.Common.title)
+                .foregroundColor(Color("Text"))
+                .frame(alignment: .center)
+                .modifier(PanelAppearance(1, self.displayState))
+            }
+            .frame(
+                height: UI.Dimension.ValidatorList.titleSectionHeight,
+                alignment: .center
+            )
+            .frame(maxWidth: .infinity)
+        }
+        .padding(EdgeInsets(
+            top: 0,
+            leading: UI.Dimension.Common.padding,
+            bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
+            trailing: UI.Dimension.Common.padding
+        ))
+        .background(
+            VisualEffectView(effect: UIBlurEffect(
+                style: .systemUltraThinMaterial
+            ))
+            .cornerRadius(
+                UI.Dimension.Common.headerBlurViewCornerRadius,
+                corners: [.bottomLeft, .bottomRight]
+            )
+            .opacity(self.headerMaterialOpacity)
+        )
+    }
+    
+    private var networkHeaderView: some View {
         VStack {
             Spacer()
                 .frame(height: UI.Dimension.Common.titleMarginTop)
             HStack(alignment: .center) {
-                Text(localized("network_report_range_selection.title"))
+                Text(localized("report_range_selection.network.title"))
                     .font(UI.Font.Common.tabViewTitle)
                     .foregroundColor(Color("Text"))
                 Spacer()
@@ -91,46 +149,63 @@ struct ReportRangeSelectionView: View {
         )
     }
     
+    private var headerView: some View {
+        Group {
+            switch self.mode {
+            case .network:
+                self.networkHeaderView
+            case .validator:
+                self.validatorHeaderView
+            }
+        }
+    }
+    
     var body: some View {
         ZStack(alignment: .top) {
-            /*
-            Color("Bg")
-                .ignoresSafeArea()
-            BgMorphView()
-                .offset(
-                    x: 0,
-                    y: UI.Dimension.BgMorph.yOffset(
-                        displayState: self.displayState
+            switch self.mode {
+            case .network:
+                headerView
+                    .zIndex(2)
+            case .validator:
+                Color("Bg")
+                    .ignoresSafeArea()
+                BgMorphView()
+                    .offset(
+                        x: 0,
+                        y: UI.Dimension.BgMorph.yOffset(
+                            displayState: self.displayState
+                        )
                     )
-                )
-                .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
-                .animation(
-                    .easeOut(duration: 0.75),
-                    value: self.displayState
-                )
-             */
-            headerView
-                .zIndex(2)
+                    .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
+                    .animation(
+                        .easeOut(duration: 0.75),
+                        value: self.displayState
+                    )
+                headerView
+                    .zIndex(2)
+            }
             ScrollView {
                 ScrollViewReader { scrollViewProxy in
                     VStack(alignment: .leading, spacing: 0) {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                        Group {
-                            Spacer()
-                                .frame(height: 24)
-                            self.networkTitleAndButtonView
-                                .disabled(self.controlsAreDisabled)
-                                .opacity(
-                                    self.controlsAreDisabled
-                                        ? UI.Value.disabledControlOpacity
-                                        : 1.0
-                                )
-                            if self.networkListIsVisible {
+                        if self.mode == .network {
+                            Group {
                                 Spacer()
-                                    .frame(height: 2)
-                                self.networkListView
+                                    .frame(height: 24)
+                                self.networkTitleAndButtonView
+                                    .disabled(self.controlsAreDisabled)
+                                    .opacity(
+                                        self.controlsAreDisabled
+                                            ? UI.Value.disabledControlOpacity
+                                            : 1.0
+                                    )
+                                if self.networkListIsVisible {
+                                    Spacer()
+                                        .frame(height: 2)
+                                    self.networkListView
+                                }
                             }
                         }
                         Group {
@@ -191,14 +266,16 @@ struct ReportRangeSelectionView: View {
                 .zIndex(1)
             switch self.viewModel.fetchState {
             case .idle, .loading:
-                ProgressView()
-                    .progressViewStyle(
-                        CircularProgressViewStyle(
-                            tint: Color("Text")
+                ZStack {
+                    ProgressView()
+                        .progressViewStyle(
+                            CircularProgressViewStyle(
+                                tint: Color("Text")
+                            )
                         )
-                    )
-                    .animation(.spring(), value: self.viewModel.fetchState)
-                    .zIndex(2)
+                        .zIndex(2)
+                }
+                .frame(maxHeight: .infinity, alignment: .center)
             default:
                 Group {}
             }
@@ -228,11 +305,21 @@ struct ReportRangeSelectionView: View {
                 VStack() {
                     Spacer()
                     NavigationLink {
-                        NetworkReportsView(
-                            network: self.viewModel.network,
-                            startEra: startEra,
-                            endEra: endEra
-                        )
+                        switch self.mode {
+                        case .network:
+                            NetworkReportsView(
+                                network: self.viewModel.network,
+                                startEra: startEra,
+                                endEra: endEra
+                            )
+                        case .validator(let validatorSummary):
+                            ValidatorReportsView(
+                                network: self.viewModel.network,
+                                validatorSummary: validatorSummary,
+                                startEra: startEra,
+                                endEra: endEra
+                            )
+                        }
                     } label: {
                         ActionButtonView(
                             title: localized("common.view"),
@@ -246,9 +333,14 @@ struct ReportRangeSelectionView: View {
                     .disabled(self.controlsAreDisabled)
                     .opacity(self.controlsAreDisabled ? UI.Value.disabledControlOpacity : 1.0)
                     Spacer()
-                        .frame(height: UI.Dimension.ReportRangeSelection.viewButtonMarginBottom)
+                        .frame(
+                            height: UI.Dimension.ReportRangeSelection.viewButtonMarginBottom(
+                                mode: self.mode
+                            )
+                        )
                 }
                 .frame(maxHeight: .infinity)
+                .zIndex(2)
             }
         }
         .navigationBarHidden(true)
@@ -261,8 +353,18 @@ struct ReportRangeSelectionView: View {
         )
         .onAppear() {
             if self.viewModel.fetchState == .idle {
-                self.viewModel.network = self.networks[0]
+                switch self.mode {
+                case .network:
+                    self.viewModel.network = self.networks[0]
+                case .validator(let validatorSummary):
+                    self.viewModel.network = self.networks.first{
+                        $0.id == validatorSummary.networkId
+                    }!
+                }
                 self.viewModel.initReportServices(networks: self.networks)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.displayState = .appeared
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                     self.viewModel.fetchEras()
                 }
@@ -614,6 +716,6 @@ struct ReportRangeSelectionView: View {
 
 struct ReportRangeSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        ReportRangeSelectionView()
+        ReportRangeSelectionView(mode: .network)
     }
 }

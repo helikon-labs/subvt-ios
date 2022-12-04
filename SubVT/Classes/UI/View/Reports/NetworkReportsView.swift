@@ -18,9 +18,9 @@ struct NetworkReportsView: View {
     // disable inner chart animation
     @State private var chartRevealPercentage: CGFloat = 1.0
     
+    private let network: Network
     private let startEra: Era
     private let endEra: Era
-    private let network: Network
     
     private let dateFormatter = DateFormatter()
     
@@ -73,7 +73,7 @@ struct NetworkReportsView: View {
                 Text(String(
                     format: "%@ %@",
                     self.network.display,
-                    localized("network_reports.title")
+                    localized("reports.network.title")
                 ))
                 .font(UI.Font.Common.title)
                 .foregroundColor(Color("Text"))
@@ -151,7 +151,7 @@ struct NetworkReportsView: View {
                 .zIndex(2)
             ZStack {
                 SnackbarView(
-                    message: localized("network_reports.error.network_reports"),
+                    message: localized("reports.error.fetch"),
                     type: .error(canRetry: true)
                 ) {
                     self.viewModel.fetchReports(
@@ -264,10 +264,10 @@ struct NetworkReportsView: View {
                             data: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             factor: .none,
                             title: String(
-                                format: localized("network_report.active_nominators_title"),
+                                format: localized("reports.network.active_nominators_title"),
                                 self.network.display
                             ),
-                            chartTitle: localized("network_reports.active_nominators"),
+                            chartTitle: localized("reports.active_nominators"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -286,11 +286,11 @@ struct NetworkReportsView: View {
                             ),
                             factor: factor,
                             title: String(
-                                format: localized("network_report.total_stake_title"),
+                                format: localized("reports.network.total_stake_title"),
                                 self.network.display
                             ),
                             chartTitle: String(
-                                format: localized("network_report.total_stake_with_factor"),
+                                format: localized("reports.total_stake_with_factor_ticker"),
                                 factor.description!.capitalized,
                                 self.network.tokenTicker
                             ),
@@ -314,11 +314,11 @@ struct NetworkReportsView: View {
                             ),
                             factor: factor,
                             title: String(
-                                format: localized("network_report.reward_points_title"),
+                                format: localized("reports.network.reward_points_title"),
                                 self.network.display
                             ),
                             chartTitle: String(
-                                format: localized("network_report.reward_points_with_factor"),
+                                format: localized("reports.reward_points_with_factor"),
                                 factor.descriptionPlural!.capitalized,
                                 self.network.tokenTicker
                             ),
@@ -335,12 +335,12 @@ struct NetworkReportsView: View {
                         let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
                         let chartTitle = self.network.tokenTicker == "DOT"
                             ? String(
-                                format: localized("network_report.total_paid_out_with_factor"),
+                                format: localized("reports.total_paid_out_with_factor_ticker"),
                                 factor.description!.capitalized,
                                 self.network.tokenTicker
                             )
                             : String(
-                                format: localized("network_report.total_paid_out"),
+                                format: localized("reports.total_paid_out_with_ticker"),
                                 self.network.tokenTicker
                             )
                         ReportView(
@@ -351,7 +351,7 @@ struct NetworkReportsView: View {
                             ),
                             factor: factor,
                             title: String(
-                                format: localized("network_report.total_paid_out_title"),
+                                format: localized("reports.network.total_paid_out_title"),
                                 self.network.display
                             ),
                             chartTitle: chartTitle,
@@ -374,10 +374,10 @@ struct NetworkReportsView: View {
                             ),
                             factor: .none,
                             title: String(
-                                format: localized("network_report.active_validators_title"),
+                                format: localized("reports.network.active_validators_title"),
                                 self.network.display
                             ),
-                            chartTitle: localized("network_report.active_validators"),
+                            chartTitle: localized("reports.active_validators"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -391,12 +391,12 @@ struct NetworkReportsView: View {
                         let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
                         let chartTitle = self.network.tokenTicker == "DOT"
                             ? String(
-                                format: localized("network_report.total_reward_with_factor"),
+                                format: localized("reports.total_reward_with_factor_ticker"),
                                 factor.description!.capitalized,
                                 self.network.tokenTicker
                             )
                             : String(
-                                format: localized("network_report.total_reward"),
+                                format: localized("reports.total_reward_with_ticker"),
                                 self.network.tokenTicker
                             )
                         ReportView(
@@ -407,7 +407,7 @@ struct NetworkReportsView: View {
                             ),
                             factor: factor,
                             title: String(
-                                format: localized("network_report.total_rewards_title"),
+                                format: localized("reports.network.total_rewards_title"),
                                 self.network.display
                             ),
                             chartTitle: chartTitle,
@@ -430,10 +430,10 @@ struct NetworkReportsView: View {
                             ),
                             factor: .none,
                             title: String(
-                                format: localized("network_report.offline_offences_title"),
+                                format: localized("reports.network.offline_offences_title"),
                                 self.network.display
                             ),
-                            chartTitle: localized("network_report.offline_offences"),
+                            chartTitle: localized("reports.offences"),
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -449,11 +449,11 @@ struct NetworkReportsView: View {
                             data: .balance(dataPoints: self.viewModel.slashesBalance),
                             factor: .none,
                             title: String(
-                                format: localized("network_report.slashes_title"),
+                                format: localized("reports.network.slashes_title"),
                                 self.network.display
                             ),
                             chartTitle: String(
-                                format: localized("network_report.slashed"),
+                                format: localized("reports.slashed_with_ticker"),
                                 self.network.tokenTicker
                             ),
                             network: self.network,
@@ -631,7 +631,7 @@ struct NetworkReportsView: View {
     
     private var activeNominatorCountsView: some View {
         ReportLineChartView(
-            title: localized("network_reports.active_nominators"),
+            title: localized("reports.active_nominators"),
             dataPoints: self.viewModel.activeNominatorCounts,
             minY: 0,
             maxY: self.viewModel.maxActiveNominatorCount * 2,
@@ -642,7 +642,7 @@ struct NetworkReportsView: View {
     
     private var activeValidatorCountsView: some View {
         ReportLineChartView(
-            title: localized("network_reports.active_validators"),
+            title: localized("reports.active_validators"),
             dataPoints: self.viewModel.activeValidatorCounts,
             minY: 0,
             maxY: self.viewModel.maxActiveValidatorCount * 2,
@@ -653,7 +653,7 @@ struct NetworkReportsView: View {
     
     private var rewardPointsView: some View {
         ReportBarChartView(
-            title: localized("network_reports.reward_points"),
+            title: localized("reports.reward_points"),
             dataPoints: self.viewModel.rewardPoints,
             minY: 0.0,
             maxY: self.viewModel.maxRewardPoint,
@@ -665,7 +665,7 @@ struct NetworkReportsView: View {
     private var totalPaidOutView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("network_reports.total_paid_out_with_ticker"),
+                format: localized("reports.total_paid_out_with_ticker"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.totalPaidOut,
@@ -679,7 +679,7 @@ struct NetworkReportsView: View {
     private var totalStakesView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("network_reports.total_stakes"),
+                format: localized("reports.total_stake_with_ticker"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.totalStakes,
@@ -693,7 +693,7 @@ struct NetworkReportsView: View {
     private var totalRewardsView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("network_reports.total_rewards"),
+                format: localized("reports.total_reward_with_ticker"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.totalRewards,
@@ -706,7 +706,7 @@ struct NetworkReportsView: View {
     
     private var offlineOffenceCountsView: some View {
         ReportBarChartView(
-            title: localized("network_reports.offline_offences"),
+            title: localized("reports.offline_offences"),
             dataPoints: self.viewModel.offlineOffenceCounts,
             minY: 0.0,
             maxY: self.viewModel.maxOfflineOffenceCount,
@@ -718,7 +718,7 @@ struct NetworkReportsView: View {
     private var slashesView: some View {
         ReportBarChartView(
             title: String(
-                format: localized("network_reports.slashed"),
+                format: localized("reports.slashed_with_ticker"),
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.slashes,
@@ -743,12 +743,12 @@ struct NetworkReportsView: View {
                     .frame(height: UI.Dimension.Common.dataPanelSpacing)
                 Group {
                     ReportDataPanelView(
-                        title: localized("network_reports.active_nominators"),
+                        title: localized("reports.network.title"),
                         content: String(self.viewModel.activeNominatorCounts[0].1)
                     )
                     .modifier(PanelAppearance(2, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.total_stake"),
+                        title: localized("reports.total_stake"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
@@ -761,7 +761,7 @@ struct NetworkReportsView: View {
                     )
                     .modifier(PanelAppearance(3, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.reward_points"),
+                        title: localized("reports.reward_points"),
                         content: formatDecimal(
                             integer: UInt64(self.viewModel.rewardPoints[0].1),
                             decimalCount: 0,
@@ -770,7 +770,7 @@ struct NetworkReportsView: View {
                     )
                     .modifier(PanelAppearance(4, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.total_paid_out"),
+                        title: localized("reports.total_paid_out"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
@@ -782,12 +782,12 @@ struct NetworkReportsView: View {
                     )
                     .modifier(PanelAppearance(5, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.active_validator_count"),
+                        title: localized("reports.active_validators"),
                         content: String(self.viewModel.activeValidatorCounts[0].1)
                     )
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.total_reward"),
+                        title: localized("reports.total_reward"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
@@ -799,12 +799,12 @@ struct NetworkReportsView: View {
                     )
                     .modifier(PanelAppearance(7, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.offline_offences"),
+                        title: localized("reports.offline_offences"),
                         content: String(Int(self.viewModel.offlineOffenceCounts[0].1))
                     )
                     .modifier(PanelAppearance(8, self.chartDisplayState))
                     ReportDataPanelView(
-                        title: localized("network_reports.slashed_plain"),
+                        title: localized("reports.slashed"),
                         content: String(
                             format: "%@ %@",
                             formatBalance(
