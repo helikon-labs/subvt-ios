@@ -259,6 +259,201 @@ struct ValidatorReportsView: View {
                 self.dateIntervalView
                 Spacer()
                     .frame(height: 16)
+                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .integer(dataPoints: self.viewModel.isActive),
+                            factor: .none,
+                            title: localized("reports.validator.active"),
+                            chartTitle: localized("reports.validator.active"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.isActiveView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(2, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .integer(
+                                dataPoints: self.viewModel.commissionPerHundred
+                            ),
+                            factor: .none,
+                            title: localized("reports.validator.commission"),
+                            chartTitle: localized("reports.validator.commission_with_percent"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.commissionView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(3, self.chartDisplayState))
+                }
+                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .balance(dataPoints: self.viewModel.selfStake),
+                            factor: .none,
+                            title: localized("reports.validator.self_stake"),
+                            chartTitle: String(
+                                format: localized("reports.validator.self_stake_with_ticker"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.selfStakeView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(4, self.chartDisplayState))
+                    NavigationLink {
+                        let factor: ReportView.Factor = self.network.tokenTicker == "DOT"
+                            ? .million
+                            : .thousand
+                        let chartTitle = String(
+                            format: localized("reports.validator.total_stake_with_factor_ticker"),
+                            factor.description!.capitalized,
+                            self.network.tokenTicker
+                        )
+                        ReportView(
+                            type: .bar,
+                            data: .balance(
+                                dataPoints: self.viewModel.totalStake,
+                                decimals: 2
+                            ),
+                            factor: factor,
+                            title: localized("reports.validator.total_stake"),
+                            chartTitle: chartTitle,
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.totalStakeView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(5, self.chartDisplayState))
+                }
+                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .integer(dataPoints: self.viewModel.blockCount),
+                            factor: .none,
+                            title: localized("reports.validator.block_count"),
+                            chartTitle: localized("reports.validator.block_count"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.blockCountView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(6, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .integer(dataPoints: self.viewModel.rewardPoints),
+                            factor: .none,
+                            title: localized("reports.validator.reward_points"),
+                            chartTitle: localized("reports.validator.reward_points"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.rewardPointsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(7, self.chartDisplayState))
+                }
+                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .balance(dataPoints: self.viewModel.selfReward),
+                            factor: .none,
+                            title: localized("reports.validator.self_reward"),
+                            chartTitle: String(
+                                format: localized("reports.validator.self_reward_with_ticker"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.selfRewardView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(8, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .balance(dataPoints: self.viewModel.stakerReward),
+                            factor: .none,
+                            title: localized("reports.validator.staker_reward"),
+                            chartTitle: String(
+                                format: localized("reports.validator.staker_reward_with_ticker"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.stakerRewardView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(9, self.chartDisplayState))
+                }
+                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .integer(dataPoints: self.viewModel.offlineOffences),
+                            factor: .none,
+                            title: localized("reports.offline_offences"),
+                            chartTitle: localized("reports.offences"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.offlineOffencesView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(10, self.chartDisplayState))
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .balance(dataPoints: self.viewModel.stakerReward),
+                            factor: .none,
+                            title: localized("reports.validator.staker_reward"),
+                            chartTitle: String(
+                                format: localized("reports.validator.staker_reward_with_ticker"),
+                                self.network.tokenTicker
+                            ),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.stakerRewardView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(11, self.chartDisplayState))
+                }
             }
             .padding(EdgeInsets(
                 top: 0,
@@ -277,6 +472,135 @@ struct ValidatorReportsView: View {
                 self.headerMaterialOpacity = min(max($0, 0) / 40.0, 1.0)
             }
         }
+    }
+    
+    private var isActiveView: some View {
+        ReportBarChartView(
+            title: localized("reports.validator.active"),
+            dataPoints: self.viewModel.isActive.map {
+                ($0.0, Double($0.1))
+            },
+            minY: 0,
+            maxY: 1,
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var commissionView: some View {
+        ReportBarChartView(
+            title: localized("reports.validator.commission_with_percent"),
+            dataPoints: self.viewModel.commissionPerHundred.map {
+                ($0.0, Double($0.1))
+            },
+            minY: 0,
+            maxY: 100,
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var selfStakeView: some View {
+        ReportBarChartView(
+            title: String(
+                format: localized("reports.validator.self_stake_with_ticker"),
+                self.network.tokenTicker
+            ),
+            dataPoints: self.viewModel.selfStake.map {
+                ($0.0, Double($0.1.value))
+            },
+            minY: 0,
+            maxY: max(self.viewModel.maxSelfStake, 1),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var totalStakeView: some View {
+        ReportBarChartView(
+            title: String(
+                format: localized("reports.validator.total_stake_with_ticker"),
+                self.network.tokenTicker
+            ),
+            dataPoints: self.viewModel.totalStake.map {
+                ($0.0, Double($0.1.value))
+            },
+            minY: 0,
+            maxY: max(self.viewModel.maxTotalStake, 1),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var blockCountView: some View {
+        ReportBarChartView(
+            title: localized("reports.validator.block_count"),
+            dataPoints: self.viewModel.blockCount.map {
+                ($0.0, Double($0.1))
+            },
+            minY: 0,
+            maxY: Double(self.viewModel.maxBlockCount),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var rewardPointsView: some View {
+        ReportBarChartView(
+            title: localized("reports.validator.reward_points"),
+            dataPoints: self.viewModel.rewardPoints.map {
+                ($0.0, Double($0.1))
+            },
+            minY: 0,
+            maxY: Double(self.viewModel.maxRewardPoints),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var selfRewardView: some View {
+        ReportBarChartView(
+            title: String(
+                format: localized("reports.validator.self_reward_with_ticker"),
+                self.network.tokenTicker
+            ),
+            dataPoints: self.viewModel.selfReward.map {
+                ($0.0, Double($0.1.value))
+            },
+            minY: 0,
+            maxY: max(self.viewModel.maxSelfReward, 1),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var stakerRewardView: some View {
+        ReportBarChartView(
+            title: String(
+                format: localized("reports.validator.staker_reward_with_ticker"),
+                self.network.tokenTicker
+            ),
+            dataPoints: self.viewModel.stakerReward.map {
+                ($0.0, Double($0.1.value))
+            },
+            minY: 0,
+            maxY: max(self.viewModel.maxStakerReward, 1),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var offlineOffencesView: some View {
+        ReportBarChartView(
+            title: localized("reports.offline_offences"),
+            dataPoints: self.viewModel.offlineOffences.map {
+                ($0.0, Double($0.1))
+            },
+            minY: 0,
+            maxY: max(self.viewModel.maxOfflineOffence, 1),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
     }
     
     private var singleReportView: some View {

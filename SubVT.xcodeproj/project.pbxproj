@@ -105,6 +105,7 @@
 		A067DD61289D4115005BE98C /* UI+Dimension+ActionFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */; };
 		A067DD64289D56A9005BE98C /* MyValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD63289D56A9005BE98C /* MyValidatorsView.swift */; };
 		A067DD65289D56A9005BE98C /* MyValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A067DD63289D56A9005BE98C /* MyValidatorsView.swift */; };
+		A06A08C7293D051F0098518A /* ReportsCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06A08C6293D051F0098518A /* ReportsCommon.swift */; };
 		A06B1E3228E30910006F8DF9 /* ValidatorSearchSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B1E3128E30910006F8DF9 /* ValidatorSearchSummaryView.swift */; };
 		A06B1E3328E30910006F8DF9 /* ValidatorSearchSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B1E3128E30910006F8DF9 /* ValidatorSearchSummaryView.swift */; };
 		A06B1E3528E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06B1E3428E30A23006F8DF9 /* ValidatorSearchSummary.swift */; };
@@ -428,6 +429,7 @@
 		A067DD5B289D398E005BE98C /* ActionFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionFeedbackView.swift; sourceTree = "<group>"; };
 		A067DD5F289D4115005BE98C /* UI+Dimension+ActionFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+ActionFeedback.swift"; sourceTree = "<group>"; };
 		A067DD63289D56A9005BE98C /* MyValidatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsView.swift; sourceTree = "<group>"; };
+		A06A08C6293D051F0098518A /* ReportsCommon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsCommon.swift; sourceTree = "<group>"; };
 		A06B1E3128E30910006F8DF9 /* ValidatorSearchSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSearchSummaryView.swift; sourceTree = "<group>"; };
 		A06B1E3428E30A23006F8DF9 /* ValidatorSearchSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSearchSummary.swift; sourceTree = "<group>"; };
 		A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRPCStatusIndicatorView.swift; sourceTree = "<group>"; };
@@ -696,6 +698,7 @@
 				A03002502937468900F7BB1E /* ReportViewModel.swift */,
 				A0DEF18A293CBF1500BAFF89 /* ValidatorReportsView.swift */,
 				A0DEF18C293CBF2000BAFF89 /* ValidatorReportsViewModel.swift */,
+				A06A08C6293D051F0098518A /* ReportsCommon.swift */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -1412,6 +1415,7 @@
 				A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A0AFF7FB2892B5F700B0CB4F /* UI+Text.swift in Sources */,
 				A0E9F09528FC433F000CCC02 /* NotificationPeriodType.swift in Sources */,
+				A06A08C7293D051F0098518A /* ReportsCommon.swift in Sources */,
 				A04C47272887F19F0004A46A /* RoundedCorner.swift in Sources */,
 				A0BCDE5F28784DD0008047D7 /* Format.swift in Sources */,
 				A0F596FF28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */,

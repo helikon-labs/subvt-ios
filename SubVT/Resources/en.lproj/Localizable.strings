@@ -259,3 +259,17 @@
 "reports.network.slashes_title"="%@ Slashes";
 
 "reports.validator.title"="Validator Reports";
+"reports.validator.active"="Active";
+"reports.validator.commission"="Commission";
+"reports.validator.commission_with_percent"="Commission (%)";
+"reports.validator.self_stake"="Self Stake";
+"reports.validator.self_stake_with_ticker"="Self Stake (%@)";
+"reports.validator.total_stake"="Total Stake";
+"reports.validator.total_stake_with_ticker"="Total Stake (%@)";
+"reports.validator.total_stake_with_factor_ticker"="Total Stake (%@ %@)";
+"reports.validator.block_count"="Authored Blocks";
+"reports.validator.reward_points"="Reward Points";
+"reports.validator.self_reward"="Self Reward";
+"reports.validator.self_reward_with_ticker"="Self Reward (%@)";
+"reports.validator.staker_reward"="Staker Reward";
+"reports.validator.staker_reward_with_ticker"="Staker Reward (%@)";

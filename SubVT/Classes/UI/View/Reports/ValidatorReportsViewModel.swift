@@ -12,6 +12,16 @@ import SubVTData
 class ValidatorReportsViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
     
+    @Published private(set) var isActive: [(Int, Int)] = []
+    @Published private(set) var commissionPerHundred: [(Int, Int)] = []
+    @Published private(set) var selfStake: [(Int, Balance)] = []
+    @Published private(set) var totalStake: [(Int, Balance)] = []
+    @Published private(set) var blockCount: [(Int, Int)] = []
+    @Published private(set) var rewardPoints: [(Int, Int)] = []
+    @Published private(set) var selfReward: [(Int, Balance)] = []
+    @Published private(set) var stakerReward: [(Int, Balance)] = []
+    @Published private(set) var offlineOffences: [(Int, Int)] = []
+    
     private var validatorSummary: ValidatorSummary! = nil
     private var network: Network! = nil
     private var reportService: ReportService! = nil
@@ -54,6 +64,66 @@ class ValidatorReportsViewModel: ObservableObject {
     }
     
     private func processReports(reports: [EraValidatorReport]) {
-        
+        self.isActive = reports.map {
+            (Int($0.era.index), ($0.isActive ?? false) ? 1 : 0)
+        }
+        self.commissionPerHundred = reports.map {
+            (Int($0.era.index), Int(($0.commissionPerBillion ?? 0) / 10000000))
+        }
+        self.selfStake = reports.map {
+            (Int($0.era.index), $0.selfStake ?? Balance(integerLiteral: 0))
+        }
+        self.totalStake = reports.map {
+            (Int($0.era.index), $0.totalStake ?? Balance(integerLiteral: 0))
+        }
+        self.blockCount = reports.map {
+            (Int($0.era.index), Int($0.blockCount))
+        }
+        self.rewardPoints = reports.map {
+            (Int($0.era.index), Int($0.rewardPoints ?? 0))
+        }
+        self.selfReward = reports.map {
+            (Int($0.era.index), $0.selfReward)
+        }
+        self.stakerReward = reports.map {
+            (Int($0.era.index), $0.stakerReward)
+        }
+        self.offlineOffences = reports.map {
+            (Int($0.era.index), Int($0.offlineOffenceCount))
+        }
+    }
+    
+    var maxSelfStake: Double {
+        return self.selfStake.map { Double($0.1.value) }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxTotalStake: Double {
+        return self.totalStake.map { Double($0.1.value) }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxBlockCount: Int {
+        return max(
+            self.blockCount.map { $0.1 }.max { $0 < $1 } ?? 0,
+            1
+        )
+    }
+    
+    var maxRewardPoints: Int {
+        return max(
+            self.rewardPoints.map { $0.1 }.max { $0 < $1 } ?? 0,
+            1
+        )
+    }
+    
+    var maxSelfReward: Double {
+        return self.selfReward.map { Double($0.1.value) }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxStakerReward: Double {
+        return self.stakerReward.map { Double($0.1.value) }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxOfflineOffence: Double {
+        return self.offlineOffences.map { Double($0.1) }.max { $0 < $1 } ?? 0
     }
 }

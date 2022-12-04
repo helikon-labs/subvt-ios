@@ -134,32 +134,32 @@ class NetworkReportsViewModel: ObservableObject {
     }
     
     var maxActiveNominatorCount: Int {
-        self.activeNominatorCounts.map{ $0.1 }.max { $0 < $1 } ?? 0
+        self.activeNominatorCounts.map { $0.1 }.max { $0 < $1 } ?? 0
     }
     
     var maxActiveValidatorCount: Int {
-        self.activeValidatorCounts.map{ $0.1 }.max { $0 < $1 } ?? 0
+        self.activeValidatorCounts.map { $0.1 }.max { $0 < $1 } ?? 0
     }
     
     var maxRewardPoint: Double {
-        let max = self.rewardPoints.map{ Double($0.1) }.max { $0 < $1 } ?? 0
+        let max = self.rewardPoints.map { Double($0.1) }.max { $0 < $1 } ?? 0
         return Double(max)
     }
     
     var maxTotalPaidOut: Double {
-        return self.totalPaidOut.map{ $0.1 }.max { $0 < $1 } ?? 0
+        return self.totalPaidOut.map { $0.1 }.max { $0 < $1 } ?? 0
     }
     
     var maxTotalStake: Double {
-        return  self.totalStakes.map{ $0.1 }.max { $0 < $1 } ?? 0
+        return  self.totalStakes.map { $0.1 }.max { $0 < $1 } ?? 0
     }
     
     var maxTotalReward: Double {
-        return self.totalRewards.map{ $0.1 }.max { $0 < $1 } ?? 0
+        return self.totalRewards.map { $0.1 }.max { $0 < $1 } ?? 0
     }
     
     var maxOfflineOffenceCount: Double {
-        let max = self.offlineOffenceCounts.map{ Double($0.1) }.max { $0 < $1 } ?? 0.0
+        let max = self.offlineOffenceCounts.map { Double($0.1) }.max { $0 < $1 } ?? 0.0
         guard max > 0.0 else {
             return 1.0
         }
@@ -167,7 +167,7 @@ class NetworkReportsViewModel: ObservableObject {
     }
     
     var maxSlash: Double {
-        let max = self.slashes.map{ $0.1 }.max { $0 < $1 } ?? 0
+        let max = self.slashes.map { $0.1 }.max { $0 < $1 } ?? 0
         guard max > 0 else {
             return 1.0
         }
