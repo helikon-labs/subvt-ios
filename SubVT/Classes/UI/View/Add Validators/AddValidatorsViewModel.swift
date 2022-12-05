@@ -21,11 +21,14 @@ class AddValidatorsViewModel: ObservableObject {
     
     private var appService = SubVTData.AppService()
     private var cancellables: Set<AnyCancellable> = []
+    private var query = ""
     
     init() {
         self.$searchText
             .debounce(for: .seconds(0.25), scheduler: DispatchQueue.main)
-            .sink { searchText in
+            .sink {
+                [weak self] searchText in
+                guard let self = self else { return }
                 self.searchValidators(query: searchText)
             }
             .store(in: &cancellables)
@@ -62,13 +65,14 @@ class AddValidatorsViewModel: ObservableObject {
     }
     
     func searchValidators(query: String) {
-        guard let host = self.network.reportServiceHost,
-              let port = self.network.reportServicePort,
-              self.networkValidatorsFetchState != .loading else {
+        guard query != self.query,
+              let host = self.network.reportServiceHost,
+              let port = self.network.reportServicePort else {
             return
         }
         self.searchCancellable?.cancel()
         let query = query.trimmingCharacters(in: .whitespaces)
+        self.query = query
         guard !query.isEmpty else {
             self.networkValidatorsFetchState = .success(result: "")
             self.validators.removeAll()

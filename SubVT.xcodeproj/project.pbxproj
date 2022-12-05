@@ -219,6 +219,7 @@
 		A0C062A328672106001FE459 /* UI+Dimension+TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */; };
 		A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
 		A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
+		A0C67D29293DF744007FCE4E /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C67D28293DF744007FCE4E /* Keyboard.swift */; };
 		A0C90E882878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
 		A0C90E892878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
 		A0C90E8A2878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
@@ -489,6 +490,7 @@
 		A0C03D8728967048001C1B54 /* RewardDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardDestination.swift; sourceTree = "<group>"; };
 		A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+TabBar.swift"; sourceTree = "<group>"; };
 		A0C062A4286721E9001FE459 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		A0C67D28293DF744007FCE4E /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
 		A0C90E872878615600A91996 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		A0C9838C2875ABF40008C370 /* OptionalCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalCodable.swift; sourceTree = "<group>"; };
 		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
@@ -626,6 +628,7 @@
 			isa = PBXGroup;
 			children = (
 				A0E0F6862848CF120029DDBF /* Font.swift */,
+				A0C67D28293DF744007FCE4E /* Keyboard.swift */,
 				A04C472C288814DA0004A46A /* PreferenceKeys.swift */,
 			);
 			path = Utility;
@@ -1396,6 +1399,7 @@
 				A05B25A4287ECBE30070EF81 /* Counter.swift in Sources */,
 				A0F2850E2879AD0500E69C6B /* BlockWaveView.swift in Sources */,
 				A0D205D2288C1E7D0040CB08 /* FooterGradientView.swift in Sources */,
+				A0C67D29293DF744007FCE4E /* Keyboard.swift in Sources */,
 				A0744D8E2885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0AFF7F128926C8400B0CB4F /* ValidatorDetailsViewModel.swift in Sources */,
 				A030024F2937466400F7BB1E /* ReportView.swift in Sources */,

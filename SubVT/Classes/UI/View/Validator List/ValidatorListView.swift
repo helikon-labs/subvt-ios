@@ -39,12 +39,7 @@ struct ValidatorListView: View {
     }
     
     private func onScroll(_ scroll: CGFloat) {
-        UIApplication.shared.sendAction(
-            #selector(UIResponder.resignFirstResponder),
-            to: nil,
-            from: nil,
-            for: nil
-        )
+        KeyboardUtil.dismissKeyboard()
         self.headerMaterialOpacity = min(scroll / 20.0, 1.0)
         if self.filterSectionIsVisible {
             if scroll < self.lastScroll {
@@ -148,12 +143,7 @@ struct ValidatorListView: View {
                         .cornerRadius(UI.Dimension.Common.cornerRadius)
                         Button(
                             action: {
-                                UIApplication.shared.sendAction(
-                                    #selector(UIResponder.resignFirstResponder),
-                                    to: nil,
-                                    from: nil,
-                                    for: nil
-                                )
+                                KeyboardUtil.dismissKeyboard()
                                 self.popupIsVisible = true
                             },
                             label: {

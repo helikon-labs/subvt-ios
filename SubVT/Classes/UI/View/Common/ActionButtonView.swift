@@ -52,19 +52,22 @@ struct ActionButtonView: View {
     let font: Font
     let width: CGFloat
     let height: CGFloat
+    let hasShadow: Bool
     
     init(
         title: String,
         state: State,
         font: Font = UI.Font.Common.actionButton,
         width: CGFloat = UI.Dimension.Common.actionButtonWidth,
-        height: CGFloat = UI.Dimension.Common.actionButtonHeight
+        height: CGFloat = UI.Dimension.Common.actionButtonHeight,
+        hasShadow: Bool = true
     ) {
         self.title = title
         self.state = state
         self.font = font
         self.width = width
         self.height = height
+        self.hasShadow = hasShadow
     }
     
     private var backgroundColor: Color {
@@ -116,7 +119,7 @@ struct ActionButtonView: View {
         .background(self.backgroundColor)
         .cornerRadius(10)
         .shadow(
-            color: self.shadowColor,
+            color: self.hasShadow ? self.shadowColor : Color.clear,
             radius: 5,
             x: 0,
             y: 10
@@ -140,6 +143,5 @@ struct ActionButtonView_Previews: PreviewProvider {
             }
         )
         .buttonStyle(ActionButtonStyle(state: .enabled))
-        
     }
 }

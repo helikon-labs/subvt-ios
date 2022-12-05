@@ -472,12 +472,7 @@ struct ValidatorDetailsView: View {
             alignment: .leading
         )
         .onAppear() {
-            UIApplication.shared.sendAction(
-                #selector(UIResponder.resignFirstResponder),
-                to: nil,
-                from: nil,
-                for: nil
-            )
+            KeyboardUtil.dismissKeyboard()
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {

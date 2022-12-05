@@ -66,7 +66,7 @@ struct ReportView: View {
     }
     
     enum Data {
-        case integer(dataPoints: [(Int, Int)])
+        case integer(dataPoints: [(Int, Int)], max: Int? = nil)
         case double(dataPoints: [(Int, Double)])
         case balance(dataPoints: [(Int, Balance)], decimals: UInt8 = 2)
     }
@@ -81,6 +81,7 @@ struct ReportView: View {
     private let factor: Factor
     private let title: String
     private let chartTitle: String
+    private let validatorIdentityDisplay: String?
     private let network: Network
     private let startEra: Era
     private let endEra: Era
@@ -97,6 +98,7 @@ struct ReportView: View {
         startPoint: .bottom,
         endPoint: .top
     )
+    private let max: Int
     
     init(
         type: `Type`,
@@ -104,6 +106,7 @@ struct ReportView: View {
         factor: Factor,
         title: String,
         chartTitle: String,
+        validatorIdentityDisplay: String? = nil,
         network: Network,
         startEra: Era,
         endEra: Era
@@ -113,10 +116,35 @@ struct ReportView: View {
         self.factor = factor
         self.title = title
         self.chartTitle = chartTitle
+        self.validatorIdentityDisplay = validatorIdentityDisplay
         self.network = network
         self.startEra = startEra
         self.endEra = endEra
         self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
+        switch data {
+        case .integer(let dataPoints, let max):
+            if let max = max {
+                self.max = max
+            } else {
+                self.max = dataPoints.map { $0.1 }.max { $0 < $1 } ?? 0
+            }
+        case .double(let dataPoints):
+            self.max = Int(
+                ceil(
+                    dataPoints
+                        .map { $0.1 }
+                        .max { $0 < $1 } ?? 0.0
+                )
+            )
+        case .balance(let dataPoints, _):
+            self.max = Int(
+                ceil(
+                    dataPoints
+                        .map { Double($0.1.value) }
+                        .max { $0 < $1 } ?? 0.0
+                )
+            )
+        }
     }
     
     private func getDateDisplay(index: UInt, timestamp: UInt64) -> String {
@@ -178,7 +206,7 @@ struct ReportView: View {
                 ))
                 .font(UI.Font.NetworkReports.date)
             }
-            .modifier(PanelAppearance(2, self.displayState))
+            .modifier(PanelAppearance(3, self.displayState))
             Spacer()
                 .frame(height: 6)
             HStack {
@@ -192,18 +220,12 @@ struct ReportView: View {
                 ))
                 .font(UI.Font.NetworkReports.date)
             }
-            .modifier(PanelAppearance(3, self.displayState))
+            .modifier(PanelAppearance(4, self.displayState))
         }
         .frame(
             maxWidth: .infinity,
             alignment: .leading
         )
-        .padding(EdgeInsets(
-            top: 0,
-            leading: UI.Dimension.Common.padding,
-            bottom: 0,
-            trailing: 0
-        ))
     }
     
     var body: some View {
@@ -234,7 +256,21 @@ struct ReportView: View {
                     Spacer()
                         .id(0)
                         .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                    self.dateIntervalView
+                    Group {
+                        if let validatorIdentityDisplay = self.validatorIdentityDisplay {
+                            Text(validatorIdentityDisplay)
+                                .font(UI.Font.Report.validatorDisplay)
+                                .foregroundColor(Color("Text"))
+                                .modifier(PanelAppearance(2, self.displayState))
+                        }
+                        self.dateIntervalView
+                    }
+                    .padding(EdgeInsets(
+                        top: 0,
+                        leading: UI.Dimension.Common.padding,
+                        bottom: 0,
+                        trailing: 0
+                    ))
                     Spacer()
                         .frame(height: 16)
                     self.chart
@@ -243,7 +279,7 @@ struct ReportView: View {
                         .frame(maxWidth: .infinity)
                         .background(Color("DataPanelBg"))
                         .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
-                        .modifier(PanelAppearance(4, self.displayState))
+                        .modifier(PanelAppearance(5, self.displayState))
                 }
                 .padding(EdgeInsets(
                     top: 0,
@@ -264,17 +300,8 @@ struct ReportView: View {
         )
         .onAppear() {
             if self.displayState != .appeared {
-                // self.viewModel.network = self.network
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.displayState = .appeared
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        /*
-                        self.viewModel.fetchReports(
-                            startEraIndex: self.startEra.index,
-                            endEraIndex: self.endEra.index
-                        )
-                         */
-                    }
                 }
             }
         }
@@ -284,7 +311,7 @@ struct ReportView: View {
         ZStack {
             Chart {
                 switch self.data {
-                case .integer(let dataPoints):
+                case .integer(let dataPoints, _):
                     ForEach(dataPoints.indices, id: \.self) { i in
                         let dataPoint = dataPoints[i]
                         switch self.type {
@@ -365,7 +392,7 @@ struct ReportView: View {
                     AxisTick()
                     AxisValueLabel {
                         switch self.data {
-                        case .integer(_):
+                        case .integer(_, _):
                             if let intValue = value.as(Int.self) {
                                 switch self.factor {
                                 case .none:
@@ -402,6 +429,7 @@ struct ReportView: View {
                     }
                   }
             }
+            .chartYScale(domain: (0...self.max))
             .chartYAxisLabel(alignment: Alignment.leading) {
                 Text(self.chartTitle)
                     .font(UI.Font.Report.axisLabel)

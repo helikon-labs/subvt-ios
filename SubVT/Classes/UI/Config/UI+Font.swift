@@ -186,6 +186,7 @@ extension UI {
         enum Report {
             static let axisLabel = LexendDeca.light.withSize(12)
             static let axisValue = LexendDeca.light.withSize(9)
+            static let validatorDisplay = LexendDeca.semiBold.withSize(14)
         }
     }
 }

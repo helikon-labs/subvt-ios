@@ -207,6 +207,7 @@ struct AddValidatorsView: View {
             Spacer()
                 .frame(height: 8)
             Button {
+                KeyboardUtil.dismissKeyboard()
                 self.networkListIsVisible.toggle()
             } label: {
                 HStack(alignment: .center) {
@@ -256,9 +257,13 @@ struct AddValidatorsView: View {
                         let network = networks[i]
                         Button(
                             action: {
+                                KeyboardUtil.dismissKeyboard()
+                                self.networkListIsVisible = false
+                                guard self.viewModel.network.id != network.id else {
+                                    return
+                                }
                                 self.viewModel.searchText = ""
                                 self.viewModel.network = network
-                                self.networkListIsVisible = false
                                 self.fetchData()
                             },
                             label: {
@@ -336,6 +341,7 @@ struct AddValidatorsView: View {
                 .font(UI.Font.ValidatorList.search)
                 .disableAutocorrection(true)
                 .autocapitalization(.none)
+                .submitLabel(.done)
             }
             .frame(height: 48)
             .padding(EdgeInsets(
@@ -361,6 +367,7 @@ struct AddValidatorsView: View {
                         canAdd: !self.viewModel.isUserValidator(address: validator.address),
                         isLoading: self.viewModel.addValidatorStatuses[validator.accountId] != nil
                     ) {
+                        KeyboardUtil.dismissKeyboard()
                         self.viewModel.addValidator(accountId: validator.accountId)
                     }
                 }
@@ -368,6 +375,9 @@ struct AddValidatorsView: View {
                     .frame(
                         height: UI.Dimension.Common.footerGradientViewHeight
                     )
+            }
+            .onTapGesture {
+                KeyboardUtil.dismissKeyboard()
             }
         }
         .frame(maxHeight: .infinity)

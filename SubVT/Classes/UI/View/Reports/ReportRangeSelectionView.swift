@@ -190,7 +190,8 @@ struct ReportRangeSelectionView: View {
                         Spacer()
                             .id(0)
                             .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                        if self.mode == .network {
+                        switch self.mode {
+                        case .network:
                             Group {
                                 Spacer()
                                     .frame(height: 24)
@@ -207,6 +208,15 @@ struct ReportRangeSelectionView: View {
                                     self.networkListView
                                 }
                             }
+                        case .validator(let validatorSummary):
+                            Text(validatorSummary.identityDisplay)
+                                .font(UI.Font.Report.validatorDisplay)
+                                .foregroundColor(Color("Text"))
+                                .opacity(
+                                    self.controlsAreDisabled
+                                        ? UI.Value.disabledControlOpacity
+                                        : 1.0
+                                )
                         }
                         Group {
                             Spacer()
@@ -326,7 +336,8 @@ struct ReportRangeSelectionView: View {
                             state: .enabled,
                             font: UI.Font.ReportRangeSelection.actionButton,
                             width: UI.Dimension.ReportRangeSelection.viewButtonWidth,
-                            height: UI.Dimension.ReportRangeSelection.viewButtonHeight
+                            height: UI.Dimension.ReportRangeSelection.viewButtonHeight,
+                            hasShadow: false
                         )
                     }
                     .buttonStyle(PushButtonStyle())

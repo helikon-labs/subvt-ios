@@ -223,7 +223,7 @@ struct ValidatorReportsView: View {
                 ))
                 .font(UI.Font.NetworkReports.date)
             }
-            .modifier(PanelAppearance(0, self.chartDisplayState))
+            .modifier(PanelAppearance(1, self.chartDisplayState))
             Spacer()
                 .frame(height: 6)
             HStack {
@@ -237,14 +237,8 @@ struct ValidatorReportsView: View {
                 ))
                 .font(UI.Font.NetworkReports.date)
             }
-            .modifier(PanelAppearance(1, self.chartDisplayState))
+            .modifier(PanelAppearance(2, self.chartDisplayState))
         }
-        .padding(EdgeInsets(
-            top: 0,
-            leading: UI.Dimension.Common.padding,
-            bottom: 0,
-            trailing: 0
-        ))
     }
     
     private var chartsView: some View {
@@ -256,7 +250,19 @@ struct ValidatorReportsView: View {
                 Spacer()
                     .id(0)
                     .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                self.dateIntervalView
+                Group {
+                    Text(self.validatorSummary.identityDisplay)
+                        .font(UI.Font.Report.validatorDisplay)
+                        .foregroundColor(Color("Text"))
+                        .modifier(PanelAppearance(0, self.chartDisplayState))
+                    self.dateIntervalView
+                }
+                .padding(EdgeInsets(
+                    top: 0,
+                    leading: UI.Dimension.Common.padding,
+                    bottom: 0,
+                    trailing: 0
+                ))
                 Spacer()
                     .frame(height: 16)
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
@@ -267,6 +273,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.active"),
                             chartTitle: localized("reports.validator.active"),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -275,16 +282,18 @@ struct ValidatorReportsView: View {
                         self.isActiveView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(2, self.chartDisplayState))
+                    .modifier(PanelAppearance(3, self.chartDisplayState))
                     NavigationLink {
                         ReportView(
                             type: .bar,
                             data: .integer(
-                                dataPoints: self.viewModel.commissionPerHundred
+                                dataPoints: self.viewModel.commissionPerHundred,
+                                max: 100
                             ),
                             factor: .none,
                             title: localized("reports.validator.commission"),
                             chartTitle: localized("reports.validator.commission_with_percent"),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -293,7 +302,7 @@ struct ValidatorReportsView: View {
                         self.commissionView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(3, self.chartDisplayState))
+                    .modifier(PanelAppearance(4, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
@@ -306,6 +315,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.validator.self_stake_with_ticker"),
                                 self.network.tokenTicker
                             ),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -314,7 +324,7 @@ struct ValidatorReportsView: View {
                         self.selfStakeView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(4, self.chartDisplayState))
+                    .modifier(PanelAppearance(5, self.chartDisplayState))
                     NavigationLink {
                         let factor: ReportView.Factor = self.network.tokenTicker == "DOT"
                             ? .million
@@ -333,6 +343,7 @@ struct ValidatorReportsView: View {
                             factor: factor,
                             title: localized("reports.validator.total_stake"),
                             chartTitle: chartTitle,
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -341,7 +352,7 @@ struct ValidatorReportsView: View {
                         self.totalStakeView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(5, self.chartDisplayState))
+                    .modifier(PanelAppearance(6, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
@@ -351,6 +362,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.block_count"),
                             chartTitle: localized("reports.validator.block_count"),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -359,7 +371,7 @@ struct ValidatorReportsView: View {
                         self.blockCountView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(6, self.chartDisplayState))
+                    .modifier(PanelAppearance(7, self.chartDisplayState))
                     NavigationLink {
                         ReportView(
                             type: .bar,
@@ -367,6 +379,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.reward_points"),
                             chartTitle: localized("reports.validator.reward_points"),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -375,7 +388,7 @@ struct ValidatorReportsView: View {
                         self.rewardPointsView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(7, self.chartDisplayState))
+                    .modifier(PanelAppearance(8, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
@@ -388,6 +401,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.validator.self_reward_with_ticker"),
                                 self.network.tokenTicker
                             ),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -396,7 +410,7 @@ struct ValidatorReportsView: View {
                         self.selfRewardView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(8, self.chartDisplayState))
+                    .modifier(PanelAppearance(9, self.chartDisplayState))
                     NavigationLink {
                         ReportView(
                             type: .bar,
@@ -407,6 +421,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.validator.staker_reward_with_ticker"),
                                 self.network.tokenTicker
                             ),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -415,7 +430,7 @@ struct ValidatorReportsView: View {
                         self.stakerRewardView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(9, self.chartDisplayState))
+                    .modifier(PanelAppearance(10, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
@@ -425,6 +440,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.offline_offences"),
                             chartTitle: localized("reports.offences"),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -433,7 +449,7 @@ struct ValidatorReportsView: View {
                         self.offlineOffencesView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(10, self.chartDisplayState))
+                    .modifier(PanelAppearance(11, self.chartDisplayState))
                     NavigationLink {
                         ReportView(
                             type: .bar,
@@ -441,6 +457,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.chilling_count"),
                             chartTitle: localized("reports.validator.chillings"),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -449,7 +466,7 @@ struct ValidatorReportsView: View {
                         self.chillingsView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(11, self.chartDisplayState))
+                    .modifier(PanelAppearance(12, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
@@ -462,6 +479,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.slashed_with_ticker"),
                                 self.network.tokenTicker
                             ),
+                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -470,7 +488,7 @@ struct ValidatorReportsView: View {
                         self.slashesView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(12, self.chartDisplayState))
+                    .modifier(PanelAppearance(13, self.chartDisplayState))
                     Spacer()
                         .frame(maxWidth: .infinity)
                 }
