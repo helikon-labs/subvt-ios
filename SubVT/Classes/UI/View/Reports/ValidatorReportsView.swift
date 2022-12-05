@@ -681,9 +681,130 @@ struct ValidatorReportsView: View {
                 Spacer()
                     .id(0)
                     .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
+                Text(self.validatorSummary.identityDisplay)
+                    .font(UI.Font.Report.validatorDisplay)
+                    .foregroundColor(Color("Text"))
+                    .modifier(PanelAppearance(0, self.chartDisplayState))
                 self.dateIntervalView
                 Spacer()
                     .frame(height: UI.Dimension.Common.dataPanelSpacing)
+                Group {
+                    ReportDataPanelView(
+                        title: localized("reports.validator.active"),
+                        content: self.viewModel.isActive[0].1 == 1
+                            ? localized("common.yes")
+                            : localized("common.no")
+                    )
+                    .modifier(PanelAppearance(3, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("reports.validator.commission"),
+                        content: self.viewModel.isActive[0].1 == 1
+                            ? String(
+                                format: localized("common.percentage"),
+                                String(self.viewModel.commissionPerHundred[0].1)
+                            )
+                            : "-"
+                    )
+                    .modifier(PanelAppearance(4, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("reports.validator.self_stake"),
+                        content: self.viewModel.isActive[0].1 == 1
+                        ? String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.selfStake[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount
+                            ),
+                            self.network.tokenTicker
+                        )
+                        : "-"
+                    )
+                    .modifier(PanelAppearance(5, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("reports.validator.total_stake"),
+                        content: self.viewModel.isActive[0].1 == 1
+                        ? String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.totalStake[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount
+                            ),
+                            self.network.tokenTicker
+                        )
+                        : "-"
+                    )
+                    .modifier(PanelAppearance(6, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("reports.validator.block_count"),
+                        content: String(self.viewModel.blockCount[0].1)
+                    )
+                    .modifier(PanelAppearance(7, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("reports.validator.reward_points"),
+                        content: String(self.viewModel.rewardPoints[0].1)
+                    )
+                    .modifier(PanelAppearance(8, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("reports.validator.self_reward"),
+                        content: self.viewModel.isActive[0].1 == 1
+                        ? String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.selfReward[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount
+                            ),
+                            self.network.tokenTicker
+                        )
+                        : "-"
+                    )
+                    .modifier(PanelAppearance(9, self.chartDisplayState))
+                    ReportDataPanelView(
+                        title: localized("reports.validator.staker_reward"),
+                        content: self.viewModel.isActive[0].1 == 1
+                        ? String(
+                            format: "%@ %@",
+                            formatBalance(
+                                balance: self.viewModel.stakerReward[0].1,
+                                tokenDecimalCount: self.network.tokenDecimalCount
+                            ),
+                            self.network.tokenTicker
+                        )
+                        : "-"
+                    )
+                    .modifier(PanelAppearance(10, self.chartDisplayState))
+                    Group {
+                        ReportDataPanelView(
+                            title: localized("reports.offline_offences"),
+                            content: self.viewModel.isActive[0].1 == 1
+                            ? String(self.viewModel.offlineOffences[0].1)
+                            : "-"
+                        )
+                        .modifier(PanelAppearance(11, self.chartDisplayState))
+                        ReportDataPanelView(
+                            title: localized("reports.validator.chillings"),
+                            content: self.viewModel.isActive[0].1 == 1
+                            ? String(self.viewModel.chillings[0].1)
+                            : "-"
+                        )
+                        .modifier(PanelAppearance(12, self.chartDisplayState))
+                        ReportDataPanelView(
+                            title: localized("reports.slashed"),
+                            content: self.viewModel.isActive[0].1 == 1
+                            ? String(
+                                format: "%@ %@",
+                                formatBalance(
+                                    balance: self.viewModel.slashes[0].1,
+                                    tokenDecimalCount: self.network.tokenDecimalCount
+                                ),
+                                self.network.tokenTicker
+                            )
+                            : "-"
+                        )
+                        .modifier(PanelAppearance(13, self.chartDisplayState))
+                    }
+                }
+                Spacer()
+                    .frame(height: UI.Dimension.Common.footerGradientViewHeight)
             }
             .padding(EdgeInsets(
                 top: 0,

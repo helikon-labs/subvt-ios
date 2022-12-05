@@ -10,8 +10,11 @@
 "common.search"="Search";
 "common.done"="Done";
 "common.overwrite"="Overwrite";
+"common.delete"="Delete";
 "common.cancel"="Cancel";
 "common.view"="View";
+"common.yes"="Yes";
+"common.no"="No";
 
 "common.factor.thousand"="thousand";
 "common.factor.thousands"="thousands";
@@ -151,6 +154,7 @@
 "notifications.apns_setup_in_progress"="Push notification setup is in progress.\nPlease make sure you are connected\nto the internet.";
 "notifications.enable_notifications"="Enable Notifications";
 "notifications.apns_setup_has_failed"="Notification setup has failed.";
+"notifications.delete_all_confirmation"="Are you sure that you want to delete all notifications?";
 
 "notification_rules.title"="Notification Rules";
 "notification_rules.no_rules"="You have no notification rules.";

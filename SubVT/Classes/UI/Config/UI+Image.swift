@@ -84,6 +84,13 @@ extension UI {
                     return SwiftUI.Image("UnionIconLight")
                 }
             }
+            static func trashIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
+                if colorScheme == .dark {
+                    return SwiftUI.Image("TrashIconDark")
+                } else {
+                    return SwiftUI.Image("TrashIconLight")
+                }
+            }
         }
         
         enum Introduction {
@@ -160,14 +167,6 @@ extension UI {
                     return SwiftUI.Image("AddValidatorIconDark")
                 } else {
                     return SwiftUI.Image("AddValidatorIconLight")
-                }
-            }
-            
-            static func removeValidatorIcon(_ colorScheme: ColorScheme) -> SwiftUI.Image {
-                if colorScheme == .dark {
-                    return SwiftUI.Image("RemoveValidatorIconDark")
-                } else {
-                    return SwiftUI.Image("RemoveValidatorIconLight")
                 }
             }
             

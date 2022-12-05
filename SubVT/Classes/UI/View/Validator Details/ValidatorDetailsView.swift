@@ -194,7 +194,7 @@ struct ValidatorDetailsView: View {
             switch self.viewModel.userValidatorsFetchState {
             case .success(_):
                 if let _ = self.viewModel.userValidator {
-                    UI.Image.ValidatorDetails.removeValidatorIcon(self.colorScheme)
+                    UI.Image.Common.trashIcon(self.colorScheme)
                 } else {
                     UI.Image.ValidatorDetails.addValidatorIcon(self.colorScheme)
                 }

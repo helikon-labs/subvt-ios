@@ -21,6 +21,7 @@ struct NotificationsView: View {
         SortDescriptor(\.receivedAt, order: .reverse)
     ]) var notifications: FetchedResults<Notification>
     @State private var headerMaterialOpacity = 0.0
+    @State private var deleteAllConfirmationDialogIsVisible: Bool = false
     @Binding var currentTab: Tab
     
     init(currentTab: Binding<Tab>) {
@@ -40,6 +41,23 @@ struct NotificationsView: View {
                         .frame(width: UI.Dimension.Common.padding)
                 }
                 Spacer()
+                Button(
+                    action: {
+                        self.deleteAllConfirmationDialogIsVisible = true
+                    },
+                    label: {
+                        UI.Image.Common.trashIcon(self.colorScheme)
+                            .frame(
+                                width: UI.Dimension.Common.networkSelectorHeight,
+                                height: UI.Dimension.Common.networkSelectorHeight
+                            )
+                            .background(Color("NetworkSelectorClosedBg"))
+                            .cornerRadius(UI.Dimension.Common.cornerRadius)
+                    }
+                )
+                .buttonStyle(PushButtonStyle())
+                .disabled(self.notifications.isEmpty)
+                .opacity(self.notifications.isEmpty ? UI.Value.disabledControlOpacity : 1.0)
                 NavigationLink {
                     NotificationRulesView()
                 } label: {
@@ -293,6 +311,29 @@ struct NotificationsView: View {
                     context: self.viewContext
                 )
             }
+        }
+        .confirmationDialog(
+            localized("notifications.delete_all_confirmation"),
+            isPresented: self.$deleteAllConfirmationDialogIsVisible,
+            titleVisibility: .visible
+        ) {
+            Button(
+                localized("common.delete"),
+                role: .destructive
+            ) {
+                for notification in self.notifications {
+                    self.viewContext.delete(notification)
+                }
+                do {
+                    try self.viewContext.save()
+                    NotificationUtil.updateAppNotificationBadge(
+                        context: self.viewContext
+                    )
+                } catch {
+                    log.error("Error while deleting notificaiton: \(error)")
+                }
+            }
+            Button(localized("common.cancel"), role: .cancel) {}
         }
     }
 }
