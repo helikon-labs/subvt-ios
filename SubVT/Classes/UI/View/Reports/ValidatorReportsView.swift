@@ -437,11 +437,29 @@ struct ValidatorReportsView: View {
                     NavigationLink {
                         ReportView(
                             type: .bar,
-                            data: .balance(dataPoints: self.viewModel.stakerReward),
+                            data: .integer(dataPoints: self.viewModel.chillings),
                             factor: .none,
-                            title: localized("reports.validator.staker_reward"),
+                            title: localized("reports.validator.chilling_count"),
+                            chartTitle: localized("reports.validator.chillings"),
+                            network: self.network,
+                            startEra: self.startEra,
+                            endEra: self.endEra
+                        )
+                    } label: {
+                        self.chillingsView
+                    }
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(11, self.chartDisplayState))
+                }
+                HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                    NavigationLink {
+                        ReportView(
+                            type: .bar,
+                            data: .balance(dataPoints: self.viewModel.slashes),
+                            factor: .none,
+                            title: localized("reports.slashes"),
                             chartTitle: String(
-                                format: localized("reports.validator.staker_reward_with_ticker"),
+                                format: localized("reports.slashed_with_ticker"),
                                 self.network.tokenTicker
                             ),
                             network: self.network,
@@ -449,11 +467,15 @@ struct ValidatorReportsView: View {
                             endEra: self.endEra
                         )
                     } label: {
-                        self.stakerRewardView
+                        self.slashesView
                     }
                     .buttonStyle(PushButtonStyle())
-                    .modifier(PanelAppearance(11, self.chartDisplayState))
+                    .modifier(PanelAppearance(12, self.chartDisplayState))
+                    Spacer()
+                        .frame(maxWidth: .infinity)
                 }
+                Spacer()
+                    .frame(height: UI.Dimension.Common.footerGradientViewHeight)
             }
             .padding(EdgeInsets(
                 top: 0,
@@ -598,6 +620,35 @@ struct ValidatorReportsView: View {
             },
             minY: 0,
             maxY: max(self.viewModel.maxOfflineOffence, 1),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var chillingsView: some View {
+        ReportBarChartView(
+            title: localized("reports.validator.chilling_count"),
+            dataPoints: self.viewModel.chillings.map {
+                ($0.0, Double($0.1))
+            },
+            minY: 0,
+            maxY: max(self.viewModel.maxChillingCount, 1),
+            revealPercentage: 1.0,
+            colorScheme: self.colorScheme
+        )
+    }
+    
+    private var slashesView: some View {
+        ReportBarChartView(
+            title: String(
+                format: localized("reports.slashed_with_ticker"),
+                self.network.tokenTicker
+            ),
+            dataPoints: self.viewModel.slashes.map {
+                ($0.0, Double($0.1.value))
+            },
+            minY: 0,
+            maxY: max(self.viewModel.maxSlash, 1),
             revealPercentage: 1.0,
             colorScheme: self.colorScheme
         )

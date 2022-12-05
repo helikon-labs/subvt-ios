@@ -244,6 +244,7 @@
 "reports.offences"="Offences";
 "reports.offline_offences"="Offline Offences";
 "reports.slashed"="Slashed";
+"reports.slashes"="Slashes";
 "reports.slashed_with_ticker"="Slashed (%@)";
 "reports.reward_points_with_factor"="Reward Points (%@)";
 "reports.total_paid_out_with_factor_ticker"="Total Paid Out (%@ %@)";
@@ -273,3 +274,5 @@
 "reports.validator.self_reward_with_ticker"="Self Reward (%@)";
 "reports.validator.staker_reward"="Staker Reward";
 "reports.validator.staker_reward_with_ticker"="Staker Reward (%@)";
+"reports.validator.chilling_count"="Chilling Count";
+"reports.validator.chillings"="Chillings";

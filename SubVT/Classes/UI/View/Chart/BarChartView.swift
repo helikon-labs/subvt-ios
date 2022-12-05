@@ -14,12 +14,14 @@ struct BarChartView: View {
     private let chartMinY: Double
     private let chartMaxY: Double
     private let revealPercentage: CGFloat
+    private let showBlur: Bool
     
     init(
         dataPoints: [(Double, Double)],
         chartMinY: Double,
         chartMaxY: Double,
-        revealPercentage: CGFloat
+        revealPercentage: CGFloat,
+        showBlur: Bool = false
     ) {
         self.dataPoints = dataPoints.sorted { pair1, pair2 in
             pair1.0 < pair2.0
@@ -29,13 +31,15 @@ struct BarChartView: View {
         self.chartMinY = chartMinY
         self.chartMaxY = chartMaxY
         self.revealPercentage = revealPercentage
+        self.showBlur = showBlur
     }
     
     init(
         dataPoints: [(Int, Int)],
         chartMinY: Int,
         chartMaxY: Int,
-        revealPercentage: CGFloat
+        revealPercentage: CGFloat,
+        showBlur: Bool = false
     ) {
         self.dataPoints = dataPoints
             .map({ (Double($0), Double($1)) })
@@ -45,13 +49,15 @@ struct BarChartView: View {
         self.chartMinY = Double(chartMinY)
         self.chartMaxY = Double(chartMaxY)
         self.revealPercentage = revealPercentage
+        self.showBlur = showBlur
     }
     
     init(
         dataPoints: [(Int, Double)],
         chartMinY: Double,
         chartMaxY: Double,
-        revealPercentage: CGFloat
+        revealPercentage: CGFloat,
+        showBlur: Bool = false
     ) {
         self.dataPoints = dataPoints
             .map({ (Double($0), $1) })
@@ -61,6 +67,7 @@ struct BarChartView: View {
         self.chartMinY = chartMinY
         self.chartMaxY = chartMaxY
         self.revealPercentage = revealPercentage
+        self.showBlur = showBlur
     }
     
     private let gradient = LinearGradient(
@@ -91,15 +98,17 @@ struct BarChartView: View {
                                 self.gradient
                             }
                             .cornerRadius(min(itemWidth / 2, 6))
-                            VStack {
-                                Spacer()
-                                    .frame(
-                                        height: geometry.size.height * (1 - heightRatio)
-                                    )
-                                self.gradient
-                                    .cornerRadius(itemWidth / 2)
-                                    .blur(radius: 4)
-                                    .opacity(0.6)
+                            if self.showBlur {
+                                VStack {
+                                    Spacer()
+                                        .frame(
+                                            height: geometry.size.height * (1 - heightRatio)
+                                        )
+                                    self.gradient
+                                        .cornerRadius(itemWidth / 2)
+                                        .blur(radius: 4)
+                                        .opacity(0.6)
+                                }
                             }
                         }
                         .frame(

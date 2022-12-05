@@ -14,12 +14,14 @@ struct LineChartView: View {
     private let chartMinY: Double
     private let chartMaxY: Double
     private let revealPercentage: CGFloat
+    private let showBlur: Bool
     
     init(
         dataPoints: [(Double, Double)],
         chartMinY: Double,
         chartMaxY: Double,
-        revealPercentage: CGFloat
+        revealPercentage: CGFloat,
+        showBlur: Bool = false
     ) {
         self.dataPoints = dataPoints.sorted { pair1, pair2 in
             pair1.0 < pair2.0
@@ -29,13 +31,15 @@ struct LineChartView: View {
         self.chartMinY = chartMinY
         self.chartMaxY = chartMaxY
         self.revealPercentage = revealPercentage
+        self.showBlur = showBlur
     }
     
     init(
         dataPoints: [(Int, Int)],
         chartMinY: Int,
         chartMaxY: Int,
-        revealPercentage: CGFloat
+        revealPercentage: CGFloat,
+        showBlur: Bool = false
     ) {
         self.dataPoints = dataPoints
             .map({ (Double($0), Double($1)) })
@@ -45,6 +49,7 @@ struct LineChartView: View {
         self.chartMinY = Double(chartMinY)
         self.chartMaxY = Double(chartMaxY)
         self.revealPercentage = revealPercentage
+        self.showBlur = showBlur
     }
     
     private let gradient = LinearGradient(
@@ -131,7 +136,7 @@ struct LineChartView: View {
                 let width = geometry.size.width
                 let xStep = width / CGFloat(maxX - minX)
                 let yStep = height / CGFloat(self.chartMaxY - self.chartMinY)
-                ForEach (0...1, id:\.self) { i in
+                ForEach (0...(self.showBlur ? 1 : 0), id:\.self) { i in
                     Path { path in
                         var lastPoint: CGPoint!
                         var lastControlPoint: CGPoint? = nil

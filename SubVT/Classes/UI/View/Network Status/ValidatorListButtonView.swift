@@ -101,7 +101,8 @@ struct ValidatorListButtonView: View {
                 dataPoints: self.chartDataPoints,
                 chartMinY: self.minValidatorCount - 10,
                 chartMaxY: self.maxValidatorCount + 10,
-                revealPercentage: self.chartRevealPercentage
+                revealPercentage: self.chartRevealPercentage,
+                showBlur: true
             )
             .padding(EdgeInsets(
                 top: 0,

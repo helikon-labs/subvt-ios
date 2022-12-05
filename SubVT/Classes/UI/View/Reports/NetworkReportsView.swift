@@ -466,6 +466,8 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(9, self.chartDisplayState))
                 }
+                Spacer()
+                    .frame(height: UI.Dimension.Common.footerGradientViewHeight)
             }
             .padding(EdgeInsets(
                 top: 0,

@@ -21,6 +21,8 @@ class ValidatorReportsViewModel: ObservableObject {
     @Published private(set) var selfReward: [(Int, Balance)] = []
     @Published private(set) var stakerReward: [(Int, Balance)] = []
     @Published private(set) var offlineOffences: [(Int, Int)] = []
+    @Published private(set) var chillings: [(Int, Int)] = []
+    @Published private(set) var slashes: [(Int, Balance)] = []
     
     private var validatorSummary: ValidatorSummary! = nil
     private var network: Network! = nil
@@ -91,6 +93,12 @@ class ValidatorReportsViewModel: ObservableObject {
         self.offlineOffences = reports.map {
             (Int($0.era.index), Int($0.offlineOffenceCount))
         }
+        self.chillings = reports.map {
+            (Int($0.era.index), Int($0.chillingCount))
+        }
+        self.slashes = reports.map {
+            (Int($0.era.index), $0.slashedAmount)
+        }
     }
     
     var maxSelfStake: Double {
@@ -125,5 +133,13 @@ class ValidatorReportsViewModel: ObservableObject {
     
     var maxOfflineOffence: Double {
         return self.offlineOffences.map { Double($0.1) }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxChillingCount: Double {
+        return self.offlineOffences.map { Double($0.1) }.max { $0 < $1 } ?? 0
+    }
+    
+    var maxSlash: Double {
+        return self.slashes.map { Double($0.1.value) }.max { $0 < $1 } ?? 0
     }
 }

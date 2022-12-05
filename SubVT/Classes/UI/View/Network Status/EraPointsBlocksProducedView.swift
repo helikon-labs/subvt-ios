@@ -23,6 +23,7 @@ struct EraPointsBlocksProducedView: View {
                 Text(String(self.value))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
+                /*
                 Spacer()
                     .frame(height: UI.Dimension.Common.dataPanelPadding)
                 Text(localized("network_status.my_validators"))
@@ -33,6 +34,7 @@ struct EraPointsBlocksProducedView: View {
                 Text(myValidatorsValue == nil ? "-" : String(myValidatorsValue!))
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
+                 */
             }
             .padding(EdgeInsets(
                 top: UI.Dimension.Common.dataPanelPadding,
