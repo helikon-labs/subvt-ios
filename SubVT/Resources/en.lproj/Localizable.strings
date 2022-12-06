@@ -16,6 +16,8 @@
 "common.yes"="Yes";
 "common.no"="No";
 
+"common.factor.hundred"="hundred";
+"common.factor.hundreds"="hundreds";
 "common.factor.thousand"="thousand";
 "common.factor.thousands"="thousands";
 "common.factor.million"="million";

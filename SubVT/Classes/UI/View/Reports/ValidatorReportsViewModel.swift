@@ -13,7 +13,7 @@ class ValidatorReportsViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
     
     @Published private(set) var isActive: [(Int, Int)] = []
-    @Published private(set) var commissionPerHundred: [(Int, Int)] = []
+    @Published private(set) var commissionPerTenThousand: [(Int, Int)] = []
     @Published private(set) var selfStake: [(Int, Balance)] = []
     @Published private(set) var totalStake: [(Int, Balance)] = []
     @Published private(set) var blockCount: [(Int, Int)] = []
@@ -69,8 +69,8 @@ class ValidatorReportsViewModel: ObservableObject {
         self.isActive = reports.map {
             (Int($0.era.index), ($0.isActive ?? false) ? 1 : 0)
         }
-        self.commissionPerHundred = reports.map {
-            (Int($0.era.index), Int(($0.commissionPerBillion ?? 0) / 10000000))
+        self.commissionPerTenThousand = reports.map {
+            (Int($0.era.index), Int(($0.commissionPerBillion ?? 0) / 100000))
         }
         self.selfStake = reports.map {
             (Int($0.era.index), $0.selfStake ?? Balance(integerLiteral: 0))

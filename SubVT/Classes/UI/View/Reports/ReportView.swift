@@ -17,6 +17,7 @@ struct ReportView: View {
     
     enum Factor {
         case none
+        case hundred
         case thousand
         case million
         
@@ -24,6 +25,8 @@ struct ReportView: View {
             switch self {
             case .none:
                 return nil
+            case .hundred:
+                return localized("common.factor.hundred")
             case .thousand:
                 return localized("common.factor.thousand")
             case .million:
@@ -35,6 +38,8 @@ struct ReportView: View {
             switch self {
             case .none:
                 return nil
+            case .hundred:
+                return localized("common.factor.hundreds")
             case .thousand:
                 return localized("common.factor.thousands")
             case .million:
@@ -46,6 +51,8 @@ struct ReportView: View {
             switch self {
             case .none:
                 return nil
+            case .hundred:
+                return "H"
             case .thousand:
                 return "K"
             case .million:
@@ -57,6 +64,8 @@ struct ReportView: View {
             switch self {
             case .none:
                 return 0
+            case .hundred:
+                return 2
             case .thousand:
                 return 3
             case .million:

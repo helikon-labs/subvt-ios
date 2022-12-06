@@ -287,10 +287,10 @@ struct ValidatorReportsView: View {
                         ReportView(
                             type: .bar,
                             data: .integer(
-                                dataPoints: self.viewModel.commissionPerHundred,
-                                max: 100
+                                dataPoints: self.viewModel.commissionPerTenThousand,
+                                max: 10000
                             ),
-                            factor: .none,
+                            factor: .hundred,
                             title: localized("reports.validator.commission"),
                             chartTitle: localized("reports.validator.commission_with_percent"),
                             validatorIdentityDisplay: self.validatorSummary.identityDisplay,
@@ -530,11 +530,11 @@ struct ValidatorReportsView: View {
     private var commissionView: some View {
         ReportBarChartView(
             title: localized("reports.validator.commission_with_percent"),
-            dataPoints: self.viewModel.commissionPerHundred.map {
+            dataPoints: self.viewModel.commissionPerTenThousand.map {
                 ($0.0, Double($0.1))
             },
             minY: 0,
-            maxY: 100,
+            maxY: 10000,
             revealPercentage: 1.0,
             colorScheme: self.colorScheme
         )
@@ -701,7 +701,11 @@ struct ValidatorReportsView: View {
                         content: self.viewModel.isActive[0].1 == 1
                             ? String(
                                 format: localized("common.percentage"),
-                                String(self.viewModel.commissionPerHundred[0].1)
+                                formatDecimal(
+                                    integer: UInt64(self.viewModel.commissionPerTenThousand[0].1),
+                                    decimalCount: 2,
+                                    formatDecimalCount: 2
+                                )
                             )
                             : "-"
                     )
