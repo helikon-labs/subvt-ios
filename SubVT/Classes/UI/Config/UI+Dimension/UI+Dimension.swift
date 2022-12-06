@@ -18,7 +18,7 @@ extension UI {
             self.tablet = tablet
         }
         
-        func `get`() -> CGFloat {
+        func get() -> CGFloat {
             if UIDevice.current.userInterfaceIdiom == .phone {
                 return self.phone
             } else {

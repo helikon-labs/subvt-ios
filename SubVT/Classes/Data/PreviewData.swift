@@ -129,15 +129,15 @@ enum PreviewData {
     )
     
     static var notification: Notification {
-        let notification = Notification()
-        notification.id = UUID()
-        notification.isRead = false
-        notification.receivedAt = Date()
-        notification.notificationTypeCode = "chain_validator_active"
-        notification.validatorDisplay = "Validator Display"
-        notification.validatorAccountId = "0xABCDEF0123456789"
-        notification.networkId = 1
-        notification.message = "Notification message."
-        return notification
+        let previewNotification = Notification()
+        previewNotification.id = UUID()
+        previewNotification.isRead = false
+        previewNotification.receivedAt = Date()
+        previewNotification.notificationTypeCode = "chain_validator_active"
+        previewNotification.validatorDisplay = "Validator Display"
+        previewNotification.validatorAccountId = "0xABCDEF0123456789"
+        previewNotification.networkId = 1
+        previewNotification.message = "Notification message."
+        return previewNotification
     }
 }
