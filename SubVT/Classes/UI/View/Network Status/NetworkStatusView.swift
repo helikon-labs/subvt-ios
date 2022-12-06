@@ -212,20 +212,46 @@ struct NetworkStatusView: View {
                             )
                                 .modifier(PanelAppearance(7, self.displayState))
                         }
-                        HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
+                        if UIDevice.current.userInterfaceIdiom == .phone {
+                            HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
+                                EraPointsBlocksProducedView(
+                                    title: localized("network_status.era_points"),
+                                    value: self.viewModel.networkStatus.eraRewardPoints,
+                                    myValidatorsValue: nil
+                                )
+                                .modifier(PanelAppearance(8, self.displayState))
+                                /*
+                                EraPointsBlocksProducedView(
+                                    title: localized("network_status.number_of_blocks"),
+                                    value: 0,
+                                    myValidatorsValue: nil
+                                )
+                                .modifier(PanelAppearance(9, self.displayState))
+                                 */
+                            }
+                        } else {
                             EraPointsBlocksProducedView(
                                 title: localized("network_status.era_points"),
                                 value: self.viewModel.networkStatus.eraRewardPoints,
                                 myValidatorsValue: nil
                             )
                             .modifier(PanelAppearance(8, self.displayState))
-                            /*
-                            EraPointsBlocksProducedView(
-                                title: localized("network_status.number_of_blocks"),
-                                value: 0,
-                                myValidatorsValue: nil
+                            LastEraTotalRewardView(
+                                network: self.network,
+                                reward: self.viewModel.networkStatus.lastEraTotalReward
                             )
-                            .modifier(PanelAppearance(9, self.displayState))
+                            .modifier(PanelAppearance(10, self.displayState))
+                            /*
+                            HStack (spacing: UI.Dimension.Common.dataPanelSpacing) {
+                                
+                                
+                                EraPointsBlocksProducedView(
+                                    title: localized("network_status.number_of_blocks"),
+                                    value: 0,
+                                    myValidatorsValue: nil
+                                )
+                                .modifier(PanelAppearance(9, self.displayState)) 
+                            }
                              */
                         }
                         if UIDevice.current.userInterfaceIdiom == .phone {
@@ -242,11 +268,6 @@ struct NetworkStatusView: View {
                             .modifier(PanelAppearance(11, self.displayState))
                         } else {
                             HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                                LastEraTotalRewardView(
-                                    network: self.network,
-                                    reward: self.viewModel.networkStatus.lastEraTotalReward
-                                )
-                                .modifier(PanelAppearance(10, self.displayState))
                                 ValidatorBackingsView(
                                     minimum: self.viewModel.networkStatus.minStake,
                                     maximum: self.viewModel.networkStatus.maxStake,

@@ -109,13 +109,11 @@ struct IntroductionView: View {
                     Button(
                         action: {
                             self.snackbarIsVisible = false
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
-                                self.actionButtonState = .loading
-                                self.viewModel.createUser(
-                                    onSuccess: self.onCreateUserSuccess,
-                                    onError: self.onCreateUserError
-                                )
-                            }
+                            self.actionButtonState = .loading
+                            self.viewModel.createUser(
+                                onSuccess: self.onCreateUserSuccess,
+                                onError: self.onCreateUserError
+                            )
                         },
                         label: {
                             ActionButtonView(

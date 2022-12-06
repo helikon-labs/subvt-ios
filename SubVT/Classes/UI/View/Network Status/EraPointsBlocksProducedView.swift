@@ -57,6 +57,7 @@ struct EraPointsBlocksProducedView: View {
                         .foregroundColor(Color("Text"))
                 }
                 Spacer()
+                /*
                 VStack(alignment: .leading) {
                     Text(localized("network_status.my_validators"))
                         .font(UI.Font.Common.dataPanelTitle)
@@ -68,6 +69,7 @@ struct EraPointsBlocksProducedView: View {
                         .foregroundColor(Color("Text"))
                 }
                 Spacer()
+                 */
             }
             .padding(EdgeInsets(
                 top: UI.Dimension.Common.dataPanelPadding,

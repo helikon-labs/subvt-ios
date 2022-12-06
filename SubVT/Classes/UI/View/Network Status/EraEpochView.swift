@@ -136,6 +136,9 @@ struct EraEpochView: View {
     }
     
     var body: some View {
+        let spanSeconds = self.endSeconds - self.startSeconds
+        let progressValue = min(self.elapsedSeconds, spanSeconds)
+        let progressTotal = max(spanSeconds, 0)
         if UIDevice.current.userInterfaceIdiom == .phone {
             VStack(alignment: .leading) {
                 Text(self.title)
@@ -149,17 +152,14 @@ struct EraEpochView: View {
                 Spacer()
                     .frame(height: 16)
                 HStack (alignment: .top) {
-                    let spanSeconds = self.endSeconds - self.startSeconds
-                    let progressValue = min(self.elapsedSeconds, spanSeconds)
-                    let progressTotal = max(spanSeconds, 0)
                     Text(
                         String(
-                            format: percentageFormat,
+                            format: self.percentageFormat,
                             self.elapsedPercentage
                         )
                     )
                     .modifier(Counter(
-                        format: percentageFormat,
+                        format: self.percentageFormat,
                         value: CGFloat(self.elapsedPercentage)
                     ))
                     .animation(
@@ -223,9 +223,17 @@ struct EraEpochView: View {
                 HStack (alignment: .top) {
                     Text(
                         String(
-                            format: localized("common.int_percentage"),
+                            format: self.percentageFormat,
                             self.elapsedPercentage
                         )
+                    )
+                    .modifier(Counter(
+                        format: self.percentageFormat,
+                        value: CGFloat(self.elapsedPercentage)
+                    ))
+                    .animation(
+                        self.isAnimated ? .easeInOut(duration: UI.Duration.counterAnimation) : nil,
+                        value: self.elapsedPercentage
                     )
                     .font(UI.Font.Common.dataMedium)
                     .foregroundColor(Color("Text"))
@@ -236,15 +244,15 @@ struct EraEpochView: View {
                             .frame(height: 14)
                         ZStack {
                             ProgressView(
-                                value: self.elapsedSeconds,
-                                total: self.endSeconds - self.startSeconds
+                                value: progressValue,
+                                total: progressTotal
                             )
                             .frame(width: 80, height: 4)
                             .progressViewStyle(LinearGradientProgressViewStyle())
                             // shadow
                             ProgressView(
-                                value: self.elapsedSeconds,
-                                total: self.endSeconds - self.startSeconds
+                                value: progressValue,
+                                total: progressTotal
                             )
                             .frame(width: 80, height: 4)
                             .progressViewStyle(LinearGradientProgressViewStyle())

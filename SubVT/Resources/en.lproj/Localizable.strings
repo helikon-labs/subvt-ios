@@ -72,8 +72,8 @@
 "onboarding.step_2.description"="Bookmark your validators and define notification rules for them to receive push, email and SMS notifications, and even phone calls for emergencies.";
 "onboarding.step_3.title"="Understand Your Network";
 "onboarding.step_3.description"="SubVT provides you with detailed past era and validator activity reports. Gain insight and understanding about the network and staking dynamics to improve the performance of your validators.";
-"onboarding.step_4.title"="Beyond the Blocks";
-"onboarding.step_4.description"="Add the SubVT Telemetry as an extra target for your validators to get even more data and notifications about peer count, upload and download bandwidth, block height, client version and more.";
+"onboarding.step_4.title"="Soon™: Beyond the Blocks";
+"onboarding.step_4.description"="Telemetry support is coming soon to SubVT: get even more data and notifications about your validators' peer count, upload and download bandwidth, block height, client version and more.";
 
 "tab.network_status"="Network";
 "tab.my_validators"="My Validators";
@@ -81,7 +81,7 @@
 "tab.network_reports"="Netw. Reports";
 
 "network_selection.selected_network"="Selected Network";
-"network_selection.select_network"="Select an available network";
+"network_selection.select_network"="Select an available network. You can always change later.";
 "network_selection.error.network_list"="Error while getting the network list. Please check your connection.";
 
 "network_status.title"="Network Status";
@@ -191,7 +191,7 @@
 "notification_type.chain_validator_set_controller"="New Controller";
 "notification_type.chain_validator_session_keys_changed"="Session Keys Changed";
 "notification_type.chain_validator_identity_changed"="Identity Changed";
-"notification_type.chain_validator_payout_stakers"="Payout";
+"notification_type.chain_validator_payout_stakers"="Payout Completed";
 "notification_type.chain_validator_started_para_validating"="Started Para-Validating";
 "notification_type.chain_validator_stopped_para_validating"="Stopped Para-Validating";
 "notification_type.telemetry_validator_offline"="Offline";

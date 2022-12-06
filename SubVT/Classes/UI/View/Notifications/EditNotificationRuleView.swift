@@ -351,6 +351,26 @@ struct EditNotificationRuleView: View {
                 )
                 .animation(.spring(), value: self.viewModel.dataFetchState)
                 .animation(.spring(), value: self.viewModel.dataPersistState)
+                .confirmationDialog(
+                    String(
+                        format: localized("edit_notification_rule.update_confirmation"),
+                        self.confirmationDialogTitle
+                    ),
+                    isPresented: self.$overwriteRuleConfirmationDialogIsVisible,
+                    titleVisibility: .visible
+                ) {
+                    Button(
+                        localized("common.overwrite"),
+                        role: .destructive
+                    ) {
+                        self.viewModel.deleteAndCreateRule(
+                            channelId: UInt64(self.notificationChannelId)
+                        ) {
+                            self.presentationMode.wrappedValue.dismiss()
+                        }
+                    }
+                    Button(localized("common.cancel"), role: .cancel) {}
+                }
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
             .zIndex(3)
@@ -401,26 +421,6 @@ struct EditNotificationRuleView: View {
             self.networkListIsVisible = false
             self.notificationTypeListIsVisible = false
             self.validatorListIsVisible = false
-        }
-        .confirmationDialog(
-            String(
-                format: localized("edit_notification_rule.update_confirmation"),
-                self.confirmationDialogTitle
-            ),
-            isPresented: self.$overwriteRuleConfirmationDialogIsVisible,
-            titleVisibility: .visible
-        ) {
-            Button(
-                localized("common.overwrite"),
-                role: .destructive
-            ) {
-                self.viewModel.deleteAndCreateRule(
-                    channelId: UInt64(self.notificationChannelId)
-                ) {
-                    self.presentationMode.wrappedValue.dismiss()
-                }
-            }
-            Button(localized("common.cancel"), role: .cancel) {}
         }
     }
     

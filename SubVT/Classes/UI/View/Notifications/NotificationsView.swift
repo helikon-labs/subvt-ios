@@ -58,6 +58,29 @@ struct NotificationsView: View {
                 .buttonStyle(PushButtonStyle())
                 .disabled(self.notifications.isEmpty)
                 .opacity(self.notifications.isEmpty ? UI.Value.disabledControlOpacity : 1.0)
+                .confirmationDialog(
+                    localized("notifications.delete_all_confirmation"),
+                    isPresented: self.$deleteAllConfirmationDialogIsVisible,
+                    titleVisibility: .visible
+                ) {
+                    Button(
+                        localized("common.delete"),
+                        role: .destructive
+                    ) {
+                        for notification in self.notifications {
+                            self.viewContext.delete(notification)
+                        }
+                        do {
+                            try self.viewContext.save()
+                            NotificationUtil.updateAppNotificationBadge(
+                                context: self.viewContext
+                            )
+                        } catch {
+                            log.error("Error while deleting notificaiton: \(error)")
+                        }
+                    }
+                    Button(localized("common.cancel"), role: .cancel) {}
+                }
                 NavigationLink {
                     NotificationRulesView()
                 } label: {
@@ -312,29 +335,6 @@ struct NotificationsView: View {
                     context: self.viewContext
                 )
             }
-        }
-        .confirmationDialog(
-            localized("notifications.delete_all_confirmation"),
-            isPresented: self.$deleteAllConfirmationDialogIsVisible,
-            titleVisibility: .visible
-        ) {
-            Button(
-                localized("common.delete"),
-                role: .destructive
-            ) {
-                for notification in self.notifications {
-                    self.viewContext.delete(notification)
-                }
-                do {
-                    try self.viewContext.save()
-                    NotificationUtil.updateAppNotificationBadge(
-                        context: self.viewContext
-                    )
-                } catch {
-                    log.error("Error while deleting notificaiton: \(error)")
-                }
-            }
-            Button(localized("common.cancel"), role: .cancel) {}
         }
     }
 }
