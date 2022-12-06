@@ -112,7 +112,6 @@ struct ValidatorListView: View {
                                 )
                             }
                         }
-                        .opacity(1.0)
                         Spacer()
                         NetworkSelectorButtonView(
                             network: self.network,
@@ -187,12 +186,8 @@ struct ValidatorListView: View {
                     UI.Dimension.Common.headerBlurViewCornerRadius,
                     corners: [.bottomLeft, .bottomRight]
                 )
+                .disabled(true)
                 .opacity(self.headerMaterialOpacity)
-                .modifier(PanelAppearance(
-                    0,
-                    self.displayState,
-                    animateOffset: false
-                ))
             )
             .frame(maxHeight: .infinity, alignment: .top)
             .zIndex(1)

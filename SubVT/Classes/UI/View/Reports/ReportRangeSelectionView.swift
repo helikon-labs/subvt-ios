@@ -115,6 +115,7 @@ struct ReportRangeSelectionView: View {
                 UI.Dimension.Common.headerBlurViewCornerRadius,
                 corners: [.bottomLeft, .bottomRight]
             )
+            .disabled(true)
             .opacity(self.headerMaterialOpacity)
         )
     }
@@ -145,6 +146,7 @@ struct ReportRangeSelectionView: View {
                 UI.Dimension.Common.headerBlurViewCornerRadius,
                 corners: [.bottomLeft, .bottomRight]
             )
+            .disabled(true)
             .opacity(self.headerMaterialOpacity)
         )
     }

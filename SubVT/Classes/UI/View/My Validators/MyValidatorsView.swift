@@ -55,6 +55,7 @@ struct MyValidatorsView: View {
                 UI.Dimension.Common.headerBlurViewCornerRadius,
                 corners: [.bottomLeft, .bottomRight]
             )
+            .disabled(true)
             .opacity(self.headerMaterialOpacity)
         )
     }
