@@ -60,7 +60,7 @@
 "reward_destination.none"="None";
 
 "introduction.title"="Welcome to SubVT";
-"introduction.subtitle"="Use SubVT to track Substrate-based proof-of-stake networks and your validators and collators on them.";
+"introduction.subtitle"="Use SubVT to monitor and get notified about Substrate-based proof-of-stake networks and your validators on them.";
 "introduction.get_started"="Get started";
 "introduction.error.create_user"="Error while creating a user for you. Please check your connection.";
 

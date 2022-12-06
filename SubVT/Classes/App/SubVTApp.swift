@@ -58,6 +58,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         _ application: UIApplication,
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
+        guard self.apnsToken.isEmpty else { return }
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
         self.apnsToken = token
         self.apnsSetupHasFailed = false
