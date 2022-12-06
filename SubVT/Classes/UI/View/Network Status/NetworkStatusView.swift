@@ -218,12 +218,14 @@ struct NetworkStatusView: View {
                                 myValidatorsValue: nil
                             )
                             .modifier(PanelAppearance(8, self.displayState))
+                            /*
                             EraPointsBlocksProducedView(
                                 title: localized("network_status.number_of_blocks"),
                                 value: 0,
                                 myValidatorsValue: nil
                             )
                             .modifier(PanelAppearance(9, self.displayState))
+                             */
                         }
                         if UIDevice.current.userInterfaceIdiom == .phone {
                             LastEraTotalRewardView(
