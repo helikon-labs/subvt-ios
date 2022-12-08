@@ -31,6 +31,15 @@ struct IntroductionView: View {
         self.displayState = .appeared
     }
     
+    private func actionButtonIsEnabled() -> Bool {
+        switch self.viewModel.fetchState {
+        case .idle, .error:
+            return true
+        default:
+            return false
+        }
+    }
+    
     var body: some View {
         ZStack {
             BgMorphView()
@@ -134,6 +143,7 @@ struct IntroductionView: View {
                         .easeOut(duration: 0.75),
                         value: self.displayState
                     )
+                    .disabled(!self.actionButtonIsEnabled())
                 }
                 if UIDevice.current.userInterfaceIdiom == .pad {
                     Spacer()
