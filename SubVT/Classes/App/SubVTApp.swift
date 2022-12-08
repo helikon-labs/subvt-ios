@@ -7,6 +7,7 @@
 
 import Combine
 import CoreData
+import FirebaseCore
 import SubVTData
 import SwiftUI
 
@@ -80,6 +81,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFailToRegisterForRemoteNotificationsWithError error: Error
     ) {
         log.error("APNS registration error: \(error)")
+    }
+    
+    func application(
+        _ application: UIApplication,
+        didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
+    ) -> Bool {
+        FirebaseApp.configure()
+        return true
     }
     
     func application(

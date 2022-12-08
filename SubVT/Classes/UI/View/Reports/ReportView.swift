@@ -76,7 +76,6 @@ struct ReportView: View {
     
     enum Data {
         case integer(dataPoints: [(Int, Int)], max: Int? = nil)
-        case double(dataPoints: [(Int, Double)])
         case balance(dataPoints: [(Int, Balance)], decimals: UInt8 = 2)
     }
     
@@ -94,6 +93,7 @@ struct ReportView: View {
     private let network: Network
     private let startEra: Era
     private let endEra: Era
+    private let annotate: Bool
     
     private let dateFormatter = DateFormatter()
     private let axisSpace: CGFloat = 30
@@ -118,7 +118,8 @@ struct ReportView: View {
         validatorIdentityDisplay: String? = nil,
         network: Network,
         startEra: Era,
-        endEra: Era
+        endEra: Era,
+        annotate: Bool = false
     ) {
         self.type = type
         self.data = data
@@ -129,6 +130,7 @@ struct ReportView: View {
         self.network = network
         self.startEra = startEra
         self.endEra = endEra
+        self.annotate = annotate
         self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
         switch data {
         case .integer(let dataPoints, let max):
@@ -137,14 +139,6 @@ struct ReportView: View {
             } else {
                 self.max = dataPoints.map { $0.1 }.max { $0 < $1 } ?? 0
             }
-        case .double(let dataPoints):
-            self.max = Int(
-                ceil(
-                    dataPoints
-                        .map { $0.1 }
-                        .max { $0 < $1 } ?? 0.0
-                )
-            )
         case .balance(let dataPoints, _):
             self.max = Int(
                 ceil(
@@ -316,6 +310,36 @@ struct ReportView: View {
         }
     }
     
+    private func integerValueLabel(value: Int) -> some View {
+        switch self.factor {
+        case .none:
+            return Text(String(value))
+                .font(UI.Font.Report.axisValue)
+                .foregroundColor(Color("Text"))
+        default:
+            return Text(formatDecimal(
+                integer: UInt64(value),
+                decimalCount: self.factor.decimals,
+                formatDecimalCount: 2
+            ))
+            .font(UI.Font.Report.axisValue)
+            .foregroundColor(Color("Text"))
+        }
+    }
+    
+    private func balanceValueLabel(
+        value: Balance,
+        decimals: UInt8
+    ) -> some View {
+        Text(formatBalance(
+            balance: value,
+            tokenDecimalCount: self.network.tokenDecimalCount + self.factor.decimals,
+            formatDecimalCount: decimals
+        ))
+        .font(UI.Font.Report.axisValue)
+        .foregroundColor(Color("Text"))
+    }
+    
     private var chart: some View {
         ZStack {
             Chart {
@@ -330,6 +354,16 @@ struct ReportView: View {
                                 y: .value("Value", dataPoint.1)
                             )
                             .foregroundStyle(self.gradient)
+                            .annotation(position: .top) {
+                                if self.annotate {
+                                    self.integerValueLabel(value: dataPoint.1)
+                                        .rotationEffect(Angle(degrees: -45))
+                                        .opacity(0.75)
+                                } else {
+                                    EmptyView()
+                                        .frame(width: 0, height: 0)
+                                }
+                            }
                         case .line:
                             LineMark(
                                 x: .value(localized("common.era"), dataPoint.0),
@@ -339,7 +373,7 @@ struct ReportView: View {
                             .interpolationMethod(.catmullRom)
                         }
                     }
-                case .balance(let dataPoints, _):
+                case .balance(let dataPoints, let decimals):
                     ForEach(dataPoints.indices, id: \.self) { i in
                         let dataPoint = dataPoints[i]
                         switch self.type {
@@ -349,6 +383,16 @@ struct ReportView: View {
                                 y: .value("Value", Double(dataPoint.1.value))
                             )
                             .foregroundStyle(self.gradient)
+                            .annotation(position: .top) {
+                                if self.annotate {
+                                    self.balanceValueLabel(value: dataPoint.1, decimals: decimals)
+                                        .rotationEffect(Angle(degrees: -45))
+                                        .opacity(0.75)
+                                } else {
+                                    EmptyView()
+                                        .frame(width: 0, height: 0)
+                                }
+                            }
                         case .line:
                             LineMark(
                                 x: .value(localized("common.era"), dataPoint.0),
@@ -358,12 +402,6 @@ struct ReportView: View {
                             .interpolationMethod(.catmullRom)
                         }
                     }
-                default:
-                    LineMark(
-                        x: .value("Era", 0),
-                        y: .value("Value", 1)
-                    )
-                    .foregroundStyle(self.gradient)
                 }
             }
             .chartXAxis {
@@ -403,36 +441,14 @@ struct ReportView: View {
                         switch self.data {
                         case .integer(_, _):
                             if let intValue = value.as(Int.self) {
-                                switch self.factor {
-                                case .none:
-                                    Text(String(intValue))
-                                        .font(UI.Font.Report.axisValue)
-                                        .foregroundColor(Color("Text"))
-                                default:
-                                    Text(formatDecimal(
-                                        integer: UInt64(intValue),
-                                        decimalCount: self.factor.decimals,
-                                        formatDecimalCount: 2
-                                    ))
-                                    .font(UI.Font.Report.axisValue)
-                                    .foregroundColor(Color("Text"))
-                                }
+                                self.integerValueLabel(value: intValue)
                             }
                         case .balance(_, let decimals):
                             if let balance = value.as(Balance.self) {
-                                Text(formatBalance(
-                                    balance: balance,
-                                    tokenDecimalCount: self.network.tokenDecimalCount + self.factor.decimals,
-                                    formatDecimalCount: decimals
-                                ))
-                                .font(UI.Font.Report.axisValue)
-                                .foregroundColor(Color("Text"))
-                            }
-                        default:
-                            if let intValue = value.as(Int.self) {
-                                Text(String(intValue))
-                                    .font(UI.Font.Report.axisValue)
-                                    .foregroundColor(Color("Text"))
+                                self.balanceValueLabel(
+                                    value: balance,
+                                    decimals: decimals
+                                )
                             }
                         }
                     }
@@ -454,20 +470,20 @@ struct ReportView_Previews: PreviewProvider {
             (1000, 10),
             (1001, 2),
             (1002, 0),
-            (1003, 7.5),
-            (1004, 3.4),
-            (1005, 7.8),
-            (1006, 2.4),
+            (1003, 7),
+            (1004, 3),
+            (1005, 7),
+            (1006, 2),
             (1007, 6),
             (1008, 0),
             (1009, 17),
             (1010, 6),
             (1011, 2),
             (1012, 0),
-            (1013, 7.5),
-            (1014, 3.4),
-            (1015, 7.8),
-            (1016, 2.4),
+            (1013, 7),
+            (1014, 3),
+            (1015, 7),
+            (1016, 2),
             (1017, 6),
             (1018, 0),
             (1019, 17),
@@ -475,7 +491,7 @@ struct ReportView_Previews: PreviewProvider {
         ]
         ReportView(
             type: .line,
-            data: .double(dataPoints: dataPoints),
+            data: .integer(dataPoints: dataPoints),
             factor: .none,
             title: "Kusama Report",
             chartTitle: "Report",

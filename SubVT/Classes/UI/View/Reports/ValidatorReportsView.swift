@@ -297,7 +297,8 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.validatorSummary.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: true
                         )
                     } label: {
                         self.commissionView

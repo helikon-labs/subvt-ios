@@ -23,7 +23,7 @@ struct AddValidatorsView: View {
     
     private var networkButtonIsEnabled: Bool {
         switch self.viewModel.networkValidatorsFetchState {
-        case .success(_):
+        case .idle, .success(_):
             return true
         default:
             return false

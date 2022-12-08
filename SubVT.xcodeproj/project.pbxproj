@@ -34,6 +34,7 @@
 		A018C2AF28B90C0500C9A276 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
 		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
+		A028D86C29420EA500794C84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A028D86B29420EA500794C84 /* GoogleService-Info.plist */; };
 		A030024F2937466400F7BB1E /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030024E2937466400F7BB1E /* ReportView.swift */; };
 		A03002512937468900F7BB1E /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03002502937468900F7BB1E /* ReportViewModel.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
@@ -172,6 +173,7 @@
 		A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC60284B990B00914237 /* BgMorphView.swift */; };
 		A0A7CAE628968C4E005440FF /* DataPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A7CAE528968C4E005440FF /* DataPanelView.swift */; };
 		A0A7CAE728968C4E005440FF /* DataPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A7CAE528968C4E005440FF /* DataPanelView.swift */; };
+		A0ABBA902941F91900D06E0A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0ABBA8F2941F91900D06E0A /* FirebaseCrashlytics */; };
 		A0AFF7F128926C8400B0CB4F /* ValidatorDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AFF7F028926C8400B0CB4F /* ValidatorDetailsViewModel.swift */; };
 		A0AFF7F228926C8400B0CB4F /* ValidatorDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AFF7F028926C8400B0CB4F /* ValidatorDetailsViewModel.swift */; };
 		A0AFF7F42892A94900B0CB4F /* UI+Dimension+ValidatorDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0AFF7F32892A94900B0CB4F /* UI+Dimension+ValidatorDetails.swift */; };
@@ -393,6 +395,7 @@
 		A015DD9F292FA3F200BF9D1B /* NetworkReportsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReportsViewModel.swift; sourceTree = "<group>"; };
 		A018C2AC28B90C0500C9A276 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
+		A028D86B29420EA500794C84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A030024E2937466400F7BB1E /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
 		A03002502937468900F7BB1E /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
@@ -555,6 +558,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0ABBA902941F91900D06E0A /* FirebaseCrashlytics in Frameworks */,
 				A0FC976C28B63D5800B75A9B /* SwiftEventBus in Frameworks */,
 				A0E0F68B2848D2B40029DDBF /* SubVTData in Frameworks */,
 			);
@@ -887,6 +891,7 @@
 		A0BF90932848C1EB0053389A /* SubVT */ = {
 			isa = PBXGroup;
 			children = (
+				A028D86B29420EA500794C84 /* GoogleService-Info.plist */,
 				A0E0F6842848CED00029DDBF /* Classes */,
 				A0BF909A2848C1EC0053389A /* Preview Content */,
 				A0E0F6662848CD000029DDBF /* Resources */,
@@ -1140,6 +1145,7 @@
 			packageProductDependencies = (
 				A0E0F68A2848D2B40029DDBF /* SubVTData */,
 				A0FC976B28B63D5800B75A9B /* SwiftEventBus */,
+				A0ABBA8F2941F91900D06E0A /* FirebaseCrashlytics */,
 			);
 			productName = SubVT;
 			productReference = A0BF90912848C1EB0053389A /* SubVT.app */;
@@ -1216,6 +1222,7 @@
 			packageReferences = (
 				A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */,
 				A0FC976A28B63D5800B75A9B /* XCRemoteSwiftPackageReference "SwiftEventBus" */,
+				A0ABBA8E2941F91900D06E0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = A0BF90922848C1EB0053389A /* Products */;
 			projectDirPath = "";
@@ -1235,6 +1242,7 @@
 			files = (
 				A0FD882E2893C1D300479C10 /* cube.mtl in Resources */,
 				A0FD88282893B98000479C10 /* cube_environment.hdr in Resources */,
+				A028D86C29420EA500794C84 /* GoogleService-Info.plist in Resources */,
 				A0128A46284A0A32000C2307 /* data-env-example.json in Resources */,
 				A0FD885E2893FF1900479C10 /* sphere-roughness.png in Resources */,
 				A0E0F6752848CD1C0029DDBF /* LexendDeca-Regular.ttf in Resources */,
@@ -1933,6 +1941,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		A0ABBA8E2941F91900D06E0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
 		A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/helikon-labs/subvt-data-swift.git";
@@ -1952,6 +1968,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		A0ABBA8F2941F91900D06E0A /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0ABBA8E2941F91900D06E0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
 		A0E0F68A2848D2B40029DDBF /* SubVTData */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */;
