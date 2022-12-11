@@ -14,7 +14,6 @@ struct EraEpochView: View {
     
     private let dateFormatter = DateFormatter()
     private let timeFormatter = DateFormatter()
-    private let percentageFormat = localized("common.int_percentage")
     
     init(eraOrEpoch: Either<Era, Epoch>, isAnimated: Bool) {
         self.eraOrEpoch = eraOrEpoch
@@ -37,10 +36,16 @@ struct EraEpochView: View {
     private var title: String {
         get {
             switch eraOrEpoch {
-            case .left(_):
-                return localized("common.era")
-            case .right(_):
-                return localized("common.epoch")
+            case .left(let era):
+                return String(
+                    format: localized("network_status.era_with_index"),
+                    era.index
+                )
+            case .right(let epoch):
+                return String(
+                    format: localized("network_status.epoch_with_index"),
+                    epoch.index
+                )
             }
         }
     }
@@ -100,7 +105,7 @@ struct EraEpochView: View {
             if total == 0 {
                 return 0
             }
-            return min(Int(elapsed * 100 / total), 100)
+            return Int(elapsed * 100 / total)
         }
     }
     
@@ -115,22 +120,38 @@ struct EraEpochView: View {
         }
     }
     
-    private var timeLeftFormatted: String {
+    private var timeLeftFormatted: (String, Bool) {
         get {
-            let seconds = max(0, Int(self.endSeconds - Date().timeIntervalSince1970))
+            let isOvertime = Date().timeIntervalSince1970 > self.endSeconds
+            let seconds = abs(Int(self.endSeconds - Date().timeIntervalSince1970))
             let hours = seconds / (60 * 60)
             let minutes = (seconds - (hours * 60 * 60)) / 60
             if hours > 0 {
-                return String(
-                    format: localized("network_status.hours_minutes_left"),
-                    hours,
-                    minutes
-                )
+                if isOvertime {
+                    return (String(
+                        format: localized("network_status.hours_minutes_over"),
+                        hours,
+                        minutes
+                    ), isOvertime)
+                } else {
+                    return (String(
+                        format: localized("network_status.hours_minutes_left"),
+                        hours,
+                        minutes
+                    ), isOvertime)
+                }
             } else {
-                return String(
-                    format: localized("network_status.minutes_left"),
-                    minutes
-                )
+                if isOvertime {
+                    return (String(
+                        format: localized("network_status.minutes_over"),
+                        minutes
+                    ), isOvertime)
+                } else {
+                    return (String(
+                        format: localized("network_status.minutes_left"),
+                        minutes
+                    ), isOvertime)
+                }
             }
         }
     }
@@ -154,12 +175,12 @@ struct EraEpochView: View {
                 HStack (alignment: .top) {
                     Text(
                         String(
-                            format: self.percentageFormat,
+                            format: localized("common.int_percentage"),
                             self.elapsedPercentage
                         )
                     )
                     .modifier(Counter(
-                        format: self.percentageFormat,
+                        format: localized("common.int_percentage"),
                         value: CGFloat(self.elapsedPercentage)
                     ))
                     .animation(
@@ -167,10 +188,11 @@ struct EraEpochView: View {
                         value: self.elapsedPercentage
                     )
                     .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
+                    .foregroundColor(self.elapsedPercentage > 100 ? Color("StatusError") : Color("Text"))
                     Spacer()
                         .frame(width: 16)
                     VStack (alignment: .leading) {
+                        let timeLeft = self.timeLeftFormatted
                         Spacer()
                             .frame(height: 14)
                         ZStack {
@@ -193,9 +215,15 @@ struct EraEpochView: View {
                         }
                         Spacer()
                             .frame(height: 4)
-                        Text(self.timeLeftFormatted)
-                            .font(UI.Font.NetworkStatus.dataSmall)
-                            .foregroundColor(Color("RemainingTime"))
+                        if timeLeft.1 { // overtime
+                            Text(self.timeLeftFormatted.0)
+                                .font(UI.Font.NetworkStatus.dataSmall)
+                                .foregroundColor(Color("StatusError"))
+                        } else {
+                            Text(self.timeLeftFormatted.0)
+                                .font(UI.Font.NetworkStatus.dataSmall)
+                                .foregroundColor(Color("RemainingTime"))
+                        }
                     }
                 }
             }
@@ -223,12 +251,12 @@ struct EraEpochView: View {
                 HStack (alignment: .top) {
                     Text(
                         String(
-                            format: self.percentageFormat,
+                            format: localized("common.int_percentage"),
                             self.elapsedPercentage
                         )
                     )
                     .modifier(Counter(
-                        format: self.percentageFormat,
+                        format: localized("common.int_percentage"),
                         value: CGFloat(self.elapsedPercentage)
                     ))
                     .animation(
@@ -240,6 +268,7 @@ struct EraEpochView: View {
                     Spacer()
                         .frame(width: 16)
                     VStack (alignment: .leading) {
+                        let timeLeft = self.timeLeftFormatted
                         Spacer()
                             .frame(height: 14)
                         ZStack {
@@ -262,9 +291,15 @@ struct EraEpochView: View {
                         }
                         Spacer()
                             .frame(height: 4)
-                        Text(self.timeLeftFormatted)
-                            .font(UI.Font.NetworkStatus.dataSmall)
-                            .foregroundColor(Color("RemainingTime"))
+                        if timeLeft.1 { // overtime
+                            Text(self.timeLeftFormatted.0)
+                                .font(UI.Font.NetworkStatus.dataSmall)
+                                .foregroundColor(Color("StatusError"))
+                        } else {
+                            Text(self.timeLeftFormatted.0)
+                                .font(UI.Font.NetworkStatus.dataSmall)
+                                .foregroundColor(Color("RemainingTime"))
+                        }
                     }
                 }
             }

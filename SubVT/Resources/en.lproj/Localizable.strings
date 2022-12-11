@@ -85,6 +85,8 @@
 "network_selection.error.network_list"="Error while getting the network list. Please check your connection.";
 
 "network_status.title"="Network Status";
+"network_status.era_with_index"="Era %d";
+"network_status.epoch_with_index"="Epoch %d";
 "network_status.best_block_number"="Best Block Number";
 "network_status.finalized_block_number"="Finalized Block Number";
 "network_status.era_points"="Era Points";
@@ -96,7 +98,9 @@
 "network_status.average"="Average";
 "network_status.maximum"="Maximum";
 "network_status.hours_minutes_left"="%d hr %d mins left";
+"network_status.hours_minutes_over"="%d hr %d mins over";
 "network_status.minutes_left"="%d mins left";
+"network_status.minutes_over"="%d mins over";
 
 "active_validator_list.title"="Active Validators";
 "inactive_validator_list.title"="Inactive Validators";
