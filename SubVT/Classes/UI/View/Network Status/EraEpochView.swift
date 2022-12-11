@@ -188,7 +188,11 @@ struct EraEpochView: View {
                         value: self.elapsedPercentage
                     )
                     .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(self.elapsedPercentage > 100 ? Color("StatusError") : Color("Text"))
+                    .foregroundColor(
+                        self.elapsedPercentage > 100
+                            ? Color("StatusError")
+                            : Color("Text")
+                    )
                     Spacer()
                         .frame(width: 16)
                     VStack (alignment: .leading) {
@@ -264,7 +268,11 @@ struct EraEpochView: View {
                         value: self.elapsedPercentage
                     )
                     .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
+                    .foregroundColor(
+                        self.elapsedPercentage > 100
+                            ? Color("StatusError")
+                            : Color("Text")
+                    )
                     Spacer()
                         .frame(width: 16)
                     VStack (alignment: .leading) {
