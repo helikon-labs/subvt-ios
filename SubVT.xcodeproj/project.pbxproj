@@ -339,6 +339,7 @@
 		A0FFD9AD28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */; };
 		A0FFD9AE28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */; };
 		A0FFD9AF28EC165000FA76B6 /* EditNotificationRuleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFD9AC28EC165000FA76B6 /* EditNotificationRuleViewModel.swift */; };
+		AED5A6E32954BC4D008108D5 /* Inject in Frameworks */ = {isa = PBXBuildFile; productRef = AED5A6E22954BC4D008108D5 /* Inject */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -561,6 +562,7 @@
 				A0ABBA902941F91900D06E0A /* FirebaseCrashlytics in Frameworks */,
 				A0FC976C28B63D5800B75A9B /* SwiftEventBus in Frameworks */,
 				A0E0F68B2848D2B40029DDBF /* SubVTData in Frameworks */,
+				AED5A6E32954BC4D008108D5 /* Inject in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1146,6 +1148,7 @@
 				A0E0F68A2848D2B40029DDBF /* SubVTData */,
 				A0FC976B28B63D5800B75A9B /* SwiftEventBus */,
 				A0ABBA8F2941F91900D06E0A /* FirebaseCrashlytics */,
+				AED5A6E22954BC4D008108D5 /* Inject */,
 			);
 			productName = SubVT;
 			productReference = A0BF90912848C1EB0053389A /* SubVT.app */;
@@ -1223,6 +1226,7 @@
 				A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */,
 				A0FC976A28B63D5800B75A9B /* XCRemoteSwiftPackageReference "SwiftEventBus" */,
 				A0ABBA8E2941F91900D06E0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AED5A6E12954BC4D008108D5 /* XCRemoteSwiftPackageReference "Inject" */,
 			);
 			productRefGroup = A0BF90922848C1EB0053389A /* Products */;
 			projectDirPath = "";
@@ -1778,6 +1782,10 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
+				OTHER_LDFLAGS = (
+					"-Xlinker",
+					"-interposable",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.helikon.subvt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTS_MACCATALYST = NO;
@@ -1965,6 +1973,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		AED5A6E12954BC4D008108D5 /* XCRemoteSwiftPackageReference "Inject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/krzysztofzablocki/Inject";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1982,6 +1998,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A0FC976A28B63D5800B75A9B /* XCRemoteSwiftPackageReference "SwiftEventBus" */;
 			productName = SwiftEventBus;
+		};
+		AED5A6E22954BC4D008108D5 /* Inject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AED5A6E12954BC4D008108D5 /* XCRemoteSwiftPackageReference "Inject" */;
+			productName = Inject;
 		};
 /* End XCSwiftPackageProductDependency section */
 
