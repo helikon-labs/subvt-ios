@@ -7,8 +7,10 @@
 
 import SubVTData
 import SwiftUI
+import Inject
 
 struct IntroductionView: View {
+    @ObservedObject private var iO = Inject.observer
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @AppStorage(AppStorageKey.hasResetKeychain) private var hasResetKeychain = false
     @AppStorage(AppStorageKey.hasCompletedIntroduction) private var hasCompletedIntroduction = false
@@ -179,7 +181,7 @@ struct IntroductionView: View {
                 self.hasResetKeychain = true
                 
             }
-        }
+        }.enableInjection()
     }
 }
 
