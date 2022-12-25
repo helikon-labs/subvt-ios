@@ -156,6 +156,7 @@
 
 "notifications.title"="Notifications";
 "notifications.no_notifications"="You have no notifications.";
+"notifications.apns_disabled_on_simulator"="Push notifications are disabled\non simulator devices.";
 "notifications.apns_disabled"="Push notifications are disabled.";
 "notifications.apns_setup_in_progress"="Push notification setup is in progress.\nPlease make sure you are connected\nto the internet.";
 "notifications.enable_notifications"="Enable Notifications";

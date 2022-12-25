@@ -196,6 +196,16 @@ struct NotificationsView: View {
                 .zIndex(0)
                 .disabled(self.notifications.isEmpty)
             }
+            #if targetEnvironment(simulator)
+            VStack {
+                Text(localized("notifications.apns_disabled_on_simulator"))
+                    .font(UI.Font.Common.listNoItems)
+                    .foregroundColor(Color("Text"))
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            .zIndex(1)
+            #else
             if !self.apnsIsEnabled {
                 VStack {
                     Text(localized("notifications.apns_disabled"))
@@ -275,6 +285,7 @@ struct NotificationsView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                 .zIndex(1)
             }
+            #endif
             FooterGradientView()
                 .zIndex(1)
         }
@@ -290,6 +301,7 @@ struct NotificationsView: View {
             UIApplication.shared.applicationIconBadgeNumber = self.notifications.filter({
                 !$0.isRead
             }).count
+            #if !targetEnvironment(simulator)
             NotificationUtil.requestAPNSAuthorization { granted in
                 self.apnsIsEnabled = granted
                 if granted {
@@ -298,10 +310,12 @@ struct NotificationsView: View {
                     }
                 }
             }
+            #endif
         }
         .onChange(of: scenePhase) { newPhase in
             switch newPhase {
             case .active:
+                #if !targetEnvironment(simulator)
                 if !self.apnsIsEnabled {
                     NotificationUtil.requestAPNSAuthorization { granted in
                         self.apnsIsEnabled = granted
@@ -312,6 +326,7 @@ struct NotificationsView: View {
                 } else if !self.hasCreatedDefaultNotificationRules {
                     UIApplication.shared.registerForRemoteNotifications()
                 }
+                #endif
             default:
                 break
             }
