@@ -21,6 +21,8 @@ class ValidatorDetailsViewModel: ObservableObject {
     @Published private(set) var inactiveNominations: [Nomination]? = nil
     @Published private(set) var inactiveNominationCount: Int? = nil
     @Published private(set) var inactiveNominationTotal: Balance? = nil
+    @Published private(set) var rewardReportFetchState: DataFetchState<String> = .idle
+    @Published private(set) var monthlyRewards: [(Int, Balance)] = []
     
     private let motion = CMMotionManager()
     private let queue = OperationQueue()
@@ -28,6 +30,7 @@ class ValidatorDetailsViewModel: ObservableObject {
     
     private var appService = SubVTData.AppService()
     private var service: SubVTData.ValidatorDetailsService! = nil
+    private var reportService: ReportService! = nil
     private var serviceStatusSubscription: AnyCancellable? = nil
     private var serviceSubscription: AnyCancellable? = nil
     private(set) var subscriptionIsInProgress = false
@@ -37,13 +40,19 @@ class ValidatorDetailsViewModel: ObservableObject {
     var accountId: AccountId? = nil
     
     private func initService() {
-        guard let rpcHost = self.network?.validatorDetailsServiceHost,
-              let rpcPort = self.network?.validatorDetailsServicePort else {
+        guard let validatorDetailsServiceRPCHost = self.network?.validatorDetailsServiceHost,
+              let validatorDetailsServiceRPCPort = self.network?.validatorDetailsServicePort,
+              let reportServiceHost = self.network?.reportServiceHost,
+              let reportServicePort = self.network?.reportServicePort else {
             return
         }
         self.service = SubVTData.ValidatorDetailsService(
-            rpcHost: rpcHost,
-            rpcPort: rpcPort
+            rpcHost: validatorDetailsServiceRPCHost,
+            rpcPort: validatorDetailsServiceRPCPort
+        )
+        self.reportService = SubVTData.ReportService(
+            host: reportServiceHost,
+            port: reportServicePort
         )
     }
     

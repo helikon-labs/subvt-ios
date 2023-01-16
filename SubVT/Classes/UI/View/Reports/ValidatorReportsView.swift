@@ -268,7 +268,7 @@ struct ValidatorReportsView: View {
                     .frame(height: 16)
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.isActive),
                             factor: .none,
@@ -285,7 +285,7 @@ struct ValidatorReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(3, self.chartDisplayState))
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .integer(
                                 dataPoints: self.viewModel.commissionPerTenThousand,
@@ -308,7 +308,7 @@ struct ValidatorReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.selfStake),
                             factor: .none,
@@ -328,7 +328,7 @@ struct ValidatorReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(5, self.chartDisplayState))
                     NavigationLink {
-                        let factor: ReportView.Factor = self.network.tokenTicker == "DOT"
+                        let factor: ReportDataFactor = self.network.tokenTicker == "DOT"
                             ? .million
                             : .thousand
                         let chartTitle = String(
@@ -336,7 +336,7 @@ struct ValidatorReportsView: View {
                             factor.description!.capitalized,
                             self.network.tokenTicker
                         )
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalStake,
@@ -358,7 +358,7 @@ struct ValidatorReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.blockCount),
                             factor: .none,
@@ -375,7 +375,7 @@ struct ValidatorReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(7, self.chartDisplayState))
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.rewardPoints),
                             factor: .none,
@@ -394,7 +394,7 @@ struct ValidatorReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.selfReward),
                             factor: .none,
@@ -414,7 +414,7 @@ struct ValidatorReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(9, self.chartDisplayState))
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.stakerReward),
                             factor: .none,
@@ -436,7 +436,7 @@ struct ValidatorReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.offlineOffences),
                             factor: .none,
@@ -453,7 +453,7 @@ struct ValidatorReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(11, self.chartDisplayState))
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.chillings),
                             factor: .none,
@@ -472,7 +472,7 @@ struct ValidatorReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.slashes),
                             factor: .none,

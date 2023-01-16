@@ -149,3 +149,73 @@ struct ReportBarChartView: View {
         .cornerRadius(UI.Dimension.Common.cornerRadius)
     }
 }
+
+enum ReportDataFactor {
+    case none
+    case hundred
+    case thousand
+    case million
+    
+    var description: String? {
+        switch self {
+        case .none:
+            return nil
+        case .hundred:
+            return localized("common.factor.hundred")
+        case .thousand:
+            return localized("common.factor.thousand")
+        case .million:
+            return localized("common.factor.million")
+        }
+    }
+    
+    var descriptionPlural: String? {
+        switch self {
+        case .none:
+            return nil
+        case .hundred:
+            return localized("common.factor.hundreds")
+        case .thousand:
+            return localized("common.factor.thousands")
+        case .million:
+            return localized("common.factor.millions")
+        }
+    }
+    
+    var symbol: String? {
+        switch self {
+        case .none:
+            return nil
+        case .hundred:
+            return "H"
+        case .thousand:
+            return "K"
+        case .million:
+            return "M"
+        }
+    }
+    
+    var decimals: UInt8 {
+        switch self {
+        case .none:
+            return 0
+        case .hundred:
+            return 2
+        case .thousand:
+            return 3
+        case .million:
+            return 6
+        }
+    }
+}
+
+let reportGradient = LinearGradient(
+    gradient: Gradient(
+        colors: [
+            Color("Green"),
+            Color("Blue")
+        ]
+    ),
+    startPoint: .bottom,
+    endPoint: .top
+)

@@ -54,6 +54,19 @@
 "common.period_type"="Period Type";
 "common.period"="Period";
 
+"common.date.month.january.short"="Jan";
+"common.date.month.february.short"="Feb";
+"common.date.month.march.short"="Mar";
+"common.date.month.april.short"="Apr";
+"common.date.month.may.short"="May";
+"common.date.month.june.short"="Jun";
+"common.date.month.july.short"="Jul";
+"common.date.month.august.short"="Aug";
+"common.date.month.september.short"="Sep";
+"common.date.month.october.short"="Oct";
+"common.date.month.november.short"="Nov";
+"common.date.month.december.short"="Dec";
+
 "reward_destination.controller"="Controller";
 "reward_destination.staked"="Staked";
 "reward_destination.stash"="Stash";
@@ -287,3 +300,8 @@
 "reports.validator.staker_reward_with_ticker"="Staker Reward (%@)";
 "reports.validator.chilling_count"="Chilling Count";
 "reports.validator.chillings"="Chillings";
+
+"reports.monhtly_reward.title"="Monthly Rewards";
+"reports.monhtly_reward.chart_title"="Reward";
+"reports.monhtly_reward.month"="Month";
+"reports.monhtly_reward.no_reward_found"="No rewards found for this validator.";

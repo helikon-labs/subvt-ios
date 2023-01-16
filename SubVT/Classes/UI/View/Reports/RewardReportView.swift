@@ -1,0 +1,314 @@
+//
+//  RewardReportView.swift
+//  SubVT
+//
+//  Created by Kutsal Kaan Bilgin on 16.01.2023.
+//
+
+import Charts
+import SubVTData
+import SwiftUI
+
+struct RewardReportView: View {
+    @Environment(\.presentationMode) private var presentationMode
+    @StateObject private var viewModel = RewardReportViewModel()
+    @State private var displayState: BasicViewDisplayState = .notAppeared
+    
+    private let validatorSummary: ValidatorSummary
+    private let factor: ReportDataFactor
+    private let title: String
+    private let chartTitle: String
+    private let network: Network
+    private let annotate: Bool
+    
+    init(
+        validatorSummary: ValidatorSummary,
+        factor: ReportDataFactor,
+        title: String,
+        chartTitle: String,
+        network: Network,
+        annotate: Bool = true
+    ) {
+        self.validatorSummary = validatorSummary
+        self.factor = factor
+        self.title = title
+        self.chartTitle = chartTitle
+        self.network = network
+        self.annotate = annotate
+    }
+    
+    private var headerView: some View {
+        VStack {
+            Spacer()
+                .frame(height: UI.Dimension.Common.titleMarginTop)
+            ZStack {
+                HStack {
+                    Button(
+                        action: {
+                            self.presentationMode.wrappedValue.dismiss()
+                        },
+                        label: {
+                            BackButtonView()
+                        }
+                    )
+                    .buttonStyle(PushButtonStyle())
+                    .modifier(PanelAppearance(0, self.displayState))
+                    .frame(alignment: .leading)
+                    Spacer()
+                }
+                Text(self.title)
+                    .font(UI.Font.Common.title)
+                    .foregroundColor(Color("Text"))
+                    .frame(alignment: .center)
+                    .modifier(PanelAppearance(1, self.displayState))
+            }
+            .frame(
+                height: UI.Dimension.ValidatorList.titleSectionHeight,
+                alignment: .center
+            )
+            .frame(maxWidth: .infinity)
+        }
+        .padding(EdgeInsets(
+            top: 0,
+            leading: UI.Dimension.Common.padding,
+            bottom: UI.Dimension.Common.headerBlurViewBottomPadding,
+            trailing: UI.Dimension.Common.padding
+        ))
+    }
+    
+    var body: some View {
+        ZStack(alignment: .top) {
+            Color("Bg")
+                .ignoresSafeArea()
+                .zIndex(0)
+            BgMorphView()
+                .offset(
+                    x: 0,
+                    y: UI.Dimension.BgMorph.yOffset(
+                        displayState: self.displayState
+                    )
+                )
+                .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
+                .animation(
+                    .easeOut(duration: 0.65),
+                    value: self.displayState
+                )
+                .zIndex(0)
+            self.headerView
+                .zIndex(2)
+            GeometryReader { geometry in
+                VStack(
+                    alignment: .leading,
+                    spacing: UI.Dimension.Common.dataPanelSpacing
+                ) {
+                    Spacer()
+                        .id(0)
+                        .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
+                    Group {
+                        Text(self.validatorSummary.identityDisplay)
+                            .font(UI.Font.Report.validatorDisplay)
+                            .foregroundColor(Color("Text"))
+                            .modifier(PanelAppearance(2, self.displayState))
+                    }
+                    .padding(EdgeInsets(
+                        top: 0,
+                        leading: UI.Dimension.Common.padding,
+                        bottom: 0,
+                        trailing: 0
+                    ))
+                    Spacer()
+                        .frame(height: 16)
+                    switch self.viewModel.fetchState {
+                    case .success:
+                        if self.viewModel.data.count > 0 {
+                            self.chart
+                                .padding(UI.Dimension.Common.dataPanelPadding)
+                                .frame(height: geometry.size.width * 2 / 3)
+                                .frame(maxWidth: .infinity)
+                                .background(Color("DataPanelBg"))
+                                .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+                                .modifier(PanelAppearance(5, self.displayState))
+                        } else {
+                            Text(localized("reports.monhtly_reward.no_reward_found"))
+                                .font(UI.Font.Common.listNoItems)
+                                .foregroundColor(Color("Text"))
+                        }
+                    case .idle, .loading:
+                        ProgressView()
+                            .progressViewStyle(
+                                CircularProgressViewStyle(
+                                    tint: Color("Text")
+                                )
+                            )
+                            .animation(.spring(), value: self.viewModel.fetchState)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                            .zIndex(10)
+                            .modifier(PanelAppearance(2, self.displayState))
+                    default:
+                        Group {}
+                    }
+                }
+                .padding(EdgeInsets(
+                    top: 0,
+                    leading: UI.Dimension.Common.padding,
+                    bottom: 0,
+                    trailing: UI.Dimension.Common.padding
+                ))
+            }
+            FooterGradientView()
+                .zIndex(2)
+        }
+        .navigationBarHidden(true)
+        .ignoresSafeArea()
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .leading
+        )
+        .onAppear() {
+            if self.displayState != .appeared {
+                self.viewModel.initialize(
+                    validatorSummary: self.validatorSummary,
+                    network: self.network
+                )
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.displayState = .appeared
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        self.viewModel.fetchRewards()
+                    }
+                }
+            }
+        }
+    }
+    
+    private func balanceValueLabel(
+        value: Balance,
+        decimals: UInt8
+    ) -> some View {
+        Text(formatBalance(
+            balance: value,
+            tokenDecimalCount: self.network.tokenDecimalCount + self.factor.decimals,
+            formatDecimalCount: decimals
+        ))
+        .font(UI.Font.Report.axisValue)
+        .foregroundColor(Color("Text"))
+    }
+    
+    private func monthDisplay(index: Int) -> String {
+        let year = index / 12;
+        let monthIndex = index - (year * 12)
+        var text = " '" + String(year).suffix(2)
+        switch monthIndex {
+        case 0:
+            text = localized("common.date.month.january.short") + text
+        case 1:
+            text = localized("common.date.month.february.short") + text
+        case 2:
+            text = localized("common.date.month.march.short") + text
+        case 3:
+            text = localized("common.date.month.april.short") + text
+        case 4:
+            text = localized("common.date.month.may.short") + text
+        case 5:
+            text = localized("common.date.month.june.short") + text
+        case 6:
+            text = localized("common.date.month.july.short") + text
+        case 7:
+            text = localized("common.date.month.august.short") + text
+        case 8:
+            text = localized("common.date.month.september.short") + text
+        case 9:
+            text = localized("common.date.month.october.short") + text
+        case 10:
+            text = localized("common.date.month.november.short") + text
+        case 11:
+            text = localized("common.date.month.december.short") + text
+        default:
+            fatalError("Unexpected month index \(monthIndex).")
+        }
+        return text
+    }
+    
+    private var chart: some View {
+        ZStack {
+            Chart {
+                ForEach(self.viewModel.data.indices, id: \.self) { i in
+                    let dataPoint = self.viewModel.data[i]
+                    BarMark(
+                        x: .value("Month", dataPoint.0),
+                        y: .value("Reward", Double(dataPoint.1.value))
+                    )
+                    .foregroundStyle(reportGradient)
+                    .annotation(position: .top) {
+                        if self.annotate {
+                            self.balanceValueLabel(value: dataPoint.1, decimals: 2)
+                                .rotationEffect(Angle(degrees: -45))
+                        } else {
+                            EmptyView()
+                                .frame(width: 0, height: 0)
+                        }
+                    }
+                }
+            }
+            .chartXAxis {
+                AxisMarks(
+                    values: .automatic(
+                        desiredCount: self.viewModel.xAxisMarkCount
+                    )
+                ) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    AxisValueLabel(
+                        anchor: UnitPoint(x: -0.5, y: 0.5),
+                        collisionResolution: .disabled
+                    ) {
+                        Text(self.monthDisplay(index: value.as(Int.self)!))
+                            .font(UI.Font.Report.axisValue)
+                            .rotationEffect(Angle(degrees: -45))
+                            .offset(x: -18, y : 5)
+                            .foregroundColor(Color("Text"))
+                    }
+                  }
+            }
+            .chartXScale(domain: self.viewModel.xAxisScale)
+            .chartXAxisLabel(alignment: Alignment.trailing) {
+                Text(" ")
+                    .font(UI.Font.Report.axisLabel)
+                    .foregroundColor(Color("Text"))
+            }
+            .chartYAxis {
+                AxisMarks(
+                    position: .leading,
+                    values: .automatic(desiredCount: 10)
+                ) { value in
+                    AxisGridLine()
+                    AxisTick()
+                    AxisValueLabel {
+                        self.balanceValueLabel(
+                            value: value.as(Balance.self)!,
+                            decimals: 2
+                        )
+                    }
+                  }
+            }
+            .chartYScale(domain: (0.0...self.viewModel.max))
+            .chartYAxisLabel(alignment: Alignment.leading) {
+                Text(self.chartTitle)
+                    .font(UI.Font.Report.axisLabel)
+                    .foregroundColor(Color("Text"))
+            }
+        }
+    }
+}
+
+struct RewardReportView_Previews: PreviewProvider {
+    static var previews: some View {
+        RewardReportView(
+            validatorSummary: PreviewData.validatorSummary,
+            factor: .none,
+            title: "Kusama Report",
+            chartTitle: "Report",
+            network: PreviewData.kusama
+        )
+    }
+}

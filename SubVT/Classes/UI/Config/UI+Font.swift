@@ -33,6 +33,7 @@ extension UI {
             static let listNoItems = LexendDeca.light.withSize(14)
             static let addItemButton = LexendDeca.regular.withSize(14)
             static let formFieldTitle = LexendDeca.medium.withSize(16)
+            static var navigationBarButton = LexendDeca.light.withSize(16)
         }
         
         enum Snackbar {

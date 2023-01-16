@@ -1,77 +1,18 @@
 //
-//  ReportView.swift
+//  EraReportView.swift
 //  SubVT
 //
 //  Created by Kutsal Kaan Bilgin on 30.11.2022.
-//x
+//
 
 import Charts
 import SwiftUI
 import SubVTData
 
-struct ReportView: View {
+struct EraReportView: View {
     enum `Type` {
         case line
         case bar
-    }
-    
-    enum Factor {
-        case none
-        case hundred
-        case thousand
-        case million
-        
-        var description: String? {
-            switch self {
-            case .none:
-                return nil
-            case .hundred:
-                return localized("common.factor.hundred")
-            case .thousand:
-                return localized("common.factor.thousand")
-            case .million:
-                return localized("common.factor.million")
-            }
-        }
-        
-        var descriptionPlural: String? {
-            switch self {
-            case .none:
-                return nil
-            case .hundred:
-                return localized("common.factor.hundreds")
-            case .thousand:
-                return localized("common.factor.thousands")
-            case .million:
-                return localized("common.factor.millions")
-            }
-        }
-        
-        var symbol: String? {
-            switch self {
-            case .none:
-                return nil
-            case .hundred:
-                return "H"
-            case .thousand:
-                return "K"
-            case .million:
-                return "M"
-            }
-        }
-        
-        var decimals: UInt8 {
-            switch self {
-            case .none:
-                return 0
-            case .hundred:
-                return 2
-            case .thousand:
-                return 3
-            case .million:
-                return 6
-            }
-        }
     }
     
     enum Data {
@@ -80,13 +21,13 @@ struct ReportView: View {
     }
     
     @Environment(\.presentationMode) private var presentationMode
-    @StateObject private var viewModel = ReportViewModel()
+    @StateObject private var viewModel = EraReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var chartRevealPercentage: CGFloat = 1.0
     
     private let type: `Type`
     private let data: Data
-    private let factor: Factor
+    private let factor: ReportDataFactor
     private let title: String
     private let chartTitle: String
     private let validatorIdentityDisplay: String?
@@ -97,22 +38,12 @@ struct ReportView: View {
     
     private let dateFormatter = DateFormatter()
     private let axisSpace: CGFloat = 30
-    private let gradient = LinearGradient(
-        gradient: Gradient(
-            colors: [
-                Color("Green"),
-                Color("Blue")
-            ]
-        ),
-        startPoint: .bottom,
-        endPoint: .top
-    )
     private let max: Int
     
     init(
         type: `Type`,
         data: Data,
-        factor: Factor,
+        factor: ReportDataFactor,
         title: String,
         chartTitle: String,
         validatorIdentityDisplay: String? = nil,
@@ -353,7 +284,7 @@ struct ReportView: View {
                                 x: .value(localized("common.era"), dataPoint.0),
                                 y: .value("Value", dataPoint.1)
                             )
-                            .foregroundStyle(self.gradient)
+                            .foregroundStyle(reportGradient)
                             .annotation(position: .top) {
                                 if self.annotate {
                                     self.integerValueLabel(value: dataPoint.1)
@@ -369,7 +300,7 @@ struct ReportView: View {
                                 x: .value(localized("common.era"), dataPoint.0),
                                 y: .value("Value", dataPoint.1)
                             )
-                            .foregroundStyle(self.gradient)
+                            .foregroundStyle(reportGradient)
                             .interpolationMethod(.catmullRom)
                         }
                     }
@@ -382,7 +313,7 @@ struct ReportView: View {
                                 x: .value(localized("common.era"), dataPoint.0),
                                 y: .value("Value", Double(dataPoint.1.value))
                             )
-                            .foregroundStyle(self.gradient)
+                            .foregroundStyle(reportGradient)
                             .annotation(position: .top) {
                                 if self.annotate {
                                     self.balanceValueLabel(value: dataPoint.1, decimals: decimals)
@@ -398,7 +329,7 @@ struct ReportView: View {
                                 x: .value(localized("common.era"), dataPoint.0),
                                 y: .value("Value", Double(dataPoint.1.value))
                             )
-                            .foregroundStyle(self.gradient)
+                            .foregroundStyle(reportGradient)
                             .interpolationMethod(.catmullRom)
                         }
                     }
@@ -424,7 +355,7 @@ struct ReportView: View {
                     }
                   }
             }
-            .chartXScale(domain: (self.startEra.index...self.endEra.index))
+            .chartXScale(domain: (self.startEra.index...(self.endEra.index + 1)))
             .chartXAxisLabel(alignment: Alignment.trailing) {
                 Text(localized("common.era"))
                     .font(UI.Font.Report.axisLabel)
@@ -489,7 +420,7 @@ struct ReportView_Previews: PreviewProvider {
             (1019, 17),
             (1020, 6)
         ]
-        ReportView(
+        EraReportView(
             type: .line,
             data: .integer(dataPoints: dataPoints),
             factor: .none,

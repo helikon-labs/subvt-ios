@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleUtilities.git",
       "state" : {
-        "revision" : "6db6edb48bdd9943426562c7f042a5492de5ba3d",
-        "version" : "7.10.0"
+        "revision" : "0543562f85620b5b7c510c6bcbef75b562a5127b",
+        "version" : "7.11.0"
       }
     },
     {
@@ -177,7 +177,7 @@
       "location" : "https://github.com/helikon-labs/subvt-data-swift.git",
       "state" : {
         "branch" : "main",
-        "revision" : "0f20504efcc34db5c6440fe9cb3bd58d2d5b81f4"
+        "revision" : "48a1f43b2a24ee116e3a46540f362951c47c8fb0"
       }
     },
     {

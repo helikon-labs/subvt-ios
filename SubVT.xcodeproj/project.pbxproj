@@ -10,6 +10,8 @@
 		A0058CEA28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
+		A00F2E2B2975094800EEB3E7 /* RewardReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F2E2A2975094800EEB3E7 /* RewardReportView.swift */; };
+		A00F2E2D2975095300EEB3E7 /* RewardReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F2E2C2975095300EEB3E7 /* RewardReportViewModel.swift */; };
 		A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0118246288D48C500EC51BD /* UINavigationController.swift */; };
 		A0118248288D48C500EC51BD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0118246288D48C500EC51BD /* UINavigationController.swift */; };
 		A011BCF42934999800F819A5 /* BarChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A011BCF32934999800F819A5 /* BarChartView.swift */; };
@@ -35,8 +37,8 @@
 		A02839C42867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A02839C52867A456009CA8BA /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02839C32867A456009CA8BA /* Tab.swift */; };
 		A028D86C29420EA500794C84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A028D86B29420EA500794C84 /* GoogleService-Info.plist */; };
-		A030024F2937466400F7BB1E /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030024E2937466400F7BB1E /* ReportView.swift */; };
-		A03002512937468900F7BB1E /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03002502937468900F7BB1E /* ReportViewModel.swift */; };
+		A030024F2937466400F7BB1E /* EraReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030024E2937466400F7BB1E /* EraReportView.swift */; };
+		A03002512937468900F7BB1E /* EraReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03002502937468900F7BB1E /* EraReportViewModel.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
 		A03BA5E628F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
 		A03BA5E728F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
@@ -384,6 +386,8 @@
 
 /* Begin PBXFileReference section */
 		A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsViewModel.swift; sourceTree = "<group>"; };
+		A00F2E2A2975094800EEB3E7 /* RewardReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportView.swift; sourceTree = "<group>"; };
+		A00F2E2C2975095300EEB3E7 /* RewardReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportViewModel.swift; sourceTree = "<group>"; };
 		A0118246288D48C500EC51BD /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
 		A011BCF32934999800F819A5 /* BarChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChartView.swift; sourceTree = "<group>"; };
 		A0128A45284A0A32000C2307 /* data-env-example.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "data-env-example.json"; sourceTree = "<group>"; };
@@ -397,8 +401,8 @@
 		A018C2AC28B90C0500C9A276 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		A02839C32867A456009CA8BA /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		A028D86B29420EA500794C84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		A030024E2937466400F7BB1E /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
-		A03002502937468900F7BB1E /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		A030024E2937466400F7BB1E /* EraReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraReportView.swift; sourceTree = "<group>"; };
+		A03002502937468900F7BB1E /* EraReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraReportViewModel.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+EditNotificationRule.swift"; sourceTree = "<group>"; };
 		A03C5BE528783C9F00D9D4FD /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
@@ -699,15 +703,17 @@
 		A0425551292CF1D100085DF3 /* Reports */ = {
 			isa = PBXGroup;
 			children = (
+				A030024E2937466400F7BB1E /* EraReportView.swift */,
+				A03002502937468900F7BB1E /* EraReportViewModel.swift */,
 				A015DD9C292FA1D000BF9D1B /* NetworkReportsView.swift */,
 				A015DD9F292FA3F200BF9D1B /* NetworkReportsViewModel.swift */,
 				A0425552292CF1F200085DF3 /* ReportRangeSelectionView.swift */,
 				A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */,
-				A030024E2937466400F7BB1E /* ReportView.swift */,
-				A03002502937468900F7BB1E /* ReportViewModel.swift */,
+				A06A08C6293D051F0098518A /* ReportsCommon.swift */,
+				A00F2E2A2975094800EEB3E7 /* RewardReportView.swift */,
+				A00F2E2C2975095300EEB3E7 /* RewardReportViewModel.swift */,
 				A0DEF18A293CBF1500BAFF89 /* ValidatorReportsView.swift */,
 				A0DEF18C293CBF2000BAFF89 /* ValidatorReportsViewModel.swift */,
-				A06A08C6293D051F0098518A /* ReportsCommon.swift */,
 			);
 			path = Reports;
 			sourceTree = "<group>";
@@ -1337,7 +1343,7 @@
 				A0FD88312893D3D500479C10 /* IdenticonSceneView.swift in Sources */,
 				A0EFDC5F28E994C2000A2BCC /* NotificationUtil.swift in Sources */,
 				A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */,
-				A03002512937468900F7BB1E /* ReportViewModel.swift in Sources */,
+				A03002512937468900F7BB1E /* EraReportViewModel.swift in Sources */,
 				A0A1DC57284B8E0000914237 /* UI+Font.swift in Sources */,
 				A0058CEA28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */,
 				A0D5498828E70132007794E2 /* NotificationsView.swift in Sources */,
@@ -1403,6 +1409,7 @@
 				A0B48C6B28DB16C8002987C0 /* UI+Dimension+AddValidators.swift in Sources */,
 				A04B37BB2876BD4B00912BF3 /* NetworkStatusView.swift in Sources */,
 				A072C33B28780685001636F9 /* Either.swift in Sources */,
+				A00F2E2B2975094800EEB3E7 /* RewardReportView.swift in Sources */,
 				A0A1DC54284B8DD200914237 /* UI+Dimension.swift in Sources */,
 				A0744D922885A033008A06DD /* UI+Dimension+ValidatorList.swift in Sources */,
 				A0128A62284A3BCC000C2307 /* UI.swift in Sources */,
@@ -1414,7 +1421,7 @@
 				A0C67D29293DF744007FCE4E /* Keyboard.swift in Sources */,
 				A0744D8E2885866B008A06DD /* ValidatorListView.swift in Sources */,
 				A0AFF7F128926C8400B0CB4F /* ValidatorDetailsViewModel.swift in Sources */,
-				A030024F2937466400F7BB1E /* ReportView.swift in Sources */,
+				A030024F2937466400F7BB1E /* EraReportView.swift in Sources */,
 				A0787280287C456300BED374 /* ActionButtonView.swift in Sources */,
 				A06E15A3288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift in Sources */,
 				A0BF90A12848C1EC0053389A /* SubVT.xcdatamodeld in Sources */,
@@ -1425,6 +1432,7 @@
 				A05C4EF92939D3810050F210 /* Balance.swift in Sources */,
 				A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */,
 				A0659D1028EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,
+				A00F2E2D2975095300EEB3E7 /* RewardReportViewModel.swift in Sources */,
 				A0C062A228672106001FE459 /* UI+Dimension+TabBar.swift in Sources */,
 				A0FFD9AA28EC161E00FA76B6 /* EditNotificationRuleView.swift in Sources */,
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,

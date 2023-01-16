@@ -260,7 +260,7 @@ struct NetworkReportsView: View {
                     .frame(height: 16)
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .line,
                             data: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             factor: .none,
@@ -279,8 +279,8 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(2, self.chartDisplayState))
                     NavigationLink {
-                        let factor = ReportView.Factor.million
-                        ReportView(
+                        let factor = ReportDataFactor.million
+                        EraReportView(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalStakesBalance
@@ -307,8 +307,8 @@ struct NetworkReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        let factor = ReportView.Factor.million
-                        ReportView(
+                        let factor = ReportDataFactor.million
+                        EraReportView(
                             type: .bar,
                             data: .integer(
                                 dataPoints: self.viewModel.rewardPoints.map{ ($0.0, Int($0.1)) }
@@ -333,7 +333,7 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(4, self.chartDisplayState))
                     NavigationLink {
-                        let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
+                        let factor: ReportDataFactor = self.network.tokenTicker == "DOT" ? .thousand : .none
                         let chartTitle = self.network.tokenTicker == "DOT"
                             ? String(
                                 format: localized("reports.total_paid_out_with_factor_ticker"),
@@ -344,7 +344,7 @@ struct NetworkReportsView: View {
                                 format: localized("reports.total_paid_out_with_ticker"),
                                 self.network.tokenTicker
                             )
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalPaidOutBalance,
@@ -368,7 +368,7 @@ struct NetworkReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .line,
                             data: .integer(
                                 dataPoints: self.viewModel.activeValidatorCounts
@@ -389,7 +389,7 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                     NavigationLink {
-                        let factor: ReportView.Factor = self.network.tokenTicker == "DOT" ? .thousand : .none
+                        let factor: ReportDataFactor = self.network.tokenTicker == "DOT" ? .thousand : .none
                         let chartTitle = self.network.tokenTicker == "DOT"
                             ? String(
                                 format: localized("reports.total_reward_with_factor_ticker"),
@@ -400,7 +400,7 @@ struct NetworkReportsView: View {
                                 format: localized("reports.total_reward_with_ticker"),
                                 self.network.tokenTicker
                             )
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalRewardsBalance,
@@ -424,7 +424,7 @@ struct NetworkReportsView: View {
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .integer(
                                 dataPoints: self.viewModel.offlineOffenceCounts.map { ($0.0, Int($0.1)) }
@@ -445,7 +445,7 @@ struct NetworkReportsView: View {
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(8, self.chartDisplayState))
                     NavigationLink {
-                        ReportView(
+                        EraReportView(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.slashesBalance),
                             factor: .none,
