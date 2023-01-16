@@ -170,11 +170,11 @@ struct NetworkSelectionView: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .offset(
-                    y: UI.Dimension.NetworkSelection.snackbarYOffset(
+                    y: UI.Dimension.Common.snackbarYOffset(
                         fetchState: self.viewModel.fetchState
                     )
                 )
-                .opacity(UI.Dimension.NetworkSelection.snackbarOpacity(
+                .opacity(UI.Dimension.Common.snackbarOpacity(
                     fetchState: self.viewModel.fetchState
                 ))
                 .animation(

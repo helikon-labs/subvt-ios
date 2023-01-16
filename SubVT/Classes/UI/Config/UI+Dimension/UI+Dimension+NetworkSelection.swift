@@ -88,31 +88,5 @@ extension UI.Dimension {
                 return 30
             }
         }
-        
-        static func snackbarYOffset<T>(fetchState: DataFetchState<T>) -> CGFloat {
-            switch fetchState {
-            case .idle:
-                fallthrough
-            case .loading:
-                fallthrough
-            case .success:
-                return 92
-            case .error:
-                return -96
-            }
-        }
-        
-        static func snackbarOpacity<T>(fetchState: DataFetchState<T>) -> Double {
-            switch fetchState {
-            case .idle:
-                fallthrough
-            case .loading:
-                fallthrough
-            case .success:
-                return 0
-            case .error:
-                return 1
-            }
-        }
     }
 }

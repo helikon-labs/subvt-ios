@@ -162,11 +162,11 @@ struct NetworkReportsView: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .offset(
-                    y: UI.Dimension.ReportRangeSelection.snackbarYOffset(
+                    y: UI.Dimension.Common.snackbarYOffset(
                         fetchState: self.viewModel.fetchState
                     )
                 )
-                .opacity(UI.Dimension.ReportRangeSelection.snackbarOpacity(
+                .opacity(UI.Dimension.Common.snackbarOpacity(
                     fetchState: self.viewModel.fetchState
                 ))
                 .animation(

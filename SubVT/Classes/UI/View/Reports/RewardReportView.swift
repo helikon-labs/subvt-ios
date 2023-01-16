@@ -129,7 +129,7 @@ struct RewardReportView: View {
                                 .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
                                 .modifier(PanelAppearance(5, self.displayState))
                         } else {
-                            Text(localized("reports.monhtly_reward.no_reward_found"))
+                            Text(localized("reports.monthly_reward.no_reward_found"))
                                 .font(UI.Font.Common.listNoItems)
                                 .foregroundColor(Color("Text"))
                         }
@@ -157,6 +157,28 @@ struct RewardReportView: View {
             }
             FooterGradientView()
                 .zIndex(2)
+            ZStack {
+                SnackbarView(
+                    message: localized("reports.error.fetch"),
+                    type: .error(canRetry: true)
+                ) {
+                    self.viewModel.fetchRewards()
+                }
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .offset(
+                    y: UI.Dimension.Common.snackbarYOffset(
+                        fetchState: self.viewModel.fetchState
+                    )
+                )
+                .opacity(UI.Dimension.Common.snackbarOpacity(
+                    fetchState: self.viewModel.fetchState
+                ))
+                .animation(
+                    .spring(),
+                    value: self.viewModel.fetchState
+                )
+            }
+            .zIndex(3)
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()

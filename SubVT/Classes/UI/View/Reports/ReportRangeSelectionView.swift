@@ -300,11 +300,11 @@ struct ReportRangeSelectionView: View {
                 }
                 .frame(maxHeight: .infinity, alignment: .bottom)
                 .offset(
-                    y: UI.Dimension.ReportRangeSelection.snackbarYOffset(
+                    y: UI.Dimension.Common.snackbarYOffsetTabbed(
                         fetchState: self.viewModel.fetchState
                     )
                 )
-                .opacity(UI.Dimension.ReportRangeSelection.snackbarOpacity(
+                .opacity(UI.Dimension.Common.snackbarYOffsetTabbed(
                     fetchState: self.viewModel.fetchState
                 ))
                 .animation(

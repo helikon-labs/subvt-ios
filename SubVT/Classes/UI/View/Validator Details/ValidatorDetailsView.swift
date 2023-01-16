@@ -294,8 +294,8 @@ struct ValidatorDetailsView: View {
                             RewardReportView(
                                 validatorSummary: self.validatorSummary,
                                 factor: .none,
-                                title: localized("reports.monhtly_reward.title"),
-                                chartTitle: localized("reports.monhtly_reward.chart_title"),
+                                title: localized("reports.monthly_reward.title"),
+                                chartTitle: localized("reports.monthly_reward.chart_title"),
                                 network: self.network
                             )
                         } label: {

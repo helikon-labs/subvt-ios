@@ -253,7 +253,7 @@
 "report_range_selection.network.title"="Network Reports";
 "report_range_selection.validator.title"="Validator Reports";
 
-"reports.error.fetch"="Error while getting the reports. Please check your connection.";
+"reports.error.fetch"="Error while getting reports. Please check your connection.";
 "reports.active_nominators"="Active Nominators";
 "reports.active_validators"="Active Validators";
 "reports.reward_points"="Reward Points";
@@ -301,7 +301,7 @@
 "reports.validator.chilling_count"="Chilling Count";
 "reports.validator.chillings"="Chillings";
 
-"reports.monhtly_reward.title"="Monthly Rewards";
-"reports.monhtly_reward.chart_title"="Reward";
-"reports.monhtly_reward.month"="Month";
-"reports.monhtly_reward.no_reward_found"="No rewards found for this validator.";
+"reports.monthly_reward.title"="Monthly Rewards";
+"reports.monthly_reward.chart_title"="Reward";
+"reports.monthly_reward.month"="Month";
+"reports.monthly_reward.no_reward_found"="No rewards found for this validator.";
