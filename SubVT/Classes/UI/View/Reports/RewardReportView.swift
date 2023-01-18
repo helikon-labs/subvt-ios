@@ -122,11 +122,11 @@ struct RewardReportView: View {
                     case .success:
                         if self.viewModel.data.count > 0 {
                             self.chart
-                                .padding(UI.Dimension.Common.dataPanelPadding)
+                                .padding(UI.Dimension.Common.dataPanelPadding / 2)
                                 .frame(height: geometry.size.width * 2 / 3)
                                 .frame(maxWidth: .infinity)
                                 .background(Color("DataPanelBg"))
-                                .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
+                                .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius / 2)
                                 .modifier(PanelAppearance(5, self.displayState))
                         } else {
                             Text(localized("reports.monthly_reward.no_reward_found"))
@@ -258,7 +258,8 @@ struct RewardReportView: View {
                     let dataPoint = self.viewModel.data[i]
                     BarMark(
                         x: .value("Month", dataPoint.0),
-                        y: .value("Reward", Double(dataPoint.1.value))
+                        y: .value("Reward", Double(dataPoint.1.value)),
+                        width: .automatic // .fixed(16.0)
                     )
                     .foregroundStyle(reportGradient)
                     .annotation(position: .top) {
@@ -308,10 +309,10 @@ struct RewardReportView: View {
                     AxisValueLabel {
                         self.balanceValueLabel(
                             value: value.as(Balance.self)!,
-                            decimals: 2
+                            decimals: 1
                         )
                     }
-                  }
+                }
             }
             .chartYScale(domain: (0.0...self.viewModel.max))
             .chartYAxisLabel(alignment: Alignment.leading) {
