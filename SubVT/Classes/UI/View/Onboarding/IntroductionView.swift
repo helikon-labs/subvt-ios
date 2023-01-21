@@ -181,7 +181,7 @@ struct IntroductionView: View {
                 self.hasResetKeychain = true
                 
             }
-        }.enableInjection()
+        }//.enableInjection()
     }
 }
 
