@@ -123,7 +123,7 @@
       "location" : "https://github.com/krzysztofzablocki/Inject",
       "state" : {
         "branch" : "main",
-        "revision" : "13486f715e1100af324d82be55c8345e8af14ae8"
+        "revision" : "550af6cd6885e93da20bdcfc6ae6245c2bf62cc7"
       }
     },
     {
@@ -177,7 +177,7 @@
       "location" : "https://github.com/helikon-labs/subvt-data-swift.git",
       "state" : {
         "branch" : "main",
-        "revision" : "48a1f43b2a24ee116e3a46540f362951c47c8fb0"
+        "revision" : "a7f3ffc02489b3e477ea6d3aef0ee0a58ab7819b"
       }
     },
     {

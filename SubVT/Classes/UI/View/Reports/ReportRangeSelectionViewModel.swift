@@ -19,7 +19,7 @@ class ReportRangeSelectionViewModel: ObservableObject {
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
     private var cancellables = Set<AnyCancellable>()
     
-    private let maxEraRange: UInt = 20
+    private let maxEraRange: UInt32 = 20
     
     func initReportServices(networks: [Network]) {
         guard self.reportServiceMap.count == 0 else {
@@ -56,7 +56,7 @@ class ReportRangeSelectionViewModel: ObservableObject {
                 self.fetchState = .success(result: "")
                 if self.eras.count > 0 {
                     self.endEra = self.eras.first
-                    self.startEra = self.eras[Int(min(self.maxEraRange - 1, UInt(self.eras.count - 1)))]
+                    self.startEra = self.eras[Int(min(UInt(self.maxEraRange) - 1, UInt(self.eras.count - 1)))]
                 }
             }
         }

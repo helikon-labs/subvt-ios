@@ -32,6 +32,7 @@
 "common.off"="Off";
 "common.immediate"="Immediate";
 "common.era"="Era";
+"common.session"="Session";
 "common.epoch"="Epoch";
 "common.hour"="Hour";
 "common.day"="Day";
@@ -302,6 +303,13 @@
 "reports.validator.chillings"="Chillings";
 
 "reports.monthly_reward.title"="Monthly Rewards";
-"reports.monthly_reward.chart_title"="Reward";
+"reports.monthly_reward.chart_title_with_ticker"="Reward (%@)";
 "reports.monthly_reward.month"="Month";
 "reports.monthly_reward.no_reward_found"="No rewards found for this validator.";
+
+"reports.paravalidation_votes.title"="Paravalidation Votes";
+"reports.paravalidation_votes.no_report_found"="No paravalidation sessions found for this validator in the last %d sessions.";
+"reports.paravalidation_votes.votes"="Votes";
+"reports.paravalidation_votes.explicit"="Explicit";
+"reports.paravalidation_votes.implicit"="Implicit";
+"reports.paravalidation_votes.missed"="Missed";

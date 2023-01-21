@@ -81,7 +81,7 @@ struct EraReportView: View {
         }
     }
     
-    private func getDateDisplay(index: UInt, timestamp: UInt64) -> String {
+    private func getDateDisplay(index: UInt32, timestamp: UInt64) -> String {
         let date = Date(
             timeIntervalSince1970: TimeInterval(timestamp / 1000)
         )

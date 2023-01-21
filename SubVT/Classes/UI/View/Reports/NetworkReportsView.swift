@@ -37,7 +37,7 @@ struct NetworkReportsView: View {
     }
     
     private func getDateDisplay(
-        index: UInt,
+        index: UInt32,
         timestamp: UInt64
     ) -> String {
         let date = Date(

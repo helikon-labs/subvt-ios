@@ -41,7 +41,10 @@ struct ReportRangeSelectionView: View {
         }
     }
     
-    private func getEraDisplay(index: UInt, timestamp: UInt64) -> String {
+    private func getEraDisplay(
+        index: UInt32,
+        timestamp: UInt64
+    ) -> String {
         let date = Date(
             timeIntervalSince1970: TimeInterval(timestamp / 1000)
         )

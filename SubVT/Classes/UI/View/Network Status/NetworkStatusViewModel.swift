@@ -9,7 +9,7 @@ import Combine
 import SubVTData
 import SwiftUI
 
-private let eraReportCount: UInt = 15
+private let eraReportCount: UInt32 = 15
 
 class NetworkStatusViewModel: ObservableObject {
     @Published private(set) var networkStatus = NetworkStatus()
@@ -150,7 +150,7 @@ class NetworkStatusViewModel: ObservableObject {
         }
     }
     
-    func fetchEraValidatorCounts(currentEraIndex: UInt) {
+    func fetchEraValidatorCounts(currentEraIndex: UInt32) {
         guard currentEraIndex > eraReportCount else {
             return
         }
@@ -158,8 +158,8 @@ class NetworkStatusViewModel: ObservableObject {
             initReportService()
         }
         self.reportServiceCancellable = self.reportService?.getEraReport(
-            startEraIndex: Int(currentEraIndex - eraReportCount),
-            endEraIndex: UInt(currentEraIndex)
+            startEraIndex: currentEraIndex - eraReportCount,
+            endEraIndex: currentEraIndex
         ).sink {
             [weak self] response in
             guard let self = self else { return }
@@ -168,13 +168,13 @@ class NetworkStatusViewModel: ObservableObject {
                 let reports = response.value!
                 self.eraActiveValidatorCounts = reports.map { eraReport in
                     (
-                        eraReport.era.index,
+                        UInt(eraReport.era.index),
                         UInt(eraReport.activeValidatorCount)
                     )
                 }
                 self.eraInactiveValidatorCounts = reports.map { eraReport in
                     (
-                        eraReport.era.index,
+                        UInt(eraReport.era.index),
                         UInt(eraReport.inactiveValidatorCount)
                     )
                 }

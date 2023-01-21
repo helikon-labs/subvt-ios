@@ -37,15 +37,23 @@ struct EraEpochView: View {
         get {
             switch eraOrEpoch {
             case .left(let era):
-                return String(
-                    format: localized("network_status.era_with_index"),
-                    era.index
-                )
+                if self.index == 0 {
+                    return localized("common.era")
+                } else {
+                    return String(
+                        format: localized("network_status.era_with_index"),
+                        era.index
+                    )
+                }
             case .right(let epoch):
-                return String(
-                    format: localized("network_status.epoch_with_index"),
-                    epoch.index
-                )
+                if self.index == 0 {
+                    return localized("common.epoch")
+                } else {
+                    return String(
+                        format: localized("network_status.epoch_with_index"),
+                        epoch.index
+                    )
+                }
             }
         }
     }
@@ -111,6 +119,9 @@ struct EraEpochView: View {
     
     private var timespanFormatted: String {
         get {
+            if self.index == 0 {
+                return "-"
+            }
             let startDate = self.startDate
             let endDate = self.endDate
             let startDateFormatted = dateFormatter.string(from: startDate)
@@ -122,6 +133,9 @@ struct EraEpochView: View {
     
     private var timeLeftFormatted: (String, Bool) {
         get {
+            if self.index == 0 {
+                return ("-", false)
+            }
             let isOvertime = Date().timeIntervalSince1970 > self.endSeconds
             let seconds = abs(Int(self.endSeconds - Date().timeIntervalSince1970))
             let hours = seconds / (60 * 60)

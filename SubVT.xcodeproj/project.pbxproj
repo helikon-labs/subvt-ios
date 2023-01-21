@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A000F656297A8C5E001210DF /* ParaVoteReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000F655297A8C5E001210DF /* ParaVoteReportView.swift */; };
+		A000F657297A8C5E001210DF /* ParaVoteReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000F655297A8C5E001210DF /* ParaVoteReportView.swift */; };
+		A000F659297A8C6F001210DF /* ParaVoteReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000F658297A8C6F001210DF /* ParaVoteReportViewModel.swift */; };
 		A0058CEA28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
@@ -385,6 +388,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A000F655297A8C5E001210DF /* ParaVoteReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaVoteReportView.swift; sourceTree = "<group>"; };
+		A000F658297A8C6F001210DF /* ParaVoteReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaVoteReportViewModel.swift; sourceTree = "<group>"; };
 		A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsViewModel.swift; sourceTree = "<group>"; };
 		A00F2E2A2975094800EEB3E7 /* RewardReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportView.swift; sourceTree = "<group>"; };
 		A00F2E2C2975095300EEB3E7 /* RewardReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportViewModel.swift; sourceTree = "<group>"; };
@@ -707,6 +712,8 @@
 				A03002502937468900F7BB1E /* EraReportViewModel.swift */,
 				A015DD9C292FA1D000BF9D1B /* NetworkReportsView.swift */,
 				A015DD9F292FA3F200BF9D1B /* NetworkReportsViewModel.swift */,
+				A000F655297A8C5E001210DF /* ParaVoteReportView.swift */,
+				A000F658297A8C6F001210DF /* ParaVoteReportViewModel.swift */,
 				A0425552292CF1F200085DF3 /* ReportRangeSelectionView.swift */,
 				A0425554292CF20100085DF3 /* ReportRangeSelectionViewModel.swift */,
 				A06A08C6293D051F0098518A /* ReportsCommon.swift */,
@@ -1393,6 +1400,7 @@
 				A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */,
 				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0FC976F28B63DEE00B75A9B /* Event.swift in Sources */,
+				A000F659297A8C6F001210DF /* ParaVoteReportViewModel.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A06B1E3528E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
 				A04ED599292E1F3200CF089F /* UI+Dimension+ReportRangeSelection.swift in Sources */,
@@ -1438,6 +1446,7 @@
 				A04B37D328771CA900912BF3 /* BlockNumberView.swift in Sources */,
 				A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */,
 				A0AFF7FB2892B5F700B0CB4F /* UI+Text.swift in Sources */,
+				A000F656297A8C5E001210DF /* ParaVoteReportView.swift in Sources */,
 				A0E9F09528FC433F000CCC02 /* NotificationPeriodType.swift in Sources */,
 				A06A08C7293D051F0098518A /* ReportsCommon.swift in Sources */,
 				A04C47272887F19F0004A46A /* RoundedCorner.swift in Sources */,
@@ -1583,6 +1592,7 @@
 				A067DD65289D56A9005BE98C /* MyValidatorsView.swift in Sources */,
 				A0DCABB8285CA36A00E458F4 /* HomeView.swift in Sources */,
 				A0FDE66428F2970800D1A590 /* NotificationView.swift in Sources */,
+				A000F657297A8C5E001210DF /* ParaVoteReportView.swift in Sources */,
 				A0D0334A288B01C5001F78D2 /* SmallCheckboxButtonView.swift in Sources */,
 				A04C47282887F19F0004A46A /* RoundedCorner.swift in Sources */,
 				A0659D1128EACF4300A6E251 /* UI+Dimension+Notifications.swift in Sources */,

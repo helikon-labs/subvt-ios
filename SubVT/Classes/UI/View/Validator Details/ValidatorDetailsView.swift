@@ -295,7 +295,10 @@ struct ValidatorDetailsView: View {
                                 validatorSummary: self.validatorSummary,
                                 factor: .none,
                                 title: localized("reports.monthly_reward.title"),
-                                chartTitle: localized("reports.monthly_reward.chart_title"),
+                                chartTitle: String(
+                                    format: localized("reports.monthly_reward.chart_title_with_ticker"),
+                                    self.network.tokenTicker
+                                ),
                                 network: self.network
                             )
                         } label: {
@@ -316,6 +319,28 @@ struct ValidatorDetailsView: View {
                         .modifier(PanelAppearance(4, self.displayState))
                         
                         NavigationLink {
+                            ParaVoteReportView(
+                                validatorSummary: self.validatorSummary,
+                                network: self.network
+                            )
+                        } label: {
+                            ZStack {
+                                Text("PV")
+                                    .font(UI.Font.Common.navigationBarButtonSmall)
+                                    .foregroundColor(Color("Text"))
+                            }
+                            .frame(
+                                width: UI.Dimension.Common.networkSelectorHeight,
+                                height: UI.Dimension.Common.networkSelectorHeight
+                            )
+                            .background(Color("NetworkSelectorClosedBg"))
+                            .cornerRadius(UI.Dimension.Common.cornerRadius)
+                        }
+                        .transition(.move(edge: .leading))
+                        .buttonStyle(PushButtonStyle())
+                        .modifier(PanelAppearance(5, self.displayState))
+                        
+                        NavigationLink {
                             ReportRangeSelectionView(
                                 mode: .validator(
                                     validatorSummary: self.validatorSummary
@@ -334,7 +359,7 @@ struct ValidatorDetailsView: View {
                         }
                         .transition(.move(edge: .leading))
                         .buttonStyle(PushButtonStyle())
-                        .modifier(PanelAppearance(5, self.displayState))
+                        .modifier(PanelAppearance(6, self.displayState))
                     }
                     .frame(height: UI.Dimension.ValidatorList.titleSectionHeight)
                 }
@@ -371,27 +396,27 @@ struct ValidatorDetailsView: View {
                         )
                         .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
                         .offset(y: sin(self.phase) * 8)
-                        .modifier(PanelAppearance(6, self.displayState))
+                        .modifier(PanelAppearance(7, self.displayState))
                         VStack(
                             alignment: .leading,
                             spacing: UI.Dimension.Common.dataPanelSpacing
                         ) {
                             self.identityDisplayView
-                                .modifier(PanelAppearance(7, self.displayState))
+                                .modifier(PanelAppearance(8, self.displayState))
                             Spacer()
                                 .frame(height: 4)
                             Group {
                                 self.nominationTotalView
-                                    .modifier(PanelAppearance(8, self.displayState))
-                                self.selfStakeView
                                     .modifier(PanelAppearance(9, self.displayState))
+                                self.selfStakeView
+                                    .modifier(PanelAppearance(10, self.displayState))
                                 if let _ = self.viewModel.validatorDetails?.validatorStake {
                                     Button {
                                         self.activeNominatorListIsVisible.toggle()
                                     } label: {
                                         self.activeStakeView
                                     }
-                                    .modifier(PanelAppearance(10, self.displayState))
+                                    .modifier(PanelAppearance(11, self.displayState))
                                     .buttonStyle(NominationListButtonStyle())
                                 }
                                 Button {
@@ -399,29 +424,29 @@ struct ValidatorDetailsView: View {
                                 } label: {
                                     self.inactiveNominationsView
                                 }
-                                .modifier(PanelAppearance(11, self.displayState))
+                                .modifier(PanelAppearance(12, self.displayState))
                                 .buttonStyle(NominationListButtonStyle())
                                 if let _ = self.viewModel.validatorDetails?.account.discoveredAt {
                                     self.accountAgeView
-                                        .modifier(PanelAppearance(12, self.displayState))
+                                        .modifier(PanelAppearance(13, self.displayState))
                                 }
                                 self.offlineFaultsView
-                                    .modifier(PanelAppearance(13, self.displayState))
-                                self.rewardDestinationView
                                     .modifier(PanelAppearance(14, self.displayState))
+                                self.rewardDestinationView
+                                    .modifier(PanelAppearance(15, self.displayState))
                             }
                             Group {
                                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                                     self.commissionView
                                     self.aprView
                                 }
-                                .modifier(PanelAppearance(15, self.displayState))
+                                .modifier(PanelAppearance(16, self.displayState))
                                 if let _ = self.viewModel.validatorDetails?.validatorStake {
                                     HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                                         self.eraBlocksView
                                         self.eraPointsView
                                     }
-                                    .modifier(PanelAppearance(16, self.displayState))
+                                    .modifier(PanelAppearance(17, self.displayState))
                                 }
                             }
                             if self.validatorSummary.isEnrolledIn1Kv {
@@ -431,19 +456,19 @@ struct ValidatorDetailsView: View {
                                     Text(localized("validator_details.onekv_section_title"))
                                         .font(UI.Font.ValidatorDetails.subsectionTitle)
                                         .foregroundColor(Color("Text"))
-                                        .modifier(PanelAppearance(17, self.displayState))
+                                        .modifier(PanelAppearance(18, self.displayState))
                                     Spacer()
                                         .frame(height: 8)
                                     self.onekvRankView
-                                        .modifier(PanelAppearance(18, self.displayState))
-                                    self.onekvLocationView
                                         .modifier(PanelAppearance(19, self.displayState))
+                                    self.onekvLocationView
+                                        .modifier(PanelAppearance(20, self.displayState))
                                     if self.viewModel.validatorDetails?.onekvOfflineSince ?? 0 > 0 {
                                         self.onekvDowntimeView
-                                            .modifier(PanelAppearance(20, self.displayState))
+                                            .modifier(PanelAppearance(21, self.displayState))
                                     }
                                     self.onekvValidityView
-                                        .modifier(PanelAppearance(21, self.displayState))
+                                        .modifier(PanelAppearance(22, self.displayState))
                                 }
                             }
                             Spacer()

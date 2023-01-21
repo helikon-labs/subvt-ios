@@ -45,14 +45,14 @@ class NetworkReportsViewModel: ObservableObject {
     }
     
     func fetchReports(
-        startEraIndex: UInt,
-        endEraIndex: UInt
+        startEraIndex: UInt32,
+        endEraIndex: UInt32
     ) {
         guard self.fetchState != .loading else { return }
         self.initReportService()
         self.fetchState = .loading
         self.reportService.getEraReport(
-            startEraIndex: Int(startEraIndex),
+            startEraIndex: startEraIndex,
             endEraIndex: endEraIndex
         ).sink {
             [weak self] response in
