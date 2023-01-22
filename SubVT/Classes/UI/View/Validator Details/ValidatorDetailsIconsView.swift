@@ -195,27 +195,27 @@ struct ValidatorDetailsIconsView: View {
         self.icons = icons
     }
     
-    init(validatorSummary summary: ValidatorSummary) {
+    init(validator: ValidatorDetails) {
         var icons = [ValidatorDetailsIcon]()
-        if summary.isEnrolledIn1Kv {
+        if let _ = validator.onekvCandidateRecordId {
             icons.append(.onekv)
         }
-        if summary.isParaValidator {
+        if validator.isParaValidator {
             icons.append(.paravalidator)
         }
-        if summary.isActiveNextSession {
+        if validator.isActiveNextSession {
             icons.append(.activeNextSession)
         }
-        if summary.heartbeatReceived ?? false {
+        if validator.heartbeatReceived ?? false {
             icons.append(.heartbeatReceived)
         }
-        if summary.oversubscribed {
+        if validator.oversubscribed {
             icons.append(.oversubscribed)
         }
-        if summary.preferences.blocksNominations {
+        if validator.preferences.blocksNominations {
             icons.append(.blocksNominations)
         }
-        if summary.slashCount > 0 {
+        if validator.slashCount > 0 {
             icons.append(.slashed)
         }
         self.icons = icons

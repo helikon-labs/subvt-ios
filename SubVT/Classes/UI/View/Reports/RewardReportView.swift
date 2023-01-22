@@ -14,22 +14,25 @@ struct RewardReportView: View {
     @StateObject private var viewModel = RewardReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     
-    private let validatorSummary: ValidatorSummary
+    private let network: Network
+    private let accountId: AccountId
+    private let identityDisplay: String
     private let factor: ReportDataFactor
     private let title: String
     private let chartTitle: String
-    private let network: Network
     private let annotate: Bool
     
     init(
-        validatorSummary: ValidatorSummary,
+        network: Network,
+        accountId: AccountId,
+        identityDisplay: String,
         factor: ReportDataFactor,
         title: String,
         chartTitle: String,
-        network: Network,
         annotate: Bool = true
     ) {
-        self.validatorSummary = validatorSummary
+        self.accountId = accountId
+        self.identityDisplay = identityDisplay
         self.factor = factor
         self.title = title
         self.chartTitle = chartTitle
@@ -105,7 +108,7 @@ struct RewardReportView: View {
                         .id(0)
                         .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
                     Group {
-                        Text(self.validatorSummary.identityDisplay)
+                        Text(self.identityDisplay)
                             .font(UI.Font.Report.validatorDisplay)
                             .foregroundColor(Color("Text"))
                             .modifier(PanelAppearance(2, self.displayState))
@@ -190,8 +193,8 @@ struct RewardReportView: View {
         .onAppear() {
             if self.displayState != .appeared {
                 self.viewModel.initialize(
-                    validatorSummary: self.validatorSummary,
-                    network: self.network
+                    network: self.network,
+                    accountId: self.accountId
                 )
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.displayState = .appeared
@@ -327,11 +330,12 @@ struct RewardReportView: View {
 struct RewardReportView_Previews: PreviewProvider {
     static var previews: some View {
         RewardReportView(
-            validatorSummary: PreviewData.validatorSummary,
+            network: PreviewData.kusama,
+            accountId: PreviewData.validatorSummary.accountId,
+            identityDisplay: PreviewData.validatorSummary.identityDisplay,
             factor: .none,
             title: "Kusama Report",
-            chartTitle: "Report",
-            network: PreviewData.kusama
+            chartTitle: "Report"
         )
     }
 }

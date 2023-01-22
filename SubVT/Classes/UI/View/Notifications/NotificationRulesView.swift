@@ -135,9 +135,9 @@ struct NotificationRulesView: View {
                                 .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
                             ForEach(self.viewModel.rules, id: \.self.id) {
                                 rule in
-                                NavigationLink {
-                                    EditNotificationRuleView(mode: .edit(rule: rule))
-                                } label: {
+                                NavigationLink(
+                                    value: Screen.editNotificationRule(rule: rule)
+                                ) {
                                     NotificationRuleView(rule: rule)
                                         .modifier(SwipeDeleteViewModifier {
                                             self.viewModel.deleteRule(rule) { isSuccessful in
@@ -154,7 +154,6 @@ struct NotificationRulesView: View {
                                                 }
                                             }
                                         })
-
                                 }
                                 .buttonStyle(PushButtonStyle())
                             }
@@ -198,9 +197,9 @@ struct NotificationRulesView: View {
             }
             FooterGradientView()
                 .zIndex(2)
-            NavigationLink {
-                EditNotificationRuleView(mode: .create)
-            } label: {
+            NavigationLink(
+                value: Screen.createNotificationRule
+            ) {
                 self.addRuleButtonView
             }
             .opacity(self.addRuleButtonIsEnabled ? 1.0 : 0.0)

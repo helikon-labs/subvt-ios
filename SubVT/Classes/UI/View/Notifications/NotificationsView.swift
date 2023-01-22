@@ -81,9 +81,7 @@ struct NotificationsView: View {
                     }
                     Button(localized("common.cancel"), role: .cancel) {}
                 }
-                NavigationLink {
-                    NotificationRulesView()
-                } label: {
+                NavigationLink(value: Screen.notificationRules) {
                     ZStack {
                         UI.Image.Notifications.settingsIcon(self.colorScheme)
                     }

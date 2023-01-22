@@ -10,7 +10,7 @@ import SwiftUI
 import SubVTData
 
 struct EraReportView: View {
-    enum `Type` {
+    enum `Type`: Hashable {
         case line
         case bar
     }

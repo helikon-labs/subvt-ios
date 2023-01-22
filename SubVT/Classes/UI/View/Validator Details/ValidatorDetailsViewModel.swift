@@ -36,14 +36,14 @@ class ValidatorDetailsViewModel: ObservableObject {
     private(set) var subscriptionIsInProgress = false
     private var cancellables: Set<AnyCancellable> = []
     
-    var network: Network? = nil
+    var network: Network = PreviewData.kusama
     var accountId: AccountId? = nil
     
     private func initService() {
-        guard let validatorDetailsServiceRPCHost = self.network?.validatorDetailsServiceHost,
-              let validatorDetailsServiceRPCPort = self.network?.validatorDetailsServicePort,
-              let reportServiceHost = self.network?.reportServiceHost,
-              let reportServicePort = self.network?.reportServicePort else {
+        guard let validatorDetailsServiceRPCHost = self.network.validatorDetailsServiceHost,
+              let validatorDetailsServiceRPCPort = self.network.validatorDetailsServicePort,
+              let reportServiceHost = self.network.reportServiceHost,
+              let reportServicePort = self.network.reportServicePort else {
             return
         }
         self.service = SubVTData.ValidatorDetailsService(
@@ -199,8 +199,7 @@ class ValidatorDetailsViewModel: ObservableObject {
         onSuccess: (() -> ())?,
         onError: @escaping (Error) -> ()
     ) {
-        guard let network = self.network,
-              let accountId = self.accountId else {
+        guard let accountId = self.accountId else {
             return
         }
         self.userValidatorsFetchState = .loading
@@ -214,7 +213,7 @@ class ValidatorDetailsViewModel: ObservableObject {
                 } else {
                     self.userValidatorsFetchState = .success(result: response.value!)
                     self.userValidator = response.value!.first { userValidator in
-                        userValidator.networkId == network.id
+                        userValidator.networkId == self.network.id
                             && userValidator.validatorAccountId == accountId
                     }
                     onSuccess?()
@@ -245,13 +244,12 @@ class ValidatorDetailsViewModel: ObservableObject {
         onSuccess: (() -> ())?,
         onError: @escaping (Error) -> ()
     ) {
-        guard let network = self.network,
-              let accountId = self.accountId else {
+        guard let accountId = self.accountId else {
             return
         }
         self.appService.createUserValidator(
             validator: NewUserValidator(
-                networkId: network.id,
+                networkId: self.network.id,
                 validatorAccountId: accountId
             )
         ).sink {

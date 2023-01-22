@@ -104,12 +104,12 @@ struct MyValidatorsView: View {
                             let network = networks!.first(where: { network in
                                 network.id == validator.networkId
                             })!
-                            NavigationLink {
-                                ValidatorDetailsView(
-                                    network: network,
-                                    validatorSummary: validator
+                            NavigationLink(
+                                value: Screen.validatorDetails(
+                                    networkId: validator.networkId,
+                                    accountId: validator.accountId
                                 )
-                            } label: {
+                            ) {
                                 ValidatorSummaryView(
                                     validatorSummary: validator,
                                     network: network,
@@ -119,7 +119,6 @@ struct MyValidatorsView: View {
                                 .modifier(SwipeDeleteViewModifier {
                                     self.viewModel.deleteUserValidator(userValidatorSummary)
                                 })
-
                             }
                             .transition(.move(edge: .leading))
                             .buttonStyle(PushButtonStyle())
@@ -164,9 +163,9 @@ struct MyValidatorsView: View {
             }
             FooterGradientView()
                 .zIndex(1)
-            NavigationLink {
-                AddValidatorsView()
-            } label: {
+            NavigationLink(
+                value: Screen.addValidators
+            ) {
                 self.addValidatorsButtonView
             }
             .opacity(self.addValidatorButtonIsEnabled ? 1.0 : 0.0)

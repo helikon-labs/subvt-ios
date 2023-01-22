@@ -12,7 +12,7 @@ struct ValidatorListView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationMode) private var presentationMode
-    @AppStorage(AppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
+    @EnvironmentObject private var router: Router
     @StateObject private var viewModel = ValidatorListViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
     @State private var displayState: BasicViewDisplayState = .notAppeared
@@ -21,6 +21,7 @@ struct ValidatorListView: View {
     @State private var lastScroll: CGFloat = 0
     @State private var popupIsVisible = false
     
+    let network: Network
     let mode: ValidatorListViewModel.Mode
     static let filterSectionHeight = UI.Dimension.ValidatorList.searchBarMarginTop
         + UI.Dimension.Common.searchBarHeight
@@ -87,7 +88,8 @@ struct ValidatorListView: View {
                             Button(
                                 action: {
                                     self.viewModel.unsubscribe()
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    //self.presentationMode.wrappedValue.dismiss()
+                                    self.router.path.removeLast()
                                 },
                                 label: {
                                     BackButtonView()
@@ -207,12 +209,12 @@ struct ValidatorListView: View {
                             .frame(height: UI.Dimension.ValidatorList.scrollContentMarginTop)
                         ForEach(self.viewModel.validators, id: \.self.address) {
                             validator in
-                            NavigationLink {
-                                ValidatorDetailsView(
-                                    network: self.network,
-                                    validatorSummary: validator
+                            NavigationLink(
+                                value: Screen.validatorDetails(
+                                    networkId: self.network.id,
+                                    accountId: validator.accountId
                                 )
-                            } label: {
+                            ) {
                                 ValidatorSummaryView(
                                     validatorSummary: validator,
                                     network: self.network
@@ -297,6 +299,9 @@ struct ValidatorListView: View {
 
 struct ValidatorListView_Previews: PreviewProvider {
     static var previews: some View {
-        ValidatorListView(mode: .active)
+        ValidatorListView(
+            network: PreviewData.kusama,
+            mode: .active
+        )
     }
 }

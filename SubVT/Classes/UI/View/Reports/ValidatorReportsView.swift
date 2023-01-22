@@ -19,7 +19,8 @@ struct ValidatorReportsView: View {
     @State private var chartRevealPercentage: CGFloat = 1.0
     
     private let network: Network
-    private let validatorSummary: ValidatorSummary
+    private let accountId: AccountId
+    private let identityDisplay: String
     private let startEra: Era
     private let endEra: Era
     
@@ -27,15 +28,16 @@ struct ValidatorReportsView: View {
     
     init(
         network: Network,
-        validatorSummary: ValidatorSummary,
+        accountId: AccountId,
+        identityDisplay: String,
         startEra: Era,
         endEra: Era
     ) {
         self.network = network
-        self.validatorSummary = validatorSummary
+        self.accountId = accountId
+        self.identityDisplay = identityDisplay
         self.startEra = startEra
         self.endEra = endEra
-        
         self.dateFormatter.dateFormat = "dd MMM ''YY HH:mm"
     }
     
@@ -186,8 +188,8 @@ struct ValidatorReportsView: View {
         .onAppear() {
             if self.displayState != .appeared {
                 self.viewModel.initialize(
-                    validatorSummary: self.validatorSummary,
-                    network: self.network
+                    network: self.network,
+                    accountId: self.accountId
                 )
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.displayState = .appeared
@@ -252,7 +254,7 @@ struct ValidatorReportsView: View {
                     .id(0)
                     .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
                 Group {
-                    Text(self.validatorSummary.identityDisplay)
+                    Text(self.identityDisplay)
                         .font(UI.Font.Report.validatorDisplay)
                         .foregroundColor(Color("Text"))
                         .modifier(PanelAppearance(0, self.chartDisplayState))
@@ -274,7 +276,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.active"),
                             chartTitle: localized("reports.validator.active"),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -294,7 +296,7 @@ struct ValidatorReportsView: View {
                             factor: .hundred,
                             title: localized("reports.validator.commission"),
                             chartTitle: localized("reports.validator.commission_with_percent"),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra,
@@ -317,7 +319,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.validator.self_stake_with_ticker"),
                                 self.network.tokenTicker
                             ),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -345,7 +347,7 @@ struct ValidatorReportsView: View {
                             factor: factor,
                             title: localized("reports.validator.total_stake"),
                             chartTitle: chartTitle,
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -364,7 +366,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.block_count"),
                             chartTitle: localized("reports.validator.block_count"),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -381,7 +383,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.reward_points"),
                             chartTitle: localized("reports.validator.reward_points"),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -403,7 +405,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.validator.self_reward_with_ticker"),
                                 self.network.tokenTicker
                             ),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -423,7 +425,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.validator.staker_reward_with_ticker"),
                                 self.network.tokenTicker
                             ),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -442,7 +444,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.offline_offences"),
                             chartTitle: localized("reports.offences"),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -459,7 +461,7 @@ struct ValidatorReportsView: View {
                             factor: .none,
                             title: localized("reports.validator.chilling_count"),
                             chartTitle: localized("reports.validator.chillings"),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -481,7 +483,7 @@ struct ValidatorReportsView: View {
                                 format: localized("reports.slashed_with_ticker"),
                                 self.network.tokenTicker
                             ),
-                            validatorIdentityDisplay: self.validatorSummary.identityDisplay,
+                            validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
                             endEra: self.endEra
@@ -683,7 +685,7 @@ struct ValidatorReportsView: View {
                 Spacer()
                     .id(0)
                     .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
-                Text(self.validatorSummary.identityDisplay)
+                Text(self.identityDisplay)
                     .font(UI.Font.Report.validatorDisplay)
                     .foregroundColor(Color("Text"))
                     .modifier(PanelAppearance(0, self.chartDisplayState))
@@ -836,7 +838,8 @@ struct ValidatorReportsView_Previews: PreviewProvider {
     static var previews: some View {
         ValidatorReportsView(
             network: PreviewData.kusama,
-            validatorSummary: PreviewData.validatorSummary,
+            accountId: PreviewData.validatorSummary.accountId,
+            identityDisplay: PreviewData.validatorSummary.identityDisplay,
             startEra: PreviewData.era,
             endEra: PreviewData.era
         )

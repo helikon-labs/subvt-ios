@@ -10,6 +10,7 @@ import SwiftUI
 
 struct HomeView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
+    @EnvironmentObject private var router: Router
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var currentTab: Tab = .network
     @State private var showsTabBar = false
@@ -26,7 +27,7 @@ struct HomeView: View {
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack(path: self.$router.path) {
             ZStack {
                 Color("Bg")
                     .ignoresSafeArea()
@@ -74,9 +75,10 @@ struct HomeView: View {
                 .ignoresSafeArea()
                 .zIndex(4)
             }
+            .navigationDestination(for: Screen.self) { screen in
+                screen.build()
+            }
         }
-        //.navigationBarTitleDisplayMode(.inline)
-        .navigationViewStyle(.stack)
         .onAppear() {
             DispatchQueue.main.asyncAfter(deadline: .now()) {
                 self.displayState = .appeared

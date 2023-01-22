@@ -146,9 +146,12 @@ struct NetworkStatusView: View {
                             .id(0)
                             .frame(height: UI.Dimension.Common.contentAfterTitleMarginTop)
                         HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                            NavigationLink {
-                                ValidatorListView(mode: .active)
-                            } label: {
+                            NavigationLink(
+                                value: Screen.validatorList(
+                                    network: self.network,
+                                    mode: .active
+                                )
+                            ) {
                                 ValidatorListButtonView(
                                     title: LocalizedStringKey("active_validator_list.title"),
                                     count: self.viewModel.networkStatus.activeValidatorCount,
@@ -158,10 +161,13 @@ struct NetworkStatusView: View {
                                 )
                             }
                             .buttonStyle(ValidatorListButtonStyle())
-                            .modifier(PanelAppearance(2, self.displayState))
-                            NavigationLink {
-                                ValidatorListView(mode: .inactive)
-                            } label: {
+                            .modifier(PanelAppearance(1, self.displayState))
+                            NavigationLink(
+                                value: Screen.validatorList(
+                                    network: self.network,
+                                    mode: .inactive
+                                )
+                            ) {
                                 ValidatorListButtonView(
                                     title: LocalizedStringKey("inactive_validator_list.title"),
                                     count: self.viewModel.networkStatus.inactiveValidatorCount,

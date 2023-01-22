@@ -24,18 +24,18 @@ class ValidatorReportsViewModel: ObservableObject {
     @Published private(set) var chillings: [(Int, Int)] = []
     @Published private(set) var slashes: [(Int, Balance)] = []
     
-    private var validatorSummary: ValidatorSummary! = nil
     private var network: Network! = nil
+    private var accountId: AccountId! = nil
     private var reportService: ReportService! = nil
     
     private var cancellables = Set<AnyCancellable>()
     
     func initialize(
-        validatorSummary: ValidatorSummary,
-        network: Network
+        network: Network,
+        accountId: AccountId
     ) {
-        self.validatorSummary = validatorSummary
         self.network = network
+        self.accountId = accountId
         self.reportService = SubVTData.ReportService(
             host: self.network.reportServiceHost!,
             port: self.network.reportServicePort!
@@ -49,7 +49,7 @@ class ValidatorReportsViewModel: ObservableObject {
         guard self.fetchState != .loading else { return }
         self.fetchState = .loading
         self.reportService.getEraValidatorReport(
-            validatorAccountId: self.validatorSummary.accountId,
+            validatorAccountId: self.accountId,
             startEraIndex: startEraIndex,
             endEraIndex: endEraIndex
         ).sink {

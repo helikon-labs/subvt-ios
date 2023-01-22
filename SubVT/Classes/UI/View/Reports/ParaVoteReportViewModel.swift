@@ -17,13 +17,13 @@ class ParaVoteReportViewModel: ObservableObject {
     private var network: Network! = nil
     private var reportService: ReportService! = nil
     
-    static let fetchReportCount: UInt32 = 9
+    static let fetchReportCount: UInt32 = 30
     
     private var cancellables = Set<AnyCancellable>()
     
     func initialize(
-        accountId: AccountId,
-        network: Network
+        network: Network,
+        accountId: AccountId
     ) {
         self.accountId = accountId
         self.network = network

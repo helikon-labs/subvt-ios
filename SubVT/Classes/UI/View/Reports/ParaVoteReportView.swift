@@ -14,15 +14,18 @@ struct ParaVoteReportView: View {
     @StateObject private var viewModel = ParaVoteReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     
-    private let validatorSummary: ValidatorSummary
     private let network: Network
+    private let accountId: AccountId
+    private let identityDisplay: String
     
     init(
-        validatorSummary: ValidatorSummary,
-        network: Network
+        network: Network,
+        accountId: AccountId,
+        identityDisplay: String
     ) {
-        self.validatorSummary = validatorSummary
         self.network = network
+        self.accountId = accountId
+        self.identityDisplay = identityDisplay
     }
     
     private var headerView: some View {
@@ -93,7 +96,7 @@ struct ParaVoteReportView: View {
                         .id(0)
                         .frame(height: UI.Dimension.MyValidators.scrollContentMarginTop)
                     Group {
-                        Text(self.validatorSummary.identityDisplay)
+                        Text(self.identityDisplay)
                             .font(UI.Font.Report.validatorDisplay)
                             .foregroundColor(Color("Text"))
                             .modifier(PanelAppearance(2, self.displayState))
@@ -181,8 +184,8 @@ struct ParaVoteReportView: View {
         .onAppear() {
             if self.displayState != .appeared {
                 self.viewModel.initialize(
-                    accountId: self.validatorSummary.accountId,
-                    network: self.network
+                    network: self.network,
+                    accountId: self.accountId
                 )
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.displayState = .appeared
@@ -323,8 +326,9 @@ struct ParaVoteReportView: View {
 struct ParaVoteReportView_Previews: PreviewProvider {
     static var previews: some View {
         ParaVoteReportView(
-            validatorSummary: PreviewData.validatorSummary,
-            network: PreviewData.kusama
+            network: PreviewData.kusama,
+            accountId: PreviewData.validatorSummary.accountId,
+            identityDisplay: PreviewData.validatorSummary.identityDisplay
         )
     }
 }

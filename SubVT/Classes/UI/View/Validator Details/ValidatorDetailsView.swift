@@ -39,12 +39,20 @@ struct ValidatorDetailsView: View {
     
     @State private var phase: Double = 0.0
     
-    let network: Network
-    let validatorSummary: ValidatorSummary
+    private let networkId: UInt64
+    private let accountId: AccountId
+    
+    init(
+        networkId: UInt64,
+        accountId: AccountId
+    ) {
+        self.networkId = networkId
+        self.accountId = accountId
+    }
     
     var identityDisplay: String {
         return self.viewModel.validatorDetails?.identityDisplay
-            ?? validatorSummary.identityDisplay
+            ?? " "
     }
     
     private var identityIcon: Image? {
@@ -61,18 +69,6 @@ struct ValidatorDetailsView: View {
                 } else {
                     return Image("IdentityNotConfirmedIcon")
                 }
-            }
-        } else if self.validatorSummary.parentDisplay != nil {
-            if self.validatorSummary.confirmed {
-                return Image("ParentIdentityConfirmedIcon")
-            } else {
-                return Image("ParentIdentityNotConfirmedIcon")
-            }
-        } else if self.validatorSummary.display != nil {
-            if self.validatorSummary.confirmed {
-                return Image("IdentityConfirmedIcon")
-            } else {
-                return Image("IdentityNotConfirmedIcon")
             }
         }
         return nil
@@ -127,57 +123,50 @@ struct ValidatorDetailsView: View {
     private var isOneKV: Bool {
         if let details = self.viewModel.validatorDetails {
             return details.onekvCandidateRecordId != nil
-        } else {
-            return self.validatorSummary.isEnrolledIn1Kv
         }
+        return false
     }
     
     private var isParaValidator: Bool {
         if let details = self.viewModel.validatorDetails {
             return details.isParaValidator
-        } else {
-            return self.validatorSummary.isParaValidator
         }
+        return false
     }
     
     private var isActiveNextSession: Bool {
         if let details = self.viewModel.validatorDetails {
             return details.isActiveNextSession
-        } else {
-            return self.validatorSummary.isActiveNextSession
         }
+        return false
     }
     
     private var heartbeatReceived: Bool {
         if let details = self.viewModel.validatorDetails {
             return details.heartbeatReceived ?? false
-        } else {
-            return self.validatorSummary.heartbeatReceived ?? false
         }
+        return false
     }
     
     private var isOversubscribed: Bool {
         if let details = self.viewModel.validatorDetails {
             return details.oversubscribed
-        } else {
-            return self.validatorSummary.oversubscribed
         }
+        return false
     }
     
     private var blocksNominations: Bool {
         if let details = self.viewModel.validatorDetails {
             return details.preferences.blocksNominations
-        } else {
-            return self.validatorSummary.preferences.blocksNominations
         }
+        return false
     }
     
     private var hasBeenSlashed: Bool {
         if let details = self.viewModel.validatorDetails {
             return details.slashCount > 0
-        } else {
-            return self.validatorSummary.slashCount > 0
         }
+        return false
     }
     
     private var addRemoveValidatorButtonIsEnabled: Bool {
@@ -223,17 +212,20 @@ struct ValidatorDetailsView: View {
         ZStack {
             Color("Bg")
                 .ignoresSafeArea()
-            BgMorphView(isActive: self.validatorSummary.isActive)
+            BgMorphView(isActive: self.viewModel.validatorDetails?.isActive ?? false)
                 .offset(
                     x: 0,
                     y: UI.Dimension.BgMorph.yOffset(
                         displayState: self.displayState
                     )
                 )
-                .opacity(UI.Dimension.Common.displayStateOpacity(self.displayState))
                 .animation(
                     .easeOut(duration: 0.75),
                     value: self.displayState
+                )
+                .animation(
+                    .easeOut(duration: 1.0),
+                    value: self.viewModel.validatorDetails
                 )
             ZStack {
                 VStack(spacing: 0) {
@@ -253,7 +245,7 @@ struct ValidatorDetailsView: View {
                         .modifier(PanelAppearance(1, self.displayState))
                         Spacer()
                         NetworkSelectorButtonView(
-                            network: self.network,
+                            network: self.viewModel.network,
                             displayType: .display
                         )
                         .modifier(PanelAppearance(2, self.displayState))
@@ -289,19 +281,19 @@ struct ValidatorDetailsView: View {
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(3, self.displayState))
                         .disabled(!self.addRemoveValidatorButtonIsEnabled)
-                        
-                        NavigationLink {
-                            RewardReportView(
-                                validatorSummary: self.validatorSummary,
+                        NavigationLink(
+                            value: Screen.rewardReport(
+                                network: self.viewModel.network,
+                                accountId: self.accountId,
+                                identityDisplay: self.identityDisplay,
                                 factor: .none,
                                 title: localized("reports.monthly_reward.title"),
                                 chartTitle: String(
                                     format: localized("reports.monthly_reward.chart_title_with_ticker"),
-                                    self.network.tokenTicker
-                                ),
-                                network: self.network
+                                    self.viewModel.network.tokenTicker
+                                )
                             )
-                        } label: {
+                        ) {
                             ZStack {
                                 Text("$")
                                     .font(UI.Font.Common.navigationBarButton)
@@ -318,12 +310,13 @@ struct ValidatorDetailsView: View {
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(4, self.displayState))
                         
-                        NavigationLink {
-                            ParaVoteReportView(
-                                validatorSummary: self.validatorSummary,
-                                network: self.network
+                        NavigationLink(
+                            value: Screen.paraVoteReport(
+                                network: self.viewModel.network,
+                                accountId: self.accountId,
+                                identityDisplay: self.identityDisplay
                             )
-                        } label: {
+                        ) {
                             ZStack {
                                 Text("PV")
                                     .font(UI.Font.Common.navigationBarButtonSmall)
@@ -340,13 +333,15 @@ struct ValidatorDetailsView: View {
                         .buttonStyle(PushButtonStyle())
                         .modifier(PanelAppearance(5, self.displayState))
                         
-                        NavigationLink {
-                            ReportRangeSelectionView(
-                                mode: .validator(
-                                    validatorSummary: self.validatorSummary
+                        NavigationLink(
+                            value: Screen.reportRangeSelection(
+                                mode: ReportRangeSelectionView.Mode.validator(
+                                    network: self.viewModel.network,
+                                    accountId: self.accountId,
+                                    identityDisplay: self.identityDisplay
                                 )
                             )
-                        } label: {
+                        ) {
                             ZStack {
                                 UI.Image.ValidatorDetails.validatorReportsIcon(self.colorScheme)
                             }
@@ -391,7 +386,7 @@ struct ValidatorDetailsView: View {
                             .id(0)
                             .frame(height: UI.Dimension.ValidatorDetails.scrollContentMarginTop)
                         IdenticonSceneView(
-                            accountId: validatorSummary.accountId,
+                            accountId: self.accountId,
                             rotation: self.viewModel.deviceRotation
                         )
                         .frame(height: UI.Dimension.ValidatorDetails.identiconHeight)
@@ -449,7 +444,7 @@ struct ValidatorDetailsView: View {
                                     .modifier(PanelAppearance(17, self.displayState))
                                 }
                             }
-                            if self.validatorSummary.isEnrolledIn1Kv {
+                            if let _ = self.viewModel.validatorDetails?.onekvCandidateRecordId {
                                 Group {
                                     Spacer()
                                         .frame(height: 8)
@@ -504,15 +499,17 @@ struct ValidatorDetailsView: View {
                 isVisible: self.$actionFeedbackViewIsVisible
             )
             .zIndex(1)
-            ValidatorDetailsIconsView(
-                validatorSummary: self.validatorSummary
-            )
-            .offset(
-                x: 0,
-                y: -UI.Dimension.ValidatorDetails.iconContainerMarginBottom
-            )
-            .zIndex(2)
-            .modifier(PanelAppearance(5, self.displayState))
+            if let validatorDetails = self.viewModel.validatorDetails {
+                ValidatorDetailsIconsView(
+                    validatorDetails: validatorDetails
+                )
+                .offset(
+                    x: 0,
+                    y: -UI.Dimension.ValidatorDetails.iconContainerMarginBottom
+                )
+                .zIndex(2)
+                .modifier(PanelAppearance(5, self.displayState))
+            }
         }
         .navigationBarHidden(true)
         .ignoresSafeArea()
@@ -522,18 +519,22 @@ struct ValidatorDetailsView: View {
             maxHeight: .infinity,
             alignment: .leading
         )
+        .animation(
+            .easeInOut(duration: 0.25),
+            value: self.viewModel.validatorDetails
+        )
         .onAppear() {
             KeyboardUtil.dismissKeyboard()
+            self.viewModel.network = (self.networks?.first(where: { $0.id == self.networkId }))!
+            self.viewModel.accountId = self.accountId
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    if self.validatorSummary.isActive {
+                    if self.viewModel.validatorDetails?.isActive ?? false {
                         withAnimation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true)) {
                             self.phase = 180.0
                         }
                     }
-                    self.viewModel.network = self.network
-                    self.viewModel.accountId = self.validatorSummary.accountId
                     self.viewModel.startDeviceMotion()
                     self.viewModel.subscribeToValidatorDetails()
                     self.viewModel.fetchUserValidators {
@@ -587,11 +588,11 @@ extension ValidatorDetailsView {
                 if let validatorDetails = self.viewModel.validatorDetails {
                     Text(formatBalance(
                         balance: validatorDetails.nominationTotal,
-                        tokenDecimalCount: self.network.tokenDecimalCount
+                        tokenDecimalCount: self.viewModel.network.tokenDecimalCount
                     ))
                     .font(UI.Font.Common.balanceLarge)
                     .foregroundColor(Color("Text"))
-                    Text(self.network.tokenTicker)
+                    Text(self.viewModel.network.tokenTicker)
                         .font(UI.Font.Common.tickerLarge)
                         .foregroundColor(Color("Text"))
                         .opacity(0.6)
@@ -610,11 +611,11 @@ extension ValidatorDetailsView {
                 if let selfStake = self.viewModel.validatorDetails?.selfStake {
                     Text(formatBalance(
                         balance: selfStake.activeAmount,
-                        tokenDecimalCount: self.network.tokenDecimalCount
+                        tokenDecimalCount: self.viewModel.network.tokenDecimalCount
                     ))
                     .font(UI.Font.Common.balanceLarge)
                     .foregroundColor(Color("Text"))
-                    Text(self.network.tokenTicker)
+                    Text(self.viewModel.network.tokenTicker)
                         .font(UI.Font.Common.tickerLarge)
                         .foregroundColor(Color("Text"))
                         .opacity(0.6)
@@ -656,11 +657,11 @@ extension ValidatorDetailsView {
                     if let activeStake = self.viewModel.validatorDetails?.validatorStake {
                         Text(formatBalance(
                             balance: activeStake.totalStake,
-                            tokenDecimalCount: self.network.tokenDecimalCount
+                            tokenDecimalCount: self.viewModel.network.tokenDecimalCount
                         ))
                         .font(UI.Font.Common.balanceLarge)
                         .foregroundColor(Color("Text"))
-                        Text(self.network.tokenTicker)
+                        Text(self.viewModel.network.tokenTicker)
                             .font(UI.Font.Common.tickerLarge)
                             .foregroundColor(Color("Text"))
                             .opacity(0.6)
@@ -682,7 +683,7 @@ extension ValidatorDetailsView {
                     ScrollView {
                         LazyVStack(spacing: 4) {
                             ForEach(nominators, id: \.self.account.id) { nominator in
-                                let onekvNominators = self.onekvNominators[self.validatorSummary.networkId] ?? []
+                                let onekvNominators = self.onekvNominators[self.networkId] ?? []
                                 HStack(alignment: .center) {
                                     Text(truncateAddress(nominator.account.address))
                                         .font(UI.Font.ValidatorDetails.nominator)
@@ -698,7 +699,7 @@ extension ValidatorDetailsView {
                                     Spacer()
                                     Text(formatBalance(
                                         balance: nominator.stake,
-                                        tokenDecimalCount: self.network.tokenDecimalCount
+                                        tokenDecimalCount: self.viewModel.network.tokenDecimalCount
                                     ))
                                     .font(UI.Font.ValidatorDetails.nominator)
                                     .foregroundColor(Color("Text"))
@@ -746,22 +747,23 @@ extension ValidatorDetailsView {
                         .font(UI.Font.Common.dataPanelTitle)
                         .foregroundColor(Color("Text"))
                     Spacer()
-                    if self.inactiveNominatorListIsVisible {
-                        UI.Image.Common.arrowUp(self.colorScheme)
-                    } else {
-                        UI.Image.Common.arrowDown(self.colorScheme)
+                    if (self.viewModel.inactiveNominationCount ?? 0) > 0 {
+                        if self.inactiveNominatorListIsVisible {
+                            UI.Image.Common.arrowUp(self.colorScheme)
+                        } else {
+                            UI.Image.Common.arrowDown(self.colorScheme)
+                        }
                     }
-
                 }
                 HStack(alignment: .center, spacing: 8) {
                     if let inactiveNominationTotal = self.viewModel.inactiveNominationTotal {
                         Text(formatBalance(
                             balance: inactiveNominationTotal,
-                            tokenDecimalCount: self.network.tokenDecimalCount
+                            tokenDecimalCount: self.viewModel.network.tokenDecimalCount
                         ))
                         .font(UI.Font.Common.balanceLarge)
                         .foregroundColor(Color("Text"))
-                        Text(self.network.tokenTicker)
+                        Text(self.viewModel.network.tokenTicker)
                             .font(UI.Font.Common.tickerLarge)
                             .foregroundColor(Color("Text"))
                             .opacity(0.6)
@@ -791,7 +793,7 @@ extension ValidatorDetailsView {
                                     Spacer()
                                     Text(formatBalance(
                                         balance: nominator.stake.activeAmount,
-                                        tokenDecimalCount: self.network.tokenDecimalCount
+                                        tokenDecimalCount: self.viewModel.network.tokenDecimalCount
                                     ))
                                     .font(UI.Font.ValidatorDetails.nominator)
                                     .foregroundColor(Color("Text"))
@@ -825,7 +827,7 @@ extension ValidatorDetailsView {
         DataPanelView(localized("validator_details.reward_destination")) {
             if let destination = self.viewModel.validatorDetails?.rewardDestination {
                 Text(destination.getDisplay(
-                    ss58Prefix: UInt16(self.network.ss58Prefix))
+                    ss58Prefix: UInt16(self.viewModel.network.ss58Prefix))
                 )
                 .font(UI.Font.Common.dataMedium)
                 .foregroundColor(Color("Text"))
@@ -1055,8 +1057,8 @@ extension ValidatorDetailsView {
 struct ValidatorDetailsView_Previews: PreviewProvider {
     static var previews: some View {
         ValidatorDetailsView(
-            network: PreviewData.kusama,
-            validatorSummary: PreviewData.validatorSummary
+            networkId: PreviewData.validatorSummary.networkId,
+            accountId: PreviewData.stashAccountId
         )
     }
 }

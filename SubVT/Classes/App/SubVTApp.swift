@@ -14,7 +14,8 @@ import SwiftUI
 @main
 struct SubVTApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
-    let persistenceController = PersistenceController.shared
+    private let persistenceController = PersistenceController.shared
+    @ObservedObject private var router = Router()
     
     var body: some Scene {
         WindowGroup {
@@ -23,6 +24,7 @@ struct SubVTApp: App {
                     \.managedObjectContext,
                      persistenceController.container.viewContext
                 )
+                .environmentObject(router)
                 .defaultAppStorage(UserDefaultsUtil.shared)
                 .onAppear() {
                     UNUserNotificationCenter.current().delegate = appDelegate

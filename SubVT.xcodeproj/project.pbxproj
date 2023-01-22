@@ -42,6 +42,7 @@
 		A028D86C29420EA500794C84 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A028D86B29420EA500794C84 /* GoogleService-Info.plist */; };
 		A030024F2937466400F7BB1E /* EraReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030024E2937466400F7BB1E /* EraReportView.swift */; };
 		A03002512937468900F7BB1E /* EraReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03002502937468900F7BB1E /* EraReportViewModel.swift */; };
+		A03341A9297D3B7E00DA63EE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03341A8297D3B7E00DA63EE /* Router.swift */; };
 		A03B954128524E0500836A94 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03B954028524E0500836A94 /* IntroductionView.swift */; };
 		A03BA5E628F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
 		A03BA5E728F94A960074108F /* UI+Dimension+EditNotificationRule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */; };
@@ -408,6 +409,7 @@
 		A028D86B29420EA500794C84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A030024E2937466400F7BB1E /* EraReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraReportView.swift; sourceTree = "<group>"; };
 		A03002502937468900F7BB1E /* EraReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraReportViewModel.swift; sourceTree = "<group>"; };
+		A03341A8297D3B7E00DA63EE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A03B954028524E0500836A94 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		A03BA5E528F94A960074108F /* UI+Dimension+EditNotificationRule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+EditNotificationRule.swift"; sourceTree = "<group>"; };
 		A03C5BE528783C9F00D9D4FD /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
@@ -691,6 +693,14 @@
 				A018C2AC28B90C0500C9A276 /* File.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A03341A7297D3B6E00DA63EE /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				A03341A8297D3B7E00DA63EE /* Router.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		A03C5BE428783C4F00D9D4FD /* Utility */ = {
@@ -1062,6 +1072,7 @@
 			children = (
 				A0128A60284A3BB8000C2307 /* Config */,
 				A0128A6B284A4E9D000C2307 /* Extension */,
+				A03341A7297D3B6E00DA63EE /* Navigation */,
 				A04C47252887F1900004A46A /* Shape */,
 				A0128A4A284A1189000C2307 /* Utility */,
 				A0128A49284A0B50000C2307 /* View */,
@@ -1403,6 +1414,7 @@
 				A000F659297A8C6F001210DF /* ParaVoteReportViewModel.swift in Sources */,
 				A07BA824285B94DB00575683 /* UI+Dimension+Onboarding.swift in Sources */,
 				A06B1E3528E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
+				A03341A9297D3B7E00DA63EE /* Router.swift in Sources */,
 				A04ED599292E1F3200CF089F /* UI+Dimension+ReportRangeSelection.swift in Sources */,
 				A0D3A73D2927A1770037EBC5 /* Dictionary.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,

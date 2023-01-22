@@ -9,9 +9,13 @@ import SubVTData
 import SwiftUI
 
 struct ReportRangeSelectionView: View {
-    enum Mode: Equatable {
+    enum Mode: Equatable, Hashable {
         case network
-        case validator(validatorSummary: ValidatorSummary)
+        case validator(
+            network: Network,
+            accountId: AccountId,
+            identityDisplay: String
+        )
     }
     
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
@@ -70,6 +74,28 @@ struct ReportRangeSelectionView: View {
             )
         } else {
             return ""
+        }
+    }
+    
+    private func getNavigationLinkValue(
+        startEra: Era,
+        endEra: Era
+    ) -> Screen {
+        switch self.mode {
+        case .network:
+            return Screen.networkReports(
+                network: self.viewModel.network,
+                startEra: startEra,
+                endEra: endEra
+            )
+        case .validator(let network, let accountId, let identityDisplay):
+            return Screen.validatorReports(
+                network: network,
+                accountId: accountId,
+                identityDisplay: identityDisplay,
+                startEra: startEra,
+                endEra: endEra
+            )
         }
     }
     
@@ -213,8 +239,8 @@ struct ReportRangeSelectionView: View {
                                     self.networkListView
                                 }
                             }
-                        case .validator(let validatorSummary):
-                            Text(validatorSummary.identityDisplay)
+                        case .validator(_, _, let identityDisplay):
+                            Text(identityDisplay)
                                 .font(UI.Font.Report.validatorDisplay)
                                 .foregroundColor(Color("Text"))
                                 .opacity(
@@ -319,23 +345,12 @@ struct ReportRangeSelectionView: View {
                let endEra = self.viewModel.endEra {
                 VStack() {
                     Spacer()
-                    NavigationLink {
-                        switch self.mode {
-                        case .network:
-                            NetworkReportsView(
-                                network: self.viewModel.network,
-                                startEra: startEra,
-                                endEra: endEra
-                            )
-                        case .validator(let validatorSummary):
-                            ValidatorReportsView(
-                                network: self.viewModel.network,
-                                validatorSummary: validatorSummary,
-                                startEra: startEra,
-                                endEra: endEra
-                            )
-                        }
-                    } label: {
+                    NavigationLink(
+                        value: self.getNavigationLinkValue(
+                            startEra: startEra,
+                            endEra: endEra
+                        )
+                    ) {
                         ActionButtonView(
                             title: localized("common.view"),
                             state: .enabled,
@@ -372,10 +387,8 @@ struct ReportRangeSelectionView: View {
                 switch self.mode {
                 case .network:
                     self.viewModel.network = self.networks[0]
-                case .validator(let validatorSummary):
-                    self.viewModel.network = self.networks.first{
-                        $0.id == validatorSummary.networkId
-                    }!
+                case .validator(let network, _, _):
+                    self.viewModel.network = network
                 }
                 self.viewModel.initReportServices(networks: self.networks)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

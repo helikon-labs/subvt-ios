@@ -13,17 +13,17 @@ class RewardReportViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
     @Published private(set) var data: [(Int, Balance)] = []
     
-    private var validatorSummary: ValidatorSummary! = nil
+    private var accountId: AccountId! = nil
     private var network: Network! = nil
     private var reportService: ReportService! = nil
     
     private var cancellables = Set<AnyCancellable>()
     
     func initialize(
-        validatorSummary: ValidatorSummary,
-        network: Network
+        network: Network,
+        accountId: AccountId
     ) {
-        self.validatorSummary = validatorSummary
+        self.accountId = accountId
         self.network = network
         self.reportService = SubVTData.ReportService(
             host: self.network.reportServiceHost!,
@@ -59,7 +59,7 @@ class RewardReportViewModel: ObservableObject {
     func fetchRewards() {
         self.fetchState = .loading
         self.reportService.getValidatorEraRewardReport(
-            validatorAccountId: self.validatorSummary.accountId
+            validatorAccountId: self.accountId
         )
             .sink {
                 [weak self] response in
