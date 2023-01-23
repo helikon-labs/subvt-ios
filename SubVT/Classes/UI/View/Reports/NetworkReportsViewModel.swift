@@ -13,22 +13,22 @@ import SubVTData
 class NetworkReportsViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
     
-    @Published private(set) var activeNominatorCounts: [(Int, Int)] = []
+    @Published private(set) var activeNominatorCounts: [EraReportView.IntDataPoint] = []
     
     @Published private(set) var totalStakes: [(Int, Double)] = []
-    @Published private(set) var totalStakesBalance: [(Int, Balance)] = []
+    @Published private(set) var totalStakesBalance: [EraReportView.BalanceDataPoint] = []
     
-    @Published private(set) var activeValidatorCounts: [(Int, Int)] = []
+    @Published private(set) var activeValidatorCounts: [EraReportView.IntDataPoint] = []
     @Published private(set) var inactiveValidatorCounts: [(Int, Int)] = []
     @Published private(set) var rewardPoints: [(Int, Double)] = []
     @Published private(set) var totalPaidOut: [(Int, Double)] = []
-    @Published private(set) var totalPaidOutBalance: [(Int, Balance)] = []
+    @Published private(set) var totalPaidOutBalance: [EraReportView.BalanceDataPoint] = []
     
     @Published private(set) var totalRewards: [(Int, Double)] = []
-    @Published private(set) var totalRewardsBalance: [(Int, Balance)] = []
+    @Published private(set) var totalRewardsBalance: [EraReportView.BalanceDataPoint] = []
     @Published private(set) var offlineOffenceCounts: [(Int, Double)] = []
     @Published private(set) var slashes: [(Int, Double)] = []
-    @Published private(set) var slashesBalance: [(Int, Balance)] = []
+    @Published private(set) var slashesBalance: [EraReportView.BalanceDataPoint] = []
     
     var network: Network! = nil
     private var reportService: ReportService! = nil
@@ -69,10 +69,10 @@ class NetworkReportsViewModel: ObservableObject {
     
     private func processReports(reports: [EraReport]) {
         self.activeNominatorCounts = reports.map {
-            (Int($0.era.index), Int($0.activeNominatorCount ?? 0))
+            EraReportView.IntDataPoint(Int($0.era.index), Int($0.activeNominatorCount ?? 0))
         }
         self.activeValidatorCounts = reports.map {
-            (Int($0.era.index), Int($0.activeValidatorCount))
+            EraReportView.IntDataPoint(Int($0.era.index), Int($0.activeValidatorCount))
         }
         self.inactiveValidatorCounts = reports.map {
             (Int($0.era.index), Int($0.inactiveValidatorCount))
@@ -87,7 +87,7 @@ class NetworkReportsViewModel: ObservableObject {
             )
         }
         self.totalPaidOutBalance = reports.map {
-            (
+            EraReportView.BalanceDataPoint(
                 (Int($0.era.index)),
                 $0.totalPaidOut
             )
@@ -99,7 +99,7 @@ class NetworkReportsViewModel: ObservableObject {
             )
         }
         self.totalStakesBalance = reports.map {
-            (
+            EraReportView.BalanceDataPoint(
                 (Int($0.era.index)),
                 $0.totalStake ?? Balance(value: 0)
             )
@@ -111,7 +111,7 @@ class NetworkReportsViewModel: ObservableObject {
             )
         }
         self.totalRewardsBalance = reports.map {
-            (
+            EraReportView.BalanceDataPoint(
                 (Int($0.era.index)),
                 $0.totalReward ?? Balance(value: 0)
             )
@@ -126,7 +126,7 @@ class NetworkReportsViewModel: ObservableObject {
             )
         }
         self.slashesBalance = reports.map {
-            (
+            EraReportView.BalanceDataPoint(
                 (Int($0.era.index)),
                 $0.slashedAmount
             )
@@ -134,11 +134,11 @@ class NetworkReportsViewModel: ObservableObject {
     }
     
     var maxActiveNominatorCount: Int {
-        self.activeNominatorCounts.map { $0.1 }.max { $0 < $1 } ?? 0
+        self.activeNominatorCounts.map { $0.y }.max { $0 < $1 } ?? 0
     }
     
     var maxActiveValidatorCount: Int {
-        self.activeValidatorCounts.map { $0.1 }.max { $0 < $1 } ?? 0
+        self.activeValidatorCounts.map { $0.y }.max { $0 < $1 } ?? 0
     }
     
     var maxRewardPoint: Double {

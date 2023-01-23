@@ -15,9 +15,29 @@ struct EraReportView: View {
         case bar
     }
     
-    enum Data {
-        case integer(dataPoints: [(Int, Int)], max: Int? = nil)
-        case balance(dataPoints: [(Int, Balance)], decimals: UInt8 = 2)
+    struct IntDataPoint: Hashable {
+        let x: Int
+        let y: Int
+        
+        init(_ x: Int, _ y: Int) {
+            self.x = x
+            self.y = y
+        }
+    }
+    
+    struct BalanceDataPoint: Hashable {
+        let x: Int
+        let y: Balance
+        
+        init(_ x: Int, _ y: Balance) {
+            self.x = x
+            self.y = y
+        }
+    }
+    
+    enum Data: Hashable {
+        case integer(dataPoints: [IntDataPoint], max: Int? = nil)
+        case balance(dataPoints: [BalanceDataPoint], decimals: UInt8 = 2)
     }
     
     @EnvironmentObject private var router: Router
@@ -68,13 +88,13 @@ struct EraReportView: View {
             if let max = max {
                 self.max = max
             } else {
-                self.max = dataPoints.map { $0.1 }.max { $0 < $1 } ?? 0
+                self.max = dataPoints.map { $0.y }.max { $0 < $1 } ?? 0
             }
         case .balance(let dataPoints, _):
             self.max = Int(
                 ceil(
                     dataPoints
-                        .map { Double($0.1.value) }
+                        .map { Double($0.y.value) }
                         .max { $0 < $1 } ?? 0.0
                 )
             )
@@ -281,13 +301,13 @@ struct EraReportView: View {
                         switch self.type {
                         case .bar:
                             BarMark(
-                                x: .value(localized("common.era"), dataPoint.0),
-                                y: .value("Value", dataPoint.1)
+                                x: .value(localized("common.era"), dataPoint.x),
+                                y: .value("Value", dataPoint.y)
                             )
                             .foregroundStyle(reportGradient)
                             .annotation(position: .top) {
                                 if self.annotate {
-                                    self.integerValueLabel(value: dataPoint.1)
+                                    self.integerValueLabel(value: dataPoint.y)
                                         .rotationEffect(Angle(degrees: -45))
                                         .opacity(0.75)
                                 } else {
@@ -297,8 +317,8 @@ struct EraReportView: View {
                             }
                         case .line:
                             LineMark(
-                                x: .value(localized("common.era"), dataPoint.0),
-                                y: .value("Value", dataPoint.1)
+                                x: .value(localized("common.era"), dataPoint.x),
+                                y: .value("Value", dataPoint.y)
                             )
                             .foregroundStyle(reportGradient)
                             .interpolationMethod(.catmullRom)
@@ -310,13 +330,13 @@ struct EraReportView: View {
                         switch self.type {
                         case .bar:
                             BarMark(
-                                x: .value(localized("common.era"), dataPoint.0),
-                                y: .value("Value", Double(dataPoint.1.value))
+                                x: .value(localized("common.era"), dataPoint.x),
+                                y: .value("Value", Double(dataPoint.y.value))
                             )
                             .foregroundStyle(reportGradient)
                             .annotation(position: .top) {
                                 if self.annotate {
-                                    self.balanceValueLabel(value: dataPoint.1, decimals: decimals)
+                                    self.balanceValueLabel(value: dataPoint.y, decimals: decimals)
                                         .rotationEffect(Angle(degrees: -45))
                                         .opacity(0.75)
                                 } else {
@@ -326,8 +346,8 @@ struct EraReportView: View {
                             }
                         case .line:
                             LineMark(
-                                x: .value(localized("common.era"), dataPoint.0),
-                                y: .value("Value", Double(dataPoint.1.value))
+                                x: .value(localized("common.era"), dataPoint.x),
+                                y: .value("Value", Double(dataPoint.y.value))
                             )
                             .foregroundStyle(reportGradient)
                             .interpolationMethod(.catmullRom)
@@ -398,27 +418,27 @@ struct EraReportView: View {
 struct ReportView_Previews: PreviewProvider {
     static var previews: some View {
         let dataPoints = [
-            (1000, 10),
-            (1001, 2),
-            (1002, 0),
-            (1003, 7),
-            (1004, 3),
-            (1005, 7),
-            (1006, 2),
-            (1007, 6),
-            (1008, 0),
-            (1009, 17),
-            (1010, 6),
-            (1011, 2),
-            (1012, 0),
-            (1013, 7),
-            (1014, 3),
-            (1015, 7),
-            (1016, 2),
-            (1017, 6),
-            (1018, 0),
-            (1019, 17),
-            (1020, 6)
+            EraReportView.IntDataPoint(1000, 10),
+            EraReportView.IntDataPoint(1001, 2),
+            EraReportView.IntDataPoint(1002, 0),
+            EraReportView.IntDataPoint(1003, 7),
+            EraReportView.IntDataPoint(1004, 3),
+            EraReportView.IntDataPoint(1005, 7),
+            EraReportView.IntDataPoint(1006, 2),
+            EraReportView.IntDataPoint(1007, 6),
+            EraReportView.IntDataPoint(1008, 0),
+            EraReportView.IntDataPoint(1009, 17),
+            EraReportView.IntDataPoint(1010, 6),
+            EraReportView.IntDataPoint(1011, 2),
+            EraReportView.IntDataPoint(1012, 0),
+            EraReportView.IntDataPoint(1013, 7),
+            EraReportView.IntDataPoint(1014, 3),
+            EraReportView.IntDataPoint(1015, 7),
+            EraReportView.IntDataPoint(1016, 2),
+            EraReportView.IntDataPoint(1017, 6),
+            EraReportView.IntDataPoint(1018, 0),
+            EraReportView.IntDataPoint(1019, 17),
+            EraReportView.IntDataPoint(1020, 6)
         ]
         EraReportView(
             type: .line,

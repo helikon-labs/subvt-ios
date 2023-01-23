@@ -33,7 +33,7 @@ struct ReportDataPanelView: View {
 
 struct ReportLineChartView: View {
     private let title: String
-    private let dataPoints: [(Int, Int)]
+    private let dataPoints: [EraReportView.IntDataPoint]
     private let minY: Int
     private let maxY: Int
     private let revealPercentage: CGFloat
@@ -41,7 +41,7 @@ struct ReportLineChartView: View {
     
     init(
         title: String,
-        dataPoints: [(Int, Int)],
+        dataPoints: [EraReportView.IntDataPoint],
         minY: Int,
         maxY: Int,
         revealPercentage: CGFloat,

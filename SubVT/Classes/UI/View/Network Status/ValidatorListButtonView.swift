@@ -98,7 +98,7 @@ struct ValidatorListButtonView: View {
                 trailing: UI.Dimension.Common.dataPanelPadding
             ))
             LineChartView(
-                dataPoints: self.chartDataPoints,
+                dataPoints: self.chartDataPoints.map({ EraReportView.IntDataPoint($0.0 , $0.1) }),
                 chartMinY: self.minValidatorCount - 10,
                 chartMaxY: self.maxValidatorCount + 10,
                 revealPercentage: self.chartRevealPercentage,

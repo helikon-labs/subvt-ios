@@ -259,8 +259,8 @@ struct NetworkReportsView: View {
                 Spacer()
                     .frame(height: 16)
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .line,
                             data: .integer(dataPoints: self.viewModel.activeNominatorCounts),
                             factor: .none,
@@ -269,106 +269,117 @@ struct NetworkReportsView: View {
                                 self.network.display
                             ),
                             chartTitle: localized("reports.active_nominators"),
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.activeNominatorCountsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(2, self.chartDisplayState))
-                    NavigationLink {
-                        let factor = ReportDataFactor.million
-                        EraReportView(
+                    
+                    let totalStakeFactor = ReportDataFactor.million
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalStakesBalance
                             ),
-                            factor: factor,
+                            factor: totalStakeFactor,
                             title: String(
                                 format: localized("reports.network.total_stake_title"),
                                 self.network.display
                             ),
                             chartTitle: String(
                                 format: localized("reports.total_stake_with_factor_ticker"),
-                                factor.description!.capitalized,
+                                totalStakeFactor.description!.capitalized,
                                 self.network.tokenTicker
                             ),
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.totalStakesView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(3, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        let factor = ReportDataFactor.million
-                        EraReportView(
+                    let rewardPointsFactor = ReportDataFactor.million
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(
-                                dataPoints: self.viewModel.rewardPoints.map{ ($0.0, Int($0.1)) }
+                                dataPoints: self.viewModel.rewardPoints.map{
+                                    EraReportView.IntDataPoint($0.0, Int($0.1))
+                                }
                             ),
-                            factor: factor,
+                            factor: rewardPointsFactor,
                             title: String(
                                 format: localized("reports.network.reward_points_title"),
                                 self.network.display
                             ),
                             chartTitle: String(
                                 format: localized("reports.reward_points_with_factor"),
-                                factor.descriptionPlural!.capitalized,
+                                rewardPointsFactor.descriptionPlural!.capitalized,
                                 self.network.tokenTicker
                             ),
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.rewardPointsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(4, self.chartDisplayState))
-                    NavigationLink {
-                        let factor: ReportDataFactor = self.network.tokenTicker == "DOT" ? .thousand : .none
-                        let chartTitle = self.network.tokenTicker == "DOT"
-                            ? String(
-                                format: localized("reports.total_paid_out_with_factor_ticker"),
-                                factor.description!.capitalized,
-                                self.network.tokenTicker
-                            )
-                            : String(
-                                format: localized("reports.total_paid_out_with_ticker"),
-                                self.network.tokenTicker
-                            )
-                        EraReportView(
+                    
+                    let totalPaidOutFactor: ReportDataFactor = self.network.tokenTicker == "DOT" ? .thousand : .none
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalPaidOutBalance,
                                 decimals: 0
                             ),
-                            factor: factor,
+                            factor: totalPaidOutFactor,
                             title: String(
                                 format: localized("reports.network.total_paid_out_title"),
                                 self.network.display
                             ),
-                            chartTitle: chartTitle,
+                            chartTitle: self.network.tokenTicker == "DOT"
+                            ? String(
+                                format: localized("reports.total_paid_out_with_factor_ticker"),
+                                totalPaidOutFactor.description!.capitalized,
+                                self.network.tokenTicker
+                            )
+                            : String(
+                                format: localized("reports.total_paid_out_with_ticker"),
+                                self.network.tokenTicker
+                            ),
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.totalPaidOutView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(5, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .line,
                             data: .integer(
                                 dataPoints: self.viewModel.activeValidatorCounts
@@ -379,55 +390,62 @@ struct NetworkReportsView: View {
                                 self.network.display
                             ),
                             chartTitle: localized("reports.active_validators"),
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.activeValidatorCountsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(6, self.chartDisplayState))
-                    NavigationLink {
-                        let factor: ReportDataFactor = self.network.tokenTicker == "DOT" ? .thousand : .none
-                        let chartTitle = self.network.tokenTicker == "DOT"
-                            ? String(
-                                format: localized("reports.total_reward_with_factor_ticker"),
-                                factor.description!.capitalized,
-                                self.network.tokenTicker
-                            )
-                            : String(
-                                format: localized("reports.total_reward_with_ticker"),
-                                self.network.tokenTicker
-                            )
-                        EraReportView(
+                    
+                    let totalRewardsFactor: ReportDataFactor = self.network.tokenTicker == "DOT" ? .thousand : .none
+                    let totalRewardsChartTitle = self.network.tokenTicker == "DOT"
+                        ? String(
+                            format: localized("reports.total_reward_with_factor_ticker"),
+                            totalRewardsFactor.description!.capitalized,
+                            self.network.tokenTicker
+                        )
+                        : String(
+                            format: localized("reports.total_reward_with_ticker"),
+                            self.network.tokenTicker
+                        )
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalRewardsBalance,
                                 decimals: 0
                             ),
-                            factor: factor,
+                            factor: totalRewardsFactor,
                             title: String(
                                 format: localized("reports.network.total_rewards_title"),
                                 self.network.display
                             ),
-                            chartTitle: chartTitle,
+                            chartTitle: totalRewardsChartTitle,
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.totalRewardsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(7, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(
-                                dataPoints: self.viewModel.offlineOffenceCounts.map { ($0.0, Int($0.1)) }
+                                dataPoints: self.viewModel.offlineOffenceCounts.map {
+                                    EraReportView.IntDataPoint($0.0, Int($0.1))
+                                }
                             ),
                             factor: .none,
                             title: String(
@@ -435,17 +453,20 @@ struct NetworkReportsView: View {
                                 self.network.display
                             ),
                             chartTitle: localized("reports.offences"),
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.offlineOffenceCountsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(8, self.chartDisplayState))
-                    NavigationLink {
-                        EraReportView(
+                    
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.slashesBalance),
                             factor: .none,
@@ -457,11 +478,13 @@ struct NetworkReportsView: View {
                                 format: localized("reports.slashed_with_ticker"),
                                 self.network.tokenTicker
                             ),
+                            validatorIdentityDisplay: nil,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.slashesView
                     }
                     .buttonStyle(PushButtonStyle())
@@ -604,7 +627,7 @@ struct NetworkReportsView: View {
                 Group {
                     ReportDataPanelView(
                         title: localized("reports.network.title"),
-                        content: String(self.viewModel.activeNominatorCounts[0].1)
+                        content: String(self.viewModel.activeNominatorCounts[0].y)
                     )
                     .modifier(PanelAppearance(2, self.chartDisplayState))
                     ReportDataPanelView(
@@ -612,7 +635,7 @@ struct NetworkReportsView: View {
                         content: String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.totalStakesBalance[0].1,
+                                balance: self.viewModel.totalStakesBalance[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount,
                                 formatDecimalCount: 0
                             ),
@@ -634,7 +657,7 @@ struct NetworkReportsView: View {
                         content: String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.totalPaidOutBalance[0].1,
+                                balance: self.viewModel.totalPaidOutBalance[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
@@ -643,7 +666,7 @@ struct NetworkReportsView: View {
                     .modifier(PanelAppearance(5, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.active_validators"),
-                        content: String(self.viewModel.activeValidatorCounts[0].1)
+                        content: String(self.viewModel.activeValidatorCounts[0].y)
                     )
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                     ReportDataPanelView(
@@ -651,7 +674,7 @@ struct NetworkReportsView: View {
                         content: String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.totalRewardsBalance[0].1,
+                                balance: self.viewModel.totalRewardsBalance[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
@@ -668,7 +691,7 @@ struct NetworkReportsView: View {
                         content: String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.slashesBalance[0].1,
+                                balance: self.viewModel.slashesBalance[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker

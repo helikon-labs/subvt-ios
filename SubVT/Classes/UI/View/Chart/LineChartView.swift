@@ -35,14 +35,14 @@ struct LineChartView: View {
     }
     
     init(
-        dataPoints: [(Int, Int)],
+        dataPoints: [EraReportView.IntDataPoint],
         chartMinY: Int,
         chartMaxY: Int,
         revealPercentage: CGFloat,
         showBlur: Bool = false
     ) {
         self.dataPoints = dataPoints
-            .map({ (Double($0), Double($1)) })
+            .map({ (Double($0.x), Double($0.y)) })
             .sorted { $0.0 < $1.0 }
         self.minX = self.dataPoints.first?.0 ?? 0
         self.maxX = self.dataPoints.last?.0 ?? 0

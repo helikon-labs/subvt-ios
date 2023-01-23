@@ -269,8 +269,8 @@ struct ValidatorReportsView: View {
                 Spacer()
                     .frame(height: 16)
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.isActive),
                             factor: .none,
@@ -279,15 +279,17 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.isActiveView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(3, self.chartDisplayState))
-                    NavigationLink {
-                        EraReportView(
+                    
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(
                                 dataPoints: self.viewModel.commissionPerTenThousand,
@@ -302,65 +304,68 @@ struct ValidatorReportsView: View {
                             endEra: self.endEra,
                             annotate: true
                         )
-                    } label: {
+                    ) {
                         self.commissionView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(4, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.selfStake),
                             factor: .none,
                             title: localized("reports.validator.self_stake"),
-                            chartTitle: String(
+                            chartTitle:  String(
                                 format: localized("reports.validator.self_stake_with_ticker"),
                                 self.network.tokenTicker
                             ),
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.selfStakeView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(5, self.chartDisplayState))
-                    NavigationLink {
-                        let factor: ReportDataFactor = self.network.tokenTicker == "DOT"
-                            ? .million
-                            : .thousand
-                        let chartTitle = String(
-                            format: localized("reports.validator.total_stake_with_factor_ticker"),
-                            factor.description!.capitalized,
-                            self.network.tokenTicker
-                        )
-                        EraReportView(
+                    
+                    let totalStakeFactor: ReportDataFactor = self.network.tokenTicker == "DOT"
+                        ? .million
+                        : .thousand
+                    let totalStakeChartTitle = String(
+                        format: localized("reports.validator.total_stake_with_factor_ticker"),
+                        totalStakeFactor.description!.capitalized,
+                        self.network.tokenTicker
+                    )
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(
                                 dataPoints: self.viewModel.totalStake,
                                 decimals: 2
                             ),
-                            factor: factor,
+                            factor: totalStakeFactor,
                             title: localized("reports.validator.total_stake"),
-                            chartTitle: chartTitle,
+                            chartTitle: totalStakeChartTitle,
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.totalStakeView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.blockCount),
                             factor: .none,
@@ -369,15 +374,17 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.blockCountView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(7, self.chartDisplayState))
-                    NavigationLink {
-                        EraReportView(
+                    
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.rewardPoints),
                             factor: .none,
@@ -386,17 +393,18 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.rewardPointsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(8, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.selfReward),
                             factor: .none,
@@ -408,15 +416,17 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.selfRewardView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(9, self.chartDisplayState))
-                    NavigationLink {
-                        EraReportView(
+                    
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.stakerReward),
                             factor: .none,
@@ -428,17 +438,18 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.stakerRewardView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(10, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.offlineOffences),
                             factor: .none,
@@ -447,15 +458,17 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.offlineOffencesView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(11, self.chartDisplayState))
-                    NavigationLink {
-                        EraReportView(
+                    
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .integer(dataPoints: self.viewModel.chillings),
                             factor: .none,
@@ -464,17 +477,18 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.chillingsView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(12, self.chartDisplayState))
                 }
                 HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    NavigationLink {
-                        EraReportView(
+                    NavigationLink(
+                        value: Screen.eraReport(
                             type: .bar,
                             data: .balance(dataPoints: self.viewModel.slashes),
                             factor: .none,
@@ -486,13 +500,15 @@ struct ValidatorReportsView: View {
                             validatorIdentityDisplay: self.identityDisplay,
                             network: self.network,
                             startEra: self.startEra,
-                            endEra: self.endEra
+                            endEra: self.endEra,
+                            annotate: false
                         )
-                    } label: {
+                    ) {
                         self.slashesView
                     }
                     .buttonStyle(PushButtonStyle())
                     .modifier(PanelAppearance(13, self.chartDisplayState))
+                    
                     Spacer()
                         .frame(maxWidth: .infinity)
                 }
@@ -522,7 +538,7 @@ struct ValidatorReportsView: View {
         ReportBarChartView(
             title: localized("reports.validator.active"),
             dataPoints: self.viewModel.isActive.map {
-                ($0.0, Double($0.1))
+                ($0.x, Double($0.y))
             },
             minY: 0,
             maxY: 1,
@@ -535,7 +551,7 @@ struct ValidatorReportsView: View {
         ReportBarChartView(
             title: localized("reports.validator.commission_with_percent"),
             dataPoints: self.viewModel.commissionPerTenThousand.map {
-                ($0.0, Double($0.1))
+                ($0.x, Double($0.y))
             },
             minY: 0,
             maxY: 10000,
@@ -551,7 +567,7 @@ struct ValidatorReportsView: View {
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.selfStake.map {
-                ($0.0, Double($0.1.value))
+                ($0.x, Double($0.y.value))
             },
             minY: 0,
             maxY: max(self.viewModel.maxSelfStake, 1),
@@ -567,7 +583,7 @@ struct ValidatorReportsView: View {
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.totalStake.map {
-                ($0.0, Double($0.1.value))
+                ($0.x, Double($0.y.value))
             },
             minY: 0,
             maxY: max(self.viewModel.maxTotalStake, 1),
@@ -580,7 +596,7 @@ struct ValidatorReportsView: View {
         ReportBarChartView(
             title: localized("reports.validator.block_count"),
             dataPoints: self.viewModel.blockCount.map {
-                ($0.0, Double($0.1))
+                ($0.x, Double($0.y))
             },
             minY: 0,
             maxY: Double(self.viewModel.maxBlockCount),
@@ -593,7 +609,7 @@ struct ValidatorReportsView: View {
         ReportBarChartView(
             title: localized("reports.validator.reward_points"),
             dataPoints: self.viewModel.rewardPoints.map {
-                ($0.0, Double($0.1))
+                ($0.x, Double($0.y))
             },
             minY: 0,
             maxY: Double(self.viewModel.maxRewardPoints),
@@ -609,7 +625,7 @@ struct ValidatorReportsView: View {
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.selfReward.map {
-                ($0.0, Double($0.1.value))
+                ($0.x, Double($0.y.value))
             },
             minY: 0,
             maxY: max(self.viewModel.maxSelfReward, 1),
@@ -625,7 +641,7 @@ struct ValidatorReportsView: View {
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.stakerReward.map {
-                ($0.0, Double($0.1.value))
+                ($0.x, Double($0.y.value))
             },
             minY: 0,
             maxY: max(self.viewModel.maxStakerReward, 1),
@@ -638,7 +654,7 @@ struct ValidatorReportsView: View {
         ReportBarChartView(
             title: localized("reports.offline_offences"),
             dataPoints: self.viewModel.offlineOffences.map {
-                ($0.0, Double($0.1))
+                ($0.x, Double($0.y))
             },
             minY: 0,
             maxY: max(self.viewModel.maxOfflineOffence, 1),
@@ -651,7 +667,7 @@ struct ValidatorReportsView: View {
         ReportBarChartView(
             title: localized("reports.validator.chilling_count"),
             dataPoints: self.viewModel.chillings.map {
-                ($0.0, Double($0.1))
+                ($0.x, Double($0.y))
             },
             minY: 0,
             maxY: max(self.viewModel.maxChillingCount, 1),
@@ -667,7 +683,7 @@ struct ValidatorReportsView: View {
                 self.network.tokenTicker
             ),
             dataPoints: self.viewModel.slashes.map {
-                ($0.0, Double($0.1.value))
+                ($0.x, Double($0.y.value))
             },
             minY: 0,
             maxY: max(self.viewModel.maxSlash, 1),
@@ -695,18 +711,18 @@ struct ValidatorReportsView: View {
                 Group {
                     ReportDataPanelView(
                         title: localized("reports.validator.active"),
-                        content: self.viewModel.isActive[0].1 == 1
+                        content: self.viewModel.isActive[0].y == 1
                             ? localized("common.yes")
                             : localized("common.no")
                     )
                     .modifier(PanelAppearance(3, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.validator.commission"),
-                        content: self.viewModel.isActive[0].1 == 1
+                        content: self.viewModel.isActive[0].y == 1
                             ? String(
                                 format: localized("common.percentage"),
                                 formatDecimal(
-                                    integer: UInt64(self.viewModel.commissionPerTenThousand[0].1),
+                                    integer: UInt64(self.viewModel.commissionPerTenThousand[0].y),
                                     decimalCount: 2,
                                     formatDecimalCount: 2
                                 )
@@ -716,11 +732,11 @@ struct ValidatorReportsView: View {
                     .modifier(PanelAppearance(4, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.validator.self_stake"),
-                        content: self.viewModel.isActive[0].1 == 1
+                        content: self.viewModel.isActive[0].y == 1
                         ? String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.selfStake[0].1,
+                                balance: self.viewModel.selfStake[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
@@ -730,11 +746,11 @@ struct ValidatorReportsView: View {
                     .modifier(PanelAppearance(5, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.validator.total_stake"),
-                        content: self.viewModel.isActive[0].1 == 1
+                        content: self.viewModel.isActive[0].y == 1
                         ? String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.totalStake[0].1,
+                                balance: self.viewModel.totalStake[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
@@ -744,21 +760,21 @@ struct ValidatorReportsView: View {
                     .modifier(PanelAppearance(6, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.validator.block_count"),
-                        content: String(self.viewModel.blockCount[0].1)
+                        content: String(self.viewModel.blockCount[0].y)
                     )
                     .modifier(PanelAppearance(7, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.validator.reward_points"),
-                        content: String(self.viewModel.rewardPoints[0].1)
+                        content: String(self.viewModel.rewardPoints[0].y)
                     )
                     .modifier(PanelAppearance(8, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.validator.self_reward"),
-                        content: self.viewModel.isActive[0].1 == 1
+                        content: self.viewModel.isActive[0].y == 1
                         ? String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.selfReward[0].1,
+                                balance: self.viewModel.selfReward[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
@@ -768,11 +784,11 @@ struct ValidatorReportsView: View {
                     .modifier(PanelAppearance(9, self.chartDisplayState))
                     ReportDataPanelView(
                         title: localized("reports.validator.staker_reward"),
-                        content: self.viewModel.isActive[0].1 == 1
+                        content: self.viewModel.isActive[0].y == 1
                         ? String(
                             format: "%@ %@",
                             formatBalance(
-                                balance: self.viewModel.stakerReward[0].1,
+                                balance: self.viewModel.stakerReward[0].y,
                                 tokenDecimalCount: self.network.tokenDecimalCount
                             ),
                             self.network.tokenTicker
@@ -783,25 +799,25 @@ struct ValidatorReportsView: View {
                     Group {
                         ReportDataPanelView(
                             title: localized("reports.offline_offences"),
-                            content: self.viewModel.isActive[0].1 == 1
-                            ? String(self.viewModel.offlineOffences[0].1)
+                            content: self.viewModel.isActive[0].y == 1
+                            ? String(self.viewModel.offlineOffences[0].y)
                             : "-"
                         )
                         .modifier(PanelAppearance(11, self.chartDisplayState))
                         ReportDataPanelView(
                             title: localized("reports.validator.chillings"),
-                            content: self.viewModel.isActive[0].1 == 1
-                            ? String(self.viewModel.chillings[0].1)
+                            content: self.viewModel.isActive[0].y == 1
+                            ? String(self.viewModel.chillings[0].y)
                             : "-"
                         )
                         .modifier(PanelAppearance(12, self.chartDisplayState))
                         ReportDataPanelView(
                             title: localized("reports.slashed"),
-                            content: self.viewModel.isActive[0].1 == 1
+                            content: self.viewModel.isActive[0].y == 1
                             ? String(
                                 format: "%@ %@",
                                 formatBalance(
-                                    balance: self.viewModel.slashes[0].1,
+                                    balance: self.viewModel.slashes[0].y,
                                     tokenDecimalCount: self.network.tokenDecimalCount
                                 ),
                                 self.network.tokenTicker

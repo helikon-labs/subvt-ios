@@ -44,6 +44,18 @@ enum Screen: Hashable {
         rule: UserNotificationRule
     )
     case addValidators
+    case eraReport(
+        type: EraReportView.`Type`,
+        data: EraReportView.Data,
+        factor: ReportDataFactor,
+        title: String,
+        chartTitle: String,
+        validatorIdentityDisplay: String?,
+        network: Network,
+        startEra: Era,
+        endEra: Era,
+        annotate: Bool
+    )
     
     @ViewBuilder
     func build() -> some View {
@@ -108,6 +120,30 @@ enum Screen: Hashable {
             EditNotificationRuleView(mode: .edit(rule: rule))
         case .addValidators:
             AddValidatorsView()
+        case .eraReport(
+            let type,
+            let data,
+            let factor,
+            let title,
+            let chartTitle,
+            let validatorIdentityDisplay,
+            let network,
+            let startEra,
+            let endEra,
+            let annotate
+        ):
+            EraReportView(
+                type: type,
+                data: data,
+                factor: factor,
+                title: title,
+                chartTitle: chartTitle,
+                validatorIdentityDisplay: validatorIdentityDisplay,
+                network: network,
+                startEra: startEra,
+                endEra: endEra,
+                annotate: annotate
+            )
         }
     }
 }
