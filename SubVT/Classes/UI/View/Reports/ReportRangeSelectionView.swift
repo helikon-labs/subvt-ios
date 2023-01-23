@@ -19,7 +19,7 @@ struct ReportRangeSelectionView: View {
     }
     
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @AppStorage(AppStorageKey.networks) private var networks: [Network]! = nil
     @StateObject private var viewModel = ReportRangeSelectionViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
@@ -107,7 +107,7 @@ struct ReportRangeSelectionView: View {
                 HStack {
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         },
                         label: {
                             BackButtonView()

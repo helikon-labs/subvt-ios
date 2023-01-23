@@ -10,7 +10,7 @@ import SubVTData
 import SwiftUI
 
 struct ParaVoteReportView: View {
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @StateObject private var viewModel = ParaVoteReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     
@@ -36,7 +36,7 @@ struct ParaVoteReportView: View {
                 HStack {
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         },
                         label: {
                             BackButtonView()

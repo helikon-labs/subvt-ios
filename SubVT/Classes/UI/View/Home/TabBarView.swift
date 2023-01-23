@@ -83,7 +83,7 @@ struct TabBarButtonView: View {
 }
 
 struct TabBarView: View {
-    @Binding var currentTab: Tab
+    @EnvironmentObject private var appState: AppState
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.receivedAt, order: .reverse)
     ], predicate: NSPredicate(
@@ -99,10 +99,10 @@ struct TabBarView: View {
             ForEach(Tab.allCases, id: \.self) { tab in
                 TabBarButtonView(
                     tab: tab,
-                    isActive: tab == self.currentTab,
+                    isActive: tab == self.appState.currentTab,
                     notificationCount: (tab == .notifications) ? self.unreadNotifications.count : 0
                 ) {
-                    self.currentTab = tab
+                    self.appState.currentTab = tab
                 }
             }
         }
@@ -117,6 +117,6 @@ struct TabBarView_Previews: PreviewProvider {
     @State static private var currentTab: Tab = .network
     
     static var previews: some View {
-        TabBarView(currentTab: $currentTab)
+        TabBarView()
     }
 }

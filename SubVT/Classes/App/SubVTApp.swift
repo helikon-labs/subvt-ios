@@ -15,7 +15,7 @@ import SwiftUI
 struct SubVTApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     private let persistenceController = PersistenceController.shared
-    @ObservedObject private var router = Router()
+    
     
     var body: some Scene {
         WindowGroup {
@@ -24,7 +24,8 @@ struct SubVTApp: App {
                     \.managedObjectContext,
                      persistenceController.container.viewContext
                 )
-                .environmentObject(router)
+                .environmentObject(appDelegate.router)
+                .environmentObject(appDelegate.appState)
                 .defaultAppStorage(UserDefaultsUtil.shared)
                 .onAppear() {
                     UNUserNotificationCenter.current().delegate = appDelegate
@@ -54,6 +55,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         AppStorageKey.notificationChannelId,
         store: UserDefaultsUtil.shared
     ) private var notificationChannelId = 0
+    
+    let router = Router()
+    let appState = AppState()
+    
     private var cancellables = Set<AnyCancellable>()
     private let viewContext = PersistenceController.shared.container.viewContext
     
@@ -139,7 +144,22 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         didReceive response: UNNotificationResponse,
         withCompletionHandler completionHandler: @escaping () -> Void
     ) {
-        // process notification
+        let userInfo = response.notification.request.content.userInfo
+        if let _ = userInfo["aps"] as? [String: Any],
+           let customData = userInfo["notification_data"] as? [String: Any],
+           let networkId = customData["network_id"] as? UInt64,
+           let _ = customData["notification_type_code"] as? String {
+            if let validatorAccountId = customData["validator_account_id"] as? String,
+               let _ = customData["validator_display"] as? String {
+                self.router.push(screen: Screen.validatorDetails(
+                    networkId: networkId,
+                    accountId: AccountId(hex: validatorAccountId)
+                ))
+            } else {
+                self.router.popToRoot()
+                self.appState.currentTab = .notifications
+            }
+        }
         completionHandler()
     }
 }

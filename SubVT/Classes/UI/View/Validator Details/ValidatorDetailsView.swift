@@ -21,7 +21,7 @@ fileprivate struct NominationListButtonStyle: ButtonStyle {
 struct ValidatorDetailsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
     @AppStorage(AppStorageKey.onekvNominators) private var onekvNominators: [UInt64:[String]] = [:]
     @StateObject private var viewModel = ValidatorDetailsViewModel()
@@ -235,7 +235,7 @@ struct ValidatorDetailsView: View {
                         Button(
                             action: {
                                 self.viewModel.unsubscribe()
-                                self.presentationMode.wrappedValue.dismiss()
+                                self.router.back()
                             },
                             label: {
                                 BackButtonView()

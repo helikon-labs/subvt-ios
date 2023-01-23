@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ValidatorReportsView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @StateObject private var viewModel = ValidatorReportsViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var chartDisplayState: BasicViewDisplayState = .notAppeared
@@ -64,7 +64,7 @@ struct ValidatorReportsView: View {
                 HStack {
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         },
                         label: {
                             BackButtonView()

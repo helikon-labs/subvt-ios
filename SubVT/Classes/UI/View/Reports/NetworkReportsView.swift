@@ -10,7 +10,7 @@ import SubVTData
 
 struct NetworkReportsView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @StateObject private var viewModel = NetworkReportsViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var chartDisplayState: BasicViewDisplayState = .notAppeared
@@ -59,7 +59,7 @@ struct NetworkReportsView: View {
                 HStack {
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         },
                         label: {
                             BackButtonView()

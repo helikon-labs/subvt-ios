@@ -10,6 +10,7 @@
 		A000F656297A8C5E001210DF /* ParaVoteReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000F655297A8C5E001210DF /* ParaVoteReportView.swift */; };
 		A000F657297A8C5E001210DF /* ParaVoteReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000F655297A8C5E001210DF /* ParaVoteReportView.swift */; };
 		A000F659297A8C6F001210DF /* ParaVoteReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A000F658297A8C6F001210DF /* ParaVoteReportViewModel.swift */; };
+		A0054440297E71AB00DE95F2 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A005443F297E71AB00DE95F2 /* AppState.swift */; };
 		A0058CEA28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
@@ -391,6 +392,7 @@
 /* Begin PBXFileReference section */
 		A000F655297A8C5E001210DF /* ParaVoteReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaVoteReportView.swift; sourceTree = "<group>"; };
 		A000F658297A8C6F001210DF /* ParaVoteReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaVoteReportViewModel.swift; sourceTree = "<group>"; };
+		A005443F297E71AB00DE95F2 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsViewModel.swift; sourceTree = "<group>"; };
 		A00F2E2A2975094800EEB3E7 /* RewardReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportView.swift; sourceTree = "<group>"; };
 		A00F2E2C2975095300EEB3E7 /* RewardReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportViewModel.swift; sourceTree = "<group>"; };
@@ -616,6 +618,7 @@
 		A0128A48284A0B46000C2307 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				A005443F297E71AB00DE95F2 /* AppState.swift */,
 				A0BF90942848C1EB0053389A /* SubVTApp.swift */,
 			);
 			path = App;
@@ -1416,6 +1419,7 @@
 				A06B1E3528E30A23006F8DF9 /* ValidatorSearchSummary.swift in Sources */,
 				A03341A9297D3B7E00DA63EE /* Router.swift in Sources */,
 				A04ED599292E1F3200CF089F /* UI+Dimension+ReportRangeSelection.swift in Sources */,
+				A0054440297E71AB00DE95F2 /* AppState.swift in Sources */,
 				A0D3A73D2927A1770037EBC5 /* Dictionary.swift in Sources */,
 				A04B37CD2876EB8200912BF3 /* Network.swift in Sources */,
 				A09AC41528E9B03500C43E2B /* NotificationRuleView.swift in Sources */,

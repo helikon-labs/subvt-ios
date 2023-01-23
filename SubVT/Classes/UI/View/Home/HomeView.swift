@@ -11,8 +11,9 @@ import SwiftUI
 struct HomeView: View {
     @Environment (\.colorScheme) var colorScheme: ColorScheme
     @EnvironmentObject private var router: Router
+    @EnvironmentObject private var appState: AppState
     @State private var displayState: BasicViewDisplayState = .notAppeared
-    @State private var currentTab: Tab = .network
+    // @State private var currentTab: Tab = .network
     @State private var showsTabBar = false
     
     private var tabBarYOffset: CGFloat {
@@ -47,16 +48,16 @@ struct HomeView: View {
                     .zIndex(2)
                 // tab content
                 NetworkStatusView()
-                    .zIndex((self.currentTab == .network) ? 3.0 : 0.0)
+                    .zIndex((self.appState.currentTab == .network) ? 3.0 : 0.0)
                 MyValidatorsView()
-                    .zIndex((self.currentTab == .myValidators) ? 3.0 : 0.0)
-                NotificationsView(currentTab: self.$currentTab)
-                    .zIndex((self.currentTab == .notifications) ? 3.0 : 0.0)
+                    .zIndex((self.appState.currentTab == .myValidators) ? 3.0 : 0.0)
+                NotificationsView()
+                    .zIndex((self.appState.currentTab == .notifications) ? 3.0 : 0.0)
                 ReportRangeSelectionView(mode: .network)
-                    .zIndex((self.currentTab == .networkReports) ? 3.0 : 0.0)
+                    .zIndex((self.appState.currentTab == .networkReports) ? 3.0 : 0.0)
                 // tab bar
                 VStack {
-                    TabBarView(currentTab: self.$currentTab)
+                    TabBarView()
                         .frame(maxHeight: .infinity, alignment: .bottom)
                     Spacer()
                         .frame(height: UI.Dimension.TabBar.marginBottom)

@@ -20,7 +20,7 @@ struct EraReportView: View {
         case balance(dataPoints: [(Int, Balance)], decimals: UInt8 = 2)
     }
     
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @StateObject private var viewModel = EraReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var chartRevealPercentage: CGFloat = 1.0
@@ -96,7 +96,7 @@ struct EraReportView: View {
                 HStack {
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         },
                         label: {
                             BackButtonView()

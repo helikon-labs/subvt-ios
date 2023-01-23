@@ -46,6 +46,8 @@
 "common.date_components.minute"="%dm";
 "common.date_components.second"="%ds";
 
+"common.democracy"="Democracy";
+
 "common.validator"="Validator";
 "common.validator.active"="Active";
 "common.validator.inactive"="Inactive";

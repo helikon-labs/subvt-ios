@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NotificationRulesView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @StateObject private var viewModel = NotificationRulesViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var headerMaterialOpacity = 0.0
@@ -35,7 +35,7 @@ struct NotificationRulesView: View {
                 HStack {
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         },
                         label: {
                             BackButtonView()

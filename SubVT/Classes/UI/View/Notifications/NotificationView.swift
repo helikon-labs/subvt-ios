@@ -36,10 +36,20 @@ struct NotificationView: View {
         return message.trimmingCharacters(in: .whitespacesAndNewlines)
     }
     
+    private var title: String {
+        if let validatorDisplay = self.notification.validatorDisplay {
+            return validatorDisplay
+        } else if let notificationTypeCode = self.notification.notificationTypeCode,
+                  notificationTypeCode.contains("democracy") {
+            return localized("common.democracy")
+        }
+        return ""
+    }
+    
     var body: some View {
         VStack {
             HStack(alignment: .center) {
-                Text(notification.validatorDisplay ?? "")
+                Text(self.title)
                     .font(UI.Font.Notification.validatorDisplay)
                     .foregroundColor(Color("Text"))
                 Spacer()

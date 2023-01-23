@@ -15,7 +15,7 @@ struct EditNotificationRuleView: View {
     }
     
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject private var router: Router
     @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
     @AppStorage(AppStorageKey.notificationChannelId) private var notificationChannelId = 0
     @StateObject private var viewModel = EditNotificationRuleViewModel()
@@ -133,7 +133,7 @@ struct EditNotificationRuleView: View {
                 HStack {
                     Button(
                         action: {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         },
                         label: {
                             BackButtonView()
@@ -320,13 +320,13 @@ struct EditNotificationRuleView: View {
                                 self.viewModel.createRule(
                                     channelId: UInt64(self.notificationChannelId)
                                 ) {
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    self.router.back()
                                 }
                             case .edit:
                                 self.viewModel.deleteAndCreateRule(
                                     channelId: UInt64(self.notificationChannelId)
                                 ) {
-                                    self.presentationMode.wrappedValue.dismiss()
+                                    self.router.back()
                                 }
                             }
                         }
@@ -366,7 +366,7 @@ struct EditNotificationRuleView: View {
                         self.viewModel.deleteAndCreateRule(
                             channelId: UInt64(self.notificationChannelId)
                         ) {
-                            self.presentationMode.wrappedValue.dismiss()
+                            self.router.back()
                         }
                     }
                     Button(localized("common.cancel"), role: .cancel) {}

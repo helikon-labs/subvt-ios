@@ -13,6 +13,7 @@ struct NotificationsView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.managedObjectContext) private var viewContext
+    @EnvironmentObject private var appState: AppState
     @AppStorage(AppStorageKey.apnsIsEnabled) private var apnsIsEnabled = false
     @AppStorage(AppStorageKey.apnsSetupHasFailed) private var apnsSetupHasFailed = false
     @AppStorage(AppStorageKey.hasCreatedDefaultNotificationRules) private var hasCreatedDefaultNotificationRules = false
@@ -22,11 +23,6 @@ struct NotificationsView: View {
     ]) var notifications: FetchedResults<Notification>
     @State private var headerMaterialOpacity = 0.0
     @State private var deleteAllConfirmationDialogIsVisible: Bool = false
-    @Binding var currentTab: Tab
-    
-    init(currentTab: Binding<Tab>) {
-        self._currentTab = currentTab
-    }
     
     private var headerView: some View {
         VStack {
@@ -153,7 +149,7 @@ struct NotificationsView: View {
                                         }
                                     })
                                     .onAppear() {
-                                        if self.currentTab == .notifications {
+                                        if self.appState.currentTab == .notifications {
                                             notification.isRead = true
                                             do {
                                                 try self.viewContext.save()
@@ -329,7 +325,7 @@ struct NotificationsView: View {
                 break
             }
         }
-        .onChange(of: self.currentTab) { newValue in
+        .onChange(of: self.appState.currentTab) { newValue in
             if newValue == .notifications {
                 var markedIds: [UUID] = []
                 for id in self.viewModel.notificationIsReadUpdateBuffer {
@@ -354,6 +350,6 @@ struct NotificationsView: View {
 
 struct NotificationsView_Previews: PreviewProvider {
     static var previews: some View {
-        NotificationsView(currentTab: .constant(.network))
+        NotificationsView()
     }
 }

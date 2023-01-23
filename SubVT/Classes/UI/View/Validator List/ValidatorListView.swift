@@ -11,7 +11,6 @@ import SwiftUI
 struct ValidatorListView: View {
     @Environment(\.scenePhase) private var scenePhase
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
-    @Environment(\.presentationMode) private var presentationMode
     @EnvironmentObject private var router: Router
     @StateObject private var viewModel = ValidatorListViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
@@ -88,8 +87,7 @@ struct ValidatorListView: View {
                             Button(
                                 action: {
                                     self.viewModel.unsubscribe()
-                                    //self.presentationMode.wrappedValue.dismiss()
-                                    self.router.path.removeLast()
+                                    self.router.back()
                                 },
                                 label: {
                                     BackButtonView()

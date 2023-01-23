@@ -114,4 +114,16 @@ enum Screen: Hashable {
 
 final class Router : ObservableObject {
     @Published var path: [Screen] = []
+    
+    func popToRoot() {
+        self.path = []
+    }
+    
+    func push(screen: Screen) {
+        self.path.append(screen)
+    }
+    
+    func back() {
+        self.path.removeLast()
+    }
 }
