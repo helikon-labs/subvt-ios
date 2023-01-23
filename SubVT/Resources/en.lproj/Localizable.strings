@@ -308,9 +308,12 @@
 "reports.monthly_reward.chart_title_with_ticker"="Reward (%@)";
 "reports.monthly_reward.month"="Month";
 "reports.monthly_reward.no_reward_found"="No rewards found for this validator.";
+"reports.monthly_reward.total"="Total: %@ %@";
 
 "reports.paravalidation_votes.title"="Paravalidation Votes";
 "reports.paravalidation_votes.no_report_found"="No paravalidation sessions found for this validator in the last %d sessions.";
+"reports.paravalidation_votes.report_count_single"="1 %@ paravalidation session found over the last %d sessions.";
+"reports.paravalidation_votes.report_count_plural"="%d %@ paravalidation sessions found over the last %d sessions.";
 "reports.paravalidation_votes.votes"="Votes";
 "reports.paravalidation_votes.explicit"="Explicit";
 "reports.paravalidation_votes.implicit"="Implicit";

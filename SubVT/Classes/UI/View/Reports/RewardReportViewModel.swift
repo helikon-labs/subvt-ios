@@ -31,6 +31,15 @@ class RewardReportViewModel: ObservableObject {
         )
     }
     
+    var total: Balance {
+        if self.data.count > 0 {
+            return self.data.map { $0.1 }.reduce(Balance(integerLiteral: 0)) { partialResult, next in
+                partialResult + next
+            }
+        }
+        return Balance(integerLiteral: 0)
+    }
+    
     var max: Double {
         if self.data.count > 0 {
             return Double(self.data

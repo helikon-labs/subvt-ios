@@ -31,6 +31,7 @@ extension UI {
             }
             static var title = LexendDeca.semiBold.withSize(18)
             static let listNoItems = LexendDeca.light.withSize(14)
+            static let listDescription = LexendDeca.light.withSize(14)
             static let addItemButton = LexendDeca.regular.withSize(14)
             static let formFieldTitle = LexendDeca.medium.withSize(16)
             static var navigationBarButton = LexendDeca.light.withSize(16)

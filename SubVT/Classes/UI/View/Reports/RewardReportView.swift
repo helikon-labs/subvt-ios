@@ -120,10 +120,29 @@ struct RewardReportView: View {
                         trailing: 0
                     ))
                     Spacer()
-                        .frame(height: 16)
+                        .frame(height: 4)
                     switch self.viewModel.fetchState {
                     case .success:
                         if self.viewModel.data.count > 0 {
+                            Text(String(
+                                format: localized("reports.monthly_reward.total"),
+                                formatBalance(
+                                    balance: self.viewModel.total,
+                                    tokenDecimalCount: self.network.tokenDecimalCount,
+                                    formatDecimalCount: 2
+                                ),
+                                self.network.tokenTicker
+                            ))
+                                .font(UI.Font.Common.listDescription)
+                                .foregroundColor(Color("Text"))
+                                .padding(EdgeInsets(
+                                    top: 0,
+                                    leading: UI.Dimension.Common.padding / 2,
+                                    bottom: 0,
+                                    trailing: UI.Dimension.Common.padding / 2
+                                ))
+                            Spacer()
+                                .frame(height: 4)
                             self.chart
                                 .padding(UI.Dimension.Common.dataPanelPadding / 2)
                                 .frame(height: geometry.size.width * 2 / 3)

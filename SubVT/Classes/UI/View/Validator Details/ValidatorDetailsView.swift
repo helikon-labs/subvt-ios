@@ -314,7 +314,7 @@ struct ValidatorDetailsView: View {
                             value: Screen.paraVoteReport(
                                 network: self.viewModel.network,
                                 accountId: self.accountId,
-                                identityDisplay: self.identityDisplay
+                                identityDisplay: self.viewModel.validatorDetails?.identityDisplay ?? ""
                             )
                         ) {
                             ZStack {

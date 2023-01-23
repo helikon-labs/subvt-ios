@@ -108,10 +108,42 @@ struct ParaVoteReportView: View {
                         trailing: 0
                     ))
                     Spacer()
-                        .frame(height: 16)
+                        .frame(height: 4)
                     switch self.viewModel.fetchState {
                     case .success:
                         if self.viewModel.data.count > 0 {
+                            if self.viewModel.data.count == 1 {
+                                Text(String(
+                                    format: localized("reports.paravalidation_votes.report_count_single"),
+                                    self.network.display,
+                                    ParaVoteReportViewModel.fetchReportCount
+                                ))
+                                    .font(UI.Font.Common.listDescription)
+                                    .foregroundColor(Color("Text"))
+                                    .padding(EdgeInsets(
+                                        top: 0,
+                                        leading: UI.Dimension.Common.padding / 2,
+                                        bottom: 0,
+                                        trailing: UI.Dimension.Common.padding / 2
+                                    ))
+                            } else {
+                                Text(String(
+                                    format: localized("reports.paravalidation_votes.report_count_plural"),
+                                    self.viewModel.data.count,
+                                    self.network.display,
+                                    ParaVoteReportViewModel.fetchReportCount
+                                ))
+                                    .font(UI.Font.Common.listDescription)
+                                    .foregroundColor(Color("Text"))
+                                    .padding(EdgeInsets(
+                                        top: 0,
+                                        leading: UI.Dimension.Common.padding / 2,
+                                        bottom: 0,
+                                        trailing: UI.Dimension.Common.padding / 2
+                                    ))
+                            }
+                            Spacer()
+                                .frame(height: 4)
                             self.chart
                                 .padding(UI.Dimension.Common.dataPanelPadding)
                                 .frame(height: geometry.size.width * 2 / 3)
@@ -124,7 +156,7 @@ struct ParaVoteReportView: View {
                                 format: localized("reports.paravalidation_votes.no_report_found"),
                                 ParaVoteReportViewModel.fetchReportCount
                             ))
-                                .font(UI.Font.Common.listNoItems)
+                                .font(UI.Font.Common.listDescription)
                                 .foregroundColor(Color("Text"))
                         }
                     case .idle, .loading:
@@ -264,8 +296,8 @@ struct ParaVoteReportView: View {
                     ) {
                         Text(value.as(String.self)!)
                             .font(UI.Font.Report.axisValue)
-                            .rotationEffect(Angle(degrees: -45))
-                            .offset(x: 0, y : 4)
+                            //.rotationEffect(Angle(degrees: -45))
+                            //.offset(x: 0, y : 4)
                             .foregroundColor(Color("Text"))
                     }
                   }

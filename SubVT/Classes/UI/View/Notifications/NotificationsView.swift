@@ -7,6 +7,7 @@
 
 import Combine
 import CoreData
+import SubVTData
 import SwiftUI
 
 struct NotificationsView: View {
@@ -137,32 +138,32 @@ struct NotificationsView: View {
                                         log.error("Error while updating notification: \(error)")
                                     }
                                 }
-                                    .modifier(SwipeDeleteViewModifier {
-                                        self.viewContext.delete(notification)
+                                .modifier(SwipeDeleteViewModifier {
+                                    self.viewContext.delete(notification)
+                                    do {
+                                        try self.viewContext.save()
+                                        NotificationUtil.updateAppNotificationBadge(
+                                            context: self.viewContext
+                                        )
+                                    } catch {
+                                        log.error("Error while deleting notificaiton: \(error)")
+                                    }
+                                })
+                                .onAppear() {
+                                    if self.appState.currentTab == .notifications {
+                                        notification.isRead = true
                                         do {
                                             try self.viewContext.save()
                                             NotificationUtil.updateAppNotificationBadge(
                                                 context: self.viewContext
                                             )
                                         } catch {
-                                            log.error("Error while deleting notificaiton: \(error)")
+                                            log.error("Error while updating notification: \(error)")
                                         }
-                                    })
-                                    .onAppear() {
-                                        if self.appState.currentTab == .notifications {
-                                            notification.isRead = true
-                                            do {
-                                                try self.viewContext.save()
-                                                NotificationUtil.updateAppNotificationBadge(
-                                                    context: self.viewContext
-                                                )
-                                            } catch {
-                                                log.error("Error while updating notification: \(error)")
-                                            }
-                                        } else if let id = notification.id {
-                                            self.viewModel.notificationIsReadUpdateBuffer.append(id)
-                                        }
+                                    } else if let id = notification.id {
+                                        self.viewModel.notificationIsReadUpdateBuffer.append(id)
                                     }
+                                }
                             }
                             Spacer()
                                 .frame(
