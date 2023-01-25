@@ -107,14 +107,14 @@ struct NotificationView: View {
         ))
         .background(Color("DataPanelBg"))
         .cornerRadius(16)
+        /*
         .onTapGesture {
-            /*
             self.isExpanded.toggle()
             if self.isExpanded {
                 self.onRead?()
             }
-             */
         }
+         */
     }
 }
 

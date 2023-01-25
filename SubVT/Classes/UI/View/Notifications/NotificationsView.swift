@@ -124,31 +124,59 @@ struct NotificationsView: View {
                                 .frame(height: UI.Dimension.Notifications.scrollContentMarginTop)
                             ForEach(self.notifications, id: \.self.id) {
                                 notification in
-                                NotificationView(notification: notification) {
-                                    guard !notification.isRead else {
-                                        return
-                                    }
-                                    notification.isRead = true
-                                    do {
-                                        try self.viewContext.save()
-                                        NotificationUtil.updateAppNotificationBadge(
-                                            context: self.viewContext
-                                        )
-                                    } catch {
-                                        log.error("Error while updating notification: \(error)")
+                                Group {
+                                    if let validatorAccountId = notification.validatorAccountId {
+                                        NavigationLink(value: Screen.validatorDetails(
+                                            networkId: UInt64(notification.networkId),
+                                            accountId: AccountId(hex: validatorAccountId)
+                                        )) {
+                                            NotificationView(notification: notification) {
+                                                guard !notification.isRead else {
+                                                    return
+                                                }
+                                                notification.isRead = true
+                                                do {
+                                                    try self.viewContext.save()
+                                                    NotificationUtil.updateAppNotificationBadge(
+                                                        context: self.viewContext
+                                                    )
+                                                } catch {
+                                                    log.error("Error while updating notification: \(error)")
+                                                }
+                                            }
+                                            /*
+                                            .modifier(SwipeDeleteViewModifier {
+                                                self.viewContext.delete(notification)
+                                                do {
+                                                    try self.viewContext.save()
+                                                    NotificationUtil.updateAppNotificationBadge(
+                                                        context: self.viewContext
+                                                    )
+                                                } catch {
+                                                    log.error("Error while deleting notification: \(error)")
+                                                }
+                                            })
+                                             */
+                                            
+                                        }
+                                        .buttonStyle(PushButtonStyle())
+                                    } else {
+                                        NotificationView(notification: notification) {
+                                            guard !notification.isRead else {
+                                                return
+                                            }
+                                            notification.isRead = true
+                                            do {
+                                                try self.viewContext.save()
+                                                NotificationUtil.updateAppNotificationBadge(
+                                                    context: self.viewContext
+                                                )
+                                            } catch {
+                                                log.error("Error while updating notification: \(error)")
+                                            }
+                                        }
                                     }
                                 }
-                                .modifier(SwipeDeleteViewModifier {
-                                    self.viewContext.delete(notification)
-                                    do {
-                                        try self.viewContext.save()
-                                        NotificationUtil.updateAppNotificationBadge(
-                                            context: self.viewContext
-                                        )
-                                    } catch {
-                                        log.error("Error while deleting notificaiton: \(error)")
-                                    }
-                                })
                                 .onAppear() {
                                     if self.appState.currentTab == .notifications {
                                         notification.isRead = true

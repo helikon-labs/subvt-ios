@@ -10,24 +10,18 @@ import SwiftUI
 extension UI.Dimension {
     enum ValidatorDetails {
         static var scrollContentMarginTop: CGFloat {
-            get {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return UI.Dimension.Common.titleMarginTop
-                        + UI.Dimension.Common.networkSelectorHeight
-                        + UI.Dimension.Common.padding
-                } else {
-                    return 20
-                }
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                return UI.Dimension.Common.titleMarginTop
+                    + UI.Dimension.Common.networkSelectorHeight
+                    + UI.Dimension.Common.padding
+            } else {
+                return UI.Dimension.Common.titleMarginTop
+                    + UI.Dimension.Common.networkSelectorHeight
+                    + (UI.Dimension.Common.padding / 2)
             }
         }
         static var identiconHeight: CGFloat {
-            get {
-                if UIDevice.current.userInterfaceIdiom == .phone {
-                    return 274
-                } else {
-                    return 234
-                }
-            }
+            return 274
         }
         static let identityIconMarginRight: CGFloat = 12
         static let identityIconSize: CGFloat = 24
