@@ -11,19 +11,21 @@ import SwiftUI
 
 struct ParaVoteReportView: View {
     @EnvironmentObject private var router: Router
+    @AppStorage(AppStorageKey.networks) private var networks: [Network]? = nil
     @StateObject private var viewModel = ParaVoteReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     
-    private let network: Network
+    private let networkId: UInt64
     private let accountId: AccountId
     private let identityDisplay: String
+    private var network = PreviewData.kusama
     
     init(
-        network: Network,
+        networkId: UInt64,
         accountId: AccountId,
         identityDisplay: String
     ) {
-        self.network = network
+        self.networkId = networkId
         self.accountId = accountId
         self.identityDisplay = identityDisplay
     }
@@ -116,7 +118,7 @@ struct ParaVoteReportView: View {
                                 Text(String(
                                     format: localized("reports.paravalidation_votes.report_count_single"),
                                     self.network.display,
-                                    ParaVoteReportViewModel.fetchReportCount
+                                    self.viewModel.fetchReportCount
                                 ))
                                     .font(UI.Font.Common.listDescription)
                                     .foregroundColor(Color("Text"))
@@ -131,7 +133,7 @@ struct ParaVoteReportView: View {
                                     format: localized("reports.paravalidation_votes.report_count_plural"),
                                     self.viewModel.data.count,
                                     self.network.display,
-                                    ParaVoteReportViewModel.fetchReportCount
+                                    self.viewModel.fetchReportCount
                                 ))
                                     .font(UI.Font.Common.listDescription)
                                     .foregroundColor(Color("Text"))
@@ -154,7 +156,7 @@ struct ParaVoteReportView: View {
                         } else {
                             Text(String(
                                 format: localized("reports.paravalidation_votes.no_report_found"),
-                                ParaVoteReportViewModel.fetchReportCount
+                                self.viewModel.fetchReportCount
                             ))
                                 .font(UI.Font.Common.listDescription)
                                 .foregroundColor(Color("Text"))
@@ -215,10 +217,13 @@ struct ParaVoteReportView: View {
         )
         .onAppear() {
             if self.displayState != .appeared {
-                self.viewModel.initialize(
-                    network: self.network,
-                    accountId: self.accountId
-                )
+                if let networks = self.networks {
+                    self.viewModel.initialize(
+                        networks: networks,
+                        networkId: self.networkId,
+                        accountId: self.accountId
+                    )
+                }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.displayState = .appeared
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -358,7 +363,7 @@ struct ParaVoteReportView: View {
 struct ParaVoteReportView_Previews: PreviewProvider {
     static var previews: some View {
         ParaVoteReportView(
-            network: PreviewData.kusama,
+            networkId: PreviewData.kusama.id,
             accountId: PreviewData.validatorSummary.accountId,
             identityDisplay: PreviewData.validatorSummary.identityDisplay
         )

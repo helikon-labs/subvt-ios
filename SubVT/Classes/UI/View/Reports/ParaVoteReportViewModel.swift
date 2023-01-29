@@ -12,21 +12,24 @@ import SubVTData
 class ParaVoteReportViewModel: ObservableObject {
     @Published private(set) var fetchState: DataFetchState<String> = .idle
     @Published private(set) var data: [(String, ParaVotesSummary)] = []
+    @Published private(set) var network: Network = PreviewData.kusama
     
     private var accountId: AccountId! = nil
-    private var network: Network! = nil
     private var reportService: ReportService! = nil
-    
-    static let fetchReportCount: UInt32 = 30
     
     private var cancellables = Set<AnyCancellable>()
     
     func initialize(
-        network: Network,
+        networks: [Network],
+        networkId: UInt64,
         accountId: AccountId
     ) {
+        if let network = networks.first(where: {
+            $0.id == networkId
+        }) {
+            self.network = network
+        }
         self.accountId = accountId
-        self.network = network
         self.reportService = SubVTData.ReportService(
             host: self.network.reportServiceHost!,
             port: self.network.reportServicePort!
@@ -35,6 +38,14 @@ class ParaVoteReportViewModel: ObservableObject {
     
     var xAxisMarkCount: Int {
         return self.data.count
+    }
+    
+    var fetchReportCount: UInt32 {
+        if self.network.tokenTicker == "KSM" {
+            return 30
+        } else {
+            return 15
+        }
     }
     
     /*
@@ -81,7 +92,7 @@ class ParaVoteReportViewModel: ObservableObject {
         self.fetchState = .loading
         self.reportService.getSessionValidatorReport(
             validatorAccountId: self.accountId,
-            startSessionIndex: currentSession.index - ParaVoteReportViewModel.fetchReportCount + 1,
+            startSessionIndex: currentSession.index - self.fetchReportCount + 1,
             endSessionIndex: currentSession.index
         )
             .sink {

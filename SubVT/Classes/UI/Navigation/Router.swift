@@ -22,7 +22,7 @@ enum Screen: Hashable {
         chartTitle: String
     )
     case paraVoteReport(
-        network: Network,
+        networkId: UInt64,
         accountId: AccountId,
         identityDisplay: String
     )
@@ -83,12 +83,12 @@ enum Screen: Hashable {
                 chartTitle: chartTitle
             )
         case .paraVoteReport(
-            let network,
+            let networkId,
             let accountId,
             let identityDisplay
         ):
             ParaVoteReportView(
-                network: network,
+                networkId: networkId,
                 accountId: accountId,
                 identityDisplay: identityDisplay
             )

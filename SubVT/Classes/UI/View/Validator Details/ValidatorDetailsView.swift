@@ -312,7 +312,7 @@ struct ValidatorDetailsView: View {
                         
                         NavigationLink(
                             value: Screen.paraVoteReport(
-                                network: self.viewModel.network,
+                                networkId: self.viewModel.network.id,
                                 accountId: self.accountId,
                                 identityDisplay: self.viewModel.validatorDetails?.identityDisplay ?? ""
                             )

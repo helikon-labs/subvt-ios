@@ -148,13 +148,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let _ = userInfo["aps"] as? [String: Any],
            let customData = userInfo["notification_data"] as? [String: Any],
            let networkId = customData["network_id"] as? UInt64,
-           let _ = customData["notification_type_code"] as? String {
+           let notificationTypeCode = customData["notification_type_code"] as? String {
             if let validatorAccountId = customData["validator_account_id"] as? String,
-               let _ = customData["validator_display"] as? String {
-                self.router.push(screen: Screen.validatorDetails(
-                    networkId: networkId,
-                    accountId: AccountId(hex: validatorAccountId)
-                ))
+               let validatorDisplay = customData["validator_display"] as? String {
+                if notificationTypeCode == "chain_validator_stopped_para_validating" {
+                    self.router.push(screen: Screen.paraVoteReport(
+                        networkId: networkId,
+                        accountId: AccountId(hex: validatorAccountId),
+                        identityDisplay: validatorDisplay
+                    ))
+                } else {
+                    self.router.push(screen: Screen.validatorDetails(
+                        networkId: networkId,
+                        accountId: AccountId(hex: validatorAccountId)
+                    ))
+                }
             } else {
                 self.router.popToRoot()
                 self.appState.currentTab = .notifications
