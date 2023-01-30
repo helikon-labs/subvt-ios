@@ -18,7 +18,6 @@ struct ParaVoteReportView: View {
     private let networkId: UInt64
     private let accountId: AccountId
     private let identityDisplay: String
-    private var network = PreviewData.kusama
     
     init(
         networkId: UInt64,
@@ -117,7 +116,7 @@ struct ParaVoteReportView: View {
                             if self.viewModel.data.count == 1 {
                                 Text(String(
                                     format: localized("reports.paravalidation_votes.report_count_single"),
-                                    self.network.display,
+                                    self.viewModel.network.display,
                                     self.viewModel.fetchReportCount
                                 ))
                                     .font(UI.Font.Common.listDescription)
@@ -132,7 +131,7 @@ struct ParaVoteReportView: View {
                                 Text(String(
                                     format: localized("reports.paravalidation_votes.report_count_plural"),
                                     self.viewModel.data.count,
-                                    self.network.display,
+                                    self.viewModel.network.display,
                                     self.viewModel.fetchReportCount
                                 ))
                                     .font(UI.Font.Common.listDescription)

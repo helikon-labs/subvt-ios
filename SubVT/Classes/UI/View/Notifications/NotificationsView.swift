@@ -126,40 +126,54 @@ struct NotificationsView: View {
                                 notification in
                                 Group {
                                     if let validatorAccountId = notification.validatorAccountId {
-                                        NavigationLink(value: Screen.validatorDetails(
-                                            networkId: UInt64(notification.networkId),
-                                            accountId: AccountId(hex: validatorAccountId)
-                                        )) {
-                                            NotificationView(notification: notification) {
-                                                guard !notification.isRead else {
-                                                    return
-                                                }
-                                                notification.isRead = true
-                                                do {
-                                                    try self.viewContext.save()
-                                                    NotificationUtil.updateAppNotificationBadge(
-                                                        context: self.viewContext
-                                                    )
-                                                } catch {
-                                                    log.error("Error while updating notification: \(error)")
-                                                }
+                                        let notificationView = NotificationView(notification: notification) {
+                                            guard !notification.isRead else {
+                                                return
                                             }
-                                            /*
-                                            .modifier(SwipeDeleteViewModifier {
-                                                self.viewContext.delete(notification)
-                                                do {
-                                                    try self.viewContext.save()
-                                                    NotificationUtil.updateAppNotificationBadge(
-                                                        context: self.viewContext
-                                                    )
-                                                } catch {
-                                                    log.error("Error while deleting notification: \(error)")
-                                                }
-                                            })
-                                             */
-                                            
+                                            notification.isRead = true
+                                            do {
+                                                try self.viewContext.save()
+                                                NotificationUtil.updateAppNotificationBadge(
+                                                    context: self.viewContext
+                                                )
+                                            } catch {
+                                                log.error("Error while updating notification: \(error)")
+                                            }
                                         }
-                                        .buttonStyle(PushButtonStyle())
+                                        if let validatorDisplay = notification.validatorDisplay,
+                                           let notificationTypeCode = notification.notificationTypeCode,
+                                           notificationTypeCode == "chain_validator_stopped_para_validating" {
+                                            NavigationLink(value: Screen.paraVoteReport(
+                                                networkId: UInt64(notification.networkId),
+                                                accountId: AccountId(hex: validatorAccountId),
+                                                identityDisplay: validatorDisplay
+                                            )) {
+                                                notificationView
+                                            }
+                                            .buttonStyle(PushButtonStyle())
+                                        } else {
+                                            NavigationLink(value: Screen.validatorDetails(
+                                                networkId: UInt64(notification.networkId),
+                                                accountId: AccountId(hex: validatorAccountId)
+                                            )) {
+                                                notificationView
+                                                /*
+                                                .modifier(SwipeDeleteViewModifier {
+                                                    self.viewContext.delete(notification)
+                                                    do {
+                                                        try self.viewContext.save()
+                                                        NotificationUtil.updateAppNotificationBadge(
+                                                            context: self.viewContext
+                                                        )
+                                                    } catch {
+                                                        log.error("Error while deleting notification: \(error)")
+                                                    }
+                                                })
+                                                 */
+                                                
+                                            }
+                                            .buttonStyle(PushButtonStyle())
+                                        }
                                     } else {
                                         NotificationView(notification: notification) {
                                             guard !notification.isRead else {
