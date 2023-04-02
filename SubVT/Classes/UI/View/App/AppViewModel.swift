@@ -20,7 +20,7 @@ class AppViewModel: ObservableObject {
         for network in networks {
             if let host = network.reportServiceHost,
                let port = network.reportServicePort {
-                reportServiceMap[network.id] = SubVTData.ReportService(
+                self.reportServiceMap[network.id] = SubVTData.ReportService(
                     host: host, port: port
                 )
             }
@@ -29,7 +29,7 @@ class AppViewModel: ObservableObject {
     
     func fetchOneKVNominatorsForNetwork(_ network: Network, onSuccess: @escaping ([String]) -> ()) {
         var result: [String] = []
-        let reportService = reportServiceMap[network.id]
+        let reportService = self.reportServiceMap[network.id]
         reportService?.getOneKVNominatorSummaries()
             .sink {
                 response in

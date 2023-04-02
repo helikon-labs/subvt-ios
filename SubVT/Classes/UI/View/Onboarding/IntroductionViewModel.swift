@@ -27,7 +27,7 @@ class IntroductionViewModel: ObservableObject {
             repeats: false
         ) {
             [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             if let result = self.result {
                 switch result {
                 case .left(let user):
@@ -42,7 +42,7 @@ class IntroductionViewModel: ObservableObject {
         self.service.createUser()
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     if self.fetchTimer?.isValid ?? false {
                         self.result = .right(error)

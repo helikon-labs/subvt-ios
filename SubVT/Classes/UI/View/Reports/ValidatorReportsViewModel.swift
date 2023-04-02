@@ -54,7 +54,7 @@ class ValidatorReportsViewModel: ObservableObject {
             endEraIndex: endEraIndex
         ).sink {
             [weak self] response in
-            guard let self = self else { return }
+            guard let self else { return }
             if let error = response.error {
                 self.fetchState = .error(error: error)
             } else if let reports = response.value {

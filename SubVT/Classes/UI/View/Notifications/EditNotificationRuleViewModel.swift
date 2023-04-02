@@ -100,7 +100,7 @@ class EditNotificationRuleViewModel: ObservableObject {
         self.appService.getNotificationTypes()
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     self.dataFetchState = .error(error: error)
                 } else if let notificationTypes = response.value {
@@ -127,7 +127,7 @@ class EditNotificationRuleViewModel: ObservableObject {
         self.appService.getUserValidators()
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     self.dataFetchState = .error(error: error)
                 } else if let userValidators = response.value {
@@ -142,7 +142,7 @@ class EditNotificationRuleViewModel: ObservableObject {
         self.appService.getUserNotificationRules()
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     self.dataFetchState = .error(error: error)
                 } else if let userNotificationRules = response.value {
@@ -230,7 +230,7 @@ class EditNotificationRuleViewModel: ObservableObject {
         appService.deleteUserNotificationRule(id: ruleToDelete.id)
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     log.error("Error deleting notification rule: \(error)")
                     self.dataPersistState = .error(error: error)
@@ -265,7 +265,7 @@ class EditNotificationRuleViewModel: ObservableObject {
         appService.createUserNotificationRule(request: request)
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     log.error("Error creating notification rule: \(error)")
                     self.dataPersistState = .error(error: error)

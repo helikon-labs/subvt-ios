@@ -105,7 +105,7 @@ class NetworkStatusViewModel: ObservableObject {
             .sink {
                 [weak self]
                 (completion) in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch completion {
                 case .finished:
                     log.info("Network status service subscription finished.")
@@ -117,7 +117,7 @@ class NetworkStatusViewModel: ObservableObject {
             } receiveValue: {
                 [weak self]
                 (event) in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch event {
                 case .subscribed(_):
                     self.subscriptionIsInProgress = false
@@ -162,7 +162,7 @@ class NetworkStatusViewModel: ObservableObject {
             endEraIndex: currentEraIndex
         ).sink {
             [weak self] response in
-            guard let self = self else { return }
+            guard let self else { return }
             // error case ignored for now
             if response.error == nil {
                 let reports = response.value!

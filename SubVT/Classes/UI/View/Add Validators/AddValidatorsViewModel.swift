@@ -28,7 +28,7 @@ class AddValidatorsViewModel: ObservableObject {
             .debounce(for: .seconds(0.25), scheduler: DispatchQueue.main)
             .sink {
                 [weak self] searchText in
-                guard let self = self else { return }
+                guard let self else { return }
                 self.searchValidators(query: searchText)
             }
             .store(in: &cancellables)
@@ -51,7 +51,7 @@ class AddValidatorsViewModel: ObservableObject {
         self.appService.getUserValidators()
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     self.userValidatorsFetchState = .error(error: error)
                     onError(error)
@@ -83,7 +83,7 @@ class AddValidatorsViewModel: ObservableObject {
         self.searchCancellable = reportService.searchValidators(query: query)
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     self.networkValidatorsFetchState = .error(error: error)
                 } else {
@@ -94,11 +94,14 @@ class AddValidatorsViewModel: ObservableObject {
     }
     
     func isUserValidator(address: String) -> Bool {
-        return self.userValidators.contains { userValidator in
+        return self.userValidators.contains {
+            [weak self]
+            userValidator in
+            guard let self = self else { return false }
             let otherAddress = try! userValidator.validatorAccountId.toSS58Check(
                 prefix: UInt16(self.network.ss58Prefix)
             )
-            return otherAddress == address
+            return otherAddress == address && userValidator.networkId == self.network.id
         }
     }
     
@@ -114,7 +117,7 @@ class AddValidatorsViewModel: ObservableObject {
             )
         ).sink {
             [weak self] response in
-            guard let self = self else { return }
+            guard let self else { return }
             self.addValidatorStatuses[accountId] = nil
             if let userValidator = response.value, response.error == nil {
                 Event.validatorAdded.post(nil)

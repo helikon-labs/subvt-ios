@@ -35,7 +35,7 @@ class BgMorphViewModel: ObservableObject {
             repeats: true
         ) {
             [weak self] _ in
-            guard let self = self else { return }
+            guard let self else { return }
             self.step = self.step.next
         }
     }

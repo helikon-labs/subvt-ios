@@ -37,7 +37,7 @@ class NotificationRulesViewModel: ObservableObject {
         self.appService.getUserNotificationRules().sink {
             [weak self]
             response in
-            guard let self = self else { return }
+            guard let self else { return }
             if let error = response.error {
                 self.rulesFetchState = .error(error: error)
             } else if let rules = response.value {

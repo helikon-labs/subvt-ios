@@ -13,6 +13,7 @@ import SwiftUI
 import SceneKit
 
 class ValidatorDetailsViewModel: ObservableObject {
+    @AppStorage(AppStorageKey.onekvNominators) private var onekvNominators: [UInt64:[String]] = [:]
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
     @Published private(set) var validatorDetails: ValidatorDetails? = nil
     @Published private(set) var userValidatorsFetchState: DataFetchState<[UserValidator]> = .idle
@@ -23,10 +24,10 @@ class ValidatorDetailsViewModel: ObservableObject {
     @Published private(set) var inactiveNominationTotal: Balance? = nil
     @Published private(set) var rewardReportFetchState: DataFetchState<String> = .idle
     @Published private(set) var monthlyRewards: [(Int, Balance)] = []
+    @Published private(set) var deviceRotation = SCNVector3(0.0, 0.0, 0.0)
     
     private let motion = CMMotionManager()
     private let queue = OperationQueue()
-    @Published private(set) var deviceRotation = SCNVector3(0.0, 0.0, 0.0)
     
     private var appService = SubVTData.AppService()
     private var service: SubVTData.ValidatorDetailsService! = nil
@@ -54,6 +55,7 @@ class ValidatorDetailsViewModel: ObservableObject {
             host: reportServiceHost,
             port: reportServicePort
         )
+        self.fetchOneKVNominators()
     }
     
     func unsubscribe() {
@@ -109,7 +111,7 @@ class ValidatorDetailsViewModel: ObservableObject {
             .sink {
                 [weak self]
                 (completion) in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch completion {
                 case .finished:
                     log.info("Validator details service subscription finished.")
@@ -121,7 +123,7 @@ class ValidatorDetailsViewModel: ObservableObject {
             } receiveValue: {
                 [weak self]
                 (event) in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch event {
                 case .subscribed(_):
                     self.subscriptionIsInProgress = false
@@ -134,7 +136,7 @@ class ValidatorDetailsViewModel: ObservableObject {
                     }
                     DispatchQueue.global(qos: .background).async {
                         [weak self] in
-                        guard let self = self else { return }
+                        guard let self else { return }
                         let activeNominations = self.validatorDetails?.validatorStake?.nominators.sorted(
                             by: { stake1, stake2 in
                                 stake1.stake.value > stake2.stake.value
@@ -151,7 +153,7 @@ class ValidatorDetailsViewModel: ObservableObject {
                             .reduce(Balance(integerLiteral: 0)) { $0 + $1 }
                         DispatchQueue.main.async {
                             [weak self] in
-                            guard let self = self else { return }
+                            guard let self else { return }
                             self.activeNominations = activeNominations
                             self.inactiveNominations = inactiveNominations
                             self.inactiveNominationCount = inactiveNominationCount
@@ -206,7 +208,7 @@ class ValidatorDetailsViewModel: ObservableObject {
         self.appService.getUserValidators()
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     self.userValidatorsFetchState = .error(error: error)
                     onError(error)
@@ -254,7 +256,7 @@ class ValidatorDetailsViewModel: ObservableObject {
             )
         ).sink {
             [weak self] response in
-            guard let self = self else { return }
+            guard let self else { return }
             if let error = response.error {
                 onError(error)
             } else {
@@ -278,7 +280,7 @@ class ValidatorDetailsViewModel: ObservableObject {
         self.appService.deleteUserValidator(id: userValidator.id)
             .sink {
                 [weak self] response in
-                guard let self = self else { return }
+                guard let self else { return }
                 if let error = response.error {
                     onError(error)
                 } else {
@@ -287,6 +289,24 @@ class ValidatorDetailsViewModel: ObservableObject {
                         onSuccess: onSuccess,
                         onError: onError
                     )
+                }
+            }
+            .store(in: &cancellables)
+    }
+    
+    func fetchOneKVNominators() {
+        guard (self.onekvNominators[self.network.id]?.isEmpty ?? true) else { return }
+        self.reportService?.getOneKVNominatorSummaries()
+            .sink {
+                response in
+                if let _ = response.error {
+                    // no-op
+                } else if let nominators = response.value {
+                    var result: [String] = []
+                    for nominator in nominators {
+                        result.append(nominator.stashAddress)
+                    }
+                    self.onekvNominators[self.network.id] = result
                 }
             }
             .store(in: &cancellables)

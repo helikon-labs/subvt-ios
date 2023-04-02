@@ -679,11 +679,11 @@ extension ValidatorDetailsView {
                 trailing: UI.Dimension.Common.dataPanelPadding
             ))
             if self.activeNominatorListIsVisible {
+                let onekvNominators = self.onekvNominators[self.networkId] ?? []
                 if let nominators = self.viewModel.activeNominations {
                     ScrollView {
                         LazyVStack(spacing: 4) {
                             ForEach(nominators, id: \.self.account.id) { nominator in
-                                let onekvNominators = self.onekvNominators[self.networkId] ?? []
                                 HStack(alignment: .center) {
                                     Text(truncateAddress(nominator.account.address))
                                         .font(UI.Font.ValidatorDetails.nominator)
@@ -781,6 +781,7 @@ extension ValidatorDetailsView {
                 trailing: UI.Dimension.Common.dataPanelPadding
             ))
             if self.inactiveNominatorListIsVisible {
+                let onekvNominators = self.onekvNominators[self.networkId] ?? []
                 if let nominators = self.viewModel.inactiveNominations {
                     ScrollView {
                         LazyVStack(spacing: 4) {
@@ -790,6 +791,13 @@ extension ValidatorDetailsView {
                                         .font(UI.Font.ValidatorDetails.nominator)
                                         .foregroundColor(Color("Text"))
                                         .lineLimit(1)
+                                    if onekvNominators.contains(nominator.stashAccount.address) {
+                                        Spacer()
+                                            .frame(width: 4)
+                                        Text("(1KV)")
+                                            .font(UI.Font.ValidatorDetails.nominator)
+                                            .foregroundColor(Color("Text"))
+                                    }
                                     Spacer()
                                     Text(formatBalance(
                                         balance: nominator.stake.activeAmount,

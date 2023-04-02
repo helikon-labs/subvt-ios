@@ -131,7 +131,7 @@ class ValidatorListViewModel: ObservableObject {
             .sink {
                 [weak self]
                 (completion) in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch completion {
                 case .finished:
                     log.info("Validator list service subscription finished.")
@@ -145,7 +145,7 @@ class ValidatorListViewModel: ObservableObject {
             } receiveValue: {
                 [weak self]
                 (event) in
-                guard let self = self else { return }
+                guard let self else { return }
                 switch event {
                 case .subscribed(_):
                     self.subscriptionIsInProgress = false
