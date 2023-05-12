@@ -20,6 +20,7 @@ class MyValidatorsViewModel: ObservableObject {
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
     private var updateTimer: Timer? = nil
     private var cancellables = Set<AnyCancellable>()
+    private var networks: [Network] = []
     
     init() {
         SwiftEventBus.onMainThread(self, name: Event.validatorAdded.rawValue) { _ in
@@ -34,7 +35,8 @@ class MyValidatorsViewModel: ObservableObject {
         guard self.reportServiceMap.count == 0 else {
             return
         }
-        for network in networks {
+        self.networks = networks
+        for network in self.networks {
             if let host = network.reportServiceHost,
                let port = network.reportServicePort {
                 reportServiceMap[network.id] = SubVTData.ReportService(
@@ -120,9 +122,30 @@ class MyValidatorsViewModel: ObservableObject {
             }
         }
         Publishers.MergeMany(publishers)
-            .sink { response in
-                if let error = response.error {
-                    self.fetchState = .error(error: error)
+            .sink {
+                [weak self] response in
+                guard let self = self else { return }
+                if let _ = response.error,
+                   let url = response.request?.url,
+                   let host = url.host() {
+                    var networkId: UInt64 = 0;
+                    for network in self.networks {
+                        if host.contains(network.display.lowercased()) {
+                            networkId = network.id
+                            break
+                        }
+                    }
+                    if networkId == 0 {
+                        return
+                    }
+                    for pathComponent in url.pathComponents {
+                        if pathComponent.starts(with: "0x") {
+                            self.removeValidator(
+                                networkId: networkId,
+                                accountId: AccountId.init(hex: pathComponent)
+                            )
+                        }
+                    }
                 } else if let validatorSummaryReport = response.value {
                     switch self.fetchState {
                     case .loading:
