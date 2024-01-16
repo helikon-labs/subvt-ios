@@ -53,9 +53,8 @@ struct NotificationView: View {
                     .font(UI.Font.Notification.validatorDisplay)
                     .foregroundColor(Color("Text"))
                 Spacer()
-                if let networkId = notification.networkId,
-                   let network = networks?.first(where: { network in
-                       network.id == networkId
+                if let network = networks?.first(where: { network in
+                    network.id == notification.networkId
                    }) {
                     UI.Image.Common.networkIcon(network: network)
                         .resizable()
