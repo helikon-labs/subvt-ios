@@ -258,7 +258,7 @@ struct ParaVoteReportView: View {
                         y: .value("Vote Count", report.1.explicit),
                         width: .automatic
                     )
-                    .foregroundStyle(Color.blue)
+                    .foregroundStyle(Color("SubVTBlue"))
                     .annotation(position: .overlay) {
                         Text(String(report.1.explicit))
                             .foregroundColor(Color("Text"))
@@ -333,8 +333,8 @@ struct ParaVoteReportView: View {
             }
             HStack(alignment: .center, spacing: 12) {
                 LegendItem(color: Color.gray, text: localized("reports.paravalidation_votes.implicit"))
-                LegendItem(color: Color.blue, text: localized("reports.paravalidation_votes.explicit"))
-                LegendItem(color: Color.red, text: localized("reports.paravalidation_votes.missed"))
+                LegendItem(color: Color("SubVTBlue"), text: localized("reports.paravalidation_votes.explicit"))
+                LegendItem(color: Color("StatusError"), text: localized("reports.paravalidation_votes.missed"))
                 Spacer()
             }
             .frame(alignment: .leading)

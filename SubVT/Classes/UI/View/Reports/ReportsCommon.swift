@@ -212,8 +212,8 @@ enum ReportDataFactor {
 let reportGradient = LinearGradient(
     gradient: Gradient(
         colors: [
-            Color("Green"),
-            Color("Blue")
+            Color("SubVTGreen"),
+            Color("SubVTBlue")
         ]
     ),
     startPoint: .bottom,

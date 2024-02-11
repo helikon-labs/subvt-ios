@@ -73,8 +73,8 @@ struct BarChartView: View {
     private let gradient = LinearGradient(
         gradient: Gradient(
             colors: [
-                Color("Green"),
-                Color("Blue")
+                Color("SubVTGreen"),
+                Color("SubVTBlue")
             ]
         ),
         startPoint: .bottom,

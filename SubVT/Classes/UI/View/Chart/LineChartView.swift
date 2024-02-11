@@ -55,8 +55,8 @@ struct LineChartView: View {
     private let gradient = LinearGradient(
         gradient: Gradient(
             colors: [
-                Color("Blue"),
-                Color("Green")
+                Color("SubVTBlue"),
+                Color("SubVTGreen")
             ]
         ),
         startPoint: .leading,
