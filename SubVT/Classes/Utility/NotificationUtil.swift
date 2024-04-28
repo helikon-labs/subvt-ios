@@ -107,6 +107,32 @@ struct NotificationUtil {
         .store(in: &cancellables)
     }
     
+    static func deleteUserNotificationChannel(
+        channelId: UInt64,
+        onSuccess: @escaping () -> (),
+        onError: @escaping (APIError) -> ()
+    ) {
+        NotificationUtil.appService.deleteUserNotificationChannel(
+            id: channelId
+        )
+        .sink { (response) in
+            if let error = response.error {
+                log.error("Error while deleting user notification channel: \(error)")
+                onError(error)
+            } else {
+                switch response.result {
+                case .success:
+                    log.info("Successfully deleted user notification channel.")
+                    onSuccess()
+                case .failure(let error):
+                    log.error("Error while deleting user notification channel: \(error)")
+                    onError(error)
+                }
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
     static func updateAppNotificationBadge(context: NSManagedObjectContext) {
         do {
             let fetchRequest : NSFetchRequest<Notification> = Notification.fetchRequest()
