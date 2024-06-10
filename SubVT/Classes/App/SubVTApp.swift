@@ -67,26 +67,6 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
     ) {
         let token = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
-        if !self.apnsToken.isEmpty
-            && self.apnsToken != token
-            && self.notificationChannelId > 0 {
-            NotificationUtil.deleteUserNotificationChannel(channelId: UInt64(self.notificationChannelId)) {
-                self.apnsToken = ""
-                self.notificationChannelId = 0
-                self.createNotificationChannel(token: token)
-            } onError: { error in
-                log.error("Error while deleting existing notification channel: \(error)")
-            }
-            return
-        } else {
-            self.createNotificationChannel(token: token)
-        }
-    }
-    
-    private func createNotificationChannel(token: String) {
-        guard self.apnsToken.isEmpty else {
-            return
-        }
         self.apnsSetupHasFailed = false
         NotificationUtil.createAPNSNotificationChannel(token: token) { channelId in
             self.apnsToken = token

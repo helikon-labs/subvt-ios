@@ -47,12 +47,6 @@ struct NotificationUtil {
         onSuccess: @escaping (UInt64) -> (),
         onError: @escaping (APIError) -> ()
     ) {
-        let existingChannelId = UserDefaultsUtil.shared.integer(forKey: AppStorageKey.notificationChannelId)
-        if existingChannelId > 0 {
-            log.info("APNS notification channel exists with id \(existingChannelId).")
-            onSuccess(UInt64(existingChannelId))
-            return
-        }
         NotificationUtil.appService.createUserNotificationChannel(
             channel: NewUserNotificationChannel(
                 channel: .apns,
@@ -81,11 +75,6 @@ struct NotificationUtil {
         onSuccess: @escaping () -> (),
         onError: @escaping (APIError) -> ()
     ) {
-        if UserDefaultsUtil.shared.bool(forKey: AppStorageKey.hasCreatedDefaultNotificationRules) {
-            log.info("Default notification rules are already created.")
-            onSuccess()
-            return
-        }
         NotificationUtil.appService.createDefaultUserNotificationRules(
             channelId: channelId
         )
