@@ -318,3 +318,9 @@
 "reports.paravalidation_votes.explicit"="Explicit";
 "reports.paravalidation_votes.implicit"="Implicit";
 "reports.paravalidation_votes.missed"="Missed";
+
+"watch.onboarding.connectivity_not_supported"="Watch connectivity is not supported.\nPlease check your iOS installation.";
+"watch.onboarding.companion_app_not_installed"="Companion app is not installed on the iOS device.\nPlease make sure that SubVT is installed on your iOS device.";
+"watch.onboarding.initial_sync_progress"="Completing initial synchronization.";
+"watch.onboarding.initial_sync_failed"="Initial synchronization has failed.";
+"watch.onboarding.onboarding_not_complete"="Please complete onboarding on the iOS device.";

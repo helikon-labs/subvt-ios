@@ -57,9 +57,7 @@ struct OnboardingParentView: View {
                         .foregroundColor(Color("Text"))
                         .onTapGesture {
                             self.displayState = .dissolved
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                                self.hasBeenOnboarded = true
-                            }
+                            self.hasBeenOnboarded = true
                         }
                     Spacer()
                     HStack(spacing: UI.Dimension.Onboarding.pageCircleSpacing) {
@@ -92,9 +90,7 @@ struct OnboardingParentView: View {
                         .onTapGesture {
                             if self.step == .step4 {
                                 self.displayState = .dissolved
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-                                    self.hasBeenOnboarded = true
-                                }
+                                self.hasBeenOnboarded = true
                             } else {
                                 withAnimation {
                                     self.step = self.step.nextStep

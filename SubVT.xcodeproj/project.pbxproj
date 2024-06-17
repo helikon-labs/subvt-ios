@@ -83,6 +83,7 @@
 		A04ED599292E1F3200CF089F /* UI+Dimension+ReportRangeSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04ED598292E1F3200CF089F /* UI+Dimension+ReportRangeSelection.swift */; };
 		A052C15128913C4400622D9F /* ValidatorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052C15028913C4400622D9F /* ValidatorDetailsView.swift */; };
 		A052C15228913C4400622D9F /* ValidatorDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A052C15028913C4400622D9F /* ValidatorDetailsView.swift */; };
+		A0548B972C17005500ADE5F1 /* WatchConnectivityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0548B962C17005500ADE5F1 /* WatchConnectivityUtil.swift */; };
 		A05B25A1287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
 		A05B25A2287EB7450070EF81 /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
 		A05B25A4287ECBE30070EF81 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A3287ECBE30070EF81 /* Counter.swift */; };
@@ -162,16 +163,24 @@
 		A07BA828285B951200575683 /* UI+Dimension+NetworkSelection.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */; };
 		A088B18728AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A088B18628AF6E990086A15E /* NetworkSelectorView.swift */; };
 		A088B18828AF6E9A0086A15E /* NetworkSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A088B18628AF6E990086A15E /* NetworkSelectorView.swift */; };
+		A09053972C202B6900362BC0 /* WatchUserDefaultsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09053962C202B6900362BC0 /* WatchUserDefaultsUtil.swift */; };
+		A090539C2C20388D00362BC0 /* DataFetchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A078727B287C1A3300BED374 /* DataFetchState.swift */; };
+		A090539D2C20391100362BC0 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = A018C2AC28B90C0500C9A276 /* File.swift */; };
+		A090539E2C203B5F00362BC0 /* data-env.json in Resources */ = {isa = PBXBuildFile; fileRef = A0607BE32868CF1B0048947D /* data-env.json */; };
+		A09053A12C2045ED00362BC0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0128A6A284A47AD000C2307 /* Localizable.strings */; };
+		A09053A22C2045F500362BC0 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A03C5BE528783C9F00D9D4FD /* Localization.swift */; };
+		A09053A32C204F1900362BC0 /* WatchConnectivityUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0548B962C17005500ADE5F1 /* WatchConnectivityUtil.swift */; };
 		A093F0482865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
 		A093F0492865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
 		A093F04A2865F08600778293 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
+		A097C17F2C20117B00ABE788 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0659D0928EAA38100A6E251 /* Logging.swift */; };
 		A098E594285DDE3D00AAA68A /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098E593285DDE3D00AAA68A /* PreviewData.swift */; };
 		A09905A02897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */; };
 		A09905A12897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */; };
 		A09AC41528E9B03500C43E2B /* NotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */; };
 		A09AC41628E9B03500C43E2B /* NotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */; };
-		A0A1A4CD2B78B3CC00E18F39 /* SubVT_WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1A4CC2B78B3CC00E18F39 /* SubVT_WatchApp.swift */; };
-		A0A1A4CF2B78B3CC00E18F39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1A4CE2B78B3CC00E18F39 /* ContentView.swift */; };
+		A0A1A4CD2B78B3CC00E18F39 /* WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1A4CC2B78B3CC00E18F39 /* WatchApp.swift */; };
+		A0A1A4CF2B78B3CC00E18F39 /* WatchAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1A4CE2B78B3CC00E18F39 /* WatchAppView.swift */; };
 		A0A1A4D12B78B3CD00E18F39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A1A4D02B78B3CD00E18F39 /* Assets.xcassets */; };
 		A0A1A4D42B78B3CD00E18F39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A1A4D32B78B3CD00E18F39 /* Preview Assets.xcassets */; };
 		A0A1A4DE2B78B3CE00E18F39 /* SubVT_Watch_AppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1A4DD2B78B3CE00E18F39 /* SubVT_Watch_AppTests.swift */; };
@@ -237,6 +246,9 @@
 		A0C062A5286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
 		A0C062A6286721E9001FE459 /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C062A4286721E9001FE459 /* TabBarView.swift */; };
 		A0C67D29293DF744007FCE4E /* Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C67D28293DF744007FCE4E /* Keyboard.swift */; };
+		A0C840C42C170842008FDFEB /* SubVTData in Frameworks */ = {isa = PBXBuildFile; productRef = A0C840C32C170842008FDFEB /* SubVTData */; };
+		A0C840C72C171799008FDFEB /* OptionalCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9838C2875ABF40008C370 /* OptionalCodable.swift */; };
+		A0C840C82C17179B008FDFEB /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37CC2876EB8200912BF3 /* Network.swift */; };
 		A0C90E882878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
 		A0C90E892878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
 		A0C90E8A2878615600A91996 /* Formatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C90E872878615600A91996 /* Formatter.swift */; };
@@ -249,6 +261,29 @@
 		A0C9A783285749940071C7AC /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
 		A0C9A78728575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
 		A0C9A78828575F470071C7AC /* NetworkSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */; };
+		A0CC50202C2078E80092303C /* WatchAppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC501F2C2078E60092303C /* WatchAppStorageKey.swift */; };
+		A0CC50222C207D650092303C /* LexendDeca-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6692848CD1C0029DDBF /* LexendDeca-Light.ttf */; };
+		A0CC50232C207D650092303C /* LexendDeca-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F66A2848CD1C0029DDBF /* LexendDeca-Regular.ttf */; };
+		A0CC50242C207D650092303C /* LexendDeca-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F66E2848CD1C0029DDBF /* LexendDeca-ExtraBold.ttf */; };
+		A0CC50252C207D650092303C /* LexendDeca-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F66F2848CD1C0029DDBF /* LexendDeca-Thin.ttf */; };
+		A0CC50262C207D650092303C /* LexendDeca-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F66B2848CD1C0029DDBF /* LexendDeca-Bold.ttf */; };
+		A0CC50272C207D650092303C /* LexendDeca-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F66D2848CD1C0029DDBF /* LexendDeca-Black.ttf */; };
+		A0CC50282C207D650092303C /* LexendDeca-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6682848CD1C0029DDBF /* LexendDeca-SemiBold.ttf */; };
+		A0CC50292C207D650092303C /* LexendDeca-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F6702848CD1C0029DDBF /* LexendDeca-ExtraLight.ttf */; };
+		A0CC502A2C207D650092303C /* LexendDeca-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A0E0F66C2848CD1C0029DDBF /* LexendDeca-Medium.ttf */; };
+		A0CC502B2C207D760092303C /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0F6862848CF120029DDBF /* Font.swift */; };
+		A0CC50472C207E150092303C /* UI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50322C207DE90092303C /* UI.swift */; };
+		A0CC50482C207E240092303C /* UI+Duration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50302C207DE80092303C /* UI+Duration.swift */; };
+		A0CC50492C207E270092303C /* UI+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC502F2C207DE80092303C /* UI+Font.swift */; };
+		A0CC504A2C207EA80092303C /* UI+Dimension+Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50382C207DE90092303C /* UI+Dimension+Common.swift */; };
+		A0CC504B2C207EAB0092303C /* UI+Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50312C207DE90092303C /* UI+Value.swift */; };
+		A0CC504C2C207EB10092303C /* UI+Text.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50332C207DE90092303C /* UI+Text.swift */; };
+		A0CC504D2C207EB10092303C /* UI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC502E2C207DE80092303C /* UI+Image.swift */; };
+		A0CC504F2C207EE40092303C /* UI+Dimension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC504E2C207EE40092303C /* UI+Dimension.swift */; };
+		A0CC50522C2080320092303C /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50512C2080320092303C /* OnboardingView.swift */; };
+		A0CC50562C2084620092303C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50552C2084620092303C /* HomeView.swift */; };
+		A0CC50582C20A9EE0092303C /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50572C20A9EE0092303C /* OnboardingViewModel.swift */; };
+		A0CC50592C20AEC00092303C /* WatchAppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC501F2C2078E60092303C /* WatchAppStorageKey.swift */; };
 		A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03342288AE065001F78D2 /* PushButtonStyle.swift */; };
 		A0D03344288AE065001F78D2 /* PushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03342288AE065001F78D2 /* PushButtonStyle.swift */; };
 		A0D03346288AE7E9001F78D2 /* ValidatorListFilterSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03345288AE7E9001F78D2 /* ValidatorListFilterSortView.swift */; };
@@ -461,6 +496,7 @@
 		A04C473028882AC40004A46A /* ValidatorSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummary.swift; sourceTree = "<group>"; };
 		A04ED598292E1F3200CF089F /* UI+Dimension+ReportRangeSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+ReportRangeSelection.swift"; sourceTree = "<group>"; };
 		A052C15028913C4400622D9F /* ValidatorDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailsView.swift; sourceTree = "<group>"; };
+		A0548B962C17005500ADE5F1 /* WatchConnectivityUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchConnectivityUtil.swift; sourceTree = "<group>"; };
 		A05B25A0287EB7450070EF81 /* PanelAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanelAppearance.swift; sourceTree = "<group>"; };
 		A05B25A3287ECBE30070EF81 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		A05B25A9287EDB530070EF81 /* UI+Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Duration.swift"; sourceTree = "<group>"; };
@@ -499,13 +535,14 @@
 		A07BA823285B94DB00575683 /* UI+Dimension+Onboarding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Onboarding.swift"; sourceTree = "<group>"; };
 		A07BA826285B951200575683 /* UI+Dimension+NetworkSelection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkSelection.swift"; sourceTree = "<group>"; };
 		A088B18628AF6E990086A15E /* NetworkSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectorView.swift; sourceTree = "<group>"; };
+		A09053962C202B6900362BC0 /* WatchUserDefaultsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchUserDefaultsUtil.swift; sourceTree = "<group>"; };
 		A093F0472865F08600778293 /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
 		A098E593285DDE3D00AAA68A /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailsIconsView.swift; sourceTree = "<group>"; };
 		A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRuleView.swift; sourceTree = "<group>"; };
 		A0A1A4CA2B78B3CC00E18F39 /* SubVT Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SubVT Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A0A1A4CC2B78B3CC00E18F39 /* SubVT_WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubVT_WatchApp.swift; sourceTree = "<group>"; };
-		A0A1A4CE2B78B3CC00E18F39 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A0A1A4CC2B78B3CC00E18F39 /* WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
+		A0A1A4CE2B78B3CC00E18F39 /* WatchAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppView.swift; sourceTree = "<group>"; };
 		A0A1A4D02B78B3CD00E18F39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0A1A4D32B78B3CD00E18F39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A0A1A4D92B78B3CD00E18F39 /* SubVT Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "SubVT Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -547,11 +584,24 @@
 		A0C062A128672106001FE459 /* UI+Dimension+TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+TabBar.swift"; sourceTree = "<group>"; };
 		A0C062A4286721E9001FE459 /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
 		A0C67D28293DF744007FCE4E /* Keyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keyboard.swift; sourceTree = "<group>"; };
+		A0C840C92C171910008FDFEB /* SubVT Watch App.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "SubVT Watch App.entitlements"; sourceTree = "<group>"; };
 		A0C90E872878615600A91996 /* Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatter.swift; sourceTree = "<group>"; };
 		A0C9838C2875ABF40008C370 /* OptionalCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalCodable.swift; sourceTree = "<group>"; };
 		A0C9A77E28573DAE0071C7AC /* NetworkSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionView.swift; sourceTree = "<group>"; };
 		A0C9A781285749940071C7AC /* BasicDisplayState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicDisplayState.swift; sourceTree = "<group>"; };
 		A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSelectionViewModel.swift; sourceTree = "<group>"; };
+		A0CC501F2C2078E60092303C /* WatchAppStorageKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppStorageKey.swift; sourceTree = "<group>"; };
+		A0CC502E2C207DE80092303C /* UI+Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Image.swift"; sourceTree = "<group>"; };
+		A0CC502F2C207DE80092303C /* UI+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Font.swift"; sourceTree = "<group>"; };
+		A0CC50302C207DE80092303C /* UI+Duration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Duration.swift"; sourceTree = "<group>"; };
+		A0CC50312C207DE90092303C /* UI+Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Value.swift"; sourceTree = "<group>"; };
+		A0CC50322C207DE90092303C /* UI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UI.swift; sourceTree = "<group>"; };
+		A0CC50332C207DE90092303C /* UI+Text.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Text.swift"; sourceTree = "<group>"; };
+		A0CC50382C207DE90092303C /* UI+Dimension+Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Common.swift"; sourceTree = "<group>"; };
+		A0CC504E2C207EE40092303C /* UI+Dimension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension.swift"; sourceTree = "<group>"; };
+		A0CC50512C2080320092303C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		A0CC50552C2084620092303C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		A0CC50572C20A9EE0092303C /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		A0D03342288AE065001F78D2 /* PushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButtonStyle.swift; sourceTree = "<group>"; };
 		A0D03345288AE7E9001F78D2 /* ValidatorListFilterSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorListFilterSortView.swift; sourceTree = "<group>"; };
 		A0D03348288B01C5001F78D2 /* SmallCheckboxButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCheckboxButtonView.swift; sourceTree = "<group>"; };
@@ -611,6 +661,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0C840C42C170842008FDFEB /* SubVTData in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,9 +821,10 @@
 			children = (
 				A0BCDE5E28784DD0008047D7 /* Format.swift */,
 				A03C5BE528783C9F00D9D4FD /* Localization.swift */,
-				A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */,
 				A0659D0928EAA38100A6E251 /* Logging.swift */,
+				A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */,
 				A0659D1228EAD9FE00A6E251 /* UserDefaultsUtil.swift */,
+				A0548B962C17005500ADE5F1 /* WatchConnectivityUtil.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -946,13 +998,50 @@
 			path = "UI+Dimension";
 			sourceTree = "<group>";
 		};
+		A09053982C20385300362BC0 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A090539F2C2045A500362BC0 /* App */,
+				A0CC501E2C2078C80092303C /* Data */,
+				A0CC502C2C207DD10092303C /* UI */,
+				A09053A02C2045B000362BC0 /* Util */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A09053992C20385800362BC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC50212C2079BA0092303C /* App */,
+				A0CC50532C2081060092303C /* Home */,
+				A0CC50502C2080200092303C /* Onboarding */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		A090539F2C2045A500362BC0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A0A1A4CC2B78B3CC00E18F39 /* WatchApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A09053A02C2045B000362BC0 /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A09053962C202B6900362BC0 /* WatchUserDefaultsUtil.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		A0A1A4CB2B78B3CC00E18F39 /* SubVT Watch App */ = {
 			isa = PBXGroup;
 			children = (
-				A0A1A4CC2B78B3CC00E18F39 /* SubVT_WatchApp.swift */,
-				A0A1A4CE2B78B3CC00E18F39 /* ContentView.swift */,
-				A0A1A4D02B78B3CD00E18F39 /* Assets.xcassets */,
+				A0C840C92C171910008FDFEB /* SubVT Watch App.entitlements */,
+				A09053982C20385300362BC0 /* Classes */,
 				A0A1A4D22B78B3CD00E18F39 /* Preview Content */,
+				A0CC50542C2084210092303C /* Resources */,
 			);
 			path = "SubVT Watch App";
 			sourceTree = "<group>";
@@ -1001,6 +1090,7 @@
 				A0A1A4DC2B78B3CE00E18F39 /* SubVT Watch AppTests */,
 				A0A1A4E62B78B3CE00E18F39 /* SubVT Watch AppUITests */,
 				A0BF90922848C1EB0053389A /* Products */,
+				A0C840C22C170842008FDFEB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1053,6 +1143,13 @@
 			path = SubVTUITests;
 			sourceTree = "<group>";
 		};
+		A0C840C22C170842008FDFEB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		A0C9838528759E0E0008C370 /* Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -1098,6 +1195,79 @@
 				A0C9A78628575F470071C7AC /* NetworkSelectionViewModel.swift */,
 			);
 			path = "Network Selection";
+			sourceTree = "<group>";
+		};
+		A0CC501E2C2078C80092303C /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC501F2C2078E60092303C /* WatchAppStorageKey.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		A0CC50212C2079BA0092303C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A0A1A4CE2B78B3CC00E18F39 /* WatchAppView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A0CC502C2C207DD10092303C /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC502D2C207DE80092303C /* Config */,
+				A09053992C20385800362BC0 /* View */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		A0CC502D2C207DE80092303C /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC50322C207DE90092303C /* UI.swift */,
+				A0CC50302C207DE80092303C /* UI+Duration.swift */,
+				A0CC502F2C207DE80092303C /* UI+Font.swift */,
+				A0CC502E2C207DE80092303C /* UI+Image.swift */,
+				A0CC50332C207DE90092303C /* UI+Text.swift */,
+				A0CC50312C207DE90092303C /* UI+Value.swift */,
+				A0CC50342C207DE90092303C /* UI+Dimension */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		A0CC50342C207DE90092303C /* UI+Dimension */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC504E2C207EE40092303C /* UI+Dimension.swift */,
+				A0CC50382C207DE90092303C /* UI+Dimension+Common.swift */,
+			);
+			path = "UI+Dimension";
+			sourceTree = "<group>";
+		};
+		A0CC50502C2080200092303C /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC50512C2080320092303C /* OnboardingView.swift */,
+				A0CC50572C20A9EE0092303C /* OnboardingViewModel.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		A0CC50532C2081060092303C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				A0CC50552C2084620092303C /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		A0CC50542C2084210092303C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A0A1A4D02B78B3CD00E18F39 /* Assets.xcassets */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		A0D5498628E70118007794E2 /* Notifications */ = {
@@ -1270,6 +1440,9 @@
 			dependencies = (
 			);
 			name = "SubVT Watch App";
+			packageProductDependencies = (
+				A0C840C32C170842008FDFEB /* SubVTData */,
+			);
 			productName = "SubVT Watch Watch App";
 			productReference = A0A1A4CA2B78B3CC00E18F39 /* SubVT Watch App.app */;
 			productType = "com.apple.product-type.application";
@@ -1439,6 +1612,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0A1A4D42B78B3CD00E18F39 /* Preview Assets.xcassets in Resources */,
+				A09053A12C2045ED00362BC0 /* Localizable.strings in Resources */,
+				A0CC50222C207D650092303C /* LexendDeca-Light.ttf in Resources */,
+				A0CC50232C207D650092303C /* LexendDeca-Regular.ttf in Resources */,
+				A0CC50242C207D650092303C /* LexendDeca-ExtraBold.ttf in Resources */,
+				A0CC50252C207D650092303C /* LexendDeca-Thin.ttf in Resources */,
+				A0CC50262C207D650092303C /* LexendDeca-Bold.ttf in Resources */,
+				A0CC50272C207D650092303C /* LexendDeca-Black.ttf in Resources */,
+				A0CC50282C207D650092303C /* LexendDeca-SemiBold.ttf in Resources */,
+				A0CC50292C207D650092303C /* LexendDeca-ExtraLight.ttf in Resources */,
+				A0CC502A2C207D650092303C /* LexendDeca-Medium.ttf in Resources */,
+				A090539E2C203B5F00362BC0 /* data-env.json in Resources */,
 				A0A1A4D12B78B3CD00E18F39 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1530,8 +1714,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A0A1A4CF2B78B3CC00E18F39 /* ContentView.swift in Sources */,
-				A0A1A4CD2B78B3CC00E18F39 /* SubVT_WatchApp.swift in Sources */,
+				A0CC504C2C207EB10092303C /* UI+Text.swift in Sources */,
+				A0CC504D2C207EB10092303C /* UI+Image.swift in Sources */,
+				A0C840C72C171799008FDFEB /* OptionalCodable.swift in Sources */,
+				A0CC50472C207E150092303C /* UI.swift in Sources */,
+				A09053A22C2045F500362BC0 /* Localization.swift in Sources */,
+				A09053A32C204F1900362BC0 /* WatchConnectivityUtil.swift in Sources */,
+				A0CC50202C2078E80092303C /* WatchAppStorageKey.swift in Sources */,
+				A0C840C82C17179B008FDFEB /* Network.swift in Sources */,
+				A0A1A4CF2B78B3CC00E18F39 /* WatchAppView.swift in Sources */,
+				A0CC504A2C207EA80092303C /* UI+Dimension+Common.swift in Sources */,
+				A0CC504F2C207EE40092303C /* UI+Dimension.swift in Sources */,
+				A0A1A4CD2B78B3CC00E18F39 /* WatchApp.swift in Sources */,
+				A0CC504B2C207EAB0092303C /* UI+Value.swift in Sources */,
+				A0CC50492C207E270092303C /* UI+Font.swift in Sources */,
+				A0CC502B2C207D760092303C /* Font.swift in Sources */,
+				A090539D2C20391100362BC0 /* File.swift in Sources */,
+				A09053972C202B6900362BC0 /* WatchUserDefaultsUtil.swift in Sources */,
+				A097C17F2C20117B00ABE788 /* Logging.swift in Sources */,
+				A0CC50582C20A9EE0092303C /* OnboardingViewModel.swift in Sources */,
+				A0CC50482C207E240092303C /* UI+Duration.swift in Sources */,
+				A090539C2C20388D00362BC0 /* DataFetchState.swift in Sources */,
+				A0CC50562C2084620092303C /* HomeView.swift in Sources */,
+				A0CC50522C2080320092303C /* OnboardingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1557,6 +1762,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0B3A6BB287D9BE9005DA484 /* CGFloat.swift in Sources */,
+				A0548B972C17005500ADE5F1 /* WatchConnectivityUtil.swift in Sources */,
 				A07BA821285B94B400575683 /* UI+Dimension+Introduction.swift in Sources */,
 				A04B37D0287712C400912BF3 /* ValidatorListButtonView.swift in Sources */,
 				A0659D1728EB003400A6E251 /* UI+Dimension+NotificationRules.swift in Sources */,
@@ -1692,6 +1898,7 @@
 				A0C90E882878615600A91996 /* Formatter.swift in Sources */,
 				A04C42992853BA18007C970B /* OnboardingStep.swift in Sources */,
 				A0FC976828B62CCF00B75A9B /* AddValidatorsView.swift in Sources */,
+				A0CC50592C20AEC00092303C /* WatchAppStorageKey.swift in Sources */,
 				A07BA81B285B943A00575683 /* UI+Dimension+BgMorph.swift in Sources */,
 				A09905A02897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */,
 				A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */,
@@ -1913,6 +2120,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
@@ -1924,6 +2132,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SubVT;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = io.helikon.subvt;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1949,6 +2158,7 @@
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
@@ -1960,6 +2170,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = SubVT;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = io.helikon.subvt;
+				INFOPLIST_KEY_WKRunsIndependentlyOfCompanionApp = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2433,7 +2644,7 @@
 			repositoryURL = "https://github.com/helikon-labs/subvt-data-swift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.16.0;
+				minimumVersion = 0.17.1;
 			};
 		};
 		A0FC976A28B63D5800B75A9B /* XCRemoteSwiftPackageReference "SwiftEventBus" */ = {
@@ -2451,6 +2662,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A0ABBA8E2941F91900D06E0A /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseCrashlytics;
+		};
+		A0C840C32C170842008FDFEB /* SubVTData */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A0E0F6892848D2B40029DDBF /* XCRemoteSwiftPackageReference "subvt-data-swift" */;
+			productName = SubVTData;
 		};
 		A0E0F68A2848D2B40029DDBF /* SubVTData */ = {
 			isa = XCSwiftPackageProductDependency;

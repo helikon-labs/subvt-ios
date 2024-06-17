@@ -9,3 +9,8 @@ import Foundation
 import SwiftyBeaver
 
 let log = SwiftyBeaver.self
+
+func initLog() {
+    let console = ConsoleDestination()
+    log.addDestination(console)
+}

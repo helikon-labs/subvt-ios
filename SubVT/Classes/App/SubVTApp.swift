@@ -10,12 +10,12 @@ import CoreData
 import FirebaseCore
 import SubVTData
 import SwiftUI
+import WatchConnectivity
 
 @main
 struct SubVTApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     private let persistenceController = PersistenceController.shared
-    
     
     var body: some Scene {
         WindowGroup {
@@ -96,6 +96,12 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil
     ) -> Bool {
         FirebaseApp.configure()
+        initLog()
+        if WCSession.isSupported() {
+            let session = WCSession.default
+            session.delegate = self
+            session.activate()
+        }
         return true
     }
     
@@ -170,5 +176,65 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             }
         }
         completionHandler()
+    }
+}
+
+extension AppDelegate: WCSessionDelegate {
+    func session(
+        _ session: WCSession,
+        activationDidCompleteWith activationState: WCSessionActivationState,
+        error: (any Error)?
+    ) {
+        switch activationState {
+        case .activated:
+            log.info("Watch connectivity session activated.")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                WatchConnectivityUtil.send(
+                    data: [
+                        WatchAppStorageKey.hasBeenOnboarded: true,
+                        WatchAppStorageKey.privateKey: KeychainStorage.shared.getPrivateKeyData()
+                    ],
+                    priority: .applicationContext
+                )
+            }
+        case .inactive:
+            log.warning("Watch connectivity session is now inactive.")
+        case .notActivated:
+            log.warning("Watch connectivity session is not actived.")
+        @unknown default:
+            log.error("Unknown watch connectivity session state: \(activationState)")
+        }
+    }
+    
+    func sessionDidBecomeInactive(_ session: WCSession) {}
+    
+    func sessionDidDeactivate(_ session: WCSession) {
+        // If the person has more than one watch, and they switch,
+        // reactivate their session on the new device.
+        WCSession.default.activate()
+    }
+    
+    func session(
+        _ session: WCSession,
+        didReceiveApplicationContext applicationContext: [String : Any]
+    ) {}
+    
+    func session(
+        _ session: WCSession,
+        didReceiveUserInfo userInfo: [String : Any] = [:]
+    ) {}
+    
+    func session(
+        _ session: WCSession,
+        didReceiveMessage message: [String : Any],
+        replyHandler: @escaping ([String : Any]) -> Void
+    ) {
+        var data: [String: Any] = [:]
+        let hasBeenOnboarded = UserDefaultsUtil.shared.string(forKey: AppStorageKey.selectedNetwork) != nil
+        data[WatchAppStorageKey.hasBeenOnboarded] = hasBeenOnboarded
+        if hasBeenOnboarded {
+            data[WatchAppStorageKey.privateKey] = KeychainStorage.shared.getPrivateKeyData()
+        }
+        replyHandler(data)
     }
 }
