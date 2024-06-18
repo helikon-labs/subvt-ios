@@ -55,6 +55,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         AppStorageKey.notificationChannelId,
         store: UserDefaultsUtil.shared
     ) private var notificationChannelId = 0
+    @AppStorage(
+        AppStorageKey.selectedNetwork,
+        store: UserDefaultsUtil.shared
+    ) private var selectedNetwork: Network? = nil
+    @AppStorage(
+        AppStorageKey.watchInitialized,
+        store: UserDefaultsUtil.shared
+    ) private var watchInitialized = false
     
     let router = Router()
     let appState = AppState()
@@ -188,15 +196,6 @@ extension AppDelegate: WCSessionDelegate {
         switch activationState {
         case .activated:
             log.info("Watch connectivity session activated.")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                WatchConnectivityUtil.send(
-                    data: [
-                        WatchAppStorageKey.hasBeenOnboarded: true,
-                        WatchAppStorageKey.privateKey: KeychainStorage.shared.getPrivateKeyData()
-                    ],
-                    priority: .applicationContext
-                )
-            }
         case .inactive:
             log.warning("Watch connectivity session is now inactive.")
         case .notActivated:
@@ -230,10 +229,11 @@ extension AppDelegate: WCSessionDelegate {
         replyHandler: @escaping ([String : Any]) -> Void
     ) {
         var data: [String: Any] = [:]
-        let hasBeenOnboarded = UserDefaultsUtil.shared.string(forKey: AppStorageKey.selectedNetwork) != nil
+        let hasBeenOnboarded = self.selectedNetwork != nil
         data[WatchAppStorageKey.hasBeenOnboarded] = hasBeenOnboarded
         if hasBeenOnboarded {
             data[WatchAppStorageKey.privateKey] = KeychainStorage.shared.getPrivateKeyData()
+            self.watchInitialized = true
         }
         replyHandler(data)
     }

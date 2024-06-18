@@ -11,6 +11,23 @@ import WatchKit
 import WatchConnectivity
 
 class MyWatchAppDelegate: NSObject, WKApplicationDelegate {
+    @AppStorage(
+        WatchAppStorageKey.initialSyncCompleted,
+        store: UserDefaultsUtil.shared
+    ) private var initialSyncCompleted = false
+    @AppStorage(
+        WatchAppStorageKey.initialSyncFailed,
+        store: UserDefaultsUtil.shared
+    ) private var initialSyncFailed = false
+    @AppStorage(
+        WatchAppStorageKey.initialSyncInProgress,
+        store: UserDefaultsUtil.shared
+    ) private var initialSyncInProgress = false
+    @AppStorage(
+        WatchAppStorageKey.hasBeenOnboarded,
+        store: UserDefaultsUtil.shared
+    ) private var hasBeenOnboarded = false
+    
     func applicationDidFinishLaunching() {
         initLog()
         if WCSession.isSupported() {
@@ -42,7 +59,7 @@ extension MyWatchAppDelegate: WCSessionDelegate {
     func sessionReachabilityDidChange(_ session: WCSession) {
         if session.isReachable {
             log.info("Watch connectivity session is now reachable.")
-            if !UserDefaultsUtil.shared.bool(forKey: WatchAppStorageKey.initialSyncCompleted) {
+            if !self.initialSyncCompleted {
                 self.sendInitialSyncMessage()
             }
         } else {
@@ -50,36 +67,35 @@ extension MyWatchAppDelegate: WCSessionDelegate {
         }
     }
     
-    private func sendInitialSyncMessage() {
+    func sendInitialSyncMessage() {
         guard WCSession.default.isReachable else {
             return
         }
-        guard !UserDefaultsUtil.shared.bool(forKey: WatchAppStorageKey.initialSyncCompleted) else {
+        guard !self.initialSyncCompleted else {
             return
         }
-        UserDefaultsUtil.shared.set(false, forKey: WatchAppStorageKey.initialSyncFailed)
-        UserDefaultsUtil.shared.set(true, forKey: WatchAppStorageKey.initialSyncInProgress)
+        self.initialSyncFailed = false
+        self.initialSyncInProgress = true
         WatchConnectivityUtil.send(
             data: [WatchConnectivityMessageKey.syncInitialContext: true],
             priority: .message,
             replyHandler: { reply in
                 log.info("Initial sync reply received.")
-                UserDefaultsUtil.shared.set(false, forKey: WatchAppStorageKey.initialSyncInProgress)
-                UserDefaultsUtil.shared.set(false, forKey: WatchAppStorageKey.initialSyncFailed)
-                UserDefaultsUtil.shared.set(true, forKey: WatchAppStorageKey.initialSyncCompleted)
-                let hasBeenOnboarded = reply[WatchAppStorageKey.hasBeenOnboarded] as? Bool ?? false
-                UserDefaultsUtil.shared.set(hasBeenOnboarded, forKey: WatchAppStorageKey.hasBeenOnboarded)
+                self.initialSyncInProgress = false
+                self.initialSyncFailed = false
+                self.initialSyncCompleted = true
+                self.update(from: reply)
             },
             errorHandler: { error in
-                UserDefaultsUtil.shared.set(false, forKey: WatchAppStorageKey.initialSyncInProgress)
-                UserDefaultsUtil.shared.set(true, forKey: WatchAppStorageKey.initialSyncFailed)
+                self.initialSyncInProgress = false
+                self.initialSyncFailed = true
             }
         )
     }
     
     private func update(from dictionary: [String: Any]) {
         if let hasBeenOnboarded = dictionary[WatchAppStorageKey.hasBeenOnboarded] as? Bool {
-            UserDefaultsUtil.shared.set(hasBeenOnboarded, forKey: WatchAppStorageKey.hasBeenOnboarded)
+            self.hasBeenOnboarded = hasBeenOnboarded
             return
         }
         if let privateKey = dictionary[WatchAppStorageKey.privateKey] as? Data {
@@ -91,7 +107,7 @@ extension MyWatchAppDelegate: WCSessionDelegate {
         _ session: WCSession,
         didReceiveUserInfo userInfo: [String: Any] = [:]
     ) {
-        log.info("Session did receive user info: \(userInfo)")
+        log.info("Watch connectivity session received user info: \(userInfo)")
         update(from: userInfo)
     }
     
@@ -99,12 +115,12 @@ extension MyWatchAppDelegate: WCSessionDelegate {
         _ session: WCSession,
         didReceiveApplicationContext applicationContext: [String: Any]
     ) {
-        log.info("Session did receive application context: \(applicationContext)")
+        log.info("Watch connectivity session received application context: \(applicationContext)")
         update(from: applicationContext)
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        log.info("Session did receive message: \(message)")
+        log.info("Watch connectivity session received message: \(message)")
     }
 }
 

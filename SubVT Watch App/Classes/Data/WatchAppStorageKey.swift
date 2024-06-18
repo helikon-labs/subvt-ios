@@ -13,5 +13,6 @@ enum WatchAppStorageKey {
     static let initialSyncFailed = "io.subvt.watch.initial_sync_failed"
     static let initialSyncCompleted = "io.subvt.watch.initial_sync_completed"
     static let hasBeenOnboarded = "io.subvt.watch.has_been_onboarded"
+    static let networks = "io.subvt.watch.networks"
     static let privateKey = "io.subvt.watch.private_key"
 }

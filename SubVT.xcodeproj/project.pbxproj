@@ -284,6 +284,9 @@
 		A0CC50562C2084620092303C /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50552C2084620092303C /* HomeView.swift */; };
 		A0CC50582C20A9EE0092303C /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC50572C20A9EE0092303C /* OnboardingViewModel.swift */; };
 		A0CC50592C20AEC00092303C /* WatchAppStorageKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC501F2C2078E60092303C /* WatchAppStorageKey.swift */; };
+		A0CC505B2C2155C80092303C /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC505A2C2155C80092303C /* HomeViewModel.swift */; };
+		A0CC505C2C2163B40092303C /* PushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03342288AE065001F78D2 /* PushButtonStyle.swift */; };
+		A0CC50602C2172B40092303C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CC505F2C2172B40092303C /* HomeViewController.swift */; };
 		A0D03343288AE065001F78D2 /* PushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03342288AE065001F78D2 /* PushButtonStyle.swift */; };
 		A0D03344288AE065001F78D2 /* PushButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03342288AE065001F78D2 /* PushButtonStyle.swift */; };
 		A0D03346288AE7E9001F78D2 /* ValidatorListFilterSortView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D03345288AE7E9001F78D2 /* ValidatorListFilterSortView.swift */; };
@@ -602,6 +605,9 @@
 		A0CC50512C2080320092303C /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		A0CC50552C2084620092303C /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A0CC50572C20A9EE0092303C /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		A0CC505A2C2155C80092303C /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A0CC505D2C2169E10092303C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0CC505F2C2172B40092303C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		A0D03342288AE065001F78D2 /* PushButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushButtonStyle.swift; sourceTree = "<group>"; };
 		A0D03345288AE7E9001F78D2 /* ValidatorListFilterSortView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorListFilterSortView.swift; sourceTree = "<group>"; };
 		A0D03348288B01C5001F78D2 /* SmallCheckboxButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmallCheckboxButtonView.swift; sourceTree = "<group>"; };
@@ -1258,6 +1264,7 @@
 			isa = PBXGroup;
 			children = (
 				A0CC50552C2084620092303C /* HomeView.swift */,
+				A0CC505F2C2172B40092303C /* HomeViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1266,6 +1273,7 @@
 			isa = PBXGroup;
 			children = (
 				A0A1A4D02B78B3CD00E18F39 /* Assets.xcassets */,
+				A0CC505D2C2169E10092303C /* Info.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1289,6 +1297,7 @@
 			isa = PBXGroup;
 			children = (
 				A0DCABB6285CA36A00E458F4 /* HomeView.swift */,
+				A0CC505A2C2155C80092303C /* HomeViewModel.swift */,
 				A02839C32867A456009CA8BA /* Tab.swift */,
 				A0C062A4286721E9001FE459 /* TabBarView.swift */,
 			);
@@ -1714,6 +1723,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0CC50602C2172B40092303C /* HomeViewController.swift in Sources */,
 				A0CC504C2C207EB10092303C /* UI+Text.swift in Sources */,
 				A0CC504D2C207EB10092303C /* UI+Image.swift in Sources */,
 				A0C840C72C171799008FDFEB /* OptionalCodable.swift in Sources */,
@@ -1727,6 +1737,7 @@
 				A0CC504F2C207EE40092303C /* UI+Dimension.swift in Sources */,
 				A0A1A4CD2B78B3CC00E18F39 /* WatchApp.swift in Sources */,
 				A0CC504B2C207EAB0092303C /* UI+Value.swift in Sources */,
+				A0CC505C2C2163B40092303C /* PushButtonStyle.swift in Sources */,
 				A0CC50492C207E270092303C /* UI+Font.swift in Sources */,
 				A0CC502B2C207D760092303C /* Font.swift in Sources */,
 				A090539D2C20391100362BC0 /* File.swift in Sources */,
@@ -1834,6 +1845,7 @@
 				A0425555292CF20100085DF3 /* ReportRangeSelectionViewModel.swift in Sources */,
 				A05B25AA287EDB530070EF81 /* UI+Duration.swift in Sources */,
 				A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */,
+				A0CC505B2C2155C80092303C /* HomeViewModel.swift in Sources */,
 				A0BCDE6728785645008047D7 /* ValidatorBackingsView.swift in Sources */,
 				A0FC976F28B63DEE00B75A9B /* Event.swift in Sources */,
 				A000F659297A8C6F001210DF /* ParaVoteReportViewModel.swift in Sources */,
@@ -2129,6 +2141,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/SubVT Watch App/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = SubVT;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = io.helikon.subvt;
@@ -2167,6 +2180,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "$(SRCROOT)/SubVT Watch App/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = SubVT;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = io.helikon.subvt;

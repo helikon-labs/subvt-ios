@@ -15,6 +15,7 @@ struct HomeView: View {
     @State private var displayState: BasicViewDisplayState = .notAppeared
     // @State private var currentTab: Tab = .network
     @State private var showsTabBar = false
+    @StateObject private var viewModel = HomeViewModel()
     
     private var tabBarYOffset: CGFloat {
         get {
@@ -85,6 +86,7 @@ struct HomeView: View {
                 self.displayState = .appeared
                 self.showsTabBar = true
             }
+            self.viewModel.initWatch()
         }
     }
 }

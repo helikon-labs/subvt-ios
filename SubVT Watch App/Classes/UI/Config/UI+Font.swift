@@ -17,12 +17,9 @@ extension UI {
             static let info = LexendDeca.regular.withSize(13)
         }
         
-        enum Snackbar {
-            static let message = LexendDeca.light.withSize(15)
-        }
-        
-        enum ActionFeedbackView {
-            static let text = LexendDeca.semiBold.withSize(16)
+        enum Home {
+            static let menuIcon = LexendDeca.regular.withSize(12)
+            static let menuItem = LexendDeca.regular.withSize(14.5)
         }
     }
 }

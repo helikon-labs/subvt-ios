@@ -95,6 +95,7 @@
 "tab.my_validators"="My Validators";
 "tab.notifications"="Notifications";
 "tab.network_reports"="Netw. Reports";
+"tab.income"="Income";
 
 "network_selection.selected_network"="Selected Network";
 "network_selection.select_network"="Select an available network. You can always change later.";
@@ -320,6 +321,7 @@
 "reports.paravalidation_votes.missed"="Missed";
 
 "watch.onboarding.connectivity_not_supported"="Watch connectivity is not supported.\nPlease check your iOS installation.";
+"watch.onboarding.connectivity_not_reachable"="Watch connectivity is not reachable.";
 "watch.onboarding.companion_app_not_installed"="Companion app is not installed on the iOS device.\nPlease make sure that SubVT is installed on your iOS device.";
 "watch.onboarding.initial_sync_progress"="Completing initial synchronization.";
 "watch.onboarding.initial_sync_failed"="Initial synchronization has failed.";

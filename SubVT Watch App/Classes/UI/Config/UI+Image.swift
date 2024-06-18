@@ -13,5 +13,9 @@ extension UI {
         enum Common {
             static let iconWithLogo = SwiftUI.Image("IconWithLogo")
         }
+        
+        enum Home {
+            static let iconWithLogo = SwiftUI.Image("IconWithLogoHome")
+        }
     }
 }

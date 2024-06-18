@@ -12,6 +12,7 @@ import WatchConnectivity
 struct OnboardingView: View {
     @AppStorage(WatchAppStorageKey.initialSyncInProgress) private var initialSyncInProgress = false
     @AppStorage(WatchAppStorageKey.initialSyncFailed) private var initialSyncFailed = false
+    @AppStorage(WatchAppStorageKey.initialSyncCompleted) private var initialSyncCompleted = false
     @AppStorage(WatchAppStorageKey.hasBeenOnboarded) private var hasBeenOnboarded = false
     @StateObject private var viewModel = OnboardingViewModel()
     
@@ -44,6 +45,12 @@ struct OnboardingView: View {
                             tint: Color("Text")
                         )
                     )
+            } else if !self.initialSyncCompleted && WCSession.default.isReachable {
+                Text(localized("watch.onboarding.connectivity_not_reachable"))
+                    .font(UI.Font.Onboarding.info)
+                    .foregroundColor(Color("Text"))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(UI.Dimension.Common.lineSpacing)
             } else if self.initialSyncFailed {
                 Text(localized("watch.onboarding.initial_sync_failed"))
                     .font(UI.Font.Onboarding.info)
@@ -52,7 +59,7 @@ struct OnboardingView: View {
                     .lineSpacing(UI.Dimension.Common.lineSpacing)
                 Spacer()
                 Button {
-                    
+                    self.viewModel.sendInitialSyncMessage()
                 } label: {
                     Text(localized("common.retry"))
                         .font(UI.Font.Common.actionButton)
@@ -62,13 +69,17 @@ struct OnboardingView: View {
                         .frame(alignment: .bottom)
                 }
             } else if !self.hasBeenOnboarded {
-                Text("not onboarded")
+                Text(localized("watch.onboarding.onboarding_not_complete"))
+                    .font(UI.Font.Onboarding.info)
+                    .foregroundColor(Color("Text"))
+                    .multilineTextAlignment(.center)
+                    .lineSpacing(UI.Dimension.Common.lineSpacing)
             }
         }
         .frame(
-            maxWidth:.infinity,
-            maxHeight:.infinity,
-            alignment:.top
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .top
         )
         .padding(EdgeInsets(
             top: 0,

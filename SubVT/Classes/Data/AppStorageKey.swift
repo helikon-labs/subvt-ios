@@ -23,4 +23,5 @@ enum AppStorageKey {
     static let hasCreatedDefaultNotificationRules = "io.subvt.has_created_default_notification_rules"
     static let notificationChannelId = "io.subvt.notification_channel_id"
     static let onekvNominators = "io.subvt.onekv_nominators"
+    static let watchInitialized = "io.subvt.watch_initialized"
 }

@@ -12,7 +12,7 @@ extension UI.Dimension {
     enum Common {
         static let cornerRadius: CGFloat = 12
         static let listItemSpacing: CGFloat = 8
-        static var padding: CGFloat = 8
+        static var padding: CGFloat = 12
         static let lineSpacing: CGFloat = 3
     }
 }
