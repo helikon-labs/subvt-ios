@@ -15,6 +15,7 @@ struct OnboardingView: View {
     @AppStorage(WatchAppStorageKey.initialSyncCompleted) private var initialSyncCompleted = false
     @AppStorage(WatchAppStorageKey.hasBeenOnboarded) private var hasBeenOnboarded = false
     @StateObject private var viewModel = OnboardingViewModel()
+    @WKApplicationDelegateAdaptor private var appDelegate: AppDelegate
     
     var body: some View {
         VStack(alignment: .center) {
@@ -59,7 +60,7 @@ struct OnboardingView: View {
                     .lineSpacing(UI.Dimension.Common.lineSpacing)
                 Spacer()
                 Button {
-                    self.viewModel.sendInitialSyncMessage()
+                    self.appDelegate.sendInitialSyncMessage()
                 } label: {
                     Text(localized("common.retry"))
                         .font(UI.Font.Common.actionButton)

@@ -10,7 +10,7 @@ import SwiftUI
 import WatchKit
 import WatchConnectivity
 
-class MyWatchAppDelegate: NSObject, WKApplicationDelegate {
+class AppDelegate: NSObject, WKApplicationDelegate {
     @AppStorage(
         WatchAppStorageKey.initialSyncCompleted,
         store: UserDefaultsUtil.shared
@@ -28,6 +28,8 @@ class MyWatchAppDelegate: NSObject, WKApplicationDelegate {
         store: UserDefaultsUtil.shared
     ) private var hasBeenOnboarded = false
     
+    let router = Router()
+    
     func applicationDidFinishLaunching() {
         initLog()
         if WCSession.isSupported() {
@@ -38,7 +40,7 @@ class MyWatchAppDelegate: NSObject, WKApplicationDelegate {
     }
 }
 
-extension MyWatchAppDelegate: WCSessionDelegate {
+extension AppDelegate: WCSessionDelegate {
     func session(
         _ session: WCSession,
         activationDidCompleteWith activationState: WCSessionActivationState,
@@ -126,12 +128,13 @@ extension MyWatchAppDelegate: WCSessionDelegate {
 
 @main
 struct WatchApp: App {
-    @WKApplicationDelegateAdaptor var appDelegate: MyWatchAppDelegate
+    @WKApplicationDelegateAdaptor var appDelegate: AppDelegate
     
     var body: some Scene {
         WindowGroup {
             WatchAppView()
                 .defaultAppStorage(UserDefaultsUtil.shared)
+                .environmentObject(appDelegate.router)
         }
     }
 }

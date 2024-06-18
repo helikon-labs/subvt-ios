@@ -345,6 +345,13 @@
 		A0E9F09728FC433F000CCC02 /* NotificationPeriodType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9F09428FC433F000CCC02 /* NotificationPeriodType.swift */; };
 		A0EFDC5F28E994C2000A2BCC /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */; };
 		A0EFDC6028E994C2000A2BCC /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */; };
+		A0F16A742C2181F300F5746B /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A732C2181F300F5746B /* Router.swift */; };
+		A0F16A762C21824F00F5746B /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A752C21824F00F5746B /* NetworkStatusView.swift */; };
+		A0F16A792C21826D00F5746B /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A782C21826D00F5746B /* NetworkStatusViewModel.swift */; };
+		A0F16A7D2C21873500F5746B /* MyValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A7C2C21873500F5746B /* MyValidatorsView.swift */; };
+		A0F16A7F2C21873F00F5746B /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A7E2C21873F00F5746B /* MyValidatorsViewModel.swift */; };
+		A0F16A812C21874900F5746B /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A802C21874900F5746B /* IncomeView.swift */; };
+		A0F16A832C21875000F5746B /* IncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A822C21875000F5746B /* IncomeViewModel.swift */; };
 		A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
 		A0F285092879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
 		A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */; };
@@ -638,6 +645,13 @@
 		A0E9F09128FC26EF000CCC02 /* ItemListButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListButtonStyle.swift; sourceTree = "<group>"; };
 		A0E9F09428FC433F000CCC02 /* NotificationPeriodType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPeriodType.swift; sourceTree = "<group>"; };
 		A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
+		A0F16A732C2181F300F5746B /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		A0F16A752C21824F00F5746B /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
+		A0F16A782C21826D00F5746B /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
+		A0F16A7C2C21873500F5746B /* MyValidatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsView.swift; sourceTree = "<group>"; };
+		A0F16A7E2C21873F00F5746B /* MyValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsViewModel.swift; sourceTree = "<group>"; };
+		A0F16A802C21874900F5746B /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
+		A0F16A822C21875000F5746B /* IncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewModel.swift; sourceTree = "<group>"; };
 		A0F285072879A96A00E69C6B /* BlockWaveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveShape.swift; sourceTree = "<group>"; };
 		A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveContainerView.swift; sourceTree = "<group>"; };
 		A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveView.swift; sourceTree = "<group>"; };
@@ -1009,6 +1023,7 @@
 			children = (
 				A090539F2C2045A500362BC0 /* App */,
 				A0CC501E2C2078C80092303C /* Data */,
+				A0F16A722C2181E600F5746B /* Navigation */,
 				A0CC502C2C207DD10092303C /* UI */,
 				A09053A02C2045B000362BC0 /* Util */,
 			);
@@ -1020,6 +1035,9 @@
 			children = (
 				A0CC50212C2079BA0092303C /* App */,
 				A0CC50532C2081060092303C /* Home */,
+				A0F16A7B2C21871E00F5746B /* Income */,
+				A0F16A7A2C21871400F5746B /* My Validators */,
+				A0F16A772C21825500F5746B /* Network Status */,
 				A0CC50502C2080200092303C /* Onboarding */,
 			);
 			path = View;
@@ -1362,6 +1380,41 @@
 				A05B259F287EB6FD0070EF81 /* View Modifier */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		A0F16A722C2181E600F5746B /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				A0F16A732C2181F300F5746B /* Router.swift */,
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		A0F16A772C21825500F5746B /* Network Status */ = {
+			isa = PBXGroup;
+			children = (
+				A0F16A752C21824F00F5746B /* NetworkStatusView.swift */,
+				A0F16A782C21826D00F5746B /* NetworkStatusViewModel.swift */,
+			);
+			path = "Network Status";
+			sourceTree = "<group>";
+		};
+		A0F16A7A2C21871400F5746B /* My Validators */ = {
+			isa = PBXGroup;
+			children = (
+				A0F16A7C2C21873500F5746B /* MyValidatorsView.swift */,
+				A0F16A7E2C21873F00F5746B /* MyValidatorsViewModel.swift */,
+			);
+			path = "My Validators";
+			sourceTree = "<group>";
+		};
+		A0F16A7B2C21871E00F5746B /* Income */ = {
+			isa = PBXGroup;
+			children = (
+				A0F16A802C21874900F5746B /* IncomeView.swift */,
+				A0F16A822C21875000F5746B /* IncomeViewModel.swift */,
+			);
+			path = Income;
 			sourceTree = "<group>";
 		};
 		A0F285062879A93D00E69C6B /* Block Wave */ = {
@@ -1724,24 +1777,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0CC50602C2172B40092303C /* HomeViewController.swift in Sources */,
+				A0F16A762C21824F00F5746B /* NetworkStatusView.swift in Sources */,
 				A0CC504C2C207EB10092303C /* UI+Text.swift in Sources */,
 				A0CC504D2C207EB10092303C /* UI+Image.swift in Sources */,
 				A0C840C72C171799008FDFEB /* OptionalCodable.swift in Sources */,
 				A0CC50472C207E150092303C /* UI.swift in Sources */,
 				A09053A22C2045F500362BC0 /* Localization.swift in Sources */,
+				A0F16A7F2C21873F00F5746B /* MyValidatorsViewModel.swift in Sources */,
 				A09053A32C204F1900362BC0 /* WatchConnectivityUtil.swift in Sources */,
 				A0CC50202C2078E80092303C /* WatchAppStorageKey.swift in Sources */,
 				A0C840C82C17179B008FDFEB /* Network.swift in Sources */,
 				A0A1A4CF2B78B3CC00E18F39 /* WatchAppView.swift in Sources */,
+				A0F16A7D2C21873500F5746B /* MyValidatorsView.swift in Sources */,
 				A0CC504A2C207EA80092303C /* UI+Dimension+Common.swift in Sources */,
 				A0CC504F2C207EE40092303C /* UI+Dimension.swift in Sources */,
+				A0F16A812C21874900F5746B /* IncomeView.swift in Sources */,
+				A0F16A742C2181F300F5746B /* Router.swift in Sources */,
 				A0A1A4CD2B78B3CC00E18F39 /* WatchApp.swift in Sources */,
 				A0CC504B2C207EAB0092303C /* UI+Value.swift in Sources */,
 				A0CC505C2C2163B40092303C /* PushButtonStyle.swift in Sources */,
 				A0CC50492C207E270092303C /* UI+Font.swift in Sources */,
 				A0CC502B2C207D760092303C /* Font.swift in Sources */,
 				A090539D2C20391100362BC0 /* File.swift in Sources */,
+				A0F16A832C21875000F5746B /* IncomeViewModel.swift in Sources */,
 				A09053972C202B6900362BC0 /* WatchUserDefaultsUtil.swift in Sources */,
+				A0F16A792C21826D00F5746B /* NetworkStatusViewModel.swift in Sources */,
 				A097C17F2C20117B00ABE788 /* Logging.swift in Sources */,
 				A0CC50582C20A9EE0092303C /* OnboardingViewModel.swift in Sources */,
 				A0CC50482C207E240092303C /* UI+Duration.swift in Sources */,

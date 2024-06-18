@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject private var router: Router
     @StateObject private var viewModel = HomeViewModel()
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 3) {
-            UI.Image.Home.iconWithLogo
-            Spacer().frame(height: 4)
-            Button(
-                action: {},
-                label: {
+        NavigationStack(path: self.$router.path) {
+            VStack(alignment: .leading, spacing: 3) {
+                UI.Image.Home.iconWithLogo
+                Spacer().frame(height: 4)
+                NavigationLink(value: Screen.networkStatus) {
                     HStack(alignment: .center, spacing: 8) {
                         SwiftUI.Image("NetworkIcon").scaleEffect(0.8)
                         Text(localized("tab.network_status"))
@@ -27,11 +27,8 @@ struct HomeView: View {
                     }
                     .frame(height: 40)
                 }
-            )
-            .buttonStyle(PushButtonStyle())
-            Button(
-                action: {},
-                label: {
+                .buttonStyle(PushButtonStyle())
+                NavigationLink(value: Screen.myValidators) {
                     HStack(alignment: .center, spacing: 8) {
                         SwiftUI.Image("MyValidatorsIcon").scaleEffect(0.8)
                         Text(localized("tab.my_validators"))
@@ -42,11 +39,8 @@ struct HomeView: View {
                     }
                     .frame(height: 40)
                 }
-            )
-            .buttonStyle(PushButtonStyle())
-            Button(
-                action: {},
-                label: {
+                .buttonStyle(PushButtonStyle())
+                NavigationLink(value: Screen.income) {
                     HStack(alignment: .center, spacing: 8) {
                         ZStack(alignment: .center) {
                             Circle()
@@ -66,18 +60,21 @@ struct HomeView: View {
                     }
                     .frame(height: 40)
                 }
+                .buttonStyle(PushButtonStyle())
+            }
+            .frame(
+                alignment: .topLeading
             )
-            .buttonStyle(PushButtonStyle())
+            .padding(EdgeInsets(
+                top: 0,
+                leading: UI.Dimension.Common.padding,
+                bottom: 0,
+                trailing: UI.Dimension.Common.padding
+            ))
+            .navigationDestination(for: Screen.self) { screen in
+                screen.build()
+            }
         }
-        .frame(
-            alignment: .topLeading
-        )
-        .padding(EdgeInsets(
-            top: 0,
-            leading: UI.Dimension.Common.padding,
-            bottom: 0,
-            trailing: UI.Dimension.Common.padding
-        ))
         .onAppear {
             viewModel.fetchNetworks()
         }
