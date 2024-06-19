@@ -137,6 +137,9 @@ struct NetworkStatusView: View {
                 self.displayState = .appeared
             }
         }
+        .onDisappear() {
+            self.viewModel.unsubscribe()
+        }
         .onReceive(blockTimer) { _ in
             let elapsedSec = Date().timeIntervalSince1970 - blockTimerStartTimeSec
             let progress = elapsedSec  / avgBlockTimeSec

@@ -140,6 +140,11 @@ class NetworkStatusViewModel: ObservableObject {
             }
     }
     
+    func unsubscribe() {
+        self.networkStatusService.unsubscribe()
+        self.subscriptionIsInProgress = false
+    }
+    
     private func initReportService() {
         if let host = self.network?.reportServiceHost,
            let port = self.network?.reportServicePort {

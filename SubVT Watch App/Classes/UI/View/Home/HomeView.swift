@@ -10,11 +10,13 @@ import SwiftUI
 struct HomeView: View {
     @EnvironmentObject private var router: Router
     @StateObject private var viewModel = HomeViewModel()
+    @State private var displayState: BasicViewDisplayState = .notAppeared
     
     var body: some View {
         NavigationStack(path: self.$router.path) {
             VStack(alignment: .leading, spacing: 3) {
                 UI.Image.Home.iconWithLogo
+                    .modifier(PanelAppearance(0, self.displayState))
                 Spacer().frame(height: 4)
                 NavigationLink(value: Screen.networkStatus) {
                     HStack(alignment: .center, spacing: 8) {
@@ -28,6 +30,7 @@ struct HomeView: View {
                     .frame(height: 40)
                 }
                 .buttonStyle(PushButtonStyle())
+                .modifier(PanelAppearance(1, self.displayState))
                 NavigationLink(value: Screen.myValidators) {
                     HStack(alignment: .center, spacing: 8) {
                         SwiftUI.Image("MyValidatorsIcon").scaleEffect(0.8)
@@ -40,6 +43,7 @@ struct HomeView: View {
                     .frame(height: 40)
                 }
                 .buttonStyle(PushButtonStyle())
+                .modifier(PanelAppearance(2, self.displayState))
                 NavigationLink(value: Screen.income) {
                     HStack(alignment: .center, spacing: 8) {
                         ZStack(alignment: .center) {
@@ -61,6 +65,7 @@ struct HomeView: View {
                     .frame(height: 40)
                 }
                 .buttonStyle(PushButtonStyle())
+                .modifier(PanelAppearance(3, self.displayState))
             }
             .frame(
                 alignment: .topLeading
@@ -77,6 +82,9 @@ struct HomeView: View {
         }
         .onAppear {
             viewModel.fetchNetworks()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.displayState = .appeared
+            }
         }
     }
 }
