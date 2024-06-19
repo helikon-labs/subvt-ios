@@ -93,13 +93,3 @@ struct WSRPCStatusIndicatorView: View {
         }
     }
 }
-
-struct WSRPCStatusIndicatorView_Previews: PreviewProvider {
-    static var previews: some View {
-        WSRPCStatusIndicatorView(
-            status: .subscribed(subscriptionId: 1),
-            isConnected: false,
-            size: UI.Dimension.Common.connectionStatusSize.get()
-        )
-    }
-}

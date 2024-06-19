@@ -11,6 +11,7 @@ extension UI {
     enum Font {
         enum Common {
             static let actionButton = LexendDeca.semiBold.withSize(14)
+            static let title = LexendDeca.semiBold.withSize(15)
         }
         
         enum Onboarding {

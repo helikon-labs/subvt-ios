@@ -195,6 +195,7 @@
 		A0A1DC5C284B8E2B00914237 /* UI+Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC5A284B8E2B00914237 /* UI+Image.swift */; };
 		A0A1DC61284B990B00914237 /* BgMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC60284B990B00914237 /* BgMorphView.swift */; };
 		A0A1DC62284B990B00914237 /* BgMorphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1DC60284B990B00914237 /* BgMorphView.swift */; };
+		A0A5B87E2C21EE7E003DE3D6 /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A093F0472865F08600778293 /* NetworkStatusViewModel.swift */; };
 		A0A7CAE628968C4E005440FF /* DataPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A7CAE528968C4E005440FF /* DataPanelView.swift */; };
 		A0A7CAE728968C4E005440FF /* DataPanelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A7CAE528968C4E005440FF /* DataPanelView.swift */; };
 		A0ABBA902941F91900D06E0A /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = A0ABBA8F2941F91900D06E0A /* FirebaseCrashlytics */; };
@@ -347,11 +348,19 @@
 		A0EFDC6028E994C2000A2BCC /* NotificationUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */; };
 		A0F16A742C2181F300F5746B /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A732C2181F300F5746B /* Router.swift */; };
 		A0F16A762C21824F00F5746B /* NetworkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A752C21824F00F5746B /* NetworkStatusView.swift */; };
-		A0F16A792C21826D00F5746B /* NetworkStatusViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A782C21826D00F5746B /* NetworkStatusViewModel.swift */; };
 		A0F16A7D2C21873500F5746B /* MyValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A7C2C21873500F5746B /* MyValidatorsView.swift */; };
 		A0F16A7F2C21873F00F5746B /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A7E2C21873F00F5746B /* MyValidatorsViewModel.swift */; };
 		A0F16A812C21874900F5746B /* IncomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A802C21874900F5746B /* IncomeView.swift */; };
 		A0F16A832C21875000F5746B /* IncomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A822C21875000F5746B /* IncomeViewModel.swift */; };
+		A0F16A842C218A2100F5746B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */; };
+		A0F16A852C218A7B00F5746B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
+		A0F16A882C21AB3600F5746B /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A872C21AB3600F5746B /* PreviewData.swift */; };
+		A0F16A892C21AD0700F5746B /* WSRPCStatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */; };
+		A0F16A8A2C21AD6000F5746B /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
+		A0F16A8B2C21AD7600F5746B /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
+		A0F16A8D2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A8C2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift */; };
+		A0F16A8E2C21AF6600F5746B /* RPCSubscriptionServiceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A04B37C32876D73000912BF3 /* RPCSubscriptionServiceStatus.swift */; };
+		A0F16A902C21B17900F5746B /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A3287ECBE30070EF81 /* Counter.swift */; };
 		A0F285082879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
 		A0F285092879A96A00E69C6B /* BlockWaveShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285072879A96A00E69C6B /* BlockWaveShape.swift */; };
 		A0F2850B2879AAFE00E69C6B /* BlockWaveContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */; };
@@ -647,11 +656,12 @@
 		A0EFDC5E28E994C2000A2BCC /* NotificationUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationUtil.swift; sourceTree = "<group>"; };
 		A0F16A732C2181F300F5746B /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		A0F16A752C21824F00F5746B /* NetworkStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusView.swift; sourceTree = "<group>"; };
-		A0F16A782C21826D00F5746B /* NetworkStatusViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkStatusViewModel.swift; sourceTree = "<group>"; };
 		A0F16A7C2C21873500F5746B /* MyValidatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsView.swift; sourceTree = "<group>"; };
 		A0F16A7E2C21873F00F5746B /* MyValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsViewModel.swift; sourceTree = "<group>"; };
 		A0F16A802C21874900F5746B /* IncomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeView.swift; sourceTree = "<group>"; };
 		A0F16A822C21875000F5746B /* IncomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomeViewModel.swift; sourceTree = "<group>"; };
+		A0F16A872C21AB3600F5746B /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
+		A0F16A8C2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+NetworkStatus.swift"; sourceTree = "<group>"; };
 		A0F285072879A96A00E69C6B /* BlockWaveShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveShape.swift; sourceTree = "<group>"; };
 		A0F2850A2879AAFE00E69C6B /* BlockWaveContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveContainerView.swift; sourceTree = "<group>"; };
 		A0F2850D2879AD0500E69C6B /* BlockWaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveView.swift; sourceTree = "<group>"; };
@@ -1224,6 +1234,7 @@
 		A0CC501E2C2078C80092303C /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				A0F16A872C21AB3600F5746B /* PreviewData.swift */,
 				A0CC501F2C2078E60092303C /* WatchAppStorageKey.swift */,
 			);
 			path = Data;
@@ -1265,6 +1276,7 @@
 			children = (
 				A0CC504E2C207EE40092303C /* UI+Dimension.swift */,
 				A0CC50382C207DE90092303C /* UI+Dimension+Common.swift */,
+				A0F16A8C2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift */,
 			);
 			path = "UI+Dimension";
 			sourceTree = "<group>";
@@ -1394,7 +1406,6 @@
 			isa = PBXGroup;
 			children = (
 				A0F16A752C21824F00F5746B /* NetworkStatusView.swift */,
-				A0F16A782C21826D00F5746B /* NetworkStatusViewModel.swift */,
 			);
 			path = "Network Status";
 			sourceTree = "<group>";
@@ -1776,13 +1787,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F16A902C21B17900F5746B /* Counter.swift in Sources */,
 				A0CC50602C2172B40092303C /* HomeViewController.swift in Sources */,
 				A0F16A762C21824F00F5746B /* NetworkStatusView.swift in Sources */,
+				A0F16A852C218A7B00F5746B /* BlockWaveParameters.swift in Sources */,
+				A0F16A8D2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift in Sources */,
 				A0CC504C2C207EB10092303C /* UI+Text.swift in Sources */,
 				A0CC504D2C207EB10092303C /* UI+Image.swift in Sources */,
 				A0C840C72C171799008FDFEB /* OptionalCodable.swift in Sources */,
 				A0CC50472C207E150092303C /* UI.swift in Sources */,
+				A0F16A8B2C21AD7600F5746B /* BasicDisplayState.swift in Sources */,
 				A09053A22C2045F500362BC0 /* Localization.swift in Sources */,
+				A0F16A892C21AD0700F5746B /* WSRPCStatusIndicatorView.swift in Sources */,
 				A0F16A7F2C21873F00F5746B /* MyValidatorsViewModel.swift in Sources */,
 				A09053A32C204F1900362BC0 /* WatchConnectivityUtil.swift in Sources */,
 				A0CC50202C2078E80092303C /* WatchAppStorageKey.swift in Sources */,
@@ -1792,20 +1808,24 @@
 				A0CC504A2C207EA80092303C /* UI+Dimension+Common.swift in Sources */,
 				A0CC504F2C207EE40092303C /* UI+Dimension.swift in Sources */,
 				A0F16A812C21874900F5746B /* IncomeView.swift in Sources */,
+				A0A5B87E2C21EE7E003DE3D6 /* NetworkStatusViewModel.swift in Sources */,
 				A0F16A742C2181F300F5746B /* Router.swift in Sources */,
 				A0A1A4CD2B78B3CC00E18F39 /* WatchApp.swift in Sources */,
 				A0CC504B2C207EAB0092303C /* UI+Value.swift in Sources */,
 				A0CC505C2C2163B40092303C /* PushButtonStyle.swift in Sources */,
 				A0CC50492C207E270092303C /* UI+Font.swift in Sources */,
 				A0CC502B2C207D760092303C /* Font.swift in Sources */,
+				A0F16A842C218A2100F5746B /* NetworkMonitor.swift in Sources */,
 				A090539D2C20391100362BC0 /* File.swift in Sources */,
+				A0F16A882C21AB3600F5746B /* PreviewData.swift in Sources */,
 				A0F16A832C21875000F5746B /* IncomeViewModel.swift in Sources */,
 				A09053972C202B6900362BC0 /* WatchUserDefaultsUtil.swift in Sources */,
-				A0F16A792C21826D00F5746B /* NetworkStatusViewModel.swift in Sources */,
 				A097C17F2C20117B00ABE788 /* Logging.swift in Sources */,
 				A0CC50582C20A9EE0092303C /* OnboardingViewModel.swift in Sources */,
 				A0CC50482C207E240092303C /* UI+Duration.swift in Sources */,
 				A090539C2C20388D00362BC0 /* DataFetchState.swift in Sources */,
+				A0F16A8E2C21AF6600F5746B /* RPCSubscriptionServiceStatus.swift in Sources */,
+				A0F16A8A2C21AD6000F5746B /* PanelAppearance.swift in Sources */,
 				A0CC50562C2084620092303C /* HomeView.swift in Sources */,
 				A0CC50522C2080320092303C /* OnboardingView.swift in Sources */,
 			);

@@ -86,7 +86,6 @@ struct HomeView: View {
                 self.displayState = .appeared
                 self.showsTabBar = true
             }
-            self.viewModel.initWatch()
         }
     }
 }

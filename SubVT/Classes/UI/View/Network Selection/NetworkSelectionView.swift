@@ -123,6 +123,13 @@ struct NetworkSelectionView: View {
                                 return
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                WatchConnectivityUtil.send(
+                                    data: [
+                                        WatchAppStorageKey.hasBeenOnboarded: true,
+                                        WatchAppStorageKey.privateKey: KeychainStorage.shared.getPrivateKeyData()
+                                    ],
+                                    priority: .applicationContext
+                                )
                                 self.displayState = .dissolved
                                 self.networksDisplayState = .dissolved
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {

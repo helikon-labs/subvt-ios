@@ -8,6 +8,7 @@
 import Combine
 import SubVTData
 import SwiftUI
+import SubVTData
 
 private let eraReportCount: UInt32 = 15
 
@@ -17,25 +18,25 @@ class NetworkStatusViewModel: ObservableObject {
     
     private var networkStatusServiceStatusSubscription: AnyCancellable? = nil
     private var networkStatusServiceSubscription: AnyCancellable? = nil
-    private var networkStatusService: SubVTData.NetworkStatusService! = nil
+    private var networkStatusService: NetworkStatusService! = nil
     private var network: Network! = nil
     private var subscriptionIsInProgress = false
     
     @Published private(set) var eraActiveValidatorCounts: [(UInt, UInt)] = []
     @Published private(set) var eraInactiveValidatorCounts: [(UInt, UInt)] = []
     
-    private var reportService: SubVTData.ReportService! = nil
+    private var reportService: ReportService! = nil
     private var reportServiceCancellable: AnyCancellable? = nil
     
     private func initNetworkStatusService() {
         if let rpcHost = self.network?.networkStatusServiceHost,
            let rpcPort = self.network?.networkStatusServicePort {
-            self.networkStatusService = SubVTData.NetworkStatusService(
+            self.networkStatusService = NetworkStatusService(
                 rpcHost: rpcHost,
                 rpcPort: rpcPort
             )
         } else {
-            self.networkStatusService = SubVTData.NetworkStatusService()
+            self.networkStatusService = NetworkStatusService()
         }
     }
     
@@ -142,11 +143,11 @@ class NetworkStatusViewModel: ObservableObject {
     private func initReportService() {
         if let host = self.network?.reportServiceHost,
            let port = self.network?.reportServicePort {
-            self.reportService = SubVTData.ReportService(
+            self.reportService = ReportService(
                 host: host, port: port
             )
         } else {
-            self.reportService = SubVTData.ReportService()
+            self.reportService = ReportService()
         }
     }
     
