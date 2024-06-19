@@ -12,14 +12,15 @@ extension UI {
     enum Image {
         enum Common {
             static let iconWithLogo = SwiftUI.Image("IconWithLogo")
+            static func networkIcon(
+                network: Network
+            ) -> SwiftUI.Image {
+                return SwiftUI.Image("\(network.chain.capitalized)Icon")
+            }
         }
         
         enum Home {
             static let iconWithLogo = SwiftUI.Image("IconWithLogoHome")
-        }
-        
-        enum NetworkStatus {
-            static let arrowRight = SwiftUI.Image("DataPanelRightArrowDarkPhone")
         }
     }
 }

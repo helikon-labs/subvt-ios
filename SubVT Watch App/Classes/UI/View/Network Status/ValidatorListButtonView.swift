@@ -91,7 +91,6 @@ struct ValidatorListButtonView: View {
                     .lineLimit(2)
                     .lineSpacing(1.2)
                 Spacer()
-                UI.Image.NetworkStatus.arrowRight
             }
             .padding(EdgeInsets(
                 top: 0,

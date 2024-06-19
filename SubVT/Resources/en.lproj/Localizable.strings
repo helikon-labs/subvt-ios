@@ -112,8 +112,11 @@
 "network_status.last_era_total_rewards"="Last Era Total Rewards";
 "network_status.validator_backings"="Validator Backings";
 "network_status.minimum"="Minimum";
+"network_status.minimum.short"="Min";
 "network_status.average"="Average";
+"network_status.average.short"="Avg";
 "network_status.maximum"="Maximum";
+"network_status.maximum.short"="Max";
 "network_status.hours_minutes_left"="%d hr %d mins left";
 "network_status.hours_minutes_over"="%d hr %d mins over";
 "network_status.minutes_left"="%d mins left";

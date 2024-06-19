@@ -15,11 +15,11 @@ private let eraReportCount: UInt32 = 15
 class NetworkStatusViewModel: ObservableObject {
     @Published private(set) var networkStatus = NetworkStatus()
     @Published private(set) var networkStatusServiceStatus: RPCSubscriptionServiceStatus = .idle
-    
+    @AppStorage(WatchAppStorageKey.networks) var networks: [Network]? = nil
+    @AppStorage(WatchAppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     private var networkStatusServiceStatusSubscription: AnyCancellable? = nil
     private var networkStatusServiceSubscription: AnyCancellable? = nil
     private var networkStatusService: NetworkStatusService! = nil
-    private var network: Network! = nil
     private var subscriptionIsInProgress = false
     
     @Published private(set) var eraActiveValidatorCounts: [(UInt, UInt)] = []
@@ -29,8 +29,8 @@ class NetworkStatusViewModel: ObservableObject {
     private var reportServiceCancellable: AnyCancellable? = nil
     
     private func initNetworkStatusService() {
-        if let rpcHost = self.network?.networkStatusServiceHost,
-           let rpcPort = self.network?.networkStatusServicePort {
+        if let rpcHost = self.network.networkStatusServiceHost,
+           let rpcPort = self.network.networkStatusServicePort {
             self.networkStatusService = NetworkStatusService(
                 rpcHost: rpcHost,
                 rpcPort: rpcPort
@@ -54,7 +54,6 @@ class NetworkStatusViewModel: ObservableObject {
         case .active:
             if !subscriptionIsInProgress {
                 self.subscribeToNetworkStatus(
-                    network: self.network,
                     onStatus: onStatus,
                     onDiff: onDiff
                 )
@@ -76,7 +75,6 @@ class NetworkStatusViewModel: ObservableObject {
     }
     
     func subscribeToNetworkStatus(
-        network: Network,
         onStatus: @escaping () -> (),
         onDiff: @escaping () -> ()
     ) {
@@ -87,7 +85,6 @@ class NetworkStatusViewModel: ObservableObject {
             break
         }
         self.subscriptionIsInProgress = true
-        self.network = network
         if self.networkStatusService == nil {
             self.initNetworkStatusService()
         }
@@ -146,8 +143,8 @@ class NetworkStatusViewModel: ObservableObject {
     }
     
     private func initReportService() {
-        if let host = self.network?.reportServiceHost,
-           let port = self.network?.reportServicePort {
+        if let host = self.network.reportServiceHost,
+           let port = self.network.reportServicePort {
             self.reportService = ReportService(
                 host: host, port: port
             )

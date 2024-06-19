@@ -13,6 +13,7 @@ extension UI {
             static let actionButton = LexendDeca.semiBold.withSize(14)
             static let title = LexendDeca.semiBold.withSize(15)
             static var dataPanelTitle = LexendDeca.light.withSize(10)
+            static let dataMedium = LexendDeca.semiBold.withSize(12)
         }
         
         enum Onboarding {
@@ -25,7 +26,11 @@ extension UI {
         }
         
         enum NetworkStatus {
+            static let dataSmall = LexendDeca.regular.withSize(10)
             static let dataLarge: SwiftUI.Font = LexendDeca.semiBold.withSize(18)
+            static let dataXLarge: SwiftUI.Font = LexendDeca.semiBold.withSize(20)
+            static let eraEpochTimestamp = LexendDeca.regular.withSize(10)
+            static let network = LexendDeca.regular.withSize(11)
         }
     }
 }

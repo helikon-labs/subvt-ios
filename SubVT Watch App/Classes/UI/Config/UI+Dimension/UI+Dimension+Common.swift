@@ -16,6 +16,7 @@ extension UI.Dimension {
         static let lineSpacing: CGFloat = 3
         static var connectionStatusSize: CGFloat = 4
         static let lineChartLineWidth: CGFloat = 2
+        static let itemSelectionIndicatorSize: CGFloat = 4
         static func dataPanelYOffset(_ displayState: BasicViewDisplayState) -> CGFloat {
             switch displayState {
             case .notAppeared:

@@ -21,7 +21,6 @@ struct NetworkStatusView: View {
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var viewModel = NetworkStatusViewModel()
     @StateObject private var networkMonitor = NetworkMonitor()
-    @AppStorage(WatchAppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networkSelectorIsOpen = false
     @State private var blockTimerSubscription: Cancellable?
@@ -88,8 +87,26 @@ struct NetworkStatusView: View {
                     )
                     //.modifier(PanelAppearance(5, self.displayState))
                 }
-                .modifier(PanelAppearance(0, self.displayState))
                 Spacer()
+                Button(action: {
+                    self.networkSelectorIsOpen = true
+                }, label: {
+                    UI.Image.Common.networkIcon(
+                        network: self.viewModel.network
+                    )
+                    .resizable()
+                    .frame(
+                        width: UI.Dimension.NetworkStatus.networkIconSize,
+                        height: UI.Dimension.NetworkStatus.networkIconSize
+                    )
+                    .padding(1.0)
+                    .overlay(
+                            RoundedRectangle(cornerRadius: UI.Dimension.NetworkStatus.networkIconSize)
+                                .stroke(Color("Text"), lineWidth: 1)
+                                .opacity(0.5)
+                        )
+                })
+                .buttonStyle(PushButtonStyle())
                 /*
                 Button(
                     action: {
@@ -117,41 +134,133 @@ struct NetworkStatusView: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading) {
-            headerView
-            ScrollView {
-                VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                    HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                        ValidatorListButtonView(
-                            title: LocalizedStringKey("active_validator_list.title"),
-                            count: self.viewModel.networkStatus.activeValidatorCount,
-                            eraValidatorCounts: self.viewModel.eraActiveValidatorCounts,
-                            chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+        ZStack {
+            VStack(alignment: .leading) {
+                headerView
+                    .modifier(PanelAppearance(0, self.displayState))
+                ScrollView {
+                    VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                        HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
+                            ValidatorListButtonView(
+                                title: LocalizedStringKey("active_validator_list.title"),
+                                count: self.viewModel.networkStatus.activeValidatorCount,
+                                eraValidatorCounts: self.viewModel.eraActiveValidatorCounts,
+                                chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+                                isAnimated: self.isAnimated
+                            )
+                            .modifier(PanelAppearance(1, self.displayState))
+                            ValidatorListButtonView(
+                                title: LocalizedStringKey("inactive_validator_list.title"),
+                                count: self.viewModel.networkStatus.inactiveValidatorCount,
+                                eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts,
+                                chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+                                isAnimated: self.isAnimated
+                            )
+                            .modifier(PanelAppearance(2, self.displayState))
+                        }
+                        BlockNumberView(
+                            title: LocalizedStringKey("network_status.best_block_number"),
+                            blockNumber: self.viewModel.networkStatus.bestBlockNumber,
+                            blockWaveParameters: self.blockWaveParameters
+                        )
+                        .modifier(PanelAppearance(3, self.displayState))
+                        BlockNumberView(
+                            title: LocalizedStringKey("network_status.finalized_block_number"),
+                            blockNumber: self.viewModel.networkStatus.finalizedBlockNumber
+                        )
+                        .modifier(PanelAppearance(4, self.displayState))
+                        EraEpochView(
+                            eraOrEpoch: .left(self.viewModel.networkStatus.activeEra),
                             isAnimated: self.isAnimated
                         )
-                        .modifier(PanelAppearance(1, self.displayState))
-                        ValidatorListButtonView(
-                            title: LocalizedStringKey("inactive_validator_list.title"),
-                            count: self.viewModel.networkStatus.inactiveValidatorCount,
-                            eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts,
-                            chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+                        .modifier(PanelAppearance(5, self.displayState))
+                        EraEpochView(
+                            eraOrEpoch: .right(self.viewModel.networkStatus.currentEpoch),
                             isAnimated: self.isAnimated
                         )
-                        .modifier(PanelAppearance(2, self.displayState))
+                        .modifier(PanelAppearance(6, self.displayState))
+                    }
+                    .padding(EdgeInsets(
+                        top: 0,
+                        leading: UI.Dimension.Common.padding,
+                        bottom: 0,
+                        trailing: UI.Dimension.Common.padding
+                    ))
+                }
+            }
+            if self.networkSelectorIsOpen {
+                if let networks = self.viewModel.networks {
+                    VStack(alignment: .center) {
+                        HStack {
+                            ForEach(networks.indices, id: \.self) { i in
+                                Button(
+                                    action: {
+                                        if networks[i].id != self.viewModel.network.id {
+                                            self.cancelBlockTimer()
+                                            self.blockWaveParameters = BlockWaveParameters(
+                                                offset: Angle(degrees: 0),
+                                                progress: 0,
+                                                amplitude: currentBlockWaveAmplitude
+                                            )
+                                            self.isAnimated = false
+                                            self.viewModel.changeNetwork(network: networks[i])
+                                            self.changeNetworkDebounce?.invalidate()
+                                            self.changeNetworkDebounce = Timer.scheduledTimer(
+                                                withTimeInterval: 0.25,
+                                                repeats: false
+                                            ) { _ in
+                                                self.isAnimated = true
+                                                self.networkSelectorIsOpen = false
+                                                self.viewModel.subscribeToNetworkStatus(
+                                                    onStatus: self.onNetworkStatusReceived,
+                                                    onDiff: self.onNetworkStatusDiffReceived
+                                                )
+                                            }
+                                            /*
+                                            
+                                            
+                                             */
+                                        }
+                                    },
+                                    label: {
+                                        NetworkButtonView(
+                                            isSelected: self.viewModel.network.id == networks[i].id,
+                                            network: networks[i]
+                                        )
+                                        .frame(height: UI.Dimension.NetworkStatus.networkButtonHeight)
+                                        .frame(maxWidth: .infinity)
+                                    }
+                                )
+                                .zIndex(100 - Double(i))
+                                .buttonStyle(NetworkButtonStyle())
+                            }
+                        }
+                    }
+                    .padding(EdgeInsets(
+                        top: 0,
+                        leading: UI.Dimension.Common.padding,
+                        bottom: 0,
+                        trailing: UI.Dimension.Common.padding
+                    ))
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity,
+                        alignment: .center
+                    )
+                    .background(Color("Bg").opacity(0.975))
+                    .onTapGesture {
+                        self.networkSelectorIsOpen = false
                     }
                 }
-                .padding(EdgeInsets(
-                    top: 0,
-                    leading: UI.Dimension.Common.padding,
-                    bottom: 0,
-                    trailing: UI.Dimension.Common.padding
-                ))
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: .topLeading
+        )
         .onAppear() {
             self.viewModel.subscribeToNetworkStatus(
-                network: network,
                 onStatus: self.onNetworkStatusReceived,
                 onDiff: self.onNetworkStatusDiffReceived
             )

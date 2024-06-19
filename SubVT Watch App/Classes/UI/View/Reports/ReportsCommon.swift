@@ -81,7 +81,6 @@ struct ReportLineChartView: View {
                         .font(UI.Font.Common.dataPanelTitle)
                         .foregroundColor(Color("Text"))
                     Spacer()
-                    UI.Image.NetworkStatus.arrowRight
                 }
                 .padding(EdgeInsets(
                     top: UI.Dimension.Common.dataPanelPadding,
@@ -129,7 +128,6 @@ struct ReportBarChartView: View {
                 .font(UI.Font.Common.dataPanelTitle)
                 .foregroundColor(Color("Text"))
                 Spacer()
-                UI.Image.NetworkStatus.arrowRight
             }
             BarChartView(
                 dataPoints: self.dataPoints,
