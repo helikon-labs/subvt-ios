@@ -9,6 +9,7 @@ import UIKit
 
 extension UI.Dimension {
     enum NetworkStatus {
-        static var connectionStatusMarginLeft: CGFloat = 4
+        static let connectionStatusMarginLeft: CGFloat = 4
+        static let validatorCountPanelHeight: CGFloat = 92
     }
 }

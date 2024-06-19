@@ -17,5 +17,9 @@ extension UI {
         enum Home {
             static let iconWithLogo = SwiftUI.Image("IconWithLogoHome")
         }
+        
+        enum NetworkStatus {
+            static let arrowRight = SwiftUI.Image("DataPanelRightArrowDarkPhone")
+        }
     }
 }

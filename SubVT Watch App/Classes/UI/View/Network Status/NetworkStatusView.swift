@@ -117,16 +117,38 @@ struct NetworkStatusView: View {
     }
     
     var body: some View {
-        ZStack(alignment: .top) {
+        VStack(alignment: .leading) {
             headerView
             ScrollView {
                 VStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
                     HStack(spacing: UI.Dimension.Common.dataPanelSpacing) {
-                        
+                        ValidatorListButtonView(
+                            title: LocalizedStringKey("active_validator_list.title"),
+                            count: self.viewModel.networkStatus.activeValidatorCount,
+                            eraValidatorCounts: self.viewModel.eraActiveValidatorCounts,
+                            chartRevealPercentage: self.viewModel.eraActiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+                            isAnimated: self.isAnimated
+                        )
+                        .modifier(PanelAppearance(1, self.displayState))
+                        ValidatorListButtonView(
+                            title: LocalizedStringKey("inactive_validator_list.title"),
+                            count: self.viewModel.networkStatus.inactiveValidatorCount,
+                            eraValidatorCounts: self.viewModel.eraInactiveValidatorCounts,
+                            chartRevealPercentage: self.viewModel.eraInactiveValidatorCounts.count > 0 ? 1.0 : 0.0,
+                            isAnimated: self.isAnimated
+                        )
+                        .modifier(PanelAppearance(2, self.displayState))
                     }
                 }
+                .padding(EdgeInsets(
+                    top: 0,
+                    leading: UI.Dimension.Common.padding,
+                    bottom: 0,
+                    trailing: UI.Dimension.Common.padding
+                ))
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .onAppear() {
             self.viewModel.subscribeToNetworkStatus(
                 network: network,

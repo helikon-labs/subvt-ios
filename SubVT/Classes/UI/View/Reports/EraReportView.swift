@@ -41,7 +41,6 @@ struct EraReportView: View {
     }
     
     @EnvironmentObject private var router: Router
-    @StateObject private var viewModel = EraReportViewModel()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var chartRevealPercentage: CGFloat = 1.0
     

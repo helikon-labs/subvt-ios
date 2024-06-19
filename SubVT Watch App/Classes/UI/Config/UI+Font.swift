@@ -12,6 +12,7 @@ extension UI {
         enum Common {
             static let actionButton = LexendDeca.semiBold.withSize(14)
             static let title = LexendDeca.semiBold.withSize(15)
+            static var dataPanelTitle = LexendDeca.light.withSize(10)
         }
         
         enum Onboarding {
@@ -21,6 +22,10 @@ extension UI {
         enum Home {
             static let menuIcon = LexendDeca.regular.withSize(12)
             static let menuItem = LexendDeca.regular.withSize(14.5)
+        }
+        
+        enum NetworkStatus {
+            static let dataLarge: SwiftUI.Font = LexendDeca.semiBold.withSize(18)
         }
     }
 }

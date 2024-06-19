@@ -26,7 +26,7 @@ extension ValidatorSearchSummary {
     }
     
     func compare(
-        sortOption: ValidatorListViewModel.SortOption,
+        sortOption: ValidatorSummary.SortOption,
         _ other: ValidatorSummary
     ) -> Bool {
         if !self.hasIdentity() {

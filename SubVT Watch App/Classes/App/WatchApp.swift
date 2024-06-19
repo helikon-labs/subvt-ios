@@ -98,7 +98,6 @@ extension AppDelegate: WCSessionDelegate {
     private func update(from dictionary: [String: Any]) {
         if let hasBeenOnboarded = dictionary[WatchAppStorageKey.hasBeenOnboarded] as? Bool {
             self.hasBeenOnboarded = hasBeenOnboarded
-            return
         }
         if let privateKey = dictionary[WatchAppStorageKey.privateKey] as? Data {
             KeychainStorage.shared.setPrivateKey(data: privateKey)
@@ -109,7 +108,7 @@ extension AppDelegate: WCSessionDelegate {
         _ session: WCSession,
         didReceiveUserInfo userInfo: [String: Any] = [:]
     ) {
-        log.info("Watch connectivity session received user info: \(userInfo)")
+        log.info("Watch connectivity session received user info with \(userInfo.count) entries.")
         update(from: userInfo)
     }
     
@@ -117,12 +116,12 @@ extension AppDelegate: WCSessionDelegate {
         _ session: WCSession,
         didReceiveApplicationContext applicationContext: [String: Any]
     ) {
-        log.info("Watch connectivity session received application context: \(applicationContext)")
+        log.info("Watch connectivity session received application context with \(applicationContext.count) entries.")
         update(from: applicationContext)
     }
     
     func session(_ session: WCSession, didReceiveMessage message: [String : Any]) {
-        log.info("Watch connectivity session received message: \(message)")
+        log.info("Watch connectivity session received message with \(message.count) entries.")
     }
 }
 

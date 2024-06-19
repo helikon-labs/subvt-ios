@@ -8,6 +8,18 @@
 import SubVTData
 
 extension ValidatorSummary {
+    enum SortOption: String {
+        case identity
+        case stakeDescending
+        case nominationDescending
+    }
+    
+    enum FilterOption: String {
+        case hasIdentity
+        case isOneKV
+        case isParavalidator
+    }
+    
     func filter(_ filter: String) -> Bool {
         if filter.isEmpty {
             return true
@@ -37,7 +49,7 @@ extension ValidatorSummary {
     }
     
     func compare(
-        sortOption: ValidatorListViewModel.SortOption,
+        sortOption: SortOption,
         _ other: ValidatorSummary
     ) -> Bool {
         let zeroBalance = Balance(integerLiteral: 0).value

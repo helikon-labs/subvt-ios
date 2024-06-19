@@ -15,22 +15,10 @@ class ValidatorListViewModel: ObservableObject {
         case inactive
     }
     
-    enum SortOption: String {
-        case identity
-        case stakeDescending
-        case nominationDescending
-    }
-    
-    enum FilterOption: String {
-        case hasIdentity
-        case isOneKV
-        case isParavalidator
-    }
-    
     @Published private(set) var serviceStatus: RPCSubscriptionServiceStatus = .idle
     @Published private(set) var validators: [ValidatorSummary] = []
-    @Published var sortOption: SortOption? = nil
-    @Published var filterOptions = Set<FilterOption>()
+    @Published var sortOption: ValidatorSummary.SortOption? = nil
+    @Published var filterOptions = Set<ValidatorSummary.FilterOption>()
     @Published var searchText: String = ""
     @Published var isLoading = false
     
@@ -195,8 +183,8 @@ class ValidatorListViewModel: ObservableObject {
     
     func filterAndSortValidators(
         searchText: String,
-        filterOptions: Set<FilterOption>,
-        sortOption: SortOption?
+        filterOptions: Set<ValidatorSummary.FilterOption>,
+        sortOption: ValidatorSummary.SortOption?
     ) {
         self.lock.lock()
         self.validators = self.innerValidators

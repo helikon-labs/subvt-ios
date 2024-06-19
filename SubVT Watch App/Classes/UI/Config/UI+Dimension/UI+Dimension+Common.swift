@@ -14,8 +14,8 @@ extension UI.Dimension {
         static let listItemSpacing: CGFloat = 8
         static var padding: CGFloat = 12
         static let lineSpacing: CGFloat = 3
-        static let dataPanelSpacing: CGFloat = 4
         static var connectionStatusSize: CGFloat = 4
+        static let lineChartLineWidth: CGFloat = 2
         static func dataPanelYOffset(_ displayState: BasicViewDisplayState) -> CGFloat {
             switch displayState {
             case .notAppeared:
@@ -36,5 +36,9 @@ extension UI.Dimension {
                 return 0
             }
         }
+        static let dataPanelSpacing: CGFloat = 4
+        static let dataPanelCornerRadius: CGFloat = 8
+        static let dataPanelPadding: CGFloat = 8
+        static let dataPanelContentMarginTop: CGFloat = 6
     }
 }

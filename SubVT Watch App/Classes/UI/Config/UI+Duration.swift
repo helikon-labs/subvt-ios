@@ -9,6 +9,8 @@ import Foundation
 
 extension UI {
     enum Duration {
-        static let dummy = 1.0
+        static let counterAnimation = 1.0
+        static let actionFeedbackViewVisibleDuration = 1.5
+        static let chartRevealAnimation = 0.5
     }
 }

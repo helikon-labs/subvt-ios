@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import SubVTData
 
 struct ValidatorListFilterSortView: View {
     @Environment (\.colorScheme) private var colorScheme: ColorScheme
     let mode: ValidatorListViewModel.Mode
     @Binding var isVisible: Bool
-    @Binding var sortOption: ValidatorListViewModel.SortOption?
-    @Binding var filterOptions: Set<ValidatorListViewModel.FilterOption>
+    @Binding var sortOption: ValidatorSummary.SortOption?
+    @Binding var filterOptions: Set<ValidatorSummary.FilterOption>
     @State private var sortByIdButtonPressed = false
     @State private var sortByStakePressed = false
     @State private var sortByNominationPressed = false
