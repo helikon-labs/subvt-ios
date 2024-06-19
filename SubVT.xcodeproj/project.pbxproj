@@ -2278,7 +2278,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2317,7 +2317,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2577,7 +2577,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2617,7 +2617,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2802,7 +2802,7 @@
 			repositoryURL = "https://github.com/helikon-labs/subvt-data-swift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.17.1;
+				minimumVersion = 0.18.0;
 			};
 		};
 		A0FC976A28B63D5800B75A9B /* XCRemoteSwiftPackageReference "SwiftEventBus" */ = {

@@ -37,14 +37,14 @@ struct NetworkStatusView: View {
     @State private var isAnimated: Bool = true
     @State private var changeNetworkDebounce: Timer? = nil
     
-    func onNetworkStatusReceived() {
+    func onNetworkStatusInitialized() {
         self.startBlockTimer()
         self.viewModel.fetchEraValidatorCounts(
             currentEraIndex: self.viewModel.networkStatus.activeEra.index
         )
     }
     
-    func onNetworkStatusDiffReceived() {
+    func onNetworkStatusUpdated() {
         self.cancelBlockTimer()
         self.startBlockTimer()
     }
@@ -212,8 +212,8 @@ struct NetworkStatusView: View {
                                                 self.isAnimated = true
                                                 self.networkSelectorIsOpen = false
                                                 self.viewModel.subscribeToNetworkStatus(
-                                                    onStatus: self.onNetworkStatusReceived,
-                                                    onDiff: self.onNetworkStatusDiffReceived
+                                                    onInit: self.onNetworkStatusInitialized,
+                                                    onUpdate: self.onNetworkStatusUpdated
                                                 )
                                             }
                                             /*
@@ -261,8 +261,8 @@ struct NetworkStatusView: View {
         )
         .onAppear() {
             self.viewModel.subscribeToNetworkStatus(
-                onStatus: self.onNetworkStatusReceived,
-                onDiff: self.onNetworkStatusDiffReceived
+                onInit: self.onNetworkStatusInitialized,
+                onUpdate: self.onNetworkStatusUpdated
             )
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.displayState = .appeared
@@ -283,8 +283,8 @@ struct NetworkStatusView: View {
         .onChange(of: scenePhase) { newPhase in
             self.viewModel.onScenePhaseChange(
                 newPhase,
-                onStatus: self.onNetworkStatusReceived,
-                onDiff: self.onNetworkStatusDiffReceived
+                onInit: self.onNetworkStatusInitialized,
+                onUpdate: self.onNetworkStatusUpdated
             )
             switch newPhase {
             case .background:

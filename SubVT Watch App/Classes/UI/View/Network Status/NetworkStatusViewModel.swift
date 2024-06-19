@@ -17,47 +17,26 @@ class NetworkStatusViewModel: ObservableObject {
     @Published private(set) var networkStatusServiceStatus: RPCSubscriptionServiceStatus = .idle
     @AppStorage(WatchAppStorageKey.networks) var networks: [Network]? = nil
     @AppStorage(WatchAppStorageKey.selectedNetwork) var network: Network = PreviewData.kusama
-    private var networkStatusServiceStatusSubscription: AnyCancellable? = nil
-    private var networkStatusServiceSubscription: AnyCancellable? = nil
-    private var networkStatusService: NetworkStatusService! = nil
-    private var subscriptionIsInProgress = false
+    private var networkStatusTimer: Timer? = nil
     
     @Published private(set) var eraActiveValidatorCounts: [(UInt, UInt)] = []
     @Published private(set) var eraInactiveValidatorCounts: [(UInt, UInt)] = []
     
+    private var cancellables = Set<AnyCancellable>()
     private var reportService: ReportService! = nil
-    private var reportServiceCancellable: AnyCancellable? = nil
-    
-    private func initNetworkStatusService() {
-        if let rpcHost = self.network.networkStatusServiceHost,
-           let rpcPort = self.network.networkStatusServicePort {
-            self.networkStatusService = NetworkStatusService(
-                rpcHost: rpcHost,
-                rpcPort: rpcPort
-            )
-        } else {
-            self.networkStatusService = NetworkStatusService()
-        }
-    }
     
     func onScenePhaseChange(
         _ scenePhase: ScenePhase,
-        onStatus: @escaping () -> (),
-        onDiff: @escaping () -> ()
+        onInit: @escaping () -> (),
+        onUpdate: @escaping () -> ()
     ) {
         switch scenePhase {
         case .background:
             break
         case .inactive:
-            self.networkStatusService.unsubscribe()
-            self.subscriptionIsInProgress = false
+            self.unsubscribe()
         case .active:
-            if !subscriptionIsInProgress {
-                self.subscribeToNetworkStatus(
-                    onStatus: onStatus,
-                    onDiff: onDiff
-                )
-            }
+            self.subscribeToNetworkStatus(onInit: onInit, onUpdate: onUpdate)
         @unknown default:
             fatalError("Unknown scene phase: \(scenePhase)")
         }
@@ -65,18 +44,53 @@ class NetworkStatusViewModel: ObservableObject {
     
     func changeNetwork(network: Network) {
         self.network = network
-        self.networkStatusService.unsubscribe()
-        self.subscriptionIsInProgress = false
+        self.unsubscribe()
         self.networkStatus = NetworkStatus()
         self.eraActiveValidatorCounts = []
         self.eraInactiveValidatorCounts = []
-        self.initNetworkStatusService()
+        self.reportService = nil
         self.initReportService()
     }
     
+    func fetchNetworkStatus(
+        onInit: @escaping () -> (),
+        onUpdate: @escaping () -> ()
+    ) {
+        self.reportService.getNetworkStatus().sink {
+            [weak self]
+            response in
+            guard let self else { return }
+            if let error = response.error {
+                self.networkStatusServiceStatus = .error(error: RPCError.backend(error: error))
+            } else if let networkStatus = response.value {
+                let oldBestBlockNumber = self.networkStatus.bestBlockNumber
+                let newBestBlockNumber = networkStatus.bestBlockNumber
+                self.networkStatus = networkStatus
+                if newBestBlockNumber > oldBestBlockNumber {
+                    if oldBestBlockNumber == 0 {
+                        onInit()
+                    } else {
+                        onUpdate()
+                    }
+                }
+            } else {
+                self.networkStatusServiceStatus = .error(error: RPCError.connection)
+            }
+            self.networkStatusTimer = Timer.scheduledTimer(
+                withTimeInterval: 1.5,
+                repeats: false
+            ) {
+                [weak self] _ in
+                guard let self else { return }
+                self.fetchNetworkStatus(onInit: onInit, onUpdate: onUpdate)
+            }
+        }
+        .store(in: &cancellables)
+    }
+    
     func subscribeToNetworkStatus(
-        onStatus: @escaping () -> (),
-        onDiff: @escaping () -> ()
+        onInit: @escaping () -> (),
+        onUpdate: @escaping () -> ()
     ) {
         switch self.networkStatusServiceStatus {
         case .subscribed(_):
@@ -84,65 +98,22 @@ class NetworkStatusViewModel: ObservableObject {
         default:
             break
         }
-        self.subscriptionIsInProgress = true
-        if self.networkStatusService == nil {
-            self.initNetworkStatusService()
-        }
-        self.networkStatusServiceStatusSubscription?.cancel()
-        self.networkStatusServiceStatusSubscription = self.networkStatusService.$status
-            .receive(on: DispatchQueue.main)
-            .sink {
-                [weak self]
-                (status) in
-                self?.networkStatusServiceStatus = status
-            }
-        self.networkStatusServiceSubscription?.cancel()
-        self.networkStatusServiceSubscription = self.networkStatusService
-            .subscribe()
-            .receive(on: DispatchQueue.main)
-            .sink {
-                [weak self]
-                (completion) in
-                guard let self else { return }
-                switch completion {
-                case .finished:
-                    log.info("Network status service subscription finished.")
-                    self.subscriptionIsInProgress = false
-                case .failure(let rpcError):
-                    log.error("Network status service subscription finished with error: \(rpcError)")
-                    self.subscriptionIsInProgress = false
-                }
-            } receiveValue: {
-                [weak self]
-                (event) in
-                guard let self else { return }
-                switch event {
-                case .subscribed(_):
-                    self.subscriptionIsInProgress = false
-                    log.info("Subscribed to network status service.")
-                case .update(let statusUpdate):
-                    if let status = statusUpdate.status {
-                        log.info("Received initial network status for block \(status.bestBlockNumber).")
-                        self.networkStatus = status
-                        onStatus()
-                    } else if let diff = statusUpdate.diff {
-                        log.info("Received network status update for block \(diff.bestBlockNumber ?? 0).")
-                        self.networkStatus.apply(diff: diff)
-                        onDiff()
-                    }
-                case .unsubscribed:
-                    self.subscriptionIsInProgress = false
-                    log.info("Unsubscribed from network status service.")
-                }
-            }
+        self.unsubscribe()
+        self.initReportService()
+        self.fetchNetworkStatus(onInit: onInit, onUpdate: onUpdate)
+        self.networkStatusServiceStatus = .subscribed(subscriptionId: 0)
     }
     
     func unsubscribe() {
-        self.networkStatusService.unsubscribe()
-        self.subscriptionIsInProgress = false
+        self.networkStatusTimer?.invalidate()
+        self.networkStatusTimer = nil
+        self.networkStatusServiceStatus = .idle
     }
     
     private func initReportService() {
+        guard self.reportService == nil else {
+            return
+        }
         if let host = self.network.reportServiceHost,
            let port = self.network.reportServicePort {
             self.reportService = ReportService(
@@ -157,10 +128,7 @@ class NetworkStatusViewModel: ObservableObject {
         guard currentEraIndex > eraReportCount else {
             return
         }
-        if self.reportService == nil {
-            initReportService()
-        }
-        self.reportServiceCancellable = self.reportService?.getEraReport(
+        self.reportService?.getEraReport(
             startEraIndex: currentEraIndex - eraReportCount,
             endEraIndex: currentEraIndex
         ).sink {
@@ -183,5 +151,6 @@ class NetworkStatusViewModel: ObservableObject {
                 }
             }
         }
+        .store(in: &cancellables)
     }
 }
