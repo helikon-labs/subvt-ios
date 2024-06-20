@@ -10,6 +10,7 @@ import SwiftUI
 import SubVTData
 
 class MyValidatorsViewModel: ObservableObject {
+    @AppStorage(WatchAppStorageKey.networks) private(set) var networks: [Network]? = nil
     @Published private(set) var fetchState: DataFetchState<String> = .idle
     
     private var userValidators: [UserValidator] = []
@@ -17,18 +18,17 @@ class MyValidatorsViewModel: ObservableObject {
     
     private var appService = SubVTData.AppService()
     private var reportServiceMap: [UInt64:SubVTData.ReportService] = [:]
-    private var updateTimer: Timer? = nil
     private var cancellables = Set<AnyCancellable>()
-    private var networks: [Network] = []
     
     init() {}
     
-    func initReportServices(networks: [Network]) {
-        guard self.reportServiceMap.count == 0 else {
+    func initReportServices() {
+        guard self.reportServiceMap.count == 0,
+              let networks = self.networks else {
             return
         }
         self.networks = networks
-        for network in self.networks {
+        for network in networks {
             if let host = network.reportServiceHost,
                let port = network.reportServicePort {
                 reportServiceMap[network.id] = SubVTData.ReportService(
@@ -41,7 +41,8 @@ class MyValidatorsViewModel: ObservableObject {
     func fetchMyValidators() {
         guard self.fetchState != .loading else { return }
         self.fetchState = .loading
-        self.updateTimer?.invalidate()
+        self.userValidators = []
+        self.userValidatorSummaries = []
         self.appService.getUserValidators().sink {
             [weak self]
             response in
@@ -100,9 +101,11 @@ class MyValidatorsViewModel: ObservableObject {
     }
     
     private func fetchValidatorSummaries() {
+        guard let networks = self.networks else {
+            return
+        }
         if self.userValidators.isEmpty {
             self.fetchState = .success(result: "")
-            self.setupUpdateTimer()
             return
         }
         var publishers: [ServiceResponsePublisher<ValidatorSummaryReport>] = []
@@ -121,7 +124,7 @@ class MyValidatorsViewModel: ObservableObject {
                    let url = response.request?.url,
                    let host = url.host() {
                     var networkId: UInt64 = 0;
-                    for network in self.networks {
+                    for network in networks {
                         if host.contains(network.display.lowercased()) {
                             networkId = network.id
                             break
@@ -144,11 +147,9 @@ class MyValidatorsViewModel: ObservableObject {
                         let validatorSummary = validatorSummaryReport.validatorSummary
                         self.addOrUpdateValidatorSummary(validatorSummary)
                         self.fetchState = .success(result: "")
-                        self.setupUpdateTimer()
                     case .success:
                         self.addOrUpdateValidatorSummary(validatorSummaryReport.validatorSummary)
                         self.fetchState = .success(result: "")
-                        self.setupUpdateTimer()
                     default:
                         break
                     }
@@ -170,17 +171,5 @@ class MyValidatorsViewModel: ObservableObject {
                 }
             }
             .store(in: &cancellables)
-    }
-    
-    private func setupUpdateTimer() {
-        self.updateTimer?.invalidate()
-        self.updateTimer = Timer.scheduledTimer(
-            withTimeInterval: 10,
-            repeats: true
-        ) {
-            [weak self] _ in
-            guard let self else { return }
-            self.fetchMyValidators()
-        }
     }
 }

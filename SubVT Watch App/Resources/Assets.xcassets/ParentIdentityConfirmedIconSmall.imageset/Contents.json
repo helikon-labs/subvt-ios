@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "ParentIdentityConfirmedIconSmall@1x.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "ParentIdentityConfirmedIconSmall@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "ParentIdentityConfirmedIconSmall@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

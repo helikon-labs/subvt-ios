@@ -24,19 +24,19 @@ struct OnboardingView: View {
                 .frame(height: UI.Dimension.Common.listItemSpacing * 2)
             if !WCSession.isSupported() {
                 Text(localized("watch.onboarding.connectivity_not_supported"))
-                    .font(UI.Font.Onboarding.info)
+                    .font(UI.Font.Common.info)
                     .foregroundColor(Color("Text"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(UI.Dimension.Common.lineSpacing)
             } else if !WCSession.default.isCompanionAppInstalled {
                 Text(localized("watch.onboarding.companion_app_not_installed"))
-                    .font(UI.Font.Onboarding.info)
+                    .font(UI.Font.Common.info)
                     .foregroundColor(Color("Text"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(UI.Dimension.Common.lineSpacing)
             } else if self.initialSyncInProgress {
                 Text(localized("watch.onboarding.initial_sync_progress"))
-                    .font(UI.Font.Onboarding.info)
+                    .font(UI.Font.Common.info)
                     .foregroundColor(Color("Text"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(UI.Dimension.Common.lineSpacing)
@@ -48,13 +48,13 @@ struct OnboardingView: View {
                     )
             } else if !self.initialSyncCompleted && WCSession.default.isReachable {
                 Text(localized("watch.onboarding.connectivity_not_reachable"))
-                    .font(UI.Font.Onboarding.info)
+                    .font(UI.Font.Common.info)
                     .foregroundColor(Color("Text"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(UI.Dimension.Common.lineSpacing)
             } else if self.initialSyncFailed {
                 Text(localized("watch.onboarding.initial_sync_failed"))
-                    .font(UI.Font.Onboarding.info)
+                    .font(UI.Font.Common.info)
                     .foregroundColor(Color("Text"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(UI.Dimension.Common.lineSpacing)
@@ -71,7 +71,7 @@ struct OnboardingView: View {
                 }
             } else if !self.hasBeenOnboarded {
                 Text(localized("watch.onboarding.onboarding_not_complete"))
-                    .font(UI.Font.Onboarding.info)
+                    .font(UI.Font.Common.info)
                     .foregroundColor(Color("Text"))
                     .multilineTextAlignment(.center)
                     .lineSpacing(UI.Dimension.Common.lineSpacing)

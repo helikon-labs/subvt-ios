@@ -390,6 +390,8 @@
 		A0F574DB28870467002849FC /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F574D928870467002849FC /* VisualEffectView.swift */; };
 		A0F596FF28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F596FE28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift */; };
 		A0F5970028B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F596FE28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift */; };
+		A0F5E2842C24528B00AE69C1 /* ValidatorSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5E2832C24528B00AE69C1 /* ValidatorSummaryView.swift */; };
+		A0F5E2862C2452DD00AE69C1 /* UI+Dimension+ValidatorSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F5E2852C2452DD00AE69C1 /* UI+Dimension+ValidatorSummary.swift */; };
 		A0FC976828B62CCF00B75A9B /* AddValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FC976728B62CCF00B75A9B /* AddValidatorsView.swift */; };
 		A0FC976928B62CCF00B75A9B /* AddValidatorsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FC976728B62CCF00B75A9B /* AddValidatorsView.swift */; };
 		A0FC976C28B63D5800B75A9B /* SwiftEventBus in Frameworks */ = {isa = PBXBuildFile; productRef = A0FC976B28B63D5800B75A9B /* SwiftEventBus */; };
@@ -692,6 +694,8 @@
 		A0F285102879C08000E69C6B /* BlockWaveParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockWaveParameters.swift; sourceTree = "<group>"; };
 		A0F574D928870467002849FC /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
 		A0F596FE28B4BD5A00CE6A01 /* UI+Dimension+MyValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+MyValidators.swift"; sourceTree = "<group>"; };
+		A0F5E2832C24528B00AE69C1 /* ValidatorSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorSummaryView.swift; sourceTree = "<group>"; };
+		A0F5E2852C2452DD00AE69C1 /* UI+Dimension+ValidatorSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+ValidatorSummary.swift"; sourceTree = "<group>"; };
 		A0FC976728B62CCF00B75A9B /* AddValidatorsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddValidatorsView.swift; sourceTree = "<group>"; };
 		A0FC976E28B63DEE00B75A9B /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		A0FD88272893B98000479C10 /* cube_environment.hdr */ = {isa = PBXFileReference; lastKnownFileType = file; path = cube_environment.hdr; sourceTree = "<group>"; };
@@ -1320,6 +1324,7 @@
 				A0CC504E2C207EE40092303C /* UI+Dimension.swift */,
 				A0CC50382C207DE90092303C /* UI+Dimension+Common.swift */,
 				A0F16A8C2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift */,
+				A0F5E2852C2452DD00AE69C1 /* UI+Dimension+ValidatorSummary.swift */,
 			);
 			path = "UI+Dimension";
 			sourceTree = "<group>";
@@ -1463,6 +1468,7 @@
 			children = (
 				A0F16A7C2C21873500F5746B /* MyValidatorsView.swift */,
 				A01F482D2C22B32700F5F01E /* MyValidatorsViewModel.swift */,
+				A0F5E2832C24528B00AE69C1 /* ValidatorSummaryView.swift */,
 			);
 			path = "My Validators";
 			sourceTree = "<group>";
@@ -1839,6 +1845,7 @@
 				A0F16A902C21B17900F5746B /* Counter.swift in Sources */,
 				A03B61F62C22C1F2008C93E9 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A01F48342C22BE6A00F5F01E /* BlockWaveView.swift in Sources */,
+				A0F5E2862C2452DD00AE69C1 /* UI+Dimension+ValidatorSummary.swift in Sources */,
 				A0CC50602C2172B40092303C /* HomeViewModel.swift in Sources */,
 				A0F16A762C21824F00F5746B /* NetworkStatusView.swift in Sources */,
 				A0F16A852C218A7B00F5746B /* BlockWaveParameters.swift in Sources */,
@@ -1872,6 +1879,7 @@
 				A03B61F22C22BF89008C93E9 /* Format.swift in Sources */,
 				A0CC50492C207E270092303C /* UI+Font.swift in Sources */,
 				A0CC502B2C207D760092303C /* Font.swift in Sources */,
+				A0F5E2842C24528B00AE69C1 /* ValidatorSummaryView.swift in Sources */,
 				A0F16A842C218A2100F5746B /* NetworkMonitor.swift in Sources */,
 				A01F482B2C22B2BB00F5F01E /* NetworkStatusViewModel.swift in Sources */,
 				A090539D2C20391100362BC0 /* File.swift in Sources */,

@@ -12,8 +12,8 @@ extension UI.Dimension {
     enum Common {
         static let cornerRadius: CGFloat = 12
         static let listItemSpacing: CGFloat = 8
-        static var padding: CGFloat = 12
-        static let lineSpacing: CGFloat = 3
+        static var padding: CGFloat = 8
+        static let lineSpacing: CGFloat = 2.75
         static var connectionStatusSize: CGFloat = 4
         static let lineChartLineWidth: CGFloat = 2
         static let itemSelectionIndicatorSize: CGFloat = 4

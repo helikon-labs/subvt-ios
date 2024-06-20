@@ -10,13 +10,10 @@ import SwiftUI
 extension UI {
     enum Font {
         enum Common {
-            static let actionButton = LexendDeca.semiBold.withSize(14)
+            static let actionButton = LexendDeca.regular.withSize(14)
             static let title = LexendDeca.semiBold.withSize(15)
             static var dataPanelTitle = LexendDeca.light.withSize(10)
             static let dataMedium = LexendDeca.semiBold.withSize(12)
-        }
-        
-        enum Onboarding {
             static let info = LexendDeca.regular.withSize(13)
         }
         
@@ -31,6 +28,11 @@ extension UI {
             static let dataXLarge: SwiftUI.Font = LexendDeca.semiBold.withSize(20)
             static let eraEpochTimestamp = LexendDeca.regular.withSize(10)
             static let network = LexendDeca.regular.withSize(11)
+        }
+        
+        enum ValidatorSummary {
+            static let display = LexendDeca.semiBold.withSize(12)
+            static let balance = LexendDeca.light.withSize(10)
         }
     }
 }

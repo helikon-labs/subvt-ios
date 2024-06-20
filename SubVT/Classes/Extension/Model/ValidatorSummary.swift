@@ -48,6 +48,18 @@ extension ValidatorSummary {
         }
     }
     
+    var identityDisplayNoParent: String {
+        get {
+            if let childDisplay = self.childDisplay {
+                return childDisplay
+            } else if let display = self.display {
+                return display
+            } else {
+                return truncateAddress(self.address)
+            }
+        }
+    }
+    
     func compare(
         sortOption: SortOption,
         _ other: ValidatorSummary
