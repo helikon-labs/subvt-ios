@@ -2810,7 +2810,7 @@
 			repositoryURL = "https://github.com/helikon-labs/subvt-data-swift.git";
 			requirement = {
 				kind = upToNextMinorVersion;
-				minimumVersion = 0.18.0;
+				minimumVersion = 0.20.0;
 			};
 		};
 		A0FC976A28B63D5800B75A9B /* XCRemoteSwiftPackageReference "SwiftEventBus" */ = {

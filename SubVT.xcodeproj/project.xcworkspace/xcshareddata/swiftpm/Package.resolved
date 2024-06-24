@@ -177,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/helikon-labs/subvt-data-swift.git",
       "state" : {
-        "revision" : "344bd7d677228a56cc0e2f2442407f12ef16eaaa",
-        "version" : "0.18.0"
+        "revision" : "d5fee65adbfff5b716f13aa259fd894cb1611a68",
+        "version" : "0.20.0"
       }
     },
     {

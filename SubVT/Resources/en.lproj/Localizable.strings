@@ -331,3 +331,8 @@
 "watch.onboarding.initial_sync_progress"="Completing initial synchronization.";
 "watch.onboarding.initial_sync_failed"="Initial synchronization has failed.";
 "watch.onboarding.onboarding_not_complete"="Please complete onboarding on the iOS device.";
+
+"monthly_income.title"="Monthly Income";
+"monthly_income.error.fetch"="Error while fetching monthly income report.";
+"monthly_income.no_validators"="You haven't added any validators.\nPlease use the iOS application to add your validators.";
+"monthly_income.no_income"="Your validators haven't generated any income yet.";

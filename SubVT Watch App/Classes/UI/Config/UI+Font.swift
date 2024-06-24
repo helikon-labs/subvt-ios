@@ -34,5 +34,9 @@ extension UI {
             static let display = LexendDeca.semiBold.withSize(12)
             static let balance = LexendDeca.light.withSize(10)
         }
+        
+        enum Income {
+            static let income = LexendDeca.regular.withSize(13)
+        }
     }
 }

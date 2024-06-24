@@ -238,41 +238,6 @@ struct RewardReportView: View {
         .foregroundColor(Color("Text"))
     }
     
-    private func monthDisplay(index: Int) -> String {
-        let year = index / 12;
-        let monthIndex = index - (year * 12)
-        var text = " '" + String(year).suffix(2)
-        switch monthIndex {
-        case 0:
-            text = localized("common.date.month.january.short") + text
-        case 1:
-            text = localized("common.date.month.february.short") + text
-        case 2:
-            text = localized("common.date.month.march.short") + text
-        case 3:
-            text = localized("common.date.month.april.short") + text
-        case 4:
-            text = localized("common.date.month.may.short") + text
-        case 5:
-            text = localized("common.date.month.june.short") + text
-        case 6:
-            text = localized("common.date.month.july.short") + text
-        case 7:
-            text = localized("common.date.month.august.short") + text
-        case 8:
-            text = localized("common.date.month.september.short") + text
-        case 9:
-            text = localized("common.date.month.october.short") + text
-        case 10:
-            text = localized("common.date.month.november.short") + text
-        case 11:
-            text = localized("common.date.month.december.short") + text
-        default:
-            fatalError("Unexpected month index \(monthIndex).")
-        }
-        return text
-    }
-    
     private var chart: some View {
         ZStack {
             Chart {
@@ -307,7 +272,7 @@ struct RewardReportView: View {
                         anchor: UnitPoint(x: -0.5, y: 0.5),
                         collisionResolution: .disabled
                     ) {
-                        Text(self.monthDisplay(index: value.as(Int.self)!))
+                        Text(formatMonthYear(index: value.as(Int.self)!))
                             .font(UI.Font.Report.axisValue)
                             .rotationEffect(Angle(degrees: -45))
                             .offset(x: -18, y : 5)

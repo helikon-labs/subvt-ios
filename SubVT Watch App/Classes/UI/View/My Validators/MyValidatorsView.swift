@@ -69,6 +69,7 @@ struct MyValidatorsView: View {
                                 displaysNetworkIcon: true,
                                 displaysActiveStatus: true
                             )
+                            .transition(.move(edge: .leading))
                         }
                     }
                     .padding(EdgeInsets(
