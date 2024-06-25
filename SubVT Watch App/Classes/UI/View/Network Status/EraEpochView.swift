@@ -186,28 +186,30 @@ struct EraEpochView: View {
             Spacer()
                 .frame(height: 8)
             HStack (alignment: .top) {
-                Text(
-                    String(
-                        format: localized("common.int_percentage"),
-                        self.elapsedPercentage
+                HStack {
+                    Text(
+                        String(
+                            format: localized("common.int_percentage"),
+                            self.elapsedPercentage
+                        )
                     )
-                )
-                .modifier(Counter(
-                    format: localized("common.int_percentage"),
-                    value: CGFloat(self.elapsedPercentage)
-                ))
-                .animation(
-                    self.isAnimated ? .easeInOut(duration: UI.Duration.counterAnimation) : nil,
-                    value: self.elapsedPercentage
-                )
-                .font(UI.Font.Common.dataMedium)
-                .foregroundColor(
-                    self.elapsedPercentage > 100
-                        ? Color("StatusError")
-                        : Color("Text")
-                )
-                Spacer()
-                    .frame(width: 10)
+                    .modifier(Counter(
+                        format: localized("common.int_percentage"),
+                        value: CGFloat(self.elapsedPercentage)
+                    ))
+                    .animation(
+                        self.isAnimated ? .easeInOut(duration: UI.Duration.counterAnimation) : nil,
+                        value: self.elapsedPercentage
+                    )
+                    .font(UI.Font.Common.dataMedium)
+                    .foregroundColor(
+                        self.elapsedPercentage > 100
+                            ? Color("StatusError")
+                            : Color("Text")
+                    )
+                    Spacer()
+                }
+                .frame(width: 32)
                 VStack (alignment: .leading) {
                     let timeLeft = self.timeLeftFormatted
                     Spacer()

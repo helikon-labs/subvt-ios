@@ -198,6 +198,8 @@
 		A09905A12897CF9900C193F5 /* ValidatorDetailsIconsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */; };
 		A09AC41528E9B03500C43E2B /* NotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */; };
 		A09AC41628E9B03500C43E2B /* NotificationRuleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */; };
+		A09C5E592C2B321600F0DDDD /* WKInterfaceDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09C5E582C2B321600F0DDDD /* WKInterfaceDevice.swift */; };
+		A09C5E5B2C2B340000F0DDDD /* UI+Dimension+Home.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09C5E5A2C2B340000F0DDDD /* UI+Dimension+Home.swift */; };
 		A0A1A4CD2B78B3CC00E18F39 /* WatchApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1A4CC2B78B3CC00E18F39 /* WatchApp.swift */; };
 		A0A1A4CF2B78B3CC00E18F39 /* WatchAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A1A4CE2B78B3CC00E18F39 /* WatchAppView.swift */; };
 		A0A1A4D12B78B3CD00E18F39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A1A4D02B78B3CD00E18F39 /* Assets.xcassets */; };
@@ -586,6 +588,8 @@
 		A098E593285DDE3D00AAA68A /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		A099059F2897CF9900C193F5 /* ValidatorDetailsIconsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValidatorDetailsIconsView.swift; sourceTree = "<group>"; };
 		A09AC41428E9B03500C43E2B /* NotificationRuleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRuleView.swift; sourceTree = "<group>"; };
+		A09C5E582C2B321600F0DDDD /* WKInterfaceDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WKInterfaceDevice.swift; sourceTree = "<group>"; };
+		A09C5E5A2C2B340000F0DDDD /* UI+Dimension+Home.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UI+Dimension+Home.swift"; sourceTree = "<group>"; };
 		A0A1A4CA2B78B3CC00E18F39 /* SubVT Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SubVT Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0A1A4CC2B78B3CC00E18F39 /* WatchApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchApp.swift; sourceTree = "<group>"; };
 		A0A1A4CE2B78B3CC00E18F39 /* WatchAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WatchAppView.swift; sourceTree = "<group>"; };
@@ -1078,6 +1082,7 @@
 			children = (
 				A090539F2C2045A500362BC0 /* App */,
 				A0CC501E2C2078C80092303C /* Data */,
+				A09C5E572C2B31F800F0DDDD /* Extension */,
 				A0F16A722C2181E600F5746B /* Navigation */,
 				A0CC502C2C207DD10092303C /* UI */,
 				A09053A02C2045B000362BC0 /* Util */,
@@ -1114,6 +1119,14 @@
 				A09053962C202B6900362BC0 /* WatchUserDefaultsUtil.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		A09C5E572C2B31F800F0DDDD /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				A09C5E582C2B321600F0DDDD /* WKInterfaceDevice.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		A0A1A4CB2B78B3CC00E18F39 /* SubVT Watch App */ = {
@@ -1323,6 +1336,7 @@
 			children = (
 				A0CC504E2C207EE40092303C /* UI+Dimension.swift */,
 				A0CC50382C207DE90092303C /* UI+Dimension+Common.swift */,
+				A09C5E5A2C2B340000F0DDDD /* UI+Dimension+Home.swift */,
 				A0F16A8C2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift */,
 				A0F5E2852C2452DD00AE69C1 /* UI+Dimension+ValidatorSummary.swift */,
 			);
@@ -1846,6 +1860,7 @@
 				A03B61F62C22C1F2008C93E9 /* LinearGradientProgressViewStyle.swift in Sources */,
 				A01F48342C22BE6A00F5F01E /* BlockWaveView.swift in Sources */,
 				A0F5E2862C2452DD00AE69C1 /* UI+Dimension+ValidatorSummary.swift in Sources */,
+				A09C5E5B2C2B340000F0DDDD /* UI+Dimension+Home.swift in Sources */,
 				A0CC50602C2172B40092303C /* HomeViewModel.swift in Sources */,
 				A0F16A762C21824F00F5746B /* NetworkStatusView.swift in Sources */,
 				A0F16A852C218A7B00F5746B /* BlockWaveParameters.swift in Sources */,
@@ -1885,6 +1900,7 @@
 				A090539D2C20391100362BC0 /* File.swift in Sources */,
 				A01F48322C22BE4000F5F01E /* BlockWaveContainerView.swift in Sources */,
 				A0F16A882C21AB3600F5746B /* PreviewData.swift in Sources */,
+				A09C5E592C2B321600F0DDDD /* WKInterfaceDevice.swift in Sources */,
 				A0F16A832C21875000F5746B /* IncomeViewModel.swift in Sources */,
 				A09053972C202B6900362BC0 /* WatchUserDefaultsUtil.swift in Sources */,
 				A097C17F2C20117B00ABE788 /* Logging.swift in Sources */,
@@ -2286,7 +2302,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2325,7 +2341,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2585,7 +2601,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2625,7 +2641,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 21;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;

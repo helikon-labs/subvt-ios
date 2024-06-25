@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "NetworkIcon@1x.png",
+      "filename" : "icons-tab-bar.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "NetworkIcon@2x.png",
+      "filename" : "icons-tab-bar 1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "NetworkIcon@3x.png",
+      "filename" : "icons-tab-bar 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

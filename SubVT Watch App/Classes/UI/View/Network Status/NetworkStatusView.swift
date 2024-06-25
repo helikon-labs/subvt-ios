@@ -227,8 +227,6 @@ struct NetworkStatusView: View {
                                             isSelected: self.viewModel.network.id == networks[i].id,
                                             network: networks[i]
                                         )
-                                        .frame(height: UI.Dimension.NetworkStatus.networkButtonHeight)
-                                        .frame(maxWidth: .infinity)
                                     }
                                 )
                                 .zIndex(100 - Double(i))

@@ -98,7 +98,7 @@ struct IncomeView: View {
                                             width: width,
                                             height: 32.0
                                         )
-                                        .opacity(0.35)
+                                        .opacity(0.3)
                                         .cornerRadius(2)
                                     HStack(alignment: .center, spacing: 0) {
                                         Text(monthYear)

@@ -20,10 +20,11 @@ struct HomeView: View {
                 Spacer().frame(height: 4)
                 NavigationLink(value: Screen.networkStatus) {
                     HStack(alignment: .center, spacing: 8) {
-                        SwiftUI.Image("NetworkIcon").scaleEffect(0.8)
+                        Image("NetworkIcon")
+                            .scaleEffect(UI.Dimension.Home.menuIconScale)
                         Text(localized("tab.network_status"))
                             .font(UI.Font.Home.menuItem)
-                            .foregroundColor(Color("HomeMenuItem"))
+                            .foregroundColor(Color("Text"))
                             .offset(y: 1)
                         Spacer()
                     }
@@ -33,10 +34,11 @@ struct HomeView: View {
                 .modifier(PanelAppearance(1, self.displayState))
                 NavigationLink(value: Screen.myValidators) {
                     HStack(alignment: .center, spacing: 8) {
-                        SwiftUI.Image("MyValidatorsIcon").scaleEffect(0.8)
+                        Image("MyValidatorsIcon")
+                            .scaleEffect(UI.Dimension.Home.menuIconScale)
                         Text(localized("tab.my_validators"))
                             .font(UI.Font.Home.menuItem)
-                            .foregroundColor(Color("HomeMenuItem"))
+                            .foregroundColor(Color("Text"))
                             .offset(y: 1)
                         Spacer()
                     }
@@ -48,8 +50,11 @@ struct HomeView: View {
                     HStack(alignment: .center, spacing: 8) {
                         ZStack(alignment: .center) {
                             Circle()
-                                .stroke(Color("HomeMenuItem"))
-                                .frame(width: 20, height: 20)
+                                .stroke(Color("Text"))
+                                .frame(
+                                    width: UI.Dimension.Home.menuIconCircleSize,
+                                    height: UI.Dimension.Home.menuIconCircleSize
+                                )
                             Text("$")
                                 .font(UI.Font.Home.menuIcon)
                                 .foregroundColor(Color("StatusActive"))
@@ -58,7 +63,7 @@ struct HomeView: View {
                         .frame(width: 27, height: 27)
                         Text(localized("tab.income"))
                             .font(UI.Font.Home.menuItem)
-                            .foregroundColor(Color("HomeMenuItem"))
+                            .foregroundColor(Color("Text"))
                             .offset(y: 1)
                         Spacer()
                     }

@@ -90,6 +90,7 @@ struct ValidatorListButtonView: View {
                     .foregroundColor(Color("Text"))
                     .lineLimit(2)
                     .lineSpacing(1.2)
+                    .fixedSize(horizontal: false, vertical: true)
                 Spacer()
             }
             .padding(EdgeInsets(

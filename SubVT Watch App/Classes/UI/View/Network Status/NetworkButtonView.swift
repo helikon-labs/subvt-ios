@@ -52,7 +52,9 @@ struct NetworkButtonView: View {
                 .font(UI.Font.NetworkStatus.network)
                 .foregroundColor(Color("Text"))
         }
-        .padding(UI.Dimension.Common.padding * 2 / 3)
+        .padding(UI.Dimension.Common.dataPanelPadding)
+        .frame(height: UI.Dimension.NetworkStatus.networkButtonHeight)
+        .frame(maxWidth: .infinity)
         .background(Color("DataPanelBg"))
         .cornerRadius(UI.Dimension.Common.dataPanelCornerRadius)
     }

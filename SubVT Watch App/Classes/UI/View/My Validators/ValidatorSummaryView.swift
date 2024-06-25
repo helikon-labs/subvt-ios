@@ -64,7 +64,7 @@ struct ValidatorSummaryView: View {
     }
     
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 7) {
             HStack(alignment: .center) {
                 if displaysNetworkIcon {
                     UI.Image.Common.networkIcon(network: self.network)
