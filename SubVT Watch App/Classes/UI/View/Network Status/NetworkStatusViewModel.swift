@@ -73,6 +73,7 @@ class NetworkStatusViewModel: ObservableObject {
                         onUpdate()
                     }
                 }
+                self.networkStatusServiceStatus = .subscribed(subscriptionId: 0)
             } else {
                 self.networkStatusServiceStatus = .error(error: RPCError.connection)
             }
