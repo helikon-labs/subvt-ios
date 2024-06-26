@@ -20,7 +20,6 @@ fileprivate var currentBlockWaveAmplitude = blockWaveAmplitudeRange.lowerBound
 struct NetworkStatusView: View {
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var viewModel = NetworkStatusViewModel()
-    @StateObject private var networkMonitor = NetworkMonitor()
     @State private var displayState: BasicViewDisplayState = .notAppeared
     @State private var networkSelectorIsOpen = false
     @State private var blockTimerSubscription: Cancellable?
