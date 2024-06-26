@@ -82,10 +82,8 @@ struct NetworkStatusView: View {
                         )
                     WSRPCStatusIndicatorView(
                         status: self.viewModel.networkStatusServiceStatus,
-                        isConnected: self.networkMonitor.isConnected,
                         size: UI.Dimension.Common.connectionStatusSize
                     )
-                    //.modifier(PanelAppearance(5, self.displayState))
                 }
                 Spacer()
                 Button(action: {

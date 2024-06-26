@@ -61,7 +61,9 @@ class NetworkStatusViewModel: ObservableObject {
             response in
             guard let self else { return }
             if let error = response.error {
-                self.networkStatusServiceStatus = .error(error: RPCError.backend(error: error))
+                DispatchQueue.main.async {
+                    self.networkStatusServiceStatus = .error(error: RPCError.backend(error: error))
+                }
             } else if let networkStatus = response.value {
                 let oldBestBlockNumber = self.networkStatus.bestBlockNumber
                 let newBestBlockNumber = networkStatus.bestBlockNumber
@@ -73,9 +75,13 @@ class NetworkStatusViewModel: ObservableObject {
                         onUpdate()
                     }
                 }
-                self.networkStatusServiceStatus = .subscribed(subscriptionId: 0)
+                DispatchQueue.main.async {
+                    self.networkStatusServiceStatus = .subscribed(subscriptionId: 0)
+                }
             } else {
-                self.networkStatusServiceStatus = .error(error: RPCError.connection)
+                DispatchQueue.main.async {
+                    self.networkStatusServiceStatus = .error(error: RPCError.connection)
+                }
             }
             self.networkStatusTimer = Timer.scheduledTimer(
                 withTimeInterval: 1.5,
@@ -102,13 +108,17 @@ class NetworkStatusViewModel: ObservableObject {
         self.unsubscribe()
         self.initReportService()
         self.fetchNetworkStatus(onInit: onInit, onUpdate: onUpdate)
-        self.networkStatusServiceStatus = .subscribed(subscriptionId: 0)
+        DispatchQueue.main.async {
+            self.networkStatusServiceStatus = .subscribed(subscriptionId: 0)
+        }
     }
     
     func unsubscribe() {
         self.networkStatusTimer?.invalidate()
         self.networkStatusTimer = nil
-        self.networkStatusServiceStatus = .idle
+        DispatchQueue.main.async {
+            self.networkStatusServiceStatus = .idle
+        }
     }
     
     private func initReportService() {

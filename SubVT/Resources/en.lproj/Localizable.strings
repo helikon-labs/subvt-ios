@@ -327,7 +327,7 @@
 
 "watch.onboarding.connectivity_not_supported"="Watch connectivity is not supported.\nPlease check your iOS installation.";
 "watch.onboarding.connectivity_not_reachable"="Watch connectivity is not reachable.";
-"watch.onboarding.companion_app_not_installed"="Companion app is not installed on the iOS device.\nPlease make sure that SubVT is installed on your iOS device.";
+"watch.onboarding.companion_app_not_installed"="Please make sure that SubVT is installed on your iOS device. If it is installed please run it.";
 "watch.onboarding.initial_sync_progress"="Completing initial synchronization.";
 "watch.onboarding.initial_sync_failed"="Initial synchronization has failed.";
 "watch.onboarding.onboarding_not_complete"="Please complete onboarding on the iOS device.";

@@ -14,6 +14,7 @@
 		A0058CEA28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEB28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
 		A0058CEC28B10FCF00D87006 /* MyValidatorsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */; };
+		A008F5DA2C2C0F0400868357 /* WSRPCStatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A008F5D92C2C0F0400868357 /* WSRPCStatusIndicatorView.swift */; };
 		A00F2E2B2975094800EEB3E7 /* RewardReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F2E2A2975094800EEB3E7 /* RewardReportView.swift */; };
 		A00F2E2D2975095300EEB3E7 /* RewardReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00F2E2C2975095300EEB3E7 /* RewardReportViewModel.swift */; };
 		A0118247288D48C500EC51BD /* UINavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0118246288D48C500EC51BD /* UINavigationController.swift */; };
@@ -373,7 +374,6 @@
 		A0F16A842C218A2100F5746B /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A5288FF69F00694CC8 /* NetworkMonitor.swift */; };
 		A0F16A852C218A7B00F5746B /* BlockWaveParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F285102879C08000E69C6B /* BlockWaveParameters.swift */; };
 		A0F16A882C21AB3600F5746B /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A872C21AB3600F5746B /* PreviewData.swift */; };
-		A0F16A892C21AD0700F5746B /* WSRPCStatusIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A06E15A2288FEB4F00694CC8 /* WSRPCStatusIndicatorView.swift */; };
 		A0F16A8A2C21AD6000F5746B /* PanelAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = A05B25A0287EB7450070EF81 /* PanelAppearance.swift */; };
 		A0F16A8B2C21AD7600F5746B /* BasicDisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C9A781285749940071C7AC /* BasicDisplayState.swift */; };
 		A0F16A8D2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F16A8C2C21AE6700F5746B /* UI+Dimension+NetworkStatus.swift */; };
@@ -497,6 +497,7 @@
 		A000F658297A8C6F001210DF /* ParaVoteReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParaVoteReportViewModel.swift; sourceTree = "<group>"; };
 		A005443F297E71AB00DE95F2 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		A0058CE928B10FCF00D87006 /* MyValidatorsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyValidatorsViewModel.swift; sourceTree = "<group>"; };
+		A008F5D92C2C0F0400868357 /* WSRPCStatusIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WSRPCStatusIndicatorView.swift; sourceTree = "<group>"; };
 		A00F2E2A2975094800EEB3E7 /* RewardReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportView.swift; sourceTree = "<group>"; };
 		A00F2E2C2975095300EEB3E7 /* RewardReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RewardReportViewModel.swift; sourceTree = "<group>"; };
 		A0118246288D48C500EC51BD /* UINavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationController.swift; sourceTree = "<group>"; };
@@ -1473,6 +1474,7 @@
 				A0F16A752C21824F00F5746B /* NetworkStatusView.swift */,
 				A01F482A2C22B2BB00F5F01E /* NetworkStatusViewModel.swift */,
 				A01F48272C22AF1B00F5F01E /* ValidatorListButtonView.swift */,
+				A008F5D92C2C0F0400868357 /* WSRPCStatusIndicatorView.swift */,
 			);
 			path = "Network Status";
 			sourceTree = "<group>";
@@ -1877,7 +1879,6 @@
 				A0CC50472C207E150092303C /* UI.swift in Sources */,
 				A0F16A8B2C21AD7600F5746B /* BasicDisplayState.swift in Sources */,
 				A09053A22C2045F500362BC0 /* Localization.swift in Sources */,
-				A0F16A892C21AD0700F5746B /* WSRPCStatusIndicatorView.swift in Sources */,
 				A09053A32C204F1900362BC0 /* WatchConnectivityUtil.swift in Sources */,
 				A0CC50202C2078E80092303C /* WatchAppStorageKey.swift in Sources */,
 				A0C840C82C17179B008FDFEB /* Network.swift in Sources */,
@@ -1908,6 +1909,7 @@
 				A03B61F12C22BED9008C93E9 /* BlockNumberView.swift in Sources */,
 				A01F48212C22AD8A00F5F01E /* CGFloat.swift in Sources */,
 				A0CC50482C207E240092303C /* UI+Duration.swift in Sources */,
+				A008F5DA2C2C0F0400868357 /* WSRPCStatusIndicatorView.swift in Sources */,
 				A03B61FB2C22E8AD008C93E9 /* NetworkButtonView.swift in Sources */,
 				A01F48312C22B3E900F5F01E /* Formatter.swift in Sources */,
 				A090539C2C20388D00362BC0 /* DataFetchState.swift in Sources */,
@@ -2302,7 +2304,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2341,7 +2343,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CODE_SIGN_ENTITLEMENTS = "SubVT Watch App/SubVT Watch App.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT Watch App/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2601,7 +2603,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
@@ -2641,7 +2643,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = SubVT/Resources/Config/SubVT.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 23;
+				CURRENT_PROJECT_VERSION = 24;
 				DEVELOPMENT_ASSET_PATHS = "\"SubVT/Preview Content\"";
 				DEVELOPMENT_TEAM = TM389H3UFR;
 				ENABLE_PREVIEWS = YES;
