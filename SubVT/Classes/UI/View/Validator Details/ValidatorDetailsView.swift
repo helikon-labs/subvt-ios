@@ -444,28 +444,6 @@ struct ValidatorDetailsView: View {
                                     .modifier(PanelAppearance(17, self.displayState))
                                 }
                             }
-                            if let _ = self.viewModel.validatorDetails?.onekvCandidateRecordId {
-                                Group {
-                                    Spacer()
-                                        .frame(height: 8)
-                                    Text(localized("validator_details.onekv_section_title"))
-                                        .font(UI.Font.ValidatorDetails.subsectionTitle)
-                                        .foregroundColor(Color("Text"))
-                                        .modifier(PanelAppearance(18, self.displayState))
-                                    Spacer()
-                                        .frame(height: 8)
-                                    self.onekvRankView
-                                        .modifier(PanelAppearance(19, self.displayState))
-                                    self.onekvLocationView
-                                        .modifier(PanelAppearance(20, self.displayState))
-                                    if self.viewModel.validatorDetails?.onekvOfflineSince ?? 0 > 0 {
-                                        self.onekvDowntimeView
-                                            .modifier(PanelAppearance(21, self.displayState))
-                                    }
-                                    self.onekvValidityView
-                                        .modifier(PanelAppearance(22, self.displayState))
-                                }
-                            }
                             Spacer()
                                 .frame(height: UI.Dimension.ValidatorDetails.scrollContentBottomSpacerHeight)
                             
@@ -692,7 +670,7 @@ extension ValidatorDetailsView {
                                     if onekvNominators.contains(nominator.account.address) {
                                         Spacer()
                                             .frame(width: 4)
-                                        Text("(1KV)")
+                                        Text("(DN)")
                                             .font(UI.Font.ValidatorDetails.nominator)
                                             .foregroundColor(Color("Text"))
                                     }
@@ -794,7 +772,7 @@ extension ValidatorDetailsView {
                                     if onekvNominators.contains(nominator.stashAccount.address) {
                                         Spacer()
                                             .frame(width: 4)
-                                        Text("(1KV)")
+                                        Text("(DN)")
                                             .font(UI.Font.ValidatorDetails.nominator)
                                             .foregroundColor(Color("Text"))
                                     }
@@ -966,92 +944,6 @@ extension ValidatorDetailsView {
                     if offenceCount > 0 {
                         Image("OfflineFaultExclamationIcon")
                     }
-                }
-            } else {
-                Text("-")
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            }
-        }
-    }
-    
-    private var onekvRankView: some View {
-        DataPanelView(
-            localized("validator_details.onekv.rank"),
-            isVertical: false
-        ) {
-            if let rank = self.viewModel.validatorDetails?.onekvRank {
-                Text(String(rank))
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            } else {
-                Text("-")
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            }
-        }
-    }
-    
-    private var onekvLocationView: some View {
-        DataPanelView(
-            localized("validator_details.onekv.location"),
-            isVertical: false
-        ) {
-            if let location = self.viewModel.validatorDetails?.onekvLocation {
-                Text(location)
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            } else {
-                Text("-")
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            }
-        }
-    }
-    
-    private var onekvUptimeView: some View {
-        DataPanelView(localized("validator_details.onekv.uptime")) {
-            HStack(alignment: .center, spacing: 8) {
-                Image("UptimeIcon")
-                Text("-")
-                    .font(UI.Font.Common.dataMedium)
-                    .foregroundColor(Color("Text"))
-            }
-        }
-    }
-    
-    private var onekvDowntimeView: some View {
-        DataPanelView(localized("validator_details.onekv.downtime")) {
-            HStack(alignment: .center, spacing: 8) {
-                Image("DowntimeIcon")
-                if let offlineSince = self.viewModel.validatorDetails?.onekvOfflineSince,
-                   offlineSince > 0 {
-                    Text(self.getTimePeriodString(timestampMs: offlineSince))
-                        .font(UI.Font.Common.dataMedium)
-                        .foregroundColor(Color("StatusError"))
-                } else {
-                    Text("-")
-                        .font(UI.Font.Common.dataMedium)
-                        .foregroundColor(Color("StatusError"))
-                }
-            }
-        }
-    }
-    
-    private var onekvValidityView: some View {
-        DataPanelView(
-            localized("validator_details.onekv.validity"),
-            isVertical: false
-        ) {
-            if let isValid = self.viewModel.validatorDetails?.onekvIsValid {
-                if isValid {
-                    Text(localized("validator_details.onekv.valid"))
-                        .font(UI.Font.Common.dataMedium)
-                        .foregroundColor(Color("Text"))
-                } else {
-                    Text(localized("validator_details.onekv.invalid"))
-                        .font(UI.Font.Common.dataMedium)
-                        .foregroundColor(Color("StatusError"))
                 }
             } else {
                 Text("-")

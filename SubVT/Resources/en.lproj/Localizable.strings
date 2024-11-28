@@ -130,7 +130,7 @@
 "validator_list.sort_by.nomination_total"="Nomination total";
 "validator_list.filter"="Filter";
 "validator_list.filter.identity"="With identity";
-"validator_list.filter.onekv"="Enrolled in 1KV";
+"validator_list.filter.onekv"="Enrolled in DN";
 "validator_list.filter.paravalidator"="Parachain validator";
 
 "validator_details.nomination_total"="Nomination Total";
@@ -147,7 +147,7 @@
 "validator_details.era_points"="Era Points";
 "validator_details.era_blocks"="Era Blocks";
 "validator_details.offline_faults"="Offline Faults";
-"validator_details.onekv_section_title"="1KV";
+"validator_details.onekv_section_title"="Decentralized Nodes";
 "validator_details.onekv.rank"="Rank";
 "validator_details.onekv.location"="Location";
 "validator_details.onekv.binary_version"="Binary Version";
@@ -156,7 +156,7 @@
 "validator_details.onekv.validity"="Validity";
 "validator_details.onekv.valid"="Valid";
 "validator_details.onekv.invalid"="Invalid";
-"validator_details.tooltip.onekv"="Enrolled in 1KV";
+"validator_details.tooltip.onekv"="Enrolled in DN";
 "validator_details.tooltip.paravalidator"="Parachain Validator";
 "validator_details.tooltip.active_next_session"="Active Next Session";
 "validator_details.tooltip.heartbeat_received"="Heartbeat Received";
